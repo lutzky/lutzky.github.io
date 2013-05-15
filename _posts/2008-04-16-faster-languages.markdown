@@ -16,9 +16,11 @@ the fact that C++ serves as a sort of lowest common denominator in the course
 
 I never liked C++ language much. As a matter of fact, I prefer C. I've been
 going over some old code for a project, which needed to use DBus to talk to
-NetworkManager. Back then I wrote it using Python, embedded in C - it seemed
-easier at the time, due to lack of documentation. After hunting around, I
-figured out how to do most of the stuff I wanted in C, using DBus's GLib API.
+NetworkManager. [Back then][1] I wrote it using Python, embedded in C - it
+seemed easier at the time, due to lack of documentation. After hunting around,
+I figured out how to do most of the stuff I wanted in C, using DBus's GLib API.
+
+[1]: /2007/09/16/exception-handling-decorators-and-python/
 
 In this process, the most helpful bit of documentation turned out to be GLib's.
 GLib looks like a wonderful library to get big-program stuff done relatively

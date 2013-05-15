@@ -6,13 +6,14 @@ tags:
 - show downloading
 ---
 
-I've [already
-mentioned](http://blog.lutzky.net/2009/09/my-show-downloading-stack.html) my
-show downloading stack on this blog. It's changed a bit since - I now use
-[Transmission](http://transmission-bt.org/) rather than rtorrent, as it has the
-excellent `transmission-daemon` package which has it acting exactly the way I
-like (without using `screen`). Also, it now E-mails me when a torrent is done
-downloading. So while this may be how TV works for you:
+I've [already mentioned][1] my show downloading stack on this blog. It's
+changed a bit since - I now use [Transmission](http://transmission-bt.org/)
+rather than rtorrent, as it has the excellent `transmission-daemon` package
+which has it acting exactly the way I like (without using `screen`). Also, it
+now E-mails me when a torrent is done downloading. So while this may be how TV
+works for you:
+
+[1]: /2009/09/05/my-show-downloading-stack
 
 1. Notice that a new episode is out
 2. Torrent it

@@ -3,7 +3,7 @@ date: 2007-02-02 01:12:00
 layout: post
 title: Courtney Love on Piracy
 tags:
-- asides
+- life
 ---
 
 This is absolutely antique (2000), but it's good to hear an artist with a clue.

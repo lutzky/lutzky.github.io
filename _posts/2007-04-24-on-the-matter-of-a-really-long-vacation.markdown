@@ -53,5 +53,5 @@ do this) - otherwise you'll get "file is not a database, or is encrypted"
 errors.
 
 Whew - that's much better. My thoughts have been depleted into the bits and
-bytes before you. I'll just [plug a friend's blog](http://gadial.blogli.co.il/)
-and hit the publish button now ;)
+bytes before you. I'll just [plug a friend's blog](http://gadial.net) and hit
+the publish button now ;)

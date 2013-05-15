@@ -27,10 +27,11 @@ PC. Wifi doesn't stand a chance through two walls and the porch's glass screen.
 
 ## First solution
 
-Put a [reverse DD-WRT
-router](http://blog.lutzky.net/2010/11/dd-wrt-awesomeness.html) at P2 (with a
-cable going across the room from the PC). Slow connection, not very reliable.
-This worked well enough for several months.
+Put a [reverse DD-WRT router][1] at P2 (with a cable going across the room from
+the PC). Slow connection, not very reliable.  This worked well enough for
+several months.
+
+[1]: /2010/11/20/dd-wrt-awesomeness
 
 ## Second solution
 

@@ -12,7 +12,7 @@ trying to figure out how to work DBus with C, and seeing how easy it is to do
 in Python, we figured we'd try to use embedded Python to do this. Fortunately,
 it's very simple to use - especially thanks to [this guide](http://www.developer.com/lang/other/article.php/2217941).
 
-TODO link blog.lutzky.net newer version of this in C and link back
+> It later turned out to be much easier to do in C, as described in _[Faster Languages](/2008/04/16/faster-languages)_.
 
 Now, we couldn't have the Python code throwing exceptions outwards, so we had
 each function return, along with its actual return value (if any), a numeric
