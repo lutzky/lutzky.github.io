@@ -63,3 +63,20 @@
   background: #57A957;
   border: 1px solid #4c964d;
   color: #FFF; }
+
+.posts li span {
+  float: right;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  color: #999;
+}
+
+.posts li {
+  list-style-type: none;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.posts {
+  margin: 0px;
+}
