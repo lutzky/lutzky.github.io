@@ -26,10 +26,15 @@ Usage:
   {% for node in pages_list %}
     {% if node.title != null %}
       {% if group == null or group == node.group %}
+        {% if use_date == true %}
+          {% capture date_string %}<span>{{ node.date | date_to_string '}}</span>{% endcapture %}
+	{% else %}
+	  {% assign date_string = "" %}
+	{% endif %}
       	{% if page.url == node.url %}
-      	<li class="active"><a href="{{ BASE_PATH }}{{node.url}}" class="active">{{node.title}}</a></li>
+      	<li class="active"><a href="{{ BASE_PATH }}{{node.url}}" class="active">{{node.title}}</a>{{ date_string }}</span></li>
       	{% else %}
-      	<li><a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a></li>
+      	<li><a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a>{{ date_string }}</li>
       	{% endif %}
       {% endif %}
     {% endif %}
@@ -37,3 +42,5 @@ Usage:
 {% endif %}
 {% assign pages_list = nil %}
 {% assign group = nil %}
+{% assign use_date = nil %}
+{% assign date_string = nil %}
