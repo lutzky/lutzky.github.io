@@ -10,8 +10,8 @@ I was having a lot of trouble with
 [gettext](http://en.wikipedia.org/wiki/Gettext) in Ruby, mostly due to lacking
 documentation. Here are some useful things I figured out while writing TTime. I
 ended up having a single `gettext_settings.rb`, included from every file which
-uses gettext. Here it is (with some extra notes)  
-  
+uses gettext. Here it is (with some extra notes)
+
 {% highlight ruby %}
 #!/usr/bin/ruby
 begin
@@ -48,7 +48,7 @@ rescue LoadError
   end
 end
 {% endhighlight %}
-  
+
 One note for context: I use
 [setup.rb](http://i.loveruby.net/en/projects/setup/) (and `ruby-pkg-tools`) to
 package TTime. So my localizations go in `data/locale`.

@@ -14,8 +14,8 @@ Gear](http://en.wikipedia.org/wiki/Game_gear), which sucked the life out of 6
 AA batteries rather quickly. The [Game Boy
 Color](http://en.wikipedia.org/wiki/Game_Boy_Color) was actually decent on
 battery life, but since it didn't have a backlight, you had to play it at very
-specific angles.  
-  
+specific angles.
+
 For gaming, I can appreciate the need for a color screen. My point has to do
 with cellphones. True, most cellphones today come with cameras, are able to
 play video, and are rather capable mobile gaming platforms (when compared to
@@ -26,8 +26,8 @@ and RSS on the phone is a major Win, in my opinion), and have a comfortable SMS
 interface. These features actually suffer from having a color screen: Battery
 life (for the powerful backlight), viewing angle, and screen resolution take a
 hit. While it's true that color LCDs have come a long way since the Game Gear,
-so have black & white display technologies (E-Paper, anyone?).  
-  
+so have black & white display technologies (E-Paper, anyone?).
+
 Of course, my wish for a modern B&W-screen cellphone will likely never come
 true. The simple reason is that they would be totally unmarketable. Even
 business-types like color screens nowadays. So I'll just keep holding out for a

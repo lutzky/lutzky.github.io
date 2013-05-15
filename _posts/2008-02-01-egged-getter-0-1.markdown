@@ -12,14 +12,14 @@ tags:
 Here's a little something I've been messing with: A simple fetcher script for
 the [Egged](http://www.egged.co.il) (Israeli bus company) site. I've made a
 deskbar applet which uses it, which was fun to do :) (I'm looking for other
-cool ideas to implement as deskbar applets)  
-  
+cool ideas to implement as deskbar applets)
+
 You can get it at
 [http://lutzky.net/files/egged_getter](http://lutzky.net/files/egged_getter).
 The readme file includes installation instructions (...which involve placing
 the two included scripts in
-`~/.gnome2/deskbar-plugin/modules-2.20-compatible/`.  
-  
+`~/.gnome2/deskbar-plugin/modules-2.20-compatible/`.
+
 There's also a [git](http://git.or.cz) repository here:
 [http://git.lutzky.net/?p=ohad/egged_getter.git](http://git.lutzky.net/?p=ohad/egged_getter.git).
 I don't think I've mentioned git on the blog before... It's freaking awesome.

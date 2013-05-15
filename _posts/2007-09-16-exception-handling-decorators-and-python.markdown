@@ -10,16 +10,16 @@ tags:
 Lately I've been working on a project that has me using DBus a lot. After
 trying to figure out how to work DBus with C, and seeing how easy it is to do
 in Python, we figured we'd try to use embedded Python to do this. Fortunately,
-it's very simple to use - especially thanks to [this guide](http://www.developer.com/lang/other/article.php/2217941).  
+it's very simple to use - especially thanks to [this guide](http://www.developer.com/lang/other/article.php/2217941).
 
 TODO link blog.lutzky.net newer version of this in C and link back
-  
+
 Now, we couldn't have the Python code throwing exceptions outwards, so we had
 each function return, along with its actual return value (if any), a numeric
 code identifying the error. Unfortunately, this made the code get really big,
 really fast - especially once DBus exceptions are thrown into the mix. But once
-I learned how to use decorators, I accomplished something like this diff:  
-  
+I learned how to use decorators, I accomplished something like this diff:
+
 {% highlight diff %}
 +@wrap_exceptions((False,))
  def checkSomething():
@@ -45,8 +45,8 @@ Now, the duplicate DBus/non-DBus exception handling, global `error_string`,
 etc. - that happened in a lot of functions. Unfortunately, they didn't all
 return their values in the same way. Some just returned a `RET_VALUE`, but most
 had other values before it in the tuple (not the ideal design, come to think of
-it...). Here's the decorator I wrote:  
-  
+it...). Here's the decorator I wrote:
+
 {% highlight python %}
 class wrap_exceptions:
     def __init__(self, prepend_tuple=None):

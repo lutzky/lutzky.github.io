@@ -6,6 +6,6 @@ tags:
 - security
 ---
 
-Well, penny knows. But I have proof she knows...  
-  
+Well, penny knows. But I have proof she knows...
+
 [http://www.wisdom.weizmann.ac.il/~naor/PUZZLES/waldo.html](http://www.wisdom.weizmann.ac.il/~naor/PUZZLES/waldo.html)

@@ -7,7 +7,7 @@ tags:
 ---
 
 I've found myself working on TTime, the Technion Timetable Scheduler, quite a
-bit lately. Lots of cool stuff went in:  
+bit lately. Lots of cool stuff went in:
 
 * Boaz Goldstein's TCal, a Cairo-based schedule renderer (could you believe the
   old version used MozEmbed?)
@@ -18,9 +18,9 @@ bit lately. Lots of cool stuff went in:
   ([Tom](http://iiafw.com), for example) prefer this.
 * Just for kicks - interoperability with [Grandpa](http://udonkey.com)'s XML
   format
-  
+
 I've also cleaned up the packaging quite a bit - it can now be installed using
 `setup.rb`, or the updated Debian package. I think it may soon be time to tag a
-release :)  
-  
+release :)
+
 [Sources at Github](http://github.com/lutzky/ttime)

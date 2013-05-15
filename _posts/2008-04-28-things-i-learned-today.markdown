@@ -9,11 +9,11 @@ tags:
 ---
 	
 1. You can use git on a VFAT disk (for example, a USB key) without all of the
-   annoying mode issues, by using the following setting in `.git/config`:  
+   annoying mode issues, by using the following setting in `.git/config`:
 
        [core]
        filemode = false
-  
+
    What I haven't figured out is how to do force a chmod in this situation; for
    example, if I create a new script, I was hoping to be able to `git chmod +x`
    it.

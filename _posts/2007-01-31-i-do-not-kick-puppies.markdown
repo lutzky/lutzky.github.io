@@ -6,8 +6,8 @@ tags:
 - asides
 ---
 
-I do type mesmerizingly fast, though... :)  
-  
+I do type mesmerizingly fast, though... :)
+
 > Image lost in the mists of time... "wanted" poster of me, claiming that the
 > public must beware being mesmerized by my typing speed, and know that I
 > install Linux on innocent bystanders' computers, and kick puppies.

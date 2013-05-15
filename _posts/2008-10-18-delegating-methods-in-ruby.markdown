@@ -8,7 +8,7 @@ tags:
 
 Sometimes, when constructing a compound object, we are interested in exporting
 functionality while retaining encapsulation. For example, suppose we have a
-`Secretary` class:  
+`Secretary` class:
 
 {% highlight ruby %}
 class Secretary
@@ -28,8 +28,8 @@ Our `Secretary` provides a lot of useful functionality, that our `Boss` class
 would like to have. `Boss` would like to be able to say that he can send a fax,
 without having the user explicitly request his `Secretary` beforehand. The same
 goes for a lot of other methods `Secretary` provides. Instead of writing a stub
-function for each of these methods, it would be nice to do the following:  
-  
+function for each of these methods, it would be nice to do the following:
+
 {% highlight ruby %}
 class Boss
   delegate_method :my_secretary, :send_fax, :answer_call
@@ -42,9 +42,9 @@ end
 john = Boss.new
 john.send_fax("Donald Trump", "YOU'RE fired")
 {% endhighlight %}
-  
-Here's how we can get this to happen:  
-  
+
+Here's how we can get this to happen:
+
 {% highlight ruby %}
 class Class
   def delegate_method(instance_var_name, *method_names)

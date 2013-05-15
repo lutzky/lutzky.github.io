@@ -15,8 +15,8 @@ connection breaks down, computers gets shut off, or things like that. This week
 my router broke down, so I can't even ssh home to manually start up rtorrent.
 My solution: A small script, which checks whether rtorrent is already running,
 and if not - runs it in a detached screen session. Run this with your favorite
-`cron` software.  
-  
+`cron` software.
+
 {% highlight bash %}
 #!/bin/bash
 # A simple script to make sure I am running rtorrent in a screen

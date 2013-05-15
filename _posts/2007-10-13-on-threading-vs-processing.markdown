@@ -19,8 +19,8 @@ the magazine does not cover is the fact that this can also benefit GUI
 applications; updating a progressbar in the application doesn't need to slow
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
-or processes at the user's choice:  
-    
+or processes at the user's choice:
+
 {% highlight python %}
 import processing
 import threading

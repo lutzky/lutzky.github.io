@@ -6,6 +6,6 @@ tags:
 - technion
 ---
 
-My lecture slides. Have a peek if you like :)  
-  
+My lecture slides. Have a peek if you like :)
+
 [sybilproof Reputation Mechanisms - Seminar](/assets/attachments/2007/01/sybils.pdf)

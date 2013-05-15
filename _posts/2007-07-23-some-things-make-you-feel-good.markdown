@@ -13,8 +13,8 @@ life. But sometimes, when things turn out to be completely different than they
 seem - new perspective is gained, old perspective is found again, and like
 something out of an old Disney cartoon, kitschy clouds of gloom make way for
 kitschy rays of sunshine. Complete with the smiling sun and everything. Like
-freakin' Roger Rabbit :)  
-  
-Finally, the story gets the ending it deserves.  
-  
+freakin' Roger Rabbit :)
+
+Finally, the story gets the ending it deserves.
+
 ![Letting Go](http://imgs.xkcd.com/comics/letting_go.png)

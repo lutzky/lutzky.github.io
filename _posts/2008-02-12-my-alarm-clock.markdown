@@ -7,9 +7,9 @@ tags:
 ---
 
 YNet was running a story on how to use your computer as an alarm clock. Here's
-what I do, for our commandline junkies :)  
-  
-Here's `~/bin/run_alarm.sh`:  
+what I do, for our commandline junkies :)
+
+Here's `~/bin/run_alarm.sh`:
 
 {% highlight bash %}
 #!/bin/bash
@@ -24,15 +24,15 @@ for (( i = 0; i <= $MAXVOL; i++ )); do
         sleep `echo $TIME / $MAXVOL | bc -l`
 done
 {% endhighlight %}
-  
+
 This basically plays all of my MP3 files, in random order. The `-print0` and `-0`
 arguments make it a null-terminated list, as some (most) files have spaces in
 their names. This process is backgrounded, and the script proceeds to gradually
-sweep the volume from 0 to the maximum, for a more gentle wakeup :)  
-  
+sweep the volume from 0 to the maximum, for a more gentle wakeup :)
+
 This script is basically intended for use with `at`. I made a little wrapper
-around it for my comfort:  
-    
+around it for my comfort:
+
 {% highlight bash %}
 #!/bin/bash
 
