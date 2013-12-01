@@ -39,8 +39,8 @@ Tomato 1.20
 
 Of course, error messages, sorting and spacing for the output would be part of
 the spec. That provided an effective way of checking your program's
-correctness: Run it on a given output, and compare it - using `diff` - to
-expected output. Some TAs even provided simple test files for this exact method
+correctness: Run it on a given input, and compare its output - using `diff` - to
+expected output. Some TAs even provided simple test files (input + expected output) for this exact method
 (but not revealing the "real" test files which would they use while grading),
 but the "serious" tests happened in the student-run "homework help" forum (ah,
 phpbb...), where students would regularly place gargantuan test files to
