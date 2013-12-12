@@ -40,7 +40,10 @@ int main(int argc, char * argv[]) {
   return 0;
 }
 
-/* Result: 0.17s */
+/* Result: 0.17s
+ * ...unless you give it a .cc extension, and then it's 0.30s!
+ * It turns out that gcc/g++ guess the language from the file extension.
+ */
 {% endhighlight %}
 
 C++
