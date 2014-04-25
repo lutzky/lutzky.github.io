@@ -4,7 +4,7 @@ layout: post
 title: Translationese
 tags:
 - natural language processing
-- coding
+- code
 - python
 ---
 

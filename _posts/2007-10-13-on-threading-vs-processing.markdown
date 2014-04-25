@@ -3,7 +3,7 @@ date: 2007-10-13 22:04:00
 layout: post
 title: On Threading vs. Processing
 tags:
-- coding
+- code
 - python
 ---
 

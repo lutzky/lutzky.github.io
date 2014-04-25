@@ -3,7 +3,7 @@ date: 2007-02-25 14:52:00
 layout: post
 title: Really liking the whole Python thing
 tags:
-- coding
+- code
 - python
 ---
 

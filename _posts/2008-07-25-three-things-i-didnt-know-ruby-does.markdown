@@ -3,7 +3,7 @@ date: 2008-07-25 17:55:00
 layout: post
 title: Three things I didn't know Ruby does
 tags:
-- coding
+- code
 - ruby
 ---
 
