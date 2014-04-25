@@ -5,6 +5,7 @@ title: Some band stuff
 tags:
 - music
 ---
+{% include JB/setup %}
 
 This Saturday we're going to record our material, and hopefully a cover we've
 been working on - Venom's excellent "School Daze". We took some photos

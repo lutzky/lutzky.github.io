@@ -5,6 +5,7 @@ title: Yasmin back up
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 Why was it down, you ask? Well, it was out here in the lab, because of a
 shortage of network ports in the server room. From the acpid log:

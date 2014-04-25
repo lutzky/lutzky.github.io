@@ -5,6 +5,7 @@ title: Sour chewing gum
 tags:
 - asides
 ---
+{% include JB/setup %}
 
 On an online board, friends posted a photo from a party a while back, as I'm chewing some extra-sour chewing gum:
 

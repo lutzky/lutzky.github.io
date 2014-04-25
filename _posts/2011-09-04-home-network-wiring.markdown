@@ -5,6 +5,7 @@ title: Home network wiring
 tags:
 - networking
 ---
+{% include JB/setup %}
 
 I don't like wireless connections; they're always second-best, be it in terms
 of security, speed, or reliability. Here's how my apartment looks (very

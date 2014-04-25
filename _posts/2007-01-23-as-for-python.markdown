@@ -6,6 +6,7 @@ tags:
 - code
 - technion
 ---
+{% include JB/setup %}
 
 Myself, I'm a Ruby hacker. I send everyone within earshot to
 [TryRuby](http://tryruby.hobix.com), code my sites using Rails, am surprised

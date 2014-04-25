@@ -5,6 +5,7 @@ title: Encrypted my Wi-fi
 tags:
 - networking
 ---
+{% include JB/setup %}
 
 Reading some backlog on this blog, I found the following gem:
 

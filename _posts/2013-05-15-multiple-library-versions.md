@@ -3,6 +3,7 @@ layout: post
 title: "Multiple library versions"
 tags: [code, c, linux]
 ---
+{% include JB/setup %}
 
 ## Introduction
 

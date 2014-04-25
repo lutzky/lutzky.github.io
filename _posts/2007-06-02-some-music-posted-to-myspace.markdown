@@ -5,6 +5,7 @@ title: Some music posted to myspace
 tags:
 - music
 ---
+{% include JB/setup %}
 
 Recording this morning was excellent! Awesome studio, not expensive at all, and
 a whole lot of fun. We've posted one song at [our myspace

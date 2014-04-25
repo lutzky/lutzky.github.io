@@ -5,6 +5,7 @@ title: Hebrew spell-checking in Pidgin
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 This one took me a while to figure out, which is reason enough to post it here.
 

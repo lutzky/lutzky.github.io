@@ -5,6 +5,7 @@ title: Timezones are fickle
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 I've been trying to work out a system to be able to cleanly switch between IST
 (Israel Standard Time, GMT+2:00) and IDT (Israel Daylight savings Time,

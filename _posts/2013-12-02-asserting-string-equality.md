@@ -3,6 +3,7 @@ layout: post
 title: "Asserting string equality"
 tags: [code, testing]
 ---
+{% include JB/setup %}
 
 I've had several opportunities to write unit tests for code that outputs large
 strings. It's important that your unit-testing framework handles this well.

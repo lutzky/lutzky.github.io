@@ -7,6 +7,7 @@ tags:
 - technion
 - life
 ---
+{% include JB/setup %}
 
 By now I've lost count of how long ago my last class was. The strike has begun
 immediately after passover, and is certainly beginning to take its toll. For

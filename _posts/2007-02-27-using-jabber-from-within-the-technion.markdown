@@ -6,6 +6,7 @@ tags:
 - networking
 - technion
 ---
+{% include JB/setup %}
 
 A very neat find for those of you who want to use Jabber from within the
 Technion, but with your client of choice rather than a web-based one: Many

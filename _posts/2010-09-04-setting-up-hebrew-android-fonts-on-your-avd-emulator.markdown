@@ -5,6 +5,7 @@ title: Setting up Hebrew Android fonts on your AVD emulator
 tags:
 - android
 ---
+{% include JB/setup %}
 
 There are several good guides for installing [Gilad
 Ben-Yossef](http://benyossef.com/)'s excellent Hebdroid fonts on physical

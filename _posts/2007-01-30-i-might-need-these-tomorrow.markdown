@@ -5,6 +5,7 @@ title: I might need these tomorrow...
 tags:
 - technion
 ---
+{% include JB/setup %}
 
 My lecture slides. Have a peek if you like :)
 

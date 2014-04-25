@@ -5,6 +5,7 @@ title: I know where waldo is
 tags:
 - security
 ---
+{% include JB/setup %}
 
 Well, penny knows. But I have proof she knows...
 

@@ -5,6 +5,7 @@ title: Means of control
 tags:
 - life
 ---
+{% include JB/setup %}
 
 New URL - not interesting. You'd notice by now, as you've been redirected.
 Guess my new E-mail. OpenID - interesting, but I don't have anything

@@ -5,6 +5,7 @@ title: Grub menu.lst editor
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 A lot of people ask me how to change the default operating system booted after
 installing Linux. The answer they get in Ubuntu's case, "Edit

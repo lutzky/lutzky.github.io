@@ -5,6 +5,7 @@ title: Before reinstalling your server for RAID
 tags:
 - hardware
 ---
+{% include JB/setup %}
 
 Check that the RAID it supports is actual Raid. My experience today:
 

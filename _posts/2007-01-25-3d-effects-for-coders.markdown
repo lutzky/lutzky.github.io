@@ -5,6 +5,7 @@ title: 3D effects for coders?
 tags:
 - code
 ---
+{% include JB/setup %}
 
 My new work desktop has a GeForce 4 MX, so I naturally installed Beryl on it.
 The graphics card has relatively little RAM, so it finds handling my 1280x1024

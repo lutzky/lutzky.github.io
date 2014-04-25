@@ -7,6 +7,7 @@ tags:
 - git
 - asides
 ---
+{% include JB/setup %}
 	
 1. You can use git on a VFAT disk (for example, a USB key) without all of the
    annoying mode issues, by using the following setting in `.git/config`:

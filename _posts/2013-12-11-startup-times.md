@@ -3,6 +3,7 @@ layout: post
 title: "Startup times"
 tags: [code]
 ---
+{% include JB/setup %}
 
 Lately, a facebook comment of mine on the subject of Java's slowness has proved quite popular, so here goes: Here's a listing of a few Hello World programs and running times for them (**including startup, which is a big deal in Java**) on my laptop:
 

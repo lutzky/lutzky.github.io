@@ -5,6 +5,7 @@ title: My show downloading stack
 tags:
 - show downloading
 ---
+{% include JB/setup %}
 
 I love watching TV, and hate it. Regular show schedules are horrible,
 commercial breaks are annoying, and the ability to rewind is very important. I

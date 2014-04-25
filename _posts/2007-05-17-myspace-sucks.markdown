@@ -6,6 +6,7 @@ tags:
 - music
 - software
 ---
+{% include JB/setup %}
 
 Life is good, for the most part. And as a technology enthusiast, there are many
 new and cool things to see online. For example, there's the new

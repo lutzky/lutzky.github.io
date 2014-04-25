@@ -5,6 +5,7 @@ title: Software Perfection - Lost in the details
 tags:
 - software
 ---
+{% include JB/setup %}
 
 Sometimes imperfections in Software drive me nuts. It's what drove me away from
 Windows. It's what keeps me switching back and forth between desktop

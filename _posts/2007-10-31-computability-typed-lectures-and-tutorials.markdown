@@ -5,6 +5,7 @@ title: Computability - Typed Lectures and Tutorials
 tags:
 - technion
 ---
+{% include JB/setup %}
 
 > All links in this post have been lost to the mists of time. I've kept it here
 > out of pure nostalgia.

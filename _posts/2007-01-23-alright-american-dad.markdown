@@ -5,6 +5,7 @@ title: Alright, American Dad!
 tags:
 - show downloading
 ---
+{% include JB/setup %}
 
 Just finished downloading an episode of American Dad off Bittorrent. TV has
 ancient episodes of Family Guy. Took about an hour though... I tells ya, I'd

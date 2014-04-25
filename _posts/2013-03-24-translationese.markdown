@@ -7,6 +7,7 @@ tags:
 - code
 - python
 ---
+{% include JB/setup %}
 
 As part of my M.Sc. studies, I've recently completed a small laboratory project
 in natural language processing. I've learned quite a bit from it, and had a

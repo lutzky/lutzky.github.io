@@ -5,6 +5,7 @@ title: Reading, writing and vacations
 tags:
 - life
 ---
+{% include JB/setup %}
 
 Vacations are a great time for doing that problematic category of things every
 management course teaches you about: important, but not urgent. For some

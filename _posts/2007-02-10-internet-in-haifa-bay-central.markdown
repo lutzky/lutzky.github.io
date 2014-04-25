@@ -5,6 +5,7 @@ title: Internet in Haifa Bay Central
 tags:
 - networking
 ---
+{% include JB/setup %}
 
 In the Haifa Bay Central bus station (מרכזית המפרץ), it's possible to get an
 internet connection. HTTPS works automatically, and setting the proxy to

@@ -5,6 +5,7 @@ title: My alarm clock
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 YNet was running a story on how to use your computer as an alarm clock. Here's
 what I do, for our commandline junkies :)

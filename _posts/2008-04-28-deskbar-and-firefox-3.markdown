@@ -5,6 +5,7 @@ title: Deskbar and Firefox 3
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 [Deskbar](raphael.slinckx.net/deskbar/) has a really neat plugin which allows
 you to search your browsing history and bookmarks. Firefox 3 has switched the

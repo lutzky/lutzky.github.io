@@ -6,6 +6,7 @@ tags:
 - code
 - python
 ---
+{% include JB/setup %}
 
 I've converted my _Antigibberish script_[^footnote]
 (converts "broken hebrew" into proper hebrew, useful for sent-offline ICQ

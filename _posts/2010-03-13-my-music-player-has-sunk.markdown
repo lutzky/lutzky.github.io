@@ -5,6 +5,7 @@ title: My music player has sunk
 tags:
 - hardware
 ---
+{% include JB/setup %}
 
 My [Meizu Mini M6](http://en.wikipedia.org/wiki/Meizu_M6_miniPlayer) has died a
 tragic death as a result of being left in my shirt pocket, which in turn was -

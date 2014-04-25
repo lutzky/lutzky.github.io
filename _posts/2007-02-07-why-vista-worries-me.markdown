@@ -6,6 +6,7 @@ tags:
 - software
 - security
 ---
+{% include JB/setup %}
 
 I've heard [the latest Security Now](http://www.twit.tv/sn77), regarding the
 debate between Dave Marsh and Peter Guttman on DRM in Windows Vista. While a

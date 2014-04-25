@@ -6,6 +6,7 @@ tags:
 - networking
 - hardware
 ---
+{% include JB/setup %}
 
 Since I've last posted, I've moved to a new apartment. First order of business
 - get a working internet connection. This is extra-challenging when your

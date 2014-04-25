@@ -7,6 +7,7 @@ tags:
 - technion
 - music
 ---
+{% include JB/setup %}
 
 I has it. Sorta.
 

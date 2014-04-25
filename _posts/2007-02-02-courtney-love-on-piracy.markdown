@@ -7,6 +7,7 @@ tags:
   - life
 
 ---
+{% include JB/setup %}
 
 This is absolutely antique (2000), but it's good to hear an artist with a clue.
 

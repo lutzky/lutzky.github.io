@@ -5,6 +5,7 @@ title: SMS and why it annoys me
 tags:
 - phones
 ---
+{% include JB/setup %}
 
 Don't get me wrong. I love being able to communicate textually with friends,
 coworkers and family. It's ideal for a noisy pub; a somewhat-private

@@ -5,6 +5,7 @@ title: Some things make you feel good
 tags:
 - life
 ---
+{% include JB/setup %}
 
 Some things renew your faith in people, in the time you spend with them.
 Amazingly small things, considering their grand scope. Making things worse is

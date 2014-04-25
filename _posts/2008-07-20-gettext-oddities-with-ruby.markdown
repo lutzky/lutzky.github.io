@@ -5,6 +5,7 @@ title: Gettext oddities with Ruby
 tags:
 - ruby
 ---
+{% include JB/setup %}
 
 I was having a lot of trouble with
 [gettext](http://en.wikipedia.org/wiki/Gettext) in Ruby, mostly due to lacking

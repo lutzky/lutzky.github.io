@@ -5,6 +5,7 @@ title: Valgrind Fail
 tags:
 - code
 ---
+{% include JB/setup %}
 
 I neglected to post this here somehow, it's about a month old by now...
 

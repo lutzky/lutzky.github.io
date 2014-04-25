@@ -6,6 +6,7 @@ tags:
 - code
 - python
 ---
+{% include JB/setup %}
 
 Writing multi-threaded applications in Python is often a headache because of
 the Global Interpreter Lock - only one Python thread can run at any given

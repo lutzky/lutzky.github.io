@@ -7,6 +7,7 @@ tags:
 - c
 - python
 ---
+{% include JB/setup %}
 
 Due to an exercise in an AI course, I'm forced to confront an old nemesis -
 C++. Part of the reason is that the exercise contains a time-limited

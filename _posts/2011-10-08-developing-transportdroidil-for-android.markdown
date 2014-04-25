@@ -6,6 +6,7 @@ tags:
 - android
 - TransportDroidIL
 ---
+{% include JB/setup %}
 
 Here are a few words on developing [TransportDroidIL][tdil_market], a small
 utility to query Israeli public transportation sites more easily using an

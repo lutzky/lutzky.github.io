@@ -5,6 +5,7 @@ title: Security project
 tags:
 - security
 ---
+{% include JB/setup %}
 
 This site gets indexed by the almighty google. [This
 link](http://lebmtg.hyperphp.com) is part of a security project I'm doing for

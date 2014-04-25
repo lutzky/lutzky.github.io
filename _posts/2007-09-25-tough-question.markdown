@@ -5,6 +5,7 @@ title: Tough Question
 tags:
 - life
 ---
+{% include JB/setup %}
 
 My girlfriend just asked me what just might be the hardest question I've heard all semester;
 What do I like better, The Simpsons or beer?

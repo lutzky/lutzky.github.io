@@ -5,6 +5,7 @@ tags:
 - code
 - show downloading
 ---
+{% include JB/setup %}
 
 My show downloading stack lives on. I'm curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.
 

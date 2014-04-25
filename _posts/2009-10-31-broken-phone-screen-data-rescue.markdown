@@ -6,6 +6,7 @@ tags:
 - hardware
 - phones
 ---
+{% include JB/setup %}
 
 Last weekend I broke my Nokia 6120's screen. I have a military phone, which is
 far cheaper, so I've decided to keep it offline. However, being the sentimental

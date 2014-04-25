@@ -5,6 +5,7 @@ title: Quick time tracking hack
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
 don't have Gnome 2.24 at work, but I do have a Unix-based operating system...

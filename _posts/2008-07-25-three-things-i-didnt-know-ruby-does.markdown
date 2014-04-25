@@ -6,6 +6,7 @@ tags:
 - code
 - ruby
 ---
+{% include JB/setup %}
 
 **Edit: I was misled!**
 

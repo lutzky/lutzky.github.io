@@ -5,6 +5,7 @@ title: Two reasons Apple suck
 tags:
 - software
 ---
+{% include JB/setup %}
 
 First of all, [new iPods won't work on
 Linux](http://www.boingboing.net/2007/09/14/new-ipods-reengineer.html). Now,

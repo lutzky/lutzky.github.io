@@ -5,6 +5,7 @@ title: Vacation
 tags:
 - life
 ---
+{% include JB/setup %}
 
 The most recent events in my life which I would consider to be vacations would
 be the second Lebanon war and my basic training. I love the Technion, but I

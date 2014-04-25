@@ -5,6 +5,7 @@ title: Scheduling
 tags:
 - ttime
 ---
+{% include JB/setup %}
 
 So, I see I forgot to post my schedule for this semester...
 

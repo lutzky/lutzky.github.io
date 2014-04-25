@@ -6,6 +6,7 @@ tags:
 - code
 - python
 ---
+{% include JB/setup %}
 
 Lately I've been working on a project that has me using DBus a lot. After
 trying to figure out how to work DBus with C, and seeing how easy it is to do

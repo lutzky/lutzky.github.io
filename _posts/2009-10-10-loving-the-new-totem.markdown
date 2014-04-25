@@ -5,6 +5,7 @@ title: Loving the new Totem
 tags:
 - show downloading
 ---
+{% include JB/setup %}
 
 Totem is Gnome's built-in media player, and it really annoyed me in previous
 versions, and had me switching to VLC. However, the version included in the

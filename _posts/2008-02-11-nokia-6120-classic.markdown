@@ -5,6 +5,7 @@ title: Nokia 6120 Classic
 tags:
 - hardware
 ---
+{% include JB/setup %}
 
 I've switched to a [Nokia 6120 Classic](http://europe.nokia.com/A4399010), and
 I've switched my carrier over to Orange. I'm very happy with it: The price is

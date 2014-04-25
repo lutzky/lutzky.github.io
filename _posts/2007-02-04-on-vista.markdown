@@ -5,6 +5,7 @@ title: On Vista
 tags:
 - software
 ---
+{% include JB/setup %}
 
 Everyone knew this was going to be an interesting one to watch. Die-hard
 Microsoft fans were sure Vista would be the final nail in the Open Source

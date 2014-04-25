@@ -5,6 +5,7 @@ title: Delegating methods in Ruby
 tags:
 - ruby
 ---
+{% include JB/setup %}
 
 Sometimes, when constructing a compound object, we are interested in exporting
 functionality while retaining encapsulation. For example, suppose we have a

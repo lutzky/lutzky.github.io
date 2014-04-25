@@ -5,6 +5,7 @@ title: I do NOT kick puppies!
 tags:
 - asides
 ---
+{% include JB/setup %}
 
 I do type mesmerizingly fast, though... :)
 

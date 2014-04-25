@@ -5,6 +5,7 @@ title: Samurai Jack - Ingenious!
 tags:
 - asides
 ---
+{% include JB/setup %}
 
 When approaching a port, the Scotsman:
 

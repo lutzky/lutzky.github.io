@@ -5,6 +5,7 @@ title: Pmount-hal + cd
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 If you're like me, and don't use Gnome or KDE, then you probably use the pmount
 or pmount-hal applications to mount removable media. Here's a neat thing to add

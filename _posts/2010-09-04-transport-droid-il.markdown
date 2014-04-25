@@ -6,6 +6,7 @@ tags:
 - TransportDroidIL
 - android
 ---
+{% include JB/setup %}
 
 After a couple of days' messing with it, I'm releasing it: _Transport Droid
 IL_! It's a handy little app for querying [Egged's site](http://egged.co.il/),

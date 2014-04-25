@@ -6,6 +6,7 @@ tags:
 - code
 - python
 ---
+{% include JB/setup %}
 
 The more I use Python, the nicer it becomes. I'm currently working on a project
 for a course, which involves somewhat heavy-duty database and algorithm work.

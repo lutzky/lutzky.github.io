@@ -5,6 +5,7 @@ title: Another SSH trick
 tags:
 - networking
 ---
+{% include JB/setup %}
 
 Ever have a machine you can only ssh into through another machine? It's a very
 common situation in the Technion. Here's one way to get around it: Assume you

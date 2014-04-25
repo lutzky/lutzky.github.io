@@ -5,6 +5,7 @@ title: Really liking this git thing
 tags:
 - git
 ---
+{% include JB/setup %}
 
 I've been a very big proponent of Subversion so far, especially as a tool for
 collaborating on coding homework. However, I've recently been trying out

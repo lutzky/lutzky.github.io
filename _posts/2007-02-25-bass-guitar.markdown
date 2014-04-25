@@ -5,6 +5,7 @@ title: Bass guitar
 tags:
 - music
 ---
+{% include JB/setup %}
 
 I brought my Fender Squier Jazz Bass up to my Technion apartment. I hope it
 won't have too much of an adverse effect on my studying... playing it (loud) is

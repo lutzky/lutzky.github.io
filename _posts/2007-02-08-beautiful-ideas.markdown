@@ -6,5 +6,6 @@ tags:
 - software
 - linux
 ---
+{% include JB/setup %}
 
 This man has [some beautiful design ideas](http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html) for the Linux desktop.

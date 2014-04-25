@@ -5,6 +5,7 @@ title: NaNuchKa
 tags:
 - music
 ---
+{% include JB/setup %}
 
 Despite having a critical midterm Sunday, as well as being sick, I could not,
 and should not have, give up on the [NaNuchKa](http://myspace.com/nanuchka)

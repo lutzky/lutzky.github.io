@@ -5,6 +5,7 @@ title: Automatically starting rtorrent within screen
 tags:
 - linux
 ---
+{% include JB/setup %}
 
 These days I don't stay at home often, but I do have an RSS/BitTorrent combo
 fetching me all kinds of neat stuff for me, so I can have it ready for me on

@@ -5,6 +5,7 @@ title: Hardware doesn't like me
 tags:
 - hardware
 ---
+{% include JB/setup %}
 
 I'm a software kind of guy. Here's proof.
 

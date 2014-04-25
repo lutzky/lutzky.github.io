@@ -5,6 +5,7 @@ title: Using git for code review
 tags:
 - git
 ---
+{% include JB/setup %}
 
 At my workplace, I've recently been using git for code review purposes. I work
 on code in my own git clone, and ask a peer to review it. It works somewhat

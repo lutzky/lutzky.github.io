@@ -6,6 +6,7 @@ tags:
 - asides
 - technion
 ---
+{% include JB/setup %}
 
 [![Paradox the cow](/assets/images/2007/06/534994007_ef57770ac3.jpg)](http://www.flickr.com/photos/paradox_the_cow/)
 

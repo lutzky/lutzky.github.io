@@ -5,6 +5,7 @@ title: The show downloading stack - part n+1
 tags:
 - show downloading
 ---
+{% include JB/setup %}
 
 I've [already mentioned][1] my show downloading stack on this blog. It's
 changed a bit since - I now use [Transmission](http://transmission-bt.org/)

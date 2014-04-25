@@ -3,6 +3,7 @@ layout: post
 title: "Test-driven procrastination"
 tags: [code, testing]
 ---
+{% include JB/setup %}
 
 A conversation with a friend reminded me that, in fact, I've been doing
 test-driven development long before I knew it was called that. Back in

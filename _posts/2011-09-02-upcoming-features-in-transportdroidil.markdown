@@ -6,6 +6,7 @@ tags:
 - TransportDroidIL
 - android
 ---
+{% include JB/setup %}
 
 Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a few new features:
 

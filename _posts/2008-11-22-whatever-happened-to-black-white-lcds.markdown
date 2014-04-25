@@ -6,6 +6,7 @@ tags:
 - hardware
 - phones
 ---
+{% include JB/setup %}
 
 I had a [Game Boy](http://en.wikipedia.org/wiki/Game_boy) once. I could play it
 just about anywhere, and battery life - for the time - was great. I lost it at

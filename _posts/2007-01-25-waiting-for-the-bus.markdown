@@ -5,6 +5,7 @@ title: Waiting for the bus
 tags:
 - networking
 ---
+{% include JB/setup %}
 
 I'm going home for the weekend, as usual. Unfortunately, the first bus of my
 route comes by at highly unpredictable times - I've had it be an hour late on

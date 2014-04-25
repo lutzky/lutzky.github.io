@@ -5,6 +5,7 @@ title: Been working on TTime
 tags:
 - ttime
 ---
+{% include JB/setup %}
 
 I've found myself working on TTime, the Technion Timetable Scheduler, quite a
 bit lately. Lots of cool stuff went in:

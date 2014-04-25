@@ -5,6 +5,7 @@ title: Here's hoping
 tags:
 - technion
 ---
+{% include JB/setup %}
 
 {% highlight ruby %}
 def factor(grade, params = {})

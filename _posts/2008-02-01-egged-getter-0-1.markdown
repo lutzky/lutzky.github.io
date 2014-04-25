@@ -5,6 +5,7 @@ title: Egged Getter 0.1
 tags:
 - software
 ---
+{% include JB/setup %}
 
 > The Egged Getter has been lost in the mists of time. However, it's code has
 > largely been integrated into [TransportDroidIL]. An old version of the Python

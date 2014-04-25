@@ -5,6 +5,7 @@ title: Tunelling even more stuff over SSH
 tags:
 - networking
 ---
+{% include JB/setup %}
 
 Today at the CS department of the Technion is a particularily Bad Network Day
 (TM) for laptop users; none of the wired connections at the farm work, and
