@@ -54,4 +54,6 @@ ps -f $(pidof sleep)
 echo "Bye"
 {% endhighlight %}
 
-This will close `stdout`, `stderr` and `stdin`. Of course, it's better to save the PID for this `sleep` and kill it when appropriate from within the script - otherwise, you might be accumulating many useless `sleep` processes.
+This will close `stdout`, `stderr` and `stdin`. As a friend pointed out, it's often safer to do `> /dev/null` rather than `>&-`, as some processes will crap out if they don't have some semblence of an `stdout`. However, `>&-` is shorter, faster, and perfectly safe for `sleep`.
+
+Of course, it's better to save the PID for this `sleep` and kill it when appropriate from within the script - otherwise, you might be accumulating many useless `sleep` processes.
