@@ -20,11 +20,13 @@
       <div class="wrap">
       {{ content }}
 
+      <span class="no-print">
       <!-- Place this tag where you want the +1 button to render. -->
       <div class="g-plusone" data-annotation="inline" data-width="300"></div>
       <div><!-- Pesky facebook alignment wrapper div -->
         <div class="fb-like" data-href="{{ page.url | prepend: site.url }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
       </div>
+      </span>
       </div>
     </div>
 
