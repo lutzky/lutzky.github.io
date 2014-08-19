@@ -47,3 +47,5 @@ obj/
 # leading "/")
 !/scripts/bin
 {% endhighlight %}
+
+Addendum: A reader has mentioned [gitignore.io](http://gitignore.io), which auto-generates useful `.gitignore` files.
