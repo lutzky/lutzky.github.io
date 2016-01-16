@@ -4,34 +4,39 @@ layout: post
 title: TransportDroidIL Outage
 ---
 
-<div style="direction: rtl; border: 1px solid black; background-color: #ffc; text-align: center">
-לאחר ההודעה באנגלית תבוא הודעה בעברית.
-</div>
-
-Hello TransportDroidIL users! I've been made aware of an outage in TransportDroidIL. The error message that shows up is:
-
-```
-java.io.IOException: HTTP/1.1 500: Internal Server error
-```
-
-The error message means that the server (Egged or MOT) is not responding to the requests TransportDroidIL is sending it. I do not yet understand why this is, but because I've seen a sharp decline in the number of installed users starting in January, I'm assuming that the MOT and/or Egged have changed the way their site works.
-
-I have not been using TransportDroidIL myself for a few years, and haven't been developing it either, so it will take me some time to fix this problem. In the meantime, I highly recommend that you use [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps) for public transport information - this is what I've been using myself, and it works very well. In fact, the only reason I developed TransportDroidIL was that, at the time (September 2010), Google Maps did not provide public transport information for Israel.
-
-If you would like to contribute a fix, please send a github pull request. See [TransportDroidIL on Github](https://github.com/lutzky/TransportDroidIL).
-
-<div style="direction: rtl">
-שלום, משתמשי TransportDroidIL! נודע לי על תקלה באפליקציה. ההודעה שמופיעה היא:
-</div>
-
-```
-java.io.IOException: HTTP/1.1 500: Internal Server error
-```
+This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.
 
 <div style="direction: rtl" markdown="1">
- משמעות ההודעה היא שהשרת (אגד או משרד התחבורה) אינו עונה לבקשות אשר TransportDroidIL שולחת אליו. אני עדיין לא יודע מה גורם לכך, אבל מאחר שראיתי ירידה חדה בכמות המשתמשים אצלם מותקנת האפליקציה מאז תחילת ינואר, אני מניח שמשרד התחבורה ו/או אגד שינו את האופן בו פועל האתר שלהם.
- 
- אני לא משתמש ב-TransportDroidIL בעצמי מזה מספר שנים, ואני גם לא מפתח את האפליקציה עוד, ולכן יקח לי זמן-מה לתקן את הבעיה. בינתיים, אני ממליץ בחום שתשתמשו באפליקציית [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps) כדי לקבל מידע על תחבורה ציבורית - זו האפליקציה בה אני משתמש בעצמי, והיא פועלת היטב. למעשה, הסיבה שפיתחתי את TransportDroidIL מלכתחילה היא שבאותו הזמן (ספטמבר 2010), Google Maps לא סיפקה מידע תחבורה ציבורית עבור ישראל.
- 
- אם אתם מעוניינים לתרום תיקון, אנא שלחו Pull Request באתר Github - ראו [TransportDroidIL on Github](https://github.com/lutzky/TransportDroidIL).
+לצערי, האפליקציה TransportDroidIL הפסיקה לפעול, והסיבה היא כזו שלא מאפשרת תיקון. אני ממליץ בחום על החלופה [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps).
+
+### שאלות ותשובות
+
+#### למה האפליקציה הפסיקה לעבוד?
+
+האפליקציה TransportDroidIL פועלת ע"י בקשת נתונים מאתר אגד או משרד אתר התחבורה, תוך שימוש במנגנון ה"שפה חופשית". שני האתרים השתנו בצורות שונות, שלא מאפשרות לאפליקציה לפעול יותר:
+
+* ב[אתר משרד התחבורה](http://bus.gov.il), מנגנון ה"שפה חופשית" כבר לא עובד כלל - קופצת ההודעה `[object Object]`, ומאחורי הקלעים ניתן לראות שהאתר לא מקבל מרכיב ה"שפה החופשית" תשובה.
+*  באתר [אגד](http://egged.co.il), מנגנון ה"שפה החופשית" עדיין פועל,והשתנה יחסית מעט, ויכול בהחלט להיות אפשרי לגרום לאפליקציה לעבוד איתו שוב, אבל...
+
+#### רגע רגע, בעצם האפליקציה לא עושה שום דבר ומביאה את כל הנתונים מאתרים קיימים? אז למה כתבת אותה?
+
+נכון! הסיבה שכתבתי את האפליקציה הייתה שהאתרים האלה, בספטמבר 2010, לא היו מותאמים לטלפונים ניידים והשימוש בהם מהנייד היה כאב-ראש מוחלט. למעשה, [אתר משרד התחבורה](http://bus.gov.il) עדיין לא מותאם, ונראה כיום דומה מאוד לאיך שאתר אגד נראה ב-2010. האפליקציה הייתה מיועדת אך ורק לתת ממשק משתמש נוח יותר לאותם האתרים.
+
+למרבה השמחה, אתר [אגד](http://egged.co.il) מותאם כיום בצורה פחות-או-יותר סבירה לטלפונים ניידים. לא מושלם, אבל בהחלט שמיש. אך, חשוב מכל...
+
+#### בתכל'ס יש אפליקציות יותר מוצלחות, כמו Google Maps, אז למה להשתמש באתרים האלה בכלל?
+
+אין יותר סיבה! ב-2010 Google Maps אמנם לא סיפקה מידע תחבורה ציבורית בישראל, אבל כיום המידע קיים שם בצורה מלאה ומקיפה. המידע מגיע לגוגל ישירות מ[אתר מאגרי המידע הממשלתיים](https://data.gov.il/dataset/383), בפורמט GTFS המותאם לכך. זו האפליקציה בה אני משתמש כיום.
+
+המידע המסופק הוא, כמו תמיד, מידע של לוחות זמנים ולא מידע זמן-אמת. כולי תקווה שחברות האוטובוסים יתחילו לפרסם מידע זמן-אמת בפורמט [GTFS-realtime](https://developers.google.com/transit/gtfs-realtime/?hl=en), אשר יגרום לכך ש-Google Maps ואפליקציות אחרות יוכלו להראות מידע מציאות יותר על זמן הגעת האוטובוסים.
+
+#### מי פיתח את האפליקציה ומה הקשר שלו לעניין?
+
+אני המפתח המקורי של האפליקציה - שמי אוהד לוצקי. התחלתי לעבוד על תוכנות שמביאות מידע מאתר משרד התחבורה בזמן שהייתי סטודנט בטכניון שנוסע הרבה באוטובוסים, בערך ב-2007. ב-2010 המרתי את התוכנה לאפליקציית אנדרואיד כשהייתי בצבא ונסעתי הרבה באוטובוסים; כמה חברים התעניינו, והעליתי את התוכנה ל-Play Store. חבר טוב מהלימודים, חגי, שלח מספר שיפורים ואף [הוסיף מנגנון עדכוני-זמן-אמת](https://github.com/lutzky/TransportDroidIL/pull/15), אשר היה תלוי בחסדי האתרים של חברות אוטובוס ספציפיות שסיפקו, גם הן, את המידע בצורה לא-סטנדרטית.
+
+בשלב כלשהו עלו אפליקציות חלופיות לרשת, דוגמת Moovit - אך אף אחד מהן לא מצאה חן בעיניי. בפרט, ל-Moovit לקח זמן רב לעלות, בעוד שהאפליקציה שלי הייתה מיועדת למבט מהיר תוך כדי שהאוטובוס מתקרב לתחנה.
+
+בשלב כלשהו (2012 לכל המאוחר) משרד התחבורה התחיל לפרסם מידע GTFS שאפשר לגוגל להציג מידע תחבורה ציבורית בישראל, ואני הפסקתי להשתמש באפליקציה שכתבתי. Google Maps מראה את התחנות על מפה, רשימת תחנות-ביניים ועוד. עם זאת, מאחר ולאפליקציה עוד היה מספר לא-קטן של משתמשים (קצת יותר מ-55,000 בשיא), המשכתי לתקן בעיות  קטנות כשהן צצו וכשהיה לי זמן.
+
+כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL :)
  </div>
