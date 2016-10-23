@@ -20,7 +20,7 @@ code identifying the error. Unfortunately, this made the code get really big,
 really fast - especially once DBus exceptions are thrown into the mix. But once
 I learned how to use decorators, I accomplished something like this diff:
 
-{% highlight diff %}
+```diff
 +@wrap_exceptions((False,))
  def checkSomething():
 -    global error_string
@@ -39,7 +39,7 @@ I learned how to use decorators, I accomplished something like this diff:
 -        return (False, RET_ERROR)
 -
 +    return (try_doing_something_over_dbus(), RET_OK)
-{% endhighlight %}
+```
 
 Now, the duplicate DBus/non-DBus exception handling, global `error_string`,
 etc. - that happened in a lot of functions. Unfortunately, they didn't all
@@ -47,7 +47,7 @@ return their values in the same way. Some just returned a `RET_VALUE`, but most
 had other values before it in the tuple (not the ideal design, come to think of
 it...). Here's the decorator I wrote:
 
-{% highlight python %}
+```python
 class wrap_exceptions:
     def __init__(self, prepend_tuple=None):
         self.prepend_tuple = prepend_tuple
@@ -79,4 +79,4 @@ class wrap_exceptions:
                 return self.tuplize(RET_ERROR)
 
         return exception_wrapped
-{% endhighlight %}
+```
