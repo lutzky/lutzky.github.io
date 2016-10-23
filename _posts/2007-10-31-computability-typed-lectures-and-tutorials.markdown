@@ -22,7 +22,9 @@ repository stored here:
 
 To use it, install `git-core` and curl, and run
 
-    git clone http://yasmin.technion.ac.il/ohad/git/computability.git
+```console
+git clone http://yasmin.technion.ac.il/ohad/git/computability.git
+```
 
 Any changes you have - send to me as patches, or push to your own repository
 and send me a link. (Drawings would be most welcome, and you're obviously

@@ -12,7 +12,7 @@ This is part of the "Git While You Sit" series, a play on Google's [Testing on t
 
 Ever find yourself `printf`-debugging? You found the bug, but now you have `printf` statements all over the place. Running `git diff`, you get:
 
-{% highlight diff %}
+```diff
 diff --git a/hello.c b/hello.c
 index 93ca08c..c7d354a 100644
 --- a/hello.c
@@ -38,11 +38,11 @@ index 93ca08c..c7d354a 100644
      return;
  }
  
-{% endhighlight %}
+```
 
 It's actually pretty easy to get rid of them. Run `git add -p` and you will be shown each patch "hunk" separately:
 
-{% highlight diff %}
+```diff
 diff --git a/hello.c b/hello.c
 index 93ca08c..c7d354a 100644
 --- a/hello.c
@@ -81,6 +81,6 @@ index 93ca08c..c7d354a 100644
      return;
  }
 ### Stage this hunk [...]? n (No) ###
-{% endhighlight %}
+```
 
 Now, only the `return 0` line is stage for commit. To get rid of the rest of the changes, run `git checkout -- hello.c`. Now the `printf` statements have been removed!

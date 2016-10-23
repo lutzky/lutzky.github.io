@@ -12,7 +12,7 @@ documentation. Here are some useful things I figured out while writing TTime. I
 ended up having a single `gettext_settings.rb`, included from every file which
 uses gettext. Here it is (with some extra notes)
 
-{% highlight ruby %}
+```ruby
 #!/usr/bin/ruby
 begin
   require 'gettext'
@@ -47,7 +47,7 @@ rescue LoadError
     s
   end
 end
-{% endhighlight %}
+```
 
 One note for context: I use
 [setup.rb](http://i.loveruby.net/en/projects/setup/) (and `ruby-pkg-tools`) to

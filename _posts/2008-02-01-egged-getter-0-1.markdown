@@ -32,7 +32,7 @@ building of the Technion, room 6, at 18:30.
 
 [TransportDroidIL]: https://github.com/lutzky/TransportDroidIL
 
-{% highlight python %}
+```python
 #!/usr/bin/python
 # coding: utf-8
 import socket
@@ -145,4 +145,4 @@ if __name__ == '__main__':
         print log2vis(result)
     except UnicodeEncodeError:
         print log2vis(unicode.encode(result,"utf-8"))
-{% endhighlight %}
+```

@@ -11,12 +11,12 @@ tags:
 
 Illustrated here. Hints below.
 
-{% highlight irb %}
+```irb
 >> def inspect_x_and_y(x,y); puts "x: %p, y: %p" % [x, y]; end
 => nil
 >> inspect_x_and_y(y={"hello" => "world"},x=[1,2,3])
 x: {"hello"=>"world"}, y: [1, 2, 3]
-{% endhighlight %}
+```
 
 The bits I didn't know about:
 

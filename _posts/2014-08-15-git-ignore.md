@@ -16,15 +16,15 @@ You can create a file called `.gitignore` - note that the filename starts with a
 
 *Note:* `.gitignore` can only be used for files which shouldn't be in source code *at all* (those show up as "Untracked files". *Modified* files can't be ignored in this way. If you really want to, you can force git to ignore modifications with this command:
 
-{% highlight console %}
+```console
 $ git update-index --assume-unchanged FILE
-{% endhighlight %}
+```
 
 However, this is usually a bad idea and indicates you need to refactor your file handling - split files which get modified locally from files which contain information which should be source-controlled.
 
 Here is an annotated excerpt from a `.gitignore` file:
 
-{% highlight text %}
+```text
 # Extensions of compiled files
 *.a
 *.so
@@ -46,6 +46,6 @@ obj/
 # one as this .gitignore file (hence the
 # leading "/")
 !/scripts/bin
-{% endhighlight %}
+```
 
 Addendum: A reader has mentioned [gitignore.io](http://gitignore.io), which auto-generates useful `.gitignore` files.

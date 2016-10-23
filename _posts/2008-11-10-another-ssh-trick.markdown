@@ -11,9 +11,11 @@ common situation in the Technion. Here's one way to get around it: Assume you
 can directly ssh into `alpha`, and from `alpha` you can ssh into `beta`. Have
 the following code in your `~/.ssh/config`:
 
-    Host beta
-            Hostname 1.2.3.4  # IP Address of beta
-            ProxyCommand ssh alpha nc -w 1 %h %p
+```
+Host beta
+        Hostname 1.2.3.4  # IP Address of beta
+        ProxyCommand ssh alpha nc -w 1 %h %p
+```
 
 This requires you to have `nc` (netcat) installed on `alpha`. Once you do that,
 you can run `ssh beta` directly from your own box.

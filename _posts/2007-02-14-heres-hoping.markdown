@@ -6,7 +6,7 @@ tags:
 - technion
 ---
 
-{% highlight ruby %}
+```ruby
 def factor(grade, params = {})
   return 100 if params.empty? # Optimistic, eh?
 
@@ -38,4 +38,4 @@ def factor(grade, params = {})
   return grade if params[:idnoclip]
   [ grade, 100 ].min
 end
-{% endhighlight %}
+```

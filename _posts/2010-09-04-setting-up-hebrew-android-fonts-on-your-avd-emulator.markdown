@@ -34,13 +34,17 @@ within your Android SDK directory, under `platforms/android-3/images` (or
 whatever version you're emulating). We'll extract that - create a temporary
 directory, say `/tmp/system.img.hebdroid`, and `cd` to it. Then run:
 
-    unyaffs /path/to/system.img
+```
+unyaffs /path/to/system.img
+```
 
 The whole `/system` filesystem should be extracted. Now extract the `ttf` files
 from `hebdroid.zip` into the fonts directory, replacing the original font
 files. To pack everything back up, run:
 
-    mkyaffs2image /tmp/system.img.hebdroid system.img.hebdroid
+```
+mkyaffs2image /tmp/system.img.hebdroid system.img.hebdroid
+```
 
 Now, I recommend putting renaming your original `system.img` to
 `system.img.orig`, and using symlinking `system.img.hebdroid` as your new

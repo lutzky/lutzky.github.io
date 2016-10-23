@@ -22,13 +22,15 @@ confusing thing is that if you forget to install `libgtkspell-dev` or
 `libaspell-dev`, SwitchSpell will not be built, but the `configure` script
 tells you that it _will_.
 
-    sudo apt-get install build-essential gettext libgtkspell-dev libaspell-dev pidgin-dev
-    wget http://downloads.guifications.org/plugins//Plugin%20Pack/purple-plugin_pack-2.3.0.tar.bz2
-    tar jxvf purple-plugin_pack-2.3.0.tar.bz2
-    cd purple-plugin_pack-2.3.0
-    ./configure --with-plugins=switchspell
-    make
-    sudo make install
+```
+sudo apt-get install build-essential gettext libgtkspell-dev libaspell-dev pidgin-dev
+wget http://downloads.guifications.org/plugins//Plugin%20Pack/purple-plugin_pack-2.3.0.tar.bz2
+tar jxvf purple-plugin_pack-2.3.0.tar.bz2
+cd purple-plugin_pack-2.3.0
+./configure --with-plugins=switchspell
+make
+sudo make install
+```
 
 At this point, the Switch Spell plugin should show up in your Pidgin
 preferences. When you activate it, you should get a menu at the top of each

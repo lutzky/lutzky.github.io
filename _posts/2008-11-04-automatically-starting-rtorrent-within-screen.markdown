@@ -17,11 +17,11 @@ My solution: A small script, which checks whether rtorrent is already running,
 and if not - runs it in a detached screen session. Run this with your favorite
 `cron` software.
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 # A simple script to make sure I am running rtorrent in a screen
 
 if ! ps -o uname -C rtorrent | grep -q `whoami`; then
 	screen -d -m rtorrent
 fi
-{% endhighlight %}
+```

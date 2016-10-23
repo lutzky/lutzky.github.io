@@ -45,20 +45,22 @@ For downloading torrents, I use [rtorrent](http://libtorrent.rakshasa.no/).
 It's a curses-based client which performs very well. My `.rtorrent.rc` file looks
 like this:
 
-    download_rate = 30
-    upload_rate = 2
-    directory = /home/ohad/torrents/in_progress
-    on_finished = move_complete,"execute=mv,-u,$d.get_base_path=,~/torrents/inbox/ ;d.set_directory=~/torrents/inbox/"
-    session = /home/ohad/torrents/.session
-    schedule = watch_directory,5,5,load_start=/home/ohad/torrents/from_rss/*.torrent
-    schedule = untied_directory,5,5,remove_untied=
-    schedule = throttle_1,23:00:00,24:00:00,download_rate=0
-    schedule = throttle_2,05:00:00,24:00:00,download_rate=30
-    port_range = 6881-6889
-    encryption = allow_incoming,enable_retry,prefer_plaintext
-    dht = auto
-    peer_exchange = yes
-    scgi_local = /tmp/rtorrent-scgi.socket
+```
+download_rate = 30
+upload_rate = 2
+directory = /home/ohad/torrents/in_progress
+on_finished = move_complete,"execute=mv,-u,$d.get_base_path=,~/torrents/inbox/ ;d.set_directory=~/torrents/inbox/"
+session = /home/ohad/torrents/.session
+schedule = watch_directory,5,5,load_start=/home/ohad/torrents/from_rss/*.torrent
+schedule = untied_directory,5,5,remove_untied=
+schedule = throttle_1,23:00:00,24:00:00,download_rate=0
+schedule = throttle_2,05:00:00,24:00:00,download_rate=30
+port_range = 6881-6889
+encryption = allow_incoming,enable_retry,prefer_plaintext
+dht = auto
+peer_exchange = yes
+scgi_local = /tmp/rtorrent-scgi.socket
+```
 
 Interesting things to note here are:
 
@@ -77,7 +79,7 @@ computer is up. This is not as elegant as starting it from an RC-script, but
 keeps the whole setup confined to the limits of my own user. Again, rtorrent
 has a lock-file which prevents multiple instances from running.
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 
 # A simple script to make sure I am running rtorrent in a screen
@@ -95,7 +97,7 @@ if [[ -S $SCGI_SOCKET ]]; then
     chgrp www-data $SCGI_SOCKET
     chmod g+rwx $SCGI_SOCKET
 fi
-{% endhighlight %}
+```
 
 [RTGUI](http://code.google.com/p/rtgui/) provides a nice web-based interface.
 It's a bit tricky to configure, and you'll need to use an HTTP server -

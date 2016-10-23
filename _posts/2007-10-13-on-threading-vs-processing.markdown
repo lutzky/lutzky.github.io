@@ -21,7 +21,7 @@ down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
 or processes at the user's choice:
 
-{% highlight python %}
+```python
 import processing
 import threading
 import Queue
@@ -81,4 +81,4 @@ if __name__ == '__main__':
 	w.show_all()
 	print "Mainloop!"
 	gtk.main()
-{% endhighlight %}
+```

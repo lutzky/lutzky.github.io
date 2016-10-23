@@ -9,7 +9,7 @@ strings. It's important that your unit-testing framework handles this well.
 
 Here's my example data:
 
-{% highlight python %}
+```python
 STRING_A = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
 Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
@@ -33,7 +33,7 @@ mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
 lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
 ultrices gravida vel et orci. Suspendisse potenti.
 """
-{% endhighlight %}
+```
 
 `STRING_A` and `STRING_B` are different, by one character. Can you tell which
 one?  If you'd use your unit testing framework's equivalent of
@@ -56,7 +56,7 @@ are similar comparison methods for other large data types.
 
 Output:
 
-{% highlight text %}
+```text
 F
 ======================================================================
 FAIL: testLongStringEquality (__main__.TestLongStrings)
@@ -84,13 +84,13 @@ AssertionError: '\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusc
 Ran 1 test in 0.003s
 
 FAILED (failures=1)
-{% endhighlight %}
+```
 
 For Java and JUnit, the output is also short and sweet (for plain `assertEquals`):
 
-{% highlight text %}
+```text
 testLongStringEquality(MyTest): expected:<...sque. Aenean venenat[i]s vulputate eros, si...> but was:<...sque. Aenean venenat[l]s vulputate eros, si...>
-{% endhighlight %}
+```
 
 Does your unit testing framework provide helpful output for failed unit tests?
 This is something you can and should demand of it.

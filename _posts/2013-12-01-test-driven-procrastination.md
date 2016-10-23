@@ -13,18 +13,18 @@ lines: Write a program managing a store inventory, with a command-line client
 conforming to a given set of specifications. For an input file looking like
 this:
 
-{% highlight text %}
+```text
 addcategory Fruit
 addproduct Fruit Banana 2.30
 addproduct Fruit Tomato 1.20
 addproduct Fruit Apple 1.50
 addproduct Fruit Apple 1.60
 list Fruit
-{% endhighlight %}
+```
 
 The output file would be expected to look like this:
 
-{% highlight text %}
+```text
 OK
 OK
 OK
@@ -35,7 +35,7 @@ Fruit
 Apple  1.50
 Banana 2.30
 Tomato 1.20
-{% endhighlight %}
+```
 
 Of course, error messages, sorting and spacing for the output would be part of
 the spec. That provided an effective way of checking your program's

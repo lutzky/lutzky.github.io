@@ -11,7 +11,7 @@ what I do, for our commandline junkies :)
 
 Here's `~/bin/run_alarm.sh`:
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 
 find ~/music/ -name '*.mp3' -print0 | xargs -0 mplayer -shuffle &
@@ -23,7 +23,7 @@ for (( i = 0; i <= $MAXVOL; i++ )); do
         amixer set Master $i > /dev/null;
         sleep `echo $TIME / $MAXVOL | bc -l`
 done
-{% endhighlight %}
+```
 
 This basically plays all of my MP3 files, in random order. The `-print0` and `-0`
 arguments make it a null-terminated list, as some (most) files have spaces in
@@ -33,7 +33,7 @@ sweep the volume from 0 to the maximum, for a more gentle wakeup :)
 This script is basically intended for use with `at`. I made a little wrapper
 around it for my comfort:
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 
 if [ -z "$1" ]; then
@@ -42,4 +42,4 @@ if [ -z "$1" ]; then
 fi
 
 echo /home/ohad/bin/run_alarm.sh | at $1
-{% endhighlight %}
+```

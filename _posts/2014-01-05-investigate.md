@@ -10,7 +10,7 @@ My show downloading stack lives on. I'm curious as to which will happen first: N
 
 At any rate, nowadays I use `flexget`, `transmission`, `tvnamer` and `xbmc`, held together with some bash scripts. On debian- and ubuntu-based systems, the `transmission` daemon runs as a separate user (`debian-transmission`), so this requires a bit of care with file and group ownership. After rebuilding my system, I couldn't get `tvnamer` to work right for some reason, no matter how careful I was. I'd keep getting this error:
 
-{% highlight text %}
+```text
 Loading config: config.json
 ####################
 # Starting tvnamer
@@ -28,7 +28,7 @@ OSError(1, 'Operation not permitted')
 New path: /media/Store/shows/Sherlock/Season 3/Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
 Creating directory /media/Store/Shows/Sherlock/Season 3
 OSError(2, 'No such file or directory')
-{% endhighlight %}
+```
 
 For a few weeks I'd double-check the permissions, fail to understand what was going on, groan and copy the files manually. The new Sherlock episode had me in a bit of a more investigative mood.
 

@@ -30,7 +30,7 @@ are implemented in a usable way, and extremely well-documented.
 
 At the end of the day, I was able to turn this Python gem:
 
-{% highlight python %}
+```python
 import dbus
 
 def _nm_device_interface(dev_object):
@@ -61,11 +61,11 @@ def _nm_all_device_interfaces():
         if _nm_dbus_exception(e, "NoDevices"):
             return [] # No devices means list of devices is empty
         else: raise
-{% endhighlight %}
+```
 
 ...into this C gem:
 
-{% highlight cpp %}
+```cpp
 #define DBUS_SERVICE_NM "org.freedesktop.NetworkManager"
 #define DBUS_PATH_NM "/org/freedesktop/NetworkManager"
 #define DBUS_INTERFACE_NM "org.freedesktop.NetworkManager"
@@ -116,7 +116,7 @@ GPtrArray * get_nm_devices(DBusGConnection *connection, GError **err) {
 
         return ptr_array;
 }
-{% endhighlight %}
+```
 
 The C code runs much faster, and I suspect is more maintainable then its
 original counterpart (which uses embedded python in C).

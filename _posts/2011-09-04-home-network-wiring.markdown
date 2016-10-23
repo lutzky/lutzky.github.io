@@ -10,15 +10,17 @@ I don't like wireless connections; they're always second-best, be it in terms
 of security, speed, or reliability. Here's how my apartment looks (very
 approximately):
 
-     .-P1----.  .-------------------P4-,---------,
-     |  PC   |  |       COMFY SOFA     .         |
-     |       |  |                      . Closed  |
-     |  .-,  |  |      Living room     . Porch   |
-     |  |B| P2  |                      .         |
-     |  |E|     |                      .         |
-     |  |D|  |      HUGE CUPBOARD   TV .  R PC   |
-     `-------'  `-P3-------------------'--P5-----'
-       My room
+```
+.-P1----.  .-------------------P4-,---------,
+|  PC   |  |       COMFY SOFA     .         |
+|       |  |                      . Closed  |
+|  .-,  |  |      Living room     . Porch   |
+|  |B| P2  |                      .         |
+|  |E|     |                      .         |
+|  |D|  |      HUGE CUPBOARD   TV .  R PC   |
+`-------'  `-P3-------------------'--P5-----'
+ My room
+```
 
 The room on the left is mine, with my (constantly torrenting) PC in bed-viewing
 position. The router (`R`) is in the closed porch, connected to my roommate's
