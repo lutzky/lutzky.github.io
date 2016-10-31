@@ -9,7 +9,7 @@ useful - you'll only need to type your password once per session. But first,
 let's set the default username (so you don't have to tell SSH what user you are
 every time):
 
-{% highlight bash %}
+```console
 $ cd ~
 $ mkdir .ssh
 $ chmod 700 .ssh
@@ -18,11 +18,11 @@ Host t2.technion.ac.il
 	User slutzky
 Ctrl-D
 $
-{% endhighlight %}
+```
 
 Now, create a public/private key pair for SSH, like so:
 
-{% highlight bash %}
+```console
 $ ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/tactless/.ssh/id_rsa): 
@@ -32,20 +32,20 @@ Your identification has been saved in /home/tactless/.ssh/id_rsa.
 Your public key has been saved in /home/tactless/.ssh/id_rsa.pub.
 The key fingerprint is:
 5a:3a:e3:f4:6e:91:fe:3f:27:4e:f4:46:0d:5e:50:4f tactless@dolphin
-{% endhighlight %}
+```
 
 Now you have a public and private key: `~/.ssh/id_rsa` is the private key
 (don't give this to anyone!), and `~/.ssh/id_rsa.pub` is the public key - give
 this to everyone. Specifically, put it on the SSH server you want to log into,
 making sure the permissions are correct. There's a script which does this:
 
-{% highlight bash %}
+```console
 $ ssh-copy-id t2.technion.ac.il
-{% endhighlight %}
+```
 
 It basically does the following for you:
 
-{% highlight bash %}
+```console
 $ scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
 password:
 $ ssh t2.technion.ac.il
@@ -54,11 +54,11 @@ $ ssh t2.technion.ac.il
 > chmod 700 .ssh .ssh/authorized_keys
 > chmod 755 .
 > logout
-{% endhighlight %}
+```
 
 Now, when you log in to your local account, before using SSH for the first time, type the following command:
 
-{% highlight bash %}
+```console
 $ ssh-add
 Enter passphrase for /home/tactless/.ssh/id_rsa: your-password-here
 $ ssh t2.technion.ac.il
@@ -66,4 +66,4 @@ $ ssh t2.technion.ac.il
 > logout
 $ ssh t2.technion.ac.il
 > # no password this time either
-{% endhighlight %}
+```
