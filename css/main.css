@@ -225,6 +225,9 @@ a:visited { color: #205caa; }
 .post-content ul,
 .post-content ol { padding-left: 20px; }
 
+[dir="rtl"] .post-content ul,
+[dir="rtl"] .post-content ol { padding-right: 20px; padding-left: 0px; }
+
 .post pre,
 .post code {
   border: 1px solid #d5d5e9;
@@ -241,6 +244,9 @@ a:visited { color: #205caa; }
 
 .post ul,
 .post ol { margin-left: 1.35em; }
+
+.post[dir="rtl"] ul,
+.post[dir="rtl"] ol { margin-right: 1.35em; margin-left: 0; }
 
 .post pre code {
   border: 0;
@@ -398,6 +404,10 @@ a:visited { color: #205caa; }
   .post-content h3 { font-size: 22px; }
   .post-content h4 { font-size: 18px; }
   .post-content blockquote { padding-left: 10px; }
+  [dir="rtl"] .post-content blockquote {
+    padding-right: 10px;
+    padding-left: 0px;
+  }
   .post-content ul,
   .post-content ol { padding-left: 10px; }
 
