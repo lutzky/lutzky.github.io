@@ -24,3 +24,5 @@ Here is a list of lectures I've given in [Haifux](http://haifux.org):
 * [FatNS - How to develop a DNS forensics tool](http://haifux.org/lectures/147) (w/Boaz Goldstein)
 * [Linux for CS Students - a Primer](http://haifux.org/lectures/152-sil)
 * [Linux for CS Students - Debugging](http://haifux.org/lectures/153-sil1)
+
+If you're with a russian keyboard and need a stress sign, try [/russian-stress](/russian-stress).
