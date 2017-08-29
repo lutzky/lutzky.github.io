@@ -1,0 +1,14 @@
+---
+layout: default
+---
+
+<textarea id="copyBuffer">́</textarea>                                               
+                                                                                    
+<script>                                                                            
+function copyIt() {                                                                 
+  document.getElementById('copyBuffer').select();                                   
+  document.execCommand('copy');                                                     
+}                                                                                   
+</script>                                                                           
+                                                                                    
+<button onClick="copyIt()">Copy</button>               
