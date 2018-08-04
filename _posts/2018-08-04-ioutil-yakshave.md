@@ -125,6 +125,6 @@ func capture() string {
 
 With `closeStdout` set to true, everything works correctly. However, with it false, `io.Copy` will hang.
 
-The full code is in https://play.golang.org/p/Xg2iajdiuNN, but because of [golang/go#24610](https://github.com/golang/go/issues/24610), for which the fix has yet to be rolled out, `Dup2` will fail, so you need to copy the code over to your local machine.
+The full code is in [the playground](https://play.golang.org/p/Xg2iajdiuNN), but because of [golang/go#24610](https://github.com/golang/go/issues/24610), for which the fix has yet to be rolled out, `Dup2` will fail, so you need to copy the code over to your local machine.
 
 [fix-commit]: https://github.com/zimmski/osutil/pull/9/commits/f15804f0e6285e5634cf78f703ca544a6936a8fa
