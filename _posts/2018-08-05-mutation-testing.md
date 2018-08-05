@@ -3,7 +3,7 @@ layout: post
 title: Mutation testing
 ---
 
-Now that we're done [yak shaving](/2018/08/04/ioutil-yakshave/), we can start talking about mutation testing.
+Now that we're done [yak shaving](/2018/08/04/ioutil-yakshave/), we can start talking about mutation testing. As an engineer at Google, I often use the Go programming language (which I really enjoy), so that is my choice for these examples; however, mutation testing is available for other languages.
 
 ### Constructing Bolson people
 
