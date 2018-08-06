@@ -1,11 +1,14 @@
 ---
 date: 2016-01-11 18:56:00
 layout: post
-rtl: true
 title: תקלה ב-TransportDroidIL
 ---
 
 <div dir="ltr">This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.</div>
+
+{::options parse_block_html="true" /}
+
+<div dir="rtl">
 
 לצערי, האפליקציה TransportDroidIL הפסיקה לפעול, והסיבה היא כזו שלא מאפשרת תיקון. אני ממליץ בחום על החלופה [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps).
 
@@ -39,3 +42,5 @@ title: תקלה ב-TransportDroidIL
 בשלב כלשהו (2012 לכל המאוחר) משרד התחבורה התחיל לפרסם מידע GTFS שאפשר לגוגל להציג מידע תחבורה ציבורית בישראל, ואני הפסקתי להשתמש באפליקציה שכתבתי. Google Maps מראה את התחנות על מפה, רשימת תחנות-ביניים ועוד. עם זאת, מאחר ולאפליקציה עוד היה מספר לא-קטן של משתמשים (קצת יותר מ-55,000 בשיא), המשכתי לתקן בעיות  קטנות כשהן צצו וכשהיה לי זמן.
 
 כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL :)
+
+</div>

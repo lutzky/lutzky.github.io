@@ -1,7 +1,9 @@
 # Site settings
 title: Shallow and Pedantic
 email: ohad@lutzky.net
-description: "A personal/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic."
+description: >-
+  A personal/tech/code blog of a coder/techie/person. Like calculus in a kiddie
+  pool, the author of this blog is known to be quite shallow and pedantic.
 baseurl: ""
 url: "http://lutzky.github.io"
 twitter_username: lutzky
@@ -9,6 +11,6 @@ github_username:  lutzky
 
 # Build settings
 markdown: kramdown
-permalink: pretty
-
-excerpt_separator: ''
+theme: minima
+plugins:
+  - jekyll-feed
