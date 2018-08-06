@@ -8,6 +8,7 @@ baseurl: ""
 url: "http://lutzky.github.io"
 twitter_username: lutzky
 github_username:  lutzky
+permalink: pretty
 
 # Build settings
 markdown: kramdown
