@@ -1,8 +1,6 @@
 ---
 published: true
 ---
-## Editing old family videos
-
 In the 90s, my family (along with much of the rest of the world) filmed a lot of home videos. At some point we converted them to what we believed to be DVD for preservation and ease-of-access, but this was actually VCD (which has somewhat worse compatibility), burned on CD-R (which degrades faster than you might think), and optical media has pretty much become extinct as well. In a family visit in 2018 I found the old stash of original video cassettes, flew them with me from Israel to Ireland, and got a local shop called DVD Centre to re-rip them - these guys provide the great service of uploading directly to Dropbox.
 
 I've been spending some sporadic time on weekends rewatching all of these, cataloguing them into what Googlers call a "one-pager" - a long document that may span many pages if printed out, but can be loaded by normal software with simple search functionality (a Google Doc, in my case). This is great for searching by name or event to more easily locate the right video. The tapes are still quite long though - usually 1-2 hours, and can be logically split into smaller segments. They also often have audio issues, such as audio only coming out of one side or having very inconsistent volume.
@@ -11,7 +9,7 @@ For the last few weekends (2020 is a weird year that gives me more time to do th
 
 Here's my workflow, in case it's useful for anyone else:
 
-### Audio corrections
+## Audio corrections
 
 First, split the audio stream into a separate file so you can modify it with the software of your choice. I use `ffmpeg` for this. The `ffprobe` program lets me determine the current audio type, which is `aac` in my case, so I do:
 
@@ -35,7 +33,7 @@ ffmpeg -i ORIGINAL_VIDEO.mov -i output-audio-fixed.aac -c:v copy -map 0:v:0 -map
 
 This method was both faster and more flexible than using the video editors I have at my disposable.
 
-### Splitting video
+## Splitting video
 
 At this point, I watch the video through, writing down key points of what's going on with approximate time-codes. It helps to do 3-4 different tapes of this before moving forward, as it gives you a feel for what the "logical separation" to smaller chunks is. I usually define those chunks as "different set of consecutive days" (usually just one), but it helps to have all the timecodes available in text so you don't have to re-watch. I recommend using a player that supports faster-than-realtime viewing, such as VLC (speed up, stop on "hey what was that", rewind, watch at regular speed). This is the most time-consuming part.
 
