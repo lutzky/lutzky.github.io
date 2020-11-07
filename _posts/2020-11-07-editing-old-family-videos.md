@@ -59,7 +59,7 @@ These are annoying to create manually, because:
 1. The timecode for ffmpeg is given in milliseconds, so 13 frames in 25fps becomes 520 milliseconds.
 2. The `-to` offset is from the section's *start* (so it's more of a `-length`), and subtraction is hard.
 
-So I wrote https://github.com/lutzky/splitpoints to do this for me. It takes a `points.txt` as described above, and outputs the appropriate series of commands.
+So, of course, I wrote [some code](https://github.com/lutzky/splitpoints) to do this for me. It takes a `points.txt` as described above, and outputs the appropriate series of commands.
 
 All that's left to do is to let the commands run, upload the videos, and wait for Google Drive's video-rendering to catch up.
 
