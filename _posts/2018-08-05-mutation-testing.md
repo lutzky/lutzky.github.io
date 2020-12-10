@@ -1,6 +1,6 @@
 ---
-layout: post
-title: Mutation testing
+title: Mutation testing in Go
+excerpt: Your test coverage might be very high, but it's possible that your tests wouldn't notice if you deleted some code. Let's check for that automatically!
 ---
 
 Now that we're done [yak shaving](/2018/08/04/ioutil-yakshave/), we can start talking about mutation testing. As an engineer at Google, I often use the Go programming language (which I really enjoy), so that is my choice for these examples; however, mutation testing is available for other languages.

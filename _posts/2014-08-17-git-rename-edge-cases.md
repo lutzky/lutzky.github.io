@@ -1,7 +1,8 @@
 ---
-date: 2014-08-17 00:28:00
-layout: post
 title: Git While You Sit 3 - "Rename" edge cases
+date: 2014-08-17 00:28:00
+excerpt: >
+  Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it's far more likely that git did the "right" thing after all.
 tags:
 - git-while-you-sit
 - git

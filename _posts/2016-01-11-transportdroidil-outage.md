@@ -1,7 +1,7 @@
 ---
 date: 2016-01-11 18:56:00
-layout: post
 title: תקלה ב-TransportDroidIL
+excerpt: (Hebrew) The tale of my now-defunct android app for fetching public transport information.
 ---
 
 <div dir="ltr">This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.</div>
