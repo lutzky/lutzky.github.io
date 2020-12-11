@@ -1,7 +1,6 @@
 ---
-date: 2014-08-13 02:00:00
-layout: post
 title: "Lessons learned"
+excerpt: Some lessons learned from my role with the previous company as a DevOps engineer and team lead. We discuss tidiness and prioritizing using pre-existing code.
 ---
 
 After 6 years with my previous employer, as a DevOps engineer and DevOps team leader, I've learned two important lessons. I wanted to get these in here before I start my new position (...as an SRE in Google Dublin, which I am very excited about!), as it's always fun to look back after a few years and see if what I wrote is still relevant.

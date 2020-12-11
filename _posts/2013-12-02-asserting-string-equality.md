@@ -1,6 +1,6 @@
 ---
-layout: post
 title: "Asserting string equality"
+excerpt: When comparing long strings in unit tests, make sure your assertion failures give you useful output.
 tags: [code, testing]
 ---
 

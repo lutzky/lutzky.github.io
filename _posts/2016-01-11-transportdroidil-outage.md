@@ -1,5 +1,4 @@
 ---
-date: 2016-01-11 18:56:00
 title: תקלה ב-TransportDroidIL
 excerpt: (Hebrew) The tale of my now-defunct android app for fetching public transport information.
 ---

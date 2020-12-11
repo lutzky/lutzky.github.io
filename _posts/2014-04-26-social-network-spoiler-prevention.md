@@ -1,9 +1,6 @@
 ---
-layout: post
 title: "Social network spoiler prevention"
-description: ""
-category: 
-tags: []
+excerpt: A feature proposal for avoiding spoilers on social networks.
 ---
 
 There is a well-known problem on today's social network platforms - spoilers. Anyone watching a show and failing to immediately catch up to the latest episode will see a lot of posts on their feed dancing around the spoiler, and finally revealing it completely. This makes sense - people like to talk about their favorite shows, and social networks are a great place to do it.

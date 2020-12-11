@@ -1,6 +1,6 @@
 ---
-layout: post
 title: "Startup times"
+excerpt: Starting new java processes in your scripts considered harmful. Let's compare "hello world" startup times for different languages.
 tags: [code]
 ---
 

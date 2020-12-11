@@ -1,7 +1,6 @@
 ---
-date: 2014-08-15 18:36:00
-layout: post
 title: Git While You Sit 2 - .gitignore
+excerpt: Using <code>.gitignore</code> to exclude build artifacts from your repository.
 tags:
 - git-while-you-sit
 - git

@@ -1,6 +1,6 @@
 ---
-layout: post
-title: "Investigate"
+title: Weird permission issues with tvnamer
+excerpt: Distinguishing <code>EPERM</code> vs <code>EACCESS</code>, and how that helps debug file manipulation scripts.
 tags:
 - code
 - show downloading

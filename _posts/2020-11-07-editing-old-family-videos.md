@@ -1,6 +1,5 @@
 ---
 title: Editing old family videos
-published: true
 excerpt: Messing with old video from tapes, simple audio corrections, splitting and organizing for the family's benefit.
 ---
 

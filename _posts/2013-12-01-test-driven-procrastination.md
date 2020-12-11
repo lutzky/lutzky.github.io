@@ -1,6 +1,6 @@
 ---
-layout: post
 title: "Test-driven procrastination"
+excerpt: How being lazy and procrastinating led me to adopt test-driven development before I realized it.
 tags: [code, testing]
 ---
 

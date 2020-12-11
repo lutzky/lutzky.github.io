@@ -1,7 +1,6 @@
 ---
-date: 2014-08-13 20:32:00
-layout: post
 title: Git While You Sit 1 - Add --patch
+excerpt: Using <code>git add -p</code> to eliminate those pesky <code>printf</code>-debugging statements.
 tags:
 - git-while-you-sit
 - git

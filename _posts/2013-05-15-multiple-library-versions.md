@@ -1,8 +1,9 @@
 ---
-layout: post
 title: "Multiple library versions"
 tags: [code, c, linux]
 ---
+
+Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let's explore.
 
 ## Introduction
 

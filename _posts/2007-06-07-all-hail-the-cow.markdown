@@ -1,7 +1,6 @@
 ---
-date: 2007-06-07 22:37:00
-layout: post
 title: All hail the cow!
+excerpt: Silly post about a cow called Paradox.
 tags:
 - asides
 - technion

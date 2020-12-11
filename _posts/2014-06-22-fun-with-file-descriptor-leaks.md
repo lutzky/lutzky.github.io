@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Fun with file descriptor leaks"
-description: ""
-category: 
+excerpt: How file descriptor leaks are causing your processes to stick around longer than they should.
 tags:
 - code
 - linux
