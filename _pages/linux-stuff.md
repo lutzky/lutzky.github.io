@@ -1,8 +1,7 @@
 ---
-date: 2013-03-23 21:52:36
-layout: page
 title: Linux stuff
-group: navigation
+date: 2013-03-23 21:52:36
+permalink: /linux-stuff
 ---
 
 Here is an assortment of Linux-related tips and tricks.
