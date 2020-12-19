@@ -1,6 +1,9 @@
 ---
 date: 2009-04-18 16:45:00
 title: Timezones are fickle
+excerpt: >-
+  Creating a manual "always-daylight-savings" timezone is hard. Let's peek
+  at just how messy timezone logic gets.
 tags:
 - linux
 ---
@@ -130,9 +133,9 @@ if( janzone < julyzone ) {
 ```
 
 And since June and July have the same timezone in our case, there's a good
-chance that this is what's going wrong. The moral of the story seems to be this
-- I should go with the first, simplest "always-DST" solution. Programs should
-ignore the `timezone` variable, as in our context it isn't reliable. In
+chance that this is what's going wrong. The moral of the story seems to be
+this - I should go with the first, simplest "always-DST" solution. Programs
+should ignore the `timezone` variable, as in our context it isn't reliable. In
 general, all internal time handling should be done in UTC; when reading times
 from the outside world, if they are in local time - use `mktime`. If
 they are in a specified timezone, use `timegm` and compensate manually.

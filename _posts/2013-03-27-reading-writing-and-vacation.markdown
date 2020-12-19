@@ -13,13 +13,14 @@ _read_ and _write_.
 
 Writing, for me, is usually about practical stuff. Sometimes it's simply
 [code](https://github.com/lutzky) (most of those projects were written on
-vacations). Other times, it's writing to this blog (in one of its incarnations)
-- which usually has to do with technical tinkering of some sort or other. It's
-not that I don't do enough writing in my day job; but there does tend to be an
-accumulation of things to write: "I should blog about that", "I should write
-that code", "I should try and get my router to do that", and so forth. When a
-few days off come by, and I feel that I have enough time to get more urgent
-stuff done - it's quite satisfying to be able to dig into that write-queue.
+vacations). Other times, it's writing to this blog (in one of its
+incarnations) - which usually has to do with technical tinkering of some sort
+or other. It's not that I don't do enough writing in my day job; but there does
+tend to be an accumulation of things to write: "I should blog about that", "I
+should write that code", "I should try and get my router to do that", and so
+forth. When a few days off come by, and I feel that I have enough time to get
+more urgent stuff done - it's quite satisfying to be able to dig into that
+write-queue.
 
 Reading is the same, but the other way around. I'm not talking about standard
 RSS feeds (Google Reader R.I.P.), which I usually only have time to skim

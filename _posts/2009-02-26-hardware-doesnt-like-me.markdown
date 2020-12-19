@@ -1,6 +1,9 @@
 ---
 date: 2009-02-26 22:15:00
 title: Hardware doesn't like me
+excerpt: >-
+  Whenever I try messing with hardware at home, inexplicable failures ensue.
+  Especially when trying to help others; no good deed goes unpunished.
 tags:
 - hardware
 ---
@@ -19,8 +22,8 @@ and the connector just broke, exposing and bending the wires.
 Checking if the computer still boots, the BIOS took much longer to display hard
 drive status, and while Ubuntu would start booting, it would fail in the
 process and tell me that my root hard drive (by UUID) isn't available. Looking
-at dmesg, the ata2 module was indeed reporting that the hard drive was too slow
-- but a few seconds later it would finally access the drive, and mount
+at dmesg, the ata2 module was indeed reporting that the hard drive was too
+slow - but a few seconds later it would finally access the drive, and mount
 properly. This problem, however, disappeared once I connected my grandparents'
 drive! (Mounting it would fail, telling me that I either have a hardware error
 or need to connect it to a Windows machine, which I don't have, and run some

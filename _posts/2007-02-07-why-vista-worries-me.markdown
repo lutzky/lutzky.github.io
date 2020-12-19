@@ -10,8 +10,8 @@ I've heard [the latest Security Now](http://www.twit.tv/sn77), regarding the
 debate between Dave Marsh and Peter Guttman on DRM in Windows Vista. While a
 few good points were made, the major one - in my opinion - was not.
 
-DRM, in a practical sense, is deeply flawed: The idea is to give you your media
-- say, a WMA piece of music - and a program to play it with - say, Windows
+DRM, in a practical sense, is deeply flawed: The idea is to give you your
+media - say, a WMA piece of music - and a program to play it with - say, Windows
 Media Player - but encrypt the media. Now, naturally, Media Player will need
 the decryption key for the media, and the idea is that Media Player will verify
 that you are allowed to listen to the song, and only then decrypt it - as it is

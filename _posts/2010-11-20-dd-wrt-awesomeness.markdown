@@ -6,11 +6,11 @@ tags:
 - hardware
 ---
 
-Since I've last posted, I've moved to a new apartment. First order of business
-- get a working internet connection. This is extra-challenging when your
+Since I've last posted, I've moved to a new apartment. First order of business -
+get a working internet connection. This is extra-challenging when your
 primary machine doesn't even have a wireless network card.
 
-My first hack used my trustee laptop - it has a properly working wireless card,
+My first hack used my trusty laptop - it has a properly working wireless card,
 and could connect to my roommate's router quite easily. It runs Ubuntu, and as
 it turns out, that means sharing the connection was dead-simple: Right-click on
 the network manager icon, add a new wired connection called "Shared", and under
