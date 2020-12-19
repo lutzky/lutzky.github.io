@@ -1,6 +1,5 @@
 ---
 date: 2013-03-24 00:51:15
-layout: post
 title: Translationese
 tags:
 - natural language processing

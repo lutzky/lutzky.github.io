@@ -1,6 +1,5 @@
 ---
 date: 2007-02-25 21:17:00
-layout: post
 title: Bass guitar
 tags:
 - music

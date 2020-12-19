@@ -1,6 +1,5 @@
 ---
 date: 2010-09-04 16:21:00
-layout: post
 title: Transport Droid IL
 tags:
 - TransportDroidIL

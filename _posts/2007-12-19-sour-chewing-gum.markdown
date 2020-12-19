@@ -1,6 +1,5 @@
 ---
 date: 2007-12-19 01:45:00
-layout: post
 title: Sour chewing gum
 tags:
 - asides

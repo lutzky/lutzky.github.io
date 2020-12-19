@@ -1,6 +1,5 @@
 ---
 date: 2007-04-19 15:44:00
-layout: post
 title: Grub menu.lst editor
 tags:
 - linux

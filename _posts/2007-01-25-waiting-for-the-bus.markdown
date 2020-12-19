@@ -1,6 +1,5 @@
 ---
 date: 2007-01-25 17:53:00
-layout: post
 title: Waiting for the bus
 tags:
 - networking

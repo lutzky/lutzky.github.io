@@ -1,6 +1,5 @@
 ---
 date: 2011-09-02 08:30:00
-layout: post
 title: Upcoming features in TransportDroidIL
 tags:
 - TransportDroidIL

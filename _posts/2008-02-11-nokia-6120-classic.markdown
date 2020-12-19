@@ -1,6 +1,5 @@
 ---
 date: 2008-02-11 14:03:00
-layout: post
 title: Nokia 6120 Classic
 tags:
 - hardware

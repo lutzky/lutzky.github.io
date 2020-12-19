@@ -1,6 +1,5 @@
 ---
 date: 2007-02-01 19:46:00
-layout: post
 title: Pmount-hal + cd
 tags:
 - linux

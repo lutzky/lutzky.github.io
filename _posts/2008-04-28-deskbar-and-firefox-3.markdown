@@ -1,6 +1,5 @@
 ---
 date: 2008-04-28 20:58:00
-layout: post
 title: Deskbar and Firefox 3
 tags:
 - linux

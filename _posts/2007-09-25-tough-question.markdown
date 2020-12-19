@@ -1,6 +1,5 @@
 ---
 date: 2007-09-25 18:29:00
-layout: post
 title: Tough Question
 tags:
 - life

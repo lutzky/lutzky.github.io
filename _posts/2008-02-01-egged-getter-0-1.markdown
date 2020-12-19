@@ -1,6 +1,5 @@
 ---
 date: 2008-02-01 23:21:00
-layout: post
 title: Egged Getter 0.1
 tags:
 - software

@@ -1,6 +1,5 @@
 ---
 date: 2007-01-30 21:21:00
-layout: post
 title: I might need these tomorrow...
 tags:
 - technion

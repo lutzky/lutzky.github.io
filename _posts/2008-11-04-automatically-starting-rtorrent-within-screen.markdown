@@ -1,6 +1,5 @@
 ---
 date: 2008-11-04 21:33:00
-layout: post
 title: Automatically starting rtorrent within screen
 tags:
 - linux

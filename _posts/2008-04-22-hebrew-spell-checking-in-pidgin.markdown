@@ -1,6 +1,5 @@
 ---
 date: 2008-04-22 14:13:00
-layout: post
 title: Hebrew spell-checking in Pidgin
 tags:
 - linux

@@ -1,6 +1,5 @@
 ---
 date: 2009-10-31 02:32:00
-layout: post
 title: Broken phone screen - data rescue
 tags:
 - hardware

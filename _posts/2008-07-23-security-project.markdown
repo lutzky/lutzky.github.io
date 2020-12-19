@@ -1,6 +1,5 @@
 ---
 date: 2008-07-23 16:19:00
-layout: post
 title: Security project
 tags:
 - security

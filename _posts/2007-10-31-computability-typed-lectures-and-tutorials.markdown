@@ -1,6 +1,5 @@
 ---
 date: 2007-10-31 22:50:00
-layout: post
 title: Computability - Typed Lectures and Tutorials
 tags:
 - technion

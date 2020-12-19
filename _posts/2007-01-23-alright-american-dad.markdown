@@ -1,6 +1,5 @@
 ---
 date: 2007-01-23 22:13:00
-layout: post
 title: Alright, American Dad!
 tags:
 - show downloading

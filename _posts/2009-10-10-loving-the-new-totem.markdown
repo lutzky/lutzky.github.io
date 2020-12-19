@@ -1,6 +1,5 @@
 ---
 date: 2009-10-10 13:04:00
-layout: post
 title: Loving the new Totem
 tags:
 - show downloading

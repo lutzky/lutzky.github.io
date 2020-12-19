@@ -1,6 +1,5 @@
 ---
 date: 2007-04-24 22:14:00
-layout: post
 title: On the matter of a really long vacation
 tags:
 - music

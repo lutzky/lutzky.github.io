@@ -1,6 +1,5 @@
 ---
 date: 2007-02-27 17:48:00
-layout: post
 title: Using Jabber from within the Technion
 tags:
 - networking

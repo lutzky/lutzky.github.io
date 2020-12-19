@@ -1,6 +1,5 @@
 ---
 date: 2008-10-18 21:16:00
-layout: post
 title: Delegating methods in Ruby
 tags:
 - ruby

@@ -1,6 +1,5 @@
 ---
 date: 2007-07-27 10:48:00
-layout: post
 title: NaNuchKa
 tags:
 - music

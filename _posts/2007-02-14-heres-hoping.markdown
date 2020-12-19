@@ -1,6 +1,5 @@
 ---
 date: 2007-02-14 22:23:00
-layout: post
 title: Here's hoping
 tags:
 - technion

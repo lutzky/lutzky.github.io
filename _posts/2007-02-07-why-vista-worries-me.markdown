@@ -1,6 +1,5 @@
 ---
 date: 2007-02-07 18:22:00
-layout: post
 title: Why Vista worries me
 tags:
 - software

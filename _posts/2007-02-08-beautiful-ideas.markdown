@@ -1,6 +1,5 @@
 ---
 date: 2007-02-08 17:24:00
-layout: post
 title: Beautiful ideas
 tags:
 - software

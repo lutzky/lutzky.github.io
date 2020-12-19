@@ -1,6 +1,5 @@
 ---
 date: 2007-02-10 20:37:00
-layout: post
 title: Internet in Haifa Bay Central
 tags:
 - networking

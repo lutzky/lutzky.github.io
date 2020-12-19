@@ -1,6 +1,5 @@
 ---
 date: 2007-05-31 22:20:00
-layout: post
 title: Some band stuff
 tags:
 - music

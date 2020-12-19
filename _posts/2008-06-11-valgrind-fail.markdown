@@ -1,6 +1,5 @@
 ---
 date: 2008-06-11 01:08:00
-layout: post
 title: Valgrind Fail
 tags:
 - code

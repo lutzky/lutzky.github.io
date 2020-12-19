@@ -1,6 +1,5 @@
 ---
 date: 2008-06-02 20:33:00
-layout: post
 title: Scheduling
 tags:
 - ttime

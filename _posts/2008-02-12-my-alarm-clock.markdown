@@ -1,6 +1,5 @@
 ---
 date: 2008-02-12 23:37:00
-layout: post
 title: My alarm clock
 tags:
 - linux

@@ -1,6 +1,5 @@
 ---
 date: 2007-11-04 00:27:00
-layout: post
 title: Vacation
 tags:
 - life

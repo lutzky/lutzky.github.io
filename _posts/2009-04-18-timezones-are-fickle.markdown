@@ -1,6 +1,5 @@
 ---
 date: 2009-04-18 16:45:00
-layout: post
 title: Timezones are fickle
 tags:
 - linux

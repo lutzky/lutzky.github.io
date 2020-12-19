@@ -1,6 +1,5 @@
 ---
 date: 2008-10-26 18:57:00
-layout: post
 title: Quick time tracking hack
 tags:
 - linux

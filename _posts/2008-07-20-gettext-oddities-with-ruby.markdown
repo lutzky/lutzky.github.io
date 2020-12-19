@@ -1,6 +1,5 @@
 ---
 date: 2008-07-20 19:19:00
-layout: post
 title: Gettext oddities with Ruby
 tags:
 - ruby

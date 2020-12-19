@@ -1,6 +1,5 @@
 ---
 date: 2008-07-11 11:58:00
-layout: post
 title: That "Life" category there
 tags:
 - life

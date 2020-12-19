@@ -1,6 +1,5 @@
 ---
 date: 2007-02-26 16:26:00
-layout: post
 title: Before reinstalling your server for RAID
 tags:
 - hardware

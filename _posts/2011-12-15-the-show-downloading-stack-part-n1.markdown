@@ -1,6 +1,5 @@
 ---
 date: 2011-12-15 12:08:00
-layout: post
 title: The show downloading stack - part n+1
 tags:
 - show downloading

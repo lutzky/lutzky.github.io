@@ -1,6 +1,5 @@
 ---
 date: 2007-12-17 01:47:00
-layout: post
 title: Means of control
 tags:
 - life

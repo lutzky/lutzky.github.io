@@ -1,6 +1,5 @@
 ---
 date: 2007-01-25 15:04:00
-layout: post
 title: 3D effects for coders?
 tags:
 - code

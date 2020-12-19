@@ -1,6 +1,5 @@
 ---
 date: 2010-03-13 16:35:00
-layout: post
 title: My music player has sunk
 tags:
 - hardware

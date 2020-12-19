@@ -1,6 +1,5 @@
 ---
 date: 2007-09-18 11:27:00
-layout: post
 title: Really liking this git thing
 tags:
 - git

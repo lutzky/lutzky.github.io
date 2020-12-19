@@ -1,7 +1,6 @@
 ---
 published: true
 date: 2007-02-02T01:12:00.000Z
-layout: post
 title: Courtney Love on Piracy
 tags: 
   - life

@@ -1,6 +1,5 @@
 ---
 date: 2007-10-28 22:05:00
-layout: post
 title: Encrypted my Wi-fi
 tags:
 - networking

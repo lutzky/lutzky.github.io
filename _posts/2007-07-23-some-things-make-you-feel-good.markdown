@@ -1,6 +1,5 @@
 ---
 date: 2007-07-23 00:26:00
-layout: post
 title: Some things make you feel good
 tags:
 - life

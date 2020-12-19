@@ -1,6 +1,5 @@
 ---
 date: 2007-05-17 14:26:00
-layout: post
 title: Myspace sucks
 tags:
 - music

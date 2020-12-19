@@ -1,6 +1,5 @@
 ---
 date: 2008-11-22 11:58:00
-layout: post
 title: Whatever happened to black &amp; white LCDs?
 tags:
 - hardware

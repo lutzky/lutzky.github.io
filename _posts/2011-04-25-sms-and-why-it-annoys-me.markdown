@@ -1,6 +1,5 @@
 ---
 date: 2011-04-25 16:58:00
-layout: post
 title: SMS and why it annoys me
 tags:
 - phones

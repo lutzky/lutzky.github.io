@@ -1,6 +1,5 @@
 ---
 date: 2007-09-16 14:02:00
-layout: post
 title: Exception handling, decorators, and python
 tags:
 - code

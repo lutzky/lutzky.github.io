@@ -1,6 +1,5 @@
 ---
 date: 2008-11-10 23:01:00
-layout: post
 title: Another SSH trick
 tags:
 - networking

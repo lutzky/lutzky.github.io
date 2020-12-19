@@ -1,6 +1,5 @@
 ---
 date: 2007-09-16 12:47:00
-layout: post
 title: Two reasons Apple suck
 tags:
 - software

@@ -1,6 +1,5 @@
 ---
 date: 2009-02-26 22:15:00
-layout: post
 title: Hardware doesn't like me
 tags:
 - hardware

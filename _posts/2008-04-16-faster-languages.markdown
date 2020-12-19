@@ -1,6 +1,5 @@
 ---
 date: 2008-04-16 00:49:00
-layout: post
 title: Faster Languages
 tags:
 - code

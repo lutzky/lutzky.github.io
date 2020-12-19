@@ -1,6 +1,5 @@
 ---
 date: 2007-01-31 16:45:00
-layout: post
 title: I do NOT kick puppies!
 tags:
 - asides

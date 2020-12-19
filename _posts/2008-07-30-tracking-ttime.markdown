@@ -1,6 +1,5 @@
 ---
 date: 2008-07-30 18:03:00
-layout: post
 title: Tracking TTime
 tags:
 - ttime

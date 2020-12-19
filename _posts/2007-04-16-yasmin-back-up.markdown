@@ -1,6 +1,5 @@
 ---
 date: 2007-04-16 10:43:00
-layout: post
 title: Yasmin back up
 tags:
 - linux

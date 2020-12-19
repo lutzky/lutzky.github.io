@@ -1,6 +1,5 @@
 ---
 date: 2007-02-04 13:27:00
-layout: post
 title: On Vista
 tags:
 - software

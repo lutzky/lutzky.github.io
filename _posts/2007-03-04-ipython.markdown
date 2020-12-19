@@ -1,6 +1,5 @@
 ---
 date: 2007-03-04 00:58:00
-layout: post
 title: IPython
 tags:
 - code

@@ -1,6 +1,5 @@
 ---
 date: 2007-01-23 21:33:00
-layout: post
 title: As for Python
 tags:
 - code

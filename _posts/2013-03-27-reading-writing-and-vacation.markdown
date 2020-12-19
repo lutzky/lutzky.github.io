@@ -1,6 +1,5 @@
 ---
 date: 2013-03-27 18:35:01
-layout: post
 title: Reading, writing and vacations
 tags:
 - life

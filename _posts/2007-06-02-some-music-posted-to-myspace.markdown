@@ -1,6 +1,5 @@
 ---
 date: 2007-06-02 22:44:00
-layout: post
 title: Some music posted to myspace
 tags:
 - music

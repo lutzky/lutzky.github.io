@@ -1,6 +1,5 @@
 ---
 date: 2010-09-04 09:54:00
-layout: post
 title: Setting up Hebrew Android fonts on your AVD emulator
 tags:
 - android

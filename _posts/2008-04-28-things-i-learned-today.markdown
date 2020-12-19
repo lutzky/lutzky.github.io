@@ -1,6 +1,5 @@
 ---
 date: 2008-04-28 21:10:00
-layout: post
 title: Things I learned today
 tags:
 - linux

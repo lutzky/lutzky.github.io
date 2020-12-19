@@ -1,6 +1,5 @@
 ---
 date: 2009-04-04 12:23:00
-layout: post
 title: Using git for code review
 tags:
 - git

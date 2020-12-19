@@ -1,6 +1,5 @@
 ---
 date: 2011-09-04 18:53:00
-layout: post
 title: Home network wiring
 tags:
 - networking

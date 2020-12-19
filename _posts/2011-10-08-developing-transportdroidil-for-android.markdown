@@ -1,6 +1,5 @@
 ---
 date: 2011-10-08 19:43:00
-layout: post
 title: Developing TransportDroidIL for Android
 tags:
 - android

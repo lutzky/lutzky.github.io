@@ -1,6 +1,5 @@
 ---
 date: 2007-01-25 00:32:00
-layout: post
 title: Software Perfection - Lost in the details
 tags:
 - software

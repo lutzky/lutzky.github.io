@@ -1,6 +1,5 @@
 ---
 date: 2008-06-17 12:32:00
-layout: post
 title: Tunelling even more stuff over SSH
 tags:
 - networking

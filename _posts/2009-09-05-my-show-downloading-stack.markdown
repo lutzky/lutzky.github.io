@@ -1,6 +1,5 @@
 ---
 date: 2009-09-05 13:42:00
-layout: post
 title: My show downloading stack
 tags:
 - show downloading

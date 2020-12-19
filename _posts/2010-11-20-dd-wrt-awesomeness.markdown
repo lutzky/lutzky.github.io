@@ -1,6 +1,5 @@
 ---
 date: 2010-11-20 15:19:00
-layout: post
 title: DD-WRT awesomeness
 tags:
 - networking

@@ -1,6 +1,5 @@
 ---
 date: 2007-01-30 19:37:00
-layout: post
 title: Samurai Jack - Ingenious!
 tags:
 - asides

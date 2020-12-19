@@ -1,6 +1,5 @@
 ---
 date: 2008-07-11 11:33:00
-layout: post
 title: Been working on TTime
 tags:
 - ttime
