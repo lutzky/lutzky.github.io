@@ -1,7 +1,7 @@
 ---
 title: Linux stuff
 date: 2013-03-23 21:52:36
-permalink: /linux-stuff
+permalink: /linux-stuff/
 ---
 
 Here is an assortment of Linux-related tips and tricks.

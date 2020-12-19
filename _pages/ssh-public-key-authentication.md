@@ -1,7 +1,7 @@
 ---
 title: SSH public key authentication
 date: 2013-03-23 21:51:06
-permalink: /linux-stuff/ssh-public-key-authentication
+permalink: /linux-stuff/ssh-public-key-authentication/
 ---
 
 If you find yourself logging into SSH servers a lot, you might find this tip
