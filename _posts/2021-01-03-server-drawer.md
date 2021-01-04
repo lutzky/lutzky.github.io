@@ -12,7 +12,7 @@ This is as good a time as any to give a quick tour of my "homelab" or server dra
 [power]: /assets/images/2021/01/server-drawer/power.jpg
 [hole]: /assets/images/2021/01/server-drawer/hole.jpg
 
-The external view is rather innocuous: A visually inoffensive Nest Wifi, a rather elegan Nest Thermostat (shame that the display can't be always-on), and the gorgeous Nintendo Switch dock cover my partner gave me. The TV aerial is tucked to the back, a reasonable compromise between "gets reception" and "hidden away and ugly". The TV is mounted on upside-down IKEA boxes which we painted to roughly match the rest, hiding some botched carpentry behind the TV.
+The external view is rather innocuous: A visually inoffensive Nest Wifi, a rather elegant Nest Thermostat (shame that the display can't be always-on), and the gorgeous Nintendo Switch dock cover my partner got me. The TV aerial is tucked to the back, a reasonable compromise between "gets reception" and "hidden away and ugly". The TV is mounted on upside-down IKEA boxes which we painted to roughly match the rest, hiding some botched carpentry behind the TV.
 
 [![External view][external]][external]
 
