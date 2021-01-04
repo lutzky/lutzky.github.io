@@ -1,3 +1,5 @@
+image:
+  file: .gitpod.Dockerfile
 tasks:
-  - init: "sudo apt-get install -y ruby-full build-essential zlib1g-dev && gem install bundler && bundle update"
+  - before: "gem install bundler && bundle install"
     command: "bundle exec jekyll serve"
