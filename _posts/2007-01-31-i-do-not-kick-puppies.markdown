@@ -7,8 +7,6 @@ tags:
 
 I do type mesmerizingly fast, though... :)
 
-> Image lost in the mists of time... "wanted" poster of me, claiming that the
-> public must beware being mesmerized by my typing speed, and know that I
-> install Linux on innocent bystanders' computers, and kick puppies.
+![Wanted poster](/assets/images/2007/01/2014-11-11-poster.jpg)
 
 I am told these were scattered around Taub... I haven't been there to day, but it feels good to be infamous.
