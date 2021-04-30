@@ -1,9 +1,0 @@
-main:
-  - title: "Posts"
-    url: /posts/
-  - title: "Tags"
-    url: /tags/
-  - title: "Linux stuff"
-    url: /linux-stuff/
-  - title: "Russian stress mark"
-    url: /russian-stress/
