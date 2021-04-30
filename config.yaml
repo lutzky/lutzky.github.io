@@ -2,4 +2,4 @@ baseURL: http://example.org/
 disablePathToLower: true
 languageCode: en-us
 title: Shallow and Pedantic
-theme: herring-cove
+theme: PaperMod
