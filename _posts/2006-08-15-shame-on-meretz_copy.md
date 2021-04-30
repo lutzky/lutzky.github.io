@@ -1,7 +1,7 @@
 ---
 title: בושה וחרפה למרצ
 excerpt: (Hebrew) Shame on Meretz
-tags: from-hebrew-wordpress
+tags: ["from-hebrew-wordpress"]
 ---
 
 > This post is written in Hebrew, which was the blog's language at the time.

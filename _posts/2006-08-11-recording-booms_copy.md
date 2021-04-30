@@ -1,7 +1,7 @@
 ---
 title: מקליטים בומים
 excerpt: (Hebrew) Loudness fight - artillery vs bass guitar
-tags: from-hebrew-wordpress
+tags: ["from-hebrew-wordpress"]
 ---
 
 > This post is written in Hebrew, which was the blog's language at the time.

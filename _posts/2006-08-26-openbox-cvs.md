@@ -1,7 +1,7 @@
 ---
 title: Openbox CVS
 excerpt: (Hebrew) A bit of excessive geekery
-tags: from-hebrew-wordpress
+tags: ["from-hebrew-wordpress"]
 ---
 
 > This post is written in Hebrew, which was the blog's language at the time.

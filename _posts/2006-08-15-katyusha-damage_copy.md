@@ -1,7 +1,7 @@
 ---
 title: אהבתי את שני אלה
 excerpt: (Hebrew) Comparative Katyusha damage
-tags: from-hebrew-wordpress
+tags: ["from-hebrew-wordpress"]
 ---
 
 > This post is written in Hebrew, which was the blog's language at the time. Context: [2006 Lebanon War]

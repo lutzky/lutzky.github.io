@@ -1,7 +1,7 @@
 ---
 title: החבוב עם הקסדה הירוקה - עכשיו הבלוג
 excerpt: (Hebrew) The green helmet guy - now with his own blog.
-tags: from-wordpress
+tags: ["from-wordpress"]
 ---
 
 <div dir="ltr">This post is written in Hebrew, which was the blog's language at the time.</div>

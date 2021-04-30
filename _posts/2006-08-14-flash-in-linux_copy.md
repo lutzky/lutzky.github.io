@@ -1,7 +1,7 @@
 ---
 title: המצב של פלאש בלינוקס
 excerpt: (Hebrew) The absolute state of Flash in Linux
-tags: from-hebrew-wordpress
+tags: ["from-hebrew-wordpress"]
 ---
 
 > This post is written in Hebrew, which was the blog's language at the time.
