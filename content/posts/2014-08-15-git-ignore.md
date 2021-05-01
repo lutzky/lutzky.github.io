@@ -1,6 +1,6 @@
 ---
 date: "2014-08-15T00:00:00Z"
-excerpt: Using <code>.gitignore</code> to exclude build artifacts from your repository.
+summary:  Using <code>.gitignore</code> to exclude build artifacts from your repository.
 tags:
 - git-while-you-sit
 - git

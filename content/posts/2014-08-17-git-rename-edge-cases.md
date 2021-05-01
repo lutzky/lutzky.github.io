@@ -1,6 +1,6 @@
 ---
 date: "2014-08-17T00:00:00Z"
-excerpt: |
+summary:  |
   Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it's far more likely that git did the "right" thing after all.
 tags:
 - git-while-you-sit

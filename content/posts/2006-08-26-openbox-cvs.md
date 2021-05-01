@@ -1,6 +1,6 @@
 ---
 date: "2006-08-26T00:00:00Z"
-excerpt: (Hebrew) A bit of excessive geekery
+summary:  (Hebrew) A bit of excessive geekery
 tags: ["from-hebrew-wordpress"]
 title: Openbox CVS
 ---

@@ -1,6 +1,6 @@
 ---
 date: "2016-01-11T00:00:00Z"
-excerpt: (Hebrew) The tale of my now-defunct android app for fetching public transport
+summary:  (Hebrew) The tale of my now-defunct android app for fetching public transport
   information.
 title: תקלה ב-TransportDroidIL
 ---

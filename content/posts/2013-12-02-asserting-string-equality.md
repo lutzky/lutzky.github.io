@@ -1,6 +1,6 @@
 ---
 date: "2013-12-02T00:00:00Z"
-excerpt: When comparing long strings in unit tests, make sure your assertion failures
+summary:  When comparing long strings in unit tests, make sure your assertion failures
   give you useful output.
 tags:
 - code

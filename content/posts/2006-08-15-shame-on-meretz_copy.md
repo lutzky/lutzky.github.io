@@ -1,6 +1,6 @@
 ---
 date: "2006-08-15T00:00:00Z"
-excerpt: (Hebrew) Shame on Meretz
+summary:  (Hebrew) Shame on Meretz
 tags: ["from-hebrew-wordpress"]
 title: בושה וחרפה למרצ
 ---

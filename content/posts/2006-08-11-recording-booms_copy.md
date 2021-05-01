@@ -1,6 +1,6 @@
 ---
 date: "2006-08-11T00:00:00Z"
-excerpt: (Hebrew) Loudness fight - artillery vs bass guitar
+summary:  (Hebrew) Loudness fight - artillery vs bass guitar
 tags: ["from-hebrew-wordpress"]
 title: מקליטים בומים
 ---

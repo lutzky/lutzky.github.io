@@ -1,6 +1,6 @@
 ---
 date: "2006-08-11T00:00:00Z"
-excerpt: (Hebrew) The green helmet guy - now with his own blog.
+summary:  (Hebrew) The green helmet guy - now with his own blog.
 tags: ["from-wordpress"]
 title: החבוב עם הקסדה הירוקה - עכשיו הבלוג
 ---

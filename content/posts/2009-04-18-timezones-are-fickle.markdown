@@ -1,6 +1,6 @@
 ---
 date: "2009-04-18T16:45:00Z"
-excerpt: Creating a manual "always-daylight-savings" timezone is hard. Let's peek
+summary:  Creating a manual "always-daylight-savings" timezone is hard. Let's peek
   at just how messy timezone logic gets.
 tags:
 - linux

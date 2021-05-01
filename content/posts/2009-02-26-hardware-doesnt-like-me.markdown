@@ -1,6 +1,6 @@
 ---
 date: "2009-02-26T22:15:00Z"
-excerpt: Whenever I try messing with hardware at home, inexplicable failures ensue.
+summary:  Whenever I try messing with hardware at home, inexplicable failures ensue.
   Especially when trying to help others; no good deed goes unpunished.
 tags:
 - hardware

@@ -1,6 +1,6 @@
 ---
 date: "2014-08-13T00:00:00Z"
-excerpt: Some lessons learned from my role with the previous company as a DevOps engineer
+summary:  Some lessons learned from my role with the previous company as a DevOps engineer
   and team lead. We discuss tidiness and prioritizing using pre-existing code.
 title: Lessons learned
 ---

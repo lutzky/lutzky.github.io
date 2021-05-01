@@ -1,6 +1,6 @@
 ---
 date: "2007-06-07T00:00:00Z"
-excerpt: Silly post about a cow called Paradox.
+summary:  Silly post about a cow called Paradox.
 tags:
 - asides
 - technion

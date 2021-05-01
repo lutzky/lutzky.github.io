@@ -1,6 +1,6 @@
 ---
 date: "2006-08-12T00:00:00Z"
-excerpt: (Hebrew) Oh but it was nice and quiet. (wartime)
+summary:  (Hebrew) Oh but it was nice and quiet. (wartime)
 tags: ["from-hebrew-wordpress"]
 title: דווקא היה נחמד, שקט וכאלה
 ---

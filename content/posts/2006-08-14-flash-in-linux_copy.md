@@ -1,6 +1,6 @@
 ---
 date: "2006-08-14T00:00:00Z"
-excerpt: (Hebrew) The absolute state of Flash in Linux
+summary:  (Hebrew) The absolute state of Flash in Linux
 tags: ["from-hebrew-wordpress"]
 title: המצב של פלאש בלינוקס
 ---

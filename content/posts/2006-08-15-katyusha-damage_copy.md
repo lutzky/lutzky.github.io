@@ -1,6 +1,6 @@
 ---
 date: "2006-08-15T00:00:00Z"
-excerpt: (Hebrew) Comparative Katyusha damage
+summary:  (Hebrew) Comparative Katyusha damage
 tags: ["from-hebrew-wordpress"]
 title: אהבתי את שני אלה
 ---

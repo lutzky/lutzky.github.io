@@ -1,6 +1,6 @@
 ---
 date: "2018-08-04T00:00:00Z"
-excerpt: How I had to fix zimmski/osutil in order to write the Mutation Testing post.
+summary:  How I had to fix zimmski/osutil in order to write the Mutation Testing post.
 title: The osutil yakshave
 ---
 

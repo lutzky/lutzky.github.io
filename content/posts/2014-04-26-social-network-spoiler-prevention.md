@@ -1,6 +1,6 @@
 ---
 date: "2014-04-26T00:00:00Z"
-excerpt: A feature proposal for avoiding spoilers on social networks.
+summary:  A feature proposal for avoiding spoilers on social networks.
 title: Social network spoiler prevention
 ---
 

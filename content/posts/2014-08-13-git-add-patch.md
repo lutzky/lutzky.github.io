@@ -1,6 +1,6 @@
 ---
 date: "2014-08-13T00:00:00Z"
-excerpt: Using <code>git add -p</code> to eliminate those pesky <code>printf</code>-debugging
+summary:  Using <code>git add -p</code> to eliminate those pesky <code>printf</code>-debugging
   statements.
 tags:
 - git-while-you-sit

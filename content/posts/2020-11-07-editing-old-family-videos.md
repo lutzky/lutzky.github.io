@@ -1,6 +1,6 @@
 ---
 date: "2020-11-07T00:00:00Z"
-excerpt: Messing with old video from tapes, simple audio corrections, splitting and
+summary:  Messing with old video from tapes, simple audio corrections, splitting and
   organizing for the family's benefit.
 title: Editing old family videos
 ---
