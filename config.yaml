@@ -1,5 +1,36 @@
-baseURL: http://example.org/
+baseURL: https://lutzky.net
 disablePathToLower: true
 languageCode: en-us
 title: Shallow and Pedantic
 theme: PaperMod
+
+permalinks:
+  post: /:year/:month/:title/
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  author: "Ohad Lutzky"
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  disableSpecial1stPost: true
+
+menu:
+  main:
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 20
+    - identifier: archive
+      name: Archive
+      url: /archives/
+      weight: 20
