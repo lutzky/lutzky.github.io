@@ -8,8 +8,6 @@ tags: ["from-hebrew-wordpress"]
 
 [2006 Lebanon War]: https://en.wikipedia.org/wiki/2006_Lebanon_War
 
-{::options parse_block_html="true" /}
-
 <div dir="rtl">
 
 ממש שקט. לא שמתי שעון מעורר, כי סמכתי על הנסראללה המעורר. בכלל, הישוב שלי מחובר לאזעקות של כל הארץ (כי הוא באמצע שום מקום) אז אנחנו מקבלים גם אזעקות של קרית שמונה.

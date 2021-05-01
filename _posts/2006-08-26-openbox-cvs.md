@@ -6,8 +6,6 @@ tags: ["from-hebrew-wordpress"]
 
 > This post is written in Hebrew, which was the blog's language at the time.
 
-{::options parse_block_html="true" /}
-
 <div dir="rtl">
 
 קצת גיקיות יתרה, ברשותכם ;)

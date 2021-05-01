@@ -5,8 +5,6 @@ excerpt: (Hebrew) The tale of my now-defunct android app for fetching public tra
 
 <div dir="ltr">This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.</div>
 
-{::options parse_block_html="true" /}
-
 <div dir="rtl">
 
 לצערי, האפליקציה TransportDroidIL הפסיקה לפעול, והסיבה היא כזו שלא מאפשרת תיקון. אני ממליץ בחום על החלופה [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps).

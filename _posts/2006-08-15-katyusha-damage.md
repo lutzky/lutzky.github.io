@@ -8,8 +8,6 @@ tags: ["from-hebrew-wordpress"]
 
 [2006 Lebanon War]: https://en.wikipedia.org/wiki/2006_Lebanon_War
 
-{::options parse_block_html="true" /}
-
 <div dir="rtl">
 
 החבר'ה הטובים ב-lgf מראים - הפלא ופלא - איך בהשוואה בין נזק פגיעות ישירות של קטיושות וטילי אוויר-קרקע ישראליים, [הקטיושה עושה הרבה יותר נזק].

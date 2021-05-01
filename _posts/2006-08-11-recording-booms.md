@@ -6,8 +6,6 @@ tags: ["from-hebrew-wordpress"]
 
 > This post is written in Hebrew, which was the blog's language at the time.
 
-{::options parse_block_html="true" /}
-
 <div dir="rtl">
 
 מלחמה. נסראללה שולח עלינו בומים. אנחנו שולחים עליו בומים (כל 10 שניות יציאה שלנו אתמול בלילה, והתריסים רועדים). ואני בבית, עושה בומים משלי. זה לא כמו לנגן עם חברים, זה לא כמו להופיע, אבל לפחות סוף סוף גיליתי איך לגרום לזה להישמע נורמאלי.

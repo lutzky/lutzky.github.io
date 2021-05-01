@@ -6,8 +6,6 @@ tags: ["from-hebrew-wordpress"]
 
 > This post is written in Hebrew, which was the blog's language at the time.
 
-{::options parse_block_html="true" /}
-
 <div dir="rtl">
 
 בהתחלה פלאש היה משהו קטן וחמוד. השתמשתי בו בכיתה ו' בשביל "פרוייקט סיום" על גלגולי אנרגייה, בעוד שאחרים הכינו מכשירים שלא היו מביישים את The Incredible Machine. זה המשיך בכל מיני משחקים קטנים באתר של Shockwave. לאט לאט זה הפך למעצבן, כשאנשים החליטו ש-HTML זה סתם כמה טאגים ששמים כדי שהדפדפן יציג את הפלאש שהוא בעצם האתר. או לחילופין, החליטו שפלאש זה אחלה מדיום לפרסומות, מה שהוביל להופעת AdBlock.
