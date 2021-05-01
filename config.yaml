@@ -20,6 +20,19 @@ params:
   ShowPostNavLinks: true
   disableSpecial1stPost: true
 
+  homeInfoParams:
+    Title: Ohad Lutzky
+    Content: >
+      A person/tech/code blog of a coder/techie/person. Like calculus in a
+      kiddie pool, the author of this blog is known to be quite shallow and
+      pedantic.
+
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/lutzky/"
+    - name: "facebook"
+      url: "https://facebook.com/lutzky/"
+
 menu:
   main:
     - identifier: tags
