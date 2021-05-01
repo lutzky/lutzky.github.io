@@ -11,6 +11,7 @@ frontmatter:
 
 permalinks:
   posts: /:year/:month/:day/:slug/
+  pages: /:filename/
 
 outputs:
   home:
@@ -40,15 +41,23 @@ params:
 
 menu:
   main:
+    - identifier: search
+      name: 🔍
+      url: /search/
+      weight: 100
+    - identifier: russian-stress
+      name: Russian stress mark
+      url: /russian-stress/
+      weight: 40
+    - identifier: linux-stuff
+      name: Linux stuff
+      url: /linux-stuff/
+      weight: 30
     - identifier: tags
       name: Tags
       url: /tags/
       weight: 20
-    - identifier: search
-      name: Search
-      url: /search/
-      weight: 20
     - identifier: archive
       name: Archive
       url: /archives/
-      weight: 20
+      weight: 10
