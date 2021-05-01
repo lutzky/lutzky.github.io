@@ -4,8 +4,13 @@ languageCode: en-us
 title: Shallow and Pedantic
 theme: PaperMod
 
+frontmatter:
+  # Grab date AND SLUG from filename - undocumented, but
+  # see https://github.com/gohugoio/hugo/pull/4494/
+  date: [":filename", ":default"]
+
 permalinks:
-  post: /:year/:month/:title/
+  post: /:year/:month/:day/:slug/
 
 outputs:
   home:
