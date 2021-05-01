@@ -10,7 +10,7 @@ frontmatter:
   date: [":filename", ":default"]
 
 permalinks:
-  post: /:year/:month/:day/:slug/
+  posts: /:year/:month/:day/:slug/
 
 outputs:
   home:
