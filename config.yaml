@@ -13,6 +13,8 @@ permalinks:
   posts: /:year/:month/:day/:slug/
   pages: /:filename/
 
+googleAnalytics: UA-40939561-1
+
 outputs:
   home:
     - HTML
