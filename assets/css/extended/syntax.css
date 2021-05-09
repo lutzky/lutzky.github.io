@@ -60,11 +60,11 @@
 /* Operator */ .chroma .o { color: #ff79c6 }
 /* OperatorWord */ .chroma .ow { color: #ff79c6 }
 /* Punctuation */ .chroma .p {  }
-/* Comment */ .chroma .c { color: #6272a4 }
-/* CommentHashbang */ .chroma .ch { color: #6272a4 }
-/* CommentMultiline */ .chroma .cm { color: #6272a4 }
-/* CommentSingle */ .chroma .c1 { color: #6272a4 }
-/* CommentSpecial */ .chroma .cs { color: #6272a4 }
+/* Comment */ .chroma .c { color: var(--comment-color) }
+/* CommentHashbang */ .chroma .ch { color: var(--comment-color) }
+/* CommentMultiline */ .chroma .cm { color: var(--comment-color) }
+/* CommentSingle */ .chroma .c1 { color: var(--comment-color) }
+/* CommentSpecial */ .chroma .cs { color: var(--comment-color) }
 /* CommentPreproc */ .chroma .cp { color: #ff79c6 }
 /* CommentPreprocFile */ .chroma .cpf { color: #ff79c6 }
 /* Generic */ .chroma .g {  }
@@ -80,3 +80,7 @@
 /* GenericTraceback */ .chroma .gt {  }
 /* GenericUnderline */ .chroma .gl { text-decoration: underline }
 /* TextWhitespace */ .chroma .w {  }
+
+.chroma {
+	--comment-color: #94a8e5;
+}
