@@ -15,6 +15,10 @@ permalinks:
 
 googleAnalytics: UA-40939561-1
 
+markup:
+  highlight:
+    noClasses: false
+
 outputs:
   home:
     - HTML
@@ -27,6 +31,9 @@ params:
   ShowShareButtons: true
   ShowPostNavLinks: true
   disableSpecial1stPost: true
+
+  assets:
+    disableHLJS: true
 
   homeInfoParams:
     Title: Ohad Lutzky
