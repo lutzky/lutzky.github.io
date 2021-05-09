@@ -105,6 +105,8 @@ Let's see if mutation testing can help us out. I put my code in `$GOPATH/src/git
 $ go get -v github.com/zimmski/go-mutesting
 $ go-mutesting github.com/lutzky/people/...
 PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.0" with checksum 252162809c884e5616872b71196c90df
+```
+```diff
 --- /home/lutzky/gopath/src/github.com/lutzky/people/people.go  2018-08-05 00:13:44.333319200 +0100
 +++ /tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.1    2018-08-05 10:15:30.013388991 +0100
 @@ -22,5 +22,5 @@
@@ -115,6 +117,8 @@ PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/peop
 +       return checkAge(p) && checkValidName(p) && true
  }
 
+```
+```
 FAIL "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.1" with checksum 996748ab09eeca8feb3f87ecf23b8319
 PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.2" with checksum 7be514fe57e53f4d02ce1e128641333f
 PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.3" with checksum 88a83b2731fda42ae4f3ac9350191c9f
@@ -142,11 +146,13 @@ func validatePerson(p person) bool {
 ...then the following mutant would survive:
 
 ```diff
+--- bla  2021-05-09 15:57:12.242530400 +0100
++++ bla  2021-05-09 15:57:12.242530400 +0100
 @@ -23,7 +23,7 @@
  func validatePerson(p person) bool {
          result := true
- -       result = result && checkAge(p)
- +       result = true && checkAge(p)
+-        result = result && checkAge(p)
++        result = true && checkAge(p)
          result = result && checkValidName(p)
          result = result && checkBolsonPolicy(p)
 ```

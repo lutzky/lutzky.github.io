@@ -68,15 +68,15 @@
 /* CommentPreproc */ .chroma .cp { color: #ff79c6 }
 /* CommentPreprocFile */ .chroma .cpf { color: #ff79c6 }
 /* Generic */ .chroma .g {  }
-/* GenericDeleted */ .chroma .gd { color: #8b080b }
+/* GenericDeleted */ .chroma .gd { color: #de7158 }
 /* GenericEmph */ .chroma .ge { text-decoration: underline }
 /* GenericError */ .chroma .gr {  }
-/* GenericHeading */ .chroma .gh { font-weight: bold }
-/* GenericInserted */ .chroma .gi { font-weight: bold }
+/* GenericHeading */ .chroma .gh { font-weight: bold; color: #ffc46b }
+/* GenericInserted */ .chroma .gi { color: #50fa7b }
 /* GenericOutput */ .chroma .go { color: #44475a }
 /* GenericPrompt */ .chroma .gp {  }
 /* GenericStrong */ .chroma .gs {  }
-/* GenericSubheading */ .chroma .gu { font-weight: bold }
+/* GenericSubheading */ .chroma .gu { color: #dc90dc }
 /* GenericTraceback */ .chroma .gt {  }
 /* GenericUnderline */ .chroma .gl { text-decoration: underline }
 /* TextWhitespace */ .chroma .w {  }
