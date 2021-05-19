@@ -30,6 +30,7 @@ params:
   ShowReadingTime: true
   ShowShareButtons: true
   ShowPostNavLinks: true
+  ShowFullTextinRSS: true
   disableSpecial1stPost: true
 
   assets:
