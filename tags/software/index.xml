@@ -1,7 +1,305 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>software on Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Recent content in software on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 Feb 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/index.xml" rel="self" type="application/rss+xml"/><item><title>Egged Getter 0.1</title><link>https://lutzky.net/2008/02/01/egged-getter-0-1/</link><pubDate>Fri, 01 Feb 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/02/01/egged-getter-0-1/</guid><description>The Egged Getter has been lost in the mists of time. However, it&amp;rsquo;s code has largely been integrated into TransportDroidIL. An old version of the Python code has been pasted at the end of this post.
-Here&amp;rsquo;s a little something I&amp;rsquo;ve been messing with: A simple fetcher script for the Egged (Israeli bus company) site. I&amp;rsquo;ve made a deskbar applet which uses it, which was fun to do :) (I&amp;rsquo;m looking for other cool ideas to implement as deskbar applets)</description></item><item><title>Two reasons Apple suck</title><link>https://lutzky.net/2007/09/16/two-reasons-apple-suck/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/two-reasons-apple-suck/</guid><description>First of all, new iPods won&amp;rsquo;t work on Linux. Now, while it&amp;rsquo;s very obvious that the idea is to block competition against other music vendors, that makes it even less legitimate. Good thing we&amp;rsquo;re starting to see some very nice cheap players out there - I&amp;rsquo;ve been rather impressed with the Meizu M6 MiniPlayer.
-Secondly, they didn&amp;rsquo;t think of this: Indexed search within the &amp;ldquo;Open&amp;rdquo; dialog. It&amp;rsquo;s in Ubuntu Gutsy, and really makes desktop search (implemented with Tracker in gutsy) worthwhile.</description></item><item><title>Myspace sucks</title><link>https://lutzky.net/2007/05/17/myspace-sucks/</link><pubDate>Thu, 17 May 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/05/17/myspace-sucks/</guid><description>Life is good, for the most part. And as a technology enthusiast, there are many new and cool things to see online. For example, there&amp;rsquo;s the new Schools site, part of the Vaya project which helps Israeli schools use Linux; this site uses the up-and-coming Lahak CMS, built on the Django framework, and looks very promising to the eyes of the bidi-lingual webmaster.
-However, some things just plain suck. One of them is myspace; today, in an attempt to make it more legible, I found that My Band&amp;rsquo;s Page implements all of its styling changes by a &amp;ldquo;style&amp;rdquo; tag hidden within the &amp;ldquo;Members&amp;rdquo; text block.</description></item><item><title>Beautiful ideas</title><link>https://lutzky.net/2007/02/08/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/08/beautiful-ideas/</guid><description>This man has some beautiful design ideas for the Linux desktop.</description></item><item><title>Why Vista worries me</title><link>https://lutzky.net/2007/02/07/why-vista-worries-me/</link><pubDate>Wed, 07 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/07/why-vista-worries-me/</guid><description>I&amp;rsquo;ve heard the latest Security Now, regarding the debate between Dave Marsh and Peter Guttman on DRM in Windows Vista. While a few good points were made, the major one - in my opinion - was not.
-DRM, in a practical sense, is deeply flawed: The idea is to give you your media - say, a WMA piece of music - and a program to play it with - say, Windows Media Player - but encrypt the media.</description></item><item><title>On Vista</title><link>https://lutzky.net/2007/02/04/on-vista/</link><pubDate>Sun, 04 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/04/on-vista/</guid><description>Everyone knew this was going to be an interesting one to watch. Die-hard Microsoft fans were sure Vista would be the final nail in the Open Source coffin, die-hard Linux fans were sure that the release would be Microsoft&amp;rsquo;s demise. Myself - I&amp;rsquo;m sitting and enjoying the show.
-It&amp;rsquo;s always very interesting to show Beryl to non-Linux users. They are almost always highly impressed, and are often completely in shock that Linux is a graphical system - many people still believe Linux is command-line only.</description></item><item><title>Software Perfection - Lost in the details</title><link>https://lutzky.net/2007/01/25/software-perfection-lost-in-the-details/</link><pubDate>Thu, 25 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/25/software-perfection-lost-in-the-details/</guid><description>Sometimes imperfections in Software drive me nuts. It&amp;rsquo;s what drove me away from Windows. It&amp;rsquo;s what keeps me switching back and forth between desktop environments. It&amp;rsquo;s what has me wasting a lot of time getting the software to do what I want, instead of getting anything done. I even have two particularily good examples.
-Firefox and Opera are my two favorite browsers. Opera is actually not as good, in my taste, as Firefox.</description></item></channel></rss>
+Here&amp;rsquo;s a little something I&amp;rsquo;ve been messing with: A simple fetcher script for the Egged (Israeli bus company) site. I&amp;rsquo;ve made a deskbar applet which uses it, which was fun to do :) (I&amp;rsquo;m looking for other cool ideas to implement as deskbar applets)</description><content:encoded><![CDATA[<blockquote>
+<p>The Egged Getter has been lost in the mists of time. However, it&rsquo;s code has
+largely been integrated into <a href="https://github.com/lutzky/TransportDroidIL">TransportDroidIL</a>. An old version of the Python
+code has been pasted at the end of this post.</p>
+</blockquote>
+<p>Here&rsquo;s a little something I&rsquo;ve been messing with: A simple fetcher script for
+the <a href="http://www.egged.co.il">Egged</a> (Israeli bus company) site. I&rsquo;ve made a
+deskbar applet which uses it, which was fun to do :) (I&rsquo;m looking for other
+cool ideas to implement as deskbar applets)</p>
+<p>You can get it at
+<a href="http://lutzky.net/files/egged_getter">http://lutzky.net/files/egged_getter</a>.
+The readme file includes installation instructions (&hellip;which involve placing
+the two included scripts in
+<code>~/.gnome2/deskbar-plugin/modules-2.20-compatible/</code>.</p>
+<p>There&rsquo;s also a <a href="http://git.or.cz">git</a> repository here:
+<a href="http://git.lutzky.net/?p=ohad/egged_getter.git">http://git.lutzky.net/?p=ohad/egged_getter.git</a>.
+I don&rsquo;t think I&rsquo;ve mentioned git on the blog before&hellip; It&rsquo;s freaking awesome.
+It made me really despise subversion :). Besides the abundance of information
+on <a href="http://git.or.cz">the main site</a>, there&rsquo;s <a href="http://www.youtube.com/watch?v=4XpnKHJAok8">an excellent (and very amusing)
+talk by Linus about it</a>. Also, I&rsquo;m
+giving a talk about it in Haifux - this coming Monday (February 4th), the Taub
+building of the Technion, room 6, at 18:30.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># coding: utf-8</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pyfribidi</span> <span class="kn">import</span> <span class="n">log2vis</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">log2vis</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="k">return</span> <span class="n">s</span>
+
+<span class="c1"># Original values which worked:</span>
+<span class="c1"># User agent (a sane browser agent):</span>
+<span class="c1"># USERAGENT=&#34;Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9b2) Gecko/2007121016 Firefox/3.0b2&#34;</span>
+<span class="c1"># Session ID: Can be retrieved from the site, but seems to have a very long</span>
+<span class="c1"># keepalive, and isn&#39;t checked anyway.</span>
+<span class="c1"># SESSION_ID=&#34;thjbzmnrhrks3a55w1dymvnx&#34;</span>
+
+<span class="n">BUF_LEN</span><span class="o">=</span><span class="mi">2048</span>
+<span class="n">HOST</span><span class="o">=</span><span class="s1">&#39;mslworld.egged.co.il&#39;</span>
+<span class="n">PORT</span><span class="o">=</span><span class="mi">80</span>
+
+<span class="n">DOUBLE_NEWLINE</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\r\n\r\n</span><span class="s2">&#34;</span>
+
+<span class="n">USER_AGENT</span><span class="o">=</span><span class="s2">&#34;EggedGetter&#34;</span>
+<span class="n">SESSION_ID</span><span class="o">=</span><span class="s2">&#34;0&#34;</span>
+
+<span class="n">JSON_DATA</span><span class="o">=</span><span class="s2">&#34;&#34;&#34;{&#34;str1&#34;:&#34;</span><span class="si">%(query)s</span><span class="s2">&#34;,&#34;strSession&#34;:&#34;</span><span class="si">%(session_id)s</span><span class="s2">&#34;}&#34;&#34;&#34;</span>
+
+<span class="n">_payload</span><span class="o">=</span><span class="s2">&#34;&#34;&#34;POST /eggedtimetable/WebForms/wsUnicell.asmx/getAnswer HTTP/1.1
+</span><span class="s2">Host: mslworld.egged.co.il
+</span><span class="s2">User-Agent: </span><span class="si">%(user_agent)s</span><span class="s2">
+</span><span class="s2">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+</span><span class="s2">Accept-Language: en-us,en;q=0.5
+</span><span class="s2">Accept-Charset: utf-8
+</span><span class="s2">Keep-Alive: 300
+</span><span class="s2">Connection: keep-alive
+</span><span class="s2">Content-Type: application/json; charset=utf-8
+</span><span class="s2">Referer: http://mslworld.egged.co.il/eggedtimetable/WebForms/wfrmMain.aspx?width=1280&amp;state=3&amp;taavura=0&amp;language=he&amp;freelang=
+</span><span class="s2">Content-Length: </span><span class="si">%(content_length)d</span><span class="s2">
+</span><span class="s2">Cookie: ASP.NET_SessionId=</span><span class="si">%(session_id)s</span><span class="s2">
+</span><span class="s2">Pragma: no-cache
+</span><span class="s2">Cache-Control: no-cache
+</span><span class="s2">
+</span><span class="s2"></span><span class="si">%(json_data)s</span><span class="s2">&#34;&#34;&#34;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">build_json_data</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">session_id</span> <span class="o">=</span> <span class="n">SESSION_ID</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Build a JSON-formatted query for the egged site.&#34;&#34;&#34;</span>
+    <span class="k">return</span> <span class="n">JSON_DATA</span> <span class="o">%</span> <span class="p">{</span>
+            <span class="s1">&#39;query&#39;</span><span class="p">:</span><span class="n">query</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#34;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;utf-8&#34;</span><span class="p">),</span>
+            <span class="s1">&#39;session_id&#39;</span><span class="p">:</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">session_id</span> <span class="o">=</span> <span class="n">SESSION_ID</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Build an HTTP request for the egged site.&#34;&#34;&#34;</span>
+
+    <span class="n">json_data</span> <span class="o">=</span> <span class="n">build_json_data</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_payload</span> <span class="o">%</span> <span class="p">{</span>
+            <span class="s1">&#39;user_agent&#39;</span><span class="p">:</span><span class="n">USER_AGENT</span><span class="p">,</span>
+            <span class="s1">&#39;content_length&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">json_data</span><span class="p">),</span>
+            <span class="s1">&#39;session_id&#39;</span><span class="p">:</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="s1">&#39;json_data&#39;</span><span class="p">:</span><span class="n">json_data</span><span class="p">,</span>
+            <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">send_query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">session_id</span> <span class="o">=</span> <span class="n">SESSION_ID</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Prepare and send query to site. Returned data is raw.&#34;&#34;&#34;</span>
+
+    <span class="n">http_data</span> <span class="o">=</span> <span class="n">build_request</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span><span class="n">PORT</span><span class="p">))</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">http_data</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">BUF_LEN</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">clean_response_html</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="n">linebreak</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">item</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2"> * &#34;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">response</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">:</span> <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">BR</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">&#34;</span>
+    <span class="n">LI</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\u003c</span><span class="s2">li</span><span class="se">\u003e</span><span class="s2">&#34;</span>
+    <span class="n">NBSP</span> <span class="o">=</span> <span class="s2">&#34;&amp;nbsp&#34;</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">BR</span><span class="p">,</span><span class="n">linebreak</span><span class="p">)</span> \
+                   <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">LI</span><span class="p">,</span><span class="n">item</span><span class="p">)</span> \
+                   <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">NBSP</span><span class="p">,</span><span class="s2">&#34; &#34;</span><span class="p">)</span> \
+                   <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\\</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">query_site</span><span class="p">(</span><span class="n">query</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Query the egged site with query&#34;&#34;&#34;</span>
+    <span class="n">site_response</span> <span class="o">=</span> <span class="n">send_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">returned_data</span> <span class="o">=</span> <span class="n">site_response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">DOUBLE_NEWLINE</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cleaned_data</span> <span class="o">=</span> <span class="n">clean_response_html</span><span class="p">(</span><span class="n">returned_data</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&#34;Error occured when trying to clean up the following response:&#34;</span>
+        <span class="k">print</span> <span class="s2">&#34;site_response:&#34;</span>
+        <span class="k">print</span> <span class="n">site_response</span>
+        <span class="k">print</span> <span class="s2">&#34;returned_data:&#34;</span>
+        <span class="k">print</span> <span class="n">returned_data</span>
+        <span class="k">raise</span>
+
+    <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">,</span> <span class="s2">&#34;utf-8&#34;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">(</span><span class="s2">&#34;Enter query for Egged site: &#34;</span><span class="p">),</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">query_site</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="s2">&#34;&#34;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">log2vis</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">log2vis</span><span class="p">(</span><span class="nb">unicode</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="s2">&#34;utf-8&#34;</span><span class="p">))</span>
+</code></pre></div>]]></content:encoded></item><item><title>Two reasons Apple suck</title><link>https://lutzky.net/2007/09/16/two-reasons-apple-suck/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/two-reasons-apple-suck/</guid><description>First of all, new iPods won&amp;rsquo;t work on Linux. Now, while it&amp;rsquo;s very obvious that the idea is to block competition against other music vendors, that makes it even less legitimate. Good thing we&amp;rsquo;re starting to see some very nice cheap players out there - I&amp;rsquo;ve been rather impressed with the Meizu M6 MiniPlayer.
+Secondly, they didn&amp;rsquo;t think of this: Indexed search within the &amp;ldquo;Open&amp;rdquo; dialog. It&amp;rsquo;s in Ubuntu Gutsy, and really makes desktop search (implemented with Tracker in gutsy) worthwhile.</description><content:encoded><![CDATA[<p>First of all, <a href="http://www.boingboing.net/2007/09/14/new-ipods-reengineer.html">new iPods won&rsquo;t work on
+Linux</a>. Now,
+while it&rsquo;s very obvious that the idea is to block competition against other
+music vendors, that makes it even less legitimate. Good thing we&rsquo;re starting to
+see some very nice cheap players out there - I&rsquo;ve been rather impressed with
+the <a href="http://en.meizu.com/product_m6.asp">Meizu M6 MiniPlayer</a>.</p>
+<p>Secondly, they didn&rsquo;t think of this: <a href="http://www.gnome.org/start/2.20/notes/en/index.html#rnusers-file-management">Indexed search within the &ldquo;Open&rdquo;
+dialog</a>.
+It&rsquo;s in Ubuntu Gutsy, and really makes desktop search (implemented with Tracker
+in gutsy) worthwhile. Especially when attaching files in GMail :)</p>
+]]></content:encoded></item><item><title>Myspace sucks</title><link>https://lutzky.net/2007/05/17/myspace-sucks/</link><pubDate>Thu, 17 May 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/05/17/myspace-sucks/</guid><description>Life is good, for the most part. And as a technology enthusiast, there are many new and cool things to see online. For example, there&amp;rsquo;s the new Schools site, part of the Vaya project which helps Israeli schools use Linux; this site uses the up-and-coming Lahak CMS, built on the Django framework, and looks very promising to the eyes of the bidi-lingual webmaster.
+However, some things just plain suck. One of them is myspace; today, in an attempt to make it more legible, I found that My Band&amp;rsquo;s Page implements all of its styling changes by a &amp;ldquo;style&amp;rdquo; tag hidden within the &amp;ldquo;Members&amp;rdquo; text block.</description><content:encoded><![CDATA[<p>Life is good, for the most part. And as a technology enthusiast, there are many
+new and cool things to see online. For example, there&rsquo;s the new
+<a href="http://schools.whatsup.org.il">Schools</a> site, part of the Vaya project which
+helps Israeli schools use Linux; this site uses the up-and-coming
+<a href="http://lahak.python-hosting.com">Lahak</a> CMS, built on the Django framework,
+and looks very promising to the eyes of the bidi-lingual webmaster.</p>
+<p>However, some things just plain suck. One of them is myspace; today, in an
+attempt to make it more legible, I found that <a href="http://myspace.com/switchblade777">My Band&rsquo;s
+Page</a> implements all of its styling changes
+by a &ldquo;style&rdquo; tag hidden within the &ldquo;Members&rdquo; text block. Myspace doesn&rsquo;t filter
+this out - nor does it provide any other means of changing the styling. This,
+combined with myspace&rsquo;s horrid administration interface, makes editing
+incredible unwieldy. I&rsquo;m considering opening another Wordpress site for the
+band here on this server&hellip;</p>
+<p>And on that topic - Wordpress 2.2 is out. Shinier. Faster. Built-in support for
+sidebar modules. And K2 broke :(. I love K2&hellip; Even though now that sidebars
+are implemented, the only thing I really need is a very simple template that
+allows me an ordinary, rectangular logo. <strong>Update:</strong> I didn&rsquo;t even notice, but
+the excellent K2 guys released a fix. However, it seems that when you copy the
+plugin they created directly, it inadvertantly adds a space to the end of the
+file - and PHP proceeds to barf. Hard to believe people still use this junk to
+develop websites&hellip; They should use <a href="http://railsenvy.com">other junk</a>.</p>
+]]></content:encoded></item><item><title>Beautiful ideas</title><link>https://lutzky.net/2007/02/08/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/08/beautiful-ideas/</guid><description>This man has some beautiful design ideas for the Linux desktop.</description><content:encoded>&lt;p>This man has &lt;a href="http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html">some beautiful design ideas&lt;/a> for the Linux desktop.&lt;/p></content:encoded></item><item><title>Why Vista worries me</title><link>https://lutzky.net/2007/02/07/why-vista-worries-me/</link><pubDate>Wed, 07 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/07/why-vista-worries-me/</guid><description>I&amp;rsquo;ve heard the latest Security Now, regarding the debate between Dave Marsh and Peter Guttman on DRM in Windows Vista. While a few good points were made, the major one - in my opinion - was not.
+DRM, in a practical sense, is deeply flawed: The idea is to give you your media - say, a WMA piece of music - and a program to play it with - say, Windows Media Player - but encrypt the media.</description><content:encoded><![CDATA[<p>I&rsquo;ve heard <a href="http://www.twit.tv/sn77">the latest Security Now</a>, regarding the
+debate between Dave Marsh and Peter Guttman on DRM in Windows Vista. While a
+few good points were made, the major one - in my opinion - was not.</p>
+<p>DRM, in a practical sense, is deeply flawed: The idea is to give you your
+media - say, a WMA piece of music - and a program to play it with - say, Windows
+Media Player - but encrypt the media. Now, naturally, Media Player will need
+the decryption key for the media, and the idea is that Media Player will verify
+that you are allowed to listen to the song, and only then decrypt it - as it is
+played.</p>
+<p>However, something is clearly wrong here - both the encrypted media and the
+decryption key are sitting locally on your computer. It&rsquo;s like giving you a
+locked box, as well as a butler (which will live in your house, where you
+presumably have a shotgun) with the key, and telling the butler not to open the
+box for anyone unauthorized. That is, you can open the Windows Media Player
+executable with your favorite hex editor, and dig away for the key. This is, of
+course, very complicated to do - but there are advanced ways of finding these
+keys, and once they&rsquo;re found - they&rsquo;re out. That&rsquo;s why we keep hearing about
+WMA and iTunes' equivalent format being cracked every once in a while, when
+they change it. No matter how sophisticated the DRM, you still get both the
+locked box and the key. They might build bigger butlers, but we can build
+deadlier shotguns. (Sorry for the violent analogy, but DRM kinda does that to
+me ;))</p>
+<p>So, what can the *AA/Microsoft/Apple/DRM scapegoats inc. do about this? Well,
+they could supposedly have Windows recognize that you are trying to view the
+Windows Media Player executable, and stop you (I&rsquo;d be surprised if they haven&rsquo;t
+done this yet). However, currently you can still, for example, run Linux on the
+computer, and use that to view the executable. And if, by some crazy
+coincidence, all variants of Linux stop you from viewing the executable - you
+can pick your favorite, change the source code so it doesn&rsquo;t, and use that. To
+stop you from running whatever unprotected operating system you want, changes
+to the hardware must be made.</p>
+<p>This is exactly what worries me about Vista. For the first time, we are seeing
+major effects like HDMI/HDCP, where the operating system interacts with the
+hardware directly to figure out exactly what the user is or isn&rsquo;t allowed to
+do. Also, Vista boasts the &ldquo;Trustworthy Computing&rdquo; project, which is all too
+reminiscent of &ldquo;Trusted Computing&rdquo; - a project in which, through integrating
+protection from the bottom of the hardware (with a TPM, Trusted Platform Module
+chip) to the top of the software, the computer verifies that it is only running
+authorized operating systems, which run only authorized programs.</p>
+<p>Now, the media companies would love this. Say HD-DVD&rsquo;s been completely cracked,
+and an alternative, open-source, unprotected player has been released. If your
+system is TPM-protected, it simply won&rsquo;t allow this software to run. Your own
+compiled applications can be forbidden from running as well, seeing as their
+source code just might be the HD-DVD cracking code. Unauthorized operating
+systems would, naturally, not be allowed to run.</p>
+<p>Now, I&rsquo;m not explicitly blaming Microsoft for this. Fact of the matter is, the
+protection they&rsquo;ve built into Vista, although probably (for the reasons I&rsquo;ve
+mentioned) insufficient, was required by the media companies in order for
+HD-DVD support to be (legally/technically) possible in Vista. Would Microsoft
+go so far as to enable the horror scenario I&rsquo;ve pictured above? Probably not.
+But I do believe we all need to be aware of the risks, just to be on the safe
+side.</p>
+]]></content:encoded></item><item><title>On Vista</title><link>https://lutzky.net/2007/02/04/on-vista/</link><pubDate>Sun, 04 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/04/on-vista/</guid><description>Everyone knew this was going to be an interesting one to watch. Die-hard Microsoft fans were sure Vista would be the final nail in the Open Source coffin, die-hard Linux fans were sure that the release would be Microsoft&amp;rsquo;s demise. Myself - I&amp;rsquo;m sitting and enjoying the show.
+It&amp;rsquo;s always very interesting to show Beryl to non-Linux users. They are almost always highly impressed, and are often completely in shock that Linux is a graphical system - many people still believe Linux is command-line only.</description><content:encoded><![CDATA[<p>Everyone knew this was going to be an interesting one to watch. Die-hard
+Microsoft fans were sure Vista would be the final nail in the Open Source
+coffin, die-hard Linux fans were sure that the release would be Microsoft&rsquo;s
+demise. Myself - I&rsquo;m sitting and enjoying the show.</p>
+<p>It&rsquo;s always very interesting to show Beryl to non-Linux users. They are almost
+always highly impressed, and are often completely in shock that Linux is a
+graphical system - many people still believe Linux is command-line only. But
+the funniest thing is that they always seem to care more about useless,
+spinning, transparent desktop cubes than, say, security. This holds for Vista&rsquo;s
+flashy new graphics, as well - mainstream media seems to be focusing on Vista&rsquo;s
+GUI a lot more than they are about its controversial new security features.
+Very interesting, keeping in mind that Windows has never been &ldquo;not pretty
+enough&rdquo; in consumer&rsquo;s eyes, but rather too unstable or virus-prone.</p>
+<p>Controversial security? Yup. And I&rsquo;m not even talking about the actually
+controversy-worth topics, like DRM&hellip; I&rsquo;m talking about the system asking if
+you&rsquo;re sure you want to set the clock. I&rsquo;ve heard more noise about this than
+the fact that all of Vista&rsquo;s new features pale in comparison to 7-year-old OS X
+which, incidentally, also &ldquo;asks if you&rsquo;re sure&rdquo; that you want to set the clock.
+Nobody complains about that however. Why? In my opinion - it&rsquo;s the password
+prompt.</p>
+<p>Just as people complained about Windows XP&rsquo;s &ldquo;Fisher-Price&rdquo; theme, they&rsquo;re now
+complaining about being treated like little kids. &ldquo;Are you <em>sure</em> you want to
+set your clock?&rdquo; - how condescending of the operating system. The reason it
+works well in Linux and OS X is that the system phrases the exact same question
+completely differently - &ldquo;You are attempting to run &ldquo;system-config-date&rdquo; which
+requires administrative privileges&rdquo;. Cryptic, right? I think they changed that
+for Ubuntu, too (I&rsquo;m writing this off a Fedora box). But most users won&rsquo;t have
+a hard time understanding that this, coupled with the password entry box, means
+that the system wants to make sure you are indeed someone allowed to set the
+clock. Hell, I believe that most people won&rsquo;t have a problem making the logical
+leap from there to &ldquo;hmm, perhaps setting the clock (im)properly can really mess
+up my system&rdquo;. Either way, it&rsquo;s much more pleasing than Vista&rsquo;s seemingly
+endless, senseless sequences of &ldquo;Are you sure?&rdquo; dialog boxes. A password prompt
+like this tells the user - &ldquo;You&rsquo;re opening the hood here, watch your step&rdquo;, the
+idea being that the user takes a hint and, realizing he has arrived at a
+password-protected part of his system, will indeed watch his proverbial step.</p>
+<p>But nobody is going to ditch windows over a couple of dialog boxes. There are
+much more interesting reasons to do that - I&rsquo;ve heard of much instability,
+inavailability of drivers, confusions in the user interface&hellip; all of the
+things that Microsoft worked very hard to get rid of when XP was released,
+making Vista look like a step back. But most of all - it&rsquo;s the timing. Vista&rsquo;s
+2007 release has given the world time to hear about shiny new Linux
+distributions, macs that run all of their old software, indexing services at
+least as powerful as Vista&rsquo;s (now that WinFS has gone down the drain), more
+advanced graphical &ldquo;shinyness&rdquo; which works on older systems, and the horrors of
+DRM (thanks for that one, Sony). With nothing really new to give them, a high
+price tag (because it often includes a new computer), and several years of not
+being in the habit of buying a new OS, people have very little motivation to
+upgrade to Vista.</p>
+<p>But I don&rsquo;t think that Microsoft and Windows are going anywhere, anytime soon.
+I do think Vista&rsquo;s lost the battle - but to XP. Vista&rsquo;s launch made people
+realize how successful XP was as an operating system, and the sheer momentum
+will keep people there. If Microsoft locks people out of technologies like
+DirectX 10 by making them Vista-only, this will keep people leaking away to OS
+X and Linux. But in the immediate future, I don&rsquo;t think any OS will be taking a
+serious bite out of the XP userbase.</p>
+]]></content:encoded></item><item><title>Software Perfection - Lost in the details</title><link>https://lutzky.net/2007/01/25/software-perfection-lost-in-the-details/</link><pubDate>Thu, 25 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/25/software-perfection-lost-in-the-details/</guid><description>Sometimes imperfections in Software drive me nuts. It&amp;rsquo;s what drove me away from Windows. It&amp;rsquo;s what keeps me switching back and forth between desktop environments. It&amp;rsquo;s what has me wasting a lot of time getting the software to do what I want, instead of getting anything done. I even have two particularily good examples.
+Firefox and Opera are my two favorite browsers. Opera is actually not as good, in my taste, as Firefox.</description><content:encoded><![CDATA[<p>Sometimes imperfections in Software drive me nuts. It&rsquo;s what drove me away from
+Windows. It&rsquo;s what keeps me switching back and forth between desktop
+environments. It&rsquo;s what has me wasting a lot of time getting the software to do
+what I want, instead of getting anything done. I even have two particularily
+good examples.</p>
+<p>Firefox and Opera are my two favorite browsers. Opera is actually not as good,
+in my taste, as Firefox. Firefox&rsquo;s slew of extensions (especially my latest
+favorites - <a href="http://del.icio.us/help/firefox/extension">Del.icio.us bookmarks</a>
+and <a href="http://www.getfirebug.com/">Firebug</a>), better font handling (on Linux) and
+Open-Source nature keep it ahead, if all things were equal. However,  Opera
+is much faster on my laptop. <strong>Way</strong> faster. And with the kind of browsing I
+usually do - zillions of tabs open and all, that difference counts.</p>
+<p>My other good example is LaTeX. I have the <a href="http://latex-beamer.sf.net">Beamer</a>
+package, which makes absolutely stunning presentations in my favorite style of
+document creation - writing and compiling source code. However, one little
+thing drives me nuts about it - the symbols in math mode, even if I set it to
+Serif (Beamer uses sans-serif fonts by default), are not the default ones,
+which I prefer. For example, the symbol for &ldquo;\in&rdquo; (a member of a set) looks
+horrible in my opinion. This tiny little thing had me chasing font preferences
+around for half an hour, to no avail.</p>
+<p>Graphviz. Ruby on Rails. Networkmanager. Openbox. IVMan. The list goes on&hellip;
+almost every piece of software I use has a little imperfection - not
+necessarily a bug, usually a missing features - that drives me crazy. Maybe I
+should quit my degree so I have time to fix all of those?</p>
+]]></content:encoded></item></channel></rss>

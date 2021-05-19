@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>asides on Shallow and Pedantic</title><link>https://lutzky.net/tags/asides/</link><description>Recent content in asides on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Apr 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/asides/index.xml" rel="self" type="application/rss+xml"/><item><title>Things I learned today</title><link>https://lutzky.net/2008/04/28/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/04/28/things-i-learned-today/</guid><description>You can use git on a VFAT disk (for example, a USB key) without all of the annoying mode issues, by using the following setting in .git/config:
 [core] filemode = false What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for example, if I create a new script, I was hoping to be able to git chmod +x it.
-Cream is a very good editor if you&amp;rsquo;re used to Windows applications.</description></item><item><title>Sour chewing gum</title><link>https://lutzky.net/2007/12/19/sour-chewing-gum/</link><pubDate>Wed, 19 Dec 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/12/19/sour-chewing-gum/</guid><description>On an online board, friends posted a photo from a party a while back, as I&amp;rsquo;m chewing some extra-sour chewing gum:
+Cream is a very good editor if you&amp;rsquo;re used to Windows applications.</description><content:encoded><![CDATA[<ol>
+<li>
+<p>You can use git on a VFAT disk (for example, a USB key) without all of the
+annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
+<pre><code>[core]
+filemode = false
+</code></pre><p>What I haven&rsquo;t figured out is how to do force a chmod in this situation; for
+example, if I create a new script, I was hoping to be able to <code>git chmod +x</code>
+it.</p>
+</li>
+<li>
+<p><a href="http://cream.sourceforge.net">Cream</a> is a very good editor if you&rsquo;re used
+to Windows applications. It&rsquo;s a set of plugins for VIM which make it
+modeless and (very) familiar to Windows users. However, Ctrl-O still has its
+usual job for us ordinary junkies :)</p>
+</li>
+<li>
+<p>Vertically, two cans of Pepsi fit very snugly into a Pringles can.</p>
+</li>
+</ol>
+]]></content:encoded></item><item><title>Sour chewing gum</title><link>https://lutzky.net/2007/12/19/sour-chewing-gum/</link><pubDate>Wed, 19 Dec 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/12/19/sour-chewing-gum/</guid><description>On an online board, friends posted a photo from a party a while back, as I&amp;rsquo;m chewing some extra-sour chewing gum:
 {: title=&amp;ldquo;חמוצקי נולד&amp;rdquo;}
-I find this suitable for use in macro form. For example, in the Computer Security course, we&amp;rsquo;re going to compromise a windows-based server using a buffer overflow vulnerability. Unfortunately, this means we&amp;rsquo;re going to have to use (as per the course&amp;rsquo;s demands) Visual Studio 2003. My response:</description></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description></item><item><title>I do NOT kick puppies!</title><link>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</link><pubDate>Wed, 31 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</guid><description>I do type mesmerizingly fast, though&amp;hellip; :)
-I am told these were scattered around Taub&amp;hellip; I haven&amp;rsquo;t been there to day, but it feels good to be infamous.</description></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</guid><description>When approaching a port, the Scotsman:
+I find this suitable for use in macro form. For example, in the Computer Security course, we&amp;rsquo;re going to compromise a windows-based server using a buffer overflow vulnerability. Unfortunately, this means we&amp;rsquo;re going to have to use (as per the course&amp;rsquo;s demands) Visual Studio 2003. My response:</description><content:encoded><![CDATA[<p>On an online board, friends posted a photo from a party a while back, as I&rsquo;m chewing some extra-sour chewing gum:</p>
+<p><img loading="lazy" src="/assets/images/2007/12/dscf6400ff0.jpg" alt="חמוצקי נולד"  />
+{: title=&ldquo;חמוצקי נולד&rdquo;}</p>
+<p>I find this suitable for use in macro form. For example, in the Computer
+Security course, we&rsquo;re going to compromise a windows-based server using a
+buffer overflow vulnerability. Unfortunately, this means we&rsquo;re going to have to
+use (as per the course&rsquo;s demands) Visual Studio 2003. My response:</p>
+<p><img loading="lazy" src="/assets/images/2007/12/lutz2as3.gif" alt="חמוצקי"  />
+{: title=&ldquo;חמוצקי&rdquo;}</p>
+]]></content:encoded></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description><content:encoded><![CDATA[<p><a href="http://www.flickr.com/photos/paradox_the_cow/"><img loading="lazy" src="/assets/images/2007/06/534994007_ef57770ac3.jpg" alt="Paradox the cow"  />
+</a></p>
+<p>I present to you, the only creature which is more of a celebrity in the
+undergrad CS world than I am&hellip; <em>The Cow</em>. (Paradox)</p>
+<p><strong>Edit:</strong> Yes, that&rsquo;s me. No, that&rsquo;s not my bass. That&rsquo;s a very good friend&rsquo;s
+Fender Fat Stratocaster. So smooooth&hellip;</p>
+<p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman">some chum</a> ;)</p>
+]]></content:encoded></item><item><title>I do NOT kick puppies!</title><link>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</link><pubDate>Wed, 31 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</guid><description>I do type mesmerizingly fast, though&amp;hellip; :)
+I am told these were scattered around Taub&amp;hellip; I haven&amp;rsquo;t been there to day, but it feels good to be infamous.</description><content:encoded><![CDATA[<p>I do type mesmerizingly fast, though&hellip; :)</p>
+<p><img loading="lazy" src="/assets/images/2007/01/2014-11-11-poster.jpg" alt="Wanted poster"  />
+</p>
+<p>I am told these were scattered around Taub&hellip; I haven&rsquo;t been there to day, but it feels good to be infamous.</p>
+]]></content:encoded></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</guid><description>When approaching a port, the Scotsman:
 You will never find a more wretched hive of scum and villany. And the crab cakes ain&amp;rsquo;t too bad, either!
 Later on:
-Is it fast? It sure is. But it&amp;rsquo;s gonna cost ya - 10,000 up-front. 10,000? We could buy our own ship for that! But who&amp;rsquo;s gonna sail it? I can. I piloted (some smaller kind of ship) back when I was a kid.</description></item></channel></rss>
+Is it fast? It sure is. But it&amp;rsquo;s gonna cost ya - 10,000 up-front. 10,000? We could buy our own ship for that! But who&amp;rsquo;s gonna sail it? I can. I piloted (some smaller kind of ship) back when I was a kid.</description><content:encoded><![CDATA[<p>When approaching a port, the Scotsman:</p>
+<blockquote>
+<p>You will never find a more wretched hive of scum and villany. And the crab
+cakes ain&rsquo;t too bad, either!</p>
+</blockquote>
+<p>Later on:</p>
+<blockquote>
+<ul>
+<li>Is it fast?</li>
+<li>It sure is. But it&rsquo;s gonna cost ya - 10,000 up-front.</li>
+<li>10,000? We could buy our own ship for that!</li>
+<li>But who&rsquo;s gonna sail it?</li>
+<li>I can. I piloted (some smaller kind of ship) back when I was a kid.</li>
+</ul>
+</blockquote>
+<p>(and if you haven&rsquo;t seen Star Wars, you&rsquo;re just not gonna get it)</p>
+]]></content:encoded></item></channel></rss>

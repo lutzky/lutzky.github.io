@@ -1,14 +1,905 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>code on Shallow and Pedantic</title><link>https://lutzky.net/tags/code/</link><description>Recent content in code on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 02 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/code/index.xml" rel="self" type="application/rss+xml"/><item><title>Code comments</title><link>https://lutzky.net/2021/05/02/comments/</link><pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/05/02/comments/</guid><description>&lt;p>Good code comments only describe &lt;em>why&lt;/em> the code is (or isn&amp;rsquo;t!) doing something.&lt;/p></description></item><item><title>PiTemp</title><link>https://lutzky.net/2021/03/14/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/03/14/pitemp/</guid><description>An adventure with Raspberry Pi, Golang, and small displays.</description></item><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/2015/05/30/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><guid>https://lutzky.net/2015/05/30/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description></item><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description></item><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description></item><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/2014/01/05/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/01/05/investigate/</guid><description>Distinguishing &lt;!-- raw HTML omitted -->EPERM&lt;!-- raw HTML omitted --> vs &lt;!-- raw HTML omitted -->EACCESS&lt;!-- raw HTML omitted -->, and how that helps debug file manipulation scripts.</description></item><item><title>Startup times</title><link>https://lutzky.net/2013/12/11/startup-times/</link><pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/11/startup-times/</guid><description>Starting new java processes in your scripts considered harmful. Let&amp;rsquo;s compare &amp;ldquo;hello world&amp;rdquo; startup times for different languages.</description></item><item><title>Asserting string equality</title><link>https://lutzky.net/2013/12/02/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/02/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/2013/12/01/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/01/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description></item><item><title>Multiple library versions</title><link>https://lutzky.net/2013/05/15/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/05/15/multiple-library-versions/</guid><description>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>code on Shallow and Pedantic</title><link>https://lutzky.net/tags/code/</link><description>Recent content in code on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 02 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/code/index.xml" rel="self" type="application/rss+xml"/><item><title>Code comments</title><link>https://lutzky.net/2021/05/02/comments/</link><pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/05/02/comments/</guid><description>&lt;p>Good code comments only describe &lt;em>why&lt;/em> the code is (or isn&amp;rsquo;t!) doing something.&lt;/p></description><content:encoded><![CDATA[<p>Good code comments only describe <em>why</em> the code is (or isn&rsquo;t!) doing something.</p>
+<p>When teaching coding or reviewing code, I sometimes encounter comments describing <em>what</em> it&rsquo;s doing, and those are almost always harmful.</p>
+<p>To be clear, I&rsquo;m talking about <em>code comments</em>, not <em>documentation comments</em>. This nuance is different in every language and setup, but for Go, this is it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// UsefulFunction does useful things. This is a documentation
+</span><span class="c1">// comment, and will be displayed in godoc, IDE autocomplete,
+</span><span class="c1">// and more.
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">UsefulFunction</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this and all of the below are code comments
+</span><span class="c1"></span>
+    <span class="c1">// count visitors //
+</span><span class="c1"></span>    <span class="c1">// x is the visitor counter
+</span><span class="c1"></span>    <span class="nx">x</span> <span class="o">:=</span> <span class="mi">0</span>
+    <span class="nx">x</span><span class="o">++</span> <span class="c1">// increment x
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><h2 id="why">Document &ldquo;why&rdquo;</h2>
+<p>In some code, things are done for non-intuitive reasons. It&rsquo;s worth pointing that out - it makes your code easier to read for a newcomer trying to understand why it&rsquo;s written that way. In this example, technically <code>sumOfIntsWithThreshold</code> will work absolutely correctly without its input being sorted, but it <a href="https://stackoverflow.com/questions/11227809">turns out that it will be faster if it is</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">sort</span><span class="p">.</span><span class="nf">Ints</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// improves performance; see https://stackoverflow.com/questions/11227809
+</span><span class="c1"></span><span class="nx">x</span> <span class="o">:=</span> <span class="nf">sumOfIntsWithThreshold</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+</code></pre></div><p>Other good &ldquo;why&rdquo; examples are code being written in a less-intuitive way to make a particular test possible or to avoid a specific edge-case - be sure to note what those are.</p>
+<p>If a well-researched algorithm is being used, definitely add a reference to it, including the best URL you have for someone who wants a quick overview of how it works.</p>
+<h2 id="why-not">Document &ldquo;why not&rdquo;</h2>
+<p>In some code, the reader might see something missing, a pattern apparently broken. Sometimes this is for a good reason, as keeping with the pattern would cause a bug. More specifically, you might be <em>fixing</em> a bug by breaking the pattern.</p>
+<p>In this example, especially if you&rsquo;re removing a line <code>sort.Strings(c)</code>, it&rsquo;s a good idea to leave a comment explaining why it shouldn&rsquo;t be there.</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+    <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+    <span class="c1">// don&#39;t sort c, we need to keep its original order for foo
+</span><span class="c1"></span>    <span class="nf">foo</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="trivial">Don&rsquo;t document &ldquo;what&rdquo; when it&rsquo;s trivial</h2>
+<p>You might be asking yourself &ldquo;what&rsquo;s the harm in a comment if it isn&rsquo;t needed. The answer is that it can be misleading; code will function correctly even if it&rsquo;s out-of-sync with its comments, so comments aren&rsquo;t always updated when code is changed, leading to this canonical example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// increment x by 1
+</span><span class="c1"></span><span class="nx">x</span> <span class="o">+=</span> <span class="mi">2</span>
+</code></pre></div><p>In less-trivial cases, the reader can be left scratching their head for far longer than they would&rsquo;ve if the comment weren&rsquo;t there in the first place.</p>
+<h2 id="sections">Documenting &ldquo;sections&rdquo; is a code smell</h2>
+<p>If your code looks is divided using comments into &ldquo;sections&rdquo;, it&rsquo;s probably long and difficult to reason about:</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//// Get site data ////
+</span><span class="c1"></span>    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;data.md&#34;</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+    <span class="nx">parser</span> <span class="o">:=</span> <span class="nx">markdown</span><span class="p">.</span><span class="nf">NewParser</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+    <span class="nx">data</span> <span class="o">:=</span> <span class="nx">parser</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+
+    <span class="c1">//// Get layout data ////
+</span><span class="c1"></span>    <span class="nx">f2</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;layout.cfg&#34;</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="nx">f2</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+    <span class="nx">layoutReader</span> <span class="o">:=</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">layoutOpts</span><span class="p">.</span><span class="nx">Defaults</span><span class="p">)</span>
+    <span class="c1">// Name &#34;data&#34; is already in use&#34;
+</span><span class="c1"></span>    <span class="nx">dataOfLayout</span> <span class="o">:=</span> <span class="nx">layoutReader</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">f2</span><span class="p">)</span>
+
+    <span class="c1">//// Set up HTML renderer ////
+</span><span class="c1"></span>    <span class="nx">renderer</span> <span class="o">:=</span> <span class="nx">htmlrender</span><span class="p">.</span><span class="nf">NewRenderer</span><span class="p">()</span>
+    <span class="nx">renderer</span><span class="p">.</span><span class="nf">SetHTMLMode</span><span class="p">(</span><span class="s">&#34;my-favorite-html-style&#34;</span><span class="p">)</span>
+    <span class="nx">renderer</span><span class="p">.</span><span class="nf">SetCompression</span><span class="p">(</span><span class="s">&#34;max-compression&#34;</span><span class="p">)</span>
+
+    <span class="nx">renderer</span><span class="p">.</span><span class="nf">Render</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataOfLayout</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>This gets even messier if you don&rsquo;t sneakily omit error handling. In any case, the section headers are reasonable (albeit not great) candidates for function names:</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">siteData</span> <span class="o">:=</span> <span class="nf">getSiteData</span><span class="p">()</span>
+    <span class="nx">layoutData</span> <span class="o">:=</span> <span class="nf">getLayoutData</span><span class="p">()</span>
+    <span class="nx">renderer</span> <span class="o">:=</span> <span class="nf">setupHTMLRenderer</span><span class="p">()</span>
+    <span class="nx">renderer</span><span class="p">.</span><span class="nf">Render</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataOfLayout</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">getSiteData</span><span class="p">()</span> <span class="nx">markdown</span><span class="p">.</span><span class="nx">Data</span> <span class="p">{</span>
+    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;data.md&#34;</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">markdown</span><span class="p">.</span><span class="nf">NewParser</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">getLayoutData</span><span class="p">()</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nx">Data</span> <span class="p">{</span>
+    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;layout.cfg&#34;</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">layoutOpts</span><span class="p">.</span><span class="nx">Defaults</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">layoutReader</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">setupHTMLRenderer</span><span class="p">()</span> <span class="nx">htmlrenderer</span><span class="p">.</span><span class="nx">Renderer</span> <span class="p">{}</span>
+    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">htmlrender</span><span class="p">.</span><span class="nf">NewRenderer</span><span class="p">()</span>
+    <span class="nx">r</span><span class="p">.</span><span class="nf">SetHTMLMode</span><span class="p">(</span><span class="s">&#34;my-favorite-html-style&#34;</span><span class="p">)</span>
+    <span class="nx">r</span><span class="p">.</span><span class="nf">SetCompression</span><span class="p">(</span><span class="s">&#34;max-compression&#34;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">r</span>
+<span class="p">}</span>
+</code></pre></div><p>The main <code>ServeSite</code> function is now much easier to read. The &ldquo;section names&rdquo; are now function names, and are less likely to fall out of date. And as a bonus, the scope of many variables is reduced - so the reader doesn&rsquo;t have to keep them in mind, and we can use short names for them.</p>
+<h2 id="code-scars">Don&rsquo;t leave code scars around</h2>
+<p>Finally, just a pet peeve - while it&rsquo;s absolutely fine to &ldquo;comment out&rdquo; code while developing, you usually shouldn&rsquo;t commit this to version control. I like calling these &ldquo;code scars&rdquo;:</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">x</span> <span class="o">:=</span> <span class="nf">getMaxValue</span><span class="p">()</span>
+<span class="c1">// x = 3
+</span><span class="c1"></span><span class="nf">handle</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+</code></pre></div><p>In this case, <code>x = 3</code> was there for testing &ldquo;what if <code>getMaxValue</code> returns 3&rdquo;. You should not commit this. However, a possible exception can be if you&rsquo;re documenting &ldquo;why not&rdquo; as above - if it comes with an explanation.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Code is meant to be read by machines and humans, with comments generally being intended for humans to read. Therefore, all of these should be taken as guidelines rather than gospel. Hopefully this post can be of some use for people trying to reason about comment etiquette, or perhaps for code reviewers wanting to point their reviewees at a preexisting summary.</p>]]></content:encoded></item><item><title>PiTemp</title><link>https://lutzky.net/2021/03/14/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/03/14/pitemp/</guid><description>An adventure with Raspberry Pi, Golang, and small displays.</description><content:encoded><![CDATA[<p>I had been looking for an excuse to mess around with Raspberry Pi for a while, and found one: I wanted a graph of temperature and humidity over time, and - while we&rsquo;re at it - a nice display of those two. Technically speaking, I already have a Nest thermostat which should provide those, but it won&rsquo;t display humidity and there&rsquo;s no easy way to get a graph off it (besides, then I&rsquo;d need another excuse for messing around with a Pi).</p>
+<p>The code for the final result is in <a href="https://github.com/lutzky/pitemp">https://github.com/lutzky/pitemp</a>.</p>
+<h1 id="stage-1-lcd-and-dht">Stage 1: LCD and DHT</h1>
+<p>Hardware:</p>
+<ul>
+<li>A <a href="https://www.raspberrypi.org/products/raspberry-pi-zero-w/">Raspberry Pi Zero W</a> a friend gave me (that&rsquo;ll become important later on)</li>
+<li>A <a href="https://www.amazon.co.uk/gp/product/B07L83K6CF">DHT11</a> temperature &amp; humidity sensor</li>
+<li>A <a href="https://www.amazon.co.uk/gp/product/B07QNKCLJM">4x20 character LCD</a>; apparently an HD44780 controller or compatible.</li>
+</ul>
+<p>This was my first time coding for hardware on the raspberry pi, and it went fairly well.</p>
+<h1 id="lcd-quirks">LCD quirks</h1>
+<p>Getting the degree symbol (°, ASCII <code>0xb0</code>) was a bit of a challenge. While the official HD44780 spec shows it should be available with &ldquo;ROM Code A02&rdquo; (i.e. Latin mode), it&rsquo;s not clear if this can be toggled in software, and the characters my unit displayed matched &ldquo;ROM Code A00&rdquo; (Japanese)&hellip; mostly, that is. Some characters were malformed, and the <a href="https://github.com/d2r2/go-hd44780">unofficial library I used</a> didn&rsquo;t support custom characters (which the hardware seems to support). Fortunately, the Japanese ROM code had a Handakuten symbol (ﾟ, like the circle from ぽ but as a separate character), which is close enough.</p>
+<p>The LCD was also quite slow to refresh, the way I was using it; any faster than 1 hz would lead to corruption, meaning that the &ldquo;second-by-second&rdquo; clock display I wanted wasn&rsquo;t feasible.</p>
+<p>Finally, the LCD unit is much, <em>much</em> large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a &ldquo;case&rdquo;.</p>
+<p><a href="/assets/images/2021/03/pitemp/lcd_box.jpg"><img loading="lazy" src="/assets/images/2021/03/pitemp/lcd_box.jpg" alt="LCD Box"  />
+</a></p>
+<h1 id="cross-compilation">Cross compilation</h1>
+<p>While the Pi Zero is certainly <em>capable</em> of being a fully-fledged Go development environment, it&rsquo;s not a fast one (and me using a cheap old SD card isn&rsquo;t helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and <code>scp</code>-ing the result over. That&rsquo;s despite Go&rsquo;s hefty statically-build binaries (7-12MB for these, depending on stripping).</p>
+<p>Cross compiling is done like so (e.g. in a <a href="https://github.com/lutzky/pitemp/blob/main/build.sh">convenience script</a>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install gcc-arm-linux-gnueabi
+$ <span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>arm-linux-gnueabi-gcc <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARM</span><span class="o">=</span><span class="m">6</span> <span class="nv">GOARCH</span><span class="o">=</span>arm
+$ go -o main.arm build main.go
+</code></pre></div><p>For build-and-run-on-save, this can be used with <code>entr</code>. However, because you can&rsquo;t modify an executable file as it runs (in this case), you need to use a temporary file. On my laptop, I run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
+</span></code></pre></div><p>Then, on the pi, I run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
+</code></pre></div><h1 id="stage-2-pioled">Stage 2: PiOLED</h1>
+<p>I looked for a not-so-ridiculously-large display, and found <a href="https://www.adafruit.com/product/3527">adafruit&rsquo;s PiOLED</a> to be perfect. Its HAT form factor makes for a much tidier device, and the display itself is reminiscent of the 2007 Sansa Clip m300 (albeit monochromatic). Library support is also much better, thanks to <a href="http://periph.io">http://periph.io</a>.</p>
+<p>That being said, my friend soldered the Pi&rsquo;s pins on &ldquo;downwards&rdquo;, as this is apparently more convenient when using it on a breadboard. I figured it&rsquo;s time to order my own Pi Zero (you can get them with the pins pre-soldered, facing &ldquo;up&rdquo;); I later found that <a href="https://pkg.go.dev/periph.io/x/devices/v3/ssd1306#Opts">this might be configurable</a>, but it&rsquo;d still be pretty awkward.</p>
+<p>The PiOLED library (actually periph.io&rsquo;s ssd1306 library) essentially lets you render an <code>image.Image</code>; since these are also trivially renderable to PNG, I could speed up development even further by adding an HTTP endpoint to serve the current image, even if the hardware isn&rsquo;t present; this also let me zoom into the rendered image instead of squinting at the actual display, making it easier to align things pixel-by-pixel. I eventually ended up separating the code into two binaries - <code>pitemp</code> would communicate with the sensors and provide an HTTP endpoint, whereas <code>pitemp_pioled</code> (and <code>pitemp_lcd</code>) would communicate with <code>pitemp</code> and the physical display (or run in <code>--simulator</code> mode on my laptop, for HTTP-endpoint-only rendering).</p>
+<p>I&rsquo;m quite happy with the final result:</p>
+<p><a href="/assets/images/2021/03/pitemp/pioled.jpg"><img loading="lazy" src="/assets/images/2021/03/pitemp/pioled.jpg" alt="PiOLED PiTemp"  />
+</a></p>
+<p>Happy hacking!</p>
+]]></content:encoded></item><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/2015/05/30/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><guid>https://lutzky.net/2015/05/30/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description><content:encoded><![CDATA[<h2 id="the-faculty-programmer">The Faculty Programmer</h2>
+<p>Sharon, a close friend of mine, has been studying psychology for the past few years. At some point she needed to run an experiment in the field of perception. While the exact form of the experiment was pending professor vetting, she did know that the experiment will take place with a user sitting in front of a desktop computer, responding to various stimuli, often with the reaction time being recorded. Seeing as programming is not in her faculty&rsquo;s curriculum (a mistake, in my opinion), the students are provided with a faculty programmer. Dozens of students would contact this jaded craftsman, describe what they need, wait patiently, and then - as it happens in the world of software - receive something almost, but not quite, entirely unlike what they asked for.</p>
+<p>I was all too happy to help (and owe Sharon an insurmountable number of favors to start with), but had nothing to start with at the time. The weeks and months passed, I was deep into my move and training at my new job[1], and happily suggesting (using my limited understanding of psychology) experiments. When the final proposal was authorized, the timing was inconvenient - I was going on a business trip to California the next day, putting a 10 hour time difference between Sharon and myself.</p>
+<p>No matter. The experiment was fairly well-defined before I left - a word out of three word-sets, designated as &ldquo;up&rdquo;, &ldquo;down&rdquo; and &ldquo;neutral&rdquo;, was to flash in the middle of the screen, and then a circle would appear at the top or bottom. The user had to react to this circle as quickly as possible, and the idea was to test whether or not a word from the &ldquo;up&rdquo; category (such as &ldquo;sky&rdquo; or &ldquo;cloud&rdquo;) would correlate with better reaction time when the circle appeared at the top, and vice versa. There were some other details such as &ldquo;catch trials&rdquo; when no circle would show up at all, but it sounded fairly simple. (Keep reading for a demo!)</p>
+<h2 id="getting-started">Getting started</h2>
+<p>My experience had me worried, as no software project is ever as simple as it originally seems. Sharon and I agreed that, while this seems completely reasonable and quite thought-out, we would work in an iterative fashion, and have regular video-chats on what should be done next. Also, to simplify things, I asked to create the software as a web page intended for use on Chrome, rather than Matlab as suggested by her faculty programmer (who seemed convinced, for whatever reason, that Matlab could give better timing precision - this turned out to be false). She agreed, and within a few hours on a plane, I had a basic draft working.</p>
+<p>I emailed Sharon a copy of the draft; it was split into a simple <code>index.html</code> file, a <code>style.css</code> file, a <code>seaplane.js</code> code file, and a <code>config.js</code> code file. That last split was deliberate: Sharon, who has no experience in coding (and even claims to be a technophobe), could modify clearly defined configuration (including the sets of words and tuned delays) with no anxiety of &ldquo;messing up&rdquo; the more complex code. Soon enough, timezones flipped by, and Sharon was happy enough with the result to respond with a modified <code>config.js</code> file, and a list of changes she wanted - mostly present in the original requirements, but some which could only be understood while trying out the first draft. Naturally, some of the changes would require the syntax of <code>config.js</code> itself to change, and Sharon had more data to add to it. To avoid <code>seaplane7-final-really.zip</code> email attachments flying back and forth, version control would be required. Using Github would facilitate this, and also allow us to use its <em>Issues</em> mechanism for tracking remaining work.</p>
+<p>It took a few minutes over the phone to explain the basic concept of version control to Sharon, as well as how to create a Github account, modify files using the web-based interface, report and comment on issues. While I did mention Github for Windows as an option, I didn&rsquo;t pressure Sharon into using it, especially as I wasn&rsquo;t familiar enough with it myself.</p>
+<p>Over 10 days and 48 commits (27 mine, 20 Sharon&rsquo;s) we got the code working well enough to run the experiment. There were a few reported bugs, but nothing substantial that skewed the results, as far as we can tell. You&rsquo;re welcome to see a <a href="https://lutzky.github.io/seaplane">Demo of Seaplane</a>, as well as browse the <a href="https://github.com/lutzky/seaplane">Seaplane source code</a>. If you can read Hebrew, you can also read <a href="/assets/attachments/2015/05/seaplane_paper.pdf">Sharon&rsquo;s paper</a>.</p>
+<h2 id="what-worked">What worked</h2>
+<ul>
+<li>Issues worked quite well for tracking the work; Sharon and I found them more useful than emails for keeping state.</li>
+<li>Being a fully client-side web application, seaplane was (and still is) trivially hosted by Github Pages. This made deployment of new versions as easy as hitting F5.</li>
+<li>For changes that could be previewed in chrome using developer tools, Sharon got instant feedback on her changes without needing to commit anything.</li>
+<li>Sharon made 4 commits to change <code>config.js</code>, modifying the word sets according to discussions with her supervisor. Sharon also made 11 commits to change <code>style.css</code>, 2 commits to change <code>index.html</code>, and even 3 to change <code>seaplane.js</code>.</li>
+</ul>
+<h2 id="what-didnt-work">What didn&rsquo;t work</h2>
+<ul>
+<li>Github&rsquo;s UI for submitting changes online has a default value for the commit message, and no recommendations against using it. As a result, there are 8 commits called &ldquo;Update <code>style.css</code>&rdquo;.</li>
+<li>Sharon didn&rsquo;t have a working copy on her own machine, and not all changes could be easily previewed in chrome. As a result, there were some back-and-forth commits by Sharon and myself which weren&rsquo;t necessary. (I could&rsquo;ve avoided this by providing appropriate &ldquo;refresh&rdquo; functionality in the app)</li>
+<li>The format I chose for the word list made right-to-left issues rear their ugly head in the editor.</li>
+</ul>
+<p>All in all, the project went swimmingly. Using progamming-oriented version control software to collaborate with non-programmers may be less crazy than you think. I highly recommend giving it a try.</p>
+<!-- raw HTML omitted -->
+<p>[1] Oh yeah, I&rsquo;m a Site Reliability Engineer at Google Ireland now, which is too awesome to detail in this footnote.</p>
+]]></content:encoded></item><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description><content:encoded><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">mock</span>
+
+<span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;somefile&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">TestMyCode</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">faker</span> <span class="o">=</span> <span class="n">fakefile</span><span class="o">.</span><span class="n">FakeFile</span><span class="p">()</span>
+
+        <span class="n">faker</span><span class="o">.</span><span class="n">set_contents</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;correct input&#34;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__builtin__.open&#39;</span><span class="p">,</span> <span class="n">faker</span><span class="o">.</span><span class="n">open</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">()</span>  <span class="c1"># No file &#34;somefile&#34; will be created!</span>
+                                    <span class="c1"># No file &#34;existing_file&#34; will be read!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">faker</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&#34;somefile&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">file_contents</span><span class="p">,</span>
+                          <span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
+</code></pre></div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
+]]></content:encoded></item><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description><content:encoded><![CDATA[<p>Here&rsquo;s a fun little bash script:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="o">(</span>
+  sleep <span class="m">20</span> <span class="p">&amp;</span>
+<span class="o">)</span>
+ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
+<span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
+</code></pre></div><p>Run it, and you&rsquo;ll notice a few things:</p>
+<ul>
+<li>Because the subshell running <code>sleep</code> dies immediately, <code>sleep</code> gets reparented to <code>init</code>. (Interestingly enough, on newer Ubuntu releases this isn&rsquo;t PID 1&hellip;), so the script doesn&rsquo;t have any child processes by the time it prints &ldquo;Bye&rdquo;.</li>
+<li>After &ldquo;Bye&rdquo; is shown, the script exits immediately, returning control to the shell.</li>
+</ul>
+<p>Now, call the script <code>pied_piper.sh</code>, and try the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./pied_piper.sh <span class="p">|</span> cat
+./pied_piper.sh <span class="p">|</span> ts  <span class="c1"># Awesome timestamping utility, same problem though</span>
+ssh localhost ./pied_piper.sh
+</code></pre></div><p>Annoying, isn&rsquo;t it? These commands won&rsquo;t finish for 20 seconds! The problem is that <code>sleep</code> is keeping its <code>stdout</code> open, which is the input pipe for <code>cat</code>, <code>ts</code>, <code>ssh</code>, or whatever else you&rsquo;re piping to (this is very annoying on Jenkins jobs as well).</p>
+<p>If a third-party product is pissing you off this way - that is, it died, but somehow still keeps its pipe open, you can find the culprit like so:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">fuser -v /proc/<span class="nv">$PID_OF_PROCESS_WITH_OPEN_PIPE</span>/fd/0
+</code></pre></div><p>This will usually yield a <code>sleep</code> process as the culprit, with the useless parent information of <code>init</code> (as per my example). The only information you have is the precise delay - in my experience, it helps to find all &ldquo;sleep&rdquo; commands lurking about, and tinker with the delay amounts: Found a <code>sleep 30</code>? Change it to <code>sleep 29</code>, see if that&rsquo;s what shows up.</p>
+<p>Here&rsquo;s how to actually fix the problem:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="o">(</span>
+  sleep <span class="m">20</span> &gt;<span class="p">&amp;</span>- 2&gt;<span class="p">&amp;</span>- &lt;<span class="p">&amp;</span>- <span class="p">&amp;</span>
+<span class="o">)</span>
+ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
+<span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
+</code></pre></div><p>This will close <code>stdout</code>, <code>stderr</code> and <code>stdin</code>. As a friend pointed out, it&rsquo;s often safer to do <code>&gt; /dev/null</code> rather than <code>&gt;&amp;-</code>, as some processes will crap out if they don&rsquo;t have some semblence of an <code>stdout</code>. However, <code>&gt;&amp;-</code> is shorter, faster, and perfectly safe for <code>sleep</code>.</p>
+<p>Of course, it&rsquo;s better to save the PID for this <code>sleep</code> and kill it when appropriate from within the script - otherwise, you might be accumulating many useless <code>sleep</code> processes.</p>
+]]></content:encoded></item><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/2014/01/05/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/01/05/investigate/</guid><description>Distinguishing &lt;!-- raw HTML omitted -->EPERM&lt;!-- raw HTML omitted --> vs &lt;!-- raw HTML omitted -->EACCESS&lt;!-- raw HTML omitted -->, and how that helps debug file manipulation scripts.</description><content:encoded><![CDATA[<p>My show downloading stack lives on. I&rsquo;m curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.</p>
+<p>At any rate, nowadays I use <code>flexget</code>, <code>transmission</code>, <code>tvnamer</code> and <code>xbmc</code>, held together with some bash scripts. On debian- and ubuntu-based systems, the <code>transmission</code> daemon runs as a separate user (<code>debian-transmission</code>), so this requires a bit of care with file and group ownership. After rebuilding my system, I couldn&rsquo;t get <code>tvnamer</code> to work right for some reason, no matter how careful I was. I&rsquo;d keep getting this error:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Loading config: config.json
+####################
+# Starting tvnamer
+# Found 1 episode
+####################
+# Processing file: Sherlock.S03E01.mkv
+# Detected series: Sherlock (season: 3, episode: 1)
+####################
+Old filename: Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
+New filename: Sherlock - [03x01] - The Empty Hearse.mkv
+New path: /home/debian-transmission/inbox/Sherlock - [03x01] - The Empty Hearse.mkv
+Creating directory /home/debian-transmission/inbox
+rename Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv to /home/debian-transmission/inbox/Sherlock - [03x01] - The Empty Hearse.mkv
+OSError(1, &#39;Operation not permitted&#39;)
+New path: /media/Store/shows/Sherlock/Season 3/Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
+Creating directory /media/Store/Shows/Sherlock/Season 3
+OSError(2, &#39;No such file or directory&#39;)
+</code></pre></div><p>For a few weeks I&rsquo;d double-check the permissions, fail to understand what was going on, groan and copy the files manually. The new Sherlock episode had me in a bit of a more investigative mood.</p>
+<p>This turns out to be an exercise in confusing OS logic and logging. It <em>looks</em> like the rename operation failed, and somehow the directory creation failed as well. Neither is the case. A hint can be found in the precise error after the rename: &ldquo;1 - Operation not permitted&rdquo; (that&rsquo;s <code>EPERM</code>). If that seems a bit off, that&rsquo;s because it is: When renames fail because of inadequate permissions, they return <code>EACCES</code> &ldquo;13 - Permission denied&rdquo;. So what&rsquo;s going on?</p>
+<p>It turns out that after renaming, <code>tvnamer</code> tries to preserve the access and modification times of renamed files. A noble cause, but it turns out that Linux won&rsquo;t allow this unless you are the <em>owner</em> of the file - even if you do have write permissions. Therefore, this fails, which causes <code>tvnamer</code> to believe the rename failed - although it hasn&rsquo;t. Afterwards, the directory is created (this succeeds), but since <code>tvnamer</code> tries to copy using the <em>old</em> filename (thinking the rename failed), we get an <code>ENOENT</code> &ldquo;2 - No such file or directory&rdquo; error about the <em>source</em> of the copy operation.</p>
+<p>The fix can be found <a href="https://github.com/dbr/tvnamer/pull/89">in this pull request</a>. Happy bug hunting!</p>
+]]></content:encoded></item><item><title>Startup times</title><link>https://lutzky.net/2013/12/11/startup-times/</link><pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/11/startup-times/</guid><description>Starting new java processes in your scripts considered harmful. Let&amp;rsquo;s compare &amp;ldquo;hello world&amp;rdquo; startup times for different languages.</description><content:encoded><![CDATA[<p>Lately, a facebook comment of mine on the subject of Java&rsquo;s slowness has proved quite popular, so here goes: Here&rsquo;s a listing of a few Hello World programs and running times for them (<strong>including startup, which is a big deal in Java</strong>) on my laptop:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">$ grep &#39;^model name&#39; /proc/cpuinfo | head -1
+model name	: Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz
+$ uname -a
+Linux orca 3.11.0-14-generic #21-Ubuntu SMP Tue Nov 12 17:04:55 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre></div><p>The following script will be timed:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">n</span><span class="o">=</span><span class="nv">$1</span>
+
+<span class="nb">shift</span>
+
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>0<span class="p">;</span> i &lt; <span class="nv">$n</span><span class="p">;</span> i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+	<span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> &gt; /dev/null
+<span class="k">done</span>
+</code></pre></div><p>Times are for <code>n=100</code>.</p>
+<h2 id="c">C</h2>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Hello, world!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Result: 0.17s
+</span><span class="cm"> * ...unless you give it a .cc extension, and then it&#39;s 0.30s!
+</span><span class="cm"> * It turns out that gcc/g++ guess the language from the file extension.
+</span><span class="cm"> */</span>
+</code></pre></div><h2 id="c-1">C++</h2>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, world!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Result: 0.30s
+</span></code></pre></div><h2 id="python">Python</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/python</span>
+
+<span class="k">print</span> <span class="s2">&#34;Hello, world!&#34;</span>
+
+<span class="c1"># Result: 1.33s</span>
+</code></pre></div><h2 id="java">Java</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Hello, world!&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Result: 8.60s. No, I am not kidding.
+</span></code></pre></div><p>There you have it. Sun&rsquo;s Java takes 28x-51x as much time to run &ldquo;Hello World&rdquo; (startup included) than native applications, and (shockingly, in my opinion) over 6x as much as non-precompiled Python. That&rsquo;s meaningless for long-running applications, but is a very big deal for small, often-run ones.</p>
+]]></content:encoded></item><item><title>Asserting string equality</title><link>https://lutzky.net/2013/12/02/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/02/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description><content:encoded><![CDATA[<p>I&rsquo;ve had several opportunities to write unit tests for code that outputs large
+strings. It&rsquo;s important that your unit-testing framework handles this well.</p>
+<p>Here&rsquo;s my example data:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">STRING_A</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
+</span><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
+</span><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
+</span><span class="s2">pellentesque. Aenean venenatis vulputate eros, sit amet sagittis ligula laoreet
+</span><span class="s2">vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
+</span><span class="s2">Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
+</span><span class="s2">mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
+</span><span class="s2">lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
+</span><span class="s2">ultrices gravida vel et orci. Suspendisse potenti.
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="n">STRING_B</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
+</span><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
+</span><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
+</span><span class="s2">pellentesque. Aenean venenatls vulputate eros, sit amet sagittis ligula laoreet
+</span><span class="s2">vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
+</span><span class="s2">Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
+</span><span class="s2">mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
+</span><span class="s2">lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
+</span><span class="s2">ultrices gravida vel et orci. Suspendisse potenti.
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><p><code>STRING_A</code> and <code>STRING_B</code> are different, by one character. Can you tell which
+one?  If you&rsquo;d use your unit testing framework&rsquo;s equivalent of
+<code>assertEqual(STRING_A, STRING_B)</code>, it would correctly report that they are
+different. But would it help you identify the difference?</p>
+<p>C#, for example, is quite horrible with this. It outputs both strings in their
+entirety. In Visual Studio, it doesn&rsquo;t even seem to be possible to copy the
+output into an external comparison tool. This has caused some developers
+(myself included) to implement an ad-hoc &ldquo;character-by-character string
+equality tester&rdquo;.</p>
+<p>For C++, if testing with Google&rsquo;s gtest library, the result is the same - the
+entire strings are shown, and an external tool needs to be used to get a
+reasonable indication of what the difference is.</p>
+<p>Python 2.7&rsquo;s <code>assertMultiLineEqual</code> gives a good solution to the problem (in
+Python 3, this becomes the default behavior for standard <code>assertEqual</code>). There
+are similar comparison methods for other large data types.</p>
+<p>Output:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">F
+======================================================================
+FAIL: testLongStringEquality (__main__.TestLongStrings)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &#34;/home/ohad/test/test_equal.py&#34;, line 35, in testLongStringEquality
+    self.assertMultiLineEqual(STRING_A, STRING_B)
+AssertionError: &#39;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui. [truncated]... != &#39;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui. [truncated]...
+  
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
+  Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
+  a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
+- pellentesque. Aenean venenatis vulputate eros, sit amet sagittis ligula laoreet
+?                             ^
++ pellentesque. Aenean venenatls vulputate eros, sit amet sagittis ligula laoreet
+?                             ^
+  vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
+  Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
+  mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
+  lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
+  ultrices gravida vel et orci. Suspendisse potenti.
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+FAILED (failures=1)
+</code></pre></div><p>For Java and JUnit, the output is also short and sweet (for plain <code>assertEquals</code>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">testLongStringEquality(MyTest): expected:&lt;...sque. Aenean venenat[i]s vulputate eros, si...&gt; but was:&lt;...sque. Aenean venenat[l]s vulputate eros, si...&gt;
+</code></pre></div><p>Does your unit testing framework provide helpful output for failed unit tests?
+This is something you can and should demand of it.</p>
+]]></content:encoded></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/2013/12/01/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/01/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description><content:encoded><![CDATA[<p>A conversation with a friend reminded me that, in fact, I&rsquo;ve been doing
+test-driven development long before I knew it was called that. Back in
+Introduction to Systems Programming (a second-semester course revolving around
+abstract data types in C, introduction to C++, and hands-on experience building
+multi-module C programs), most homework exercises looked something along these
+lines: Write a program managing a store inventory, with a command-line client
+conforming to a given set of specifications. For an input file looking like
+this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">addcategory Fruit
+addproduct Fruit Banana 2.30
+addproduct Fruit Tomato 1.20
+addproduct Fruit Apple 1.50
+addproduct Fruit Apple 1.60
+list Fruit
+</code></pre></div><p>The output file would be expected to look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">OK
+OK
+OK
+OK
+ERROR Duplicate fruit Apple
+Fruit
+-----
+Apple  1.50
+Banana 2.30
+Tomato 1.20
+</code></pre></div><p>Of course, error messages, sorting and spacing for the output would be part of
+the spec. That provided an effective way of checking your program&rsquo;s
+correctness: Run it on a given input, and compare its output - using <code>diff</code> - to
+expected output. Some TAs even provided simple test files (input + expected output) for this exact method
+(but not revealing the &ldquo;real&rdquo; test files which would they use while grading),
+but the &ldquo;serious&rdquo; tests happened in the student-run &ldquo;homework help&rdquo; forum (ah,
+phpbb&hellip;), where students would regularly place gargantuan test files to
+compare your program against (these were very helpful in finding memory
+handling errors).</p>
+<p>For an advanced technique, I wrote a &ldquo;reference&rdquo; implementation in Python (this
+is much shorter than the C version, and probably less bug-prone). I then
+generated random input files, fed them into both programs, and whenever the
+output would differ between the two - I&rsquo;d found in a bug (in one of the
+versions).</p>
+<p>I recall a certain student festival, a friend ran up to me, and exclaimed: &ldquo;I&rsquo;m
+totally wasted. I&rsquo;ve had no sleep for the past two days, but I&rsquo;ve finally
+finished the exercise. <code>diff</code> [outputs] 0 [lines of difference]!  Whoo!&rdquo; He
+ran off at this point.</p>
+<p>What does all of this have to do with test-driven development? It became
+&ldquo;known&rdquo; that it&rsquo;s better to start the exercises later, so that early-bird
+students will have test data up on the forum before you start. Then, just code
+until the tests pass. Ah, the excuses we students come up with for
+procrastination&hellip;</p>
+<p>I&rsquo;ve been striving to do test-driven development ever since, with the help of
+proper unit testing frameworks, and it&rsquo;s hard for me to think of having ever
+coded without it. There are plenty of resources online explaining why
+unit-testing is such a helpful idea&hellip; all I&rsquo;m saying is that you might already
+be testing your code, not realizing that a nice framework can help. But more on
+that later&hellip;</p>
+]]></content:encoded></item><item><title>Multiple library versions</title><link>https://lutzky.net/2013/05/15/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/05/15/multiple-library-versions/</guid><description>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.
 Introduction Assume you&amp;rsquo;re working with an external vendor, who is providing you with code for a wonderful function getFoo:
-// foo.h version 1.2.3 int getFoo(); // foo.c version 1.2.3 int getFoo() { sleep(1000); // TODO improve performance return 42 } You use this function in many of your products - for example, in your best-selling barApp application:</description></item><item><title>Translationese</title><link>https://lutzky.net/2013/03/24/translationese/</link><pubDate>Sun, 24 Mar 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/03/24/translationese/</guid><description>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a chance to use a few of my favorite technologies.
-The project was coded in Python, which is not my favorite programming language - Ruby is. However, since Python is more popular at my workplace, and seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown to love it almost as much over the years.</description></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</guid><description>Edit: I was misled!
+// foo.h version 1.2.3 int getFoo(); // foo.c version 1.2.3 int getFoo() { sleep(1000); // TODO improve performance return 42 } You use this function in many of your products - for example, in your best-selling barApp application:</description><content:encoded><![CDATA[<p>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&rsquo;s explore.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Assume you&rsquo;re working with an external vendor, who is providing you with code
+for a wonderful function <code>getFoo</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// foo.h version 1.2.3
+</span><span class="c1"></span>
+<span class="kt">int</span> <span class="nf">getFoo</span><span class="p">();</span>
+
+<span class="c1">// foo.c version 1.2.3
+</span><span class="c1"></span>
+<span class="kt">int</span> <span class="nf">getFoo</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">// TODO improve performance
+</span><span class="c1"></span>	<span class="k">return</span> <span class="mi">42</span>
+<span class="p">}</span>
+</code></pre></div><p>You use this function in many of your products - for example, in your
+best-selling <code>barApp</code> application:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// barApp.c
+</span><span class="c1"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">getFoo</span><span class="p">());</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>So <code>barApp</code>, and other applications, would want to use a <code>foo</code> library.  It
+makes sense to provide this function in a shared library (<code>libfoo.so</code>).
+However, this library will change in the future, in several ways:</p>
+<ol>
+<li>Binary-compatible changes</li>
+</ol>
+<ul>
+<li>Performance improvements (<code>sleep</code> will be removed)</li>
+<li>Additional functionality will become available (new functions)</li>
+</ul>
+<ol start="2">
+<li>Binary-incompatibile changes - at the very least, recompilation will be necessary</li>
+</ol>
+<ul>
+<li>For C, this is usually caused by changes to macros</li>
+<li>For C++, a plethora of reasons: Virtual function reimplementation, function
+inlining, new private data members&hellip;</li>
+</ul>
+<ol start="3">
+<li>Source-incompatible changes - these will require you to change your source
+code (in <code>barApp</code>):</li>
+</ol>
+<ul>
+<li>Functions (which you use) being removed or renamed</li>
+<li>Semantic changes - <code>getFoo</code> could return 43</li>
+</ul>
+<p>This gets even more complicated due to the fact that <code>barApp</code> is an operational,
+mission-critical application for your organization. Developers may need to
+hotfix older versions of <code>barApp</code>, which use older versions of <code>libfoo</code>. The build
+servers and developer boxes will need to be able to have multiple versions of
+<code>libfoo</code> installed simultaneously.</p>
+<h2 id="compiling-installing-and-using-a-shared-library-properly">Compiling, installing, and using a shared library properly</h2>
+<p>First, the upstream vendor should compile <code>libfoo.so</code> with an <code>SONAME</code>, like so:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gcc -shared -Wl,-soname,libfoo.so.1 -o libfoo.so.1.2.3 foo.c
+objdump -x libfoo.so.1.2.3 <span class="p">|</span> grep SONAME
+<span class="c1"># SONAME               libfoo.so.1</span>
+</code></pre></div><p>The guarantee the upstream vendor should give is this: As long as <code>SONAME</code>
+doesn&rsquo;t change, binary compatibility will be retained.</p>
+<p>Now, you (or, preferably, your package manager) should install the package on your machine like so:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo1
+cp foo.h /usr/include/foo1
+cp libfoo.so.1.2.3 /usr/lib
+ldconfig -v <span class="p">|</span> grep libfoo
+<span class="c1"># libfoo.so.1 -&gt; libfoo.so.1.2.3</span>
+</code></pre></div><p>Now, traditionally <em>another</em> symlink <code>libfoo.so</code> -&gt; <code>libfoo.so.1.2.3</code> would be
+created, so you could compile <code>barApp</code> with <code>-lfoo</code>. However, here&rsquo;s an
+alternative:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gcc -I/usr/include/foo1 -l:libfoo.so.1 barApp.c -o barApp
+ldd barApp
+<span class="c1"># linux-vdso.so.1 =&gt;  (0x00007fff8edfe000)</span>
+<span class="c1"># libfoo.so.1 =&gt; /usr/lib/libfoo.so.1 (0x00007fb367cce000)</span>
+<span class="c1"># libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb367906000)</span>
+<span class="c1"># /lib64/ld-linux-x86-64.so.2 (0x00007fb367ef2000)</span>
+</code></pre></div><p>Now <code>barApp</code> is compiled, and looks for <code>libfoo.so.1</code> - it will find it thanks
+to the symlink created by <code>ldconfig</code>, and use <code>libfoo.so.1.2.3</code>.</p>
+<h2 id="aftermath">Aftermath</h2>
+<h3 id="binary-compatible-updates">Binary-compatible updates</h3>
+<p>Suppose a new, compatible, faster version of <code>libfoo</code> is released - say version
+\1.3.0, which has removed that pesky <code>sleep</code>. Well, just place it in <code>/usr/lib</code>
+and rerun <code>ldconfig</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cp libfoo.so.1.3.0 /usr/lib
+ldconfig -v <span class="p">|</span> grep libfoo
+<span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
+</code></pre></div><p>The symlink has been updated, and now all applications (<code>barApp</code>, for example)
+which were linked against <code>libfoo.so.1</code> will have improved performance.</p>
+<h3 id="incompatible-updates">Incompatible updates</h3>
+<p>Suppose a new, incompatible version 2.0.0 of <code>libfoo</code> is released, which would
+force the newer <code>barApp2.0</code> to be recompiled against the new, different
+headers. No problem:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo2
+cp foo.h /usr/include/foo2
+cp libfoo.so.2.0.0 /usr/lib
+ldconfig -v <span class="p">|</span> grep libfoo
+<span class="c1"># -&gt; libfoo.so.2 -&gt; libfoo.so.2.0.0</span>
+<span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
+gcc -I/usr/include/foo2 -l:libfoo.so.2 barApp2.0.c -o barApp2.0
+</code></pre></div><p>Both versions of <code>libfoo</code> are installed simultaneously, and do not conflict.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>The <a href="http://www.debian.org/doc/debian-policy/ch-sharedlibs.html#s-sharedlibs-runtime">Debian policy guide</a> states that <code>-dev</code> packages should include
+the <code>libfoo.so</code> symlink. However, this would cause a conflict between the
+<code>-dev</code> packages for two different generations of <code>libfoo</code>. I am curious as to
+how this problem is solved &ldquo;in the wild&rdquo;, as I&rsquo;m sure Debian have good reasons
+for suggesting this.</p>
+]]></content:encoded></item><item><title>Translationese</title><link>https://lutzky.net/2013/03/24/translationese/</link><pubDate>Sun, 24 Mar 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/03/24/translationese/</guid><description>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a chance to use a few of my favorite technologies.
+The project was coded in Python, which is not my favorite programming language - Ruby is. However, since Python is more popular at my workplace, and seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown to love it almost as much over the years.</description><content:encoded><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
+in natural language processing. I&rsquo;ve learned quite a bit from it, and had a
+chance to use a few of my favorite technologies.</p>
+<p>The project was coded in Python, which is <em>not</em> my favorite programming
+language - Ruby is. However, since Python is more popular at my workplace, and
+seems to have a richer ecosystem around it (sometimes, at any rate), I&rsquo;ve grown
+to love it almost as much over the years. It&rsquo;s quick, easy, and has fantastic
+libraries; specifically, for this project, we made heavy use of the <a href="http://nltk.org">Natural
+Language Toolkit</a>. We used Git for source control and Github
+for hosting, Travis for continuous integration, and ReadTheDocs for
+documentation. All of these culminate in the project being handed in as a
+single link: <a href="http://github.com/lutzky/translationese">http://github.com/lutzky/translationese</a>.</p>
+<p>The translationese project is a re-implementation of the concepts presented in
+&ldquo;On The Features Of Translationese&rdquo;, an article describing an attempt to
+automatically distinguish between texts written in English originally, and
+texts translated to English from a different language. Since this turned to be
+an easy problem, the focus was to determine what specific <em>features</em> of a given
+text are better at distinguishing between the two categories.</p>
+<p>Why reproduce results from an existing article? Well, beyond academic points,
+we wanted to provide well-documented, easily-extensible, <em>tested</em> code. The
+article was not always clear on specific definitions of various features;
+Python code makes these completely explicit, in a relatively readable way (for
+code, at any rate).</p>
+<p>To keep code quality high, we used test-driven development: each feature was
+coded only after a (failing) unit test for it was written. This helped keep the
+code modular, and made refactoring (which happened quite a bit) easy and safe.
+The resulting design proved to be quite flexible, as I will shortly explain.</p>
+<p><a href="http://en.wikipedia.org/wiki/Support_vector_machine">SVM</a> is a form of
+<em>machine learning</em>. Simply put, it&rsquo;s a method of teaching a machine to
+distinguish between two categories of &ldquo;points&rdquo; (in our case, &ldquo;translated&rdquo; and
+&ldquo;original&rdquo;). The SVM is given two such sets, and tries to draw a &ldquo;line&rdquo; (or,
+generally, a hyperplane) separating them. Afterwards, it should be able to
+classify new points (without being told which set they belong to) by which side
+of the line they are. The following image (Wikipedia) shows a simple,
+two-dimensional case (the red line properly distinguishing the two sets):</p>
+<p><img loading="lazy" src="http://upload.wikimedia.org/wikipedia/commons/b/b5/Svm_separating_hyperplanes_%28SVG%29.svg" alt=""  />
+{: style=&ldquo;max-width:350px&rdquo;}</p>
+<p>For our case, each <em>&ldquo;property&rdquo;</em> took a block of text, and translated it to an
+<em>n</em>-dimensional point. For some properties, the dimension was quite extreme.
+For example, the property of character trigrams gives each coordinate the value
+of &ldquo;how many times does each permutation of three consecutive letters appear in
+the text&rdquo;. There are 17,576 such permutations, so each text became a point in a
+17,576-dimensional space. These points were fed into an SVM algorithm
+implemented in <a href="http://www.cs.waikato.ac.nz/ml/weka">Weka</a>.</p>
+<p>During the final presentation of the project, we explained that the
+particularly high-dimensionality properties proved to be too much for Weka (it
+would use up all available RAM), so smaller sample sizes were used for those.
+However, we were told that using sparse vector representation as Weka&rsquo;s input
+could allow it to be more efficient. Fortunately, our design proved to be
+robust enough that I could implement (and test) the change during the
+presentation (<a href="https://github.com/lutzky/translationese/commit/12786459ef41d64963fd19433ba86dd71acc0e92">1278645</a>).  Indeed, we now had no problems with the
+high-dimensionality properties, and repeated our runs, updating the
+documentation (after we were given our grade&hellip;)</p>
+<p>There&rsquo;s a somewhat eerie aspect to this project. Having used SVM, I have no
+idea how it works. While I know exactly how my Python code works, and exactly
+what the SVM algorithm does, I still don&rsquo;t know how to tell a translated text
+from one written in English originally. Even looking at the SVM output, which
+details exactly what the resulting classifier does, the data is the result of
+analyzing thousands of texts, and something of an &ldquo;intuition&rdquo; the classifier
+has generated from its &ldquo;experience&rdquo;; certainly not a formal algorithm that I
+can read and understand. While I could read it and painstakingly apply it
+manually to text, I&rsquo;d be blindly following a program which I do not understand,
+much like a Rubik&rsquo;s Cube novice following an algorithm, not (yet) understanding
+why it solves the cube, and being quite surprised when it does. With the high
+complexity of the resulting classifier (for example - for every three letters,
+look up its index in a 17,576-entry list and increment it by a factor), I&rsquo;d
+have no chance of ever understanding how it works. In essence, I&rsquo;ve written
+code to have my computer learn how to do something, but it cannot practically
+teach me what it has learned.</p>
+]]></content:encoded></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</guid><description>Edit: I was misled!
 Illustrated here. Hints below.
 &amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;quot;x: %p, y: %p&amp;quot; % [x, y]; end =&amp;gt; nil &amp;gt;&amp;gt; inspect_x_and_y(y={&amp;quot;hello&amp;quot; =&amp;gt; &amp;quot;world&amp;quot;},x=[1,2,3]) x: {&amp;quot;hello&amp;quot;=&amp;gt;&amp;quot;world&amp;quot;}, y: [1, 2, 3] The bits I didn&amp;rsquo;t know about:
-&amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ] The %p formatting character is the same as inspect. You can call methods with method_name(param2=val2, param1=val1), also like in python.</description></item><item><title>Valgrind Fail</title><link>https://lutzky.net/2008/06/11/valgrind-fail/</link><pubDate>Wed, 11 Jun 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/06/11/valgrind-fail/</guid><description>I neglected to post this here somehow, it&amp;rsquo;s about a month old by now&amp;hellip;
+&amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ] The %p formatting character is the same as inspect. You can call methods with method_name(param2=val2, param1=val1), also like in python.</description><content:encoded><![CDATA[<p><strong>Edit: I was misled!</strong></p>
+<p>Illustrated here. Hints below.</p>
+<pre><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &quot;x: %p, y: %p&quot; % [x, y]; end
+=&gt; nil
+&gt;&gt; inspect_x_and_y(y={&quot;hello&quot; =&gt; &quot;world&quot;},x=[1,2,3])
+x: {&quot;hello&quot;=&gt;&quot;world&quot;}, y: [1, 2, 3]
+</code></pre><p>The bits I didn&rsquo;t know about:</p>
+<ol>
+<li><code>&quot;Format strings using a %% sign, %s, %s!&quot; % [ &quot;just like in python&quot;, &quot;but with arrays&quot; ]</code></li>
+<li>The <code>%p</code> formatting character is the same as <code>inspect</code>.</li>
+<li>You can call methods with <code>method_name(param2=val2, param1=val1)</code>, also like
+in python. <strong>No you can&rsquo;t! This code sets external variables called y and
+x.</strong></li>
+</ol>
+<p>How embarassing&hellip; :(</p>
+]]></content:encoded></item><item><title>Valgrind Fail</title><link>https://lutzky.net/2008/06/11/valgrind-fail/</link><pubDate>Wed, 11 Jun 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/06/11/valgrind-fail/</guid><description>I neglected to post this here somehow, it&amp;rsquo;s about a month old by now&amp;hellip;
 Screenshot lost in the mist of time&amp;hellip; shows a program segfaulting, and then working properly when run within valgrind.
-The problem turned out to be an imprecise (false-positve) comparison operator implemented for a class used as a hash key. God, I hate C++.</description></item><item><title>Faster Languages</title><link>https://lutzky.net/2008/04/16/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/04/16/faster-languages/</guid><description>Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis - C++. Part of the reason is that the exercise contains a time-limited tournament, and the code needs to run very quickly. Another reason is, I guess, the fact that C++ serves as a sort of lowest common denominator in the course (which used, by the way, to be taught in LISP, along with the language).</description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/2007/10/13/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/10/13/on-threading-vs-processing/</guid><description>Writing multi-threaded applications in Python is often a headache because of the Global Interpreter Lock - only one Python thread can run at any given moment, which makes multi-threading useful only in the case where all modules but one actually run C code. However, thanks to the impressive new Python Magazine, I&amp;rsquo;ve stumbled across a package called processing, paraphrasing python&amp;rsquo;s built-in threading package. Essentially, the package provides an API identical to Python&amp;rsquo;s threading, but uses processes and pipes (or other mechanisms on non-posix operating systems) instead.</description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After trying to figure out how to work DBus with C, and seeing how easy it is to do in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately, it&amp;rsquo;s very simple to use - especially thanks to this guide.
-It later turned out to be much easier to do in C, as described in Faster Languages.</description></item><item><title>IPython</title><link>https://lutzky.net/2007/03/04/ipython/</link><pubDate>Sun, 04 Mar 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/03/04/ipython/</guid><description>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project for a course, which involves somewhat heavy-duty database and algorithm work. Python is my language of choice for it - let&amp;rsquo;s hope it works out well.
-In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython (available in apt) - it adds a bunch of stuff to the python shell which I sorely missed from irb - autocompletion, auto-indentation, and - it seems - adds a whole lot more.</description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</guid><description>I&amp;rsquo;ve converted my Antigibberish script1 (converts &amp;ldquo;broken hebrew&amp;rdquo; into proper hebrew, useful for sent-offline ICQ messages) to Python&amp;hellip; it&amp;rsquo;s quite a nice language, and the interpreter is FAST! I&amp;rsquo;m really torn between it and Ruby :(
+The problem turned out to be an imprecise (false-positve) comparison operator implemented for a class used as a hash key. God, I hate C++.</description><content:encoded><![CDATA[<p>I neglected to post this here somehow, it&rsquo;s about a month old by now&hellip;</p>
+<blockquote>
+<p>Screenshot lost in the mist of time&hellip; shows a program segfaulting, and then working properly when run within valgrind.</p>
+</blockquote>
+<p>The problem turned out to be an imprecise (false-positve) comparison operator
+implemented for a class used as a hash key. God, I hate C++.</p>
+]]></content:encoded></item><item><title>Faster Languages</title><link>https://lutzky.net/2008/04/16/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/04/16/faster-languages/</guid><description>Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis - C++. Part of the reason is that the exercise contains a time-limited tournament, and the code needs to run very quickly. Another reason is, I guess, the fact that C++ serves as a sort of lowest common denominator in the course (which used, by the way, to be taught in LISP, along with the language).</description><content:encoded><![CDATA[<p>Due to an exercise in an AI course, I&rsquo;m forced to confront an old nemesis -
+C++. Part of the reason is that the exercise contains a time-limited
+tournament, and the code needs to run very quickly. Another reason is, I guess,
+the fact that C++ serves as a sort of lowest common denominator in the course
+(which used, by the way, to be taught in LISP, along with the language).</p>
+<p>I never liked C++ language much. As a matter of fact, I prefer C. I&rsquo;ve been
+going over some old code for a project, which needed to use DBus to talk to
+NetworkManager. <a href="/2007/09/16/exception-handling-decorators-and-python/">Back then</a> I wrote it using Python, embedded in C - it
+seemed easier at the time, due to lack of documentation. After hunting around,
+I figured out how to do most of the stuff I wanted in C, using DBus&rsquo;s GLib API.</p>
+<p>In this process, the most helpful bit of documentation turned out to be GLib&rsquo;s.
+GLib looks like a wonderful library to get big-program stuff done relatively
+nicely in C, without mucking about in C++. Exception handling (of sorts),
+object-oriented programming (of sorts) as well as garbage collection (of sorts)
+are implemented in a usable way, and extremely well-documented.</p>
+<p>At the end of the day, I was able to turn this Python gem:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">dbus</span>
+
+<span class="k">def</span> <span class="nf">_nm_device_interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Returns an interface to the device object dev_object&#34;&#34;&#34;</span>
+    <span class="k">return</span> <span class="n">dbus</span><span class="o">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">,</span> <span class="n">NM_DEVICE_IFACE</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_nm_get_object</span><span class="p">(</span><span class="n">object_path</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Returns an object with the given object path using the NM service&#34;&#34;&#34;</span>
+    <span class="k">return</span> <span class="n">dbus</span><span class="o">.</span><span class="n">SystemBus</span><span class="p">()</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">NM_SERVICE</span><span class="p">,</span> <span class="n">object_path</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_nm</span><span class="p">():</span> <span class="k">return</span> <span class="n">_nm_get_object</span><span class="p">(</span><span class="n">NM_OBJECT_PATH</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">guessed_exception</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Checks if the DBus exception e is (exactly) of type guessed_exception&#34;&#34;&#34;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">get_dbus_name</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">guessed_exception</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="c1"># If it doesn&#39;t have a get_dbus_name, it probably isn&#39;t the DBus</span>
+        <span class="c1"># exception we&#39;re looking for.</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">_nm_all_device_interfaces</span><span class="p">():</span>
+    <span class="s2">&#34;&#34;&#34;Return a list of interfaces to all devices NM sees&#34;&#34;&#34;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">_nm_device_interface</span><span class="p">(</span><span class="n">_nm_get_object</span><span class="p">(</span><span class="n">devicename</span><span class="p">))</span>
+                    <span class="k">for</span> <span class="n">devicename</span> <span class="ow">in</span> <span class="n">_nm</span><span class="p">()</span><span class="o">.</span><span class="n">getDevices</span><span class="p">()</span> <span class="p">]</span>
+    <span class="k">except</span> <span class="n">dbus</span><span class="o">.</span><span class="n">DBusException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&#34;NoDevices&#34;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[]</span> <span class="c1"># No devices means list of devices is empty</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">raise</span>
+</code></pre></div><p>&hellip;into this C gem:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
+</span><span class="cp">#define DBUS_PATH_NM &#34;/org/freedesktop/NetworkManager&#34;
+</span><span class="cp">#define DBUS_INTERFACE_NM &#34;org.freedesktop.NetworkManager&#34;
+</span><span class="cp">#define NM_ERR_NODEVICES &#34;org.freedesktop.NetworkManager.NoDevices&#34;
+</span><span class="cp"></span>
+<span class="n">gboolean</span> <span class="nf">is_remote_dbus_exception</span><span class="p">(</span><span class="n">GError</span> <span class="o">*</span><span class="n">error</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">exception_name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">g_assert</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="o">-&gt;</span><span class="n">domain</span> <span class="o">!=</span> <span class="n">DBUS_GERROR</span> <span class="o">||</span>
+                        <span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span> <span class="o">!=</span> <span class="n">DBUS_GERROR_REMOTE_EXCEPTION</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">exception_name</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">dbus_g_error_get_name</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">exception_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">GPtrArray</span> <span class="o">*</span> <span class="nf">get_nm_devices</span><span class="p">(</span><span class="n">DBusGConnection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span> <span class="n">GError</span> <span class="o">**</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">GError</span> <span class="o">*</span><span class="n">tmp_error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">DBusGProxy</span> <span class="o">*</span><span class="n">proxy</span><span class="p">;</span>
+        <span class="n">GPtrArray</span> <span class="o">*</span><span class="n">ptr_array</span><span class="p">;</span>
+
+        <span class="n">g_return_val_if_fail</span><span class="p">(</span><span class="n">connection</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="n">proxy</span> <span class="o">=</span> <span class="n">dbus_g_proxy_new_for_name</span><span class="p">(</span>
+                        <span class="n">connection</span><span class="p">,</span>
+                        <span class="n">DBUS_SERVICE_NM</span><span class="p">,</span>
+                        <span class="n">DBUS_PATH_NM</span><span class="p">,</span>
+                        <span class="n">DBUS_INTERFACE_NM</span><span class="p">);</span>
+
+        <span class="n">dbus_g_proxy_call</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="s">&#34;getDevices&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp_error</span><span class="p">,</span> <span class="n">G_TYPE_INVALID</span><span class="p">,</span>
+                        <span class="n">dbus_g_type_get_collection</span><span class="p">(</span><span class="s">&#34;GPtrArray&#34;</span><span class="p">,</span>
+                                <span class="n">DBUS_TYPE_G_PROXY</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ptr_array</span><span class="p">,</span> <span class="n">G_TYPE_INVALID</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">tmp_error</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">is_remote_dbus_exception</span><span class="p">(</span><span class="n">tmp_error</span><span class="p">,</span> <span class="n">NM_ERR_NODEVICES</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="n">g_error_free</span><span class="p">(</span><span class="n">tmp_error</span><span class="p">);</span>
+                        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="p">{</span>
+                        <span class="n">g_propagate_error</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">tmp_error</span><span class="p">);</span>
+                        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">g_object_unref</span><span class="p">(</span><span class="n">proxy</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">ptr_array</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>The C code runs much faster, and I suspect is more maintainable then its
+original counterpart (which uses embedded python in C).</p>
+]]></content:encoded></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/2007/10/13/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/10/13/on-threading-vs-processing/</guid><description>Writing multi-threaded applications in Python is often a headache because of the Global Interpreter Lock - only one Python thread can run at any given moment, which makes multi-threading useful only in the case where all modules but one actually run C code. However, thanks to the impressive new Python Magazine, I&amp;rsquo;ve stumbled across a package called processing, paraphrasing python&amp;rsquo;s built-in threading package. Essentially, the package provides an API identical to Python&amp;rsquo;s threading, but uses processes and pipes (or other mechanisms on non-posix operating systems) instead.</description><content:encoded><![CDATA[<p>Writing multi-threaded applications in Python is often a headache because of
+the Global Interpreter Lock - only one Python thread can run at any given
+moment, which makes multi-threading useful only in the case where all modules
+but one actually run C code. However, thanks to the impressive new <a href="http://pythonmagazine.com">Python
+Magazine</a>, I&rsquo;ve stumbled across a package called
+<code>processing</code>, paraphrasing python&rsquo;s built-in <code>threading</code> package. Essentially,
+the package provides an API identical to Python&rsquo;s threading, but uses processes
+and pipes (or other mechanisms on non-posix operating systems) instead. What
+the magazine does not cover is the fact that this can also benefit GUI
+applications; updating a progressbar in the application doesn&rsquo;t need to slow
+down heavy computations being done in a separate thread. To show how easy the
+integration is, take the following example which shows usage of either threads
+or processes at the user&rsquo;s choice:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">processing</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">Queue</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gtk</span>
+<span class="kn">import</span> <span class="nn">gobject</span>
+
+<span class="n">gtk</span><span class="o">.</span><span class="n">gdk</span><span class="o">.</span><span class="n">threads_init</span><span class="p">()</span>
+
+<span class="n">USE_PROCESSING</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">WORKER_DELAY</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">GUI_DELAY</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
+	<span class="k">print</span> <span class="s2">&#34;Init other thread&#34;</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">while</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+		<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">WORKER_DELAY</span><span class="p">)</span>
+		<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+		<span class="k">print</span> <span class="s2">&#34;Other thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span>
+		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">update_label</span><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">)):</span>
+	<span class="k">print</span> <span class="s2">&#34;Updating label&#34;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Number in thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+	<span class="k">except</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Queue is empty!&#34;</span><span class="p">)</span>
+	<span class="k">except</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Queue is empty!&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
+	<span class="n">sq</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">USE_PROCESSING</span><span class="p">:</span>
+		<span class="n">q</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+		<span class="n">sq</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span>
+			<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">])</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+		<span class="n">sq</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span>
+			<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">])</span>
+
+	<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+	<span class="n">w</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Window</span><span class="p">()</span>
+	<span class="n">l</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
+	<span class="n">gobject</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">GUI_DELAY</span><span class="p">),</span>
+		<span class="n">update_label</span><span class="p">,</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">sq</span><span class="p">))</span>
+	<span class="n">w</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+	<span class="n">w</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">sq</span><span class="p">)</span>
+	<span class="n">w</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+	<span class="k">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
+	<span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</code></pre></div>]]></content:encoded></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After trying to figure out how to work DBus with C, and seeing how easy it is to do in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately, it&amp;rsquo;s very simple to use - especially thanks to this guide.
+It later turned out to be much easier to do in C, as described in Faster Languages.</description><content:encoded><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
+trying to figure out how to work DBus with C, and seeing how easy it is to do
+in Python, we figured we&rsquo;d try to use embedded Python to do this. Fortunately,
+it&rsquo;s very simple to use - especially thanks to <a href="http://www.developer.com/lang/other/article.php/2217941">this guide</a>.</p>
+<blockquote>
+<p>It later turned out to be much easier to do in C, as described in <em><a href="/2008/04/16/faster-languages">Faster Languages</a></em>.</p>
+</blockquote>
+<p>Now, we couldn&rsquo;t have the Python code throwing exceptions outwards, so we had
+each function return, along with its actual return value (if any), a numeric
+code identifying the error. Unfortunately, this made the code get really big,
+really fast - especially once DBus exceptions are thrown into the mix. But once
+I learned how to use decorators, I accomplished something like this diff:</p>
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gi">+@wrap_exceptions((False,))
+</span><span class="gi"></span> def checkSomething():
+<span class="gd">-    global error_string
+</span><span class="gd">-
+</span><span class="gd">-    error_string = &#34;&#34;
+</span><span class="gd">-
+</span><span class="gd">-    try:
+</span><span class="gd">-        return (try_doing_something_over_dbus(), RET_OK)
+</span><span class="gd">-    except dbus.DBusException, e:
+</span><span class="gd">-        error_string = str(e)
+</span><span class="gd">-        if _nm_dbus_exception(e, &#34;ServiceUnknown&#34;):
+</span><span class="gd">-            return (False, RET_SERVICE_NOT_RUNNING)
+</span><span class="gd">-        return (False, RET_ERROR)
+</span><span class="gd">-    except Exception, e:
+</span><span class="gd">-        error_string = str(e)
+</span><span class="gd">-        return (False, RET_ERROR)
+</span><span class="gd">-
+</span><span class="gd"></span><span class="gi">+    return (try_doing_something_over_dbus(), RET_OK)
+</span></code></pre></div><p>Now, the duplicate DBus/non-DBus exception handling, global <code>error_string</code>,
+etc. - that happened in a lot of functions. Unfortunately, they didn&rsquo;t all
+return their values in the same way. Some just returned a <code>RET_VALUE</code>, but most
+had other values before it in the tuple (not the ideal design, come to think of
+it&hellip;). Here&rsquo;s the decorator I wrote:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span> <span class="o">=</span> <span class="n">prepend_tuple</span>
+
+    <span class="k">def</span> <span class="nf">tuplize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retval</span><span class="p">):</span>
+        <span class="c1"># Change retval into a default tuple form, if necessary</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span><span class="p">:</span> <span class="k">return</span> <span class="n">retval</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">retval</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">exception_wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+            <span class="k">global</span> <span class="n">error_string</span>
+
+            <span class="n">error_string</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">dbus</span><span class="o">.</span><span class="n">DBusException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># Check known DBus Exceptions first</span>
+                <span class="k">if</span> <span class="n">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&#34;ServiceUnknown&#34;</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_SERVICE_NOT_RUNNING</span><span class="p">)</span>
+
+                <span class="c1"># Unknown exceptions (DBus)</span>
+                <span class="n">error_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="c1"># Includes get_dbus_name</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_ERROR</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># Unknown exceptions (non-DBus)</span>
+                <span class="n">error_string</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_ERROR</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">exception_wrapped</span>
+</code></pre></div>]]></content:encoded></item><item><title>IPython</title><link>https://lutzky.net/2007/03/04/ipython/</link><pubDate>Sun, 04 Mar 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/03/04/ipython/</guid><description>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project for a course, which involves somewhat heavy-duty database and algorithm work. Python is my language of choice for it - let&amp;rsquo;s hope it works out well.
+In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython (available in apt) - it adds a bunch of stuff to the python shell which I sorely missed from irb - autocompletion, auto-indentation, and - it seems - adds a whole lot more.</description><content:encoded><![CDATA[<p>The more I use Python, the nicer it becomes. I&rsquo;m currently working on a project
+for a course, which involves somewhat heavy-duty database and algorithm work.
+Python is my language of choice for it - let&rsquo;s hope it works out well.</p>
+<p>In the meantime, I&rsquo;ve found a really nice python shell called iPython
+(available in apt) - it adds a bunch of stuff to the python shell which I
+sorely missed from irb - autocompletion, auto-indentation, and - it seems -
+adds a whole lot more.</p>
+<p>Looks like I&rsquo;ll have to check django out as well. I&rsquo;ve been working with Ruby
+on Rails for quite a while now (and that&rsquo;s how I got introduced to Ruby in the
+first place). Odd as it may be&hellip; do I have a new favorite language?</p>
+]]></content:encoded></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</guid><description>I&amp;rsquo;ve converted my Antigibberish script1 (converts &amp;ldquo;broken hebrew&amp;rdquo; into proper hebrew, useful for sent-offline ICQ messages) to Python&amp;hellip; it&amp;rsquo;s quite a nice language, and the interpreter is FAST! I&amp;rsquo;m really torn between it and Ruby :(
 Used to have a copy of antigibberish.py, but it&amp;rsquo;s been lost in the mists of time. It used to do the equivalent of this:
-iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8 &amp;#160;&amp;#x21a9;&amp;#xfe0e;</description></item><item><title>3D effects for coders?</title><link>https://lutzky.net/2007/01/25/3d-effects-for-coders/</link><pubDate>Thu, 25 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/25/3d-effects-for-coders/</guid><description>My new work desktop has a GeForce 4 MX, so I naturally installed Beryl on it. The graphics card has relatively little RAM, so it finds handling my 1280x1024 resolution difficult when additional texture memory is needed - so using something like Firefox really slows it down when Beryl is activated, making me keep it off most of the time. However, for coding, I&amp;rsquo;m finding that Beryl is very useful - it actually helps me that the code windows are transparent, so that I can see what&amp;rsquo;s underneath them, and the &amp;ldquo;Expose&amp;rdquo; effect still leaves text legible, which is great for reading off a lot of terminals at once.</description></item><item><title>As for Python</title><link>https://lutzky.net/2007/01/23/as-for-python/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/23/as-for-python/</guid><description>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to TryRuby, code my sites using Rails, am surprised that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes called the Japanese Python, and comparisons are inevitable. I know very little about Python, but I do know that&amp;hellip;
-It has a larger community More GUI applications are written in it More bindings are available for it Its interpreter is much faster Not a far inferior language Ruby certainly does have its advantages over it - trivial class expansion, extremely concise syntax, seemingly better-suited for heavy usage of closures, and Matz.</description></item></channel></rss>
+iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8 &amp;#160;&amp;#x21a9;&amp;#xfe0e;</description><content:encoded><![CDATA[<p>I&rsquo;ve converted my <em>Antigibberish script</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+(converts &ldquo;broken hebrew&rdquo; into proper hebrew, useful for sent-offline ICQ
+messages) to Python&hellip; it&rsquo;s quite a nice language, and the interpreter is FAST!
+I&rsquo;m really torn between it and Ruby :(</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Used to have a copy of <code>antigibberish.py</code>, but it&rsquo;s been lost in
+the mists of time. It used to do the equivalent of this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
+</code></pre></div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+</ol>
+</section>
+]]></content:encoded></item><item><title>3D effects for coders?</title><link>https://lutzky.net/2007/01/25/3d-effects-for-coders/</link><pubDate>Thu, 25 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/25/3d-effects-for-coders/</guid><description>My new work desktop has a GeForce 4 MX, so I naturally installed Beryl on it. The graphics card has relatively little RAM, so it finds handling my 1280x1024 resolution difficult when additional texture memory is needed - so using something like Firefox really slows it down when Beryl is activated, making me keep it off most of the time. However, for coding, I&amp;rsquo;m finding that Beryl is very useful - it actually helps me that the code windows are transparent, so that I can see what&amp;rsquo;s underneath them, and the &amp;ldquo;Expose&amp;rdquo; effect still leaves text legible, which is great for reading off a lot of terminals at once.</description><content:encoded><![CDATA[<p>My new work desktop has a GeForce 4 MX, so I naturally installed Beryl on it.
+The graphics card has relatively little RAM, so it finds handling my 1280x1024
+resolution difficult when additional texture memory is needed - so using
+something like Firefox really slows it down when Beryl is activated, making me
+keep it off most of the time. However, for coding, I&rsquo;m finding that Beryl is
+very useful - it actually helps me that the code windows are transparent, so
+that I can see what&rsquo;s underneath them, and the &ldquo;Expose&rdquo; effect still leaves
+text legible, which is great for reading off a lot of terminals at once. So is
+Beryl&hellip; a programmer&rsquo;s tool?</p>
+]]></content:encoded></item><item><title>As for Python</title><link>https://lutzky.net/2007/01/23/as-for-python/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/23/as-for-python/</guid><description>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to TryRuby, code my sites using Rails, am surprised that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes called the Japanese Python, and comparisons are inevitable. I know very little about Python, but I do know that&amp;hellip;
+It has a larger community More GUI applications are written in it More bindings are available for it Its interpreter is much faster Not a far inferior language Ruby certainly does have its advantages over it - trivial class expansion, extremely concise syntax, seemingly better-suited for heavy usage of closures, and Matz.</description><content:encoded><![CDATA[<p>Myself, I&rsquo;m a Ruby hacker. I send everyone within earshot to
+<a href="http://tryruby.hobix.com">TryRuby</a>, code my sites using Rails, am surprised
+that I&rsquo;m using a php-based blog&hellip; you get the picture. Ruby is sometimes
+called the Japanese Python, and comparisons are inevitable. I know very little
+about Python, but I do know that&hellip;</p>
+<ul>
+<li>It has a larger community</li>
+<li>More GUI applications are written in it</li>
+<li>More bindings are available for it</li>
+<li>Its interpreter is much faster</li>
+<li>Not a far inferior language</li>
+</ul>
+<p>Ruby certainly does have its advantages over it - trivial class expansion,
+extremely concise syntax, seemingly better-suited for heavy usage of closures,
+and Matz. Ya gotta love Matz.</p>
+<p>I will be giving Python a try soon&hellip; I love learning new programming
+languages. That&rsquo;s why I&rsquo;m taking Programming Languages this coming semester.</p>
+]]></content:encoded></item></channel></rss>

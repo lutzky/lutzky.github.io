@@ -1,6 +1,307 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>hardware on Shallow and Pedantic</title><link>https://lutzky.net/tags/hardware/</link><description>Recent content in hardware on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 14 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/hardware/index.xml" rel="self" type="application/rss+xml"/><item><title>PiTemp</title><link>https://lutzky.net/2021/03/14/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/03/14/pitemp/</guid><description>An adventure with Raspberry Pi, Golang, and small displays.</description></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/2010/11/20/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/11/20/dd-wrt-awesomeness/</guid><description>Since I&amp;rsquo;ve last posted, I&amp;rsquo;ve moved to a new apartment. First order of business - get a working internet connection. This is extra-challenging when your primary machine doesn&amp;rsquo;t even have a wireless network card.
-My first hack used my trusty laptop - it has a properly working wireless card, and could connect to my roommate&amp;rsquo;s router quite easily. It runs Ubuntu, and as it turns out, that means sharing the connection was dead-simple: Right-click on the network manager icon, add a new wired connection called &amp;ldquo;Shared&amp;rdquo;, and under IPv4 settings, choose &amp;ldquo;Shared to other computers&amp;rdquo;.</description></item><item><title>Android</title><link>https://lutzky.net/2010/09/04/android/</link><pubDate>Sat, 04 Sep 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/09/04/android/</guid><description>I&amp;rsquo;ve finally gotten the chance to get one of those newfangled Android phones.
-I&amp;rsquo;ve recently &amp;ldquo;bought&amp;rdquo; a Samsung Galaxy Android phone (the older i7500, not the newer i9000 &amp;ldquo;S&amp;rdquo;) model. It&amp;rsquo;s a seriously serious upgrade from my old Nokia 6120 Classic, and as I broke the 6120&amp;rsquo;s screen and reverted back to my trusty old Nokia 6070 (which I couldn&amp;rsquo;t even get to run the GMail app), I was quite a happy camper switching to a modern phone.</description></item><item><title>My music player has sunk</title><link>https://lutzky.net/2010/03/13/my-music-player-has-sunk/</link><pubDate>Sat, 13 Mar 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/03/13/my-music-player-has-sunk/</guid><description>My Meizu Mini M6 has died a tragic death as a result of being left in my shirt pocket, which in turn was - with the rest of my shirt - in the laundry. I&amp;rsquo;ve had it for three years, so this would be a good time to review.
-My favorite thing about the Mini was the cost. When I bought it, it was far cheaper than comparable players, at ~400₪ for 8GB.</description></item><item><title>Broken phone screen - data rescue</title><link>https://lutzky.net/2009/10/31/broken-phone-screen-data-rescue/</link><pubDate>Sat, 31 Oct 2009 00:00:00 +0000</pubDate><guid>https://lutzky.net/2009/10/31/broken-phone-screen-data-rescue/</guid><description>Last weekend I broke my Nokia 6120&amp;rsquo;s screen. I have a military phone, which is far cheaper, so I&amp;rsquo;ve decided to keep it offline. However, being the sentimental guy that I am, I did want to save all of my contacts and SMS messages (in addition to the photos, which presented less of a problem). This proved to be a bit of a challenge without the screen working.
-Usually, when you connect the phone via USB, it asks if you want &amp;ldquo;PC Suite mode&amp;rdquo; or &amp;ldquo;Data Transfer mode&amp;rdquo;.</description></item><item><title>Hardware doesn't like me</title><link>https://lutzky.net/2009/02/26/hardware-doesnt-like-me/</link><pubDate>Thu, 26 Feb 2009 00:00:00 +0000</pubDate><guid>https://lutzky.net/2009/02/26/hardware-doesnt-like-me/</guid><description>Whenever I try messing with hardware at home, inexplicable failures ensue. Especially when trying to help others; no good deed goes unpunished.</description></item><item><title>Whatever happened to black &amp;amp; white LCDs?</title><link>https://lutzky.net/2008/11/22/whatever-happened-to-black-white-lcds/</link><pubDate>Sat, 22 Nov 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/11/22/whatever-happened-to-black-white-lcds/</guid><description>I had a Game Boy once. I could play it just about anywhere, and battery life - for the time - was great. I lost it at one point, and replaced it with a Game Gear, which sucked the life out of 6 AA batteries rather quickly. The Game Boy Color was actually decent on battery life, but since it didn&amp;rsquo;t have a backlight, you had to play it at very specific angles.</description></item><item><title>Nokia 6120 Classic</title><link>https://lutzky.net/2008/02/11/nokia-6120-classic/</link><pubDate>Mon, 11 Feb 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/02/11/nokia-6120-classic/</guid><description>I&amp;rsquo;ve switched to a Nokia 6120 Classic, and I&amp;rsquo;ve switched my carrier over to Orange. I&amp;rsquo;m very happy with it: The price is right, at 0 NIS a month (if your monthly bill adds up to over 100 NIS without it, which it does). It&amp;rsquo;s very small, but has a nice screen and a respectable 2 megapixel camera. It&amp;rsquo;s &amp;ldquo;3.5G&amp;rdquo;, which means it has a very fast internet connection (I&amp;rsquo;ve clocked over 50kbyte/sec), and the Symbian S60 operating system lets me use it well - it comes with a very, very nice webkit-based browser and RSS reader, and a fast GMail client is a few clicks away.</description></item><item><title>Before reinstalling your server for RAID</title><link>https://lutzky.net/2007/02/26/before-reinstalling-your-server-for-raid/</link><pubDate>Mon, 26 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/26/before-reinstalling-your-server-for-raid/</guid><description>Check that the RAID it supports is actual Raid. My experience today:
-Decide that secondary server should gradually become more and more primary Decide that since it has two 160GB hard drives and built-in RAID, we should use that for mirroring Mail (both!) users of the secondary server that it&amp;rsquo;ll be down for rebuilding Set up RAID array from BIOS, clearing all old information Insert installation CD Notice that installation still sees two hard drives Discover that built-in NVRaid is actually software RAID Disable built in RAID in favor of LVM, proceed to reinstall :(</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>hardware on Shallow and Pedantic</title><link>https://lutzky.net/tags/hardware/</link><description>Recent content in hardware on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 14 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/hardware/index.xml" rel="self" type="application/rss+xml"/><item><title>PiTemp</title><link>https://lutzky.net/2021/03/14/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/03/14/pitemp/</guid><description>An adventure with Raspberry Pi, Golang, and small displays.</description><content:encoded><![CDATA[<p>I had been looking for an excuse to mess around with Raspberry Pi for a while, and found one: I wanted a graph of temperature and humidity over time, and - while we&rsquo;re at it - a nice display of those two. Technically speaking, I already have a Nest thermostat which should provide those, but it won&rsquo;t display humidity and there&rsquo;s no easy way to get a graph off it (besides, then I&rsquo;d need another excuse for messing around with a Pi).</p>
+<p>The code for the final result is in <a href="https://github.com/lutzky/pitemp">https://github.com/lutzky/pitemp</a>.</p>
+<h1 id="stage-1-lcd-and-dht">Stage 1: LCD and DHT</h1>
+<p>Hardware:</p>
+<ul>
+<li>A <a href="https://www.raspberrypi.org/products/raspberry-pi-zero-w/">Raspberry Pi Zero W</a> a friend gave me (that&rsquo;ll become important later on)</li>
+<li>A <a href="https://www.amazon.co.uk/gp/product/B07L83K6CF">DHT11</a> temperature &amp; humidity sensor</li>
+<li>A <a href="https://www.amazon.co.uk/gp/product/B07QNKCLJM">4x20 character LCD</a>; apparently an HD44780 controller or compatible.</li>
+</ul>
+<p>This was my first time coding for hardware on the raspberry pi, and it went fairly well.</p>
+<h1 id="lcd-quirks">LCD quirks</h1>
+<p>Getting the degree symbol (°, ASCII <code>0xb0</code>) was a bit of a challenge. While the official HD44780 spec shows it should be available with &ldquo;ROM Code A02&rdquo; (i.e. Latin mode), it&rsquo;s not clear if this can be toggled in software, and the characters my unit displayed matched &ldquo;ROM Code A00&rdquo; (Japanese)&hellip; mostly, that is. Some characters were malformed, and the <a href="https://github.com/d2r2/go-hd44780">unofficial library I used</a> didn&rsquo;t support custom characters (which the hardware seems to support). Fortunately, the Japanese ROM code had a Handakuten symbol (ﾟ, like the circle from ぽ but as a separate character), which is close enough.</p>
+<p>The LCD was also quite slow to refresh, the way I was using it; any faster than 1 hz would lead to corruption, meaning that the &ldquo;second-by-second&rdquo; clock display I wanted wasn&rsquo;t feasible.</p>
+<p>Finally, the LCD unit is much, <em>much</em> large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a &ldquo;case&rdquo;.</p>
+<p><a href="/assets/images/2021/03/pitemp/lcd_box.jpg"><img loading="lazy" src="/assets/images/2021/03/pitemp/lcd_box.jpg" alt="LCD Box"  />
+</a></p>
+<h1 id="cross-compilation">Cross compilation</h1>
+<p>While the Pi Zero is certainly <em>capable</em> of being a fully-fledged Go development environment, it&rsquo;s not a fast one (and me using a cheap old SD card isn&rsquo;t helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and <code>scp</code>-ing the result over. That&rsquo;s despite Go&rsquo;s hefty statically-build binaries (7-12MB for these, depending on stripping).</p>
+<p>Cross compiling is done like so (e.g. in a <a href="https://github.com/lutzky/pitemp/blob/main/build.sh">convenience script</a>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install gcc-arm-linux-gnueabi
+$ <span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>arm-linux-gnueabi-gcc <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARM</span><span class="o">=</span><span class="m">6</span> <span class="nv">GOARCH</span><span class="o">=</span>arm
+$ go -o main.arm build main.go
+</code></pre></div><p>For build-and-run-on-save, this can be used with <code>entr</code>. However, because you can&rsquo;t modify an executable file as it runs (in this case), you need to use a temporary file. On my laptop, I run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
+</span></code></pre></div><p>Then, on the pi, I run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
+</code></pre></div><h1 id="stage-2-pioled">Stage 2: PiOLED</h1>
+<p>I looked for a not-so-ridiculously-large display, and found <a href="https://www.adafruit.com/product/3527">adafruit&rsquo;s PiOLED</a> to be perfect. Its HAT form factor makes for a much tidier device, and the display itself is reminiscent of the 2007 Sansa Clip m300 (albeit monochromatic). Library support is also much better, thanks to <a href="http://periph.io">http://periph.io</a>.</p>
+<p>That being said, my friend soldered the Pi&rsquo;s pins on &ldquo;downwards&rdquo;, as this is apparently more convenient when using it on a breadboard. I figured it&rsquo;s time to order my own Pi Zero (you can get them with the pins pre-soldered, facing &ldquo;up&rdquo;); I later found that <a href="https://pkg.go.dev/periph.io/x/devices/v3/ssd1306#Opts">this might be configurable</a>, but it&rsquo;d still be pretty awkward.</p>
+<p>The PiOLED library (actually periph.io&rsquo;s ssd1306 library) essentially lets you render an <code>image.Image</code>; since these are also trivially renderable to PNG, I could speed up development even further by adding an HTTP endpoint to serve the current image, even if the hardware isn&rsquo;t present; this also let me zoom into the rendered image instead of squinting at the actual display, making it easier to align things pixel-by-pixel. I eventually ended up separating the code into two binaries - <code>pitemp</code> would communicate with the sensors and provide an HTTP endpoint, whereas <code>pitemp_pioled</code> (and <code>pitemp_lcd</code>) would communicate with <code>pitemp</code> and the physical display (or run in <code>--simulator</code> mode on my laptop, for HTTP-endpoint-only rendering).</p>
+<p>I&rsquo;m quite happy with the final result:</p>
+<p><a href="/assets/images/2021/03/pitemp/pioled.jpg"><img loading="lazy" src="/assets/images/2021/03/pitemp/pioled.jpg" alt="PiOLED PiTemp"  />
+</a></p>
+<p>Happy hacking!</p>
+]]></content:encoded></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/2010/11/20/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/11/20/dd-wrt-awesomeness/</guid><description>Since I&amp;rsquo;ve last posted, I&amp;rsquo;ve moved to a new apartment. First order of business - get a working internet connection. This is extra-challenging when your primary machine doesn&amp;rsquo;t even have a wireless network card.
+My first hack used my trusty laptop - it has a properly working wireless card, and could connect to my roommate&amp;rsquo;s router quite easily. It runs Ubuntu, and as it turns out, that means sharing the connection was dead-simple: Right-click on the network manager icon, add a new wired connection called &amp;ldquo;Shared&amp;rdquo;, and under IPv4 settings, choose &amp;ldquo;Shared to other computers&amp;rdquo;.</description><content:encoded><![CDATA[<p>Since I&rsquo;ve last posted, I&rsquo;ve moved to a new apartment. First order of business -
+get a working internet connection. This is extra-challenging when your
+primary machine doesn&rsquo;t even have a wireless network card.</p>
+<p>My first hack used my trusty laptop - it has a properly working wireless card,
+and could connect to my roommate&rsquo;s router quite easily. It runs Ubuntu, and as
+it turns out, that means sharing the connection was dead-simple: Right-click on
+the network manager icon, add a new wired connection called &ldquo;Shared&rdquo;, and under
+IPv4 settings, choose &ldquo;Shared to other computers&rdquo;. That&rsquo;s it. Once I connected
+my desktop to my laptop, it automatically got all of its settings, and I was
+good to go.</p>
+<p>However, this was kind of annoying - I had to leave my laptop on, the reception
+in my room isn&rsquo;t perfect so it would sometimes disconnect (requiring manual
+intervention), and my laptop wasn&rsquo;t free for ordinary use (if I wanted my
+torrents to keep going).</p>
+<p>The solution: I grabbed my (horrible) old D-Link DIR-300 router, and installed
+DD-WRT on it. This gave it an awesome &ldquo;client mode&rdquo; feature, which allowed it
+to use it the same way I used my laptop to bridge my wireless connection.
+Flashing it worked quite well by following the guide (the updated version in
+the wiki, that is - it has proper instructions for connecting to RedBoot, the
+D-Link flashing interface, from Linux), and another guide helped me set up
+Client mode. All seems well, except for two issues:</p>
+<p>First, port forwarding doesn&rsquo;t seem to work properly - it works well on the
+internal network (that is, I can SSH into my desktop using my laptop), but not
+on the internet (SSH port shows up as open, but I can&rsquo;t connect). I&rsquo;m also
+guessing that UPnP/NAT-PMP won&rsquo;t work properly. Second, and this is an old
+problem - the router has a high-pitched whine. This may have something to do
+with the fact that the AC/DC adapter it came with is rated for 12V @ 1A,
+whereas the router is rated 5V @ 1.2A. Let&rsquo;s hope it doesn&rsquo;t fry (hasn&rsquo;t for
+the 3 years I used it).</p>
+]]></content:encoded></item><item><title>Android</title><link>https://lutzky.net/2010/09/04/android/</link><pubDate>Sat, 04 Sep 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/09/04/android/</guid><description>I&amp;rsquo;ve finally gotten the chance to get one of those newfangled Android phones.
+I&amp;rsquo;ve recently &amp;ldquo;bought&amp;rdquo; a Samsung Galaxy Android phone (the older i7500, not the newer i9000 &amp;ldquo;S&amp;rdquo;) model. It&amp;rsquo;s a seriously serious upgrade from my old Nokia 6120 Classic, and as I broke the 6120&amp;rsquo;s screen and reverted back to my trusty old Nokia 6070 (which I couldn&amp;rsquo;t even get to run the GMail app), I was quite a happy camper switching to a modern phone.</description><content:encoded><![CDATA[<p>I&rsquo;ve finally gotten the chance to get one of those newfangled Android phones.</p>
+<p>I&rsquo;ve recently &ldquo;bought&rdquo; a <a href="http://en.wikipedia.org/wiki/Samsung_Galaxy">Samsung Galaxy
+Android</a> phone (the older i7500,
+not the newer i9000 &ldquo;S&rdquo;) model. It&rsquo;s a seriously serious upgrade from my old
+<a href="http://en.wikipedia.org/wiki/Nokia_6120_classic">Nokia 6120 Classic</a>, and as I
+broke the 6120&rsquo;s screen and reverted back to my trusty old <a href="http://en.wikipedia.org/wiki/Nokia_6070">Nokia
+6070</a> (which I couldn&rsquo;t even get to
+run the GMail app), I was quite a happy camper switching to a modern phone.</p>
+<p>The whole idea of Android has always been very appealing to me - Nokia&rsquo;s
+software has been declining in quality, and while Motorola and Samsung have
+always made excellent hardware, they could never get the knack of good
+software. Google has. Problem solved, right?</p>
+<p>The Android software is miles ahead of anything I&rsquo;ve ever seen, including
+iPhone. I now have connectivity everywhere, and apps to sync all of my favorite
+things - GMail and Google Calendar are included, GTasks is great for tasks,
+Paperdroid is great for Read It Later, NewsRob is great for Google Reader. The
+Facebook and Twidroyd applications are also quite nice, and the convenience has
+me using those networks more. I even have nifty stuff like Transdroid, a
+Transmission web client which is actually very good at <strong>adding</strong> torrents
+while I&rsquo;m away, so they&rsquo;re done by the time I get home. I get my reading done
+with Aldiko and ACV (for comics). Even Israeli sites have some good
+applications up, such as YNet and <a href="http://d.co.il/">Dapei Zahav</a> have a nice
+Android app, though not as nice as their iPhone ones. And of course, there&rsquo;s
+the wonderful <a href="http://waze.co.il/">Waze</a>, which is the most Israeli solution to
+the road congestion problem I&rsquo;ve ever seen. I&rsquo;ve even had the chance to do some
+on-foot navigation with Google Maps, which is also handy.</p>
+<p>The phone itself has a beautiful AMOLED screen, great audio quality (comes with
+quite a good set of headphones as well), and looks sleek. The touchscreen is
+responsive enough (though not anywhere near new Android devices nor the
+iPhone/iPod touch), and it even comes with a free extra 8GB SD card, for a
+total of 16GB.</p>
+<p>And now, to rant.</p>
+<p>Battery life isn&rsquo;t what is should be - the phone is awesome, I want to use it,
+and it can barely get through the day - especially if I&rsquo;m doing heavy stuff
+like Waze (GPS + Data + screen is always on + voice), but even if I&rsquo;m just
+surfing casually. The unlock button is located inconveniently on the bottom
+part of the right side, just above the camera button. The home button is
+located between the Back and Send buttons, meaning it&rsquo;s very easy to hit by
+accident; it&rsquo;s not even labeled. The CPU isn&rsquo;t always fast enough to keep
+everything completely smooth, and while this is generally acceptable, it gets
+rather irksome in odd places: If you turn on screen auto-rotation (which uses
+more battery power), rotation takes a while and might be accidental. However,
+there is no <em>manual</em> screen rotation option as far as I can tell.</p>
+<p>As a music player (relating to my previous post), the device works well enough -
+but I couldn&rsquo;t, for the life of me, get Hebrew support in ID3 tags (no matter
+what the encoding is), and only a limited subset of ID3 tag versions is
+supported, and everything works much better with Ogg files.</p>
+<p>The flaws I&rsquo;ve mentioned are relatively minor and nitpicky - for Waze, you can
+use the car charger (which comes with the phone, thankfully). The buttons are
+OK after some getting used to (and installing the excellent AnySoftKeyboard),
+and operation is generally smooth. However, there is a major issue I can&rsquo;t wrap
+my head around - the shipped firmware is 1.5 cupcake, and there are absolutely
+zero updates available from Samsung. There is a semi-official leaked 1.6 update
+which, as I&rsquo;ve heard, is quite buggy. An awesome guy called
+<a href="http://www.drakaz.com/">drakaz</a> has been working on a Froyo (2.2) port for the
+Galaxy, which I really should check out, but Samsung&rsquo;s behavior on this topic
+is inexcusable in my opinion.</p>
+<p>All-in-all, however, I&rsquo;m happy with my phone. It&rsquo;s a joy to use, and the price
+is hard to beat - free with my phone plan, provided I can rake up a bill of
+150₪ (which I can, with some help from the 70₪ 1GB data plan, which comes in
+quite handy). My next phone will, however, probably not be a Samsung.</p>
+]]></content:encoded></item><item><title>My music player has sunk</title><link>https://lutzky.net/2010/03/13/my-music-player-has-sunk/</link><pubDate>Sat, 13 Mar 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/03/13/my-music-player-has-sunk/</guid><description>My Meizu Mini M6 has died a tragic death as a result of being left in my shirt pocket, which in turn was - with the rest of my shirt - in the laundry. I&amp;rsquo;ve had it for three years, so this would be a good time to review.
+My favorite thing about the Mini was the cost. When I bought it, it was far cheaper than comparable players, at ~400₪ for 8GB.</description><content:encoded><![CDATA[<p>My <a href="http://en.wikipedia.org/wiki/Meizu_M6_miniPlayer">Meizu Mini M6</a> has died a
+tragic death as a result of being left in my shirt pocket, which in turn was -
+with the rest of my shirt - in the laundry. I&rsquo;ve had it for three years, so
+this would be a good time to review.</p>
+<p>My favorite thing about the Mini was the cost. When I bought it, it was far
+cheaper than comparable players, at ~400₪ for 8GB. For a player with good video
+support, it was a steal. Other pros it had include:</p>
+<ul>
+<li>Great screen. I used to watch TV shows on it quite a bit</li>
+<li>Great audio quality, especially in the lower range - very important for a
+bass guitarist</li>
+<li>Perfect OS compatibility - shows up as a Mass Storage device, just drag your
+files over. This is also how firmware upgrades are performed</li>
+<li>EBook reader, of sorts</li>
+<li>Quite small and very thin</li>
+</ul>
+<p>However, the player is full of quirks:</p>
+<ul>
+<li>
+<p>Slow startup time. This is compounded by the fact that to turn it on, you
+have to press the &ldquo;Play&rdquo; button for about 3 seconds - too much less or too
+much more, and it won&rsquo;t start up.</p>
+<p>This is even worse when unplugging it from USB - it would rebuild the library
+every time, even if you were just charging it.</p>
+</li>
+<li>
+<p>You can&rsquo;t turn the player on when it&rsquo;s connected to USB. When it&rsquo;s off,
+connecting it to USB is for charging only - to access the filesystem, you
+have to disconnect it, turn it on, and connect it again. (&hellip;not that the
+player is functional when in it&rsquo;s plugged in&hellip;)</p>
+</li>
+<li>
+<p>A few podcast niceties would be very easy to implement and extremely helpful.
+There&rsquo;s no way to separate podcasts from the rest of the music, so you don&rsquo;t
+get &ldquo;This Week In Tech&rdquo; when you put it on &ldquo;All Music at random&rdquo; mode.  Also,
+the player doesn&rsquo;t keep track of positions within audio streams, other than
+the last played one.</p>
+</li>
+<li>
+<p>There&rsquo;s no way to delete a song from within the player.</p>
+</li>
+<li>
+<p>The interface is very inconsistent, with the video and audio sections having
+completely different key bindings. Long presses and short presses have very
+different meanings (but the length isn&rsquo;t all that different), so you have to
+be very careful.</p>
+</li>
+<li>
+<p>Pressing various key during startup had interesting, non-obvious effects,
+such as rebuilding the music library or <strong>formatting the player without
+asking for confirmation</strong>. This isn&rsquo;t in the official documentation, and even
+if it were - that&rsquo;s a <strong>very</strong> bad misfeature.</p>
+</li>
+<li>
+<p>The newer version of the player, which I have, did away with the bottom
+&ldquo;play&rdquo; button, and moved it to the bottom of the 4-way D-pad, instead of the
+&ldquo;Enter&rdquo; key. The &ldquo;Enter&rdquo; key was replaced with a tap on the d-pad.
+Unfortunately, such a tap is very similar to a volume change drag, and even
+if it weren&rsquo;t - is very easy to perform by accident.</p>
+</li>
+</ul>
+<p>One more feature that I would have liked is one I&rsquo;ve only seen in the iPod
+(which I despise for a variety of reasons) - the iPod keeps track of which
+songs you&rsquo;ve played all the way through, and remembers that you &ldquo;like&rdquo; them -
+this information is later used when building playlists, and is integrated into
+iTunes playlists as well.</p>
+<p>Now, I might be going to a long course soon, one which will specifically mean
+plenty of bus time. So go ahead, guys - recommend a player. :)</p>
+]]></content:encoded></item><item><title>Broken phone screen - data rescue</title><link>https://lutzky.net/2009/10/31/broken-phone-screen-data-rescue/</link><pubDate>Sat, 31 Oct 2009 00:00:00 +0000</pubDate><guid>https://lutzky.net/2009/10/31/broken-phone-screen-data-rescue/</guid><description>Last weekend I broke my Nokia 6120&amp;rsquo;s screen. I have a military phone, which is far cheaper, so I&amp;rsquo;ve decided to keep it offline. However, being the sentimental guy that I am, I did want to save all of my contacts and SMS messages (in addition to the photos, which presented less of a problem). This proved to be a bit of a challenge without the screen working.
+Usually, when you connect the phone via USB, it asks if you want &amp;ldquo;PC Suite mode&amp;rdquo; or &amp;ldquo;Data Transfer mode&amp;rdquo;.</description><content:encoded><![CDATA[<p>Last weekend I broke my Nokia 6120&rsquo;s screen. I have a military phone, which is
+far cheaper, so I&rsquo;ve decided to keep it offline. However, being the sentimental
+guy that I am, I did want to save all of my contacts and SMS messages (in
+addition to the photos, which presented less of a problem). This proved to be a
+bit of a challenge without the screen working.</p>
+<p>Usually, when you connect the phone via USB, it asks if you want &ldquo;PC Suite
+mode&rdquo; or &ldquo;Data Transfer mode&rdquo;. The &ldquo;Data Transfer&rdquo; mode has the phone show up
+as a standard USB storage device, which allows for easy transfer of MP3 files,
+photos and videos to and from the phone, without any nokia-specific software.
+However, it only works for the external SD card, so you can&rsquo;t use that to
+access SMS messages or contacts.</p>
+<p>I usually only need &ldquo;Data Transfer&rdquo; mode, so I changed the default to that.
+Today I regret that decision, as it cost me a couple of hours' work. I called
+the Orange hotline, and they did their best to help me, including trying to
+blind-guide me through the menus, which failed because the menus are actually
+dynamic and I didn&rsquo;t have the default setup. They actually got me 90% of the
+way there - here&rsquo;s the solution I found: Hit the red (disconnect) button, and
+type the Soft Reset GSM code: <code>*#7780#</code>. Now press the &ldquo;left menu&rdquo; key (not the
+left key, nor the menu key - the left of the two &ldquo;dynamic&rdquo; keys) - this part
+was what the Orange hotline missed, because it seemed so obvious. Then hit
+12345 (this is the default &ldquo;secret code&rdquo;), and the left menu key again. I found
+this by watching a demo of the soft reset on YouTube.</p>
+<p>At this point I used VirtualBox and the Nokia PC suite (both are
+free-as-in-beer) to do the heavy lifting. I now have a text file with all of my
+contacts, a CSV file with all of my SMS messages, and all of my images saved
+both to my computer and a DR site. Now I just need to upgrade my military phone
+(Mirs)&hellip;</p>
+]]></content:encoded></item><item><title>Hardware doesn't like me</title><link>https://lutzky.net/2009/02/26/hardware-doesnt-like-me/</link><pubDate>Thu, 26 Feb 2009 00:00:00 +0000</pubDate><guid>https://lutzky.net/2009/02/26/hardware-doesnt-like-me/</guid><description>Whenever I try messing with hardware at home, inexplicable failures ensue. Especially when trying to help others; no good deed goes unpunished.</description><content:encoded><![CDATA[<p>I&rsquo;m a software kind of guy. Here&rsquo;s proof.</p>
+<p>Today I went to visit my grandparents, and it turned out their computer
+wouldn&rsquo;t boot. BIOS would load up fine, and I could browse the menus fine - but
+once it tried to go on from there, it would simply blink what looked like half
+a cursor (that is, half of a <code>_</code>-style cursor). I figured it might be the HDD -
+so I took it home, and decided to connect it to my own box. Upon disconnecting
+my DVD drive, I destroyed the SATA cord - it had an annoying little metal tab
+which had to be pushed in before it would release, and it just wouldn&rsquo;t give,
+and the connector just broke, exposing and bending the wires.</p>
+<p>Checking if the computer still boots, the BIOS took much longer to display hard
+drive status, and while Ubuntu would start booting, it would fail in the
+process and tell me that my root hard drive (by UUID) isn&rsquo;t available. Looking
+at dmesg, the ata2 module was indeed reporting that the hard drive was too
+slow - but a few seconds later it would finally access the drive, and mount
+properly. This problem, however, disappeared once I connected my grandparents'
+drive! (Mounting it would fail, telling me that I either have a hardware error
+or need to connect it to a Windows machine, which I don&rsquo;t have, and run some
+diagnostic commands). Sure enough, when the HDD is connected by itself, it gets
+quite flaky, but once I connect a second drive (back to the DVD, eventually),
+everything works properly. This probably has to do with the fact that both
+drives are connected on continuations of the same power cord - but I&rsquo;ve never
+experienced such a problem, where you <em>must</em> connect devices to <em>both</em>
+connectors on the power cord. A hardware guy I know says he&rsquo;s never heard of
+such a problem either.</p>
+<p>Naturally, these things never happen when I mess with hardware at work, where
+there are plenty of spare parts&hellip;</p>
+]]></content:encoded></item><item><title>Whatever happened to black &amp;amp; white LCDs?</title><link>https://lutzky.net/2008/11/22/whatever-happened-to-black-white-lcds/</link><pubDate>Sat, 22 Nov 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/11/22/whatever-happened-to-black-white-lcds/</guid><description>I had a Game Boy once. I could play it just about anywhere, and battery life - for the time - was great. I lost it at one point, and replaced it with a Game Gear, which sucked the life out of 6 AA batteries rather quickly. The Game Boy Color was actually decent on battery life, but since it didn&amp;rsquo;t have a backlight, you had to play it at very specific angles.</description><content:encoded><![CDATA[<p>I had a <a href="http://en.wikipedia.org/wiki/Game_boy">Game Boy</a> once. I could play it
+just about anywhere, and battery life - for the time - was great. I lost it at
+one point, and replaced it with a <a href="http://en.wikipedia.org/wiki/Game_gear">Game
+Gear</a>, which sucked the life out of 6
+AA batteries rather quickly. The <a href="http://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy
+Color</a> was actually decent on
+battery life, but since it didn&rsquo;t have a backlight, you had to play it at very
+specific angles.</p>
+<p>For gaming, I can appreciate the need for a color screen. My point has to do
+with cellphones. True, most cellphones today come with cameras, are able to
+play video, and are rather capable mobile gaming platforms (when compared to
+the Game Boy, that is). All this does, in fact, require a color screen.
+However, I believe that there is a market for cellphones which do not support
+these features, but do support neat things like 3G internet connectivity (GMail
+and RSS on the phone is a major Win, in my opinion), and have a comfortable SMS
+interface. These features actually suffer from having a color screen: Battery
+life (for the powerful backlight), viewing angle, and screen resolution take a
+hit. While it&rsquo;s true that color LCDs have come a long way since the Game Gear,
+so have black &amp; white display technologies (E-Paper, anyone?).</p>
+<p>Of course, my wish for a modern B&amp;W-screen cellphone will likely never come
+true. The simple reason is that they would be totally unmarketable. Even
+business-types like color screens nowadays. So I&rsquo;ll just keep holding out for a
+folding E-Paper mobile browser.</p>
+]]></content:encoded></item><item><title>Nokia 6120 Classic</title><link>https://lutzky.net/2008/02/11/nokia-6120-classic/</link><pubDate>Mon, 11 Feb 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/02/11/nokia-6120-classic/</guid><description>I&amp;rsquo;ve switched to a Nokia 6120 Classic, and I&amp;rsquo;ve switched my carrier over to Orange. I&amp;rsquo;m very happy with it: The price is right, at 0 NIS a month (if your monthly bill adds up to over 100 NIS without it, which it does). It&amp;rsquo;s very small, but has a nice screen and a respectable 2 megapixel camera. It&amp;rsquo;s &amp;ldquo;3.5G&amp;rdquo;, which means it has a very fast internet connection (I&amp;rsquo;ve clocked over 50kbyte/sec), and the Symbian S60 operating system lets me use it well - it comes with a very, very nice webkit-based browser and RSS reader, and a fast GMail client is a few clicks away.</description><content:encoded><![CDATA[<p>I&rsquo;ve switched to a <a href="http://europe.nokia.com/A4399010">Nokia 6120 Classic</a>, and
+I&rsquo;ve switched my carrier over to Orange. I&rsquo;m very happy with it: The price is
+right, at 0 NIS a month (if your monthly bill adds up to over 100 NIS without
+it, which it does). It&rsquo;s very small, but has a nice screen and a respectable 2
+megapixel camera. It&rsquo;s &ldquo;3.5G&rdquo;, which means it has a very fast internet
+connection (I&rsquo;ve clocked over 50kbyte/sec), and the Symbian S60 operating
+system lets me use it well - it comes with a very, very nice webkit-based
+browser and RSS reader, and a fast GMail client is a few clicks away.</p>
+<p>Another nice feature is the built-in MP3 player - which is actually made
+relevant due to the micro-SD support and included 1GB SD card. The device has a
+standard USB connection (cable included, but it&rsquo;s an ordinary Mini-to-A cable),
+and has a Mass Storage Device mode, so it works well with any OS. It can also
+automatically text-to-speech the name of the caller (or dial by voice
+recognition, which works remarkably well), which is handy when listening to
+MP3s.</p>
+<p>I&rsquo;ve only had two problems with it so far - first, when viewing a long web page
+(on wikipedia, specifically), it gave an &ldquo;out of RAM&rdquo; message and rebooted. I&rsquo;m
+curious as to whether there&rsquo;s a simpler, non-CSS version of Wikipedia, or a way
+to get the phone to ignore the CSS - this will probably save on RAM. Another
+problem I had was that the vibration feature didn&rsquo;t work until I rebooted it -
+but this no longer seems to occur.</p>
+<p>I wonder how well puTTy would work on this&hellip;</p>
+]]></content:encoded></item><item><title>Before reinstalling your server for RAID</title><link>https://lutzky.net/2007/02/26/before-reinstalling-your-server-for-raid/</link><pubDate>Mon, 26 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/26/before-reinstalling-your-server-for-raid/</guid><description>Check that the RAID it supports is actual Raid. My experience today:
+Decide that secondary server should gradually become more and more primary Decide that since it has two 160GB hard drives and built-in RAID, we should use that for mirroring Mail (both!) users of the secondary server that it&amp;rsquo;ll be down for rebuilding Set up RAID array from BIOS, clearing all old information Insert installation CD Notice that installation still sees two hard drives Discover that built-in NVRaid is actually software RAID Disable built in RAID in favor of LVM, proceed to reinstall :(</description><content:encoded><![CDATA[<p>Check that the RAID it supports is actual Raid. My experience today:</p>
+<ol>
+<li>Decide that secondary server should gradually become more and more primary</li>
+<li>Decide that since it has two 160GB hard drives and built-in RAID, we should use that for mirroring</li>
+<li>Mail (both!) users of the secondary server that it&rsquo;ll be down for rebuilding</li>
+<li>Set up RAID array from BIOS, clearing all old information</li>
+<li>Insert installation CD</li>
+<li>Notice that installation still sees two hard drives</li>
+<li>Discover that built-in NVRaid is actually software RAID</li>
+<li>Disable built in RAID in favor of LVM, proceed to reinstall :(</li>
+</ol>
+]]></content:encoded></item></channel></rss>

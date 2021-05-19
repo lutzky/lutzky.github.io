@@ -2,6 +2,80 @@
 If you&amp;rsquo;re tired of hitting your SSH password over and over again, you might want to take a look at this guide: SSH Public Key Authentication.
 If you&amp;rsquo;re a Technion student taking the Matam course, you should definitely check out the Matam Guide.
 Here is a list of lectures I&amp;rsquo;ve given in Haifux:
-Lightning Talks 2005 (w/Many others) LIRC - Infrared Remote Control (w/Alon Altman) WiFi in Linux The VIM Editor for beginners (Rerun of Shlomi&amp;rsquo;s lecture) FatNS - How to develop a DNS forensics tool (w/Boaz Goldstein) Linux for CS Students - a Primer Linux for CS Students - Debugging If you&amp;rsquo;re with a russian keyboard and need a stress sign, try /russian-stress.</description></item><item><title>SSH public key authentication</title><link>https://lutzky.net/linux-stuff/ssh-public-key-authentication/</link><pubDate>Sat, 23 Mar 2013 21:51:06 +0000</pubDate><guid>https://lutzky.net/linux-stuff/ssh-public-key-authentication/</guid><description>If you find yourself logging into SSH servers a lot, you might find this tip useful - you&amp;rsquo;ll only need to type your password once per session. But first, let&amp;rsquo;s set the default username (so you don&amp;rsquo;t have to tell SSH what user you are every time):
-$ cd ~ $ mkdir .ssh $ chmod 700 .ssh $ cat &amp;gt;&amp;gt; .ssh/config Host t2.technion.ac.il User slutzky Ctrl-D $ Now, create a public/private key pair for SSH, like so:</description></item><item><title>Russian stress mark</title><link>https://lutzky.net/russian-stress/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lutzky.net/russian-stress/</guid><description> This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian keyboard doesn't support it.
-́ function copyIt() { document.getElementById('copyBuffer').select(); document.execCommand('copy'); } Copy</description></item></channel></rss>
+Lightning Talks 2005 (w/Many others) LIRC - Infrared Remote Control (w/Alon Altman) WiFi in Linux The VIM Editor for beginners (Rerun of Shlomi&amp;rsquo;s lecture) FatNS - How to develop a DNS forensics tool (w/Boaz Goldstein) Linux for CS Students - a Primer Linux for CS Students - Debugging If you&amp;rsquo;re with a russian keyboard and need a stress sign, try /russian-stress.</description><content:encoded><![CDATA[<p>Here is an assortment of Linux-related tips and tricks.</p>
+<p>If you&rsquo;re tired of hitting your SSH password over and over again, you might
+want to take a look at this guide: <a href="/linux-stuff/ssh-public-key-authentication">SSH Public Key
+Authentication</a>.</p>
+<p>If you&rsquo;re a Technion student taking the Matam course, you should definitely
+check out the <a href="http://www.underwar.co.il/document-details.asp?id=293">Matam
+Guide</a>.</p>
+<p>Here is a list of lectures I&rsquo;ve given in <a href="http://haifux.org">Haifux</a>:</p>
+<ul>
+<li><a href="http://haifux.org/lectures/127">Lightning Talks 2005 (w/Many others)</a></li>
+<li><a href="http://haifux.org/lectures/129">LIRC - Infrared Remote Control (w/Alon Altman)</a></li>
+<li><a href="http://haifux.org/lectures/138">WiFi in Linux</a></li>
+<li><a href="http://www.shlomifish.org/lecture/Vim/beginners/slides/">The VIM Editor for beginners</a> (Rerun of Shlomi&rsquo;s lecture)</li>
+<li><a href="http://haifux.org/lectures/147">FatNS - How to develop a DNS forensics tool</a> (w/Boaz Goldstein)</li>
+<li><a href="http://haifux.org/lectures/152-sil">Linux for CS Students - a Primer</a></li>
+<li><a href="http://haifux.org/lectures/153-sil1">Linux for CS Students - Debugging</a></li>
+</ul>
+<p>If you&rsquo;re with a russian keyboard and need a stress sign, try <a href="/russian-stress">/russian-stress</a>.</p>
+]]></content:encoded></item><item><title>SSH public key authentication</title><link>https://lutzky.net/linux-stuff/ssh-public-key-authentication/</link><pubDate>Sat, 23 Mar 2013 21:51:06 +0000</pubDate><guid>https://lutzky.net/linux-stuff/ssh-public-key-authentication/</guid><description>If you find yourself logging into SSH servers a lot, you might find this tip useful - you&amp;rsquo;ll only need to type your password once per session. But first, let&amp;rsquo;s set the default username (so you don&amp;rsquo;t have to tell SSH what user you are every time):
+$ cd ~ $ mkdir .ssh $ chmod 700 .ssh $ cat &amp;gt;&amp;gt; .ssh/config Host t2.technion.ac.il User slutzky Ctrl-D $ Now, create a public/private key pair for SSH, like so:</description><content:encoded><![CDATA[<p>If you find yourself logging into SSH servers a lot, you might find this tip
+useful - you&rsquo;ll only need to type your password once per session. But first,
+let&rsquo;s set the default username (so you don&rsquo;t have to tell SSH what user you are
+every time):</p>
+<pre><code class="language-console" data-lang="console">$ cd ~
+$ mkdir .ssh
+$ chmod 700 .ssh
+$ cat &gt;&gt; .ssh/config
+Host t2.technion.ac.il
+	User slutzky
+Ctrl-D
+$
+</code></pre><p>Now, create a public/private key pair for SSH, like so:</p>
+<pre><code class="language-console" data-lang="console">$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/tactless/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): use_a_password
+Enter same passphrase again: use_a_password
+Your identification has been saved in /home/tactless/.ssh/id_rsa.
+Your public key has been saved in /home/tactless/.ssh/id_rsa.pub.
+The key fingerprint is:
+5a:3a:e3:f4:6e:91:fe:3f:27:4e:f4:46:0d:5e:50:4f tactless@dolphin
+</code></pre><p>Now you have a public and private key: <code>~/.ssh/id_rsa</code> is the private key
+(don&rsquo;t give this to anyone!), and <code>~/.ssh/id_rsa.pub</code> is the public key - give
+this to everyone. Specifically, put it on the SSH server you want to log into,
+making sure the permissions are correct. There&rsquo;s a script which does this:</p>
+<pre><code class="language-console" data-lang="console">$ ssh-copy-id t2.technion.ac.il
+</code></pre><p>It basically does the following for you:</p>
+<pre><code class="language-console" data-lang="console">$ scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
+password:
+$ ssh t2.technion.ac.il
+&gt; mkdir .ssh
+&gt; cat id_rsa.pub &gt;&gt; .ssh/authorized_keys
+&gt; chmod 700 .ssh .ssh/authorized_keys
+&gt; chmod 755 .
+&gt; logout
+</code></pre><p>Now, when you log in to your local account, before using SSH for the first time, type the following command:</p>
+<pre><code class="language-console" data-lang="console">$ ssh-add
+Enter passphrase for /home/tactless/.ssh/id_rsa: your-password-here
+$ ssh t2.technion.ac.il
+&gt; # notice, didn't type a password
+&gt; logout
+$ ssh t2.technion.ac.il
+&gt; # no password this time either
+</code></pre>]]></content:encoded></item><item><title>Russian stress mark</title><link>https://lutzky.net/russian-stress/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lutzky.net/russian-stress/</guid><description> This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian keyboard doesn't support it.
+́ function copyIt() { document.getElementById('copyBuffer').select(); document.execCommand('copy'); } Copy</description><content:encoded><![CDATA[
+<p>This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian
+    keyboard doesn't support it.</p>
+<textarea id="copyBuffer">́</textarea>
+
+<script>
+    function copyIt() {
+        document.getElementById('copyBuffer').select();
+        document.execCommand('copy');
+    }                                                                                   
+</script>
+
+<button onClick="copyIt()">Copy</button>]]></content:encoded></item></channel></rss>
