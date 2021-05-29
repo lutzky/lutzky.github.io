@@ -55,6 +55,10 @@ menu:
       name: 🔍
       url: /search/
       weight: 100
+    - identifier: ttime3
+      name: TTime3
+      url: /ttime3/
+      weight: 50
     - identifier: russian-stress
       name: Russian stress mark
       url: /russian-stress/
