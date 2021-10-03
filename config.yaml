@@ -13,6 +13,7 @@ permalinks:
   posts: /:year/:month/:day/:slug/
   pages: /:filename/
 
+disqusShortname: shallowandpedantic
 googleAnalytics: UA-40939561-1
 
 markup:
@@ -27,6 +28,7 @@ outputs:
 
 params:
   author: "Ohad Lutzky"
+  comments: true
   ShowReadingTime: true
   ShowShareButtons: true
   ShowPostNavLinks: true
