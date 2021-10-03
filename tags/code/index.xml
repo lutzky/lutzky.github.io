@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>code on Shallow and Pedantic</title><link>https://lutzky.net/tags/code/</link><description>Recent content in code on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 02 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/code/index.xml" rel="self" type="application/rss+xml"/><item><title>Code comments</title><link>https://lutzky.net/2021/05/02/comments/</link><pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/05/02/comments/</guid><description>&lt;p>Good code comments only describe &lt;em>why&lt;/em> the code is (or isn&amp;rsquo;t!) doing something.&lt;/p></description><content:encoded><![CDATA[<p>Good code comments only describe <em>why</em> the code is (or isn&rsquo;t!) doing something.</p>
 <p>When teaching coding or reviewing code, I sometimes encounter comments describing <em>what</em> it&rsquo;s doing, and those are almost always harmful.</p>
 <p>To be clear, I&rsquo;m talking about <em>code comments</em>, not <em>documentation comments</em>. This nuance is different in every language and setup, but for Go, this is it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// UsefulFunction does useful things. This is a documentation
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// UsefulFunction does useful things. This is a documentation
 </span><span class="c1">// comment, and will be displayed in godoc, IDE autocomplete,
 </span><span class="c1">// and more.
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">UsefulFunction</span><span class="p">()</span> <span class="p">{</span>
@@ -14,14 +14,14 @@
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></div><h2 id="why">Document &ldquo;why&rdquo;</h2>
 <p>In some code, things are done for non-intuitive reasons. It&rsquo;s worth pointing that out - it makes your code easier to read for a newcomer trying to understand why it&rsquo;s written that way. In this example, technically <code>sumOfIntsWithThreshold</code> will work absolutely correctly without its input being sorted, but it <a href="https://stackoverflow.com/questions/11227809">turns out that it will be faster if it is</a>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">sort</span><span class="p">.</span><span class="nf">Ints</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// improves performance; see https://stackoverflow.com/questions/11227809
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">sort</span><span class="p">.</span><span class="nf">Ints</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// improves performance; see https://stackoverflow.com/questions/11227809
 </span><span class="c1"></span><span class="nx">x</span> <span class="o">:=</span> <span class="nf">sumOfIntsWithThreshold</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
 </code></pre></div><p>Other good &ldquo;why&rdquo; examples are code being written in a less-intuitive way to make a particular test possible or to avoid a specific edge-case - be sure to note what those are.</p>
 <p>If a well-researched algorithm is being used, definitely add a reference to it, including the best URL you have for someone who wants a quick overview of how it works.</p>
 <h2 id="why-not">Document &ldquo;why not&rdquo;</h2>
 <p>In some code, the reader might see something missing, a pattern apparently broken. Sometimes this is for a good reason, as keeping with the pattern would cause a bug. More specifically, you might be <em>fixing</em> a bug by breaking the pattern.</p>
 <p>In this example, especially if you&rsquo;re removing a line <code>sort.Strings(c)</code>, it&rsquo;s a good idea to leave a comment explaining why it shouldn&rsquo;t be there.</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{}</span>
     <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
     <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
     <span class="c1">// don&#39;t sort c, we need to keep its original order for foo
@@ -29,12 +29,12 @@
 <span class="p">}</span>
 </code></pre></div><h2 id="trivial">Don&rsquo;t document &ldquo;what&rdquo; when it&rsquo;s trivial</h2>
 <p>You might be asking yourself &ldquo;what&rsquo;s the harm in a comment if it isn&rsquo;t needed. The answer is that it can be misleading; code will function correctly even if it&rsquo;s out-of-sync with its comments, so comments aren&rsquo;t always updated when code is changed, leading to this canonical example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// increment x by 1
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// increment x by 1
 </span><span class="c1"></span><span class="nx">x</span> <span class="o">+=</span> <span class="mi">2</span>
 </code></pre></div><p>In less-trivial cases, the reader can be left scratching their head for far longer than they would&rsquo;ve if the comment weren&rsquo;t there in the first place.</p>
 <h2 id="sections">Documenting &ldquo;sections&rdquo; is a code smell</h2>
 <p>If your code looks is divided using comments into &ldquo;sections&rdquo;, it&rsquo;s probably long and difficult to reason about:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">//// Get site data ////
 </span><span class="c1"></span>    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;data.md&#34;</span><span class="p">)</span>
     <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
@@ -56,7 +56,7 @@
     <span class="nx">renderer</span><span class="p">.</span><span class="nf">Render</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataOfLayout</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div><p>This gets even messier if you don&rsquo;t sneakily omit error handling. In any case, the section headers are reasonable (albeit not great) candidates for function names:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">siteData</span> <span class="o">:=</span> <span class="nf">getSiteData</span><span class="p">()</span>
     <span class="nx">layoutData</span> <span class="o">:=</span> <span class="nf">getLayoutData</span><span class="p">()</span>
     <span class="nx">renderer</span> <span class="o">:=</span> <span class="nf">setupHTMLRenderer</span><span class="p">()</span>
@@ -86,7 +86,7 @@
 </code></pre></div><p>The main <code>ServeSite</code> function is now much easier to read. The &ldquo;section names&rdquo; are now function names, and are less likely to fall out of date. And as a bonus, the scope of many variables is reduced - so the reader doesn&rsquo;t have to keep them in mind, and we can use short names for them.</p>
 <h2 id="code-scars">Don&rsquo;t leave code scars around</h2>
 <p>Finally, just a pet peeve - while it&rsquo;s absolutely fine to &ldquo;comment out&rdquo; code while developing, you usually shouldn&rsquo;t commit this to version control. I like calling these &ldquo;code scars&rdquo;:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">x</span> <span class="o">:=</span> <span class="nf">getMaxValue</span><span class="p">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">x</span> <span class="o">:=</span> <span class="nf">getMaxValue</span><span class="p">()</span>
 <span class="c1">// x = 3
 </span><span class="c1"></span><span class="nf">handle</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
 </code></pre></div><p>In this case, <code>x = 3</code> was there for testing &ldquo;what if <code>getMaxValue</code> returns 3&rdquo;. You should not commit this. However, a possible exception can be if you&rsquo;re documenting &ldquo;why not&rdquo; as above - if it comes with an explanation.</p>
@@ -110,13 +110,13 @@
 <h1 id="cross-compilation">Cross compilation</h1>
 <p>While the Pi Zero is certainly <em>capable</em> of being a fully-fledged Go development environment, it&rsquo;s not a fast one (and me using a cheap old SD card isn&rsquo;t helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and <code>scp</code>-ing the result over. That&rsquo;s despite Go&rsquo;s hefty statically-build binaries (7-12MB for these, depending on stripping).</p>
 <p>Cross compiling is done like so (e.g. in a <a href="https://github.com/lutzky/pitemp/blob/main/build.sh">convenience script</a>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install gcc-arm-linux-gnueabi
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install gcc-arm-linux-gnueabi
 $ <span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>arm-linux-gnueabi-gcc <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARM</span><span class="o">=</span><span class="m">6</span> <span class="nv">GOARCH</span><span class="o">=</span>arm
 $ go -o main.arm build main.go
 </code></pre></div><p>For build-and-run-on-save, this can be used with <code>entr</code>. However, because you can&rsquo;t modify an executable file as it runs (in this case), you need to use a temporary file. On my laptop, I run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
 </span></code></pre></div><p>Then, on the pi, I run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
 </code></pre></div><h1 id="stage-2-pioled">Stage 2: PiOLED</h1>
 <p>I looked for a not-so-ridiculously-large display, and found <a href="https://www.adafruit.com/product/3527">adafruit&rsquo;s PiOLED</a> to be perfect. Its HAT form factor makes for a much tidier device, and the display itself is reminiscent of the 2007 Sansa Clip m300 (albeit monochromatic). Library support is also much better, thanks to <a href="http://periph.io">http://periph.io</a>.</p>
 <p>That being said, my friend soldered the Pi&rsquo;s pins on &ldquo;downwards&rdquo;, as this is apparently more convenient when using it on a breadboard. I figured it&rsquo;s time to order my own Pi Zero (you can get them with the pins pre-soldered, facing &ldquo;up&rdquo;); I later found that <a href="https://pkg.go.dev/periph.io/x/devices/v3/ssd1306#Opts">this might be configurable</a>, but it&rsquo;d still be pretty awkward.</p>
@@ -151,7 +151,7 @@ $ go -o main.arm build main.go
 <!-- raw HTML omitted -->
 <p>[1] Oh yeah, I&rsquo;m a Site Reliability Engineer at Google Ireland now, which is too awesome to detail in this footnote.</p>
 ]]></content:encoded></item><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description><content:encoded><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
 <span class="kn">import</span> <span class="nn">mock</span>
 
@@ -175,7 +175,7 @@ $ go -o main.arm build main.go
                           <span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
 </code></pre></div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
 ]]></content:encoded></item><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description><content:encoded><![CDATA[<p>Here&rsquo;s a fun little bash script:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span><span class="o">(</span>
   sleep <span class="m">20</span> <span class="p">&amp;</span>
 <span class="o">)</span>
@@ -187,15 +187,15 @@ ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
 <li>After &ldquo;Bye&rdquo; is shown, the script exits immediately, returning control to the shell.</li>
 </ul>
 <p>Now, call the script <code>pied_piper.sh</code>, and try the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./pied_piper.sh <span class="p">|</span> cat
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">./pied_piper.sh <span class="p">|</span> cat
 ./pied_piper.sh <span class="p">|</span> ts  <span class="c1"># Awesome timestamping utility, same problem though</span>
 ssh localhost ./pied_piper.sh
 </code></pre></div><p>Annoying, isn&rsquo;t it? These commands won&rsquo;t finish for 20 seconds! The problem is that <code>sleep</code> is keeping its <code>stdout</code> open, which is the input pipe for <code>cat</code>, <code>ts</code>, <code>ssh</code>, or whatever else you&rsquo;re piping to (this is very annoying on Jenkins jobs as well).</p>
 <p>If a third-party product is pissing you off this way - that is, it died, but somehow still keeps its pipe open, you can find the culprit like so:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">fuser -v /proc/<span class="nv">$PID_OF_PROCESS_WITH_OPEN_PIPE</span>/fd/0
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">fuser -v /proc/<span class="nv">$PID_OF_PROCESS_WITH_OPEN_PIPE</span>/fd/0
 </code></pre></div><p>This will usually yield a <code>sleep</code> process as the culprit, with the useless parent information of <code>init</code> (as per my example). The only information you have is the precise delay - in my experience, it helps to find all &ldquo;sleep&rdquo; commands lurking about, and tinker with the delay amounts: Found a <code>sleep 30</code>? Change it to <code>sleep 29</code>, see if that&rsquo;s what shows up.</p>
 <p>Here&rsquo;s how to actually fix the problem:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span><span class="o">(</span>
   sleep <span class="m">20</span> &gt;<span class="p">&amp;</span>- 2&gt;<span class="p">&amp;</span>- &lt;<span class="p">&amp;</span>- <span class="p">&amp;</span>
 <span class="o">)</span>
@@ -205,7 +205,7 @@ ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
 <p>Of course, it&rsquo;s better to save the PID for this <code>sleep</code> and kill it when appropriate from within the script - otherwise, you might be accumulating many useless <code>sleep</code> processes.</p>
 ]]></content:encoded></item><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/2014/01/05/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/01/05/investigate/</guid><description>Distinguishing &lt;!-- raw HTML omitted -->EPERM&lt;!-- raw HTML omitted --> vs &lt;!-- raw HTML omitted -->EACCESS&lt;!-- raw HTML omitted -->, and how that helps debug file manipulation scripts.</description><content:encoded><![CDATA[<p>My show downloading stack lives on. I&rsquo;m curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.</p>
 <p>At any rate, nowadays I use <code>flexget</code>, <code>transmission</code>, <code>tvnamer</code> and <code>xbmc</code>, held together with some bash scripts. On debian- and ubuntu-based systems, the <code>transmission</code> daemon runs as a separate user (<code>debian-transmission</code>), so this requires a bit of care with file and group ownership. After rebuilding my system, I couldn&rsquo;t get <code>tvnamer</code> to work right for some reason, no matter how careful I was. I&rsquo;d keep getting this error:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Loading config: config.json
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Loading config: config.json
 ####################
 # Starting tvnamer
 # Found 1 episode
@@ -227,12 +227,12 @@ OSError(2, &#39;No such file or directory&#39;)
 <p>It turns out that after renaming, <code>tvnamer</code> tries to preserve the access and modification times of renamed files. A noble cause, but it turns out that Linux won&rsquo;t allow this unless you are the <em>owner</em> of the file - even if you do have write permissions. Therefore, this fails, which causes <code>tvnamer</code> to believe the rename failed - although it hasn&rsquo;t. Afterwards, the directory is created (this succeeds), but since <code>tvnamer</code> tries to copy using the <em>old</em> filename (thinking the rename failed), we get an <code>ENOENT</code> &ldquo;2 - No such file or directory&rdquo; error about the <em>source</em> of the copy operation.</p>
 <p>The fix can be found <a href="https://github.com/dbr/tvnamer/pull/89">in this pull request</a>. Happy bug hunting!</p>
 ]]></content:encoded></item><item><title>Startup times</title><link>https://lutzky.net/2013/12/11/startup-times/</link><pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/11/startup-times/</guid><description>Starting new java processes in your scripts considered harmful. Let&amp;rsquo;s compare &amp;ldquo;hello world&amp;rdquo; startup times for different languages.</description><content:encoded><![CDATA[<p>Lately, a facebook comment of mine on the subject of Java&rsquo;s slowness has proved quite popular, so here goes: Here&rsquo;s a listing of a few Hello World programs and running times for them (<strong>including startup, which is a big deal in Java</strong>) on my laptop:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">$ grep &#39;^model name&#39; /proc/cpuinfo | head -1
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">$ grep &#39;^model name&#39; /proc/cpuinfo | head -1
 model name	: Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz
 $ uname -a
 Linux orca 3.11.0-14-generic #21-Ubuntu SMP Tue Nov 12 17:04:55 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
 </code></pre></div><p>The following script will be timed:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="nv">n</span><span class="o">=</span><span class="nv">$1</span>
 
@@ -243,7 +243,7 @@ Linux orca 3.11.0-14-generic #21-Ubuntu SMP Tue Nov 12 17:04:55 UTC 2013 x86_64 
 <span class="k">done</span>
 </code></pre></div><p>Times are for <code>n=100</code>.</p>
 <h2 id="c">C</h2>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span><span class="cp"></span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Hello, world!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
@@ -255,7 +255,7 @@ Linux orca 3.11.0-14-generic #21-Ubuntu SMP Tue Nov 12 17:04:55 UTC 2013 x86_64 
 </span><span class="cm"> * It turns out that gcc/g++ guess the language from the file extension.
 </span><span class="cm"> */</span>
 </code></pre></div><h2 id="c-1">C++</h2>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span><span class="cp"></span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, world!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -264,13 +264,13 @@ Linux orca 3.11.0-14-generic #21-Ubuntu SMP Tue Nov 12 17:04:55 UTC 2013 x86_64 
 
 <span class="c1">// Result: 0.30s
 </span></code></pre></div><h2 id="python">Python</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/python</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/python</span>
 
-<span class="k">print</span> <span class="s2">&#34;Hello, world!&#34;</span>
+<span class="nb">print</span> <span class="s2">&#34;Hello, world!&#34;</span>
 
 <span class="c1"># Result: 1.33s</span>
 </code></pre></div><h2 id="java">Java</h2>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Hello, world!&#34;</span><span class="o">);</span>
     <span class="o">}</span>
@@ -281,7 +281,7 @@ Linux orca 3.11.0-14-generic #21-Ubuntu SMP Tue Nov 12 17:04:55 UTC 2013 x86_64 
 ]]></content:encoded></item><item><title>Asserting string equality</title><link>https://lutzky.net/2013/12/02/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/02/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description><content:encoded><![CDATA[<p>I&rsquo;ve had several opportunities to write unit tests for code that outputs large
 strings. It&rsquo;s important that your unit-testing framework handles this well.</p>
 <p>Here&rsquo;s my example data:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">STRING_A</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">STRING_A</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
 </span><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
 </span><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
@@ -320,7 +320,7 @@ reasonable indication of what the difference is.</p>
 Python 3, this becomes the default behavior for standard <code>assertEqual</code>). There
 are similar comparison methods for other large data types.</p>
 <p>Output:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">F
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">F
 ======================================================================
 FAIL: testLongStringEquality (__main__.TestLongStrings)
 ----------------------------------------------------------------------
@@ -348,7 +348,7 @@ Ran 1 test in 0.003s
 
 FAILED (failures=1)
 </code></pre></div><p>For Java and JUnit, the output is also short and sweet (for plain <code>assertEquals</code>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">testLongStringEquality(MyTest): expected:&lt;...sque. Aenean venenat[i]s vulputate eros, si...&gt; but was:&lt;...sque. Aenean venenat[l]s vulputate eros, si...&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">testLongStringEquality(MyTest): expected:&lt;...sque. Aenean venenat[i]s vulputate eros, si...&gt; but was:&lt;...sque. Aenean venenat[l]s vulputate eros, si...&gt;
 </code></pre></div><p>Does your unit testing framework provide helpful output for failed unit tests?
 This is something you can and should demand of it.</p>
 ]]></content:encoded></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/2013/12/01/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/01/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description><content:encoded><![CDATA[<p>A conversation with a friend reminded me that, in fact, I&rsquo;ve been doing
@@ -359,14 +359,14 @@ multi-module C programs), most homework exercises looked something along these
 lines: Write a program managing a store inventory, with a command-line client
 conforming to a given set of specifications. For an input file looking like
 this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">addcategory Fruit
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">addcategory Fruit
 addproduct Fruit Banana 2.30
 addproduct Fruit Tomato 1.20
 addproduct Fruit Apple 1.50
 addproduct Fruit Apple 1.60
 list Fruit
 </code></pre></div><p>The output file would be expected to look like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">OK
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">OK
 OK
 OK
 OK
@@ -411,7 +411,7 @@ Introduction Assume you&amp;rsquo;re working with an external vendor, who is pro
 <h2 id="introduction">Introduction</h2>
 <p>Assume you&rsquo;re working with an external vendor, who is providing you with code
 for a wonderful function <code>getFoo</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// foo.h version 1.2.3
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// foo.h version 1.2.3
 </span><span class="c1"></span>
 <span class="kt">int</span> <span class="nf">getFoo</span><span class="p">();</span>
 
@@ -423,7 +423,7 @@ for a wonderful function <code>getFoo</code>:</p>
 <span class="p">}</span>
 </code></pre></div><p>You use this function in many of your products - for example, in your
 best-selling <code>barApp</code> application:</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// barApp.c
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// barApp.c
 </span><span class="c1"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span><span class="cp"></span>
@@ -464,13 +464,13 @@ servers and developer boxes will need to be able to have multiple versions of
 <code>libfoo</code> installed simultaneously.</p>
 <h2 id="compiling-installing-and-using-a-shared-library-properly">Compiling, installing, and using a shared library properly</h2>
 <p>First, the upstream vendor should compile <code>libfoo.so</code> with an <code>SONAME</code>, like so:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gcc -shared -Wl,-soname,libfoo.so.1 -o libfoo.so.1.2.3 foo.c
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">gcc -shared -Wl,-soname,libfoo.so.1 -o libfoo.so.1.2.3 foo.c
 objdump -x libfoo.so.1.2.3 <span class="p">|</span> grep SONAME
 <span class="c1"># SONAME               libfoo.so.1</span>
 </code></pre></div><p>The guarantee the upstream vendor should give is this: As long as <code>SONAME</code>
 doesn&rsquo;t change, binary compatibility will be retained.</p>
 <p>Now, you (or, preferably, your package manager) should install the package on your machine like so:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo1
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo1
 cp foo.h /usr/include/foo1
 cp libfoo.so.1.2.3 /usr/lib
 ldconfig -v <span class="p">|</span> grep libfoo
@@ -478,7 +478,7 @@ ldconfig -v <span class="p">|</span> grep libfoo
 </code></pre></div><p>Now, traditionally <em>another</em> symlink <code>libfoo.so</code> -&gt; <code>libfoo.so.1.2.3</code> would be
 created, so you could compile <code>barApp</code> with <code>-lfoo</code>. However, here&rsquo;s an
 alternative:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gcc -I/usr/include/foo1 -l:libfoo.so.1 barApp.c -o barApp
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">gcc -I/usr/include/foo1 -l:libfoo.so.1 barApp.c -o barApp
 ldd barApp
 <span class="c1"># linux-vdso.so.1 =&gt;  (0x00007fff8edfe000)</span>
 <span class="c1"># libfoo.so.1 =&gt; /usr/lib/libfoo.so.1 (0x00007fb367cce000)</span>
@@ -491,7 +491,7 @@ to the symlink created by <code>ldconfig</code>, and use <code>libfoo.so.1.2.3</
 <p>Suppose a new, compatible, faster version of <code>libfoo</code> is released - say version
 \1.3.0, which has removed that pesky <code>sleep</code>. Well, just place it in <code>/usr/lib</code>
 and rerun <code>ldconfig</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cp libfoo.so.1.3.0 /usr/lib
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cp libfoo.so.1.3.0 /usr/lib
 ldconfig -v <span class="p">|</span> grep libfoo
 <span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
 </code></pre></div><p>The symlink has been updated, and now all applications (<code>barApp</code>, for example)
@@ -500,7 +500,7 @@ which were linked against <code>libfoo.so.1</code> will have improved performanc
 <p>Suppose a new, incompatible version 2.0.0 of <code>libfoo</code> is released, which would
 force the newer <code>barApp2.0</code> to be recompiled against the new, different
 headers. No problem:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo2
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo2
 cp foo.h /usr/include/foo2
 cp libfoo.so.2.0.0 /usr/lib
 ldconfig -v <span class="p">|</span> grep libfoo
@@ -589,7 +589,7 @@ Illustrated here. Hints below.
 &amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;quot;x: %p, y: %p&amp;quot; % [x, y]; end =&amp;gt; nil &amp;gt;&amp;gt; inspect_x_and_y(y={&amp;quot;hello&amp;quot; =&amp;gt; &amp;quot;world&amp;quot;},x=[1,2,3]) x: {&amp;quot;hello&amp;quot;=&amp;gt;&amp;quot;world&amp;quot;}, y: [1, 2, 3] The bits I didn&amp;rsquo;t know about:
 &amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ] The %p formatting character is the same as inspect. You can call methods with method_name(param2=val2, param1=val1), also like in python.</description><content:encoded><![CDATA[<p><strong>Edit: I was misled!</strong></p>
 <p>Illustrated here. Hints below.</p>
-<pre><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &quot;x: %p, y: %p&quot; % [x, y]; end
+<pre tabindex="0"><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &quot;x: %p, y: %p&quot; % [x, y]; end
 =&gt; nil
 &gt;&gt; inspect_x_and_y(y={&quot;hello&quot; =&gt; &quot;world&quot;},x=[1,2,3])
 x: {&quot;hello&quot;=&gt;&quot;world&quot;}, y: [1, 2, 3]
@@ -626,7 +626,7 @@ nicely in C, without mucking about in C++. Exception handling (of sorts),
 object-oriented programming (of sorts) as well as garbage collection (of sorts)
 are implemented in a usable way, and extremely well-documented.</p>
 <p>At the end of the day, I was able to turn this Python gem:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">dbus</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">dbus</span>
 
 <span class="k">def</span> <span class="nf">_nm_device_interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;Returns an interface to the device object dev_object&#34;&#34;&#34;</span>
@@ -645,7 +645,7 @@ are implemented in a usable way, and extremely well-documented.</p>
     <span class="k">except</span><span class="p">:</span>
         <span class="c1"># If it doesn&#39;t have a get_dbus_name, it probably isn&#39;t the DBus</span>
         <span class="c1"># exception we&#39;re looking for.</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">_nm_all_device_interfaces</span><span class="p">():</span>
     <span class="s2">&#34;&#34;&#34;Return a list of interfaces to all devices NM sees&#34;&#34;&#34;</span>
@@ -657,7 +657,7 @@ are implemented in a usable way, and extremely well-documented.</p>
             <span class="k">return</span> <span class="p">[]</span> <span class="c1"># No devices means list of devices is empty</span>
         <span class="k">else</span><span class="p">:</span> <span class="k">raise</span>
 </code></pre></div><p>&hellip;into this C gem:</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
 </span><span class="cp">#define DBUS_PATH_NM &#34;/org/freedesktop/NetworkManager&#34;
 </span><span class="cp">#define DBUS_INTERFACE_NM &#34;org.freedesktop.NetworkManager&#34;
 </span><span class="cp">#define NM_ERR_NODEVICES &#34;org.freedesktop.NetworkManager.NoDevices&#34;
@@ -722,7 +722,7 @@ applications; updating a progressbar in the application doesn&rsquo;t need to sl
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
 or processes at the user&rsquo;s choice:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">processing</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">processing</span>
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">Queue</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -731,21 +731,21 @@ or processes at the user&rsquo;s choice:</p>
 
 <span class="n">gtk</span><span class="o">.</span><span class="n">gdk</span><span class="o">.</span><span class="n">threads_init</span><span class="p">()</span>
 
-<span class="n">USE_PROCESSING</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">USE_PROCESSING</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">WORKER_DELAY</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">GUI_DELAY</span> <span class="o">=</span> <span class="mf">0.5</span>
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
-	<span class="k">print</span> <span class="s2">&#34;Init other thread&#34;</span>
+	<span class="nb">print</span> <span class="s2">&#34;Init other thread&#34;</span>
 	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 	<span class="k">while</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
 		<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">WORKER_DELAY</span><span class="p">)</span>
 		<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-		<span class="k">print</span> <span class="s2">&#34;Other thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span>
+		<span class="nb">print</span> <span class="s2">&#34;Other thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span>
 		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="k">def</span> <span class="nf">update_label</span><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">)):</span>
-	<span class="k">print</span> <span class="s2">&#34;Updating label&#34;</span>
+	<span class="nb">print</span> <span class="s2">&#34;Updating label&#34;</span>
 	<span class="k">try</span><span class="p">:</span>
 		<span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
 		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Number in thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
@@ -756,7 +756,7 @@ or processes at the user&rsquo;s choice:</p>
 	<span class="k">return</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
-	<span class="n">sq</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">sq</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 	<span class="n">gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -779,7 +779,7 @@ or processes at the user&rsquo;s choice:</p>
 	<span class="n">w</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 	<span class="n">w</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">sq</span><span class="p">)</span>
 	<span class="n">w</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
-	<span class="k">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
+	<span class="nb">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
 	<span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 </code></pre></div>]]></content:encoded></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After trying to figure out how to work DBus with C, and seeing how easy it is to do in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately, it&amp;rsquo;s very simple to use - especially thanks to this guide.
 It later turned out to be much easier to do in C, as described in Faster Languages.</description><content:encoded><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
@@ -794,7 +794,7 @@ each function return, along with its actual return value (if any), a numeric
 code identifying the error. Unfortunately, this made the code get really big,
 really fast - especially once DBus exceptions are thrown into the mix. But once
 I learned how to use decorators, I accomplished something like this diff:</p>
-<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gi">+@wrap_exceptions((False,))
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gi">+@wrap_exceptions((False,))
 </span><span class="gi"></span> def checkSomething():
 <span class="gd">-    global error_string
 </span><span class="gd">-
@@ -817,8 +817,8 @@ etc. - that happened in a lot of functions. Unfortunately, they didn&rsquo;t all
 return their values in the same way. Some just returned a <code>RET_VALUE</code>, but most
 had other values before it in the tuple (not the ideal design, come to think of
 it&hellip;). Here&rsquo;s the decorator I wrote:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span> <span class="o">=</span> <span class="n">prepend_tuple</span>
 
     <span class="k">def</span> <span class="nf">tuplize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retval</span><span class="p">):</span>
@@ -871,7 +871,7 @@ I&rsquo;m really torn between it and Ruby :(</p>
 <li id="fn:1" role="doc-endnote">
 <p>Used to have a copy of <code>antigibberish.py</code>, but it&rsquo;s been lost in
 the mists of time. It used to do the equivalent of this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
 </code></pre></div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </section>

@@ -2,7 +2,7 @@
 class Secretary def send_fax(destination, fax_contents) puts &amp;#39;Sending fax &amp;#34;%s&amp;#34; to %s&amp;#39; % [fax_contents, destination] end def answer_call(call) # ... end # ... end Our Secretary provides a lot of useful functionality, that our Boss class would like to have. Boss would like to be able to say that he can send a fax, without having the user explicitly request his Secretary beforehand.</description><content:encoded><![CDATA[<p>Sometimes, when constructing a compound object, we are interested in exporting
 functionality while retaining encapsulation. For example, suppose we have a
 <code>Secretary</code> class:</p>
-<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Secretary</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Secretary</span>
   <span class="k">def</span> <span class="nf">send_fax</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">fax_contents</span><span class="p">)</span>
     <span class="nb">puts</span> <span class="s1">&#39;Sending fax &#34;%s&#34; to %s&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="n">fax_contents</span><span class="p">,</span> <span class="n">destination</span><span class="o">]</span>
   <span class="k">end</span>
@@ -18,7 +18,7 @@ would like to have. <code>Boss</code> would like to be able to say that he can s
 without having the user explicitly request his <code>Secretary</code> beforehand. The same
 goes for a lot of other methods <code>Secretary</code> provides. Instead of writing a stub
 function for each of these methods, it would be nice to do the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Boss</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Boss</span>
   <span class="n">delegate_method</span> <span class="ss">:my_secretary</span><span class="p">,</span> <span class="ss">:send_fax</span><span class="p">,</span> <span class="ss">:answer_call</span>
 
   <span class="k">def</span> <span class="nf">initialize</span>
@@ -29,7 +29,7 @@ function for each of these methods, it would be nice to do the following:</p>
 <span class="n">john</span> <span class="o">=</span> <span class="no">Boss</span><span class="o">.</span><span class="n">new</span>
 <span class="n">john</span><span class="o">.</span><span class="n">send_fax</span><span class="p">(</span><span class="s2">&#34;Donald Trump&#34;</span><span class="p">,</span> <span class="s2">&#34;YOU&#39;RE fired&#34;</span><span class="p">)</span>
 </code></pre></div><p>Here&rsquo;s how we can get this to happen:</p>
-<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Class</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Class</span>
   <span class="k">def</span> <span class="nf">delegate_method</span><span class="p">(</span><span class="n">instance_var_name</span><span class="p">,</span> <span class="o">*</span><span class="n">method_names</span><span class="p">)</span>
     <span class="n">method_names</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">method_name</span><span class="o">|</span>
       <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
@@ -48,7 +48,7 @@ Illustrated here. Hints below.
 &amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;quot;x: %p, y: %p&amp;quot; % [x, y]; end =&amp;gt; nil &amp;gt;&amp;gt; inspect_x_and_y(y={&amp;quot;hello&amp;quot; =&amp;gt; &amp;quot;world&amp;quot;},x=[1,2,3]) x: {&amp;quot;hello&amp;quot;=&amp;gt;&amp;quot;world&amp;quot;}, y: [1, 2, 3] The bits I didn&amp;rsquo;t know about:
 &amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ] The %p formatting character is the same as inspect. You can call methods with method_name(param2=val2, param1=val1), also like in python.</description><content:encoded><![CDATA[<p><strong>Edit: I was misled!</strong></p>
 <p>Illustrated here. Hints below.</p>
-<pre><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &quot;x: %p, y: %p&quot; % [x, y]; end
+<pre tabindex="0"><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &quot;x: %p, y: %p&quot; % [x, y]; end
 =&gt; nil
 &gt;&gt; inspect_x_and_y(y={&quot;hello&quot; =&gt; &quot;world&quot;},x=[1,2,3])
 x: {&quot;hello&quot;=&gt;&quot;world&quot;}, y: [1, 2, 3]
@@ -67,7 +67,7 @@ x.</strong></li>
 documentation. Here are some useful things I figured out while writing TTime. I
 ended up having a single <code>gettext_settings.rb</code>, included from every file which
 uses gettext. Here it is (with some extra notes)</p>
-<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="ch">#!/usr/bin/ruby</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="ch">#!/usr/bin/ruby</span>
 <span class="k">begin</span>
   <span class="nb">require</span> <span class="s1">&#39;gettext&#39;</span>
   <span class="nb">require</span> <span class="s1">&#39;pathname&#39;</span>

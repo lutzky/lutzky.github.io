@@ -3,20 +3,20 @@
 <p>Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it&rsquo;s far more likely that git did the &ldquo;right&rdquo; thing after all. Here are a couple of examples I&rsquo;ve seen recently.</p>
 <h2 id="first-case">First case</h2>
 <p>When rebasing, conflicts might occur <em>before</em> renames:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">o---o---E---F---G (master)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">o---o---E---F---G (master)
      \
       A---B---RENAME---C (feature *)
 </code></pre></div><p>When the current branch is <em>feature</em>, and running <code>git rebase master</code>, what happens is that the commits from <code>feature</code> will be <code>cherry-pick</code>ed onto <code>G</code> in order - <code>A</code>, <code>B</code>, <code>RENAME</code>, and <code>C</code>. If a conflict occurs in <code>B</code>, in a file that was later renamed (in <code>RENAME</code>), conflict resolution will have to happen <em>using the original name</em>. If there was a massive reworking, it might be simpler and more sensible to <em>merge</em> in this case.</p>
 <h2 id="second-case">Second case</h2>
 <p>It wasn&rsquo;t a rename, it was a copy.</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">--o---E----F [MODIFY]----G (master)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">--o---E----F [MODIFY]----G (master)
    \                      \
     A---B [COPY]---C---D---M (feature *)
 </code></pre></div><p>In this case, the user thought he renamed <code>dir1/file.xml</code> to <code>dir2/file.xml</code> in <code>B [COPY]</code>. Then, when he merged <code>master</code> into <code>feature</code>, he expected that the modifications in <code>file.xml</code> in <code>F [MODIFY]</code> would, as part of the merge in <code>M</code>, be applied to <code>dir2/file.xml</code>. This would indeed have happened if <code>B</code> had a move operation. However, it doesn&rsquo;t make sense for git to merge the changes from a <em>copy</em> of a file, so it didn&rsquo;t.</p>
 <p>The fix here was to undo the merge:</p>
-<pre><code class="language-console" data-lang="console">$ git reset --hard D
+<pre tabindex="0"><code class="language-console" data-lang="console">$ git reset --hard D
 </code></pre><p>&hellip;and then edit the commit:</p>
-<pre><code class="language-console" data-lang="console">$ git rebase -i A
+<pre tabindex="0"><code class="language-console" data-lang="console">$ git rebase -i A
 </code></pre><p>&hellip;and set <code>B</code> to <code>edit</code> instead of <code>pick</code>. Amend the commit for <code>B</code> so that it doesn&rsquo;t just create <code>dir2/file.xml</code>, but also deletes <code>dir1/file.xml</code>. If it&rsquo;s indeed the same file (or has very similar contents), this will be automatically detected as a rename during <code>log</code> and <code>merge</code> operations.</p>
 <p>It should be noted that git doesn&rsquo;t track renames (or copies) at all during commits. It only figures out that they happened retroactively when it&rsquo;s relevant (<code>log</code>, <code>merge</code>, <code>cherry-pick</code>, <code>diff</code>&hellip;), by comparing the contents. This is why those operations have options like <code>rename-threshold</code>, <code>find-renames</code>, <code>find-copies</code> and even <code>find-copies-harder</code>.</p>
 ]]></content:encoded></item><item><title>Git While You Sit 2 - .gitignore</title><link>https://lutzky.net/2014/08/15/git-ignore/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/08/15/git-ignore/</guid><description>Using &lt;!-- raw HTML omitted -->.gitignore&lt;!-- raw HTML omitted --> to exclude build artifacts from your repository.</description><content:encoded><![CDATA[<p>This is part of the &ldquo;Git While You Sit&rdquo; series, a play on Google&rsquo;s <a href="http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html">Testing on the Toilet</a>. It&rsquo;s intended to fit on a printed page. Currently Chrome doesn&rsquo;t seem to correctly print columns, but Firefox does.
@@ -24,10 +24,10 @@
 <p>Your repository has files which are generated as part of your build process or as part of running your software, which you don&rsquo;t want in source control. They keep showing up in <code>git status</code>. What to do?</p>
 <p>You can create a file called <code>.gitignore</code> - note that the filename starts with a <code>.</code>, which is standard for configuration files in Unix and causes them to be hidden from normal listing. Each <code>.gitignore</code> file affects the current directory and its subdirectories - you can have multiple <code>.gitignore</code> files to create more specific rules for subdirectories.</p>
 <p><em>Note:</em> <code>.gitignore</code> can only be used for files which shouldn&rsquo;t be in source code <em>at all</em> (those show up as &ldquo;Untracked files&rdquo;. <em>Modified</em> files can&rsquo;t be ignored in this way. If you really want to, you can force git to ignore modifications with this command:</p>
-<pre><code class="language-console" data-lang="console">$ git update-index --assume-unchanged FILE
+<pre tabindex="0"><code class="language-console" data-lang="console">$ git update-index --assume-unchanged FILE
 </code></pre><p>However, this is usually a bad idea and indicates you need to refactor your file handling - split files which get modified locally from files which contain information which should be source-controlled.</p>
 <p>Here is an annotated excerpt from a <code>.gitignore</code> file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"># Extensions of compiled files
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"># Extensions of compiled files
 *.a
 *.so
 *.o
@@ -52,7 +52,7 @@ obj/
 ]]></content:encoded></item><item><title>Git While You Sit 1 - Add --patch</title><link>https://lutzky.net/2014/08/13/git-add-patch/</link><pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/08/13/git-add-patch/</guid><description>Using &lt;!-- raw HTML omitted -->git add -p&lt;!-- raw HTML omitted --> to eliminate those pesky &lt;!-- raw HTML omitted -->printf&lt;!-- raw HTML omitted -->-debugging statements.</description><content:encoded><![CDATA[<p>This is part of the &ldquo;Git While You Sit&rdquo; series, a play on Google&rsquo;s <a href="http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html">Testing on the Toilet</a>. It&rsquo;s intended to fit on a printed page. Currently Chrome doesn&rsquo;t seem to correctly print columns, but Firefox does.
 {: .no-print }</p>
 <p>Ever find yourself <code>printf</code>-debugging? You found the bug, but now you have <code>printf</code> statements all over the place. Running <code>git diff</code>, you get:</p>
-<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gh">diff --git a/hello.c b/hello.c
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gh">diff --git a/hello.c b/hello.c
 </span><span class="gh">index 93ca08c..c7d354a 100644
 </span><span class="gh"></span><span class="gd">--- a/hello.c
 </span><span class="gd"></span><span class="gi">+++ b/hello.c
@@ -78,7 +78,7 @@ obj/
  }
  
 </code></pre></div><p>It&rsquo;s actually pretty easy to get rid of them. Run <code>git add -p</code> and you will be shown each patch &ldquo;hunk&rdquo; separately:</p>
-<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gh">diff --git a/hello.c b/hello.c
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gh">diff --git a/hello.c b/hello.c
 </span><span class="gh">index 93ca08c..c7d354a 100644
 </span><span class="gh"></span><span class="gd">--- a/hello.c
 </span><span class="gd"></span><span class="gi">+++ b/hello.c

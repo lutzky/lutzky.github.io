@@ -25,7 +25,7 @@ $ cd ~ $ mkdir .ssh $ chmod 700 .ssh $ cat &amp;gt;&amp;gt; .ssh/config Host t2.
 useful - you&rsquo;ll only need to type your password once per session. But first,
 let&rsquo;s set the default username (so you don&rsquo;t have to tell SSH what user you are
 every time):</p>
-<pre><code class="language-console" data-lang="console">$ cd ~
+<pre tabindex="0"><code class="language-console" data-lang="console">$ cd ~
 $ mkdir .ssh
 $ chmod 700 .ssh
 $ cat &gt;&gt; .ssh/config
@@ -34,7 +34,7 @@ Host t2.technion.ac.il
 Ctrl-D
 $
 </code></pre><p>Now, create a public/private key pair for SSH, like so:</p>
-<pre><code class="language-console" data-lang="console">$ ssh-keygen -t rsa
+<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/tactless/.ssh/id_rsa): 
 Enter passphrase (empty for no passphrase): use_a_password
@@ -47,9 +47,9 @@ The key fingerprint is:
 (don&rsquo;t give this to anyone!), and <code>~/.ssh/id_rsa.pub</code> is the public key - give
 this to everyone. Specifically, put it on the SSH server you want to log into,
 making sure the permissions are correct. There&rsquo;s a script which does this:</p>
-<pre><code class="language-console" data-lang="console">$ ssh-copy-id t2.technion.ac.il
+<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-copy-id t2.technion.ac.il
 </code></pre><p>It basically does the following for you:</p>
-<pre><code class="language-console" data-lang="console">$ scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
+<pre tabindex="0"><code class="language-console" data-lang="console">$ scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
 password:
 $ ssh t2.technion.ac.il
 &gt; mkdir .ssh
@@ -58,7 +58,7 @@ $ ssh t2.technion.ac.il
 &gt; chmod 755 .
 &gt; logout
 </code></pre><p>Now, when you log in to your local account, before using SSH for the first time, type the following command:</p>
-<pre><code class="language-console" data-lang="console">$ ssh-add
+<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-add
 Enter passphrase for /home/tactless/.ssh/id_rsa: your-password-here
 $ ssh t2.technion.ac.il
 &gt; # notice, didn't type a password

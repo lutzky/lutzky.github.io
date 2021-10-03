@@ -21,7 +21,7 @@ on <a href="http://git.or.cz">the main site</a>, there&rsquo;s <a href="http://w
 talk by Linus about it</a>. Also, I&rsquo;m
 giving a talk about it in Haifux - this coming Monday (February 4th), the Taub
 building of the Technion, room 6, at 18:30.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/python</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/python</span>
 <span class="c1"># coding: utf-8</span>
 <span class="kn">import</span> <span class="nn">socket</span>
 
@@ -114,25 +114,25 @@ building of the Technion, room 6, at 18:30.</p>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">cleaned_data</span> <span class="o">=</span> <span class="n">clean_response_html</span><span class="p">(</span><span class="n">returned_data</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s2">&#34;Error occured when trying to clean up the following response:&#34;</span>
-        <span class="k">print</span> <span class="s2">&#34;site_response:&#34;</span>
-        <span class="k">print</span> <span class="n">site_response</span>
-        <span class="k">print</span> <span class="s2">&#34;returned_data:&#34;</span>
-        <span class="k">print</span> <span class="n">returned_data</span>
+        <span class="nb">print</span> <span class="s2">&#34;Error occured when trying to clean up the following response:&#34;</span>
+        <span class="nb">print</span> <span class="s2">&#34;site_response:&#34;</span>
+        <span class="nb">print</span> <span class="n">site_response</span>
+        <span class="nb">print</span> <span class="s2">&#34;returned_data:&#34;</span>
+        <span class="nb">print</span> <span class="n">returned_data</span>
         <span class="k">raise</span>
 
-    <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">,</span> <span class="s2">&#34;utf-8&#34;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">,</span> <span class="s2">&#34;utf-8&#34;</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">(</span><span class="s2">&#34;Enter query for Egged site: &#34;</span><span class="p">),</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">unicode</span><span class="p">(</span><span class="n">raw_input</span><span class="p">(</span><span class="s2">&#34;Enter query for Egged site: &#34;</span><span class="p">),</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">query_site</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 
-    <span class="k">print</span> <span class="s2">&#34;&#34;</span>
+    <span class="nb">print</span> <span class="s2">&#34;&#34;</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">log2vis</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="n">log2vis</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">log2vis</span><span class="p">(</span><span class="nb">unicode</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="s2">&#34;utf-8&#34;</span><span class="p">))</span>
+        <span class="nb">print</span> <span class="n">log2vis</span><span class="p">(</span><span class="n">unicode</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="s2">&#34;utf-8&#34;</span><span class="p">))</span>
 </code></pre></div>]]></content:encoded></item><item><title>Two reasons Apple suck</title><link>https://lutzky.net/2007/09/16/two-reasons-apple-suck/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/two-reasons-apple-suck/</guid><description>First of all, new iPods won&amp;rsquo;t work on Linux. Now, while it&amp;rsquo;s very obvious that the idea is to block competition against other music vendors, that makes it even less legitimate. Good thing we&amp;rsquo;re starting to see some very nice cheap players out there - I&amp;rsquo;ve been rather impressed with the Meizu M6 MiniPlayer.
 Secondly, they didn&amp;rsquo;t think of this: Indexed search within the &amp;ldquo;Open&amp;rdquo; dialog. It&amp;rsquo;s in Ubuntu Gutsy, and really makes desktop search (implemented with Tracker in gutsy) worthwhile.</description><content:encoded><![CDATA[<p>First of all, <a href="http://www.boingboing.net/2007/09/14/new-ipods-reengineer.html">new iPods won&rsquo;t work on
 Linux</a>. Now,

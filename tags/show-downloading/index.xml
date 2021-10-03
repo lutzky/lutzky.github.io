@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>show downloading on Shallow and Pedantic</title><link>https://lutzky.net/tags/show-downloading/</link><description>Recent content in show downloading on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 05 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/show-downloading/index.xml" rel="self" type="application/rss+xml"/><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/2014/01/05/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/01/05/investigate/</guid><description>Distinguishing &lt;!-- raw HTML omitted -->EPERM&lt;!-- raw HTML omitted --> vs &lt;!-- raw HTML omitted -->EACCESS&lt;!-- raw HTML omitted -->, and how that helps debug file manipulation scripts.</description><content:encoded><![CDATA[<p>My show downloading stack lives on. I&rsquo;m curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.</p>
 <p>At any rate, nowadays I use <code>flexget</code>, <code>transmission</code>, <code>tvnamer</code> and <code>xbmc</code>, held together with some bash scripts. On debian- and ubuntu-based systems, the <code>transmission</code> daemon runs as a separate user (<code>debian-transmission</code>), so this requires a bit of care with file and group ownership. After rebuilding my system, I couldn&rsquo;t get <code>tvnamer</code> to work right for some reason, no matter how careful I was. I&rsquo;d keep getting this error:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Loading config: config.json
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Loading config: config.json
 ####################
 # Starting tvnamer
 # Found 1 episode
@@ -40,7 +40,7 @@ works for you:</p>
 <li>Watch it</li>
 </ol>
 <p>Here&rsquo;s how it&rsquo;s done: First, write <code>/usr/local/bin/notify_torrent_done</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>cat_the_message<span class="o">()</span> <span class="o">{</span>
 cat <span class="s">&lt;&lt;EOF
 </span><span class="s">Subject: Torrent done: $TR_TORRENT_NAME
@@ -68,7 +68,7 @@ this script. We rerun <code>msmtp</code> until it succeeds because you will ofte
 &ldquo;connection timed out&rdquo; response from gmail (&hellip;at least on my ISP&hellip;). Here&rsquo;s
 <code>/etc/msmtprc.transmission</code> which is relevant to gmail (this is a bit tricky
 and took a lot of fiddling around with):</p>
-<pre><code>defaults
+<pre tabindex="0"><code>defaults
 tls on
 tls_starttls on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
@@ -87,7 +87,7 @@ recommend using Google&rsquo;s two-step authentication, which will have you crea
 a one-time password for each application - use one of those one-time passwords
 here.</p>
 <p>Finally, in <code>/etc/transmission-daemon/settings.json</code>, add the following code:</p>
-<pre><code>&quot;script-torrent-done-enabled&quot;: true,
+<pre tabindex="0"><code>&quot;script-torrent-done-enabled&quot;: true,
 &quot;script-torrent-done-filename&quot;: &quot;/usr/local/bin/notify_torrent_done&quot;,
 </code></pre><p><strong>Important:</strong> You need to run <code>/etc/init.d/transmission-daemon reload</code> at
 this point, not <code>restart</code> - that would cause <code>settings.json</code> to be
@@ -144,7 +144,7 @@ set the output directory to <code>~/torrents/from_rss</code>.</p>
 <p>For downloading torrents, I use <a href="http://libtorrent.rakshasa.no/">rtorrent</a>.
 It&rsquo;s a curses-based client which performs very well. My <code>.rtorrent.rc</code> file looks
 like this:</p>
-<pre><code>download_rate = 30
+<pre tabindex="0"><code>download_rate = 30
 upload_rate = 2
 directory = /home/ohad/torrents/in_progress
 on_finished = move_complete,&quot;execute=mv,-u,$d.get_base_path=,~/torrents/inbox/ ;d.set_directory=~/torrents/inbox/&quot;
@@ -174,7 +174,7 @@ deleted.</li>
 computer is up. This is not as elegant as starting it from an RC-script, but
 keeps the whole setup confined to the limits of my own user. Again, rtorrent
 has a lock-file which prevents multiple instances from running.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
 

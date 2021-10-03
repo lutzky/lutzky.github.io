@@ -50,7 +50,7 @@ of security, speed, or reliability. Here&amp;rsquo;s how my apartment looks (ver
 approximately):&lt;/p></description><content:encoded><![CDATA[<p>I don&rsquo;t like wireless connections; they&rsquo;re always second-best, be it in terms
 of security, speed, or reliability. Here&rsquo;s how my apartment looks (very
 approximately):</p>
-<pre><code>.-P1----.  .-------------------P4-,---------,
+<pre tabindex="0"><code>.-P1----.  .-------------------P4-,---------,
 |  PC   |  |       COMFY SOFA     .         |
 |       |  |                      . Closed  |
 |  .-,  |  |      Living room     . Porch   |
@@ -119,7 +119,7 @@ Host beta Hostname 1.2.3.4 # IP Address of beta ProxyCommand ssh alpha nc -w 1 %
 common situation in the Technion. Here&rsquo;s one way to get around it: Assume you
 can directly ssh into <code>alpha</code>, and from <code>alpha</code> you can ssh into <code>beta</code>. Have
 the following code in your <code>~/.ssh/config</code>:</p>
-<pre><code>Host beta
+<pre tabindex="0"><code>Host beta
         Hostname 1.2.3.4  # IP Address of beta
         ProxyCommand ssh alpha nc -w 1 %h %p
 </code></pre><p>This requires you to have <code>nc</code> (netcat) installed on <code>alpha</code>. Once you do that,
@@ -139,7 +139,7 @@ excellent program called dante-client (that&rsquo;s an apt package, folks. if yo
 can&rsquo;t apt-get due to your network situation, get it at packages.ubuntu.com or
 packages.debian.org). Install it, and make sure <code>/etc/dante.conf</code> has the
 following lines:</p>
-<pre><code>route {
+<pre tabindex="0"><code>route {
     from: 0.0.0.0/0   to: 0.0.0.0/0   via: 127.0.0.1 port = 9999
     protocol: tcp
     proxyprotocol: socks_v4 socks_v5

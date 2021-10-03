@@ -4,7 +4,7 @@ Cream is a very good editor if you&amp;rsquo;re used to Windows applications.</d
 <li>
 <p>You can use git on a VFAT disk (for example, a USB key) without all of the
 annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
-<pre><code>[core]
+<pre tabindex="0"><code>[core]
 filemode = false
 </code></pre><p>What I haven&rsquo;t figured out is how to do force a chmod in this situation; for
 example, if I create a new script, I was hoping to be able to <code>git chmod +x</code>

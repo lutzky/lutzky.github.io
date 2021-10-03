@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>testing on Shallow and Pedantic</title><link>https://lutzky.net/tags/testing/</link><description>Recent content in testing on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/testing/index.xml" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description><content:encoded><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
 <span class="kn">import</span> <span class="nn">mock</span>
 
@@ -25,7 +25,7 @@
 ]]></content:encoded></item><item><title>Asserting string equality</title><link>https://lutzky.net/2013/12/02/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/02/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description><content:encoded><![CDATA[<p>I&rsquo;ve had several opportunities to write unit tests for code that outputs large
 strings. It&rsquo;s important that your unit-testing framework handles this well.</p>
 <p>Here&rsquo;s my example data:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">STRING_A</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">STRING_A</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
 </span><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
 </span><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
@@ -64,7 +64,7 @@ reasonable indication of what the difference is.</p>
 Python 3, this becomes the default behavior for standard <code>assertEqual</code>). There
 are similar comparison methods for other large data types.</p>
 <p>Output:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">F
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">F
 ======================================================================
 FAIL: testLongStringEquality (__main__.TestLongStrings)
 ----------------------------------------------------------------------
@@ -92,7 +92,7 @@ Ran 1 test in 0.003s
 
 FAILED (failures=1)
 </code></pre></div><p>For Java and JUnit, the output is also short and sweet (for plain <code>assertEquals</code>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">testLongStringEquality(MyTest): expected:&lt;...sque. Aenean venenat[i]s vulputate eros, si...&gt; but was:&lt;...sque. Aenean venenat[l]s vulputate eros, si...&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">testLongStringEquality(MyTest): expected:&lt;...sque. Aenean venenat[i]s vulputate eros, si...&gt; but was:&lt;...sque. Aenean venenat[l]s vulputate eros, si...&gt;
 </code></pre></div><p>Does your unit testing framework provide helpful output for failed unit tests?
 This is something you can and should demand of it.</p>
 ]]></content:encoded></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/2013/12/01/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/01/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description><content:encoded><![CDATA[<p>A conversation with a friend reminded me that, in fact, I&rsquo;ve been doing
@@ -103,14 +103,14 @@ multi-module C programs), most homework exercises looked something along these
 lines: Write a program managing a store inventory, with a command-line client
 conforming to a given set of specifications. For an input file looking like
 this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">addcategory Fruit
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">addcategory Fruit
 addproduct Fruit Banana 2.30
 addproduct Fruit Tomato 1.20
 addproduct Fruit Apple 1.50
 addproduct Fruit Apple 1.60
 list Fruit
 </code></pre></div><p>The output file would be expected to look like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">OK
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">OK
 OK
 OK
 OK

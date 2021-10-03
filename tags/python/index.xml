@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>python on Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>Recent content in python on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description><content:encoded><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
 <span class="kn">import</span> <span class="nn">mock</span>
 
@@ -108,7 +108,7 @@ nicely in C, without mucking about in C++. Exception handling (of sorts),
 object-oriented programming (of sorts) as well as garbage collection (of sorts)
 are implemented in a usable way, and extremely well-documented.</p>
 <p>At the end of the day, I was able to turn this Python gem:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">dbus</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">dbus</span>
 
 <span class="k">def</span> <span class="nf">_nm_device_interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;Returns an interface to the device object dev_object&#34;&#34;&#34;</span>
@@ -127,7 +127,7 @@ are implemented in a usable way, and extremely well-documented.</p>
     <span class="k">except</span><span class="p">:</span>
         <span class="c1"># If it doesn&#39;t have a get_dbus_name, it probably isn&#39;t the DBus</span>
         <span class="c1"># exception we&#39;re looking for.</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">_nm_all_device_interfaces</span><span class="p">():</span>
     <span class="s2">&#34;&#34;&#34;Return a list of interfaces to all devices NM sees&#34;&#34;&#34;</span>
@@ -139,7 +139,7 @@ are implemented in a usable way, and extremely well-documented.</p>
             <span class="k">return</span> <span class="p">[]</span> <span class="c1"># No devices means list of devices is empty</span>
         <span class="k">else</span><span class="p">:</span> <span class="k">raise</span>
 </code></pre></div><p>&hellip;into this C gem:</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
 </span><span class="cp">#define DBUS_PATH_NM &#34;/org/freedesktop/NetworkManager&#34;
 </span><span class="cp">#define DBUS_INTERFACE_NM &#34;org.freedesktop.NetworkManager&#34;
 </span><span class="cp">#define NM_ERR_NODEVICES &#34;org.freedesktop.NetworkManager.NoDevices&#34;
@@ -204,7 +204,7 @@ applications; updating a progressbar in the application doesn&rsquo;t need to sl
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
 or processes at the user&rsquo;s choice:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">processing</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">processing</span>
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">Queue</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -213,21 +213,21 @@ or processes at the user&rsquo;s choice:</p>
 
 <span class="n">gtk</span><span class="o">.</span><span class="n">gdk</span><span class="o">.</span><span class="n">threads_init</span><span class="p">()</span>
 
-<span class="n">USE_PROCESSING</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">USE_PROCESSING</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">WORKER_DELAY</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">GUI_DELAY</span> <span class="o">=</span> <span class="mf">0.5</span>
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
-	<span class="k">print</span> <span class="s2">&#34;Init other thread&#34;</span>
+	<span class="nb">print</span> <span class="s2">&#34;Init other thread&#34;</span>
 	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 	<span class="k">while</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
 		<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">WORKER_DELAY</span><span class="p">)</span>
 		<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-		<span class="k">print</span> <span class="s2">&#34;Other thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span>
+		<span class="nb">print</span> <span class="s2">&#34;Other thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span>
 		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="k">def</span> <span class="nf">update_label</span><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">)):</span>
-	<span class="k">print</span> <span class="s2">&#34;Updating label&#34;</span>
+	<span class="nb">print</span> <span class="s2">&#34;Updating label&#34;</span>
 	<span class="k">try</span><span class="p">:</span>
 		<span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
 		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Number in thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
@@ -238,7 +238,7 @@ or processes at the user&rsquo;s choice:</p>
 	<span class="k">return</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
-	<span class="n">sq</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">sq</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 	<span class="n">gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -261,7 +261,7 @@ or processes at the user&rsquo;s choice:</p>
 	<span class="n">w</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 	<span class="n">w</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">sq</span><span class="p">)</span>
 	<span class="n">w</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
-	<span class="k">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
+	<span class="nb">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
 	<span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 </code></pre></div>]]></content:encoded></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After trying to figure out how to work DBus with C, and seeing how easy it is to do in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately, it&amp;rsquo;s very simple to use - especially thanks to this guide.
 It later turned out to be much easier to do in C, as described in Faster Languages.</description><content:encoded><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
@@ -276,7 +276,7 @@ each function return, along with its actual return value (if any), a numeric
 code identifying the error. Unfortunately, this made the code get really big,
 really fast - especially once DBus exceptions are thrown into the mix. But once
 I learned how to use decorators, I accomplished something like this diff:</p>
-<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gi">+@wrap_exceptions((False,))
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gi">+@wrap_exceptions((False,))
 </span><span class="gi"></span> def checkSomething():
 <span class="gd">-    global error_string
 </span><span class="gd">-
@@ -299,8 +299,8 @@ etc. - that happened in a lot of functions. Unfortunately, they didn&rsquo;t all
 return their values in the same way. Some just returned a <code>RET_VALUE</code>, but most
 had other values before it in the tuple (not the ideal design, come to think of
 it&hellip;). Here&rsquo;s the decorator I wrote:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span> <span class="o">=</span> <span class="n">prepend_tuple</span>
 
     <span class="k">def</span> <span class="nf">tuplize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retval</span><span class="p">):</span>
@@ -353,7 +353,7 @@ I&rsquo;m really torn between it and Ruby :(</p>
 <li id="fn:1" role="doc-endnote">
 <p>Used to have a copy of <code>antigibberish.py</code>, but it&rsquo;s been lost in
 the mists of time. It used to do the equivalent of this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
 </code></pre></div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </section>

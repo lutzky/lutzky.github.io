@@ -160,11 +160,11 @@ somewhere in your <code>$PATH</code> for convenience.</p>
 within your Android SDK directory, under <code>platforms/android-3/images</code> (or
 whatever version you&rsquo;re emulating). We&rsquo;ll extract that - create a temporary
 directory, say <code>/tmp/system.img.hebdroid</code>, and <code>cd</code> to it. Then run:</p>
-<pre><code>unyaffs /path/to/system.img
+<pre tabindex="0"><code>unyaffs /path/to/system.img
 </code></pre><p>The whole <code>/system</code> filesystem should be extracted. Now extract the <code>ttf</code> files
 from <code>hebdroid.zip</code> into the fonts directory, replacing the original font
 files. To pack everything back up, run:</p>
-<pre><code>mkyaffs2image /tmp/system.img.hebdroid system.img.hebdroid
+<pre tabindex="0"><code>mkyaffs2image /tmp/system.img.hebdroid system.img.hebdroid
 </code></pre><p>Now, I recommend putting renaming your original <code>system.img</code> to
 <code>system.img.orig</code>, and using symlinking <code>system.img.hebdroid</code> as your new
 <code>system.img</code> (the emulator does indeed follow symlinks), but you can basically
