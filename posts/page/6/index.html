@@ -82,6 +82,17 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Gettext oddities with Ruby</h2>
+</header>
+<section class=entry-content>
+<p>I was having a lot of trouble with gettext in Ruby, mostly due to lacking documentation. Here are some useful things I figured out while writing TTime. I ended up having a single gettext_settings.rb, included from every file which uses gettext. Here it is (with some extra notes)
+#!/usr/bin/ruby begin require 'gettext' require 'pathname' include GetText # This fixes a swarm of problems on Windows GetText.locale.charset = "UTF-8" # Ruby's gettext acts in a sane # method - add a path to the set of paths # scanned....</p>
+</section>
+<footer class=entry-footer>July 20, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
+<a class=entry-link aria-label="post link to Gettext oddities with Ruby" href=https://lutzky.net/2008/07/20/gettext-oddities-with-ruby/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Been working on TTime</h2>
 </header>
 <section class=entry-content>
@@ -183,18 +194,6 @@ Now you need a neat little plugin from the Guifications plugin pack, called Swit
 </section>
 <footer class=entry-footer>April 16, 2008&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Ohad Lutzky</footer>
 <a class=entry-link aria-label="post link to Faster Languages" href=https://lutzky.net/2008/04/16/faster-languages/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>My alarm clock</h2>
-</header>
-<section class=entry-content>
-<p>YNet was running a story on how to use your computer as an alarm clock. Here’s what I do, for our commandline junkies :)
-Here’s ~/bin/run_alarm.sh:
-#!/bin/bash find ~/music/ -name '*.mp3' -print0 | xargs -0 mplayer -shuffle & MAXVOL=31 TIME=900 for (( i = 0; i &lt;= $MAXVOL; i++ )); do amixer set Master $i > /dev/null; sleep `echo $TIME / $MAXVOL | bc -l` done This basically plays all of my MP3 files, in random order....</p>
-</section>
-<footer class=entry-footer>February 12, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
-<a class=entry-link aria-label="post link to My alarm clock" href=https://lutzky.net/2008/02/12/my-alarm-clock/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

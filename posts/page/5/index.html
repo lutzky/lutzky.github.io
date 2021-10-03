@@ -82,6 +82,17 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Using git for code review</h2>
+</header>
+<section class=entry-content>
+<p>At my workplace, I’ve recently been using git for code review purposes. I work on code in my own git clone, and ask a peer to review it. It works somewhat like this:
+master branch is same code as currently in upstream. Working to resolve issue #1234 pertaining to “Performance for gizmo”, I work on a branch 1234-gizmo-performance. I mail a peer, John, with this information, as well as my repository location....</p>
+</section>
+<footer class=entry-footer>April 4, 2009&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
+<a class=entry-link aria-label="post link to Using git for code review" href=https://lutzky.net/2009/04/04/using-git-for-code-review/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Hardware doesn't like me</h2>
 </header>
 <section class=entry-content>
@@ -178,17 +189,6 @@ The was part of project BadSense. See the BadSense report
 </section>
 <footer class=entry-footer>July 23, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
 <a class=entry-link aria-label="post link to Security project" href=https://lutzky.net/2008/07/23/security-project/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Gettext oddities with Ruby</h2>
-</header>
-<section class=entry-content>
-<p>I was having a lot of trouble with gettext in Ruby, mostly due to lacking documentation. Here are some useful things I figured out while writing TTime. I ended up having a single gettext_settings.rb, included from every file which uses gettext. Here it is (with some extra notes)
-#!/usr/bin/ruby begin require 'gettext' require 'pathname' include GetText # This fixes a swarm of problems on Windows GetText.locale.charset = "UTF-8" # Ruby's gettext acts in a sane # method - add a path to the set of paths # scanned....</p>
-</section>
-<footer class=entry-footer>July 20, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
-<a class=entry-link aria-label="post link to Gettext oddities with Ruby" href=https://lutzky.net/2008/07/20/gettext-oddities-with-ruby/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

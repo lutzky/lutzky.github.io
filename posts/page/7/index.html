@@ -82,6 +82,18 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>My alarm clock</h2>
+</header>
+<section class=entry-content>
+<p>YNet was running a story on how to use your computer as an alarm clock. Here’s what I do, for our commandline junkies :)
+Here’s ~/bin/run_alarm.sh:
+#!/bin/bash find ~/music/ -name '*.mp3' -print0 | xargs -0 mplayer -shuffle & MAXVOL=31 TIME=900 for (( i = 0; i &lt;= $MAXVOL; i++ )); do amixer set Master $i > /dev/null; sleep `echo $TIME / $MAXVOL | bc -l` done This basically plays all of my MP3 files, in random order....</p>
+</section>
+<footer class=entry-footer>February 12, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
+<a class=entry-link aria-label="post link to My alarm clock" href=https://lutzky.net/2008/02/12/my-alarm-clock/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Nokia 6120 Classic</h2>
 </header>
 <section class=entry-content>
@@ -180,17 +192,6 @@ Yeah… not so anymore. For about four weeks (just a bit before the semester sta
 </section>
 <footer class=entry-footer>September 25, 2007&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
 <a class=entry-link aria-label="post link to Tough Question" href=https://lutzky.net/2007/09/25/tough-question/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Really liking this git thing</h2>
-</header>
-<section class=entry-content>
-<p>I’ve been a very big proponent of Subversion so far, especially as a tool for collaborating on coding homework. However, I’ve recently been trying out Linus’s git. It’s very nice so far, and really seems to be catching on. Some good points:
-Fast as all hell (much faster than Bazaar, although I haven’t given that the proper attention) No need for a central server; hell, no need for an internet connection at all, everything can be done over USB keys or whatnot No real need to configure any special server; just install git on it Very nice alternative to configuring write-control for all of the users Very easy branching and merging, finally!...</p>
-</section>
-<footer class=entry-footer>September 18, 2007&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
-<a class=entry-link aria-label="post link to Really liking this git thing" href=https://lutzky.net/2007/09/18/really-liking-this-git-thing/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
