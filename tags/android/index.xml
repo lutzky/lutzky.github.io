@@ -63,11 +63,11 @@ interface for this unobtrusive.</li>
 </li>
 </ol>
 <p>Everyone loves screenshots:</p>
-<p><img loading="lazy" src="/assets/images/2011/09/device2.png" alt="Separate source and destination fields"  />
+<p><img loading="lazy" src="device2.png" alt="Separate source and destination fields"  />
 
-<img loading="lazy" src="/assets/images/2011/09/prefs.png" alt="Select data provider"  />
+<img loading="lazy" src="prefs.png" alt="Select data provider"  />
 
-<img loading="lazy" src="/assets/images/2011/09/device.png" alt="Automatic location detection, Egged provider"  />
+<img loading="lazy" src="device.png" alt="Automatic location detection, Egged provider"  />
 </p>
 <p>For a sneak peek, go to <a href="http://github.com/lutzky/TransportDroidIL">http://github.com/lutzky/TransportDroidIL</a> for the
 latest sources. You can also report issues there.</p>
