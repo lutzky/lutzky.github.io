@@ -1,6 +1,6 @@
 tasks:
   - before: "brew install hugo"
-    command: "hugo server --baseUrl $(gp url 1313) --appendPort=false"
+    command: "hugo -D -F server --baseUrl $(gp url 1313) --appendPort=false --liveReloadPort 443 --bind=0.0.0.0"
 ports:
   - port: 1313
     onOpen: open-preview
