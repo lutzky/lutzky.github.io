@@ -82,6 +82,18 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Hebrew spell-checking in Pidgin</h2>
+</header>
+<section class=entry-content>
+<p>This one took me a while to figure out, which is reason enough to post it here.
+First of all, you’ll need aspell-he, as pidgin uses gtkspell (which, in turn, uses aspell) rather than enchant (which supports hspell). There is a patch for gtkspell which gets it to use enchant, but I don’t know of a simple way to get it to work in my distribution of choice, Ubuntu.
+Now you need a neat little plugin from the Guifications plugin pack, called SwitchSpell....</p>
+</section>
+<footer class=entry-footer>April 22, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
+<a class=entry-link aria-label="post link to Hebrew spell-checking in Pidgin" href=https://lutzky.net/2008/04/22/hebrew-spell-checking-in-pidgin/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Faster Languages</h2>
 </header>
 <section class=entry-content>
@@ -182,16 +194,6 @@ Yeah… not so anymore. For about four weeks (just a bit before the semester sta
 </section>
 <footer class=entry-footer>October 28, 2007&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
 <a class=entry-link aria-label="post link to Encrypted my Wi-fi" href=https://lutzky.net/2007/10/28/encrypted-my-wi-fi/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>On Threading vs. Processing</h2>
-</header>
-<section class=entry-content>
-<p>Writing multi-threaded applications in Python is often a headache because of the Global Interpreter Lock - only one Python thread can run at any given moment, which makes multi-threading useful only in the case where all modules but one actually run C code. However, thanks to the impressive new Python Magazine, I’ve stumbled across a package called processing, paraphrasing python’s built-in threading package. Essentially, the package provides an API identical to Python’s threading, but uses processes and pipes (or other mechanisms on non-posix operating systems) instead....</p>
-</section>
-<footer class=entry-footer>October 13, 2007&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Ohad Lutzky</footer>
-<a class=entry-link aria-label="post link to On Threading vs. Processing" href=https://lutzky.net/2007/10/13/on-threading-vs-processing/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

@@ -82,6 +82,16 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>On Threading vs. Processing</h2>
+</header>
+<section class=entry-content>
+<p>Writing multi-threaded applications in Python is often a headache because of the Global Interpreter Lock - only one Python thread can run at any given moment, which makes multi-threading useful only in the case where all modules but one actually run C code. However, thanks to the impressive new Python Magazine, I’ve stumbled across a package called processing, paraphrasing python’s built-in threading package. Essentially, the package provides an API identical to Python’s threading, but uses processes and pipes (or other mechanisms on non-posix operating systems) instead....</p>
+</section>
+<footer class=entry-footer>October 13, 2007&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Ohad Lutzky</footer>
+<a class=entry-link aria-label="post link to On Threading vs. Processing" href=https://lutzky.net/2007/10/13/on-threading-vs-processing/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Tough Question</h2>
 </header>
 <section class=entry-content>
@@ -178,17 +188,6 @@ Poster lost in the mists of time, show ended up being cancelled at the last mome
 </section>
 <footer class=entry-footer>May 31, 2007&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
 <a class=entry-link aria-label="post link to Some band stuff" href=https://lutzky.net/2007/05/31/some-band-stuff/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Myspace sucks</h2>
-</header>
-<section class=entry-content>
-<p>Life is good, for the most part. And as a technology enthusiast, there are many new and cool things to see online. For example, there’s the new Schools site, part of the Vaya project which helps Israeli schools use Linux; this site uses the up-and-coming Lahak CMS, built on the Django framework, and looks very promising to the eyes of the bidi-lingual webmaster.
-However, some things just plain suck. One of them is myspace; today, in an attempt to make it more legible, I found that My Band’s Page implements all of its styling changes by a “style” tag hidden within the “Members” text block....</p>
-</section>
-<footer class=entry-footer>May 17, 2007&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Ohad Lutzky</footer>
-<a class=entry-link aria-label="post link to Myspace sucks" href=https://lutzky.net/2007/05/17/myspace-sucks/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

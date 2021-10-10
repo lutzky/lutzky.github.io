@@ -82,6 +82,19 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Three things I didn't know Ruby does</h2>
+</header>
+<section class=entry-content>
+<p>Edit: I was misled!
+Illustrated here. Hints below.
+>> def inspect_x_and_y(x,y); puts "x: %p, y: %p" % [x, y]; end => nil >> inspect_x_and_y(y={"hello" => "world"},x=[1,2,3]) x: {"hello"=>"world"}, y: [1, 2, 3] The bits I didn’t know about:
+"Format strings using a %% sign, %s, %s!" % [ "just like in python", "but with arrays" ] The %p formatting character is the same as inspect. You can call methods with method_name(param2=val2, param1=val1), also like in python....</p>
+</section>
+<footer class=entry-footer>July 25, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
+<a class=entry-link aria-label="post link to Three things I didn't know Ruby does" href=https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Security project</h2>
 </header>
 <section class=entry-content>
@@ -184,18 +197,6 @@ Cream is a very good editor if you’re used to Windows applications....</p>
 </section>
 <footer class=entry-footer>April 28, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
 <a class=entry-link aria-label="post link to Things I learned today" href=https://lutzky.net/2008/04/28/things-i-learned-today/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Hebrew spell-checking in Pidgin</h2>
-</header>
-<section class=entry-content>
-<p>This one took me a while to figure out, which is reason enough to post it here.
-First of all, you’ll need aspell-he, as pidgin uses gtkspell (which, in turn, uses aspell) rather than enchant (which supports hspell). There is a patch for gtkspell which gets it to use enchant, but I don’t know of a simple way to get it to work in my distribution of choice, Ubuntu.
-Now you need a neat little plugin from the Guifications plugin pack, called SwitchSpell....</p>
-</section>
-<footer class=entry-footer>April 22, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
-<a class=entry-link aria-label="post link to Hebrew spell-checking in Pidgin" href=https://lutzky.net/2008/04/22/hebrew-spell-checking-in-pidgin/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
