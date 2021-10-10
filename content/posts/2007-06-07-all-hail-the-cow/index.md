@@ -1,13 +1,15 @@
 ---
 date: "2007-06-07T00:00:00Z"
-summary:  Silly post about a cow called Paradox.
+summary: Silly post about a cow called Paradox.
 tags:
-- asides
-- technion
+  - asides
+  - technion
 title: All hail the cow!
 ---
 
-[![Paradox the cow](/assets/images/2007/06/534994007_ef57770ac3.jpg)](http://www.flickr.com/photos/paradox_the_cow/)
+[![Paradox the cow](534994007_ef57770ac3.jpg)](http://www.flickr.com/photos/paradox_the_cow/)
+
+![Another action shot with Paradox](535038697_9b471a95b1_o.jpg)
 
 I present to you, the only creature which is more of a celebrity in the
 undergrad CS world than I am... _The Cow_. (Paradox)

@@ -1,10 +1,10 @@
 ---
 date: "2007-01-30T21:21:00Z"
 tags:
-- technion
+  - technion
 title: I might need these tomorrow...
 ---
 
 My lecture slides. Have a peek if you like :)
 
-[sybilproof Reputation Mechanisms - Seminar](/assets/attachments/2007/01/sybils.pdf)
+[sybilproof Reputation Mechanisms - Seminar](sybils.pdf)

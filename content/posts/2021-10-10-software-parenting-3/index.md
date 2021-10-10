@@ -17,7 +17,7 @@ Coding for the ESP8266 can be done using the same tooling as Arduino - namely, i
 
 One quirk of working with the BabyBuddy API is that reporting a diaper requires supplying the current time, even if our intention is "right now". That's easy enough on a Linux system, but microcontrollers don't generally have clocks. Thankfully, libraries such as [ESPDateTime](https://github.com/mcxiaoke/ESPDateTime) provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:
 
-[poobuttons-v2]: /assets/images/2021/10/software-parenting-3/poobuttons-v2.jpg
+[poobuttons-v2]: poobuttons-v2.jpg
 
 [![PooButtons v2 - nodeMCU on breadboard][poobuttons-v2]][poobuttons-v2]
 
@@ -29,7 +29,7 @@ I decided to repurpose my [shitty cardboard LCD case](https://lutzky.net/2021/03
 
 [^heartbeat]: 2nd row from the bottom, rightmost column; you can see it fading out in this shot. It blinks every second. Although the photo doesn't show it, the LCD's contrast is actually great in-person.
 
-[poobuttons-v3]: /assets/images/2021/10/software-parenting-3/poobuttons-v3.jpg
+[poobuttons-v3]: poobuttons-v3.jpg
 
 [![PooButtons v3 - nodeMCU on breadboard][poobuttons-v3]][poobuttons-v3]
 

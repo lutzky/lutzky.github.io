@@ -11,7 +11,7 @@ title: WFH Wifi
 
 (Diagram below is approximate; I'll explain why and how it was created in a bit.)
 
-![Apartment diagram](/assets/images/2020/12/wfh-wifi/base.png)
+![Apartment diagram](base.png)
 
 My broadband comes in via a cable connection in the living room - the modem and router/AP sit in the bottom middle of the room. Before WFH times we would occasionally work from home, mostly from the living room, which was the only place with chairs. To get wifi in the bedrooms (one of which is now labeled "office"), I used a TP-link powerline pack - i.e. one thing stuck to a power socket by the router in the living room, and another in the bedroom. Or the hallway. The tradeoffs were these:
 
@@ -32,14 +32,14 @@ So, step 1 - I needed a floor plan. I do not have one of my apartment, but the 3
 
 [![Living room][livingroom-2g]][livingroom-2g]
 
-[livingroom-2g]: /assets/images/2020/12/wfh-wifi/livingroom-2g-64dBm.png
-[livingroom-5g]: /assets/images/2020/12/wfh-wifi/livingroom-5g-64dBm.png
-[hallway-2g]: /assets/images/2020/12/wfh-wifi/hallway-2g-60dBm.png
-[hallway-5g]: /assets/images/2020/12/wfh-wifi/hallway-5g-60dBm.png
-[office-2g]: /assets/images/2020/12/wfh-wifi/office-2g-60dBm.png
-[office-5g]: /assets/images/2020/12/wfh-wifi/office-5g-60dBm.png
-[bedroom-opendoor-2g]: /assets/images/2020/12/wfh-wifi/bedroom-opendoor-2g-60dBm.png
-[bedroom-opendoor-5g]: /assets/images/2020/12/wfh-wifi/bedroom-opendoor-5g-60dBm.png
+[livingroom-2g]: livingroom-2g-64dBm.png
+[livingroom-5g]: livingroom-5g-64dBm.png
+[hallway-2g]: hallway-2g-60dBm.png
+[hallway-5g]: hallway-5g-60dBm.png
+[office-2g]: office-2g-60dBm.png
+[office-5g]: office-5g-60dBm.png
+[bedroom-opendoor-2g]: bedroom-opendoor-2g-60dBm.png
+[bedroom-opendoor-5g]: bedroom-opendoor-5g-60dBm.png
 
 This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren't taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally [worse in 5ghz][livingroom-5g].
 

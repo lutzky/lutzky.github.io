@@ -33,7 +33,7 @@ The LCD was also quite slow to refresh, the way I was using it; any faster than 
 
 Finally, the LCD unit is much, *much* large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a "case".
 
-[lcd-box-img]: /assets/images/2021/03/pitemp/lcd_box.jpg
+[lcd-box-img]: lcd_box.jpg
 
 [![LCD Box][lcd-box-img]][lcd-box-img]
 
@@ -79,7 +79,7 @@ The PiOLED library (actually periph.io's ssd1306 library) essentially lets you r
 
 I'm quite happy with the final result:
 
-[pioled-img]: /assets/images/2021/03/pitemp/pioled.jpg
+[pioled-img]: pioled.jpg
 
 [![PiOLED PiTemp][pioled-img]][pioled-img]
 
