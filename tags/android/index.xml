@@ -63,12 +63,18 @@ interface for this unobtrusive.</li>
 </li>
 </ol>
 <p>Everyone loves screenshots:</p>
-<p><img loading="lazy" src="device2.png" alt="Separate source and destination fields"  />
-
-<img loading="lazy" src="prefs.png" alt="Select data provider"  />
-
-<img loading="lazy" src="device.png" alt="Automatic location detection, Egged provider"  />
-</p>
+<figure>
+  <a href="/2011/09/02/upcoming-features-in-transportdroidil/device2.png">
+    <img loading="lazy" src="/2011/09/02/upcoming-features-in-transportdroidil/device2.png" />
+  </a><figcaption>Separate source and destination fields</figcaption></figure>
+<figure>
+  <a href="/2011/09/02/upcoming-features-in-transportdroidil/prefs.png">
+    <img loading="lazy" src="/2011/09/02/upcoming-features-in-transportdroidil/prefs.png" />
+  </a><figcaption>Select data provider</figcaption></figure>
+<figure>
+  <a href="/2011/09/02/upcoming-features-in-transportdroidil/device.png">
+    <img loading="lazy" src="/2011/09/02/upcoming-features-in-transportdroidil/device.png" />
+  </a><figcaption>Automatic location detection, Egged provider</figcaption></figure>
 <p>For a sneak peek, go to <a href="http://github.com/lutzky/TransportDroidIL">http://github.com/lutzky/TransportDroidIL</a> for the
 latest sources. You can also report issues there.</p>
 ]]></content:encoded></item><item><title>Android</title><link>https://lutzky.net/2010/09/04/android/</link><pubDate>Sat, 04 Sep 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/09/04/android/</guid><description>I&amp;rsquo;ve finally gotten the chance to get one of those newfangled Android phones.

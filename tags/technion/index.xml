@@ -46,10 +46,14 @@ and send me a link. (Drawings would be most welcome, and you&rsquo;re obviously
 welcome to add your name to the list of typers)</p>
 <p>If you need git storage, try <a href="http://repo.or.cz">repo.or.cz</a>, or ask the T2
 admins to install git :)</p>
-]]></content:encoded></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description><content:encoded><![CDATA[<p><a href="http://www.flickr.com/photos/paradox_the_cow/"><img loading="lazy" src="534994007_ef57770ac3.jpg" alt="Paradox the cow"  />
-</a></p>
-<p><img loading="lazy" src="535038697_9b471a95b1_o.jpg" alt="Another action shot with Paradox"  />
-</p>
+]]></content:encoded></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description><content:encoded><![CDATA[<figure>
+  <a href="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg">
+    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" />
+  </a><figcaption><a href="http://www.flickr.com/photos/paradox_the_cow/">Paradox the cow</a></figcaption></figure>
+<figure>
+  <a href="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg">
+    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" />
+  </a><figcaption>Another action shot with Paradox</figcaption></figure>
 <p>I present to you, the only creature which is more of a celebrity in the
 undergrad CS world than I am&hellip; <em>The Cow</em>. (Paradox)</p>
 <p><strong>Edit:</strong> Yes, that&rsquo;s me. No, that&rsquo;s not my bass. That&rsquo;s a very good friend&rsquo;s
@@ -136,9 +140,8 @@ jabber client (that&rsquo;s what it&rsquo;s called in gaim and pidgin, at any ra
   <span class="o">[</span> <span class="n">grade</span><span class="p">,</span> <span class="mi">100</span> <span class="o">].</span><span class="n">min</span>
 <span class="k">end</span>
 </code></pre></div>]]></content:encoded></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</guid><description>My lecture slides. Have a peek if you like :)
-sybilproof Reputation Mechanisms - Seminar</description><content:encoded><![CDATA[<p>My lecture slides. Have a peek if you like :)</p>
-<p><a href="sybils.pdf">sybilproof Reputation Mechanisms - Seminar</a></p>
-]]></content:encoded></item><item><title>As for Python</title><link>https://lutzky.net/2007/01/23/as-for-python/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/23/as-for-python/</guid><description>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to TryRuby, code my sites using Rails, am surprised that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes called the Japanese Python, and comparisons are inevitable. I know very little about Python, but I do know that&amp;hellip;
+sybilproof Reputation Mechanisms - Seminar</description><content:encoded>&lt;p>My lecture slides. Have a peek if you like :)&lt;/p>
+&lt;a href="/2007/01/30/i-might-need-these-tomorrow/sybils.pdf">sybilproof Reputation Mechanisms - Seminar&lt;/a></content:encoded></item><item><title>As for Python</title><link>https://lutzky.net/2007/01/23/as-for-python/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/23/as-for-python/</guid><description>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to TryRuby, code my sites using Rails, am surprised that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes called the Japanese Python, and comparisons are inevitable. I know very little about Python, but I do know that&amp;hellip;
 It has a larger community More GUI applications are written in it More bindings are available for it Its interpreter is much faster Not a far inferior language Ruby certainly does have its advantages over it - trivial class expansion, extremely concise syntax, seemingly better-suited for heavy usage of closures, and Matz.</description><content:encoded><![CDATA[<p>Myself, I&rsquo;m a Ruby hacker. I send everyone within earshot to
 <a href="http://tryruby.hobix.com">TryRuby</a>, code my sites using Rails, am surprised
 that I&rsquo;m using a php-based blog&hellip; you get the picture. Ruby is sometimes

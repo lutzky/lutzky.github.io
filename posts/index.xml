@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on Shallow and Pedantic</title><link>https://lutzky.net/posts/</link><description>Recent content in Posts on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/2021/10/10/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/10/10/software-parenting-3/</guid><description>Transitioning PooButtons to a microcontroller</description><content:encoded><![CDATA[<p>As noted in the <a href="https://lutzky.net/2021/10/05/software-parenting-2/">previous post</a>, I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn&rsquo;t have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it&rsquo;s quite capable as a microcontroller on its own (and the newer ESP32 is faster).</p>
 <p>So what&rsquo;s the difference between a (very small) computer and a microcontroller? A Raspberry Pi boots off an SD card, usually to a full-fledged Linux operating system; you&rsquo;d operate it either directly with a monitor and keyboard, or connect remotely using SSH. You can install/create software on it as you would on a &ldquo;full-size&rdquo; computer, and I usually do this in Go (although Python is more popular). Conversely, a microcontroller will usually run only one program, which you need to build on a separate computer, connect it over USB to the microcontroller board, and flash it. This has a number of advantages, including simplicity and pretty-much-instant boot.</p>
 <p>Coding for the ESP8266 can be done using the same tooling as Arduino - namely, in C++<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, on the Arduino IDE. However, during this project I learned of <a href="https://platformio.org/">PlatformIO</a>, which is far more comfortable to work with: It&rsquo;s integrated into VSCode, and git, auto-formatting, autocomplete and <a href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim">VIM keybindings</a> all work nicely. It also provides a more organized approach to unit testing (practically absent in Arduino IDE) and per-project dependency management (you can list what each project needs and have it auto-install). This made the project fun enough for a few iterations.</p>
-<p>One quirk of working with the BabyBuddy API is that reporting a diaper requires supplying the current time, even if our intention is &ldquo;right now&rdquo;. That&rsquo;s easy enough on a Linux system, but microcontrollers don&rsquo;t generally have clocks. Thankfully, libraries such as <a href="https://github.com/mcxiaoke/ESPDateTime">ESPDateTime</a> provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:</p>
-<p><a href="poobuttons-v2.jpg"><img loading="lazy" src="poobuttons-v2.jpg" alt="PooButtons v2 - nodeMCU on breadboard"  />
-</a></p>
+<p>One quirk of working with the BabyBuddy API is that reporting a diaper change requires supplying the time of change, even if our intention is &ldquo;right now&rdquo;. That&rsquo;s easy enough on a Linux system, but microcontrollers don&rsquo;t generally have clocks. Thankfully, libraries such as <a href="https://github.com/mcxiaoke/ESPDateTime">ESPDateTime</a> provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:</p>
+<figure>
+  <a href="/2021/10/10/software-parenting-3/poobuttons-v2.jpg">
+    <img loading="lazy" src="/2021/10/10/software-parenting-3/poobuttons-v2.jpg" />
+  </a><figcaption>Poobuttons v2 - nodeMCU on breadboard</figcaption></figure>
 <p>Indeed, this version fits neatly onto a single (full-sized) breadboard. It&rsquo;s not quite <a href="https://www.youtube.com/watch?v=PE-_rJqvDhQ">Ben Eater</a> grade, but the NodeMCU is pretty good for breadboard mounting, and using solid-core jumpers let me make it much neater than the previous iteration. However, at this point we realized there was a missing feature: We were never quite sure if we had pressed the button, especially if we were performing a diaper change together<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> . A couple of LEDs can only convey so much information.</p>
 <p>I decided to repurpose my <a href="https://lutzky.net/2021/03/14/pitemp/">shitty cardboard LCD case</a> for this project. These tactile buttons have quite short feet - they don&rsquo;t make it through the cardboard, and I insisted on avoiding using a perfboard and soldering iron - as, at the time, I had neither. I ultimately decided to reuse the mini-breadboard from <a href="https://lutzky.net/2021/10/05/software-parenting-2/">the previous version</a>; like many (all?) breadboards, its bottom is an adhesive pad; I didn&rsquo;t even bother to remove the resistors from V1, they add a certain design flare to it. With a few iterations on the UI, it was wife-approved: Custom characters are fully supported in C++ (though, not in Go), so I got nice labels for the tactile buttons, as well as a heartbeat<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> to indicate that NTP is still working.</p>
-<p><a href="poobuttons-v3.jpg"><img loading="lazy" src="poobuttons-v3.jpg" alt="PooButtons v3 - nodeMCU on breadboard"  />
-</a></p>
+<figure>
+  <a href="/2021/10/10/software-parenting-3/poobuttons-v3.jpg">
+    <img loading="lazy" src="/2021/10/10/software-parenting-3/poobuttons-v3.jpg" />
+  </a><figcaption>Poobuttons v3 - nodeMCU with LCD in cardboard</figcaption></figure>
 <p>Overall, the project has been a blast, and the result is everyday-useful. Working on it has made me realize how much I need my own space for late-night electronics projects, but that&rsquo;s a project for another day.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
@@ -29,8 +33,10 @@
 ]]></content:encoded></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/2021/10/05/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/10/05/software-parenting-2/</guid><description>Logging diapers with satisfying clicks</description><content:encoded><![CDATA[<p>With BabyBuddy now installed and running properly (see <a href="https://lutzky.net/2021/10/03/software-parenting-1/">previous post</a>), and an always-on display showing the latest information, we now got into the swing of using it. We loved the timeline for &ldquo;what happened while I as sleeping&rdquo;; we loved the food amount reports; and because we had a consistent &ldquo;feed, then change, then wait 15 minutes with baby upright to reduce spit-up&rdquo; system, the display&rsquo;s &ldquo;time since last change&rdquo; box was super useful as well. However, as you might imagine, we did <em>not</em> love handling a freshly-re-diapered baby with one hand while using the other to unlock the phone and navigate to the &ldquo;yes he pooped now&rdquo; page in a web app.</p>
 <p>My first idea was to create voice commands for the Nest Home Mini in the room. However, it&rsquo;s prone to misunderstanding us; you have to enunciate, and even then the speech recognition is mostly tuned to preexisting Google Assistant commands, and tends to guess that we aren&rsquo;t really saying words like &ldquo;pee&rdquo; or &ldquo;poo&rdquo;. Furthermore, the baby might be crying, or worse yet - lightly sleeping, at risk of being woken up by our voice (or the assistant&rsquo;s). What we needed was a button (well, two - one for pee and one for poo).</p>
 <p>I had a Raspberry Pi ZeroW lying around <a href="https://lutzky.net/2021/03/14/pitemp/">from a previous project</a> and decided to use it for this (the small OLED display wasn&rsquo;t used for this project, but I didn&rsquo;t find a good reason to take it off yet; more on that later). With bits I had from a generic &ldquo;learn electronics&rdquo; kit (which I bought for the specific purpose of having such bits), I created the user interface: Two buttons, a green LED for &ldquo;OK&rdquo;, a red LED for &ldquo;something went wrong&rdquo;; all tied together by some jumper cables and a mini breadboard. The Raspberry Pi would handle communicating with BabyBuddy&rsquo;s API (over wifi), reading the buttons, and driving the LEDs. The setup was indeed quite similar to PiTemp&rsquo;s with the software written in Go, cross-compiled, and run on startup using systemd.</p>
-<p><a href="poobuttons-rpi0w.jpg"><img loading="lazy" src="poobuttons-rpi0w.jpg" alt="PooButtons on Raspberry Pi ZeroW"  />
-</a></p>
+<figure>
+  <a href="/2021/10/05/software-parenting-2/poobuttons-rpi0w.jpg">
+    <img loading="lazy" src="/2021/10/05/software-parenting-2/poobuttons-rpi0w.jpg" />
+  </a><figcaption>PooButtons on Raspberry Pi ZeroW</figcaption></figure>
 <p>One annoying quirk with the Raspberry Pi Zero for this is that it would register phantom button presses; they&rsquo;d be quite rare, fewer than 5 a day, but that&rsquo;s certainly enough to mess up diaper reporting. I&rsquo;m not sure if it&rsquo;s something about the particular GPIO pins I used (GPIO24, GPIO22), and disconnecting the OLED display didn&rsquo;t work. I ended up following the old joke:</p>
 <blockquote>
 <p>How many software engineers does it take to change a lightbulb?</p>
@@ -213,8 +219,10 @@
 <p>Getting the degree symbol (°, ASCII <code>0xb0</code>) was a bit of a challenge. While the official HD44780 spec shows it should be available with &ldquo;ROM Code A02&rdquo; (i.e. Latin mode), it&rsquo;s not clear if this can be toggled in software, and the characters my unit displayed matched &ldquo;ROM Code A00&rdquo; (Japanese)&hellip; mostly, that is. Some characters were malformed, and the <a href="https://github.com/d2r2/go-hd44780">unofficial library I used</a> didn&rsquo;t support custom characters (which the hardware seems to support). Fortunately, the Japanese ROM code had a Handakuten symbol (ﾟ, like the circle from ぽ but as a separate character), which is close enough.</p>
 <p>The LCD was also quite slow to refresh, the way I was using it; any faster than 1 hz would lead to corruption, meaning that the &ldquo;second-by-second&rdquo; clock display I wanted wasn&rsquo;t feasible.</p>
 <p>Finally, the LCD unit is much, <em>much</em> large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a &ldquo;case&rdquo;.</p>
-<p><a href="lcd_box.jpg"><img loading="lazy" src="lcd_box.jpg" alt="LCD Box"  />
-</a></p>
+<figure>
+  <a href="/2021/03/14/pitemp/lcd_box.jpg">
+    <img loading="lazy" src="/2021/03/14/pitemp/lcd_box.jpg" />
+  </a><figcaption>LCD in a cardboard box &ldquo;case&rdquo;</figcaption></figure>
 <h1 id="cross-compilation">Cross compilation</h1>
 <p>While the Pi Zero is certainly <em>capable</em> of being a fully-fledged Go development environment, it&rsquo;s not a fast one (and me using a cheap old SD card isn&rsquo;t helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and <code>scp</code>-ing the result over. That&rsquo;s despite Go&rsquo;s hefty statically-build binaries (7-12MB for these, depending on stripping).</p>
 <p>Cross compiling is done like so (e.g. in a <a href="https://github.com/lutzky/pitemp/blob/main/build.sh">convenience script</a>):</p>
@@ -230,26 +238,38 @@ $ go -o main.arm build main.go
 <p>That being said, my friend soldered the Pi&rsquo;s pins on &ldquo;downwards&rdquo;, as this is apparently more convenient when using it on a breadboard. I figured it&rsquo;s time to order my own Pi Zero (you can get them with the pins pre-soldered, facing &ldquo;up&rdquo;); I later found that <a href="https://pkg.go.dev/periph.io/x/devices/v3/ssd1306#Opts">this might be configurable</a>, but it&rsquo;d still be pretty awkward.</p>
 <p>The PiOLED library (actually periph.io&rsquo;s ssd1306 library) essentially lets you render an <code>image.Image</code>; since these are also trivially renderable to PNG, I could speed up development even further by adding an HTTP endpoint to serve the current image, even if the hardware isn&rsquo;t present; this also let me zoom into the rendered image instead of squinting at the actual display, making it easier to align things pixel-by-pixel. I eventually ended up separating the code into two binaries - <code>pitemp</code> would communicate with the sensors and provide an HTTP endpoint, whereas <code>pitemp_pioled</code> (and <code>pitemp_lcd</code>) would communicate with <code>pitemp</code> and the physical display (or run in <code>--simulator</code> mode on my laptop, for HTTP-endpoint-only rendering).</p>
 <p>I&rsquo;m quite happy with the final result:</p>
-<p><a href="pioled.jpg"><img loading="lazy" src="pioled.jpg" alt="PiOLED PiTemp"  />
-</a></p>
+<figure>
+  <a href="/2021/03/14/pitemp/pioled.jpg">
+    <img loading="lazy" src="/2021/03/14/pitemp/pioled.jpg" />
+  </a><figcaption>PiTemp with PiOLED</figcaption></figure>
 <p>Happy hacking!</p>
 ]]></content:encoded></item><item><title>Server drawer</title><link>https://lutzky.net/2021/01/03/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><guid>https://lutzky.net/2021/01/03/server-drawer/</guid><description>A quick look at my partner-approved &amp;ldquo;server drawer&amp;rdquo;</description><content:encoded><![CDATA[<p>This is as good a time as any to give a quick tour of my &ldquo;homelab&rdquo; or server drawer.</p>
 <p>The external view is rather innocuous: A visually inoffensive Nest Wifi, a rather elegant Nest Thermostat (shame that the display can&rsquo;t be always-on), and the gorgeous Nintendo Switch dock cover my partner got me. The TV aerial is tucked to the back, a reasonable compromise between &ldquo;gets reception&rdquo; and &ldquo;hidden away and ugly&rdquo;. The TV is mounted on upside-down IKEA boxes which we painted to roughly match the rest, hiding some botched carpentry behind the TV.</p>
-<p><a href="external.jpg"><img loading="lazy" src="external.jpg" alt="External view"  />
-</a></p>
+<figure>
+  <a href="/2021/01/03/server-drawer/external.jpg">
+    <img loading="lazy" src="/2021/01/03/server-drawer/external.jpg" />
+  </a><figcaption>External view</figcaption></figure>
 <p>You may note some cables heading down through a hole in the woodwork (yeah, I could probably make them a bit neater on the way down):</p>
-<p><a href="hole.jpg"><img loading="lazy" src="hole.jpg" alt="Through the hole"  />
-</a></p>
+<figure>
+  <a href="/2021/01/03/server-drawer/hole.jpg">
+    <img loading="lazy" src="/2021/01/03/server-drawer/hole.jpg" />
+  </a><figcaption>Through the hole</figcaption></figure>
 <p>When opened, the drawer shows the Virgin Media router (in <a href="https://www.virginmedia.com/help/virgin-media-hub-modem-mode">Modem Mode</a>), hooked up to the Nest Wifi and back into a small switch. The TV is hardwired in, and so is the NUC i3 media server (&ldquo;Michael&rdquo;, replacing the previous server &ldquo;George&rdquo;). The NUC is wearing a 4TB USB HDD as a hat. Everything is quite low-powered, and Michael usually hovers around 42°C.</p>
-<p><a href="top.jpg"><img loading="lazy" src="top.jpg" alt="Top view"  />
-</a></p>
+<figure>
+  <a href="/2021/01/03/server-drawer/top.jpg">
+    <img loading="lazy" src="/2021/01/03/server-drawer/top.jpg" />
+  </a><figcaption>Top view</figcaption></figure>
 <p>Finally, here&rsquo;s how everything is powered. The guy who built it thought 10 sockets (8 in the drawer, 2 behind the TV) was overkill. It was not.</p>
-<p><a href="power.jpg"><img loading="lazy" src="power.jpg" alt="Power view"  />
-</a></p>
+<figure>
+  <a href="/2021/01/03/server-drawer/power.jpg">
+    <img loading="lazy" src="/2021/01/03/server-drawer/power.jpg" />
+  </a><figcaption>Power view</figcaption></figure>
 ]]></content:encoded></item><item><title>WFH Wifi</title><link>https://lutzky.net/2020/12/10/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><guid>https://lutzky.net/2020/12/10/wfh-wifi/</guid><description>My adventures in setting up wifi when working from home, working around limitations of my apartment form factor.</description><content:encoded><![CDATA[<p>2020 being what it is, I&rsquo;ve been working from home for quite a while. We decided to convert our spare bedroom into a home office, and I realized how nice it is to have a proper desk at home, even for non-work stuff (I haven&rsquo;t had one in over 10 years!). That being said, wifi is a challenge with the apartment&rsquo;s structure.</p>
 <p>(Diagram below is approximate; I&rsquo;ll explain why and how it was created in a bit.)</p>
-<p><img loading="lazy" src="base.png" alt="Apartment diagram"  />
-</p>
+<figure>
+  <a href="/2020/12/10/wfh-wifi/base.png">
+    <img loading="lazy" src="/2020/12/10/wfh-wifi/base.png" />
+  </a></figure>
 <p>My broadband comes in via a cable connection in the living room - the modem and router/AP sit in the bottom middle of the room. Before WFH times we would occasionally work from home, mostly from the living room, which was the only place with chairs. To get wifi in the bedrooms (one of which is now labeled &ldquo;office&rdquo;), I used a TP-link powerline pack - i.e. one thing stuck to a power socket by the router in the living room, and another in the bedroom. Or the hallway. The tradeoffs were these:</p>
 <ul>
 <li>We wanted to have it as close to the bedroom as possible, so we&rsquo;d have good reception there.</li>
@@ -264,20 +284,28 @@ $ go -o main.arm build main.go
 <p>Working from home, connectivity suddenly became <em>important</em>. We have a ton of video meetings, we&rsquo;re using our laptops all day, and sometimes we need to move around quickly - we can&rsquo;t both have meetings in the home office, so one of us needs to switch to the living room table and have the connection <em>work</em> with minimal extra fiddling.</p>
 <p>I decided two get a two-pack of Nest Wifi devices (a Router and a Point). Over time, I found a third one was necessary, and still doesn&rsquo;t always work quite right. Unfortunately, running ethernet to the home office isn&rsquo;t currently a possibility (&hellip;but should definitely be a priority for any renovation). After some messing around, I came up with a solution, but figured I&rsquo;d try and understand if I can do better by analyzing the apartment.</p>
 <p>So, step 1 - I needed a floor plan. I do not have one of my apartment, but the 3D visualization the realtor provided was still up and had a &ldquo;measurement&rdquo; tool. So I went to <a href="http://floorplanner.com">http://floorplanner.com</a> and used that visualization to sketch up the diagram above. The point of this was the next step: In a wonderful company-internal talk about home wifi (this is a common issue in Israel, where many apartments have <a href="https://en.wikipedia.org/wiki/Merkhav_Mugan">concrete-walled shelters</a>), the neat mapping capability of Unifi&rsquo;s controller software was shown. While I don&rsquo;t own any Unifi gear, I installed the controller software (available as <a href="https://docs.linuxserver.io/images/docker-unifi-controller">a neat docker container</a>), imported my diagram, drew the walls, and positioned my living room router.</p>
-<p><a href="livingroom-2g-64dBm.png"><img loading="lazy" src="livingroom-2g-64dBm.png" alt="Living room"  />
-</a></p>
-<p>This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren&rsquo;t taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally <a href="livingroom-5g-64dBm.png">worse in 5ghz</a>.</p>
+<figure>
+  <a href="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png">
+    <img loading="lazy" src="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png" />
+  </a><figcaption>Router in the living room</figcaption></figure>
+<p>This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren&rsquo;t taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally <a href="/2020/12/10/wfh-wifi/livingroom-5g-64dBm.png">worse in 5ghz</a>.</p>
 <p>The spot we naturally chose for the point was the hallway (the utility room now seems like it would&rsquo;ve worked better for reception, but it&rsquo;s often quite damp and has no free power sockets anyway). Indeed, the Google Wifi app (which you still use for Nest Wifi) would say that the connection between it and the living room is &ldquo;Great&rdquo; (and that&rsquo;s as much detail as you&rsquo;ll get). But the reception in the office would still be pretty bad, sometimes leading to disconnections.</p>
-<p><a href="hallway-2g-60dBm.png"><img loading="lazy" src="hallway-2g-60dBm.png" alt="Hallway"  />
-</a></p>
-<p>I suspect the issue here might be that 5ghz connectivity is <em>just barely</em> available (<a href="hallway-5g-60dBm.png">diagram</a>). At any rate, I decided to throw some more money at the problem, adding a 2nd Point in the office:</p>
-<p><a href="office-2g-60dBm.png"><img loading="lazy" src="office-2g-60dBm.png" alt="Office"  />
-</a></p>
+<figure>
+  <a href="/2020/12/10/wfh-wifi/hallway-2g-60dBm.png">
+    <img loading="lazy" src="/2020/12/10/wfh-wifi/hallway-2g-60dBm.png" />
+  </a><figcaption>Wifi point in the hallway</figcaption></figure>
+<p>I suspect the issue here might be that 5ghz connectivity is <em>just barely</em> available (<a href="/2020/12/10/wfh-wifi/hallway-5g-60dBm.png">diagram</a>). At any rate, I decided to throw some more money at the problem, adding a 2nd Point in the office:</p>
+<figure>
+  <a href="/2020/12/10/wfh-wifi/office-2g-60dBm.png">
+    <img loading="lazy" src="/2020/12/10/wfh-wifi/office-2g-60dBm.png" />
+  </a><figcaption>Wifi point in the office</figcaption></figure>
 <p>There is now most certainly a strong connection between the office point and the hallway point (as well as the laptops in the office), and the hallway point has a good connection with the living room. However, as it turned out, the mesh test did not consistently give me good results - sometimes I would just get &ldquo;poor&rdquo; results. I suspect the issue is the dynamic nature of&hellip; doors.</p>
 <p>We tend to get quite loud in meetings, so when we have them, we close the office and living room doors - represented here as wooden walls. It seems that, when the doors are open, the office point could still just barely communicate with the router in the living room. It turns out that Nest does all it can to avoid daisy-chaining, so the office point would connect to the living room router if it could see it. Closing the doors would make that connection worse, but it&rsquo;d take the network some time to reconfigure. However, rebooting the system with all doors closed got a &ldquo;great mesh&rdquo; (presumably daisy-chained, though this can&rsquo;t be seen from the app). That meant that my wifi-signal depended on the particular state of the doors when the mesh network last decided to self-optimize.</p>
 <p>The solution I came up with was to move the point from the office to the bedroom (&hellip;where nobody is during the work day), and make sure that door stays open:</p>
-<p><a href="office-2g-60dBm.png"><img loading="lazy" src="bedroom-opendoor-2g-60dBm.png" alt="Bedroom with open door"  />
-</a></p>
+<figure>
+  <a href="/2020/12/10/wfh-wifi/bedroom-opendoor-2g-60dBm.png">
+    <img loading="lazy" src="/2020/12/10/wfh-wifi/bedroom-opendoor-2g-60dBm.png" />
+  </a><figcaption>Wifi point in the bedroom, door open</figcaption></figure>
 <p>I now have no idea if the network is daisy-chained or not, but it has been working consistently well&hellip; even at night when I stay up writing stuff like this blog post, and the bedroom door is closed.</p>
 <p>I&rsquo;d really want to get some CAT7 around the apartment, but for now - this works. Hopefully these tools and methods can help you out as well.</p>
 ]]></content:encoded></item><item><title>Editing old family videos</title><link>https://lutzky.net/2020/11/07/editing-old-family-videos/</link><pubDate>Sat, 07 Nov 2020 00:00:00 +0000</pubDate><guid>https://lutzky.net/2020/11/07/editing-old-family-videos/</guid><description>Messing with old video from tapes, simple audio corrections, splitting and organizing for the family&amp;rsquo;s benefit.</description><content:encoded><![CDATA[<p>In the 90s, my family (along with much of the rest of the world) filmed a lot of home videos. At some point we converted them to what we believed to be DVD for preservation and ease-of-access, but this was actually VCD (which has somewhat worse compatibility), burned on CD-R (which degrades faster than you might think), and optical media has pretty much become extinct as well. In a family visit in 2018 I found the old stash of original video cassettes, flew them with me from Israel to Ireland, and got a local shop called DVD Centre to re-rip them - these guys provide the great service of uploading directly to Dropbox.</p>
@@ -680,7 +708,7 @@ The mutation score is 0.750000 (3 passed, 1 failed, 0 duplicated, 0 skipped, tot
 <p>My experience had me worried, as no software project is ever as simple as it originally seems. Sharon and I agreed that, while this seems completely reasonable and quite thought-out, we would work in an iterative fashion, and have regular video-chats on what should be done next. Also, to simplify things, I asked to create the software as a web page intended for use on Chrome, rather than Matlab as suggested by her faculty programmer (who seemed convinced, for whatever reason, that Matlab could give better timing precision - this turned out to be false). She agreed, and within a few hours on a plane, I had a basic draft working.</p>
 <p>I emailed Sharon a copy of the draft; it was split into a simple <code>index.html</code> file, a <code>style.css</code> file, a <code>seaplane.js</code> code file, and a <code>config.js</code> code file. That last split was deliberate: Sharon, who has no experience in coding (and even claims to be a technophobe), could modify clearly defined configuration (including the sets of words and tuned delays) with no anxiety of &ldquo;messing up&rdquo; the more complex code. Soon enough, timezones flipped by, and Sharon was happy enough with the result to respond with a modified <code>config.js</code> file, and a list of changes she wanted - mostly present in the original requirements, but some which could only be understood while trying out the first draft. Naturally, some of the changes would require the syntax of <code>config.js</code> itself to change, and Sharon had more data to add to it. To avoid <code>seaplane7-final-really.zip</code> email attachments flying back and forth, version control would be required. Using Github would facilitate this, and also allow us to use its <em>Issues</em> mechanism for tracking remaining work.</p>
 <p>It took a few minutes over the phone to explain the basic concept of version control to Sharon, as well as how to create a Github account, modify files using the web-based interface, report and comment on issues. While I did mention Github for Windows as an option, I didn&rsquo;t pressure Sharon into using it, especially as I wasn&rsquo;t familiar enough with it myself.</p>
-<p>Over 10 days and 48 commits (27 mine, 20 Sharon&rsquo;s) we got the code working well enough to run the experiment. There were a few reported bugs, but nothing substantial that skewed the results, as far as we can tell. You&rsquo;re welcome to see a <a href="https://lutzky.github.io/seaplane">Demo of Seaplane</a>, as well as browse the <a href="https://github.com/lutzky/seaplane">Seaplane source code</a>. If you can read Hebrew, you can also read <a href="seaplane_paper.pdf">Sharon&rsquo;s paper</a>.</p>
+<p>Over 10 days and 48 commits (27 mine, 20 Sharon&rsquo;s) we got the code working well enough to run the experiment. There were a few reported bugs, but nothing substantial that skewed the results, as far as we can tell. You&rsquo;re welcome to see a <a href="https://lutzky.github.io/seaplane">Demo of Seaplane</a>, as well as browse the <a href="https://github.com/lutzky/seaplane">Seaplane source code</a>. If you can read Hebrew, you can also read <a href="/2015/05/30/seaplane/seaplane_paper.pdf">Sharon's paper</a>.</p>
 <h2 id="what-worked">What worked</h2>
 <ul>
 <li>Issues worked quite well for tracking the work; Sharon and I found them more useful than emails for keeping state.</li>
@@ -1506,12 +1534,18 @@ interface for this unobtrusive.</li>
 </li>
 </ol>
 <p>Everyone loves screenshots:</p>
-<p><img loading="lazy" src="device2.png" alt="Separate source and destination fields"  />
-
-<img loading="lazy" src="prefs.png" alt="Select data provider"  />
-
-<img loading="lazy" src="device.png" alt="Automatic location detection, Egged provider"  />
-</p>
+<figure>
+  <a href="/2011/09/02/upcoming-features-in-transportdroidil/device2.png">
+    <img loading="lazy" src="/2011/09/02/upcoming-features-in-transportdroidil/device2.png" />
+  </a><figcaption>Separate source and destination fields</figcaption></figure>
+<figure>
+  <a href="/2011/09/02/upcoming-features-in-transportdroidil/prefs.png">
+    <img loading="lazy" src="/2011/09/02/upcoming-features-in-transportdroidil/prefs.png" />
+  </a><figcaption>Select data provider</figcaption></figure>
+<figure>
+  <a href="/2011/09/02/upcoming-features-in-transportdroidil/device.png">
+    <img loading="lazy" src="/2011/09/02/upcoming-features-in-transportdroidil/device.png" />
+  </a><figcaption>Automatic location detection, Egged provider</figcaption></figure>
 <p>For a sneak peek, go to <a href="http://github.com/lutzky/TransportDroidIL">http://github.com/lutzky/TransportDroidIL</a> for the
 latest sources. You can also report issues there.</p>
 ]]></content:encoded></item><item><title>SMS and why it annoys me</title><link>https://lutzky.net/2011/04/25/sms-and-why-it-annoys-me/</link><pubDate>Mon, 25 Apr 2011 00:00:00 +0000</pubDate><guid>https://lutzky.net/2011/04/25/sms-and-why-it-annoys-me/</guid><description>Don&amp;rsquo;t get me wrong. I love being able to communicate textually with friends, coworkers and family. It&amp;rsquo;s ideal for a noisy pub; a somewhat-private conversation on a crowded bus; telling something to someone who may be asleep, so they see it first thing when they wake up; making quick responses while in a meeting without being rude (well, at least at my workplace it&amp;rsquo;s considered perfectly acceptable). It&amp;rsquo;s also very handy when you want to tell someone something they ought to write down, such as a phone number or something they should remember to buy.</description><content:encoded><![CDATA[<p>Don&rsquo;t get me wrong. I love being able to communicate textually with friends,
@@ -2677,15 +2711,19 @@ building of the Technion, room 6, at 18:30.</p>
     <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
         <span class="nb">print</span> <span class="n">log2vis</span><span class="p">(</span><span class="n">unicode</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="s2">&#34;utf-8&#34;</span><span class="p">))</span>
 </code></pre></div>]]></content:encoded></item><item><title>Sour chewing gum</title><link>https://lutzky.net/2007/12/19/sour-chewing-gum/</link><pubDate>Wed, 19 Dec 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/12/19/sour-chewing-gum/</guid><description>On an online board, friends posted a photo from a party a while back, as I&amp;rsquo;m chewing some extra-sour chewing gum:
-I find this suitable for use in macro form. For example, in the Computer Security course, we&amp;rsquo;re going to compromise a windows-based server using a buffer overflow vulnerability. Unfortunately, this means we&amp;rsquo;re going to have to use (as per the course&amp;rsquo;s demands) Visual Studio 2003. My response (now known as חמוצקי):</description><content:encoded><![CDATA[<p>On an online board, friends posted a photo from a party a while back, as I&rsquo;m chewing some extra-sour chewing gum:</p>
-<p><img loading="lazy" src="dscf6400ff0.jpg" alt="חמוצקי נולד"  title="חמוצקי נולד"  />
-</p>
+חמוצקי נולד I find this suitable for use in macro form. For example, in the Computer Security course, we&amp;rsquo;re going to compromise a windows-based server using a buffer overflow vulnerability. Unfortunately, this means we&amp;rsquo;re going to have to use (as per the course&amp;rsquo;s demands) Visual Studio 2003. My response (now known as חמוצקי):</description><content:encoded><![CDATA[<p>On an online board, friends posted a photo from a party a while back, as I&rsquo;m chewing some extra-sour chewing gum:</p>
+<figure>
+  <a href="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg">
+    <img loading="lazy" src="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" />
+  </a><figcaption>חמוצקי נולד</figcaption></figure>
 <p>I find this suitable for use in macro form. For example, in the Computer
 Security course, we&rsquo;re going to compromise a windows-based server using a
 buffer overflow vulnerability. Unfortunately, this means we&rsquo;re going to have to
 use (as per the course&rsquo;s demands) Visual Studio 2003. My response (now known as חמוצקי):</p>
-<p><img loading="lazy" src="lutz2as3.gif" alt="חמוצקי"  title="חמוצקי"  />
-</p>
+<figure>
+  <a href="/2007/12/19/sour-chewing-gum/lutz2as3.gif">
+    <img loading="lazy" src="/2007/12/19/sour-chewing-gum/lutz2as3.gif" />
+  </a><figcaption>חמוצקי</figcaption></figure>
 ]]></content:encoded></item><item><title>Means of control</title><link>https://lutzky.net/2007/12/17/means-of-control/</link><pubDate>Mon, 17 Dec 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/12/17/means-of-control/</guid><description>New URL - not interesting. You&amp;rsquo;d notice by now, as you&amp;rsquo;ve been redirected. Guess my new E-mail. OpenID - interesting, but I don&amp;rsquo;t have anything particularily interesting to say about it right now.
 This, however, is interesting: &amp;ldquo;10 things christians and atheists can (and must) agree on&amp;rdquo;, a nicely written piece over at cracked.com. But this isn&amp;rsquo;t blogspam, I&amp;rsquo;ll actually share my two cents. (or shnekel, if you like)
 I have a serious problem with religion; It is my opinion that it is an overly powerful means of control.</description><content:encoded><![CDATA[<p>New URL - not interesting. You&rsquo;d notice by now, as you&rsquo;ve been redirected.
@@ -2958,10 +2996,14 @@ freakin' Roger Rabbit :)</p>
 <p>Finally, the story gets the ending it deserves.</p>
 <p><img loading="lazy" src="http://imgs.xkcd.com/comics/letting_go.png" alt="Letting Go"  />
 </p>
-]]></content:encoded></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description><content:encoded><![CDATA[<p><a href="http://www.flickr.com/photos/paradox_the_cow/"><img loading="lazy" src="534994007_ef57770ac3.jpg" alt="Paradox the cow"  />
-</a></p>
-<p><img loading="lazy" src="535038697_9b471a95b1_o.jpg" alt="Another action shot with Paradox"  />
-</p>
+]]></content:encoded></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description><content:encoded><![CDATA[<figure>
+  <a href="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg">
+    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" />
+  </a><figcaption><a href="http://www.flickr.com/photos/paradox_the_cow/">Paradox the cow</a></figcaption></figure>
+<figure>
+  <a href="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg">
+    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" />
+  </a><figcaption>Another action shot with Paradox</figcaption></figure>
 <p>I present to you, the only creature which is more of a celebrity in the
 undergrad CS world than I am&hellip; <em>The Cow</em>. (Paradox)</p>
 <p><strong>Edit:</strong> Yes, that&rsquo;s me. No, that&rsquo;s not my bass. That&rsquo;s a very good friend&rsquo;s
@@ -2969,7 +3011,7 @@ Fender Fat Stratocaster. So smooooth&hellip;</p>
 <p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman">some chum</a> ;)</p>
 ]]></content:encoded></item><item><title>Some music posted to myspace</title><link>https://lutzky.net/2007/06/02/some-music-posted-to-myspace/</link><pubDate>Sat, 02 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/02/some-music-posted-to-myspace/</guid><description>Recording this morning was excellent! Awesome studio, not expensive at all, and a whole lot of fun. We&amp;rsquo;ve posted one song at our myspace page, and it seems that Lior has found an apt name for the CD (hint) ;)
 For those of you who don&amp;rsquo;t want to visit Myspace (can&amp;rsquo;t blame you), here&amp;rsquo;s the song we posted, as well as an extra track (my personal favorite), Falsely Accused.
-The Deal Falsely Accused I really want to point out the incredible recording studio we used - it&amp;rsquo;s a place called MIXסולידי in Tel Hanania.</description><content:encoded><![CDATA[<p>Recording this morning was excellent! Awesome studio, not expensive at all, and
+The deal Falsely Accused I really want to point out the incredible recording studio we used - it&amp;rsquo;s a place called MIXסולידי in Tel Hanania.</description><content:encoded><![CDATA[<p>Recording this morning was excellent! Awesome studio, not expensive at all, and
 a whole lot of fun. We&rsquo;ve posted one song at <a href="http://myspace.com/switchblade777">our myspace
 page</a>, and it seems that Lior has found an
 apt name for the CD (hint) ;)</p>
@@ -2977,8 +3019,8 @@ apt name for the CD (hint) ;)</p>
 song we posted, as well as an extra track (my personal favorite), Falsely
 Accused.</p>
 <ul>
-<li><a href="Switchblade%20-%20Old%20School%20Daze%20-%2002%20-%20The%20Deal.mp3">The Deal</a></li>
-<li><a href="Switchblade%20-%20Old%20School%20Daze%20-%2006%20-%20Falsely%20Accused.mp3">Falsely Accused</a></li>
+<li><a href="/2007/06/02/some-music-posted-to-myspace/Switchblade%20-%20Old%20School%20Daze%20-%2002%20-%20The%20Deal.mp3">The deal</a></li>
+<li><a href="/2007/06/02/some-music-posted-to-myspace/Switchblade%20-%20Old%20School%20Daze%20-%2006%20-%20Falsely%20Accused.mp3">Falsely Accused</a></li>
 </ul>
 <p>I really want to point out the <strong>incredible</strong> recording studio we used - it&rsquo;s a
 place called MIXסולידי in Tel Hanania. The man charged us very little, and the
@@ -3306,14 +3348,15 @@ to your <code>.bash_aliases</code>:</p>
     <span class="nb">cd</span> <span class="s2">&#34;`hal-get-property --udi </span><span class="nv">$UDI</span><span class="s2"> --key volume.mount_point`&#34;</span>
 <span class="o">}</span>
 </code></pre></div>]]></content:encoded></item><item><title>I do NOT kick puppies!</title><link>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</link><pubDate>Wed, 31 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</guid><description>I do type mesmerizingly fast, though&amp;hellip; :)
-I am told these were scattered around Taub&amp;hellip; I haven&amp;rsquo;t been there to day, but it feels good to be infamous.</description><content:encoded><![CDATA[<p>I do type mesmerizingly fast, though&hellip; :)</p>
-<p><img loading="lazy" src="poster.jpg" alt="Wanted poster"  />
-</p>
+Wanted poster I am told these were scattered around Taub&amp;hellip; I haven&amp;rsquo;t been there to day, but it feels good to be infamous.</description><content:encoded><![CDATA[<p>I do type mesmerizingly fast, though&hellip; :)</p>
+<figure>
+  <a href="/2007/01/31/i-do-not-kick-puppies/poster.jpg">
+    <img loading="lazy" src="/2007/01/31/i-do-not-kick-puppies/poster.jpg" />
+  </a><figcaption>Wanted poster</figcaption></figure>
 <p>I am told these were scattered around Taub&hellip; I haven&rsquo;t been there to day, but it feels good to be infamous.</p>
 ]]></content:encoded></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</guid><description>My lecture slides. Have a peek if you like :)
-sybilproof Reputation Mechanisms - Seminar</description><content:encoded><![CDATA[<p>My lecture slides. Have a peek if you like :)</p>
-<p><a href="sybils.pdf">sybilproof Reputation Mechanisms - Seminar</a></p>
-]]></content:encoded></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</guid><description>When approaching a port, the Scotsman:
+sybilproof Reputation Mechanisms - Seminar</description><content:encoded>&lt;p>My lecture slides. Have a peek if you like :)&lt;/p>
+&lt;a href="/2007/01/30/i-might-need-these-tomorrow/sybils.pdf">sybilproof Reputation Mechanisms - Seminar&lt;/a></content:encoded></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</guid><description>When approaching a port, the Scotsman:
 You will never find a more wretched hive of scum and villany. And the crab cakes ain&amp;rsquo;t too bad, either!
 Later on:
 Is it fast? It sure is. But it&amp;rsquo;s gonna cost ya - 10,000 up-front. 10,000? We could buy our own ship for that! But who&amp;rsquo;s gonna sail it? I can. I piloted (some smaller kind of ship) back when I was a kid.</description><content:encoded><![CDATA[<p>When approaching a port, the Scotsman:</p>
