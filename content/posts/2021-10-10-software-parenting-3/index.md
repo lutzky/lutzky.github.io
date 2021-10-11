@@ -17,9 +17,7 @@ Coding for the ESP8266 can be done using the same tooling as Arduino - namely, i
 
 One quirk of working with the BabyBuddy API is that reporting a diaper change requires supplying the time of change, even if our intention is "right now". That's easy enough on a Linux system, but microcontrollers don't generally have clocks. Thankfully, libraries such as [ESPDateTime](https://github.com/mcxiaoke/ESPDateTime) provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:
 
-[poobuttons-v2]: poobuttons-v2.jpg
-
-[![PooButtons v2 - nodeMCU on breadboard][poobuttons-v2]][poobuttons-v2]
+{{<image "poobuttons-v2.jpg">}}Poobuttons v2 - nodeMCU on breadboard{{</image>}}
 
 Indeed, this version fits neatly onto a single (full-sized) breadboard. It's not quite [Ben Eater](https://www.youtube.com/watch?v=PE-_rJqvDhQ) grade, but the NodeMCU is pretty good for breadboard mounting, and using solid-core jumpers let me make it much neater than the previous iteration. However, at this point we realized there was a missing feature: We were never quite sure if we had pressed the button, especially if we were performing a diaper change together[^formula-1] . A couple of LEDs can only convey so much information.
 
@@ -29,8 +27,6 @@ I decided to repurpose my [shitty cardboard LCD case](https://lutzky.net/2021/03
 
 [^heartbeat]: 2nd row from the bottom, rightmost column; you can see it fading out in this shot. It blinks every second. Although the photo doesn't show it, the LCD's contrast is actually great in-person.
 
-[poobuttons-v3]: poobuttons-v3.jpg
-
-[![PooButtons v3 - nodeMCU on breadboard][poobuttons-v3]][poobuttons-v3]
+{{<image "poobuttons-v3.jpg">}}Poobuttons v3 - nodeMCU with LCD in cardboard{{</image>}}
 
 Overall, the project has been a blast, and the result is everyday-useful. Working on it has made me realize how much I need my own space for late-night electronics projects, but that's a project for another day.

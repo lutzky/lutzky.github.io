@@ -1,7 +1,7 @@
 ---
 date: "2007-06-02T22:44:00Z"
 tags:
-- music
+  - music
 title: Some music posted to myspace
 ---
 
@@ -14,8 +14,8 @@ For those of you who don't want to visit Myspace (can't blame you), here's the
 song we posted, as well as an extra track (my personal favorite), Falsely
 Accused.
 
-* [The Deal](Switchblade%20-%20Old%20School%20Daze%20-%2002%20-%20The%20Deal.mp3)
-* [Falsely Accused](Switchblade%20-%20Old%20School%20Daze%20-%2006%20-%20Falsely%20Accused.mp3)
+- {{<link "Switchblade - Old School Daze - 02 - The Deal.mp3">}}The deal{{</link>}}
+- {{<link "Switchblade - Old School Daze - 06 - Falsely Accused.mp3">}}Falsely Accused{{</link>}}
 
 I really want to point out the **incredible** recording studio we used - it's a
 place called MIXסולידי in Tel Hanania. The man charged us very little, and the

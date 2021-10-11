@@ -1,8 +1,8 @@
 ---
 date: "2011-09-02T08:30:00Z"
 tags:
-- TransportDroidIL
-- android
+  - TransportDroidIL
+  - android
 title: Upcoming features in TransportDroidIL
 ---
 
@@ -14,15 +14,17 @@ Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a
    interface for this unobtrusive.
 3. Quick reversal of "Source" and "Destination", for your return trip.
 4. A new settings screen, with:
-    - Provider selection (currently Egged or MOT)
-    - A small attempt at right-to-left fixes for non-supporting devices.
-    - A "clear history" button
+   - Provider selection (currently Egged or MOT)
+   - A small attempt at right-to-left fixes for non-supporting devices.
+   - A "clear history" button
 
 Everyone loves screenshots:
 
-![Separate source and destination fields](device2.png)
-![Select data provider](prefs.png)
-![Automatic location detection, Egged provider](device.png)
+{{<image "device2.png">}}Separate source and destination fields{{</image>}}
+
+{{<image "prefs.png">}}Select data provider{{</image>}}
+
+{{<image "device.png">}}Automatic location detection, Egged provider{{</image>}}
 
 For a sneak peek, go to <http://github.com/lutzky/TransportDroidIL> for the
 latest sources. You can also report issues there.

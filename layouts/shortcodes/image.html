@@ -1,0 +1,11 @@
+{{- $img := .Page.Resources.GetMatch (.Get 0) -}}
+<figure>
+  <a href="{{ $img.RelPermalink }}">
+    <img loading="lazy" src="{{ $img.RelPermalink }}" />
+  </a>
+  {{- if .Inner -}}
+    <figcaption>
+      {{- .Inner | markdownify -}}
+    </figcaption>
+  {{- end -}}
+</figure>

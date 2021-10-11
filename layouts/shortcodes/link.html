@@ -1,0 +1,2 @@
+{{- $res := .Page.Resources.GetMatch (.Get 0) -}}
+<a href="{{ $res.RelPermalink }}">{{ .Inner }}</a>

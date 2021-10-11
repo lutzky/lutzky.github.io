@@ -7,6 +7,6 @@ title: I do NOT kick puppies!
 
 I do type mesmerizingly fast, though... :)
 
-![Wanted poster](poster.jpg)
+{{<image "poster.jpg">}}Wanted poster{{</image>}}
 
 I am told these were scattered around Taub... I haven't been there to day, but it feels good to be infamous.

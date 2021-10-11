@@ -1,9 +1,9 @@
 ---
 date: "2021-03-14T00:00:00Z"
-summary:  An adventure with Raspberry Pi, Golang, and small displays.
+summary: An adventure with Raspberry Pi, Golang, and small displays.
 tags:
-- hardware
-- code
+  - hardware
+  - code
 title: PiTemp
 ---
 
@@ -15,12 +15,12 @@ The code for the final result is in https://github.com/lutzky/pitemp.
 
 Hardware:
 
-* A [Raspberry Pi Zero W] a friend gave me (that'll become important later on)
-* A [DHT11] temperature & humidity sensor
-* A [4x20 character LCD][lcd]; apparently an HD44780 controller or compatible.
+- A [Raspberry Pi Zero W] a friend gave me (that'll become important later on)
+- A [DHT11] temperature & humidity sensor
+- A [4x20 character LCD][lcd]; apparently an HD44780 controller or compatible.
 
-[Raspberry Pi Zero W]: https://www.raspberrypi.org/products/raspberry-pi-zero-w/
-[DHT11]: https://www.amazon.co.uk/gp/product/B07L83K6CF
+[raspberry pi zero w]: https://www.raspberrypi.org/products/raspberry-pi-zero-w/
+[dht11]: https://www.amazon.co.uk/gp/product/B07L83K6CF
 [lcd]: https://www.amazon.co.uk/gp/product/B07QNKCLJM
 
 This was my first time coding for hardware on the raspberry pi, and it went fairly well.
@@ -31,17 +31,15 @@ Getting the degree symbol (&deg;, ASCII `0xb0`) was a bit of a challenge. While 
 
 The LCD was also quite slow to refresh, the way I was using it; any faster than 1 hz would lead to corruption, meaning that the "second-by-second" clock display I wanted wasn't feasible.
 
-Finally, the LCD unit is much, *much* large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a "case".
+Finally, the LCD unit is much, _much_ large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a "case".
 
-[lcd-box-img]: lcd_box.jpg
-
-[![LCD Box][lcd-box-img]][lcd-box-img]
+{{<image "lcd_box.jpg">}}LCD in a cardboard box "case"{{</image>}}
 
 [go-hd44780]: https://github.com/d2r2/go-hd44780
 
 # Cross compilation
 
-While the Pi Zero is certainly *capable* of being a fully-fledged Go development environment, it's not a fast one (and me using a cheap old SD card isn't helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and `scp`-ing the result over. That's despite Go's hefty statically-build binaries (7-12MB for these, depending on stripping).
+While the Pi Zero is certainly _capable_ of being a fully-fledged Go development environment, it's not a fast one (and me using a cheap old SD card isn't helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and `scp`-ing the result over. That's despite Go's hefty statically-build binaries (7-12MB for these, depending on stripping).
 
 Cross compiling is done like so (e.g. in a [convenience script][cross-compile-script]):
 
@@ -79,8 +77,6 @@ The PiOLED library (actually periph.io's ssd1306 library) essentially lets you r
 
 I'm quite happy with the final result:
 
-[pioled-img]: pioled.jpg
-
-[![PiOLED PiTemp][pioled-img]][pioled-img]
+{{<image "pioled.jpg">}}PiTemp with PiOLED{{</image>}}
 
 Happy hacking!
