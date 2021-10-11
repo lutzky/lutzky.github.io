@@ -15,7 +15,7 @@ Coding for the ESP8266 can be done using the same tooling as Arduino - namely, i
 
 [^tinygo]: Unfortunately, [TinyGo does not yet support wifi](https://tinygo.org/docs/reference/microcontrollers/nodemcu/).
 
-One quirk of working with the BabyBuddy API is that reporting a diaper requires supplying the current time, even if our intention is "right now". That's easy enough on a Linux system, but microcontrollers don't generally have clocks. Thankfully, libraries such as [ESPDateTime](https://github.com/mcxiaoke/ESPDateTime) provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:
+One quirk of working with the BabyBuddy API is that reporting a diaper change requires supplying the time of change, even if our intention is "right now". That's easy enough on a Linux system, but microcontrollers don't generally have clocks. Thankfully, libraries such as [ESPDateTime](https://github.com/mcxiaoke/ESPDateTime) provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:
 
 [poobuttons-v2]: poobuttons-v2.jpg
 
