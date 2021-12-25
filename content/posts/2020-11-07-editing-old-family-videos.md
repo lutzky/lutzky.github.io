@@ -1,6 +1,7 @@
 ---
 date: "2020-11-07T00:00:00Z"
-summary:  Messing with old video from tapes, simple audio corrections, splitting and
+summary:
+  Messing with old video from tapes, simple audio corrections, splitting and
   organizing for the family's benefit.
 title: Editing old family videos
 ---
@@ -39,6 +40,8 @@ This method was both faster and more flexible than using the video editors I hav
 
 ## Splitting video
 
+> Note from the future (2021-12-25): [LosslessCut](https://mifi.no/losslesscut/) does a _far_ better job of this than my hacky scripts, and is far easier to use.
+
 At this point, I watch the video through, writing down key points of what's going on with approximate time-codes. It helps to do 3-4 different tapes of this before moving forward, as it gives you a feel for what the "logical separation" to smaller chunks is. I usually define those chunks as "different set of consecutive days" (usually just one), but it helps to have all the timecodes available in text so you don't have to re-watch. I recommend using a player that supports faster-than-realtime viewing, such as VLC (speed up, stop on "hey what was that", rewind, watch at regular speed). This is the most time-consuming part.
 
 After this, I decide on the section structure, and need to determine the precise frames where I want to split. Since most video players aren't designed to "go back one frame", I actually open the video in a video editor (the free HitFilm Express, in my case). I start with the rough time-codes from the previous step, and step frame-by-frame back-and-forth until I find the first and last usable frames of a section. I write these to a `points.txt` file with the following syntax:
@@ -61,7 +64,7 @@ ffmpeg -ss 0:15:50.680 -i audio_corrected.mov -to 0:24:23.360 -c copy segment_2.
 These are annoying to create manually, because:
 
 1. The timecode for ffmpeg is given in milliseconds, so 13 frames in 25fps becomes 520 milliseconds.
-2. The `-to` offset is from the section's *start* (so it's more of a `-length`), and subtraction is hard.
+2. The `-to` offset is from the section's _start_ (so it's more of a `-length`), and subtraction is hard.
 
 So, of course, I wrote [some code](https://github.com/lutzky/splitpoints) to do this for me. It takes a `points.txt` as described above, and outputs the appropriate series of commands.
 
