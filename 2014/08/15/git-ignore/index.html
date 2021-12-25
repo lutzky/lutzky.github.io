@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://lutzky.net/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.2">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40939561-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="Git While You Sit 2 - .gitignore">
 <meta property="og:description" content="Using .gitignore to exclude build artifacts from your repository.">
 <meta property="og:type" content="article">
@@ -92,8 +92,8 @@ Git While You Sit 2 - .gitignore
 <p>Your repository has files which are generated as part of your build process or as part of running your software, which you don&rsquo;t want in source control. They keep showing up in <code>git status</code>. What to do?</p>
 <p>You can create a file called <code>.gitignore</code> - note that the filename starts with a <code>.</code>, which is standard for configuration files in Unix and causes them to be hidden from normal listing. Each <code>.gitignore</code> file affects the current directory and its subdirectories - you can have multiple <code>.gitignore</code> files to create more specific rules for subdirectories.</p>
 <p><em>Note:</em> <code>.gitignore</code> can only be used for files which shouldn&rsquo;t be in source code <em>at all</em> (those show up as &ldquo;Untracked files&rdquo;. <em>Modified</em> files can&rsquo;t be ignored in this way. If you really want to, you can force git to ignore modifications with this command:</p>
-<pre tabindex=0><code class=language-console data-lang=console>$ git update-index --assume-unchanged FILE
-</code></pre><p>However, this is usually a bad idea and indicates you need to refactor your file handling - split files which get modified locally from files which contain information which should be source-controlled.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-console data-lang=console><span class=gp>$ </span>git update-index --assume-unchanged FILE
+</code></pre></div><p>However, this is usually a bad idea and indicates you need to refactor your file handling - split files which get modified locally from files which contain information which should be source-controlled.</p>
 <p>Here is an annotated excerpt from a <code>.gitignore</code> file:</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text># Extensions of compiled files
 *.a

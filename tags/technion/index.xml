@@ -40,8 +40,8 @@ semester. Attached are my lectures notes in PDF form:</p>
 repository stored here:</p>
 <p><a href="http://yasmin.technion.ac.il/ohad/git/computability.git">http://yasmin.technion.ac.il/ohad/git/computability.git</a></p>
 <p>To use it, install <code>git-core</code> and curl, and run</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
-</code></pre><p>Any changes you have - send to me as patches, or push to your own repository
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="go">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
+</span></code></pre></div><p>Any changes you have - send to me as patches, or push to your own repository
 and send me a link. (Drawings would be most welcome, and you&rsquo;re obviously
 welcome to add your name to the list of typers)</p>
 <p>If you need git storage, try <a href="http://repo.or.cz">repo.or.cz</a>, or ask the T2

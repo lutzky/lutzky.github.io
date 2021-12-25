@@ -162,12 +162,12 @@ Zone      IsraelIDT           2:00    ZionIDT     I%sT
 </code></pre><p>Sounds about right, nay? Even my handy little
 <a href="http://github.com/lutzky/pyzdump">pyzdump</a> confirms that it looks about how I
 want it to:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ./pyzdump.py /usr/share/zoneinfo/IsraelIDT
-Transitions: ['At Sat Dec 31 23:00:00 1938, switch to IST',
-'At Sun Dec 31 22:00:00 1939, switch to IDT']
-Types: [&lt;tztype dst=&quot;True&quot; idt:=&quot;&quot; utc+10800=&quot;&quot;&gt;,
-&lt;tztype dst=&quot;False&quot; ist:=&quot;&quot; utc+7200=&quot;&quot;&gt;]
-</code></pre><p>However, it still doesn&rsquo;t work. A test program:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>./pyzdump.py /usr/share/zoneinfo/IsraelIDT
+<span class="go">Transitions: [&#39;At Sat Dec 31 23:00:00 1938, switch to IST&#39;,
+</span><span class="go">&#39;At Sun Dec 31 22:00:00 1939, switch to IDT&#39;]
+</span><span class="go">Types: [&lt;tztype dst=&#34;True&#34; idt:=&#34;&#34; utc+10800=&#34;&#34;&gt;,
+</span><span class="go">&lt;tztype dst=&#34;False&#34; ist:=&#34;&#34; utc+7200=&#34;&#34;&gt;]
+</span></code></pre></div><p>However, it still doesn&rsquo;t work. A test program:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">tzset</span><span class="p">();</span>
     <span class="n">time_t</span> <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>

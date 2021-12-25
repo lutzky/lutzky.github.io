@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://lutzky.net/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.2">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40939561-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="Git While You Sit 3 - &#34;Rename&#34; edge cases">
 <meta property="og:description" content="Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it&rsquo;s far more likely that git did the &ldquo;right&rdquo; thing after all.">
 <meta property="og:type" content="article">
@@ -103,10 +103,10 @@ Git While You Sit 3 - "Rename" edge cases
     A---B [COPY]---C---D---M (feature *)
 </code></pre></div><p>In this case, the user thought he renamed <code>dir1/file.xml</code> to <code>dir2/file.xml</code> in <code>B [COPY]</code>. Then, when he merged <code>master</code> into <code>feature</code>, he expected that the modifications in <code>file.xml</code> in <code>F [MODIFY]</code> would, as part of the merge in <code>M</code>, be applied to <code>dir2/file.xml</code>. This would indeed have happened if <code>B</code> had a move operation. However, it doesn&rsquo;t make sense for git to merge the changes from a <em>copy</em> of a file, so it didn&rsquo;t.</p>
 <p>The fix here was to undo the merge:</p>
-<pre tabindex=0><code class=language-console data-lang=console>$ git reset --hard D
-</code></pre><p>&mldr;and then edit the commit:</p>
-<pre tabindex=0><code class=language-console data-lang=console>$ git rebase -i A
-</code></pre><p>&mldr;and set <code>B</code> to <code>edit</code> instead of <code>pick</code>. Amend the commit for <code>B</code> so that it doesn&rsquo;t just create <code>dir2/file.xml</code>, but also deletes <code>dir1/file.xml</code>. If it&rsquo;s indeed the same file (or has very similar contents), this will be automatically detected as a rename during <code>log</code> and <code>merge</code> operations.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-console data-lang=console><span class=gp>$ </span>git reset --hard D
+</code></pre></div><p>&mldr;and then edit the commit:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-console data-lang=console><span class=gp>$ </span>git rebase -i A
+</code></pre></div><p>&mldr;and set <code>B</code> to <code>edit</code> instead of <code>pick</code>. Amend the commit for <code>B</code> so that it doesn&rsquo;t just create <code>dir2/file.xml</code>, but also deletes <code>dir1/file.xml</code>. If it&rsquo;s indeed the same file (or has very similar contents), this will be automatically detected as a rename during <code>log</code> and <code>merge</code> operations.</p>
 <p>It should be noted that git doesn&rsquo;t track renames (or copies) at all during commits. It only figures out that they happened retroactively when it&rsquo;s relevant (<code>log</code>, <code>merge</code>, <code>cherry-pick</code>, <code>diff</code>&mldr;), by comparing the contents. This is why those operations have options like <code>rename-threshold</code>, <code>find-renames</code>, <code>find-copies</code> and even <code>find-copies-harder</code>.</p>
 </div>
 <footer class=post-footer>

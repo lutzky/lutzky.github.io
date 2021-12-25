@@ -25,47 +25,47 @@ $ cd ~ $ mkdir .ssh $ chmod 700 .ssh $ cat &amp;gt;&amp;gt; .ssh/config Host t2.
 useful - you&rsquo;ll only need to type your password once per session. But first,
 let&rsquo;s set the default username (so you don&rsquo;t have to tell SSH what user you are
 every time):</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ cd ~
-$ mkdir .ssh
-$ chmod 700 .ssh
-$ cat &gt;&gt; .ssh/config
-Host t2.technion.ac.il
-	User slutzky
-Ctrl-D
-$
-</code></pre><p>Now, create a public/private key pair for SSH, like so:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-keygen -t rsa
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/tactless/.ssh/id_rsa): 
-Enter passphrase (empty for no passphrase): use_a_password
-Enter same passphrase again: use_a_password
-Your identification has been saved in /home/tactless/.ssh/id_rsa.
-Your public key has been saved in /home/tactless/.ssh/id_rsa.pub.
-The key fingerprint is:
-5a:3a:e3:f4:6e:91:fe:3f:27:4e:f4:46:0d:5e:50:4f tactless@dolphin
-</code></pre><p>Now you have a public and private key: <code>~/.ssh/id_rsa</code> is the private key
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span><span class="nb">cd</span> ~
+<span class="gp">$ </span>mkdir .ssh
+<span class="gp">$ </span>chmod <span class="m">700</span> .ssh
+<span class="gp">$ </span>cat &gt;&gt; .ssh/config
+<span class="go">Host t2.technion.ac.il
+</span><span class="go">	User slutzky
+</span><span class="go">Ctrl-D
+</span><span class="go"></span><span class="gp">$
+</span></code></pre></div><p>Now, create a public/private key pair for SSH, like so:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>ssh-keygen -t rsa
+<span class="go">Generating public/private rsa key pair.
+</span><span class="go">Enter file in which to save the key (/home/tactless/.ssh/id_rsa): 
+</span><span class="go">Enter passphrase (empty for no passphrase): use_a_password
+</span><span class="go">Enter same passphrase again: use_a_password
+</span><span class="go">Your identification has been saved in /home/tactless/.ssh/id_rsa.
+</span><span class="go">Your public key has been saved in /home/tactless/.ssh/id_rsa.pub.
+</span><span class="go">The key fingerprint is:
+</span><span class="go">5a:3a:e3:f4:6e:91:fe:3f:27:4e:f4:46:0d:5e:50:4f tactless@dolphin
+</span></code></pre></div><p>Now you have a public and private key: <code>~/.ssh/id_rsa</code> is the private key
 (don&rsquo;t give this to anyone!), and <code>~/.ssh/id_rsa.pub</code> is the public key - give
 this to everyone. Specifically, put it on the SSH server you want to log into,
 making sure the permissions are correct. There&rsquo;s a script which does this:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-copy-id t2.technion.ac.il
-</code></pre><p>It basically does the following for you:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
-password:
-$ ssh t2.technion.ac.il
-&gt; mkdir .ssh
-&gt; cat id_rsa.pub &gt;&gt; .ssh/authorized_keys
-&gt; chmod 700 .ssh .ssh/authorized_keys
-&gt; chmod 755 .
-&gt; logout
-</code></pre><p>Now, when you log in to your local account, before using SSH for the first time, type the following command:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-add
-Enter passphrase for /home/tactless/.ssh/id_rsa: your-password-here
-$ ssh t2.technion.ac.il
-&gt; # notice, didn't type a password
-&gt; logout
-$ ssh t2.technion.ac.il
-&gt; # no password this time either
-</code></pre>]]></content:encoded></item><item><title>Russian stress mark</title><link>https://lutzky.net/russian-stress/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lutzky.net/russian-stress/</guid><description> This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian keyboard doesn't support it.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>ssh-copy-id t2.technion.ac.il
+</code></pre></div><p>It basically does the following for you:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
+<span class="go">password:
+</span><span class="go"></span><span class="gp">$ </span>ssh t2.technion.ac.il
+<span class="gp">&gt; </span>mkdir .ssh
+<span class="gp">&gt; </span>cat id_rsa.pub &gt;&gt; .ssh/authorized_keys
+<span class="gp">&gt; </span>chmod <span class="m">700</span> .ssh .ssh/authorized_keys
+<span class="gp">&gt; </span>chmod <span class="m">755</span> .
+<span class="gp">&gt; </span><span class="nb">logout</span>
+</code></pre></div><p>Now, when you log in to your local account, before using SSH for the first time, type the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>ssh-add
+<span class="go">Enter passphrase for /home/tactless/.ssh/id_rsa: your-password-here
+</span><span class="go"></span><span class="gp">$ </span>ssh t2.technion.ac.il
+<span class="gp">&gt; </span><span class="c1"># notice, didn&#39;t type a password</span>
+<span class="gp">&gt; </span><span class="nb">logout</span>
+<span class="gp">$ </span>ssh t2.technion.ac.il
+<span class="gp">&gt; </span><span class="c1"># no password this time either</span>
+</code></pre></div>]]></content:encoded></item><item><title>Russian stress mark</title><link>https://lutzky.net/russian-stress/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lutzky.net/russian-stress/</guid><description> This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian keyboard doesn't support it.
 ́ function copyIt() { document.getElementById('copyBuffer').select(); document.execCommand('copy'); } Copy</description><content:encoded><![CDATA[
 <p>This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian
     keyboard doesn't support it.</p>

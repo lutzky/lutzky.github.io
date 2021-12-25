@@ -326,6 +326,9 @@ $ go -o main.arm build main.go
 <pre tabindex="0"><code>ffmpeg -i ORIGINAL_VIDEO.mov -i output-audio-fixed.aac -c:v copy -map 0:v:0 -map 1:a:0 ORIGINAL_VIDEO_sound_fixed.mov
 </code></pre><p>This method was both faster and more flexible than using the video editors I have at my disposable.</p>
 <h2 id="splitting-video">Splitting video</h2>
+<blockquote>
+<p>Note from the future (2021-12-25): <a href="https://mifi.no/losslesscut/">LosslessCut</a> does a <em>far</em> better job of this than my hacky scripts, and is far easier to use.</p>
+</blockquote>
 <p>At this point, I watch the video through, writing down key points of what&rsquo;s going on with approximate time-codes. It helps to do 3-4 different tapes of this before moving forward, as it gives you a feel for what the &ldquo;logical separation&rdquo; to smaller chunks is. I usually define those chunks as &ldquo;different set of consecutive days&rdquo; (usually just one), but it helps to have all the timecodes available in text so you don&rsquo;t have to re-watch. I recommend using a player that supports faster-than-realtime viewing, such as VLC (speed up, stop on &ldquo;hey what was that&rdquo;, rewind, watch at regular speed). This is the most time-consuming part.</p>
 <p>After this, I decide on the section structure, and need to determine the precise frames where I want to split. Since most video players aren&rsquo;t designed to &ldquo;go back one frame&rdquo;, I actually open the video in a video editor (the free HitFilm Express, in my case). I start with the rough time-codes from the previous step, and step frame-by-frame back-and-forth until I find the first and last usable frames of a section. I write these to a <code>points.txt</code> file with the following syntax:</p>
 <pre tabindex="0"><code>00:00:00:00-00:15:48:13
@@ -741,18 +744,18 @@ The mutation score is 0.750000 (3 passed, 1 failed, 0 duplicated, 0 skipped, tot
     A---B [COPY]---C---D---M (feature *)
 </code></pre></div><p>In this case, the user thought he renamed <code>dir1/file.xml</code> to <code>dir2/file.xml</code> in <code>B [COPY]</code>. Then, when he merged <code>master</code> into <code>feature</code>, he expected that the modifications in <code>file.xml</code> in <code>F [MODIFY]</code> would, as part of the merge in <code>M</code>, be applied to <code>dir2/file.xml</code>. This would indeed have happened if <code>B</code> had a move operation. However, it doesn&rsquo;t make sense for git to merge the changes from a <em>copy</em> of a file, so it didn&rsquo;t.</p>
 <p>The fix here was to undo the merge:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ git reset --hard D
-</code></pre><p>&hellip;and then edit the commit:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ git rebase -i A
-</code></pre><p>&hellip;and set <code>B</code> to <code>edit</code> instead of <code>pick</code>. Amend the commit for <code>B</code> so that it doesn&rsquo;t just create <code>dir2/file.xml</code>, but also deletes <code>dir1/file.xml</code>. If it&rsquo;s indeed the same file (or has very similar contents), this will be automatically detected as a rename during <code>log</code> and <code>merge</code> operations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>git reset --hard D
+</code></pre></div><p>&hellip;and then edit the commit:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>git rebase -i A
+</code></pre></div><p>&hellip;and set <code>B</code> to <code>edit</code> instead of <code>pick</code>. Amend the commit for <code>B</code> so that it doesn&rsquo;t just create <code>dir2/file.xml</code>, but also deletes <code>dir1/file.xml</code>. If it&rsquo;s indeed the same file (or has very similar contents), this will be automatically detected as a rename during <code>log</code> and <code>merge</code> operations.</p>
 <p>It should be noted that git doesn&rsquo;t track renames (or copies) at all during commits. It only figures out that they happened retroactively when it&rsquo;s relevant (<code>log</code>, <code>merge</code>, <code>cherry-pick</code>, <code>diff</code>&hellip;), by comparing the contents. This is why those operations have options like <code>rename-threshold</code>, <code>find-renames</code>, <code>find-copies</code> and even <code>find-copies-harder</code>.</p>
 ]]></content:encoded></item><item><title>Git While You Sit 2 - .gitignore</title><link>https://lutzky.net/2014/08/15/git-ignore/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/08/15/git-ignore/</guid><description>Using &lt;!-- raw HTML omitted -->.gitignore&lt;!-- raw HTML omitted --> to exclude build artifacts from your repository.</description><content:encoded><![CDATA[<p>This is part of the &ldquo;Git While You Sit&rdquo; series, a play on Google&rsquo;s <a href="http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html">Testing on the Toilet</a>. It&rsquo;s intended to fit on a printed page. Currently Chrome doesn&rsquo;t seem to correctly print columns, but Firefox does.
 {: .no-print }</p>
 <p>Your repository has files which are generated as part of your build process or as part of running your software, which you don&rsquo;t want in source control. They keep showing up in <code>git status</code>. What to do?</p>
 <p>You can create a file called <code>.gitignore</code> - note that the filename starts with a <code>.</code>, which is standard for configuration files in Unix and causes them to be hidden from normal listing. Each <code>.gitignore</code> file affects the current directory and its subdirectories - you can have multiple <code>.gitignore</code> files to create more specific rules for subdirectories.</p>
 <p><em>Note:</em> <code>.gitignore</code> can only be used for files which shouldn&rsquo;t be in source code <em>at all</em> (those show up as &ldquo;Untracked files&rdquo;. <em>Modified</em> files can&rsquo;t be ignored in this way. If you really want to, you can force git to ignore modifications with this command:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ git update-index --assume-unchanged FILE
-</code></pre><p>However, this is usually a bad idea and indicates you need to refactor your file handling - split files which get modified locally from files which contain information which should be source-controlled.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>git update-index --assume-unchanged FILE
+</code></pre></div><p>However, this is usually a bad idea and indicates you need to refactor your file handling - split files which get modified locally from files which contain information which should be source-controlled.</p>
 <p>Here is an annotated excerpt from a <code>.gitignore</code> file:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"># Extensions of compiled files
 *.a
@@ -1385,47 +1388,47 @@ $ cd ~ $ mkdir .ssh $ chmod 700 .ssh $ cat &amp;gt;&amp;gt; .ssh/config Host t2.
 useful - you&rsquo;ll only need to type your password once per session. But first,
 let&rsquo;s set the default username (so you don&rsquo;t have to tell SSH what user you are
 every time):</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ cd ~
-$ mkdir .ssh
-$ chmod 700 .ssh
-$ cat &gt;&gt; .ssh/config
-Host t2.technion.ac.il
-	User slutzky
-Ctrl-D
-$
-</code></pre><p>Now, create a public/private key pair for SSH, like so:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-keygen -t rsa
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/tactless/.ssh/id_rsa): 
-Enter passphrase (empty for no passphrase): use_a_password
-Enter same passphrase again: use_a_password
-Your identification has been saved in /home/tactless/.ssh/id_rsa.
-Your public key has been saved in /home/tactless/.ssh/id_rsa.pub.
-The key fingerprint is:
-5a:3a:e3:f4:6e:91:fe:3f:27:4e:f4:46:0d:5e:50:4f tactless@dolphin
-</code></pre><p>Now you have a public and private key: <code>~/.ssh/id_rsa</code> is the private key
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span><span class="nb">cd</span> ~
+<span class="gp">$ </span>mkdir .ssh
+<span class="gp">$ </span>chmod <span class="m">700</span> .ssh
+<span class="gp">$ </span>cat &gt;&gt; .ssh/config
+<span class="go">Host t2.technion.ac.il
+</span><span class="go">	User slutzky
+</span><span class="go">Ctrl-D
+</span><span class="go"></span><span class="gp">$
+</span></code></pre></div><p>Now, create a public/private key pair for SSH, like so:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>ssh-keygen -t rsa
+<span class="go">Generating public/private rsa key pair.
+</span><span class="go">Enter file in which to save the key (/home/tactless/.ssh/id_rsa): 
+</span><span class="go">Enter passphrase (empty for no passphrase): use_a_password
+</span><span class="go">Enter same passphrase again: use_a_password
+</span><span class="go">Your identification has been saved in /home/tactless/.ssh/id_rsa.
+</span><span class="go">Your public key has been saved in /home/tactless/.ssh/id_rsa.pub.
+</span><span class="go">The key fingerprint is:
+</span><span class="go">5a:3a:e3:f4:6e:91:fe:3f:27:4e:f4:46:0d:5e:50:4f tactless@dolphin
+</span></code></pre></div><p>Now you have a public and private key: <code>~/.ssh/id_rsa</code> is the private key
 (don&rsquo;t give this to anyone!), and <code>~/.ssh/id_rsa.pub</code> is the public key - give
 this to everyone. Specifically, put it on the SSH server you want to log into,
 making sure the permissions are correct. There&rsquo;s a script which does this:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-copy-id t2.technion.ac.il
-</code></pre><p>It basically does the following for you:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
-password:
-$ ssh t2.technion.ac.il
-&gt; mkdir .ssh
-&gt; cat id_rsa.pub &gt;&gt; .ssh/authorized_keys
-&gt; chmod 700 .ssh .ssh/authorized_keys
-&gt; chmod 755 .
-&gt; logout
-</code></pre><p>Now, when you log in to your local account, before using SSH for the first time, type the following command:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ssh-add
-Enter passphrase for /home/tactless/.ssh/id_rsa: your-password-here
-$ ssh t2.technion.ac.il
-&gt; # notice, didn't type a password
-&gt; logout
-$ ssh t2.technion.ac.il
-&gt; # no password this time either
-</code></pre>]]></content:encoded></item><item><title>The show downloading stack - part n+1</title><link>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</link><pubDate>Thu, 15 Dec 2011 00:00:00 +0000</pubDate><guid>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</guid><description>I&amp;rsquo;ve already mentioned my show downloading stack on this blog. It&amp;rsquo;s changed a bit since - I now use Transmission rather than rtorrent, as it has the excellent transmission-daemon package which has it acting exactly the way I like (without using screen). Also, it now E-mails me when a torrent is done downloading. So while this may be how TV works for you:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>ssh-copy-id t2.technion.ac.il
+</code></pre></div><p>It basically does the following for you:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>scp ~/.ssh/id_rsa.pub t2.technion.ac.il:
+<span class="go">password:
+</span><span class="go"></span><span class="gp">$ </span>ssh t2.technion.ac.il
+<span class="gp">&gt; </span>mkdir .ssh
+<span class="gp">&gt; </span>cat id_rsa.pub &gt;&gt; .ssh/authorized_keys
+<span class="gp">&gt; </span>chmod <span class="m">700</span> .ssh .ssh/authorized_keys
+<span class="gp">&gt; </span>chmod <span class="m">755</span> .
+<span class="gp">&gt; </span><span class="nb">logout</span>
+</code></pre></div><p>Now, when you log in to your local account, before using SSH for the first time, type the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>ssh-add
+<span class="go">Enter passphrase for /home/tactless/.ssh/id_rsa: your-password-here
+</span><span class="go"></span><span class="gp">$ </span>ssh t2.technion.ac.il
+<span class="gp">&gt; </span><span class="c1"># notice, didn&#39;t type a password</span>
+<span class="gp">&gt; </span><span class="nb">logout</span>
+<span class="gp">$ </span>ssh t2.technion.ac.il
+<span class="gp">&gt; </span><span class="c1"># no password this time either</span>
+</code></pre></div>]]></content:encoded></item><item><title>The show downloading stack - part n+1</title><link>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</link><pubDate>Thu, 15 Dec 2011 00:00:00 +0000</pubDate><guid>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</guid><description>I&amp;rsquo;ve already mentioned my show downloading stack on this blog. It&amp;rsquo;s changed a bit since - I now use Transmission rather than rtorrent, as it has the excellent transmission-daemon package which has it acting exactly the way I like (without using screen). Also, it now E-mails me when a torrent is done downloading. So while this may be how TV works for you:
 Notice that a new episode is out Torrent it Wait for the download to finish Watch it &amp;hellip;this is how TV works for me now:</description><content:encoded><![CDATA[<p>I&rsquo;ve <a href="/2009/09/05/my-show-downloading-stack">already mentioned</a> my show downloading stack on this blog. It&rsquo;s
 changed a bit since - I now use <a href="http://transmission-bt.org/">Transmission</a>
 rather than rtorrent, as it has the excellent <code>transmission-daemon</code> package
@@ -2047,12 +2050,12 @@ Zone      IsraelIDT           2:00    ZionIDT     I%sT
 </code></pre><p>Sounds about right, nay? Even my handy little
 <a href="http://github.com/lutzky/pyzdump">pyzdump</a> confirms that it looks about how I
 want it to:</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">$ ./pyzdump.py /usr/share/zoneinfo/IsraelIDT
-Transitions: ['At Sat Dec 31 23:00:00 1938, switch to IST',
-'At Sun Dec 31 22:00:00 1939, switch to IDT']
-Types: [&lt;tztype dst=&quot;True&quot; idt:=&quot;&quot; utc+10800=&quot;&quot;&gt;,
-&lt;tztype dst=&quot;False&quot; ist:=&quot;&quot; utc+7200=&quot;&quot;&gt;]
-</code></pre><p>However, it still doesn&rsquo;t work. A test program:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>./pyzdump.py /usr/share/zoneinfo/IsraelIDT
+<span class="go">Transitions: [&#39;At Sat Dec 31 23:00:00 1938, switch to IST&#39;,
+</span><span class="go">&#39;At Sun Dec 31 22:00:00 1939, switch to IDT&#39;]
+</span><span class="go">Types: [&lt;tztype dst=&#34;True&#34; idt:=&#34;&#34; utc+10800=&#34;&#34;&gt;,
+</span><span class="go">&lt;tztype dst=&#34;False&#34; ist:=&#34;&#34; utc+7200=&#34;&#34;&gt;]
+</span></code></pre></div><p>However, it still doesn&rsquo;t work. A test program:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">tzset</span><span class="p">();</span>
     <span class="n">time_t</span> <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
@@ -2858,8 +2861,8 @@ semester. Attached are my lectures notes in PDF form:</p>
 repository stored here:</p>
 <p><a href="http://yasmin.technion.ac.il/ohad/git/computability.git">http://yasmin.technion.ac.il/ohad/git/computability.git</a></p>
 <p>To use it, install <code>git-core</code> and curl, and run</p>
-<pre tabindex="0"><code class="language-console" data-lang="console">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
-</code></pre><p>Any changes you have - send to me as patches, or push to your own repository
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="go">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
+</span></code></pre></div><p>Any changes you have - send to me as patches, or push to your own repository
 and send me a link. (Drawings would be most welcome, and you&rsquo;re obviously
 welcome to add your name to the list of typers)</p>
 <p>If you need git storage, try <a href="http://repo.or.cz">repo.or.cz</a>, or ask the T2

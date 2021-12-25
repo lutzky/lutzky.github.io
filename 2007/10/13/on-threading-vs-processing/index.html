@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://lutzky.net/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.2">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40939561-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="On Threading vs. Processing">
 <meta property="og:description" content="Writing multi-threaded applications in Python is often a headache because of the Global Interpreter Lock - only one Python thread can run at any given moment, which makes multi-threading useful only in the case where all modules but one actually run C code. However, thanks to the impressive new Python Magazine, I&rsquo;ve stumbled across a package called processing, paraphrasing python&rsquo;s built-in threading package. Essentially, the package provides an API identical to Python&rsquo;s threading, but uses processes and pipes (or other mechanisms on non-posix operating systems) instead.">
 <meta property="og:type" content="article">
