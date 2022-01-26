@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://lutzky.net/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <link rel=alternate type=application/rss+xml href=https://lutzky.net/posts/index.xml>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40939561-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="Posts">
 <meta property="og:description" content>
@@ -80,6 +80,18 @@
 <header class=page-header>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Things I learned today</h2>
+</header>
+<section class=entry-content>
+<p>You can use git on a VFAT disk (for example, a USB key) without all of the annoying mode issues, by using the following setting in .git/config:
+[core] filemode = false What I haven’t figured out is how to do force a chmod in this situation; for example, if I create a new script, I was hoping to be able to git chmod +x it.
+Cream is a very good editor if you’re used to Windows applications....</p>
+</section>
+<footer class=entry-footer>April 28, 2008&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
+<a class=entry-link aria-label="post link to Things I learned today" href=https://lutzky.net/2008/04/28/things-i-learned-today/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>Hebrew spell-checking in Pidgin</h2>
@@ -182,18 +194,6 @@ http://yasmin.technion.ac.il/ohad/git/computability.git...</p>
 <footer class=entry-footer>October 31, 2007&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
 <a class=entry-link aria-label="post link to Computability - Typed Lectures and Tutorials" href=https://lutzky.net/2007/10/31/computability-typed-lectures-and-tutorials/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Encrypted my Wi-fi</h2>
-</header>
-<section class=entry-content>
-<p>Reading some backlog on this blog, I found the following gem:
-It’s a sad state of affairs that people go ahead and limit access to their wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.
-Yeah… not so anymore. For about four weeks (just a bit before the semester started), my net connection was working excrutiatingly slow. Now, we’re four roommates here, so we started blaming each other....</p>
-</section>
-<footer class=entry-footer>October 28, 2007&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Ohad Lutzky</footer>
-<a class=entry-link aria-label="post link to Encrypted my Wi-fi" href=https://lutzky.net/2007/10/28/encrypted-my-wi-fi/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://lutzky.net/posts/page/6/>« Prev Page</a>
@@ -202,7 +202,7 @@ Yeah… not so anymore. For about four weeks (just a bit before the semester sta
 </footer>
 </main>
 <footer class=footer>
-<span>&copy; 2021 <a href=https://lutzky.net>Shallow and Pedantic</a></span>
+<span>&copy; 2022 <a href=https://lutzky.net>Shallow and Pedantic</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
