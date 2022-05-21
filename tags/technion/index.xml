@@ -40,8 +40,8 @@ semester. Attached are my lectures notes in PDF form:</p>
 repository stored here:</p>
 <p><a href="http://yasmin.technion.ac.il/ohad/git/computability.git">http://yasmin.technion.ac.il/ohad/git/computability.git</a></p>
 <p>To use it, install <code>git-core</code> and curl, and run</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="go">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
-</span></code></pre></div><p>Any changes you have - send to me as patches, or push to your own repository
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
+</span></span></span></code></pre></div><p>Any changes you have - send to me as patches, or push to your own repository
 and send me a link. (Drawings would be most welcome, and you&rsquo;re obviously
 welcome to add your name to the list of typers)</p>
 <p>If you need git storage, try <a href="http://repo.or.cz">repo.or.cz</a>, or ask the T2
@@ -108,38 +108,38 @@ Jabber servers, including Google Talk, support using Port 443 over SSL. Since
 the Technion does not block outbound SSL connections, this will work there as
 well. Be sure to mark the appropriate &lsquo;Use old SSL protocol&rsquo; option in your
 jabber client (that&rsquo;s what it&rsquo;s called in gaim and pidgin, at any rate).</p>
-]]></content:encoded></item><item><title>Here's hoping</title><link>https://lutzky.net/2007/02/14/heres-hoping/</link><pubDate>Wed, 14 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/14/heres-hoping/</guid><description>def factor(grade, params = {}) return 100 if params.empty? # Optimistic, eh? case params[:type] when :pass return 55 when :fail return 54 when :root params[:gamma] = 0.5 end grade = grade.to_f return params[:proc].call(grade) if params[:proc] grade *= params[:coefficient] if params[:coefficient] if params[:gamma] grade /= 100 grade **= params[:gamma] grade *= 100 end if params[:offset] grade += params[:offset] end return grade if params[:idnoclip] [ grade, 100 ].min end</description><content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="n">grade</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
-  <span class="k">return</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">empty?</span> <span class="c1"># Optimistic, eh?</span>
-
-  <span class="k">case</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]</span>
-  <span class="k">when</span> <span class="ss">:pass</span>
-    <span class="k">return</span> <span class="mi">55</span>
-  <span class="k">when</span> <span class="ss">:fail</span>
-    <span class="k">return</span> <span class="mi">54</span>
-  <span class="k">when</span> <span class="ss">:root</span>
-    <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
-  <span class="k">end</span>
-
-  <span class="n">grade</span> <span class="o">=</span> <span class="n">grade</span><span class="o">.</span><span class="n">to_f</span>
-
-  <span class="k">return</span> <span class="n">params</span><span class="o">[</span><span class="ss">:proc</span><span class="o">].</span><span class="n">call</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:proc</span><span class="o">]</span>
-
-  <span class="n">grade</span> <span class="o">*=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:coefficient</span><span class="o">]</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:coefficient</span><span class="o">]</span>
-
-  <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span>
-    <span class="n">grade</span> <span class="o">/=</span> <span class="mi">100</span>
-    <span class="n">grade</span> <span class="o">**=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span>
-    <span class="n">grade</span> <span class="o">*=</span> <span class="mi">100</span>
-  <span class="k">end</span>
-
-  <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:offset</span><span class="o">]</span>
-    <span class="n">grade</span> <span class="o">+=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:offset</span><span class="o">]</span>
-  <span class="k">end</span>
-
-  <span class="k">return</span> <span class="n">grade</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:idnoclip</span><span class="o">]</span>
-  <span class="o">[</span> <span class="n">grade</span><span class="p">,</span> <span class="mi">100</span> <span class="o">].</span><span class="n">min</span>
-<span class="k">end</span>
-</code></pre></div>]]></content:encoded></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</guid><description>My lecture slides. Have a peek if you like :)
+]]></content:encoded></item><item><title>Here's hoping</title><link>https://lutzky.net/2007/02/14/heres-hoping/</link><pubDate>Wed, 14 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/14/heres-hoping/</guid><description>def factor(grade, params = {}) return 100 if params.empty? # Optimistic, eh? case params[:type] when :pass return 55 when :fail return 54 when :root params[:gamma] = 0.5 end grade = grade.to_f return params[:proc].call(grade) if params[:proc] grade *= params[:coefficient] if params[:coefficient] if params[:gamma] grade /= 100 grade **= params[:gamma] grade *= 100 end if params[:offset] grade += params[:offset] end return grade if params[:idnoclip] [ grade, 100 ].min end</description><content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="n">grade</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">empty?</span> <span class="c1"># Optimistic, eh?</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">case</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">when</span> <span class="ss">:pass</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">55</span>
+</span></span><span class="line"><span class="cl">  <span class="k">when</span> <span class="ss">:fail</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">54</span>
+</span></span><span class="line"><span class="cl">  <span class="k">when</span> <span class="ss">:root</span>
+</span></span><span class="line"><span class="cl">    <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">grade</span> <span class="o">=</span> <span class="n">grade</span><span class="o">.</span><span class="n">to_f</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">params</span><span class="o">[</span><span class="ss">:proc</span><span class="o">].</span><span class="n">call</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:proc</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">grade</span> <span class="o">*=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:coefficient</span><span class="o">]</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:coefficient</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">/=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">**=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">*=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:offset</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">+=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:offset</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">grade</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:idnoclip</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="o">[</span> <span class="n">grade</span><span class="p">,</span> <span class="mi">100</span> <span class="o">].</span><span class="n">min</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div>]]></content:encoded></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</guid><description>My lecture slides. Have a peek if you like :)
 sybilproof Reputation Mechanisms - Seminar</description><content:encoded>&lt;p>My lecture slides. Have a peek if you like :)&lt;/p>
 &lt;a href="/2007/01/30/i-might-need-these-tomorrow/sybils.pdf">sybilproof Reputation Mechanisms - Seminar&lt;/a></content:encoded></item><item><title>As for Python</title><link>https://lutzky.net/2007/01/23/as-for-python/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/23/as-for-python/</guid><description>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to TryRuby, code my sites using Rails, am surprised that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes called the Japanese Python, and comparisons are inevitable. I know very little about Python, but I do know that&amp;hellip;
 It has a larger community More GUI applications are written in it More bindings are available for it Its interpreter is much faster Not a far inferior language Ruby certainly does have its advantages over it - trivial class expansion, extremely concise syntax, seemingly better-suited for heavy usage of closures, and Matz.</description><content:encoded><![CDATA[<p>Myself, I&rsquo;m a Ruby hacker. I send everyone within earshot to

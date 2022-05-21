@@ -19,14 +19,14 @@
 <h1 id="cross-compilation">Cross compilation</h1>
 <p>While the Pi Zero is certainly <em>capable</em> of being a fully-fledged Go development environment, it&rsquo;s not a fast one (and me using a cheap old SD card isn&rsquo;t helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and <code>scp</code>-ing the result over. That&rsquo;s despite Go&rsquo;s hefty statically-build binaries (7-12MB for these, depending on stripping).</p>
 <p>Cross compiling is done like so (e.g. in a <a href="https://github.com/lutzky/pitemp/blob/main/build.sh">convenience script</a>):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install gcc-arm-linux-gnueabi
-$ <span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>arm-linux-gnueabi-gcc <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARM</span><span class="o">=</span><span class="m">6</span> <span class="nv">GOARCH</span><span class="o">=</span>arm
-$ go -o main.arm build main.go
-</code></pre></div><p>For build-and-run-on-save, this can be used with <code>entr</code>. However, because you can&rsquo;t modify an executable file as it runs (in this case), you need to use a temporary file. On my laptop, I run:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
-</span></code></pre></div><p>Then, on the pi, I run:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
-</code></pre></div><h1 id="stage-2-pioled">Stage 2: PiOLED</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo apt install gcc-arm-linux-gnueabi
+</span></span><span class="line"><span class="cl">$ <span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>arm-linux-gnueabi-gcc <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARM</span><span class="o">=</span><span class="m">6</span> <span class="nv">GOARCH</span><span class="o">=</span>arm
+</span></span><span class="line"><span class="cl">$ go -o main.arm build main.go
+</span></span></code></pre></div><p>For build-and-run-on-save, this can be used with <code>entr</code>. However, because you can&rsquo;t modify an executable file as it runs (in this case), you need to use a temporary file. On my laptop, I run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
+</span></span></span></code></pre></div><p>Then, on the pi, I run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
+</span></span></code></pre></div><h1 id="stage-2-pioled">Stage 2: PiOLED</h1>
 <p>I looked for a not-so-ridiculously-large display, and found <a href="https://www.adafruit.com/product/3527">adafruit&rsquo;s PiOLED</a> to be perfect. Its HAT form factor makes for a much tidier device, and the display itself is reminiscent of the 2007 Sansa Clip m300 (albeit monochromatic). Library support is also much better, thanks to <a href="http://periph.io">http://periph.io</a>.</p>
 <p>That being said, my friend soldered the Pi&rsquo;s pins on &ldquo;downwards&rdquo;, as this is apparently more convenient when using it on a breadboard. I figured it&rsquo;s time to order my own Pi Zero (you can get them with the pins pre-soldered, facing &ldquo;up&rdquo;); I later found that <a href="https://pkg.go.dev/periph.io/x/devices/v3/ssd1306#Opts">this might be configurable</a>, but it&rsquo;d still be pretty awkward.</p>
 <p>The PiOLED library (actually periph.io&rsquo;s ssd1306 library) essentially lets you render an <code>image.Image</code>; since these are also trivially renderable to PNG, I could speed up development even further by adding an HTTP endpoint to serve the current image, even if the hardware isn&rsquo;t present; this also let me zoom into the rendered image instead of squinting at the actual display, making it easier to align things pixel-by-pixel. I eventually ended up separating the code into two binaries - <code>pitemp</code> would communicate with the sensors and provide an HTTP endpoint, whereas <code>pitemp_pioled</code> (and <code>pitemp_lcd</code>) would communicate with <code>pitemp</code> and the physical display (or run in <code>--simulator</code> mode on my laptop, for HTTP-endpoint-only rendering).</p>
@@ -210,7 +210,7 @@ photos and videos to and from the phone, without any nokia-specific software.
 However, it only works for the external SD card, so you can&rsquo;t use that to
 access SMS messages or contacts.</p>
 <p>I usually only need &ldquo;Data Transfer&rdquo; mode, so I changed the default to that.
-Today I regret that decision, as it cost me a couple of hours' work. I called
+Today I regret that decision, as it cost me a couple of hours&rsquo; work. I called
 the Orange hotline, and they did their best to help me, including trying to
 blind-guide me through the menus, which failed because the menus are actually
 dynamic and I didn&rsquo;t have the default setup. They actually got me 90% of the

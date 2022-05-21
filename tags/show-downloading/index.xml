@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>show downloading on Shallow and Pedantic</title><link>https://lutzky.net/tags/show-downloading/</link><description>Recent content in show downloading on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 05 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/show-downloading/index.xml" rel="self" type="application/rss+xml"/><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/2014/01/05/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/01/05/investigate/</guid><description>Distinguishing &lt;!-- raw HTML omitted -->EPERM&lt;!-- raw HTML omitted --> vs &lt;!-- raw HTML omitted -->EACCESS&lt;!-- raw HTML omitted -->, and how that helps debug file manipulation scripts.</description><content:encoded><![CDATA[<p>My show downloading stack lives on. I&rsquo;m curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.</p>
 <p>At any rate, nowadays I use <code>flexget</code>, <code>transmission</code>, <code>tvnamer</code> and <code>xbmc</code>, held together with some bash scripts. On debian- and ubuntu-based systems, the <code>transmission</code> daemon runs as a separate user (<code>debian-transmission</code>), so this requires a bit of care with file and group ownership. After rebuilding my system, I couldn&rsquo;t get <code>tvnamer</code> to work right for some reason, no matter how careful I was. I&rsquo;d keep getting this error:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Loading config: config.json
-####################
-# Starting tvnamer
-# Found 1 episode
-####################
-# Processing file: Sherlock.S03E01.mkv
-# Detected series: Sherlock (season: 3, episode: 1)
-####################
-Old filename: Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
-New filename: Sherlock - [03x01] - The Empty Hearse.mkv
-New path: /home/debian-transmission/inbox/Sherlock - [03x01] - The Empty Hearse.mkv
-Creating directory /home/debian-transmission/inbox
-rename Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv to /home/debian-transmission/inbox/Sherlock - [03x01] - The Empty Hearse.mkv
-OSError(1, &#39;Operation not permitted&#39;)
-New path: /media/Store/shows/Sherlock/Season 3/Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
-Creating directory /media/Store/Shows/Sherlock/Season 3
-OSError(2, &#39;No such file or directory&#39;)
-</code></pre></div><p>For a few weeks I&rsquo;d double-check the permissions, fail to understand what was going on, groan and copy the files manually. The new Sherlock episode had me in a bit of a more investigative mood.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Loading config: config.json
+</span></span><span class="line"><span class="cl">####################
+</span></span><span class="line"><span class="cl"># Starting tvnamer
+</span></span><span class="line"><span class="cl"># Found 1 episode
+</span></span><span class="line"><span class="cl">####################
+</span></span><span class="line"><span class="cl"># Processing file: Sherlock.S03E01.mkv
+</span></span><span class="line"><span class="cl"># Detected series: Sherlock (season: 3, episode: 1)
+</span></span><span class="line"><span class="cl">####################
+</span></span><span class="line"><span class="cl">Old filename: Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
+</span></span><span class="line"><span class="cl">New filename: Sherlock - [03x01] - The Empty Hearse.mkv
+</span></span><span class="line"><span class="cl">New path: /home/debian-transmission/inbox/Sherlock - [03x01] - The Empty Hearse.mkv
+</span></span><span class="line"><span class="cl">Creating directory /home/debian-transmission/inbox
+</span></span><span class="line"><span class="cl">rename Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv to /home/debian-transmission/inbox/Sherlock - [03x01] - The Empty Hearse.mkv
+</span></span><span class="line"><span class="cl">OSError(1, &#39;Operation not permitted&#39;)
+</span></span><span class="line"><span class="cl">New path: /media/Store/shows/Sherlock/Season 3/Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
+</span></span><span class="line"><span class="cl">Creating directory /media/Store/Shows/Sherlock/Season 3
+</span></span><span class="line"><span class="cl">OSError(2, &#39;No such file or directory&#39;)
+</span></span></code></pre></div><p>For a few weeks I&rsquo;d double-check the permissions, fail to understand what was going on, groan and copy the files manually. The new Sherlock episode had me in a bit of a more investigative mood.</p>
 <p>This turns out to be an exercise in confusing OS logic and logging. It <em>looks</em> like the rename operation failed, and somehow the directory creation failed as well. Neither is the case. A hint can be found in the precise error after the rename: &ldquo;1 - Operation not permitted&rdquo; (that&rsquo;s <code>EPERM</code>). If that seems a bit off, that&rsquo;s because it is: When renames fail because of inadequate permissions, they return <code>EACCES</code> &ldquo;13 - Permission denied&rdquo;. So what&rsquo;s going on?</p>
 <p>It turns out that after renaming, <code>tvnamer</code> tries to preserve the access and modification times of renamed files. A noble cause, but it turns out that Linux won&rsquo;t allow this unless you are the <em>owner</em> of the file - even if you do have write permissions. Therefore, this fails, which causes <code>tvnamer</code> to believe the rename failed - although it hasn&rsquo;t. Afterwards, the directory is created (this succeeds), but since <code>tvnamer</code> tries to copy using the <em>old</em> filename (thinking the rename failed), we get an <code>ENOENT</code> &ldquo;2 - No such file or directory&rdquo; error about the <em>source</em> of the copy operation.</p>
 <p>The fix can be found <a href="https://github.com/dbr/tvnamer/pull/89">in this pull request</a>. Happy bug hunting!</p>
@@ -40,30 +40,30 @@ works for you:</p>
 <li>Watch it</li>
 </ol>
 <p>Here&rsquo;s how it&rsquo;s done: First, write <code>/usr/local/bin/notify_torrent_done</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>cat_the_message<span class="o">()</span> <span class="o">{</span>
-cat <span class="s">&lt;&lt;EOF
-</span><span class="s">Subject: Torrent done: $TR_TORRENT_NAME
-</span><span class="s">
-</span><span class="s">Hello from transmission $TR_APP_VERSION at $(hostname). The following torrent
-</span><span class="s">has completed:
-</span><span class="s">
-</span><span class="s">Name: $TR_TORRENT_NAME
-</span><span class="s">Finished at: $TR_TIME_LOCALTIME
-</span><span class="s">Downloaded to: $TR_TORRENT_DIR
-</span><span class="s">Hash: $TR_TORRENT_HASH
-</span><span class="s">
-</span><span class="s">Enjoy!
-</span><span class="s">EOF</span>
-<span class="o">}</span>
-
-<span class="nv">RETVAL</span><span class="o">=</span><span class="m">1</span>
-
-<span class="k">while</span> <span class="o">[[</span> <span class="nv">$RETVAL</span> !<span class="o">=</span> <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
-    cat_the_message <span class="p">|</span> msmtp -C /etc/msmtprc.transmission --from default -t your@email.address
-    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
-<span class="k">done</span>
-</code></pre></div><p>The various environment variables will be set by transmission when it calls
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>cat_the_message<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">Subject: Torrent done: $TR_TORRENT_NAME
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">Hello from transmission $TR_APP_VERSION at $(hostname). The following torrent
+</span></span></span><span class="line"><span class="cl"><span class="s">has completed:
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">Name: $TR_TORRENT_NAME
+</span></span></span><span class="line"><span class="cl"><span class="s">Finished at: $TR_TIME_LOCALTIME
+</span></span></span><span class="line"><span class="cl"><span class="s">Downloaded to: $TR_TORRENT_DIR
+</span></span></span><span class="line"><span class="cl"><span class="s">Hash: $TR_TORRENT_HASH
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">Enjoy!
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">RETVAL</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="o">[[</span> <span class="nv">$RETVAL</span> !<span class="o">=</span> <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    cat_the_message <span class="p">|</span> msmtp -C /etc/msmtprc.transmission --from default -t your@email.address
+</span></span><span class="line"><span class="cl">    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><p>The various environment variables will be set by transmission when it calls
 this script. We rerun <code>msmtp</code> until it succeeds because you will often get a
 &ldquo;connection timed out&rdquo; response from gmail (&hellip;at least on my ISP&hellip;). Here&rsquo;s
 <code>/etc/msmtprc.transmission</code> which is relevant to gmail (this is a bit tricky
@@ -87,8 +87,8 @@ recommend using Google&rsquo;s two-step authentication, which will have you crea
 a one-time password for each application - use one of those one-time passwords
 here.</p>
 <p>Finally, in <code>/etc/transmission-daemon/settings.json</code>, add the following code:</p>
-<pre tabindex="0"><code>&quot;script-torrent-done-enabled&quot;: true,
-&quot;script-torrent-done-filename&quot;: &quot;/usr/local/bin/notify_torrent_done&quot;,
+<pre tabindex="0"><code>&#34;script-torrent-done-enabled&#34;: true,
+&#34;script-torrent-done-filename&#34;: &#34;/usr/local/bin/notify_torrent_done&#34;,
 </code></pre><p><strong>Important:</strong> You need to run <code>/etc/init.d/transmission-daemon reload</code> at
 this point, not <code>restart</code> - that would cause <code>settings.json</code> to be
 rewritten from runtime configuration.</p>
@@ -147,7 +147,7 @@ like this:</p>
 <pre tabindex="0"><code>download_rate = 30
 upload_rate = 2
 directory = /home/ohad/torrents/in_progress
-on_finished = move_complete,&quot;execute=mv,-u,$d.get_base_path=,~/torrents/inbox/ ;d.set_directory=~/torrents/inbox/&quot;
+on_finished = move_complete,&#34;execute=mv,-u,$d.get_base_path=,~/torrents/inbox/ ;d.set_directory=~/torrents/inbox/&#34;
 session = /home/ohad/torrents/.session
 schedule = watch_directory,5,5,load_start=/home/ohad/torrents/from_rss/*.torrent
 schedule = untied_directory,5,5,remove_untied=
@@ -174,24 +174,24 @@ deleted.</li>
 computer is up. This is not as elegant as starting it from an RC-script, but
 keeps the whole setup confined to the limits of my own user. Again, rtorrent
 has a lock-file which prevents multiple instances from running.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
-
-<span class="nb">set</span> -e
-
-<span class="nv">SCGI_SOCKET</span><span class="o">=</span>/tmp/rtorrent-scgi.socket
-<span class="nv">SESSION_DIR</span><span class="o">=</span>~/torrents/.session
-
-screen -d -m -fn -S rtorrent -s /bin/bash -t rtorrent -m nice rtorrent
-
-<span class="k">while</span> <span class="o">[[</span> ! -S <span class="nv">$SCGI_SOCKET</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span> sleep 1<span class="p">;</span> <span class="k">done</span>
-
-<span class="k">if</span> <span class="o">[[</span> -S <span class="nv">$SCGI_SOCKET</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-    chgrp www-data <span class="nv">$SCGI_SOCKET</span>
-    chmod g+rwx <span class="nv">$SCGI_SOCKET</span>
-<span class="k">fi</span>
-</code></pre></div><p><a href="http://code.google.com/p/rtgui/">RTGUI</a> provides a nice web-based interface.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> -e
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">SCGI_SOCKET</span><span class="o">=</span>/tmp/rtorrent-scgi.socket
+</span></span><span class="line"><span class="cl"><span class="nv">SESSION_DIR</span><span class="o">=</span>~/torrents/.session
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">screen -d -m -fn -S rtorrent -s /bin/bash -t rtorrent -m nice rtorrent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="o">[[</span> ! -S <span class="nv">$SCGI_SOCKET</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span> sleep 1<span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> -S <span class="nv">$SCGI_SOCKET</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    chgrp www-data <span class="nv">$SCGI_SOCKET</span>
+</span></span><span class="line"><span class="cl">    chmod g+rwx <span class="nv">$SCGI_SOCKET</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><p><a href="http://code.google.com/p/rtgui/">RTGUI</a> provides a nice web-based interface.
 It&rsquo;s a bit tricky to configure, and you&rsquo;ll need to use an HTTP server -
 preferably lighttpd, as it has support for SCGI UNIX sockets (as opposed to
 SCGI TCP sockets). This lets you keep the number of open network ports to a

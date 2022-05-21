@@ -2,56 +2,56 @@
 class Secretary def send_fax(destination, fax_contents) puts &amp;#39;Sending fax &amp;#34;%s&amp;#34; to %s&amp;#39; % [fax_contents, destination] end def answer_call(call) # ... end # ... end Our Secretary provides a lot of useful functionality, that our Boss class would like to have. Boss would like to be able to say that he can send a fax, without having the user explicitly request his Secretary beforehand.</description><content:encoded><![CDATA[<p>Sometimes, when constructing a compound object, we are interested in exporting
 functionality while retaining encapsulation. For example, suppose we have a
 <code>Secretary</code> class:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Secretary</span>
-  <span class="k">def</span> <span class="nf">send_fax</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">fax_contents</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s1">&#39;Sending fax &#34;%s&#34; to %s&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="n">fax_contents</span><span class="p">,</span> <span class="n">destination</span><span class="o">]</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">answer_call</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
-    <span class="c1"># ...</span>
-  <span class="k">end</span>
-
-  <span class="c1"># ...</span>
-<span class="k">end</span>
-</code></pre></div><p>Our <code>Secretary</code> provides a lot of useful functionality, that our <code>Boss</code> class
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Secretary</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">send_fax</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">fax_contents</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s1">&#39;Sending fax &#34;%s&#34; to %s&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="n">fax_contents</span><span class="p">,</span> <span class="n">destination</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">answer_call</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>Our <code>Secretary</code> provides a lot of useful functionality, that our <code>Boss</code> class
 would like to have. <code>Boss</code> would like to be able to say that he can send a fax,
 without having the user explicitly request his <code>Secretary</code> beforehand. The same
 goes for a lot of other methods <code>Secretary</code> provides. Instead of writing a stub
 function for each of these methods, it would be nice to do the following:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Boss</span>
-  <span class="n">delegate_method</span> <span class="ss">:my_secretary</span><span class="p">,</span> <span class="ss">:send_fax</span><span class="p">,</span> <span class="ss">:answer_call</span>
-
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@my_secretary</span> <span class="o">=</span> <span class="no">Secretary</span><span class="o">.</span><span class="n">new</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">john</span> <span class="o">=</span> <span class="no">Boss</span><span class="o">.</span><span class="n">new</span>
-<span class="n">john</span><span class="o">.</span><span class="n">send_fax</span><span class="p">(</span><span class="s2">&#34;Donald Trump&#34;</span><span class="p">,</span> <span class="s2">&#34;YOU&#39;RE fired&#34;</span><span class="p">)</span>
-</code></pre></div><p>Here&rsquo;s how we can get this to happen:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Class</span>
-  <span class="k">def</span> <span class="nf">delegate_method</span><span class="p">(</span><span class="n">instance_var_name</span><span class="p">,</span> <span class="o">*</span><span class="n">method_names</span><span class="p">)</span>
-    <span class="n">method_names</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">method_name</span><span class="o">|</span>
-      <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
-        <span class="n">instance_var</span> <span class="o">=</span> <span class="nb">instance_variable_get</span><span class="p">(</span><span class="s2">&#34;@%s&#34;</span> <span class="o">%</span> <span class="n">instance_var_name</span><span class="p">)</span>
-        <span class="n">instance_var</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div><p>This solution does have its drawbacks - it will not work for methods which are
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Boss</span>
+</span></span><span class="line"><span class="cl">  <span class="n">delegate_method</span> <span class="ss">:my_secretary</span><span class="p">,</span> <span class="ss">:send_fax</span><span class="p">,</span> <span class="ss">:answer_call</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">initialize</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@my_secretary</span> <span class="o">=</span> <span class="no">Secretary</span><span class="o">.</span><span class="n">new</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">john</span> <span class="o">=</span> <span class="no">Boss</span><span class="o">.</span><span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="n">john</span><span class="o">.</span><span class="n">send_fax</span><span class="p">(</span><span class="s2">&#34;Donald Trump&#34;</span><span class="p">,</span> <span class="s2">&#34;YOU&#39;RE fired&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Here&rsquo;s how we can get this to happen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Class</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">delegate_method</span><span class="p">(</span><span class="n">instance_var_name</span><span class="p">,</span> <span class="o">*</span><span class="n">method_names</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">method_names</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">method_name</span><span class="o">|</span>
+</span></span><span class="line"><span class="cl">      <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_var</span> <span class="o">=</span> <span class="nb">instance_variable_get</span><span class="p">(</span><span class="s2">&#34;@%s&#34;</span> <span class="o">%</span> <span class="n">instance_var_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_var</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>This solution does have its drawbacks - it will not work for methods which are
 meant to accept blocks. I&rsquo;m not sure how to get that to happen, short of using
 a string-based <code>class_eval</code>, which I&rsquo;m not very fond of. (I find <code>eval</code> to be,
 well, evil&hellip;)</p>
 ]]></content:encoded></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</guid><description>Edit: I was misled!
 Illustrated here. Hints below.
-&amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;quot;x: %p, y: %p&amp;quot; % [x, y]; end =&amp;gt; nil &amp;gt;&amp;gt; inspect_x_and_y(y={&amp;quot;hello&amp;quot; =&amp;gt; &amp;quot;world&amp;quot;},x=[1,2,3]) x: {&amp;quot;hello&amp;quot;=&amp;gt;&amp;quot;world&amp;quot;}, y: [1, 2, 3] The bits I didn&amp;rsquo;t know about:
+&amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;#34;x: %p, y: %p&amp;#34; % [x, y]; end =&amp;gt; nil &amp;gt;&amp;gt; inspect_x_and_y(y={&amp;#34;hello&amp;#34; =&amp;gt; &amp;#34;world&amp;#34;},x=[1,2,3]) x: {&amp;#34;hello&amp;#34;=&amp;gt;&amp;#34;world&amp;#34;}, y: [1, 2, 3] The bits I didn&amp;rsquo;t know about:
 &amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ] The %p formatting character is the same as inspect. You can call methods with method_name(param2=val2, param1=val1), also like in python.</description><content:encoded><![CDATA[<p><strong>Edit: I was misled!</strong></p>
 <p>Illustrated here. Hints below.</p>
-<pre tabindex="0"><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &quot;x: %p, y: %p&quot; % [x, y]; end
+<pre tabindex="0"><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &#34;x: %p, y: %p&#34; % [x, y]; end
 =&gt; nil
-&gt;&gt; inspect_x_and_y(y={&quot;hello&quot; =&gt; &quot;world&quot;},x=[1,2,3])
-x: {&quot;hello&quot;=&gt;&quot;world&quot;}, y: [1, 2, 3]
+&gt;&gt; inspect_x_and_y(y={&#34;hello&#34; =&gt; &#34;world&#34;},x=[1,2,3])
+x: {&#34;hello&#34;=&gt;&#34;world&#34;}, y: [1, 2, 3]
 </code></pre><p>The bits I didn&rsquo;t know about:</p>
 <ol>
 <li><code>&quot;Format strings using a %% sign, %s, %s!&quot; % [ &quot;just like in python&quot;, &quot;but with arrays&quot; ]</code></li>
@@ -67,41 +67,41 @@ x.</strong></li>
 documentation. Here are some useful things I figured out while writing TTime. I
 ended up having a single <code>gettext_settings.rb</code>, included from every file which
 uses gettext. Here it is (with some extra notes)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="ch">#!/usr/bin/ruby</span>
-<span class="k">begin</span>
-  <span class="nb">require</span> <span class="s1">&#39;gettext&#39;</span>
-  <span class="nb">require</span> <span class="s1">&#39;pathname&#39;</span>
-
-  <span class="kp">include</span> <span class="no">GetText</span>
-
-  <span class="c1"># This fixes a swarm of problems on Windows</span>
-  <span class="no">GetText</span><span class="o">.</span><span class="n">locale</span><span class="o">.</span><span class="n">charset</span> <span class="o">=</span> <span class="s2">&#34;UTF-8&#34;</span>
-
-  <span class="c1"># Ruby&#39;s gettext acts in a sane</span>
-  <span class="c1"># method - add a path to the set of paths</span>
-  <span class="c1"># scanned.</span>
-  <span class="n">locale_in_data_path</span> <span class="o">=</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vg">$0</span><span class="p">)</span><span class="o">.</span><span class="n">dirname</span> <span class="o">+</span> <span class="p">\</span>
-    <span class="s2">&#34;../data/locale/%{locale}/LC_MESSAGES/%{name}.mo&#34;</span>
-  <span class="n">add_default_locale_path</span><span class="p">(</span><span class="n">locale_in_data_path</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
-  <span class="n">bound_text_domain</span> <span class="o">=</span> <span class="n">bindtextdomain</span><span class="p">(</span><span class="s2">&#34;ttime&#34;</span><span class="p">)</span>
-
-  <span class="c1"># For Glade, however, it only seems to</span>
-  <span class="c1"># be possible to specify one path at a</span>
-  <span class="c1"># time. Fortunately, gettext already</span>
-  <span class="c1"># found it for us.</span>
-  <span class="n">my_current_mo</span> <span class="o">=</span> <span class="n">bound_text_domain</span><span class="o">.</span><span class="n">entries</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">current_mo</span>
-  <span class="k">if</span> <span class="n">my_current_mo</span>
-    <span class="no">ENV</span><span class="o">[</span><span class="s2">&#34;GETTEXT_PATH&#34;</span><span class="o">]</span> <span class="o">=</span> <span class="n">my_current_mo</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span>
-      <span class="sr">/locale\/[^\/]+\/LC_MESSAGES.*/</span><span class="p">,</span>
-      <span class="s2">&#34;locale/&#34;</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">rescue</span> <span class="no">LoadError</span>
-  <span class="k">def</span> <span class="nf">_</span> <span class="n">s</span> <span class="c1">#:nodoc:</span>
-    <span class="c1"># No gettext? No problem.</span>
-    <span class="n">s</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div><p>One note for context: I use
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/ruby</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">require</span> <span class="s1">&#39;gettext&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">require</span> <span class="s1">&#39;pathname&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kp">include</span> <span class="no">GetText</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># This fixes a swarm of problems on Windows</span>
+</span></span><span class="line"><span class="cl">  <span class="no">GetText</span><span class="o">.</span><span class="n">locale</span><span class="o">.</span><span class="n">charset</span> <span class="o">=</span> <span class="s2">&#34;UTF-8&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Ruby&#39;s gettext acts in a sane</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># method - add a path to the set of paths</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># scanned.</span>
+</span></span><span class="line"><span class="cl">  <span class="n">locale_in_data_path</span> <span class="o">=</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vg">$0</span><span class="p">)</span><span class="o">.</span><span class="n">dirname</span> <span class="o">+</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;../data/locale/%{locale}/LC_MESSAGES/%{name}.mo&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">add_default_locale_path</span><span class="p">(</span><span class="n">locale_in_data_path</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bound_text_domain</span> <span class="o">=</span> <span class="n">bindtextdomain</span><span class="p">(</span><span class="s2">&#34;ttime&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># For Glade, however, it only seems to</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># be possible to specify one path at a</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># time. Fortunately, gettext already</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># found it for us.</span>
+</span></span><span class="line"><span class="cl">  <span class="n">my_current_mo</span> <span class="o">=</span> <span class="n">bound_text_domain</span><span class="o">.</span><span class="n">entries</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">current_mo</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">my_current_mo</span>
+</span></span><span class="line"><span class="cl">    <span class="no">ENV</span><span class="o">[</span><span class="s2">&#34;GETTEXT_PATH&#34;</span><span class="o">]</span> <span class="o">=</span> <span class="n">my_current_mo</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="sr">/locale\/[^\/]+\/LC_MESSAGES.*/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;locale/&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">rescue</span> <span class="no">LoadError</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">_</span> <span class="n">s</span> <span class="c1">#:nodoc:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># No gettext? No problem.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>One note for context: I use
 <a href="http://i.loveruby.net/en/projects/setup/">setup.rb</a> (and <code>ruby-pkg-tools</code>) to
 package TTime. So my localizations go in <code>data/locale</code>.</p>
 ]]></content:encoded></item></channel></rss>

@@ -77,9 +77,9 @@ interface for this unobtrusive.</li>
   </a><figcaption>Automatic location detection, Egged provider</figcaption></figure>
 <p>For a sneak peek, go to <a href="http://github.com/lutzky/TransportDroidIL">http://github.com/lutzky/TransportDroidIL</a> for the
 latest sources. You can also report issues there.</p>
-]]></content:encoded></item><item><title>Transport Droid IL</title><link>https://lutzky.net/2010/09/04/transport-droid-il/</link><pubDate>Sat, 04 Sep 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/09/04/transport-droid-il/</guid><description>After a couple of days' messing with it, I&amp;rsquo;m releasing it: Transport Droid IL! It&amp;rsquo;s a handy little app for querying Egged&amp;rsquo;s site, as well as the new Ministry of Transportation site, on transportation information. This is pretty beta, but seems to work well enough.
+]]></content:encoded></item><item><title>Transport Droid IL</title><link>https://lutzky.net/2010/09/04/transport-droid-il/</link><pubDate>Sat, 04 Sep 2010 00:00:00 +0000</pubDate><guid>https://lutzky.net/2010/09/04/transport-droid-il/</guid><description>After a couple of days&amp;rsquo; messing with it, I&amp;rsquo;m releasing it: Transport Droid IL! It&amp;rsquo;s a handy little app for querying Egged&amp;rsquo;s site, as well as the new Ministry of Transportation site, on transportation information. This is pretty beta, but seems to work well enough.
 More info, source code: http://lutzky.github.com/TransportDroidIL
-APK File: TransportDroidIL.APK</description><content:encoded><![CDATA[<p>After a couple of days' messing with it, I&rsquo;m releasing it: <em>Transport Droid
+APK File: TransportDroidIL.APK</description><content:encoded><![CDATA[<p>After a couple of days&rsquo; messing with it, I&rsquo;m releasing it: <em>Transport Droid
 IL</em>! It&rsquo;s a handy little app for querying <a href="http://egged.co.il/">Egged&rsquo;s site</a>,
 as well as the new <a href="http://bus.gov.il/">Ministry of Transportation site</a>, on
 transportation information. This is pretty beta, but seems to work well enough.</p>

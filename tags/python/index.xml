@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>python on Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>Recent content in python on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description><content:encoded><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
-<span class="kn">import</span> <span class="nn">unittest</span>
-<span class="kn">import</span> <span class="nn">mock</span>
-
-<span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;somefile&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-
-<span class="k">class</span> <span class="nc">TestMyCode</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">faker</span> <span class="o">=</span> <span class="n">fakefile</span><span class="o">.</span><span class="n">FakeFile</span><span class="p">()</span>
-
-        <span class="n">faker</span><span class="o">.</span><span class="n">set_contents</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;correct input&#34;</span><span class="p">)</span>
-
-        <span class="k">with</span> <span class="n">mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__builtin__.open&#39;</span><span class="p">,</span> <span class="n">faker</span><span class="o">.</span><span class="n">open</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">()</span>  <span class="c1"># No file &#34;somefile&#34; will be created!</span>
-                                    <span class="c1"># No file &#34;existing_file&#34; will be read!</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">faker</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&#34;somefile&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">file_contents</span><span class="p">,</span>
-                          <span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
-</code></pre></div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">fakefile</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">unittest</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">mock</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;somefile&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TestMyCode</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">test_my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">faker</span> <span class="o">=</span> <span class="n">fakefile</span><span class="o">.</span><span class="n">FakeFile</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">faker</span><span class="o">.</span><span class="n">set_contents</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;correct input&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__builtin__.open&#39;</span><span class="p">,</span> <span class="n">faker</span><span class="o">.</span><span class="n">open</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">()</span>  <span class="c1"># No file &#34;somefile&#34; will be created!</span>
+</span></span><span class="line"><span class="cl">                                    <span class="c1"># No file &#34;existing_file&#34; will be read!</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">faker</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&#34;somefile&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">file_contents</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
 ]]></content:encoded></item><item><title>Translationese</title><link>https://lutzky.net/2013/03/24/translationese/</link><pubDate>Sun, 24 Mar 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/03/24/translationese/</guid><description>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a chance to use a few of my favorite technologies.
 The project was coded in Python, which is not my favorite programming language - Ruby is. However, since Python is more popular at my workplace, and seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown to love it almost as much over the years.</description><content:encoded><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
 in natural language processing. I&rsquo;ve learned quite a bit from it, and had a
@@ -108,88 +108,88 @@ nicely in C, without mucking about in C++. Exception handling (of sorts),
 object-oriented programming (of sorts) as well as garbage collection (of sorts)
 are implemented in a usable way, and extremely well-documented.</p>
 <p>At the end of the day, I was able to turn this Python gem:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">dbus</span>
-
-<span class="k">def</span> <span class="nf">_nm_device_interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Returns an interface to the device object dev_object&#34;&#34;&#34;</span>
-    <span class="k">return</span> <span class="n">dbus</span><span class="o">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">,</span> <span class="n">NM_DEVICE_IFACE</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">_nm_get_object</span><span class="p">(</span><span class="n">object_path</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Returns an object with the given object path using the NM service&#34;&#34;&#34;</span>
-    <span class="k">return</span> <span class="n">dbus</span><span class="o">.</span><span class="n">SystemBus</span><span class="p">()</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">NM_SERVICE</span><span class="p">,</span> <span class="n">object_path</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">_nm</span><span class="p">():</span> <span class="k">return</span> <span class="n">_nm_get_object</span><span class="p">(</span><span class="n">NM_OBJECT_PATH</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">guessed_exception</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Checks if the DBus exception e is (exactly) of type guessed_exception&#34;&#34;&#34;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">get_dbus_name</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">guessed_exception</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="c1"># If it doesn&#39;t have a get_dbus_name, it probably isn&#39;t the DBus</span>
-        <span class="c1"># exception we&#39;re looking for.</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
-<span class="k">def</span> <span class="nf">_nm_all_device_interfaces</span><span class="p">():</span>
-    <span class="s2">&#34;&#34;&#34;Return a list of interfaces to all devices NM sees&#34;&#34;&#34;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span> <span class="n">_nm_device_interface</span><span class="p">(</span><span class="n">_nm_get_object</span><span class="p">(</span><span class="n">devicename</span><span class="p">))</span>
-                    <span class="k">for</span> <span class="n">devicename</span> <span class="ow">in</span> <span class="n">_nm</span><span class="p">()</span><span class="o">.</span><span class="n">getDevices</span><span class="p">()</span> <span class="p">]</span>
-    <span class="k">except</span> <span class="n">dbus</span><span class="o">.</span><span class="n">DBusException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&#34;NoDevices&#34;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[]</span> <span class="c1"># No devices means list of devices is empty</span>
-        <span class="k">else</span><span class="p">:</span> <span class="k">raise</span>
-</code></pre></div><p>&hellip;into this C gem:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
-</span><span class="cp">#define DBUS_PATH_NM &#34;/org/freedesktop/NetworkManager&#34;
-</span><span class="cp">#define DBUS_INTERFACE_NM &#34;org.freedesktop.NetworkManager&#34;
-</span><span class="cp">#define NM_ERR_NODEVICES &#34;org.freedesktop.NetworkManager.NoDevices&#34;
-</span><span class="cp"></span>
-<span class="n">gboolean</span> <span class="nf">is_remote_dbus_exception</span><span class="p">(</span><span class="n">GError</span> <span class="o">*</span><span class="n">error</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">exception_name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">g_assert</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="o">-&gt;</span><span class="n">domain</span> <span class="o">!=</span> <span class="n">DBUS_GERROR</span> <span class="o">||</span>
-                        <span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span> <span class="o">!=</span> <span class="n">DBUS_GERROR_REMOTE_EXCEPTION</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">exception_name</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
-
-        <span class="k">return</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">dbus_g_error_get_name</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">exception_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">GPtrArray</span> <span class="o">*</span> <span class="nf">get_nm_devices</span><span class="p">(</span><span class="n">DBusGConnection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span> <span class="n">GError</span> <span class="o">**</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">GError</span> <span class="o">*</span><span class="n">tmp_error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-        <span class="n">DBusGProxy</span> <span class="o">*</span><span class="n">proxy</span><span class="p">;</span>
-        <span class="n">GPtrArray</span> <span class="o">*</span><span class="n">ptr_array</span><span class="p">;</span>
-
-        <span class="n">g_return_val_if_fail</span><span class="p">(</span><span class="n">connection</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-
-        <span class="n">proxy</span> <span class="o">=</span> <span class="n">dbus_g_proxy_new_for_name</span><span class="p">(</span>
-                        <span class="n">connection</span><span class="p">,</span>
-                        <span class="n">DBUS_SERVICE_NM</span><span class="p">,</span>
-                        <span class="n">DBUS_PATH_NM</span><span class="p">,</span>
-                        <span class="n">DBUS_INTERFACE_NM</span><span class="p">);</span>
-
-        <span class="n">dbus_g_proxy_call</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="s">&#34;getDevices&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp_error</span><span class="p">,</span> <span class="n">G_TYPE_INVALID</span><span class="p">,</span>
-                        <span class="n">dbus_g_type_get_collection</span><span class="p">(</span><span class="s">&#34;GPtrArray&#34;</span><span class="p">,</span>
-                                <span class="n">DBUS_TYPE_G_PROXY</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ptr_array</span><span class="p">,</span> <span class="n">G_TYPE_INVALID</span><span class="p">);</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">tmp_error</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">is_remote_dbus_exception</span><span class="p">(</span><span class="n">tmp_error</span><span class="p">,</span> <span class="n">NM_ERR_NODEVICES</span><span class="p">))</span> <span class="p">{</span>
-                        <span class="n">g_error_free</span><span class="p">(</span><span class="n">tmp_error</span><span class="p">);</span>
-                        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-                <span class="p">}</span>
-                <span class="k">else</span> <span class="p">{</span>
-                        <span class="n">g_propagate_error</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">tmp_error</span><span class="p">);</span>
-                        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-                <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="n">g_object_unref</span><span class="p">(</span><span class="n">proxy</span><span class="p">);</span>
-
-        <span class="k">return</span> <span class="n">ptr_array</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><p>The C code runs much faster, and I suspect is more maintainable then its
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">dbus</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_nm_device_interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Returns an interface to the device object dev_object&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dbus</span><span class="o">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">,</span> <span class="n">NM_DEVICE_IFACE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_nm_get_object</span><span class="p">(</span><span class="n">object_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Returns an object with the given object path using the NM service&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dbus</span><span class="o">.</span><span class="n">SystemBus</span><span class="p">()</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">NM_SERVICE</span><span class="p">,</span> <span class="n">object_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_nm</span><span class="p">():</span> <span class="k">return</span> <span class="n">_nm_get_object</span><span class="p">(</span><span class="n">NM_OBJECT_PATH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">guessed_exception</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Checks if the DBus exception e is (exactly) of type guessed_exception&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">get_dbus_name</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">guessed_exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># If it doesn&#39;t have a get_dbus_name, it probably isn&#39;t the DBus</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># exception we&#39;re looking for.</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_nm_all_device_interfaces</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Return a list of interfaces to all devices NM sees&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span> <span class="n">_nm_device_interface</span><span class="p">(</span><span class="n">_nm_get_object</span><span class="p">(</span><span class="n">devicename</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">for</span> <span class="n">devicename</span> <span class="ow">in</span> <span class="n">_nm</span><span class="p">()</span><span class="o">.</span><span class="n">getDevices</span><span class="p">()</span> <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">dbus</span><span class="o">.</span><span class="n">DBusException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&#34;NoDevices&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">[]</span> <span class="c1"># No devices means list of devices is empty</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span> <span class="k">raise</span>
+</span></span></code></pre></div><p>&hellip;into this C gem:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define DBUS_PATH_NM &#34;/org/freedesktop/NetworkManager&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define DBUS_INTERFACE_NM &#34;org.freedesktop.NetworkManager&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define NM_ERR_NODEVICES &#34;org.freedesktop.NetworkManager.NoDevices&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">gboolean</span> <span class="nf">is_remote_dbus_exception</span><span class="p">(</span><span class="n">GError</span> <span class="o">*</span><span class="n">error</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">exception_name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">g_assert</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="o">-&gt;</span><span class="n">domain</span> <span class="o">!=</span> <span class="n">DBUS_GERROR</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span> <span class="o">!=</span> <span class="n">DBUS_GERROR_REMOTE_EXCEPTION</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">exception_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">dbus_g_error_get_name</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">exception_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">GPtrArray</span> <span class="o">*</span> <span class="nf">get_nm_devices</span><span class="p">(</span><span class="n">DBusGConnection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span> <span class="n">GError</span> <span class="o">**</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GError</span> <span class="o">*</span><span class="n">tmp_error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DBusGProxy</span> <span class="o">*</span><span class="n">proxy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GPtrArray</span> <span class="o">*</span><span class="n">ptr_array</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">g_return_val_if_fail</span><span class="p">(</span><span class="n">connection</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">proxy</span> <span class="o">=</span> <span class="n">dbus_g_proxy_new_for_name</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">connection</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">DBUS_SERVICE_NM</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">DBUS_PATH_NM</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">DBUS_INTERFACE_NM</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">dbus_g_proxy_call</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="s">&#34;getDevices&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp_error</span><span class="p">,</span> <span class="n">G_TYPE_INVALID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dbus_g_type_get_collection</span><span class="p">(</span><span class="s">&#34;GPtrArray&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">DBUS_TYPE_G_PROXY</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ptr_array</span><span class="p">,</span> <span class="n">G_TYPE_INVALID</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">tmp_error</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">is_remote_dbus_exception</span><span class="p">(</span><span class="n">tmp_error</span><span class="p">,</span> <span class="n">NM_ERR_NODEVICES</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">g_error_free</span><span class="p">(</span><span class="n">tmp_error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">g_propagate_error</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">tmp_error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">g_object_unref</span><span class="p">(</span><span class="n">proxy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ptr_array</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The C code runs much faster, and I suspect is more maintainable then its
 original counterpart (which uses embedded python in C).</p>
 ]]></content:encoded></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/2007/10/13/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/10/13/on-threading-vs-processing/</guid><description>Writing multi-threaded applications in Python is often a headache because of the Global Interpreter Lock - only one Python thread can run at any given moment, which makes multi-threading useful only in the case where all modules but one actually run C code. However, thanks to the impressive new Python Magazine, I&amp;rsquo;ve stumbled across a package called processing, paraphrasing python&amp;rsquo;s built-in threading package. Essentially, the package provides an API identical to Python&amp;rsquo;s threading, but uses processes and pipes (or other mechanisms on non-posix operating systems) instead.</description><content:encoded><![CDATA[<p>Writing multi-threaded applications in Python is often a headache because of
 the Global Interpreter Lock - only one Python thread can run at any given
@@ -204,66 +204,66 @@ applications; updating a progressbar in the application doesn&rsquo;t need to sl
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
 or processes at the user&rsquo;s choice:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">processing</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-<span class="kn">import</span> <span class="nn">Queue</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">gtk</span>
-<span class="kn">import</span> <span class="nn">gobject</span>
-
-<span class="n">gtk</span><span class="o">.</span><span class="n">gdk</span><span class="o">.</span><span class="n">threads_init</span><span class="p">()</span>
-
-<span class="n">USE_PROCESSING</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">WORKER_DELAY</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">GUI_DELAY</span> <span class="o">=</span> <span class="mf">0.5</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
-	<span class="nb">print</span> <span class="s2">&#34;Init other thread&#34;</span>
-	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">while</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
-		<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">WORKER_DELAY</span><span class="p">)</span>
-		<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-		<span class="nb">print</span> <span class="s2">&#34;Other thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span>
-		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="k">def</span> <span class="nf">update_label</span><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">)):</span>
-	<span class="nb">print</span> <span class="s2">&#34;Updating label&#34;</span>
-	<span class="k">try</span><span class="p">:</span>
-		<span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
-		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Number in thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
-	<span class="k">except</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
-		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Queue is empty!&#34;</span><span class="p">)</span>
-	<span class="k">except</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
-		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Queue is empty!&#34;</span><span class="p">)</span>
-	<span class="k">return</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
-	<span class="n">sq</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-	<span class="n">gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-	<span class="k">if</span> <span class="n">USE_PROCESSING</span><span class="p">:</span>
-		<span class="n">q</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-		<span class="n">sq</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-		<span class="n">p</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span>
-			<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">])</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-		<span class="n">sq</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-		<span class="n">p</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span>
-			<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">])</span>
-
-	<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-	<span class="n">w</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Window</span><span class="p">()</span>
-	<span class="n">l</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
-	<span class="n">gobject</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">GUI_DELAY</span><span class="p">),</span>
-		<span class="n">update_label</span><span class="p">,</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">sq</span><span class="p">))</span>
-	<span class="n">w</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-	<span class="n">w</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">sq</span><span class="p">)</span>
-	<span class="n">w</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
-	<span class="nb">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
-	<span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
-</code></pre></div>]]></content:encoded></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After trying to figure out how to work DBus with C, and seeing how easy it is to do in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately, it&amp;rsquo;s very simple to use - especially thanks to this guide.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">processing</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">threading</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">Queue</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gtk</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gobject</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gtk</span><span class="o">.</span><span class="n">gdk</span><span class="o">.</span><span class="n">threads_init</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">USE_PROCESSING</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="n">WORKER_DELAY</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">GUI_DELAY</span> <span class="o">=</span> <span class="mf">0.5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span> <span class="s2">&#34;Init other thread&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">		<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">WORKER_DELAY</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">print</span> <span class="s2">&#34;Other thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">update_label</span><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span> <span class="s2">&#34;Updating label&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Number in thread: </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">except</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Queue is empty!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">except</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="n">l</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&#34;Queue is empty!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">sq</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">sq</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">sq</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="n">USE_PROCESSING</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="n">q</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sq</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="n">p</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">	<span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sq</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="n">p</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="n">sq</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="n">w</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Window</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="n">l</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="n">gobject</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">GUI_DELAY</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="n">update_label</span><span class="p">,</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">sq</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="n">w</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">w</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">sq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">w</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></div>]]></content:encoded></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After trying to figure out how to work DBus with C, and seeing how easy it is to do in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately, it&amp;rsquo;s very simple to use - especially thanks to this guide.
 It later turned out to be much easier to do in C, as described in Faster Languages.</description><content:encoded><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
 trying to figure out how to work DBus with C, and seeing how easy it is to do
 in Python, we figured we&rsquo;d try to use embedded Python to do this. Fortunately,
@@ -276,61 +276,61 @@ each function return, along with its actual return value (if any), a numeric
 code identifying the error. Unfortunately, this made the code get really big,
 really fast - especially once DBus exceptions are thrown into the mix. But once
 I learned how to use decorators, I accomplished something like this diff:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gi">+@wrap_exceptions((False,))
-</span><span class="gi"></span> def checkSomething():
-<span class="gd">-    global error_string
-</span><span class="gd">-
-</span><span class="gd">-    error_string = &#34;&#34;
-</span><span class="gd">-
-</span><span class="gd">-    try:
-</span><span class="gd">-        return (try_doing_something_over_dbus(), RET_OK)
-</span><span class="gd">-    except dbus.DBusException, e:
-</span><span class="gd">-        error_string = str(e)
-</span><span class="gd">-        if _nm_dbus_exception(e, &#34;ServiceUnknown&#34;):
-</span><span class="gd">-            return (False, RET_SERVICE_NOT_RUNNING)
-</span><span class="gd">-        return (False, RET_ERROR)
-</span><span class="gd">-    except Exception, e:
-</span><span class="gd">-        error_string = str(e)
-</span><span class="gd">-        return (False, RET_ERROR)
-</span><span class="gd">-
-</span><span class="gd"></span><span class="gi">+    return (try_doing_something_over_dbus(), RET_OK)
-</span></code></pre></div><p>Now, the duplicate DBus/non-DBus exception handling, global <code>error_string</code>,
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gi">+@wrap_exceptions((False,))
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span> def checkSomething():
+</span></span><span class="line"><span class="cl"><span class="gd">-    global error_string
+</span></span></span><span class="line"><span class="cl"><span class="gd">-
+</span></span></span><span class="line"><span class="cl"><span class="gd">-    error_string = &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="gd">-
+</span></span></span><span class="line"><span class="cl"><span class="gd">-    try:
+</span></span></span><span class="line"><span class="cl"><span class="gd">-        return (try_doing_something_over_dbus(), RET_OK)
+</span></span></span><span class="line"><span class="cl"><span class="gd">-    except dbus.DBusException, e:
+</span></span></span><span class="line"><span class="cl"><span class="gd">-        error_string = str(e)
+</span></span></span><span class="line"><span class="cl"><span class="gd">-        if _nm_dbus_exception(e, &#34;ServiceUnknown&#34;):
+</span></span></span><span class="line"><span class="cl"><span class="gd">-            return (False, RET_SERVICE_NOT_RUNNING)
+</span></span></span><span class="line"><span class="cl"><span class="gd">-        return (False, RET_ERROR)
+</span></span></span><span class="line"><span class="cl"><span class="gd">-    except Exception, e:
+</span></span></span><span class="line"><span class="cl"><span class="gd">-        error_string = str(e)
+</span></span></span><span class="line"><span class="cl"><span class="gd">-        return (False, RET_ERROR)
+</span></span></span><span class="line"><span class="cl"><span class="gd">-
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+    return (try_doing_something_over_dbus(), RET_OK)
+</span></span></span></code></pre></div><p>Now, the duplicate DBus/non-DBus exception handling, global <code>error_string</code>,
 etc. - that happened in a lot of functions. Unfortunately, they didn&rsquo;t all
 return their values in the same way. Some just returned a <code>RET_VALUE</code>, but most
 had other values before it in the tuple (not the ideal design, come to think of
 it&hellip;). Here&rsquo;s the decorator I wrote:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span> <span class="o">=</span> <span class="n">prepend_tuple</span>
-
-    <span class="k">def</span> <span class="nf">tuplize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retval</span><span class="p">):</span>
-        <span class="c1"># Change retval into a default tuple form, if necessary</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span><span class="p">:</span> <span class="k">return</span> <span class="n">retval</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">retval</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">exception_wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
-            <span class="k">global</span> <span class="n">error_string</span>
-
-            <span class="n">error_string</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
-
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
-            <span class="k">except</span> <span class="n">dbus</span><span class="o">.</span><span class="n">DBusException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-                <span class="c1"># Check known DBus Exceptions first</span>
-                <span class="k">if</span> <span class="n">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&#34;ServiceUnknown&#34;</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_SERVICE_NOT_RUNNING</span><span class="p">)</span>
-
-                <span class="c1"># Unknown exceptions (DBus)</span>
-                <span class="n">error_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="c1"># Includes get_dbus_name</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_ERROR</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-                <span class="c1"># Unknown exceptions (non-DBus)</span>
-                <span class="n">error_string</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_ERROR</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">exception_wrapped</span>
-</code></pre></div>]]></content:encoded></item><item><title>IPython</title><link>https://lutzky.net/2007/03/04/ipython/</link><pubDate>Sun, 04 Mar 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/03/04/ipython/</guid><description>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project for a course, which involves somewhat heavy-duty database and algorithm work. Python is my language of choice for it - let&amp;rsquo;s hope it works out well.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span> <span class="o">=</span> <span class="n">prepend_tuple</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">tuplize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retval</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Change retval into a default tuple form, if necessary</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span><span class="p">:</span> <span class="k">return</span> <span class="n">retval</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">retval</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">exception_wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">global</span> <span class="n">error_string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">error_string</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="n">dbus</span><span class="o">.</span><span class="n">DBusException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># Check known DBus Exceptions first</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&#34;ServiceUnknown&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_SERVICE_NOT_RUNNING</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1"># Unknown exceptions (DBus)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">error_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="c1"># Includes get_dbus_name</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_ERROR</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># Unknown exceptions (non-DBus)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">error_string</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_ERROR</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">exception_wrapped</span>
+</span></span></code></pre></div>]]></content:encoded></item><item><title>IPython</title><link>https://lutzky.net/2007/03/04/ipython/</link><pubDate>Sun, 04 Mar 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/03/04/ipython/</guid><description>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project for a course, which involves somewhat heavy-duty database and algorithm work. Python is my language of choice for it - let&amp;rsquo;s hope it works out well.
 In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython (available in apt) - it adds a bunch of stuff to the python shell which I sorely missed from irb - autocompletion, auto-indentation, and - it seems - adds a whole lot more.</description><content:encoded><![CDATA[<p>The more I use Python, the nicer it becomes. I&rsquo;m currently working on a project
 for a course, which involves somewhat heavy-duty database and algorithm work.
 Python is my language of choice for it - let&rsquo;s hope it works out well.</p>
@@ -347,14 +347,14 @@ iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8 &amp;#160;&amp;#x21a9;
 (converts &ldquo;broken hebrew&rdquo; into proper hebrew, useful for sent-offline ICQ
 messages) to Python&hellip; it&rsquo;s quite a nice language, and the interpreter is FAST!
 I&rsquo;m really torn between it and Ruby :(</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Used to have a copy of <code>antigibberish.py</code>, but it&rsquo;s been lost in
 the mists of time. It used to do the equivalent of this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
-</code></pre></div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
+</span></span></code></pre></div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
-</section>
+</div>
 ]]></content:encoded></item></channel></rss>

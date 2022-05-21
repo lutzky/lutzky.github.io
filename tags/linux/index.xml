@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>linux on Shallow and Pedantic</title><link>https://lutzky.net/tags/linux/</link><description>Recent content in linux on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 22 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description><content:encoded><![CDATA[<p>Here&rsquo;s a fun little bash script:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span><span class="o">(</span>
-  sleep <span class="m">20</span> <span class="p">&amp;</span>
-<span class="o">)</span>
-ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
-<span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
-</code></pre></div><p>Run it, and you&rsquo;ll notice a few things:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">  sleep <span class="m">20</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
+</span></span></code></pre></div><p>Run it, and you&rsquo;ll notice a few things:</p>
 <ul>
 <li>Because the subshell running <code>sleep</code> dies immediately, <code>sleep</code> gets reparented to <code>init</code>. (Interestingly enough, on newer Ubuntu releases this isn&rsquo;t PID 1&hellip;), so the script doesn&rsquo;t have any child processes by the time it prints &ldquo;Bye&rdquo;.</li>
 <li>After &ldquo;Bye&rdquo; is shown, the script exits immediately, returning control to the shell.</li>
 </ul>
 <p>Now, call the script <code>pied_piper.sh</code>, and try the following:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">./pied_piper.sh <span class="p">|</span> cat
-./pied_piper.sh <span class="p">|</span> ts  <span class="c1"># Awesome timestamping utility, same problem though</span>
-ssh localhost ./pied_piper.sh
-</code></pre></div><p>Annoying, isn&rsquo;t it? These commands won&rsquo;t finish for 20 seconds! The problem is that <code>sleep</code> is keeping its <code>stdout</code> open, which is the input pipe for <code>cat</code>, <code>ts</code>, <code>ssh</code>, or whatever else you&rsquo;re piping to (this is very annoying on Jenkins jobs as well).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./pied_piper.sh <span class="p">|</span> cat
+</span></span><span class="line"><span class="cl">./pied_piper.sh <span class="p">|</span> ts  <span class="c1"># Awesome timestamping utility, same problem though</span>
+</span></span><span class="line"><span class="cl">ssh localhost ./pied_piper.sh
+</span></span></code></pre></div><p>Annoying, isn&rsquo;t it? These commands won&rsquo;t finish for 20 seconds! The problem is that <code>sleep</code> is keeping its <code>stdout</code> open, which is the input pipe for <code>cat</code>, <code>ts</code>, <code>ssh</code>, or whatever else you&rsquo;re piping to (this is very annoying on Jenkins jobs as well).</p>
 <p>If a third-party product is pissing you off this way - that is, it died, but somehow still keeps its pipe open, you can find the culprit like so:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">fuser -v /proc/<span class="nv">$PID_OF_PROCESS_WITH_OPEN_PIPE</span>/fd/0
-</code></pre></div><p>This will usually yield a <code>sleep</code> process as the culprit, with the useless parent information of <code>init</code> (as per my example). The only information you have is the precise delay - in my experience, it helps to find all &ldquo;sleep&rdquo; commands lurking about, and tinker with the delay amounts: Found a <code>sleep 30</code>? Change it to <code>sleep 29</code>, see if that&rsquo;s what shows up.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fuser -v /proc/<span class="nv">$PID_OF_PROCESS_WITH_OPEN_PIPE</span>/fd/0
+</span></span></code></pre></div><p>This will usually yield a <code>sleep</code> process as the culprit, with the useless parent information of <code>init</code> (as per my example). The only information you have is the precise delay - in my experience, it helps to find all &ldquo;sleep&rdquo; commands lurking about, and tinker with the delay amounts: Found a <code>sleep 30</code>? Change it to <code>sleep 29</code>, see if that&rsquo;s what shows up.</p>
 <p>Here&rsquo;s how to actually fix the problem:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span><span class="o">(</span>
-  sleep <span class="m">20</span> &gt;<span class="p">&amp;</span>- 2&gt;<span class="p">&amp;</span>- &lt;<span class="p">&amp;</span>- <span class="p">&amp;</span>
-<span class="o">)</span>
-ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
-<span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
-</code></pre></div><p>This will close <code>stdout</code>, <code>stderr</code> and <code>stdin</code>. As a friend pointed out, it&rsquo;s often safer to do <code>&gt; /dev/null</code> rather than <code>&gt;&amp;-</code>, as some processes will crap out if they don&rsquo;t have some semblence of an <code>stdout</code>. However, <code>&gt;&amp;-</code> is shorter, faster, and perfectly safe for <code>sleep</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">  sleep <span class="m">20</span> &gt;<span class="p">&amp;</span>- 2&gt;<span class="p">&amp;</span>- &lt;<span class="p">&amp;</span>- <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
+</span></span></code></pre></div><p>This will close <code>stdout</code>, <code>stderr</code> and <code>stdin</code>. As a friend pointed out, it&rsquo;s often safer to do <code>&gt; /dev/null</code> rather than <code>&gt;&amp;-</code>, as some processes will crap out if they don&rsquo;t have some semblence of an <code>stdout</code>. However, <code>&gt;&amp;-</code> is shorter, faster, and perfectly safe for <code>sleep</code>.</p>
 <p>Of course, it&rsquo;s better to save the PID for this <code>sleep</code> and kill it when appropriate from within the script - otherwise, you might be accumulating many useless <code>sleep</code> processes.</p>
 ]]></content:encoded></item><item><title>Multiple library versions</title><link>https://lutzky.net/2013/05/15/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/05/15/multiple-library-versions/</guid><description>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.
 Introduction Assume you&amp;rsquo;re working with an external vendor, who is providing you with code for a wonderful function getFoo:
@@ -33,27 +33,27 @@ Introduction Assume you&amp;rsquo;re working with an external vendor, who is pro
 <h2 id="introduction">Introduction</h2>
 <p>Assume you&rsquo;re working with an external vendor, who is providing you with code
 for a wonderful function <code>getFoo</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// foo.h version 1.2.3
-</span><span class="c1"></span>
-<span class="kt">int</span> <span class="nf">getFoo</span><span class="p">();</span>
-
-<span class="c1">// foo.c version 1.2.3
-</span><span class="c1"></span>
-<span class="kt">int</span> <span class="nf">getFoo</span><span class="p">()</span> <span class="p">{</span>
-	<span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">// TODO improve performance
-</span><span class="c1"></span>	<span class="k">return</span> <span class="mi">42</span>
-<span class="p">}</span>
-</code></pre></div><p>You use this function in many of your products - for example, in your
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// foo.h version 1.2.3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">getFoo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// foo.c version 1.2.3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">getFoo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">// TODO improve performance
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="mi">42</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You use this function in many of your products - for example, in your
 best-selling <code>barApp</code> application:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// barApp.c
-</span><span class="c1"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">getFoo</span><span class="p">());</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><p>So <code>barApp</code>, and other applications, would want to use a <code>foo</code> library.  It
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// barApp.c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">getFoo</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>So <code>barApp</code>, and other applications, would want to use a <code>foo</code> library.  It
 makes sense to provide this function in a shared library (<code>libfoo.so</code>).
 However, this library will change in the future, in several ways:</p>
 <ol>
@@ -86,50 +86,50 @@ servers and developer boxes will need to be able to have multiple versions of
 <code>libfoo</code> installed simultaneously.</p>
 <h2 id="compiling-installing-and-using-a-shared-library-properly">Compiling, installing, and using a shared library properly</h2>
 <p>First, the upstream vendor should compile <code>libfoo.so</code> with an <code>SONAME</code>, like so:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">gcc -shared -Wl,-soname,libfoo.so.1 -o libfoo.so.1.2.3 foo.c
-objdump -x libfoo.so.1.2.3 <span class="p">|</span> grep SONAME
-<span class="c1"># SONAME               libfoo.so.1</span>
-</code></pre></div><p>The guarantee the upstream vendor should give is this: As long as <code>SONAME</code>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -shared -Wl,-soname,libfoo.so.1 -o libfoo.so.1.2.3 foo.c
+</span></span><span class="line"><span class="cl">objdump -x libfoo.so.1.2.3 <span class="p">|</span> grep SONAME
+</span></span><span class="line"><span class="cl"><span class="c1"># SONAME               libfoo.so.1</span>
+</span></span></code></pre></div><p>The guarantee the upstream vendor should give is this: As long as <code>SONAME</code>
 doesn&rsquo;t change, binary compatibility will be retained.</p>
 <p>Now, you (or, preferably, your package manager) should install the package on your machine like so:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo1
-cp foo.h /usr/include/foo1
-cp libfoo.so.1.2.3 /usr/lib
-ldconfig -v <span class="p">|</span> grep libfoo
-<span class="c1"># libfoo.so.1 -&gt; libfoo.so.1.2.3</span>
-</code></pre></div><p>Now, traditionally <em>another</em> symlink <code>libfoo.so</code> -&gt; <code>libfoo.so.1.2.3</code> would be
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p /usr/include/foo1
+</span></span><span class="line"><span class="cl">cp foo.h /usr/include/foo1
+</span></span><span class="line"><span class="cl">cp libfoo.so.1.2.3 /usr/lib
+</span></span><span class="line"><span class="cl">ldconfig -v <span class="p">|</span> grep libfoo
+</span></span><span class="line"><span class="cl"><span class="c1"># libfoo.so.1 -&gt; libfoo.so.1.2.3</span>
+</span></span></code></pre></div><p>Now, traditionally <em>another</em> symlink <code>libfoo.so</code> -&gt; <code>libfoo.so.1.2.3</code> would be
 created, so you could compile <code>barApp</code> with <code>-lfoo</code>. However, here&rsquo;s an
 alternative:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">gcc -I/usr/include/foo1 -l:libfoo.so.1 barApp.c -o barApp
-ldd barApp
-<span class="c1"># linux-vdso.so.1 =&gt;  (0x00007fff8edfe000)</span>
-<span class="c1"># libfoo.so.1 =&gt; /usr/lib/libfoo.so.1 (0x00007fb367cce000)</span>
-<span class="c1"># libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb367906000)</span>
-<span class="c1"># /lib64/ld-linux-x86-64.so.2 (0x00007fb367ef2000)</span>
-</code></pre></div><p>Now <code>barApp</code> is compiled, and looks for <code>libfoo.so.1</code> - it will find it thanks
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -I/usr/include/foo1 -l:libfoo.so.1 barApp.c -o barApp
+</span></span><span class="line"><span class="cl">ldd barApp
+</span></span><span class="line"><span class="cl"><span class="c1"># linux-vdso.so.1 =&gt;  (0x00007fff8edfe000)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># libfoo.so.1 =&gt; /usr/lib/libfoo.so.1 (0x00007fb367cce000)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb367906000)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># /lib64/ld-linux-x86-64.so.2 (0x00007fb367ef2000)</span>
+</span></span></code></pre></div><p>Now <code>barApp</code> is compiled, and looks for <code>libfoo.so.1</code> - it will find it thanks
 to the symlink created by <code>ldconfig</code>, and use <code>libfoo.so.1.2.3</code>.</p>
 <h2 id="aftermath">Aftermath</h2>
 <h3 id="binary-compatible-updates">Binary-compatible updates</h3>
 <p>Suppose a new, compatible, faster version of <code>libfoo</code> is released - say version
 \1.3.0, which has removed that pesky <code>sleep</code>. Well, just place it in <code>/usr/lib</code>
 and rerun <code>ldconfig</code>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cp libfoo.so.1.3.0 /usr/lib
-ldconfig -v <span class="p">|</span> grep libfoo
-<span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
-</code></pre></div><p>The symlink has been updated, and now all applications (<code>barApp</code>, for example)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp libfoo.so.1.3.0 /usr/lib
+</span></span><span class="line"><span class="cl">ldconfig -v <span class="p">|</span> grep libfoo
+</span></span><span class="line"><span class="cl"><span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
+</span></span></code></pre></div><p>The symlink has been updated, and now all applications (<code>barApp</code>, for example)
 which were linked against <code>libfoo.so.1</code> will have improved performance.</p>
 <h3 id="incompatible-updates">Incompatible updates</h3>
 <p>Suppose a new, incompatible version 2.0.0 of <code>libfoo</code> is released, which would
 force the newer <code>barApp2.0</code> to be recompiled against the new, different
 headers. No problem:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /usr/include/foo2
-cp foo.h /usr/include/foo2
-cp libfoo.so.2.0.0 /usr/lib
-ldconfig -v <span class="p">|</span> grep libfoo
-<span class="c1"># -&gt; libfoo.so.2 -&gt; libfoo.so.2.0.0</span>
-<span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
-gcc -I/usr/include/foo2 -l:libfoo.so.2 barApp2.0.c -o barApp2.0
-</code></pre></div><p>Both versions of <code>libfoo</code> are installed simultaneously, and do not conflict.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p /usr/include/foo2
+</span></span><span class="line"><span class="cl">cp foo.h /usr/include/foo2
+</span></span><span class="line"><span class="cl">cp libfoo.so.2.0.0 /usr/lib
+</span></span><span class="line"><span class="cl">ldconfig -v <span class="p">|</span> grep libfoo
+</span></span><span class="line"><span class="cl"><span class="c1"># -&gt; libfoo.so.2 -&gt; libfoo.so.2.0.0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
+</span></span><span class="line"><span class="cl">gcc -I/usr/include/foo2 -l:libfoo.so.2 barApp2.0.c -o barApp2.0
+</span></span></code></pre></div><p>Both versions of <code>libfoo</code> are installed simultaneously, and do not conflict.</p>
 <h2 id="final-thoughts">Final thoughts</h2>
 <p>The <a href="http://www.debian.org/doc/debian-policy/ch-sharedlibs.html#s-sharedlibs-runtime">Debian policy guide</a> states that <code>-dev</code> packages should include
 the <code>libfoo.so</code> symlink. However, this would cause a conflict between the
@@ -162,23 +162,23 @@ Zone      IsraelIDT           2:00    ZionIDT     I%sT
 </code></pre><p>Sounds about right, nay? Even my handy little
 <a href="http://github.com/lutzky/pyzdump">pyzdump</a> confirms that it looks about how I
 want it to:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="gp">$ </span>./pyzdump.py /usr/share/zoneinfo/IsraelIDT
-<span class="go">Transitions: [&#39;At Sat Dec 31 23:00:00 1938, switch to IST&#39;,
-</span><span class="go">&#39;At Sun Dec 31 22:00:00 1939, switch to IDT&#39;]
-</span><span class="go">Types: [&lt;tztype dst=&#34;True&#34; idt:=&#34;&#34; utc+10800=&#34;&#34;&gt;,
-</span><span class="go">&lt;tztype dst=&#34;False&#34; ist:=&#34;&#34; utc+7200=&#34;&#34;&gt;]
-</span></code></pre></div><p>However, it still doesn&rsquo;t work. A test program:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">tzset</span><span class="p">();</span>
-    <span class="n">time_t</span> <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Timezone name is %s, timezone=%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
-            <span class="n">__tzname</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">timezone</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;The time is %s&#34;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Timezone name is %s, timezone=%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
-            <span class="n">__tzname</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">timezone</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><p>And its results, as run at 14:42:17 UTC, which is 19:42:17 IDT:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> ./pyzdump.py /usr/share/zoneinfo/IsraelIDT
+</span></span><span class="line"><span class="cl"><span class="go">Transitions: [&#39;At Sat Dec 31 23:00:00 1938, switch to IST&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="go">&#39;At Sun Dec 31 22:00:00 1939, switch to IDT&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="go">Types: [&lt;tztype dst=&#34;True&#34; idt:=&#34;&#34; utc+10800=&#34;&#34;&gt;,
+</span></span></span><span class="line"><span class="cl"><span class="go">&lt;tztype dst=&#34;False&#34; ist:=&#34;&#34; utc+7200=&#34;&#34;&gt;]
+</span></span></span></code></pre></div><p>However, it still doesn&rsquo;t work. A test program:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tzset</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_t</span> <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Timezone name is %s, timezone=%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">__tzname</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">timezone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;The time is %s&#34;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Timezone name is %s, timezone=%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">__tzname</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">timezone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>And its results, as run at 14:42:17 UTC, which is 19:42:17 IDT:</p>
 <pre tabindex="0"><code>Timezone name is IDT, timezone=-7200
 The time is Sat Apr 18 14:42:17 2009
 Timezone name is UTC, timezone=0
@@ -205,25 +205,25 @@ Rule    ZionIDT 2030  max   -     Jan  1        00:00 0:00  S
 Zone      IsraelIDT           2:00    ZionIDT     I%sT
 </code></pre><p>However, Python programs still show <code>timezone = -10800</code>. Examining
 Python&rsquo;s code, I found this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">if</span><span class="p">(</span> <span class="n">janzone</span> <span class="o">&lt;</span> <span class="n">julyzone</span> <span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/* DST is reversed in the southern hemisphere */</span>
-    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;timezone&#34;</span><span class="p">,</span> <span class="n">julyzone</span><span class="p">);</span>
-    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;altzone&#34;</span><span class="p">,</span> <span class="n">janzone</span><span class="p">);</span>
-    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;daylight&#34;</span><span class="p">,</span>
-        <span class="n">janzone</span> <span class="o">!=</span> <span class="n">julyzone</span><span class="p">);</span>
-    <span class="n">PyModule_AddObject</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;tzname&#34;</span><span class="p">,</span>
-        <span class="n">Py_BuildValue</span><span class="p">(</span><span class="s">&#34;(zz)&#34;</span><span class="p">,</span>
-        <span class="n">julyname</span><span class="p">,</span> <span class="n">janname</span><span class="p">));</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;timezone&#34;</span><span class="p">,</span> <span class="n">janzone</span><span class="p">);</span>
-        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;altzone&#34;</span><span class="p">,</span> <span class="n">julyzone</span><span class="p">);</span>
-        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;daylight&#34;</span><span class="p">,</span>
-            <span class="n">janzone</span> <span class="o">!=</span> <span class="n">julyzone</span><span class="p">);</span>
-        <span class="n">PyModule_AddObject</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;tzname&#34;</span><span class="p">,</span>
-            <span class="n">Py_BuildValue</span><span class="p">(</span><span class="s">&#34;(zz)&#34;</span><span class="p">,</span>
-            <span class="n">janname</span><span class="p">,</span> <span class="n">julyname</span><span class="p">));</span>
-<span class="p">}</span>
-</code></pre></div><p>And since June and July have the same timezone in our case, there&rsquo;s a good
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span> <span class="n">janzone</span> <span class="o">&lt;</span> <span class="n">julyzone</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* DST is reversed in the southern hemisphere */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;timezone&#34;</span><span class="p">,</span> <span class="n">julyzone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;altzone&#34;</span><span class="p">,</span> <span class="n">janzone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;daylight&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">janzone</span> <span class="o">!=</span> <span class="n">julyzone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddObject</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;tzname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Py_BuildValue</span><span class="p">(</span><span class="s">&#34;(zz)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">julyname</span><span class="p">,</span> <span class="n">janname</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;timezone&#34;</span><span class="p">,</span> <span class="n">janzone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;altzone&#34;</span><span class="p">,</span> <span class="n">julyzone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;daylight&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">janzone</span> <span class="o">!=</span> <span class="n">julyzone</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddObject</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;tzname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Py_BuildValue</span><span class="p">(</span><span class="s">&#34;(zz)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">janname</span><span class="p">,</span> <span class="n">julyname</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>And since June and July have the same timezone in our case, there&rsquo;s a good
 chance that this is what&rsquo;s going wrong. The moral of the story seems to be
 this - I should go with the first, simplest &ldquo;always-DST&rdquo; solution. Programs
 should ignore the <code>timezone</code> variable, as in our context it isn&rsquo;t reliable. In
@@ -241,27 +241,27 @@ my router broke down, so I can&rsquo;t even ssh home to manually start up rtorre
 My solution: A small script, which checks whether rtorrent is already running,
 and if not - runs it in a detached screen session. Run this with your favorite
 <code>cron</code> software.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span><span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
-
-<span class="k">if</span> ! ps -o uname -C rtorrent <span class="p">|</span> grep -q <span class="sb">`</span>whoami<span class="sb">`</span><span class="p">;</span> <span class="k">then</span>
-	screen -d -m rtorrent
-<span class="k">fi</span>
-</code></pre></div>]]></content:encoded></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/2008/10/26/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/10/26/quick-time-tracking-hack/</guid><description>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I don&amp;rsquo;t have Gnome 2.24 at work, but I do have a Unix-based operating system&amp;hellip; Here&amp;rsquo;s my new ~/bin/track:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> ! ps -o uname -C rtorrent <span class="p">|</span> grep -q <span class="sb">`</span>whoami<span class="sb">`</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">	screen -d -m rtorrent
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div>]]></content:encoded></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/2008/10/26/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/10/26/quick-time-tracking-hack/</guid><description>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I don&amp;rsquo;t have Gnome 2.24 at work, but I do have a Unix-based operating system&amp;hellip; Here&amp;rsquo;s my new ~/bin/track:
 #!/bin/bash date &amp;gt;&amp;gt; ~/time_tracking vim ~/time_tracking + Now, if I could only get vim to automatically hit &amp;ldquo;A&amp;rdquo; and space for me afterwards&amp;hellip; (I&amp;rsquo;m betting there&amp;rsquo;s a way to do it, but AFAIK vim can only receive ex-mode commands as parameters).</description><content:encoded><![CDATA[<p>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
 don&rsquo;t have Gnome 2.24 at work, but I do have a Unix-based operating system&hellip;
 Here&rsquo;s my new <code>~/bin/track</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>date &gt;&gt; ~/time_tracking
-vim ~/time_tracking +
-</code></pre></div><p>Now, if I could only get vim to automatically hit &ldquo;A&rdquo; and space for me
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>date &gt;&gt; ~/time_tracking
+</span></span><span class="line"><span class="cl">vim ~/time_tracking +
+</span></span></code></pre></div><p>Now, if I could only get vim to automatically hit &ldquo;A&rdquo; and space for me
 afterwards&hellip; (I&rsquo;m betting there&rsquo;s a way to do it, but AFAIK vim can only
 receive ex-mode commands as parameters).</p>
 <p><strong>Edit:</strong> &hellip;and, of course it&rsquo;s possible. Here&rsquo;s the new version:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;`date` &#34;</span> &gt;&gt; ~/time_tracking
-vim ~/time_tracking + -c <span class="s1">&#39;startinsert!&#39;</span>
-</code></pre></div>]]></content:encoded></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/2008/04/28/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/04/28/deskbar-and-firefox-3/</guid><description>Deskbar has a really neat plugin which allows you to search your browsing history and bookmarks. Firefox 3 has switched the storage format to an sqlite-based one. I&amp;rsquo;ve been working on a new plugin to make use of that - so far it&amp;rsquo;s very enjoyable to use :)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;`date` &#34;</span> &gt;&gt; ~/time_tracking
+</span></span><span class="line"><span class="cl">vim ~/time_tracking + -c <span class="s1">&#39;startinsert!&#39;</span>
+</span></span></code></pre></div>]]></content:encoded></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/2008/04/28/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/04/28/deskbar-and-firefox-3/</guid><description>Deskbar has a really neat plugin which allows you to search your browsing history and bookmarks. Firefox 3 has switched the storage format to an sqlite-based one. I&amp;rsquo;ve been working on a new plugin to make use of that - so far it&amp;rsquo;s very enjoyable to use :)
 » Deskbar_FF3</description><content:encoded><![CDATA[<p><a href="raphael.slinckx.net/deskbar/">Deskbar</a> has a really neat plugin which allows
 you to search your browsing history and bookmarks. Firefox 3 has switched the
 storage format to an sqlite-based one. I&rsquo;ve been working on a new plugin to
@@ -319,32 +319,32 @@ Here&amp;rsquo;s ~/bin/run_alarm.sh:
 #!/bin/bash find ~/music/ -name &amp;#39;*.mp3&amp;#39; -print0 | xargs -0 mplayer -shuffle &amp;amp; MAXVOL=31 TIME=900 for (( i = 0; i &amp;lt;= $MAXVOL; i++ )); do amixer set Master $i &amp;gt; /dev/null; sleep `echo $TIME / $MAXVOL | bc -l` done This basically plays all of my MP3 files, in random order.</description><content:encoded><![CDATA[<p>YNet was running a story on how to use your computer as an alarm clock. Here&rsquo;s
 what I do, for our commandline junkies :)</p>
 <p>Here&rsquo;s <code>~/bin/run_alarm.sh</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-find ~/music/ -name <span class="s1">&#39;*.mp3&#39;</span> -print0 <span class="p">|</span> xargs -0 mplayer -shuffle <span class="p">&amp;</span>
-
-<span class="nv">MAXVOL</span><span class="o">=</span><span class="m">31</span>
-<span class="nv">TIME</span><span class="o">=</span><span class="m">900</span>
-
-<span class="k">for</span> <span class="o">((</span> <span class="nv">i</span> <span class="o">=</span> 0<span class="p">;</span> i &lt;<span class="o">=</span> <span class="nv">$MAXVOL</span><span class="p">;</span> i++ <span class="o">))</span><span class="p">;</span> <span class="k">do</span>
-        amixer <span class="nb">set</span> Master <span class="nv">$i</span> &gt; /dev/null<span class="p">;</span>
-        sleep <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$TIME</span> / <span class="nv">$MAXVOL</span> <span class="p">|</span> bc -l<span class="sb">`</span>
-<span class="k">done</span>
-</code></pre></div><p>This basically plays all of my MP3 files, in random order. The <code>-print0</code> and <code>-0</code>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">find ~/music/ -name <span class="s1">&#39;*.mp3&#39;</span> -print0 <span class="p">|</span> xargs -0 mplayer -shuffle <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">MAXVOL</span><span class="o">=</span><span class="m">31</span>
+</span></span><span class="line"><span class="cl"><span class="nv">TIME</span><span class="o">=</span><span class="m">900</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">((</span> <span class="nv">i</span> <span class="o">=</span> 0<span class="p">;</span> i &lt;<span class="o">=</span> <span class="nv">$MAXVOL</span><span class="p">;</span> i++ <span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        amixer <span class="nb">set</span> Master <span class="nv">$i</span> &gt; /dev/null<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        sleep <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$TIME</span> / <span class="nv">$MAXVOL</span> <span class="p">|</span> bc -l<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><p>This basically plays all of my MP3 files, in random order. The <code>-print0</code> and <code>-0</code>
 arguments make it a null-terminated list, as some (most) files have spaces in
 their names. This process is backgrounded, and the script proceeds to gradually
 sweep the volume from 0 to the maximum, for a more gentle wakeup :)</p>
 <p>This script is basically intended for use with <code>at</code>. I made a little wrapper
 around it for my comfort:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">echo</span> <span class="s2">&#34;Usage: </span><span class="nv">$0</span><span class="s2"> [time]&#34;</span><span class="p">;</span>
-        <span class="nb">exit</span> 1<span class="p">;</span>
-<span class="k">fi</span>
-
-<span class="nb">echo</span> /home/ohad/bin/run_alarm.sh <span class="p">|</span> at <span class="nv">$1</span>
-</code></pre></div>]]></content:encoded></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/2007/04/19/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/04/19/grub-menu-lst-editor/</guid><description>A lot of people ask me how to change the default operating system booted after installing Linux. The answer they get in Ubuntu&amp;rsquo;s case, &amp;ldquo;Edit /boot/grub/menu.lst, it&amp;rsquo;s self-explanatory&amp;rdquo;, is often unsatisfactory. Attached is the solution :)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;Usage: </span><span class="nv">$0</span><span class="s2"> [time]&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">exit</span> 1<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> /home/ohad/bin/run_alarm.sh <span class="p">|</span> at <span class="nv">$1</span>
+</span></span></code></pre></div>]]></content:encoded></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/2007/04/19/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/04/19/grub-menu-lst-editor/</guid><description>A lot of people ask me how to change the default operating system booted after installing Linux. The answer they get in Ubuntu&amp;rsquo;s case, &amp;ldquo;Edit /boot/grub/menu.lst, it&amp;rsquo;s self-explanatory&amp;rdquo;, is often unsatisfactory. Attached is the solution :)
 Actual script lost in the mists of time&amp;hellip;
 Download the file, open a terminal, and run gksudo python grubmenu.py
 I&amp;rsquo;ll try and make a package of this soon, so it becomes a menu entry and that much easier to use.</description><content:encoded><![CDATA[<p>A lot of people ask me how to change the default operating system booted after
@@ -369,9 +369,9 @@ server room now&hellip;</p>
 function pmh { pmount-hal $1 UDI=`hal-find-by-property --key block.device --string $1` cd &amp;#34;`hal-get-property --udi $UDI--key volume.mount_point`&amp;#34; }</description><content:encoded><![CDATA[<p>If you&rsquo;re like me, and don&rsquo;t use Gnome or KDE, then you probably use the pmount
 or pmount-hal applications to mount removable media. Here&rsquo;s a neat thing to add
 to your <code>.bash_aliases</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> pmh <span class="o">{</span>
-    pmount-hal <span class="nv">$1</span>
-    <span class="nv">UDI</span><span class="o">=</span><span class="sb">`</span>hal-find-by-property --key block.device --string <span class="nv">$1</span><span class="sb">`</span>
-    <span class="nb">cd</span> <span class="s2">&#34;`hal-get-property --udi </span><span class="nv">$UDI</span><span class="s2"> --key volume.mount_point`&#34;</span>
-<span class="o">}</span>
-</code></pre></div>]]></content:encoded></item></channel></rss>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">function</span> pmh <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    pmount-hal <span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">UDI</span><span class="o">=</span><span class="sb">`</span>hal-find-by-property --key block.device --string <span class="nv">$1</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">cd</span> <span class="s2">&#34;`hal-get-property --udi </span><span class="nv">$UDI</span><span class="s2"> --key volume.mount_point`&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div>]]></content:encoded></item></channel></rss>

@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>testing on Shallow and Pedantic</title><link>https://lutzky.net/tags/testing/</link><description>Recent content in testing on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/testing/index.xml" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description><content:encoded><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fakefile</span>
-<span class="kn">import</span> <span class="nn">unittest</span>
-<span class="kn">import</span> <span class="nn">mock</span>
-
-<span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;somefile&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-
-<span class="k">class</span> <span class="nc">TestMyCode</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">faker</span> <span class="o">=</span> <span class="n">fakefile</span><span class="o">.</span><span class="n">FakeFile</span><span class="p">()</span>
-
-        <span class="n">faker</span><span class="o">.</span><span class="n">set_contents</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;correct input&#34;</span><span class="p">)</span>
-
-        <span class="k">with</span> <span class="n">mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__builtin__.open&#39;</span><span class="p">,</span> <span class="n">faker</span><span class="o">.</span><span class="n">open</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">()</span>  <span class="c1"># No file &#34;somefile&#34; will be created!</span>
-                                    <span class="c1"># No file &#34;existing_file&#34; will be read!</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">faker</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&#34;somefile&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">file_contents</span><span class="p">,</span>
-                          <span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
-</code></pre></div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">fakefile</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">unittest</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">mock</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;somefile&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TestMyCode</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">test_my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">faker</span> <span class="o">=</span> <span class="n">fakefile</span><span class="o">.</span><span class="n">FakeFile</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">faker</span><span class="o">.</span><span class="n">set_contents</span><span class="p">(</span><span class="s2">&#34;existing_file&#34;</span><span class="p">,</span> <span class="s2">&#34;correct input&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__builtin__.open&#39;</span><span class="p">,</span> <span class="n">faker</span><span class="o">.</span><span class="n">open</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">()</span>  <span class="c1"># No file &#34;somefile&#34; will be created!</span>
+</span></span><span class="line"><span class="cl">                                    <span class="c1"># No file &#34;existing_file&#34; will be read!</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">faker</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&#34;somefile&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">file_contents</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
 ]]></content:encoded></item><item><title>Asserting string equality</title><link>https://lutzky.net/2013/12/02/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/02/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description><content:encoded><![CDATA[<p>I&rsquo;ve had several opportunities to write unit tests for code that outputs large
 strings. It&rsquo;s important that your unit-testing framework handles this well.</p>
 <p>Here&rsquo;s my example data:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">STRING_A</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
-</span><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
-</span><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
-</span><span class="s2">pellentesque. Aenean venenatis vulputate eros, sit amet sagittis ligula laoreet
-</span><span class="s2">vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
-</span><span class="s2">Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
-</span><span class="s2">mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
-</span><span class="s2">lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
-</span><span class="s2">ultrices gravida vel et orci. Suspendisse potenti.
-</span><span class="s2">&#34;&#34;&#34;</span>
-
-<span class="n">STRING_B</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
-</span><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
-</span><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
-</span><span class="s2">pellentesque. Aenean venenatls vulputate eros, sit amet sagittis ligula laoreet
-</span><span class="s2">vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
-</span><span class="s2">Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
-</span><span class="s2">mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
-</span><span class="s2">lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
-</span><span class="s2">ultrices gravida vel et orci. Suspendisse potenti.
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><p><code>STRING_A</code> and <code>STRING_B</code> are different, by one character. Can you tell which
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">STRING_A</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
+</span></span></span><span class="line"><span class="cl"><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
+</span></span></span><span class="line"><span class="cl"><span class="s2">pellentesque. Aenean venenatis vulputate eros, sit amet sagittis ligula laoreet
+</span></span></span><span class="line"><span class="cl"><span class="s2">vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
+</span></span></span><span class="line"><span class="cl"><span class="s2">mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
+</span></span></span><span class="line"><span class="cl"><span class="s2">lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
+</span></span></span><span class="line"><span class="cl"><span class="s2">ultrices gravida vel et orci. Suspendisse potenti.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">STRING_B</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
+</span></span></span><span class="line"><span class="cl"><span class="s2">a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
+</span></span></span><span class="line"><span class="cl"><span class="s2">pellentesque. Aenean venenatls vulputate eros, sit amet sagittis ligula laoreet
+</span></span></span><span class="line"><span class="cl"><span class="s2">vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
+</span></span></span><span class="line"><span class="cl"><span class="s2">mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
+</span></span></span><span class="line"><span class="cl"><span class="s2">lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
+</span></span></span><span class="line"><span class="cl"><span class="s2">ultrices gravida vel et orci. Suspendisse potenti.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><p><code>STRING_A</code> and <code>STRING_B</code> are different, by one character. Can you tell which
 one?  If you&rsquo;d use your unit testing framework&rsquo;s equivalent of
 <code>assertEqual(STRING_A, STRING_B)</code>, it would correctly report that they are
 different. But would it help you identify the difference?</p>
@@ -64,36 +64,36 @@ reasonable indication of what the difference is.</p>
 Python 3, this becomes the default behavior for standard <code>assertEqual</code>). There
 are similar comparison methods for other large data types.</p>
 <p>Output:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">F
-======================================================================
-FAIL: testLongStringEquality (__main__.TestLongStrings)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;/home/ohad/test/test_equal.py&#34;, line 35, in testLongStringEquality
-    self.assertMultiLineEqual(STRING_A, STRING_B)
-AssertionError: &#39;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui. [truncated]... != &#39;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui. [truncated]...
-  
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
-  Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
-  a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
-- pellentesque. Aenean venenatis vulputate eros, sit amet sagittis ligula laoreet
-?                             ^
-+ pellentesque. Aenean venenatls vulputate eros, sit amet sagittis ligula laoreet
-?                             ^
-  vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
-  Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
-  mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
-  lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
-  ultrices gravida vel et orci. Suspendisse potenti.
-
-
-----------------------------------------------------------------------
-Ran 1 test in 0.003s
-
-FAILED (failures=1)
-</code></pre></div><p>For Java and JUnit, the output is also short and sweet (for plain <code>assertEquals</code>):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">testLongStringEquality(MyTest): expected:&lt;...sque. Aenean venenat[i]s vulputate eros, si...&gt; but was:&lt;...sque. Aenean venenat[l]s vulputate eros, si...&gt;
-</code></pre></div><p>Does your unit testing framework provide helpful output for failed unit tests?
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">F
+</span></span><span class="line"><span class="cl">======================================================================
+</span></span><span class="line"><span class="cl">FAIL: testLongStringEquality (__main__.TestLongStrings)
+</span></span><span class="line"><span class="cl">----------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">Traceback (most recent call last):
+</span></span><span class="line"><span class="cl">  File &#34;/home/ohad/test/test_equal.py&#34;, line 35, in testLongStringEquality
+</span></span><span class="line"><span class="cl">    self.assertMultiLineEqual(STRING_A, STRING_B)
+</span></span><span class="line"><span class="cl">AssertionError: &#39;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui. [truncated]... != &#39;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui. [truncated]...
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut tempus dui.
+</span></span><span class="line"><span class="cl">  Suspendisse ut augue placerat, venenatis ante a, aliquam nibh. Sed vitae massa
+</span></span><span class="line"><span class="cl">  a nibh dignissim porta id rhoncus neque. Etiam commodo dapibus magna sit amet
+</span></span><span class="line"><span class="cl">- pellentesque. Aenean venenatis vulputate eros, sit amet sagittis ligula laoreet
+</span></span><span class="line"><span class="cl">?                             ^
+</span></span><span class="line"><span class="cl">+ pellentesque. Aenean venenatls vulputate eros, sit amet sagittis ligula laoreet
+</span></span><span class="line"><span class="cl">?                             ^
+</span></span><span class="line"><span class="cl">  vel. Pellentesque consectetur viverra nunc, vel interdum turpis tempor nec.
+</span></span><span class="line"><span class="cl">  Quisque vel purus in quam facilisis gravida posuere in mi. Aenean ligula sem,
+</span></span><span class="line"><span class="cl">  mattis ut feugiat sit amet, lobortis ut sapien. Vestibulum laoreet aliquam
+</span></span><span class="line"><span class="cl">  lorem pulvinar lobortis. Mauris quis orci lorem. Mauris ut ante id nulla
+</span></span><span class="line"><span class="cl">  ultrices gravida vel et orci. Suspendisse potenti.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">----------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">Ran 1 test in 0.003s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">FAILED (failures=1)
+</span></span></code></pre></div><p>For Java and JUnit, the output is also short and sweet (for plain <code>assertEquals</code>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">testLongStringEquality(MyTest): expected:&lt;...sque. Aenean venenat[i]s vulputate eros, si...&gt; but was:&lt;...sque. Aenean venenat[l]s vulputate eros, si...&gt;
+</span></span></code></pre></div><p>Does your unit testing framework provide helpful output for failed unit tests?
 This is something you can and should demand of it.</p>
 ]]></content:encoded></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/2013/12/01/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/12/01/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description><content:encoded><![CDATA[<p>A conversation with a friend reminded me that, in fact, I&rsquo;ve been doing
 test-driven development long before I knew it was called that. Back in
@@ -103,24 +103,24 @@ multi-module C programs), most homework exercises looked something along these
 lines: Write a program managing a store inventory, with a command-line client
 conforming to a given set of specifications. For an input file looking like
 this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">addcategory Fruit
-addproduct Fruit Banana 2.30
-addproduct Fruit Tomato 1.20
-addproduct Fruit Apple 1.50
-addproduct Fruit Apple 1.60
-list Fruit
-</code></pre></div><p>The output file would be expected to look like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">OK
-OK
-OK
-OK
-ERROR Duplicate fruit Apple
-Fruit
------
-Apple  1.50
-Banana 2.30
-Tomato 1.20
-</code></pre></div><p>Of course, error messages, sorting and spacing for the output would be part of
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">addcategory Fruit
+</span></span><span class="line"><span class="cl">addproduct Fruit Banana 2.30
+</span></span><span class="line"><span class="cl">addproduct Fruit Tomato 1.20
+</span></span><span class="line"><span class="cl">addproduct Fruit Apple 1.50
+</span></span><span class="line"><span class="cl">addproduct Fruit Apple 1.60
+</span></span><span class="line"><span class="cl">list Fruit
+</span></span></code></pre></div><p>The output file would be expected to look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">ERROR Duplicate fruit Apple
+</span></span><span class="line"><span class="cl">Fruit
+</span></span><span class="line"><span class="cl">-----
+</span></span><span class="line"><span class="cl">Apple  1.50
+</span></span><span class="line"><span class="cl">Banana 2.30
+</span></span><span class="line"><span class="cl">Tomato 1.20
+</span></span></code></pre></div><p>Of course, error messages, sorting and spacing for the output would be part of
 the spec. That provided an effective way of checking your program&rsquo;s
 correctness: Run it on a given input, and compare its output - using <code>diff</code> - to
 expected output. Some TAs even provided simple test files (input + expected output) for this exact method
