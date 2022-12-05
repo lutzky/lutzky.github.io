@@ -50,6 +50,8 @@ params:
       url: "https://github.com/lutzky/"
     - name: "facebook"
       url: "https://facebook.com/lutzky/"
+    - name: "mastodon"
+      url: "https://ohai.social/@lutzky"
 
 menu:
   main:
