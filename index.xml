@@ -1236,7 +1236,7 @@ The mutation score is 0.750000 (3 passed, 1 failed, 0 duplicated, 0 skipped, tot
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Hello, world!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Hello, world!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -2671,7 +2671,7 @@ implemented for a class used as a hash key. God, I hate C++.</p>
 ]]></content:encoded></item><item><title>Scheduling</title><link>https://lutzky.net/2008/06/02/scheduling/</link><pubDate>Mon, 02 Jun 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/06/02/scheduling/</guid><description>So, I see I forgot to post my schedule for this semester&amp;hellip;
 &amp;hellip;ttime screenshot lost in the mists of time&amp;hellip;
 As you can see, it&amp;rsquo;s TTime! With a shiny new Cairo interface. We&amp;rsquo;re back to the Ruby version, too - as we have another coder on board, which is using his compilation skills in order to write a new REPY parser.
-You can also see it&amp;rsquo;s only found one schedule.</description><content:encoded><![CDATA[<p>So, I see I forgot to post my schedule for this semester&hellip;</p>
+You can also see it&amp;rsquo;s only found one schedule. This is thanks to the group selection constraint which was finally coded.</description><content:encoded><![CDATA[<p>So, I see I forgot to post my schedule for this semester&hellip;</p>
 <blockquote>
 <p><em>&hellip;ttime screenshot lost in the mists of time&hellip;</em></p>
 </blockquote>
@@ -3090,7 +3090,8 @@ likelihood, my near future, I can&rsquo;t help but wear an annoying smile on my 
 I&amp;rsquo;m typing the lectures of the course 236343 Computability Theory this semester. Attached are my lectures notes in PDF form:
 Computability Lecture Notes Computability Tutorial Notes
 If you also type the notes and would like to collaborate with me, I use a git repository stored here:
-http://yasmin.technion.ac.il/ohad/git/computability.git</description><content:encoded><![CDATA[<blockquote>
+http://yasmin.technion.ac.il/ohad/git/computability.git
+To use it, install git-core and curl, and run</description><content:encoded><![CDATA[<blockquote>
 <p>All links in this post have been lost to the mists of time. I&rsquo;ve kept it here
 out of pure nostalgia.</p>
 </blockquote>
@@ -3650,7 +3651,7 @@ serious bite out of the XP userbase.</p>
 http://archive.salon.com/tech/feature/2000/06/14/love/print.html</description><content:encoded><![CDATA[<p>This is absolutely antique (2000), but it&rsquo;s good to hear an artist with a clue.</p>
 <p><a href="http://archive.salon.com/tech/feature/2000/06/14/love/print.html">http://archive.salon.com/tech/feature/2000/06/14/love/print.html</a></p>
 ]]></content:encoded></item><item><title>Pmount-hal + cd</title><link>https://lutzky.net/2007/02/01/pmount-hal-cd/</link><pubDate>Thu, 01 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/01/pmount-hal-cd/</guid><description>If you&amp;rsquo;re like me, and don&amp;rsquo;t use Gnome or KDE, then you probably use the pmount or pmount-hal applications to mount removable media. Here&amp;rsquo;s a neat thing to add to your .bash_aliases:
-function pmh { pmount-hal $1 UDI=`hal-find-by-property --key block.device --string $1` cd &amp;#34;`hal-get-property --udi $UDI--key volume.mount_point`&amp;#34; }</description><content:encoded><![CDATA[<p>If you&rsquo;re like me, and don&rsquo;t use Gnome or KDE, then you probably use the pmount
+function pmh { pmount-hal $1 UDI=`hal-find-by-property --key block.device --string $1` cd &amp;#34;`hal-get-property --udi $UDI --key volume.mount_point`&amp;#34; }</description><content:encoded><![CDATA[<p>If you&rsquo;re like me, and don&rsquo;t use Gnome or KDE, then you probably use the pmount
 or pmount-hal applications to mount removable media. Here&rsquo;s a neat thing to add
 to your <code>.bash_aliases</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">function</span> pmh <span class="o">{</span>
@@ -3819,7 +3820,7 @@ languages. That&rsquo;s why I&rsquo;m taking Programming Languages this coming s
 <p>במסע להוציא את האינפורמציה הזו עליתי על <a href="http://drop-alive.blogspot.com/">אחלה להקה מאיטליה</a>. שווה האזנה.</p>
 <!-- raw HTML omitted -->
 ]]></content:encoded></item><item><title>Russian stress mark</title><link>https://lutzky.net/russian-stress/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lutzky.net/russian-stress/</guid><description> This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian keyboard doesn't support it.
-́ function copyIt() { document.getElementById('copyBuffer').select(); document.execCommand('copy'); } Copy</description><content:encoded><![CDATA[
+́ Copy</description><content:encoded><![CDATA[
 <p>This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian
     keyboard doesn't support it.</p>
 <textarea id="copyBuffer">́</textarea>

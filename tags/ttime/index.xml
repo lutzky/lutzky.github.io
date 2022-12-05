@@ -27,7 +27,7 @@ release :)</p>
 ]]></content:encoded></item><item><title>Scheduling</title><link>https://lutzky.net/2008/06/02/scheduling/</link><pubDate>Mon, 02 Jun 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/06/02/scheduling/</guid><description>So, I see I forgot to post my schedule for this semester&amp;hellip;
 &amp;hellip;ttime screenshot lost in the mists of time&amp;hellip;
 As you can see, it&amp;rsquo;s TTime! With a shiny new Cairo interface. We&amp;rsquo;re back to the Ruby version, too - as we have another coder on board, which is using his compilation skills in order to write a new REPY parser.
-You can also see it&amp;rsquo;s only found one schedule.</description><content:encoded><![CDATA[<p>So, I see I forgot to post my schedule for this semester&hellip;</p>
+You can also see it&amp;rsquo;s only found one schedule. This is thanks to the group selection constraint which was finally coded.</description><content:encoded><![CDATA[<p>So, I see I forgot to post my schedule for this semester&hellip;</p>
 <blockquote>
 <p><em>&hellip;ttime screenshot lost in the mists of time&hellip;</em></p>
 </blockquote>

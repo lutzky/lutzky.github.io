@@ -66,7 +66,7 @@ making sure the permissions are correct. There&rsquo;s a script which does this:
 </span></span><span class="line"><span class="cl"><span class="gp">$</span> ssh t2.technion.ac.il
 </span></span><span class="line"><span class="cl"><span class="gp">&gt;</span> <span class="c1"># no password this time either</span>
 </span></span></code></pre></div>]]></content:encoded></item><item><title>Russian stress mark</title><link>https://lutzky.net/russian-stress/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lutzky.net/russian-stress/</guid><description> This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian keyboard doesn't support it.
-́ function copyIt() { document.getElementById('copyBuffer').select(); document.execCommand('copy'); } Copy</description><content:encoded><![CDATA[
+́ Copy</description><content:encoded><![CDATA[
 <p>This is a handy little page for copying the stress mark (acute mark) to clipboard. Useful if your Russian
     keyboard doesn't support it.</p>
 <textarea id="copyBuffer">́</textarea>
