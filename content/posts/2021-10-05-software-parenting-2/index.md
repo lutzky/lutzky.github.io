@@ -12,7 +12,7 @@ My first idea was to create voice commands for the Nest Home Mini in the room. H
 
 I had a Raspberry Pi ZeroW lying around [from a previous project]({{<ref "2021-03-14-pitemp">}}) and decided to use it for this (the small OLED display wasn't used for this project, but I didn't find a good reason to take it off yet; more on that later). With bits I had from a generic "learn electronics" kit (which I bought for the specific purpose of having such bits), I created the user interface: Two buttons, a green LED for "OK", a red LED for "something went wrong"; all tied together by some jumper cables and a mini breadboard. The Raspberry Pi would handle communicating with BabyBuddy's API (over wifi), reading the buttons, and driving the LEDs. The setup was indeed quite similar to PiTemp's with the software written in Go, cross-compiled, and run on startup using systemd.
 
-{{<image "poobuttons-rpi0w.jpg">}}PooButtons on Raspberry Pi ZeroW{{</image>}}
+{{< image src="poobuttons-rpi0w.jpg" caption="PooButtons on Raspberry Pi ZeroW" >}}
 
 One annoying quirk with the Raspberry Pi Zero for this is that it would register phantom button presses; they'd be quite rare, fewer than 5 a day, but that's certainly enough to mess up diaper reporting. I'm not sure if it's something about the particular GPIO pins I used (GPIO24, GPIO22), and disconnecting the OLED display didn't work. I ended up following the old joke:
 

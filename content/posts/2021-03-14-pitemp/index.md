@@ -33,7 +33,7 @@ The LCD was also quite slow to refresh, the way I was using it; any faster than 
 
 Finally, the LCD unit is much, _much_ large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a "case".
 
-{{<image "lcd_box.jpg">}}LCD in a cardboard box "case"{{</image>}}
+{{< image src="lcd_box.jpg" caption="LCD in a cardboard box \"case\"" >}}
 
 [go-hd44780]: https://github.com/d2r2/go-hd44780
 
@@ -77,6 +77,6 @@ The PiOLED library (actually periph.io's ssd1306 library) essentially lets you r
 
 I'm quite happy with the final result:
 
-{{<image "pioled.jpg">}}PiTemp with PiOLED{{</image>}}
+{{< image src="pioled.jpg" caption="PiTemp with PiOLED" >}}
 
 Happy hacking!

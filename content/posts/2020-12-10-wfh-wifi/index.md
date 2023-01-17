@@ -11,7 +11,10 @@ title: WFH Wifi
 
 (Diagram below is approximate; I'll explain why and how it was created in a bit.)
 
-{{<image "base.png" />}}
+{{< 
+  image src="base.png"
+  caption="Approximate apartment structure; explanation on how and why it was created coming in a bit."
+>}}
 
 My broadband comes in via a cable connection in the living room - the modem and router/AP sit in the bottom middle of the room. Before WFH times we would occasionally work from home, mostly from the living room, which was the only place with chairs. To get wifi in the bedrooms (one of which is now labeled "office"), I used a TP-link powerline pack - i.e. one thing stuck to a power socket by the router in the living room, and another in the bedroom. Or the hallway. The tradeoffs were these:
 
@@ -30,17 +33,23 @@ I decided two get a two-pack of Nest Wifi devices (a Router and a Point). Over t
 
 So, step 1 - I needed a floor plan. I do not have one of my apartment, but the 3D visualization the realtor provided was still up and had a "measurement" tool. So I went to http://floorplanner.com and used that visualization to sketch up the diagram above. The point of this was the next step: In a wonderful company-internal talk about home wifi (this is a common issue in Israel, where many apartments have [concrete-walled shelters](https://en.wikipedia.org/wiki/Merkhav_Mugan)), the neat mapping capability of Unifi's controller software was shown. While I don't own any Unifi gear, I installed the controller software (available as [a neat docker container](https://docs.linuxserver.io/images/docker-unifi-controller)), imported my diagram, drew the walls, and positioned my living room router.
 
-{{<image "livingroom-2g-64dBm.png">}}Router in the living room{{</image>}}
+{{< image src="livingroom-2g-64dBm.png" caption="Router in the living room" >}}
 
-This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren't taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally {{<link "livingroom-5g-64dBm.png">}}worse in 5ghz{{</link>}}.
+This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren't taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally worse in 5ghz:
+
+{{< image src="livingroom-5g-64dBm.png" caption="5ghz is even worse" >}}
 
 The spot we naturally chose for the point was the hallway (the utility room now seems like it would've worked better for reception, but it's often quite damp and has no free power sockets anyway). Indeed, the Google Wifi app (which you still use for Nest Wifi) would say that the connection between it and the living room is "Great" (and that's as much detail as you'll get). But the reception in the office would still be pretty bad, sometimes leading to disconnections.
 
-{{<image "hallway-2g-60dBm.png">}}Wifi point in the hallway{{</image>}}
+{{< image src="hallway-2g-60dBm.png" caption="Wifi point in the hallway" >}}
 
-I suspect the issue here might be that 5ghz connectivity is _just barely_ available ({{<link "hallway-5g-60dBm.png">}}diagram{{</link>}}). At any rate, I decided to throw some more money at the problem, adding a 2nd Point in the office:
+I suspect the issue here might be that 5ghz connectivity is _just barely_ available:
 
-{{<image "office-2g-60dBm.png">}}Wifi point in the office{{</image>}}
+{{< image src="hallway-5g-60dBm.png" caption="5ghz just *barely* available" >}}
+
+At any rate, I decided to throw some more money at the problem, adding a 2nd Point in the office:
+
+{{< image src="office-2g-60dBm.png" caption="Wifi point in the office" >}}
 
 There is now most certainly a strong connection between the office point and the hallway point (as well as the laptops in the office), and the hallway point has a good connection with the living room. However, as it turned out, the mesh test did not consistently give me good results - sometimes I would just get "poor" results. I suspect the issue is the dynamic nature of... doors.
 
@@ -48,7 +57,7 @@ We tend to get quite loud in meetings, so when we have them, we close the office
 
 The solution I came up with was to move the point from the office to the bedroom (...where nobody is during the work day), and make sure that door stays open:
 
-{{<image "bedroom-opendoor-2g-60dBm.png">}}Wifi point in the bedroom, door open{{</image>}}
+{{< image src="bedroom-opendoor-2g-60dBm.png" caption="Wifi point in the bedroom, door open" >}}
 
 I now have no idea if the network is daisy-chained or not, but it has been working consistently well... even at night when I stay up writing stuff like this blog post, and the bedroom door is closed.
 

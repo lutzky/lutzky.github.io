@@ -7,4 +7,4 @@ title: I might need these tomorrow...
 
 My lecture slides. Have a peek if you like :)
 
-{{<link "sybils.pdf">}}sybilproof Reputation Mechanisms - Seminar{{</link>}}
+{{< link "sybils.pdf" "sybilproof Reputation Mechanisms - Seminar" >}}

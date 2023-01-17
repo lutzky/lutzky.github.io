@@ -20,11 +20,12 @@ Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a
 
 Everyone loves screenshots:
 
-{{<image "device2.png">}}Separate source and destination fields{{</image>}}
 
-{{<image "prefs.png">}}Select data provider{{</image>}}
+{{< image src="device2.png" caption="Separate source and destination fields" >}}
 
-{{<image "device.png">}}Automatic location detection, Egged provider{{</image>}}
+{{< image src="prefs.png" caption="Select data provider" >}}
+
+{{< image src="device.png" caption="Automatic location detection, Egged provider" >}}
 
 For a sneak peek, go to <http://github.com/lutzky/TransportDroidIL> for the
 latest sources. You can also report issues there.
