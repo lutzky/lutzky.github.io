@@ -1,13 +1,15 @@
 ---
 date: "2006-08-14T00:00:00Z"
 summary:  (Hebrew) The absolute state of Flash in Linux
-tags: ["from-hebrew-wordpress"]
+tags: ["hebrew"]
 title: המצב של פלאש בלינוקס
 ---
 
-> This post is written in Hebrew, which was the blog's language at the time.
+{{< admonition type=info title="Hebrew post" >}}
+This post is written in Hebrew, which was the blog's language at the time.
+{{< /admonition >}}
 
-<div dir="rtl">
+{{< style "direction:rtl" >}}
 
 בהתחלה פלאש היה משהו קטן וחמוד. השתמשתי בו בכיתה ו' בשביל "פרוייקט סיום" על גלגולי אנרגייה, בעוד שאחרים הכינו מכשירים שלא היו מביישים את The Incredible Machine. זה המשיך בכל מיני משחקים קטנים באתר של Shockwave. לאט לאט זה הפך למעצבן, כשאנשים החליטו ש-HTML זה סתם כמה טאגים ששמים כדי שהדפדפן יציג את הפלאש שהוא בעצם האתר. או לחילופין, החליטו שפלאש זה אחלה מדיום לפרסומות, מה שהוביל להופעת AdBlock.
 
@@ -23,4 +25,4 @@ title: המצב של פלאש בלינוקס
 
 זהו, יצא הקיטור. בחזרה ל-Youtube. 🙂
 
-</div>
+{{< /style >}}

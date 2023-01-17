@@ -1,13 +1,17 @@
 ---
 date: "2006-08-11T00:00:00Z"
-summary:  (Hebrew) Loudness fight - artillery vs bass guitar
-tags: ["from-hebrew-wordpress"]
+summary: (Hebrew) Loudness fight - artillery vs bass guitar
+tags: ["hebrew"]
 title: מקליטים בומים
 ---
 
-> This post is written in Hebrew, which was the blog's language at the time.
+{{< admonition type=info title="Hebrew post" >}}
+This post is written in Hebrew, which was the blog's language at the time. Context: [2006 Lebanon War]
 
-<div dir="rtl">
+[2006 Lebanon War]: https://en.wikipedia.org/wiki/2006_Lebanon_War
+{{< /admonition >}}
+
+{{< style "direction:rtl" >}}
 
 מלחמה. נסראללה שולח עלינו בומים. אנחנו שולחים עליו בומים (כל 10 שניות יציאה שלנו אתמול בלילה, והתריסים רועדים). ואני בבית, עושה בומים משלי. זה לא כמו לנגן עם חברים, זה לא כמו להופיע, אבל לפחות סוף סוף גיליתי איך לגרום לזה להישמע נורמאלי.
 
@@ -27,4 +31,4 @@ title: מקליטים בומים
 
 [אחלה להקה מאיטליה]: http://drop-alive.blogspot.com/
 
-</div>
+{{< /style >}}
