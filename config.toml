@@ -1,0 +1,102 @@
+baseURL = "https://lutzky.net"
+disablePathToLower = true
+languageCode = "en-us"
+title = "Shallow and Pedantic"
+theme = "LoveIt"
+
+disqusShortname = "shallowandpedantic"
+googleAnalytics = "UA-40939561-1"
+enableGitInfo = true
+enableEmoji = true
+
+[frontmatter]
+  # Grab date AND SLUG from filename - undocumented, but
+  # see https://github.com/gohugoio/hugo/pull/4494/
+  date = [":filename", ":default"]
+
+[permalinks]
+  posts = "/:year/:month/:day/:slug/"
+  pages = "/:filename/"
+
+[markup.highlight]
+  noClasses = false
+  lineNos = true
+  lineNumbersInTable = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[author]
+  name = "Ohad Lutzky"
+  email = "lutzky@gmail.com"
+
+[params]
+  title = "Shallow and Pedantic"
+  description = """\
+    A person/tech/code blog of a coder/techie/person. Like calculus in a \
+    kiddie pool, the author of this blog is known to be quite shallow and \
+    pedantic.\
+    """
+
+  [params.search]
+    enable = true
+
+  [params.page]
+    rssFullText = true
+    [params.page.share]
+      enable = true
+      Twitter = false
+      Whatsapp = true
+      Line = false
+    [params.page.comment]
+      enable = true
+      [params.page.comment.disqus]
+        enable = true
+
+  [params.header.title]
+    name = "Shallow and Pedantic"
+
+  [params.home]
+    [params.home.profile]
+      title = "Shallow and Pedantic"
+      avatarURL = "/assets/images/bio-photo.jpg"
+      subtitle = """\
+        A person/tech/code blog of a coder/techie/person. Like calculus in a \
+        kiddie pool, the author of this blog is known to be quite shallow and \
+        pedantic.\
+        """
+    [params.typeit]
+      speed = 50
+      duration = 2000
+
+  [params.social]
+    "Github" = "lutzky"
+    "Facebook" = "lutzky"
+    "Mastodon" = "https://ohai.social/@lutzky"
+
+[menu]
+  [[menu.main]]
+    identifier = "ttime3"
+    name = "TTime3"
+    url = "/ttime3/"
+    weight = 50
+  [[menu.main]]
+    identifier = "russian-stress"
+    name = "Russian stress mark"
+    url = "/russian-stress/"
+    weight = 40
+  [[menu.main]]
+    identifier = "linux-stuff"
+    name = "Linux stuff"
+    url = "/linux-stuff/"
+    weight = 30
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 20
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
