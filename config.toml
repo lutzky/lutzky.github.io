@@ -59,7 +59,7 @@ enableEmoji = true
   [params.home]
     [params.home.profile]
       title = "Shallow and Pedantic"
-      avatarURL = "/assets/images/bio-photo.jpg"
+      avatarURL = "/images/bio-photo.jpg"
       subtitle = """\
         A person/tech/code blog of a coder/techie/person. Like calculus in a \
         kiddie pool, the author of this blog is known to be quite shallow and \
