@@ -33,7 +33,7 @@ Starting Baby+ on an android phone, after closing it so it syncs, takes about 7 
 
 This felt like a silly problem to have; almost any web-based app would have none of these issues. Furthermore, I thought, there's surely an open-source one where I could fix any annoyances I have myself. Indeed, that would be BabyBuddy.
 
-# BabyBuddy
+## BabyBuddy
 
 [BabyBuddy](https://github.com/babybuddy/babybuddy) is an open-source web app, self-described as "to help caregivers track sleep, feedings, diaper changes, and tummy time to learn about and predict baby's needs without (as much) guess work". I describe it as "the dumbest-sounding idea ever - sleep-deprived parents of newborns creating and maintaining baby-tracking software as a hobby". It turns out to be wonderful, and is what we use today. It requires self-hosting (but provides a button to do that easily on Heroku), but works remarkably well. It didn't work _exactly_ like I wanted, but that just provided ample opportunity to hack on it.
 
