@@ -3,6 +3,7 @@ title: "Newborn parenting software - part 1"
 date: 2021-10-03T17:00:00+01:00
 summary: Choosing and hacking on baby tracking apps
 tags: ["software", "life"]
+categories: ["Newborn parenting software"]
 ---
 
 A few months ago, I became a father. To help overcome some of the challenges of raising a newborn, I decided to employ my standard MO - software; preferably the kind where I understand what it's doing. It's been working well, and I learned a lot doing it - several blog posts' worth, in fact.

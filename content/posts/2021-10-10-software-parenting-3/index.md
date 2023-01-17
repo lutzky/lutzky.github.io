@@ -3,6 +3,7 @@ title: "Newborn parenting software - part 3"
 date: 2021-10-10T09:00:00Z
 summary: Transitioning PooButtons to a microcontroller
 tags: ["software", "life"]
+categories: ["Newborn parenting software"]
 ---
 
 As noted in the [previous post]({{<ref "2021-10-05-software-parenting-2">}}), I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn't have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available[^actually-available] on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it's quite capable as a microcontroller on its own (and the newer ESP32 is faster).

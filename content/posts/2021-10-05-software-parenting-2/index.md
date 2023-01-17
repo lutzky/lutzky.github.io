@@ -3,6 +3,7 @@ title: "Newborn parenting software - part 2"
 date: 2021-10-05T21:57:09Z
 summary: Logging diapers with satisfying clicks
 tags: ["software", "life"]
+categories: ["Newborn parenting software"]
 ---
 
 With BabyBuddy now installed and running properly (see [previous post]({{<ref "2021-10-03-software-parenting-1">}})), and an always-on display showing the latest information, we now got into the swing of using it. We loved the timeline for "what happened while I as sleeping"; we loved the food amount reports; and because we had a consistent "feed, then change, then wait 15 minutes with baby upright to reduce spit-up" system, the display's "time since last change" box was super useful as well. However, as you might imagine, we did _not_ love handling a freshly-re-diapered baby with one hand while using the other to unlock the phone and navigate to the "yes he pooped now" page in a web app.
