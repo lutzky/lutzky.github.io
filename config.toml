@@ -77,20 +77,10 @@ enableEmoji = true
 
 [menu]
   [[menu.main]]
-    identifier = "ttime3"
-    name = "TTime3"
-    url = "/ttime3/"
+    identifier = "stuff"
+    name = "Stuff"
+    url = "/stuff/"
     weight = 50
-  [[menu.main]]
-    identifier = "russian-stress"
-    name = "Russian stress mark"
-    url = "/russian-stress/"
-    weight = 40
-  [[menu.main]]
-    identifier = "linux-stuff"
-    name = "Linux stuff"
-    url = "/linux-stuff/"
-    weight = 30
   [[menu.main]]
     identifier = "tags"
     name = "Tags"
