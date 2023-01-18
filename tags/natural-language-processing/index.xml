@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>natural language processing on Shallow and Pedantic</title><link>https://lutzky.net/tags/natural-language-processing/</link><description>Recent content in natural language processing on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 24 Mar 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/natural-language-processing/index.xml" rel="self" type="application/rss+xml"/><item><title>Translationese</title><link>https://lutzky.net/2013/03/24/translationese/</link><pubDate>Sun, 24 Mar 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/03/24/translationese/</guid><description>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a chance to use a few of my favorite technologies.
-The project was coded in Python, which is not my favorite programming language - Ruby is. However, since Python is more popular at my workplace, and seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown to love it almost as much over the years.</description><content:encoded><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>natural language processing - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/natural-language-processing/</link><description>natural language processing - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 24 Mar 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/natural-language-processing/" rel="self" type="application/rss+xml"/><item><title>Translationese</title><link>https://lutzky.net/2013/03/24/translationese/</link><pubDate>Sun, 24 Mar 2013 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2013/03/24/translationese/</guid><description><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
 in natural language processing. I&rsquo;ve learned quite a bit from it, and had a
 chance to use a few of my favorite technologies.</p>
 <p>The project was coded in Python, which is <em>not</em> my favorite programming
 language - Ruby is. However, since Python is more popular at my workplace, and
 seems to have a richer ecosystem around it (sometimes, at any rate), I&rsquo;ve grown
 to love it almost as much over the years. It&rsquo;s quick, easy, and has fantastic
-libraries; specifically, for this project, we made heavy use of the <a href="http://nltk.org">Natural
+libraries; specifically, for this project, we made heavy use of the <a href="http://nltk.org" target="_blank" rel="noopener noreffer ">Natural
 Language Toolkit</a>. We used Git for source control and Github
 for hosting, Travis for continuous integration, and ReadTheDocs for
 documentation. All of these culminate in the project being handed in as a
-single link: <a href="http://github.com/lutzky/translationese">http://github.com/lutzky/translationese</a>.</p>
+single link: <a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer ">http://github.com/lutzky/translationese</a>.</p>
 <p>The translationese project is a re-implementation of the concepts presented in
 &ldquo;On The Features Of Translationese&rdquo;, an article describing an attempt to
 automatically distinguish between texts written in English originally, and
@@ -26,7 +25,7 @@ code, at any rate).</p>
 coded only after a (failing) unit test for it was written. This helped keep the
 code modular, and made refactoring (which happened quite a bit) easy and safe.
 The resulting design proved to be quite flexible, as I will shortly explain.</p>
-<p><a href="http://en.wikipedia.org/wiki/Support_vector_machine">SVM</a> is a form of
+<p><a href="http://en.wikipedia.org/wiki/Support_vector_machine" target="_blank" rel="noopener noreffer ">SVM</a> is a form of
 <em>machine learning</em>. Simply put, it&rsquo;s a method of teaching a machine to
 distinguish between two categories of &ldquo;points&rdquo; (in our case, &ldquo;translated&rdquo; and
 &ldquo;original&rdquo;). The SVM is given two such sets, and tries to draw a &ldquo;line&rdquo; (or,
@@ -34,22 +33,21 @@ generally, a hyperplane) separating them. Afterwards, it should be able to
 classify new points (without being told which set they belong to) by which side
 of the line they are. The following image (Wikipedia) shows a simple,
 two-dimensional case (the red line properly distinguishing the two sets):</p>
-<p><img loading="lazy" src="http://upload.wikimedia.org/wikipedia/commons/b/b5/Svm_separating_hyperplanes_%28SVG%29.svg" alt=""  />
-{: style=&ldquo;max-width:350px&rdquo;}</p>
+<p>{: style=&ldquo;max-width:350px&rdquo;}</p>
 <p>For our case, each <em>&ldquo;property&rdquo;</em> took a block of text, and translated it to an
 <em>n</em>-dimensional point. For some properties, the dimension was quite extreme.
 For example, the property of character trigrams gives each coordinate the value
 of &ldquo;how many times does each permutation of three consecutive letters appear in
 the text&rdquo;. There are 17,576 such permutations, so each text became a point in a
 17,576-dimensional space. These points were fed into an SVM algorithm
-implemented in <a href="http://www.cs.waikato.ac.nz/ml/weka">Weka</a>.</p>
+implemented in <a href="http://www.cs.waikato.ac.nz/ml/weka" target="_blank" rel="noopener noreffer ">Weka</a>.</p>
 <p>During the final presentation of the project, we explained that the
 particularly high-dimensionality properties proved to be too much for Weka (it
 would use up all available RAM), so smaller sample sizes were used for those.
 However, we were told that using sparse vector representation as Weka&rsquo;s input
 could allow it to be more efficient. Fortunately, our design proved to be
 robust enough that I could implement (and test) the change during the
-presentation (<a href="https://github.com/lutzky/translationese/commit/12786459ef41d64963fd19433ba86dd71acc0e92">1278645</a>).  Indeed, we now had no problems with the
+presentation (<a href="https://github.com/lutzky/translationese/commit/12786459ef41d64963fd19433ba86dd71acc0e92" target="_blank" rel="noopener noreffer ">1278645</a>).  Indeed, we now had no problems with the
 high-dimensionality properties, and repeated our runs, updating the
 documentation (after we were given our grade&hellip;)</p>
 <p>There&rsquo;s a somewhat eerie aspect to this project. Having used SVM, I have no
@@ -68,4 +66,4 @@ look up its index in a 17,576-entry list and increment it by a factor), I&rsquo;
 have no chance of ever understanding how it works. In essence, I&rsquo;ve written
 code to have my computer learn how to do something, but it cannot practically
 teach me what it has learned.</p>
-]]></content:encoded></item></channel></rss>
+]]></description></item></channel></rss>

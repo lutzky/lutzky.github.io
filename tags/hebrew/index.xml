@@ -1,0 +1,137 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>hebrew - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/hebrew/</link><description>hebrew - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 11 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/hebrew/" rel="self" type="application/rss+xml"/><item><title>TransportDroidIL outage</title><link>https://lutzky.net/2016/01/11/transportdroidil-outage/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2016/01/11/transportdroidil-outage/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.</div>
+        </div>
+    </div>
+<!-- raw HTML omitted -->
+<div id="id-1"><h1 id="תקלה-ב-transportdroidil">תקלה ב-TransportDroidIL</h1>
+<p>לצערי, האפליקציה TransportDroidIL הפסיקה לפעול, והסיבה היא כזו שלא מאפשרת תיקון. אני ממליץ בחום על החלופה <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.maps" target="_blank" rel="noopener noreffer ">Google Maps</a>.</p>
+<h2 id="שאלות-ותשובות">שאלות ותשובות</h2>
+<h3 id="למה-האפליקציה-הפסיקה-לעבוד">למה האפליקציה הפסיקה לעבוד?</h3>
+<p>האפליקציה TransportDroidIL פועלת ע&quot;י בקשת נתונים מאתר אגד או משרד אתר התחבורה, תוך שימוש במנגנון ה&quot;שפה חופשית&quot;. שני האתרים השתנו בצורות שונות, שלא מאפשרות לאפליקציה לפעול יותר:</p>
+<ul>
+<li>ב<a href="http://bus.gov.il" target="_blank" rel="noopener noreffer ">אתר משרד התחבורה</a>, מנגנון ה&quot;שפה חופשית&quot; כבר לא עובד כלל - קופצת ההודעה <code>[object Object]</code>, ומאחורי הקלעים ניתן לראות שהאתר לא מקבל מרכיב ה&quot;שפה החופשית&quot; תשובה.</li>
+<li>באתר <a href="http://egged.co.il" target="_blank" rel="noopener noreffer ">אגד</a>, מנגנון ה&quot;שפה החופשית&quot; עדיין פועל,והשתנה יחסית מעט, ויכול בהחלט להיות אפשרי לגרום לאפליקציה לעבוד איתו שוב, אבל&hellip;</li>
+</ul>
+<h3 id="רגע-רגע-בעצם-האפליקציה-לא-עושה-שום-דבר-ומביאה-את-כל-הנתונים-מאתרים-קיימים-אז-למה-כתבת-אותה">רגע רגע, בעצם האפליקציה לא עושה שום דבר ומביאה את כל הנתונים מאתרים קיימים? אז למה כתבת אותה?</h3>
+<p>נכון! הסיבה שכתבתי את האפליקציה הייתה שהאתרים האלה, בספטמבר 2010, לא היו מותאמים לטלפונים ניידים והשימוש בהם מהנייד היה כאב-ראש מוחלט. למעשה, <a href="http://bus.gov.il" target="_blank" rel="noopener noreffer ">אתר משרד התחבורה</a> עדיין לא מותאם, ונראה כיום דומה מאוד לאיך שאתר אגד נראה ב-2010. האפליקציה הייתה מיועדת אך ורק לתת ממשק משתמש נוח יותר לאותם האתרים.</p>
+<p>למרבה השמחה, אתר <a href="http://egged.co.il" target="_blank" rel="noopener noreffer ">אגד</a> מותאם כיום בצורה פחות-או-יותר סבירה לטלפונים ניידים. לא מושלם, אבל בהחלט שמיש. אך, חשוב מכל&hellip;</p>
+<h3 id="בתכלס-יש-אפליקציות-יותר-מוצלחות-כמו-google-maps-אז-למה-להשתמש-באתרים-האלה-בכלל">בתכל&rsquo;ס יש אפליקציות יותר מוצלחות, כמו Google Maps, אז למה להשתמש באתרים האלה בכלל?</h3>
+<p>אין יותר סיבה! ב-2010 Google Maps אמנם לא סיפקה מידע תחבורה ציבורית בישראל, אבל כיום המידע קיים שם בצורה מלאה ומקיפה. המידע מגיע לגוגל ישירות מ<a href="https://data.gov.il/dataset/383" target="_blank" rel="noopener noreffer ">אתר מאגרי המידע הממשלתיים</a>, בפורמט GTFS המותאם לכך. זו האפליקציה בה אני משתמש כיום.</p>
+<p>המידע המסופק הוא, כמו תמיד, מידע של לוחות זמנים ולא מידע זמן-אמת. כולי תקווה שחברות האוטובוסים יתחילו לפרסם מידע זמן-אמת בפורמט <a href="https://developers.google.com/transit/gtfs-realtime/?hl=en" target="_blank" rel="noopener noreffer ">GTFS-realtime</a>, אשר יגרום לכך ש-Google Maps ואפליקציות אחרות יוכלו להראות מידע מציאות יותר על זמן הגעת האוטובוסים.</p>
+<h3 id="מי-פיתח-את-האפליקציה-ומה-הקשר-שלו-לעניין">מי פיתח את האפליקציה ומה הקשר שלו לעניין?</h3>
+<p>אני המפתח המקורי של האפליקציה - שמי אוהד לוצקי. התחלתי לעבוד על תוכנות שמביאות מידע מאתר משרד התחבורה בזמן שהייתי סטודנט בטכניון שנוסע הרבה באוטובוסים, בערך ב-2007. ב-2010 המרתי את התוכנה לאפליקציית אנדרואיד כשהייתי בצבא ונסעתי הרבה באוטובוסים; כמה חברים התעניינו, והעליתי את התוכנה ל-Play Store. חבר טוב מהלימודים, חגי, שלח מספר שיפורים ואף <a href="https://github.com/lutzky/TransportDroidIL/pull/15" target="_blank" rel="noopener noreffer ">הוסיף מנגנון עדכוני-זמן-אמת</a>, אשר היה תלוי בחסדי האתרים של חברות אוטובוס ספציפיות שסיפקו, גם הן, את המידע בצורה לא-סטנדרטית.</p>
+<p>בשלב כלשהו עלו אפליקציות חלופיות לרשת, דוגמת Moovit - אך אף אחד מהן לא מצאה חן בעיניי. בפרט, ל-Moovit לקח זמן רב לעלות, בעוד שהאפליקציה שלי הייתה מיועדת למבט מהיר תוך כדי שהאוטובוס מתקרב לתחנה.</p>
+<p>בשלב כלשהו (2012 לכל המאוחר) משרד התחבורה התחיל לפרסם מידע GTFS שאפשר לגוגל להציג מידע תחבורה ציבורית בישראל, ואני הפסקתי להשתמש באפליקציה שכתבתי. Google Maps מראה את התחנות על מפה, רשימת תחנות-ביניים ועוד. עם זאת, מאחר ולאפליקציה עוד היה מספר לא-קטן של משתמשים (קצת יותר מ-55,000 בשיא), המשכתי לתקן בעיות  קטנות כשהן צצו וכשהיה לי זמן.</p>
+<p>כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL 😄</p>
+</div>
+]]></description></item><item><title>Openbox CVS</title><link>https://lutzky.net/2006/08/26/openbox-cvs/</link><pubDate>Sat, 26 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2006/08/26/openbox-cvs/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew, which was the blog&rsquo;s language at the time.</div>
+        </div>
+    </div>
+<div id="id-1"><p>קצת גיקיות יתרה, ברשותכם 😉</p>
+<p>התקנתי את הגירסה מ-CVS של מנהל החלונות האהוב עליי, Openbox, לקראת הגרסה המתעתדת לצאת 3.3, ומאוד התרשמתי לטובה:</p>
+<ul>
+<li>נוספה תמיכה ב-Pango, אז עברית סוף-סוף עובדת כמו שצריך (יש לקמפל עם הדגל with-pango</li>
+<li>הפאץ&rsquo; ל-Split gradients נכנס, מה שנותן ל-Themes ממש יפים לעבוד. מה שכן, הם שינו את שם ההגדרה מ-&ldquo;split&rdquo; ל-&ldquo;splitvertical&rdquo;, אז צריך לשנות את זה בקובץ themerc של כל theme רלוונטי
+מצ&quot;ב תמונת-מסך. שמייח ☺️</li>
+</ul>
+<p>(תמונת-המסך נשמרה ב-Imageshack, ומאז נמחקה)</p>
+<p>עריכה: אני רוצה גם לציין לשבח את <a href="https://web.archive.org/web/20061119211209/http://obmenu.sf.net/" target="_blank" rel="noopener noreffer ">Obmenu</a>, תוכנה שמאוד מקלה על עריכת התפריטים של Openbox.</p>
+</div>
+]]></description></item><item><title>אהבתי את שני אלה</title><link>https://lutzky.net/2006/08/15/katyusha-damage_copy/</link><pubDate>Tue, 15 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2006/08/15/katyusha-damage_copy/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew, which was the blog&rsquo;s language at the time. Context: <a href="https://en.wikipedia.org/wiki/2006_Lebanon_War" target="_blank" rel="noopener noreffer ">2006 Lebanon War</a></div>
+        </div>
+    </div>
+<div id="id-1"><p>החבר&rsquo;ה הטובים ב-lgf מראים - הפלא ופלא - איך בהשוואה בין נזק פגיעות ישירות של קטיושות וטילי אוויר-קרקע ישראליים, <a href="http://littlegreenfootballs.com/weblog/?entry=22100" target="_blank" rel="noopener noreffer ">הקטיושה עושה הרבה יותר נזק</a>.</p>
+<p>בנוסף, אל תכנסו לבלוג של אחמדיניג&rsquo;אד עם אקספלורר. <a href="http://olehgirl.blogspot.com/2006/08/pres-ahmadinejad-trying-to-infect.html" target="_blank" rel="noopener noreffer ">זה מסוכן</a>.</p>
+<p>מוות לקיצונים 😉</p>
+</div>
+]]></description></item><item><title>בושה וחרפה למרצ</title><link>https://lutzky.net/2006/08/15/shame-on-meretz_copy/</link><pubDate>Tue, 15 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2006/08/15/shame-on-meretz_copy/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew, which was the blog&rsquo;s language at the time.</div>
+        </div>
+    </div>
+<div id="id-1"><p><a href="http://www.ynet.co.il/articles/0,7340,L-3291668,00.html" target="_blank" rel="noopener noreffer ">מרצ מציעה: להוציא את שיתוף הקבצים אל מחוץ לחוק</a>. הכותרת אולי נשמעת מטעה, יחשוב לו הקורא התמים - הרי וודאי וּוודאי שלמרץ אין בעיה עם שיתוף קבצים באופן כללי, וכמובן שהמאבק שלהם מרוסן לעניין עבירות בנושא קניין רוחני. אך לא ולא - הסעיף הרביעי בהצעת החוק שלהם מוציא מחוץ לחוק תוכנות ושירותים לשיתוף קבצים. בכלל. זה שמאל זה? זו פרימיטיוויוּת מחשבתית חמורה ממה שאנחנו רואים מה-RIAA.</p>
+<p>לזכותם יאמר כי הם תומכים בפתרון בדמות מיסוי של הגולשים - אבל עושה רושם שהם ממהרים לוותר בחזית זו. אכזבה עמוקה ממפלגה שראיתי בה סיכוי לרפורמה ב&quot;קניין רוחני&quot; ותמיכה בתוכנה חופשית.</p>
+</div>
+]]></description></item><item><title>המצב של פלאש בלינוקס</title><link>https://lutzky.net/2006/08/14/flash-in-linux_copy/</link><pubDate>Mon, 14 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2006/08/14/flash-in-linux_copy/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew, which was the blog&rsquo;s language at the time.</div>
+        </div>
+    </div>
+<div id="id-1"><p>בהתחלה פלאש היה משהו קטן וחמוד. השתמשתי בו בכיתה ו&rsquo; בשביל &ldquo;פרוייקט סיום&rdquo; על גלגולי אנרגייה, בעוד שאחרים הכינו מכשירים שלא היו מביישים את The Incredible Machine. זה המשיך בכל מיני משחקים קטנים באתר של Shockwave. לאט לאט זה הפך למעצבן, כשאנשים החליטו ש-HTML זה סתם כמה טאגים ששמים כדי שהדפדפן יציג את הפלאש שהוא בעצם האתר. או לחילופין, החליטו שפלאש זה אחלה מדיום לפרסומות, מה שהוביל להופעת AdBlock.</p>
+<p>אבל בזמן האחרון עושה רושם שסוף-סוף מצאו את הייעוד האמיתי של פלאש - סרטוני ווידאו היתוליים. והגרסה האחרונה של פלאש עושה את זה נהדר - באמצעות Codec קנייני חדש ומתוחכם, הסרטים יורדים חיש-קל. הביצועים טובים, העומס על המערכת מינימלי&hellip; בקיצור - כולם נהנים.</p>
+<p>אבל לא לכולם יש את הגרסא האחרונה הזו. לא לכולם אפילו יש את גרסה 8. משתמשי לינוקס תקועים עם גרסה 7 - וגרסה גרועה של גרסה 7. כל אובייקט פלאש תופס ה-מ-ו-ן משאבי מערכת. הם עובדים לאט, הסאונד לא מסונכרן (אלא אם משתמשים ב-aoss, מה שמוסיף לפגוע ביציבות), וה-Codec החדש והנפלא הזה - שכחו ממנו. באתרי הווידאו שבכל זאת דואגים לתמוך בפלאש 7 אפשר לראות את הסרטים יורדים לאט-לאט. ב-Youtube, למעשה, אפילו את זה אי אפשר לראות - צריך לנחש מתי הסרט סיים לרדת.</p>
+<p>גרוע מכך, Adobe (הבעלים החדשים של פלאש) כל פעם אומרים ש&quot;הגרסה החדשה ללינוקס יוצאת בקרוב&quot;. כך הם אמרו בפלאש 8. כשלא יצא, אמרו שיהיה 8.5. עכשיו הם אומרים את אותו הדבר ב-9. כרגע תאריך היעד המפורסם הוא &ldquo;מוקדם ב-2007&rdquo;, והם אפילו טרחו להעלות בלוג של אחד מהמפתחים.</p>
+<p>מעניין מאוד מה שהולך בבלוג הזה, אגב - הם אומרים שהם עובדים נורא קשה על לגרום לתאימות עם מצלמות ווידאו בלינוקס, ולוודא שכמה שיותר מצלמות עובדות. עכשיו, תגידו לי - מישהו כאן אי פעם ראה סרטון פלאש שאשכרה משתמש במצלמת ווידאו? איפהשהו? שימו לינק בתגובות. גרוע מכך - הם אומרים שכרגע הם לא משחררים גרסת בטא כי למרות שהסאונד מסונכרן פרפקט ו-Youtube עובד די טוב, עדיין יש הרבה בעיות יציבות. אז יש לי חדשות בשבילכם חברים - גם בגירסה הנוכחית יש המון בעיות יציבות! שחררו את זה מצידי בגירסת &ldquo;סופר-היפר-אלפה-אל-תגעו-יא-חארות&rdquo;!</p>
+<p>ורק עוד נקודה אחת. אומרים בפורומים אחרים שזה בעיה של קהילת הקוד הפתוח שלא פיתחנו גרסה משלנו לפלאש. למרבה הצער, פלאש משתמש במספר אלמנטים קנייניים - החשוב ביניהם הוא הקודק החדש של הווידאו. מה לעשות, כאן אנחנו תלויים ב-Adobe.</p>
+<p>זהו, יצא הקיטור. בחזרה ל-Youtube. 🙂</p>
+</div>
+]]></description></item><item><title>דווקא היה נחמד, שקט וכאלה</title><link>https://lutzky.net/2006/08/12/nice-and-quiet_copy/</link><pubDate>Sat, 12 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2006/08/12/nice-and-quiet_copy/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew, which was the blog&rsquo;s language at the time. Context: <a href="https://en.wikipedia.org/wiki/2006_Lebanon_War" target="_blank" rel="noopener noreffer ">2006 Lebanon War</a></div>
+        </div>
+    </div>
+<div id="id-1"><p>ממש שקט. לא שמתי שעון מעורר, כי סמכתי על הנסראללה המעורר. בכלל, הישוב שלי מחובר לאזעקות של כל הארץ (כי הוא באמצע שום מקום) אז אנחנו מקבלים גם אזעקות של קרית שמונה.</p>
+<p>כבר היה כל כך שקט, שאבא שלי קצת הלך לישון&hellip; ואז אני שומע דרך המזגן אזעקה, צועק &ldquo;אזעקה&rdquo;, ואמא שלי אומרת להיות בשקט כי אבא ישן&hellip;</p>
+</div>
+]]></description></item><item><title>החבוב עם הקסדה הירוקה - עכשיו הבלוג</title><link>https://lutzky.net/2006/08/11/green-helmet-guy/</link><pubDate>Fri, 11 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2006/08/11/green-helmet-guy/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew, which was the blog&rsquo;s language at the time. Context: <a href="https://en.wikipedia.org/wiki/2006_Lebanon_War" target="_blank" rel="noopener noreffer ">2006 Lebanon War</a></div>
+        </div>
+    </div>
+<div id="id-1"><p>כולנו ראינו אותו בטלוויזיה ובתמונות. קראנו את הכתבות, ראינו את הצילומים של איך שהוא מוריד את הגופות מהאמבולנס כדי שיצלמו שוב, עם פוקוס יותר טוב ובלי שאנשים יסתירו. איך במשך שעות הוא סוחב אותה גופה הלוך ושוב בשביל המצלמות. ושאיכשהו הוא תמיד מצליח להגיע לכל זירה מצולמת.</p>
+<p>ועכשיו יש לו <a href="http://greenhelmetguy.blogspot.com/" target="_blank" rel="noopener noreffer ">בלוג משלו</a>! 🙂</p>
+</div>
+]]></description></item><item><title>מקליטים בומים</title><link>https://lutzky.net/2006/08/11/recording-booms_copy/</link><pubDate>Fri, 11 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2006/08/11/recording-booms_copy/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is written in Hebrew, which was the blog&rsquo;s language at the time. Context: <a href="https://en.wikipedia.org/wiki/2006_Lebanon_War" target="_blank" rel="noopener noreffer ">2006 Lebanon War</a></div>
+        </div>
+    </div>
+<div id="id-1"><p>מלחמה. נסראללה שולח עלינו בומים. אנחנו שולחים עליו בומים (כל 10 שניות יציאה שלנו אתמול בלילה, והתריסים רועדים). ואני בבית, עושה בומים משלי. זה לא כמו לנגן עם חברים, זה לא כמו להופיע, אבל לפחות סוף סוף גיליתי איך לגרום לזה להישמע נורמאלי.</p>
+<p>הציוד - בס ג’אז של סקוייר. אדום. כבל LP - גם אדום. מקטין LP ולפטופ.</p>
+<p>התוכנה - <a href="http://ardour.org" target="_blank" rel="noopener noreffer ">Ardour</a>, יחד עם כמה פלאגינים של LADSPA.</p>
+<p>אז מה שגיליתי זה ככה -</p>
+<ul>
+<li>להפעיל את שני הפיקאפים על אותו ווליום, ושלא יהיה עד הסוף. ככה הם מבטלים את ההמהום.</li>
+<li>להשתמש ב-lowpass filter כדי לבטל את הרחשים הגבוהים</li>
+<li>להשתמש ב-compressor, ולבחור אותו בקפידה. ככה ישמעו את ה-hammer-ons/pull-offs הרבה יותר טוב, ואפשר לנגן חלש או חזק בלי שזה ירד מהסקאלה</li>
+</ul>
+<p>במסע להוציא את האינפורמציה הזו עליתי על <a href="http://drop-alive.blogspot.com/" target="_blank" rel="noopener noreffer ">אחלה להקה מאיטליה</a>. שווה האזנה.</p>
+</div>
+]]></description></item></channel></rss>

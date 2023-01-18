@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>asides on Shallow and Pedantic</title><link>https://lutzky.net/tags/asides/</link><description>Recent content in asides on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Apr 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/asides/index.xml" rel="self" type="application/rss+xml"/><item><title>Things I learned today</title><link>https://lutzky.net/2008/04/28/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/04/28/things-i-learned-today/</guid><description>You can use git on a VFAT disk (for example, a USB key) without all of the annoying mode issues, by using the following setting in .git/config:
-[core] filemode = false What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for example, if I create a new script, I was hoping to be able to git chmod +x it.
-Cream is a very good editor if you&amp;rsquo;re used to Windows applications.</description><content:encoded><![CDATA[<ol>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>asides - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/asides/</link><description>asides - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 28 Apr 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/asides/" rel="self" type="application/rss+xml"/><item><title>Things I learned today</title><link>https://lutzky.net/2008/04/28/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/04/28/things-i-learned-today/</guid><description><![CDATA[<ol>
 <li>
 <p>You can use git on a VFAT disk (for example, a USB key) without all of the
 annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
@@ -11,7 +9,7 @@ example, if I create a new script, I was hoping to be able to <code>git chmod +x
 it.</p>
 </li>
 <li>
-<p><a href="http://cream.sourceforge.net">Cream</a> is a very good editor if you&rsquo;re used
+<p><a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer ">Cream</a> is a very good editor if you&rsquo;re used
 to Windows applications. It&rsquo;s a set of plugins for VIM which make it
 modeless and (very) familiar to Windows users. However, Ctrl-O still has its
 usual job for us ordinary junkies :)</p>
@@ -20,44 +18,38 @@ usual job for us ordinary junkies :)</p>
 <p>Vertically, two cans of Pepsi fit very snugly into a Pringles can.</p>
 </li>
 </ol>
-]]></content:encoded></item><item><title>Sour chewing gum</title><link>https://lutzky.net/2007/12/19/sour-chewing-gum/</link><pubDate>Wed, 19 Dec 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/12/19/sour-chewing-gum/</guid><description>On an online board, friends posted a photo from a party a while back, as I&amp;rsquo;m chewing some extra-sour chewing gum:
-חמוצקי נולד I find this suitable for use in macro form. For example, in the Computer Security course, we&amp;rsquo;re going to compromise a windows-based server using a buffer overflow vulnerability. Unfortunately, this means we&amp;rsquo;re going to have to use (as per the course&amp;rsquo;s demands) Visual Studio 2003. My response (now known as חמוצקי):</description><content:encoded><![CDATA[<p>On an online board, friends posted a photo from a party a while back, as I&rsquo;m chewing some extra-sour chewing gum:</p>
-<figure>
-  <a href="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg">
-    <img loading="lazy" src="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" />
-  </a><figcaption>חמוצקי נולד</figcaption></figure>
+]]></description></item><item><title>Sour chewing gum</title><link>https://lutzky.net/2007/12/19/sour-chewing-gum/</link><pubDate>Wed, 19 Dec 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/12/19/sour-chewing-gum/</guid><description><![CDATA[<p>On an online board, friends posted a photo from a party a while back, as I&rsquo;m
+chewing some extra-sour chewing gum:</p>
+<figure><a class="lightgallery" href="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" title="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" data-thumbnail="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" data-sub-html="<h2>חמוצקי נולד</h2>">
+        
+    </a><figcaption class="image-caption">חמוצקי נולד</figcaption>
+    </figure>
 <p>I find this suitable for use in macro form. For example, in the Computer
 Security course, we&rsquo;re going to compromise a windows-based server using a
 buffer overflow vulnerability. Unfortunately, this means we&rsquo;re going to have to
 use (as per the course&rsquo;s demands) Visual Studio 2003. My response (now known as חמוצקי):</p>
-<figure>
-  <a href="/2007/12/19/sour-chewing-gum/lutz2as3.gif">
-    <img loading="lazy" src="/2007/12/19/sour-chewing-gum/lutz2as3.gif" />
-  </a><figcaption>חמוצקי</figcaption></figure>
-]]></content:encoded></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description><content:encoded><![CDATA[<figure>
-  <a href="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg">
-    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" />
-  </a><figcaption><a href="http://www.flickr.com/photos/paradox_the_cow/">Paradox the cow</a></figcaption></figure>
-<figure>
-  <a href="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg">
-    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" />
-  </a><figcaption>Another action shot with Paradox</figcaption></figure>
+<p></p>
+]]></description></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description><![CDATA[<figure><a class="lightgallery" href="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" title="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" data-thumbnail="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" data-sub-html="<h2>Paradox the cow</h2>">
+        
+    </a><figcaption class="image-caption"><a href="http://www.flickr.com/photos/paradox_the_cow/" target="_blank" rel="noopener noreffer ">Paradox the cow</a></figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" title="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-thumbnail="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-sub-html="<h2>Another action shot with Paradox</h2>">
+        
+    </a><figcaption class="image-caption">Another action shot with Paradox</figcaption>
+    </figure>
 <p>I present to you, the only creature which is more of a celebrity in the
 undergrad CS world than I am&hellip; <em>The Cow</em>. (Paradox)</p>
 <p><strong>Edit:</strong> Yes, that&rsquo;s me. No, that&rsquo;s not my bass. That&rsquo;s a very good friend&rsquo;s
 Fender Fat Stratocaster. So smooooth&hellip;</p>
-<p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman">some chum</a> ;)</p>
-]]></content:encoded></item><item><title>I do NOT kick puppies!</title><link>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</link><pubDate>Wed, 31 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</guid><description>I do type mesmerizingly fast, though&amp;hellip; :)
-Wanted poster I am told these were scattered around Taub&amp;hellip; I haven&amp;rsquo;t been there to day, but it feels good to be infamous.</description><content:encoded><![CDATA[<p>I do type mesmerizingly fast, though&hellip; :)</p>
-<figure>
-  <a href="/2007/01/31/i-do-not-kick-puppies/poster.jpg">
-    <img loading="lazy" src="/2007/01/31/i-do-not-kick-puppies/poster.jpg" />
-  </a><figcaption>Wanted poster</figcaption></figure>
-<p>I am told these were scattered around Taub&hellip; I haven&rsquo;t been there to day, but it feels good to be infamous.</p>
-]]></content:encoded></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</guid><description>When approaching a port, the Scotsman:
-You will never find a more wretched hive of scum and villany. And the crab cakes ain&amp;rsquo;t too bad, either!
-Later on:
-Is it fast? It sure is. But it&amp;rsquo;s gonna cost ya - 10,000 up-front. 10,000? We could buy our own ship for that! But who&amp;rsquo;s gonna sail it? I can. I piloted (some smaller kind of ship) back when I was a kid.</description><content:encoded><![CDATA[<p>When approaching a port, the Scotsman:</p>
+<p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman" target="_blank" rel="noopener noreffer ">some chum</a> ;)</p>
+]]></description></item><item><title>I do NOT kick puppies!</title><link>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</link><pubDate>Wed, 31 Jan 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</guid><description><![CDATA[<p>I do type mesmerizingly fast, though&hellip; :)</p>
+<figure><a class="lightgallery" href="/2007/01/31/i-do-not-kick-puppies/poster.jpg" title="/2007/01/31/i-do-not-kick-puppies/poster.jpg" data-thumbnail="/2007/01/31/i-do-not-kick-puppies/poster.jpg" data-sub-html="<h2>Wanted poster</h2>">
+        
+    </a><figcaption class="image-caption">Wanted poster</figcaption>
+    </figure>
+<p>I am told these were scattered around Taub&hellip; I haven&rsquo;t been there to day, but
+it feels good to be infamous.</p>
+]]></description></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</guid><description><![CDATA[<p>When approaching a port, the Scotsman:</p>
 <blockquote>
 <p>You will never find a more wretched hive of scum and villany. And the crab
 cakes ain&rsquo;t too bad, either!</p>
@@ -73,4 +65,4 @@ cakes ain&rsquo;t too bad, either!</p>
 </ul>
 </blockquote>
 <p>(and if you haven&rsquo;t seen Star Wars, you&rsquo;re just not gonna get it)</p>
-]]></content:encoded></item></channel></rss>
+]]></description></item></channel></rss>

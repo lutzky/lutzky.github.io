@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>technion on Shallow and Pedantic</title><link>https://lutzky.net/tags/technion/</link><description>Recent content in technion on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 11 Jul 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/technion/index.xml" rel="self" type="application/rss+xml"/><item><title>That "Life" category there</title><link>https://lutzky.net/2008/07/11/that-life-category-there/</link><pubDate>Fri, 11 Jul 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/07/11/that-life-category-there/</guid><description>I has it. Sorta.
-A few weeks ago, the lovely NaNuchKa visited Israel for two and a half shows (the half-show was warming for Berry Sacharof). &amp;ldquo;Three shows in two weeks?&amp;rdquo;, people ask - well, yeah. They only come once a year. Their set is already too long to play all the songs I like, and that&amp;rsquo;s actually quite excellent - new EP and all. Great stuff :) Deep Purple should be coming to Israel this summer (holy crap!</description><content:encoded><![CDATA[<p>I has it. Sorta.</p>
-<p>A few weeks ago, the lovely <a href="http://nanuchka.com">NaNuchKa</a> visited Israel for
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>technion - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/technion/</link><description>technion - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 11 Jul 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/technion/" rel="self" type="application/rss+xml"/><item><title>That "Life" category there</title><link>https://lutzky.net/2008/07/11/that-life-category-there/</link><pubDate>Fri, 11 Jul 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/07/11/that-life-category-there/</guid><description><![CDATA[<p>I has it. Sorta.</p>
+<p>A few weeks ago, the lovely <a href="http://nanuchka.com" target="_blank" rel="noopener noreffer ">NaNuchKa</a> visited Israel for
 two and a half shows (the half-show was warming for Berry Sacharof). &ldquo;Three
 shows in two weeks?&rdquo;, people ask - well, yeah. They only come once a year.
-Their set is already too long to play <a href="http://youtube.com/watch?v=tn4RITTXkjw">all the songs I
+Their set is already too long to play <a href="http://youtube.com/watch?v=tn4RITTXkjw" target="_blank" rel="noopener noreffer ">all the songs I
 like</a>, and that&rsquo;s actually quite
 excellent - new EP and all. Great stuff :) Deep Purple should be coming to
 Israel this summer (holy crap!), and I need to see what I can do about getting
@@ -11,7 +10,7 @@ tickets for that.</p>
 <p>This is my last semester at the Technion - then it&rsquo;s off to the military for
 me. Courses for this semester are Electronic Switching Circuits (bleh&hellip;),
 Signals and Systems (which is actually turning out to be quite awesome!), and
-the neat Compilation Theory. After having thoroughly enjoyed <a href="http://www.cs.technion.ac.il/~biham/">Eli
+the neat Compilation Theory. After having thoroughly enjoyed <a href="http://www.cs.technion.ac.il/~biham/" target="_blank" rel="noopener noreffer ">Eli
 Biham</a>&rsquo;s excellent Modern Cryptology last
 semester, I&rsquo;m visiting (but not taking) his advanced topics course this
 semester. I also have two projects: One in computer security, where we mess
@@ -21,46 +20,48 @@ order to optimize Apache.</p>
 Haifa, just like the good old days. He was supposed to join NaNuchKa for one of
 their shows, but had to cancel, so my lovely lady (who introduced me to his
 work in the first place) and I haven&rsquo;t been to his shows in quite a while. It
-seems that will be able to use the new <a href="http://www.egged.co.il/main.asp?lngCategoryID=6109">200
+seems that will be able to use the new <a href="http://www.egged.co.il/main.asp?lngCategoryID=6109" target="_blank" rel="noopener noreffer ">200
 line</a> - part of a long
 overdue project to have cheap public transportation available all night long.</p>
-]]></content:encoded></item><item><title>Computability - Typed Lectures and Tutorials</title><link>https://lutzky.net/2007/10/31/computability-typed-lectures-and-tutorials/</link><pubDate>Wed, 31 Oct 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/10/31/computability-typed-lectures-and-tutorials/</guid><description>All links in this post have been lost to the mists of time. I&amp;rsquo;ve kept it here out of pure nostalgia.
-I&amp;rsquo;m typing the lectures of the course 236343 Computability Theory this semester. Attached are my lectures notes in PDF form:
-Computability Lecture Notes Computability Tutorial Notes
-If you also type the notes and would like to collaborate with me, I use a git repository stored here:
-http://yasmin.technion.ac.il/ohad/git/computability.git
-To use it, install git-core and curl, and run</description><content:encoded><![CDATA[<blockquote>
+]]></description></item><item><title>Computability - Typed Lectures and Tutorials</title><link>https://lutzky.net/2007/10/31/computability-typed-lectures-and-tutorials/</link><pubDate>Wed, 31 Oct 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/10/31/computability-typed-lectures-and-tutorials/</guid><description><![CDATA[<blockquote>
 <p>All links in this post have been lost to the mists of time. I&rsquo;ve kept it here
 out of pure nostalgia.</p>
 </blockquote>
 <p>I&rsquo;m typing the lectures of the course 236343 Computability Theory this
 semester. Attached are my lectures notes in PDF form:</p>
-<p><a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_lecture.pdf">Computability Lecture Notes</a>
-<a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_tutorial.pdf">Computability Tutorial Notes</a></p>
+<p><a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_lecture.pdf" target="_blank" rel="noopener noreffer ">Computability Lecture Notes</a>
+<a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_tutorial.pdf" target="_blank" rel="noopener noreffer ">Computability Tutorial Notes</a></p>
 <p>If you also type the notes and would like to collaborate with me, I use a git
 repository stored here:</p>
-<p><a href="http://yasmin.technion.ac.il/ohad/git/computability.git">http://yasmin.technion.ac.il/ohad/git/computability.git</a></p>
+<p><a href="http://yasmin.technion.ac.il/ohad/git/computability.git" target="_blank" rel="noopener noreffer ">http://yasmin.technion.ac.il/ohad/git/computability.git</a></p>
 <p>To use it, install <code>git-core</code> and curl, and run</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
-</span></span></span></code></pre></div><p>Any changes you have - send to me as patches, or push to your own repository
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Any changes you have - send to me as patches, or push to your own repository
 and send me a link. (Drawings would be most welcome, and you&rsquo;re obviously
 welcome to add your name to the list of typers)</p>
-<p>If you need git storage, try <a href="http://repo.or.cz">repo.or.cz</a>, or ask the T2
+<p>If you need git storage, try <a href="http://repo.or.cz" target="_blank" rel="noopener noreffer ">repo.or.cz</a>, or ask the T2
 admins to install git :)</p>
-]]></content:encoded></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description><content:encoded><![CDATA[<figure>
-  <a href="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg">
-    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" />
-  </a><figcaption><a href="http://www.flickr.com/photos/paradox_the_cow/">Paradox the cow</a></figcaption></figure>
-<figure>
-  <a href="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg">
-    <img loading="lazy" src="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" />
-  </a><figcaption>Another action shot with Paradox</figcaption></figure>
+]]></description></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description><![CDATA[<figure><a class="lightgallery" href="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" title="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" data-thumbnail="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" data-sub-html="<h2>Paradox the cow</h2>">
+        
+    </a><figcaption class="image-caption"><a href="http://www.flickr.com/photos/paradox_the_cow/" target="_blank" rel="noopener noreffer ">Paradox the cow</a></figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" title="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-thumbnail="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-sub-html="<h2>Another action shot with Paradox</h2>">
+        
+    </a><figcaption class="image-caption">Another action shot with Paradox</figcaption>
+    </figure>
 <p>I present to you, the only creature which is more of a celebrity in the
 undergrad CS world than I am&hellip; <em>The Cow</em>. (Paradox)</p>
 <p><strong>Edit:</strong> Yes, that&rsquo;s me. No, that&rsquo;s not my bass. That&rsquo;s a very good friend&rsquo;s
 Fender Fat Stratocaster. So smooooth&hellip;</p>
-<p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman">some chum</a> ;)</p>
-]]></content:encoded></item><item><title>On the matter of a really long vacation</title><link>https://lutzky.net/2007/04/24/on-the-matter-of-a-really-long-vacation/</link><pubDate>Tue, 24 Apr 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/04/24/on-the-matter-of-a-really-long-vacation/</guid><description>By now I&amp;rsquo;ve lost count of how long ago my last class was. The strike has begun immediately after passover, and is certainly beginning to take its toll. For one thing, I have no homework deadlines - a rare situation indeed for the Technion student. Furthermore, contemplations are rising about whether or not this coming summer semester will be held, as the current semester will most likely leak into it. This is of special interest to me, as I&amp;rsquo;m behind on my degree, which is problematic because of my military scholarship.</description><content:encoded><![CDATA[<p>By now I&rsquo;ve lost count of how long ago my last class was. The strike has begun
+<p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman" target="_blank" rel="noopener noreffer ">some chum</a> ;)</p>
+]]></description></item><item><title>On the matter of a really long vacation</title><link>https://lutzky.net/2007/04/24/on-the-matter-of-a-really-long-vacation/</link><pubDate>Tue, 24 Apr 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/04/24/on-the-matter-of-a-really-long-vacation/</guid><description><![CDATA[<p>By now I&rsquo;ve lost count of how long ago my last class was. The strike has begun
 immediately after passover, and is certainly beginning to take its toll. For
 one thing, I have no homework deadlines - a rare situation indeed for the
 Technion student. Furthermore, contemplations are rising about whether or not
@@ -85,12 +86,12 @@ show. Better still - if there&rsquo;s no reason to get up early the following da
 <p>Another item of interest is that I&rsquo;ve joined a band. Hopefully I&rsquo;ll be able to
 keep up the 3-hours-on-Saturday rehearsals. It&rsquo;s a &ldquo;Trash Metal&rdquo; band which has
 evidently had really bad experience with bass players. Unfortunately, we seem
-to have a <a href="http://myspace.com/switchblade777">myspace page</a>. It looks&hellip;
+to have a <a href="http://myspace.com/switchblade777" target="_blank" rel="noopener noreffer ">myspace page</a>. It looks&hellip;
 myspaceish. However, I really think the group has potential, as well as
 excellent influences. Furthermore, I&rsquo;m an attention whore :D. Hopefully I&rsquo;ll be
 able to help influence the band into more of a heavy-metal direction by
 harassing them with melodic basslines.</p>
-<p>Very little geek news this time, other than the fact that <a href="http://ubuntu.com">Feisty
+<p>Very little geek news this time, other than the fact that <a href="http://ubuntu.com" target="_blank" rel="noopener noreffer ">Feisty
 Fawn</a> is out. My verdict - get it. It&rsquo;s awesome. Period.
 Suspend works much better, NetworkManager is now installed by default, a lot of
 things have really been polished, and - can you believe it - Sudoku :)! If you
@@ -101,15 +102,50 @@ databases you&rsquo;ll need to convert them (use the sqlite and sqlite3 binaries
 do this) - otherwise you&rsquo;ll get &ldquo;file is not a database, or is encrypted&rdquo;
 errors.</p>
 <p>Whew - that&rsquo;s much better. My thoughts have been depleted into the bits and
-bytes before you. I&rsquo;ll just <a href="http://gadial.net">plug a friend&rsquo;s blog</a> and hit
+bytes before you. I&rsquo;ll just <a href="http://gadial.net" target="_blank" rel="noopener noreffer ">plug a friend&rsquo;s blog</a> and hit
 the publish button now ;)</p>
-]]></content:encoded></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/2007/02/27/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/27/using-jabber-from-within-the-technion/</guid><description>A very neat find for those of you who want to use Jabber from within the Technion, but with your client of choice rather than a web-based one: Many Jabber servers, including Google Talk, support using Port 443 over SSL. Since the Technion does not block outbound SSL connections, this will work there as well. Be sure to mark the appropriate &amp;lsquo;Use old SSL protocol&amp;rsquo; option in your jabber client (that&amp;rsquo;s what it&amp;rsquo;s called in gaim and pidgin, at any rate).</description><content:encoded><![CDATA[<p>A very neat find for those of you who want to use Jabber from within the
+]]></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/2007/02/27/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/02/27/using-jabber-from-within-the-technion/</guid><description><![CDATA[<p>A very neat find for those of you who want to use Jabber from within the
 Technion, but with your client of choice rather than a web-based one: Many
 Jabber servers, including Google Talk, support using Port 443 over SSL. Since
 the Technion does not block outbound SSL connections, this will work there as
 well. Be sure to mark the appropriate &lsquo;Use old SSL protocol&rsquo; option in your
 jabber client (that&rsquo;s what it&rsquo;s called in gaim and pidgin, at any rate).</p>
-]]></content:encoded></item><item><title>Here's hoping</title><link>https://lutzky.net/2007/02/14/heres-hoping/</link><pubDate>Wed, 14 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/14/heres-hoping/</guid><description>def factor(grade, params = {}) return 100 if params.empty? # Optimistic, eh? case params[:type] when :pass return 55 when :fail return 54 when :root params[:gamma] = 0.5 end grade = grade.to_f return params[:proc].call(grade) if params[:proc] grade *= params[:coefficient] if params[:coefficient] if params[:gamma] grade /= 100 grade **= params[:gamma] grade *= 100 end if params[:offset] grade += params[:offset] end return grade if params[:idnoclip] [ grade, 100 ].min end</description><content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="n">grade</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
+]]></description></item><item><title>Here's hoping</title><link>https://lutzky.net/2007/02/14/heres-hoping/</link><pubDate>Wed, 14 Feb 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/02/14/heres-hoping/</guid><description><![CDATA[<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="n">grade</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">empty?</span> <span class="c1"># Optimistic, eh?</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">case</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]</span>
@@ -140,11 +176,11 @@ jabber client (that&rsquo;s what it&rsquo;s called in gaim and pidgin, at any ra
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">grade</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:idnoclip</span><span class="o">]</span>
 </span></span><span class="line"><span class="cl">  <span class="o">[</span> <span class="n">grade</span><span class="p">,</span> <span class="mi">100</span> <span class="o">].</span><span class="n">min</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div>]]></content:encoded></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</guid><description>My lecture slides. Have a peek if you like :)
-sybilproof Reputation Mechanisms - Seminar</description><content:encoded>&lt;p>My lecture slides. Have a peek if you like :)&lt;/p>
-&lt;a href="/2007/01/30/i-might-need-these-tomorrow/sybils.pdf">sybilproof Reputation Mechanisms - Seminar&lt;/a></content:encoded></item><item><title>As for Python</title><link>https://lutzky.net/2007/01/23/as-for-python/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/23/as-for-python/</guid><description>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to TryRuby, code my sites using Rails, am surprised that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes called the Japanese Python, and comparisons are inevitable. I know very little about Python, but I do know that&amp;hellip;
-It has a larger community More GUI applications are written in it More bindings are available for it Its interpreter is much faster Not a far inferior language Ruby certainly does have its advantages over it - trivial class expansion, extremely concise syntax, seemingly better-suited for heavy usage of closures, and Matz.</description><content:encoded><![CDATA[<p>Myself, I&rsquo;m a Ruby hacker. I send everyone within earshot to
-<a href="http://tryruby.hobix.com">TryRuby</a>, code my sites using Rails, am surprised
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/01/30/i-might-need-these-tomorrow/</guid><description>&lt;p>My lecture slides. Have a peek if you like :)&lt;/p>
+&lt;a href="/2007/01/30/i-might-need-these-tomorrow/sybils.pdf" rel="">sybilproof Reputation Mechanisms - Seminar&lt;/a></description></item><item><title>As for Python</title><link>https://lutzky.net/2007/01/23/as-for-python/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/01/23/as-for-python/</guid><description><![CDATA[<p>Myself, I&rsquo;m a Ruby hacker. I send everyone within earshot to
+<a href="http://tryruby.hobix.com" target="_blank" rel="noopener noreffer ">TryRuby</a>, code my sites using Rails, am surprised
 that I&rsquo;m using a php-based blog&hellip; you get the picture. Ruby is sometimes
 called the Japanese Python, and comparisons are inevitable. I know very little
 about Python, but I do know that&hellip;</p>
@@ -160,4 +196,4 @@ extremely concise syntax, seemingly better-suited for heavy usage of closures,
 and Matz. Ya gotta love Matz.</p>
 <p>I will be giving Python a try soon&hellip; I love learning new programming
 languages. That&rsquo;s why I&rsquo;m taking Programming Languages this coming semester.</p>
-]]></content:encoded></item></channel></rss>
+]]></description></item></channel></rss>

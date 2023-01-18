@@ -1,8 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>ruby on Shallow and Pedantic</title><link>https://lutzky.net/tags/ruby/</link><description>Recent content in ruby on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 18 Oct 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ruby/index.xml" rel="self" type="application/rss+xml"/><item><title>Delegating methods in Ruby</title><link>https://lutzky.net/2008/10/18/delegating-methods-in-ruby/</link><pubDate>Sat, 18 Oct 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/10/18/delegating-methods-in-ruby/</guid><description>Sometimes, when constructing a compound object, we are interested in exporting functionality while retaining encapsulation. For example, suppose we have a Secretary class:
-class Secretary def send_fax(destination, fax_contents) puts &amp;#39;Sending fax &amp;#34;%s&amp;#34; to %s&amp;#39; % [fax_contents, destination] end def answer_call(call) # ... end # ... end Our Secretary provides a lot of useful functionality, that our Boss class would like to have. Boss would like to be able to say that he can send a fax, without having the user explicitly request his Secretary beforehand.</description><content:encoded><![CDATA[<p>Sometimes, when constructing a compound object, we are interested in exporting
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>ruby - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/ruby/</link><description>ruby - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sat, 18 Oct 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ruby/" rel="self" type="application/rss+xml"/><item><title>Delegating methods in Ruby</title><link>https://lutzky.net/2008/10/18/delegating-methods-in-ruby/</link><pubDate>Sat, 18 Oct 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/10/18/delegating-methods-in-ruby/</guid><description><![CDATA[<p>Sometimes, when constructing a compound object, we are interested in exporting
 functionality while retaining encapsulation. For example, suppose we have a
 <code>Secretary</code> class:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Secretary</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Secretary</span>
 </span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">send_fax</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">fax_contents</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s1">&#39;Sending fax &#34;%s&#34; to %s&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="n">fax_contents</span><span class="p">,</span> <span class="n">destination</span><span class="o">]</span>
 </span></span><span class="line"><span class="cl">  <span class="k">end</span>
@@ -13,12 +27,28 @@ functionality while retaining encapsulation. For example, suppose we have a
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1"># ...</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div><p>Our <code>Secretary</code> provides a lot of useful functionality, that our <code>Boss</code> class
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Our <code>Secretary</code> provides a lot of useful functionality, that our <code>Boss</code> class
 would like to have. <code>Boss</code> would like to be able to say that he can send a fax,
 without having the user explicitly request his <code>Secretary</code> beforehand. The same
 goes for a lot of other methods <code>Secretary</code> provides. Instead of writing a stub
 function for each of these methods, it would be nice to do the following:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Boss</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Boss</span>
 </span></span><span class="line"><span class="cl">  <span class="n">delegate_method</span> <span class="ss">:my_secretary</span><span class="p">,</span> <span class="ss">:send_fax</span><span class="p">,</span> <span class="ss">:answer_call</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">initialize</span>
@@ -28,8 +58,24 @@ function for each of these methods, it would be nice to do the following:</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">john</span> <span class="o">=</span> <span class="no">Boss</span><span class="o">.</span><span class="n">new</span>
 </span></span><span class="line"><span class="cl"><span class="n">john</span><span class="o">.</span><span class="n">send_fax</span><span class="p">(</span><span class="s2">&#34;Donald Trump&#34;</span><span class="p">,</span> <span class="s2">&#34;YOU&#39;RE fired&#34;</span><span class="p">)</span>
-</span></span></code></pre></div><p>Here&rsquo;s how we can get this to happen:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Class</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Here&rsquo;s how we can get this to happen:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Class</span>
 </span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">delegate_method</span><span class="p">(</span><span class="n">instance_var_name</span><span class="p">,</span> <span class="o">*</span><span class="n">method_names</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">method_names</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">method_name</span><span class="o">|</span>
 </span></span><span class="line"><span class="cl">      <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
@@ -39,14 +85,13 @@ function for each of these methods, it would be nice to do the following:</p>
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">  <span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div><p>This solution does have its drawbacks - it will not work for methods which are
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This solution does have its drawbacks - it will not work for methods which are
 meant to accept blocks. I&rsquo;m not sure how to get that to happen, short of using
 a string-based <code>class_eval</code>, which I&rsquo;m not very fond of. (I find <code>eval</code> to be,
 well, evil&hellip;)</p>
-]]></content:encoded></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</guid><description>Edit: I was misled!
-Illustrated here. Hints below.
-&amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;#34;x: %p, y: %p&amp;#34; % [x, y]; end =&amp;gt; nil &amp;gt;&amp;gt; inspect_x_and_y(y={&amp;#34;hello&amp;#34; =&amp;gt; &amp;#34;world&amp;#34;},x=[1,2,3]) x: {&amp;#34;hello&amp;#34;=&amp;gt;&amp;#34;world&amp;#34;}, y: [1, 2, 3] The bits I didn&amp;rsquo;t know about:
-&amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ] The %p formatting character is the same as inspect. You can call methods with method_name(param2=val2, param1=val1), also like in python.</description><content:encoded><![CDATA[<p><strong>Edit: I was misled!</strong></p>
+]]></description></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/07/25/three-things-i-didnt-know-ruby-does/</guid><description><![CDATA[<p><strong>Edit: I was misled!</strong></p>
 <p>Illustrated here. Hints below.</p>
 <pre tabindex="0"><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &#34;x: %p, y: %p&#34; % [x, y]; end
 =&gt; nil
@@ -61,13 +106,50 @@ in python. <strong>No you can&rsquo;t! This code sets external variables called 
 x.</strong></li>
 </ol>
 <p>How embarassing&hellip; :(</p>
-]]></content:encoded></item><item><title>Gettext oddities with Ruby</title><link>https://lutzky.net/2008/07/20/gettext-oddities-with-ruby/</link><pubDate>Sun, 20 Jul 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/07/20/gettext-oddities-with-ruby/</guid><description>I was having a lot of trouble with gettext in Ruby, mostly due to lacking documentation. Here are some useful things I figured out while writing TTime. I ended up having a single gettext_settings.rb, included from every file which uses gettext. Here it is (with some extra notes)
-#!/usr/bin/ruby begin require &amp;#39;gettext&amp;#39; require &amp;#39;pathname&amp;#39; include GetText # This fixes a swarm of problems on Windows GetText.locale.charset = &amp;#34;UTF-8&amp;#34; # Ruby&amp;#39;s gettext acts in a sane # method - add a path to the set of paths # scanned.</description><content:encoded><![CDATA[<p>I was having a lot of trouble with
-<a href="http://en.wikipedia.org/wiki/Gettext">gettext</a> in Ruby, mostly due to lacking
+]]></description></item><item><title>Gettext oddities with Ruby</title><link>https://lutzky.net/2008/07/20/gettext-oddities-with-ruby/</link><pubDate>Sun, 20 Jul 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/07/20/gettext-oddities-with-ruby/</guid><description><![CDATA[<p>I was having a lot of trouble with
+<a href="http://en.wikipedia.org/wiki/Gettext" target="_blank" rel="noopener noreffer ">gettext</a> in Ruby, mostly due to lacking
 documentation. Here are some useful things I figured out while writing TTime. I
 ended up having a single <code>gettext_settings.rb</code>, included from every file which
 uses gettext. Here it is (with some extra notes)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/ruby</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/ruby</span>
 </span></span><span class="line"><span class="cl"><span class="k">begin</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">require</span> <span class="s1">&#39;gettext&#39;</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">require</span> <span class="s1">&#39;pathname&#39;</span>
@@ -101,7 +183,9 @@ uses gettext. Here it is (with some extra notes)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">s</span>
 </span></span><span class="line"><span class="cl">  <span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div><p>One note for context: I use
-<a href="http://i.loveruby.net/en/projects/setup/">setup.rb</a> (and <code>ruby-pkg-tools</code>) to
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>One note for context: I use
+<a href="http://i.loveruby.net/en/projects/setup/" target="_blank" rel="noopener noreffer ">setup.rb</a> (and <code>ruby-pkg-tools</code>) to
 package TTime. So my localizations go in <code>data/locale</code>.</p>
-]]></content:encoded></item></channel></rss>
+]]></description></item></channel></rss>

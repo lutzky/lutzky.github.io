@@ -1,6 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>show downloading on Shallow and Pedantic</title><link>https://lutzky.net/tags/show-downloading/</link><description>Recent content in show downloading on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 05 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/show-downloading/index.xml" rel="self" type="application/rss+xml"/><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/2014/01/05/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/01/05/investigate/</guid><description>Distinguishing &lt;!-- raw HTML omitted -->EPERM&lt;!-- raw HTML omitted --> vs &lt;!-- raw HTML omitted -->EACCESS&lt;!-- raw HTML omitted -->, and how that helps debug file manipulation scripts.</description><content:encoded><![CDATA[<p>My show downloading stack lives on. I&rsquo;m curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>show downloading - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/show-downloading/</link><description>show downloading - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 05 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/show-downloading/" rel="self" type="application/rss+xml"/><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/2014/01/05/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2014/01/05/investigate/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<p>My show downloading stack lives on. I&rsquo;m curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.</p>
 <p>At any rate, nowadays I use <code>flexget</code>, <code>transmission</code>, <code>tvnamer</code> and <code>xbmc</code>, held together with some bash scripts. On debian- and ubuntu-based systems, the <code>transmission</code> daemon runs as a separate user (<code>debian-transmission</code>), so this requires a bit of care with file and group ownership. After rebuilding my system, I couldn&rsquo;t get <code>tvnamer</code> to work right for some reason, no matter how careful I was. I&rsquo;d keep getting this error:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Loading config: config.json
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Loading config: config.json
 </span></span><span class="line"><span class="cl">####################
 </span></span><span class="line"><span class="cl"># Starting tvnamer
 </span></span><span class="line"><span class="cl"># Found 1 episode
@@ -17,13 +39,14 @@
 </span></span><span class="line"><span class="cl">New path: /media/Store/shows/Sherlock/Season 3/Sherlock.3x01.The.Empty.Hearse.720p.HDTV.x264-FoV.mkv
 </span></span><span class="line"><span class="cl">Creating directory /media/Store/Shows/Sherlock/Season 3
 </span></span><span class="line"><span class="cl">OSError(2, &#39;No such file or directory&#39;)
-</span></span></code></pre></div><p>For a few weeks I&rsquo;d double-check the permissions, fail to understand what was going on, groan and copy the files manually. The new Sherlock episode had me in a bit of a more investigative mood.</p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>For a few weeks I&rsquo;d double-check the permissions, fail to understand what was going on, groan and copy the files manually. The new Sherlock episode had me in a bit of a more investigative mood.</p>
 <p>This turns out to be an exercise in confusing OS logic and logging. It <em>looks</em> like the rename operation failed, and somehow the directory creation failed as well. Neither is the case. A hint can be found in the precise error after the rename: &ldquo;1 - Operation not permitted&rdquo; (that&rsquo;s <code>EPERM</code>). If that seems a bit off, that&rsquo;s because it is: When renames fail because of inadequate permissions, they return <code>EACCES</code> &ldquo;13 - Permission denied&rdquo;. So what&rsquo;s going on?</p>
 <p>It turns out that after renaming, <code>tvnamer</code> tries to preserve the access and modification times of renamed files. A noble cause, but it turns out that Linux won&rsquo;t allow this unless you are the <em>owner</em> of the file - even if you do have write permissions. Therefore, this fails, which causes <code>tvnamer</code> to believe the rename failed - although it hasn&rsquo;t. Afterwards, the directory is created (this succeeds), but since <code>tvnamer</code> tries to copy using the <em>old</em> filename (thinking the rename failed), we get an <code>ENOENT</code> &ldquo;2 - No such file or directory&rdquo; error about the <em>source</em> of the copy operation.</p>
-<p>The fix can be found <a href="https://github.com/dbr/tvnamer/pull/89">in this pull request</a>. Happy bug hunting!</p>
-]]></content:encoded></item><item><title>The show downloading stack - part n+1</title><link>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</link><pubDate>Thu, 15 Dec 2011 00:00:00 +0000</pubDate><guid>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</guid><description>I&amp;rsquo;ve already mentioned my show downloading stack on this blog. It&amp;rsquo;s changed a bit since - I now use Transmission rather than rtorrent, as it has the excellent transmission-daemon package which has it acting exactly the way I like (without using screen). Also, it now E-mails me when a torrent is done downloading. So while this may be how TV works for you:
-Notice that a new episode is out Torrent it Wait for the download to finish Watch it &amp;hellip;this is how TV works for me now:</description><content:encoded><![CDATA[<p>I&rsquo;ve <a href="/2009/09/05/my-show-downloading-stack">already mentioned</a> my show downloading stack on this blog. It&rsquo;s
-changed a bit since - I now use <a href="http://transmission-bt.org/">Transmission</a>
+<p>The fix can be found <a href="https://github.com/dbr/tvnamer/pull/89" target="_blank" rel="noopener noreffer ">in this pull request</a>. Happy bug hunting!</p>
+]]></description></item><item><title>The show downloading stack - part n+1</title><link>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</link><pubDate>Thu, 15 Dec 2011 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2011/12/15/the-show-downloading-stack-part-n1/</guid><description><![CDATA[<p>I&rsquo;ve <a href="/2009/09/05/my-show-downloading-stack" rel="">already mentioned</a> my show downloading stack on this blog. It&rsquo;s
+changed a bit since - I now use <a href="http://transmission-bt.org/" target="_blank" rel="noopener noreffer ">Transmission</a>
 rather than rtorrent, as it has the excellent <code>transmission-daemon</code> package
 which has it acting exactly the way I like (without using <code>screen</code>). Also, it
 now E-mails me when a torrent is done downloading. So while this may be how TV
@@ -40,7 +63,34 @@ works for you:</p>
 <li>Watch it</li>
 </ol>
 <p>Here&rsquo;s how it&rsquo;s done: First, write <code>/usr/local/bin/notify_torrent_done</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>cat_the_message<span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF
 </span></span></span><span class="line"><span class="cl"><span class="s">Subject: Torrent done: $TR_TORRENT_NAME
@@ -63,7 +113,9 @@ works for you:</p>
 </span></span><span class="line"><span class="cl">    cat_the_message <span class="p">|</span> msmtp -C /etc/msmtprc.transmission --from default -t your@email.address
 </span></span><span class="line"><span class="cl">    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
 </span></span><span class="line"><span class="cl"><span class="k">done</span>
-</span></span></code></pre></div><p>The various environment variables will be set by transmission when it calls
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The various environment variables will be set by transmission when it calls
 this script. We rerun <code>msmtp</code> until it succeeds because you will often get a
 &ldquo;connection timed out&rdquo; response from gmail (&hellip;at least on my ISP&hellip;). Here&rsquo;s
 <code>/etc/msmtprc.transmission</code> which is relevant to gmail (this is a bit tricky
@@ -93,7 +145,7 @@ here.</p>
 this point, not <code>restart</code> - that would cause <code>settings.json</code> to be
 rewritten from runtime configuration.</p>
 <p>That&rsquo;s it. Enjoy!</p>
-]]></content:encoded></item><item><title>Loving the new Totem</title><link>https://lutzky.net/2009/10/10/loving-the-new-totem/</link><pubDate>Sat, 10 Oct 2009 00:00:00 +0000</pubDate><guid>https://lutzky.net/2009/10/10/loving-the-new-totem/</guid><description>Totem is Gnome&amp;rsquo;s built-in media player, and it really annoyed me in previous versions, and had me switching to VLC. However, the version included in the Ubuntu 9.10 release candidate has two features which are very important, in my opinion. The first feature is smooth graphical integration with compositing managers (such as compiz). In previous versions, as well as VLC, once you fullscreen the window, moving the mouse (which causes the cursor and the partial interface to appear) causes a very annoying flicker.</description><content:encoded><![CDATA[<p>Totem is Gnome&rsquo;s built-in media player, and it really annoyed me in previous
+]]></description></item><item><title>Loving the new Totem</title><link>https://lutzky.net/2009/10/10/loving-the-new-totem/</link><pubDate>Sat, 10 Oct 2009 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2009/10/10/loving-the-new-totem/</guid><description><![CDATA[<p>Totem is Gnome&rsquo;s built-in media player, and it really annoyed me in previous
 versions, and had me switching to VLC. However, the version included in the
 Ubuntu 9.10 release candidate has two features which are very important, in my
 opinion. The first feature is smooth graphical integration with compositing
@@ -102,21 +154,20 @@ fullscreen the window, moving the mouse (which causes the cursor and the
 partial interface to appear) causes a very annoying flicker. This has been
 fixed (at least on my box, using an NVidia card).</p>
 <p>The second, more important feature, is the exact one I&rsquo;ve been missing and
-talked about in <a href="/2009/09/05/my-show-downloading-stack">the previous post</a> - hit Edit -&gt; Preferences -&gt; Start
+talked about in <a href="/2009/09/05/my-show-downloading-stack" rel="">the previous post</a> - hit Edit -&gt; Preferences -&gt; Start
 playing files from last position, and Totem will keep track of your last
-playback position when you close the video. Reading <a href="http://article.gmane.org/gmane.comp.gnome.svn/223873">the implementation
+playback position when you close the video. Reading <a href="http://article.gmane.org/gmane.comp.gnome.svn/223873" target="_blank" rel="noopener noreffer ">the implementation
 patch</a> shows that there
 is a certain threshold for this - the position won&rsquo;t be saved if you&rsquo;re too
 close to the beginning or end of the video. So there, my show downloading stack
 now has every feature I&rsquo;d want from Miro, without the downsides I&rsquo;ve mentioned.</p>
-]]></content:encoded></item><item><title>My show downloading stack</title><link>https://lutzky.net/2009/09/05/my-show-downloading-stack/</link><pubDate>Sat, 05 Sep 2009 00:00:00 +0000</pubDate><guid>https://lutzky.net/2009/09/05/my-show-downloading-stack/</guid><description>I love watching TV, and hate it. Regular show schedules are horrible, commercial breaks are annoying, and the ability to rewind is very important. I love Hot&amp;rsquo;s VOD service (and happily pay to watch the shows I enjoy), but my true favorite for getting my entertainment is everyone&amp;rsquo;s favorite not-a-dumptruck, the internet. In this post, I will describe how I do it.
-Everything I describe in this post can be done using miro.</description><content:encoded><![CDATA[<p>I love watching TV, and hate it. Regular show schedules are horrible,
+]]></description></item><item><title>My show downloading stack</title><link>https://lutzky.net/2009/09/05/my-show-downloading-stack/</link><pubDate>Sat, 05 Sep 2009 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2009/09/05/my-show-downloading-stack/</guid><description><![CDATA[<p>I love watching TV, and hate it. Regular show schedules are horrible,
 commercial breaks are annoying, and the ability to rewind is very important. I
 love Hot&rsquo;s VOD service (and happily pay to watch the shows I enjoy), but my
 true favorite for getting my entertainment is everyone&rsquo;s favorite
 not-a-dumptruck, the internet. In this post, I will describe how I do it.</p>
 <p>Everything I describe in this post can be done using
-<a href="http://getmiro.com/">miro</a>. It&rsquo;s a neat piece of software, which lacked polish
+<a href="http://getmiro.com/" target="_blank" rel="noopener noreffer ">miro</a>. It&rsquo;s a neat piece of software, which lacked polish
 in version 2.4 (2.5 is out now though), but there are a few things I don&rsquo;t like
 about it:</p>
 <ul>
@@ -130,18 +181,18 @@ start automatically. (I&rsquo;ll be very happy to know if I&rsquo;m wrong about 
 It keeps track of your position within watched shows. That is, stop watching a
 show -and next time playback will resume from the same place.</p>
 <p>The first thing you want to do is get a good RSS feed for your show.
-Unfortunately, <a href="http://revision3.com/">Revision3</a>&rsquo;s shows (many of which are
+Unfortunately, <a href="http://revision3.com/" target="_blank" rel="noopener noreffer ">Revision3</a>&rsquo;s shows (many of which are
 quite good), are direct HTTP download links, as per the advertiser&rsquo;s request.
 For other shows, you can find torrent RSS feeds, which make much better use of
 everyone&rsquo;s bandwidth. Also, downloading will be handled by our trusty rtorrent,
 which we can configure for bandwidth limiting.</p>
-<p>To download RSS feeds, I use <a href="http://flexget.com/">flexget</a>. It does its job
+<p>To download RSS feeds, I use <a href="http://flexget.com/" target="_blank" rel="noopener noreffer ">flexget</a>. It does its job
 well, but doesn&rsquo;t support bandwidth limiting. It accepts a simple YAML
 configuration file, and has good logging. I run it as a cron job - its locking
 mechanism prevents multiple instances from running simultaneously. For
 non-torrents, I set the output directory to <code>~/torrents/inbox</code>. For torrents, I
 set the output directory to <code>~/torrents/from_rss</code>.</p>
-<p>For downloading torrents, I use <a href="http://libtorrent.rakshasa.no/">rtorrent</a>.
+<p>For downloading torrents, I use <a href="http://libtorrent.rakshasa.no/" target="_blank" rel="noopener noreffer ">rtorrent</a>.
 It&rsquo;s a curses-based client which performs very well. My <code>.rtorrent.rc</code> file looks
 like this:</p>
 <pre tabindex="0"><code>download_rate = 30
@@ -174,7 +225,28 @@ deleted.</li>
 computer is up. This is not as elegant as starting it from an RC-script, but
 keeps the whole setup confined to the limits of my own user. Again, rtorrent
 has a lock-file which prevents multiple instances from running.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
 </span></span><span class="line"><span class="cl">
@@ -191,17 +263,19 @@ has a lock-file which prevents multiple instances from running.</p>
 </span></span><span class="line"><span class="cl">    chgrp www-data <span class="nv">$SCGI_SOCKET</span>
 </span></span><span class="line"><span class="cl">    chmod g+rwx <span class="nv">$SCGI_SOCKET</span>
 </span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span></code></pre></div><p><a href="http://code.google.com/p/rtgui/">RTGUI</a> provides a nice web-based interface.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a href="http://code.google.com/p/rtgui/" target="_blank" rel="noopener noreffer ">RTGUI</a> provides a nice web-based interface.
 It&rsquo;s a bit tricky to configure, and you&rsquo;ll need to use an HTTP server -
 preferably lighttpd, as it has support for SCGI UNIX sockets (as opposed to
 SCGI TCP sockets). This lets you keep the number of open network ports to a
 minimum. This is all well-documented on the RTGUI site.</p>
 <p>Finally, I&rsquo;ve written a little python script called
-<a href="http://github.com/lutzky/check_shows">check_shows</a> which uses <code>libnotify</code> to
+<a href="http://github.com/lutzky/check_shows" target="_blank" rel="noopener noreffer ">check_shows</a> which uses <code>libnotify</code> to
 show a pretty pop-up whenever downloads complete. It&rsquo;s a tiny little hack which
 uses inotify, which is lots of fun.</p>
 <p>That&rsquo;s it. Any neat tricks are welcome :)</p>
-]]></content:encoded></item><item><title>Alright, American Dad!</title><link>https://lutzky.net/2007/01/23/alright-american-dad/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/01/23/alright-american-dad/</guid><description>Just finished downloading an episode of American Dad off Bittorrent. TV has ancient episodes of Family Guy. Took about an hour though&amp;hellip; I tells ya, I&amp;rsquo;d pay for this kind of service if it were faster&amp;hellip; ;)</description><content:encoded><![CDATA[<p>Just finished downloading an episode of American Dad off Bittorrent. TV has
+]]></description></item><item><title>Alright, American Dad!</title><link>https://lutzky.net/2007/01/23/alright-american-dad/</link><pubDate>Tue, 23 Jan 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/01/23/alright-american-dad/</guid><description><![CDATA[<p>Just finished downloading an episode of American Dad off Bittorrent. TV has
 ancient episodes of Family Guy. Took about an hour though&hellip; I tells ya, I&rsquo;d
 pay for this kind of service if it were faster&hellip; ;)</p>
-]]></content:encoded></item></channel></rss>
+]]></description></item></channel></rss>

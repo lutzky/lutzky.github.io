@@ -1,5 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>python on Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>Recent content in python on Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description><content:encoded><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">fakefile</span>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>python - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>python - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/2014/07/02/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2014/07/02/fakefile/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">fakefile</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">unittest</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">mock</span>
 </span></span><span class="line"><span class="cl">
@@ -21,20 +48,21 @@
 </span></span><span class="line"><span class="cl">                                    <span class="c1"># No file &#34;existing_file&#34; will be read!</span>
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">faker</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&#34;somefile&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">file_contents</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                          <span class="s2">&#34;correct output&#34;</span><span class="p">)</span>
-</span></span></code></pre></div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
-]]></content:encoded></item><item><title>Translationese</title><link>https://lutzky.net/2013/03/24/translationese/</link><pubDate>Sun, 24 Mar 2013 00:00:00 +0000</pubDate><guid>https://lutzky.net/2013/03/24/translationese/</guid><description>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a chance to use a few of my favorite technologies.
-The project was coded in Python, which is not my favorite programming language - Ruby is. However, since Python is more popular at my workplace, and seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown to love it almost as much over the years.</description><content:encoded><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile" target="_blank" rel="noopener noreffer ">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs" target="_blank" rel="noopener noreffer ">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
+]]></description></item><item><title>Translationese</title><link>https://lutzky.net/2013/03/24/translationese/</link><pubDate>Sun, 24 Mar 2013 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2013/03/24/translationese/</guid><description><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
 in natural language processing. I&rsquo;ve learned quite a bit from it, and had a
 chance to use a few of my favorite technologies.</p>
 <p>The project was coded in Python, which is <em>not</em> my favorite programming
 language - Ruby is. However, since Python is more popular at my workplace, and
 seems to have a richer ecosystem around it (sometimes, at any rate), I&rsquo;ve grown
 to love it almost as much over the years. It&rsquo;s quick, easy, and has fantastic
-libraries; specifically, for this project, we made heavy use of the <a href="http://nltk.org">Natural
+libraries; specifically, for this project, we made heavy use of the <a href="http://nltk.org" target="_blank" rel="noopener noreffer ">Natural
 Language Toolkit</a>. We used Git for source control and Github
 for hosting, Travis for continuous integration, and ReadTheDocs for
 documentation. All of these culminate in the project being handed in as a
-single link: <a href="http://github.com/lutzky/translationese">http://github.com/lutzky/translationese</a>.</p>
+single link: <a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer ">http://github.com/lutzky/translationese</a>.</p>
 <p>The translationese project is a re-implementation of the concepts presented in
 &ldquo;On The Features Of Translationese&rdquo;, an article describing an attempt to
 automatically distinguish between texts written in English originally, and
@@ -50,7 +78,7 @@ code, at any rate).</p>
 coded only after a (failing) unit test for it was written. This helped keep the
 code modular, and made refactoring (which happened quite a bit) easy and safe.
 The resulting design proved to be quite flexible, as I will shortly explain.</p>
-<p><a href="http://en.wikipedia.org/wiki/Support_vector_machine">SVM</a> is a form of
+<p><a href="http://en.wikipedia.org/wiki/Support_vector_machine" target="_blank" rel="noopener noreffer ">SVM</a> is a form of
 <em>machine learning</em>. Simply put, it&rsquo;s a method of teaching a machine to
 distinguish between two categories of &ldquo;points&rdquo; (in our case, &ldquo;translated&rdquo; and
 &ldquo;original&rdquo;). The SVM is given two such sets, and tries to draw a &ldquo;line&rdquo; (or,
@@ -58,22 +86,21 @@ generally, a hyperplane) separating them. Afterwards, it should be able to
 classify new points (without being told which set they belong to) by which side
 of the line they are. The following image (Wikipedia) shows a simple,
 two-dimensional case (the red line properly distinguishing the two sets):</p>
-<p><img loading="lazy" src="http://upload.wikimedia.org/wikipedia/commons/b/b5/Svm_separating_hyperplanes_%28SVG%29.svg" alt=""  />
-{: style=&ldquo;max-width:350px&rdquo;}</p>
+<p>{: style=&ldquo;max-width:350px&rdquo;}</p>
 <p>For our case, each <em>&ldquo;property&rdquo;</em> took a block of text, and translated it to an
 <em>n</em>-dimensional point. For some properties, the dimension was quite extreme.
 For example, the property of character trigrams gives each coordinate the value
 of &ldquo;how many times does each permutation of three consecutive letters appear in
 the text&rdquo;. There are 17,576 such permutations, so each text became a point in a
 17,576-dimensional space. These points were fed into an SVM algorithm
-implemented in <a href="http://www.cs.waikato.ac.nz/ml/weka">Weka</a>.</p>
+implemented in <a href="http://www.cs.waikato.ac.nz/ml/weka" target="_blank" rel="noopener noreffer ">Weka</a>.</p>
 <p>During the final presentation of the project, we explained that the
 particularly high-dimensionality properties proved to be too much for Weka (it
 would use up all available RAM), so smaller sample sizes were used for those.
 However, we were told that using sparse vector representation as Weka&rsquo;s input
 could allow it to be more efficient. Fortunately, our design proved to be
 robust enough that I could implement (and test) the change during the
-presentation (<a href="https://github.com/lutzky/translationese/commit/12786459ef41d64963fd19433ba86dd71acc0e92">1278645</a>).  Indeed, we now had no problems with the
+presentation (<a href="https://github.com/lutzky/translationese/commit/12786459ef41d64963fd19433ba86dd71acc0e92" target="_blank" rel="noopener noreffer ">1278645</a>).  Indeed, we now had no problems with the
 high-dimensionality properties, and repeated our runs, updating the
 documentation (after we were given our grade&hellip;)</p>
 <p>There&rsquo;s a somewhat eerie aspect to this project. Having used SVM, I have no
@@ -92,14 +119,14 @@ look up its index in a 17,576-entry list and increment it by a factor), I&rsquo;
 have no chance of ever understanding how it works. In essence, I&rsquo;ve written
 code to have my computer learn how to do something, but it cannot practically
 teach me what it has learned.</p>
-]]></content:encoded></item><item><title>Faster Languages</title><link>https://lutzky.net/2008/04/16/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:00:00 +0000</pubDate><guid>https://lutzky.net/2008/04/16/faster-languages/</guid><description>Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis - C++. Part of the reason is that the exercise contains a time-limited tournament, and the code needs to run very quickly. Another reason is, I guess, the fact that C++ serves as a sort of lowest common denominator in the course (which used, by the way, to be taught in LISP, along with the language).</description><content:encoded><![CDATA[<p>Due to an exercise in an AI course, I&rsquo;m forced to confront an old nemesis -
+]]></description></item><item><title>Faster Languages</title><link>https://lutzky.net/2008/04/16/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/04/16/faster-languages/</guid><description><![CDATA[<p>Due to an exercise in an AI course, I&rsquo;m forced to confront an old nemesis -
 C++. Part of the reason is that the exercise contains a time-limited
 tournament, and the code needs to run very quickly. Another reason is, I guess,
 the fact that C++ serves as a sort of lowest common denominator in the course
 (which used, by the way, to be taught in LISP, along with the language).</p>
 <p>I never liked C++ language much. As a matter of fact, I prefer C. I&rsquo;ve been
 going over some old code for a project, which needed to use DBus to talk to
-NetworkManager. <a href="/2007/09/16/exception-handling-decorators-and-python/">Back then</a> I wrote it using Python, embedded in C - it
+NetworkManager. <a href="/2007/09/16/exception-handling-decorators-and-python/" rel="">Back then</a> I wrote it using Python, embedded in C - it
 seemed easier at the time, due to lack of documentation. After hunting around,
 I figured out how to do most of the stuff I wanted in C, using DBus&rsquo;s GLib API.</p>
 <p>In this process, the most helpful bit of documentation turned out to be GLib&rsquo;s.
@@ -108,7 +135,41 @@ nicely in C, without mucking about in C++. Exception handling (of sorts),
 object-oriented programming (of sorts) as well as garbage collection (of sorts)
 are implemented in a usable way, and extremely well-documented.</p>
 <p>At the end of the day, I was able to turn this Python gem:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">dbus</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">dbus</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_nm_device_interface</span><span class="p">(</span><span class="n">dev_object</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Returns an interface to the device object dev_object&#34;&#34;&#34;</span>
@@ -138,8 +199,64 @@ are implemented in a usable way, and extremely well-documented.</p>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">_nm_dbus_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&#34;NoDevices&#34;</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">[]</span> <span class="c1"># No devices means list of devices is empty</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span> <span class="k">raise</span>
-</span></span></code></pre></div><p>&hellip;into this C gem:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>&hellip;into this C gem:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define DBUS_SERVICE_NM &#34;org.freedesktop.NetworkManager&#34;
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define DBUS_PATH_NM &#34;/org/freedesktop/NetworkManager&#34;
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define DBUS_INTERFACE_NM &#34;org.freedesktop.NetworkManager&#34;
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define NM_ERR_NODEVICES &#34;org.freedesktop.NetworkManager.NoDevices&#34;
@@ -189,12 +306,14 @@ are implemented in a usable way, and extremely well-documented.</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ptr_array</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>The C code runs much faster, and I suspect is more maintainable then its
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The C code runs much faster, and I suspect is more maintainable then its
 original counterpart (which uses embedded python in C).</p>
-]]></content:encoded></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/2007/10/13/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/10/13/on-threading-vs-processing/</guid><description>Writing multi-threaded applications in Python is often a headache because of the Global Interpreter Lock - only one Python thread can run at any given moment, which makes multi-threading useful only in the case where all modules but one actually run C code. However, thanks to the impressive new Python Magazine, I&amp;rsquo;ve stumbled across a package called processing, paraphrasing python&amp;rsquo;s built-in threading package. Essentially, the package provides an API identical to Python&amp;rsquo;s threading, but uses processes and pipes (or other mechanisms on non-posix operating systems) instead.</description><content:encoded><![CDATA[<p>Writing multi-threaded applications in Python is often a headache because of
+]]></description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/2007/10/13/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/10/13/on-threading-vs-processing/</guid><description><![CDATA[<p>Writing multi-threaded applications in Python is often a headache because of
 the Global Interpreter Lock - only one Python thread can run at any given
 moment, which makes multi-threading useful only in the case where all modules
-but one actually run C code. However, thanks to the impressive new <a href="http://pythonmagazine.com">Python
+but one actually run C code. However, thanks to the impressive new <a href="http://pythonmagazine.com" target="_blank" rel="noopener noreffer ">Python
 Magazine</a>, I&rsquo;ve stumbled across a package called
 <code>processing</code>, paraphrasing python&rsquo;s built-in <code>threading</code> package. Essentially,
 the package provides an API identical to Python&rsquo;s threading, but uses processes
@@ -204,7 +323,70 @@ applications; updating a progressbar in the application doesn&rsquo;t need to sl
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
 or processes at the user&rsquo;s choice:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">processing</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">processing</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">threading</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">Queue</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
@@ -263,20 +445,43 @@ or processes at the user&rsquo;s choice:</p>
 </span></span><span class="line"><span class="cl">	<span class="n">w</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="nb">print</span> <span class="s2">&#34;Mainloop!&#34;</span>
 </span></span><span class="line"><span class="cl">	<span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
-</span></span></code></pre></div>]]></content:encoded></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After trying to figure out how to work DBus with C, and seeing how easy it is to do in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately, it&amp;rsquo;s very simple to use - especially thanks to this guide.
-It later turned out to be much easier to do in C, as described in Faster Languages.</description><content:encoded><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/09/16/exception-handling-decorators-and-python/</guid><description><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
 trying to figure out how to work DBus with C, and seeing how easy it is to do
 in Python, we figured we&rsquo;d try to use embedded Python to do this. Fortunately,
-it&rsquo;s very simple to use - especially thanks to <a href="http://www.developer.com/lang/other/article.php/2217941">this guide</a>.</p>
+it&rsquo;s very simple to use - especially thanks to <a href="http://www.developer.com/lang/other/article.php/2217941" target="_blank" rel="noopener noreffer ">this guide</a>.</p>
 <blockquote>
-<p>It later turned out to be much easier to do in C, as described in <em><a href="/2008/04/16/faster-languages">Faster Languages</a></em>.</p>
+<p>It later turned out to be much easier to do in C, as described in <em><a href="/2008/04/16/faster-languages" rel="">Faster Languages</a></em>.</p>
 </blockquote>
 <p>Now, we couldn&rsquo;t have the Python code throwing exceptions outwards, so we had
 each function return, along with its actual return value (if any), a numeric
 code identifying the error. Unfortunately, this made the code get really big,
 really fast - especially once DBus exceptions are thrown into the mix. But once
 I learned how to use decorators, I accomplished something like this diff:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gi">+@wrap_exceptions((False,))
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gi">+@wrap_exceptions((False,))
 </span></span></span><span class="line"><span class="cl"><span class="gi"></span> def checkSomething():
 </span></span><span class="line"><span class="cl"><span class="gd">-    global error_string
 </span></span></span><span class="line"><span class="cl"><span class="gd">-
@@ -294,12 +499,49 @@ I learned how to use decorators, I accomplished something like this diff:</p>
 </span></span></span><span class="line"><span class="cl"><span class="gd">-        return (False, RET_ERROR)
 </span></span></span><span class="line"><span class="cl"><span class="gd">-
 </span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+    return (try_doing_something_over_dbus(), RET_OK)
-</span></span></span></code></pre></div><p>Now, the duplicate DBus/non-DBus exception handling, global <code>error_string</code>,
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now, the duplicate DBus/non-DBus exception handling, global <code>error_string</code>,
 etc. - that happened in a lot of functions. Unfortunately, they didn&rsquo;t all
 return their values in the same way. Some just returned a <code>RET_VALUE</code>, but most
 had other values before it in the tuple (not the ideal design, come to think of
 it&hellip;). Here&rsquo;s the decorator I wrote:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">wrap_exceptions</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepend_tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">prepend_tuple</span> <span class="o">=</span> <span class="n">prepend_tuple</span>
 </span></span><span class="line"><span class="cl">
@@ -330,8 +572,9 @@ it&hellip;). Here&rsquo;s the decorator I wrote:</p>
 </span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuplize</span><span class="p">(</span><span class="n">RET_ERROR</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">exception_wrapped</span>
-</span></span></code></pre></div>]]></content:encoded></item><item><title>IPython</title><link>https://lutzky.net/2007/03/04/ipython/</link><pubDate>Sun, 04 Mar 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/03/04/ipython/</guid><description>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project for a course, which involves somewhat heavy-duty database and algorithm work. Python is my language of choice for it - let&amp;rsquo;s hope it works out well.
-In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython (available in apt) - it adds a bunch of stuff to the python shell which I sorely missed from irb - autocompletion, auto-indentation, and - it seems - adds a whole lot more.</description><content:encoded><![CDATA[<p>The more I use Python, the nicer it becomes. I&rsquo;m currently working on a project
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description></item><item><title>IPython</title><link>https://lutzky.net/2007/03/04/ipython/</link><pubDate>Sun, 04 Mar 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/03/04/ipython/</guid><description><![CDATA[<p>The more I use Python, the nicer it becomes. I&rsquo;m currently working on a project
 for a course, which involves somewhat heavy-duty database and algorithm work.
 Python is my language of choice for it - let&rsquo;s hope it works out well.</p>
 <p>In the meantime, I&rsquo;ve found a really nice python shell called iPython
@@ -341,9 +584,7 @@ adds a whole lot more.</p>
 <p>Looks like I&rsquo;ll have to check django out as well. I&rsquo;ve been working with Ruby
 on Rails for quite a while now (and that&rsquo;s how I got introduced to Ruby in the
 first place). Odd as it may be&hellip; do I have a new favorite language?</p>
-]]></content:encoded></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 00:00:00 +0000</pubDate><guid>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</guid><description>I&amp;rsquo;ve converted my Antigibberish script1 (converts &amp;ldquo;broken hebrew&amp;rdquo; into proper hebrew, useful for sent-offline ICQ messages) to Python&amp;hellip; it&amp;rsquo;s quite a nice language, and the interpreter is FAST! I&amp;rsquo;m really torn between it and Ruby :(
-Used to have a copy of antigibberish.py, but it&amp;rsquo;s been lost in the mists of time. It used to do the equivalent of this:
-iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8 &amp;#160;&amp;#x21a9;&amp;#xfe0e;</description><content:encoded><![CDATA[<p>I&rsquo;ve converted my <em>Antigibberish script</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+]]></description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/02/25/really-liking-the-whole-python-thing/</guid><description><![CDATA[<p>I&rsquo;ve converted my <em>Antigibberish script</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
 (converts &ldquo;broken hebrew&rdquo; into proper hebrew, useful for sent-offline ICQ
 messages) to Python&hellip; it&rsquo;s quite a nice language, and the interpreter is FAST!
 I&rsquo;m really torn between it and Ruby :(</p>
@@ -353,8 +594,15 @@ I&rsquo;m really torn between it and Ruby :(</p>
 <li id="fn:1">
 <p>Used to have a copy of <code>antigibberish.py</code>, but it&rsquo;s been lost in
 the mists of time. It used to do the equivalent of this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
-</span></span></code></pre></div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iconv -f utf-8 -t iso8859-1 <span class="p">|</span> iconv -f iso8859-8 -t utf-8
+</span></span></code></pre></td></tr></table>
+</div>
+</div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </div>
-]]></content:encoded></item></channel></rss>
+]]></description></item></channel></rss>
