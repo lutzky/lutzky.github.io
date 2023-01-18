@@ -1,7 +1,7 @@
 ---
 date: "2008-04-16T00:49:00Z"
 tags:
-- code
+- software
 - c
 - python
 title: Faster Languages

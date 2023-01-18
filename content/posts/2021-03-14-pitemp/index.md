@@ -3,7 +3,7 @@ date: "2021-03-14T00:00:00Z"
 summary: An adventure with Raspberry Pi, Golang, and small displays.
 tags:
   - hardware
-  - code
+  - software
 title: PiTemp
 ---
 

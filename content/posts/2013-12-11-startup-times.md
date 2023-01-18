@@ -3,7 +3,7 @@ date: "2013-12-11T00:00:00Z"
 summary:  Starting new java processes in your scripts considered harmful. Let's compare
   "hello world" startup times for different languages.
 tags:
-- code
+- software
 title: Startup times
 ---
 

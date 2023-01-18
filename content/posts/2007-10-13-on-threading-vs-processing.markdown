@@ -1,7 +1,7 @@
 ---
 date: "2007-10-13T22:04:00Z"
 tags:
-- code
+- software
 - python
 title: On Threading vs. Processing
 ---

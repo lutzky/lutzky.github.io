@@ -3,7 +3,7 @@ date: "2013-12-01T00:00:00Z"
 summary:  How being lazy and procrastinating led me to adopt test-driven development
   before I realized it.
 tags:
-- code
+- software
 - testing
 title: Test-driven procrastination
 ---

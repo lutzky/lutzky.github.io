@@ -2,7 +2,7 @@
 date: "2013-03-24T00:51:15Z"
 tags:
 - natural language processing
-- code
+- software
 - python
 title: Translationese
 ---

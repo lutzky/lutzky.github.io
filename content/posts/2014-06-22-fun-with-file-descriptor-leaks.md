@@ -3,7 +3,7 @@ date: "2014-06-22T00:00:00Z"
 summary:  How file descriptor leaks are causing your processes to stick around longer
   than they should.
 tags:
-- code
+- software
 - linux
 title: Fun with file descriptor leaks
 ---

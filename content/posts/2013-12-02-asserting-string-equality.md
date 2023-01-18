@@ -3,7 +3,7 @@ date: "2013-12-02T00:00:00Z"
 summary:  When comparing long strings in unit tests, make sure your assertion failures
   give you useful output.
 tags:
-- code
+- software
 - testing
 title: Asserting string equality
 ---

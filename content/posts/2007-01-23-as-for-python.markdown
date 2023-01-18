@@ -1,7 +1,7 @@
 ---
 date: "2007-01-23T21:33:00Z"
 tags:
-- code
+- software
 - technion
 title: As for Python
 ---

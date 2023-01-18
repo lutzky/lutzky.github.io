@@ -3,7 +3,7 @@ date: "2014-01-05T00:00:00Z"
 summary:  Distinguishing <code>EPERM</code> vs <code>EACCESS</code>, and how that helps
   debug file manipulation scripts.
 tags:
-- code
+- software
 - show downloading
 title: Weird permission issues with tvnamer
 ---

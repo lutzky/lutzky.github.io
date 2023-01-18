@@ -1,7 +1,7 @@
 ---
 date: "2007-09-16T14:02:00Z"
 tags:
-- code
+- software
 - python
 title: Exception handling, decorators, and python
 ---

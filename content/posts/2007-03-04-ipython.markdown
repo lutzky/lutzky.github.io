@@ -1,7 +1,7 @@
 ---
 date: "2007-03-04T00:58:00Z"
 tags:
-- code
+- software
 - python
 title: IPython
 ---

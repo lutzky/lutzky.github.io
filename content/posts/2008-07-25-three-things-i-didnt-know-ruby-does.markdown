@@ -1,7 +1,7 @@
 ---
 date: "2008-07-25T17:55:00Z"
 tags:
-- code
+- software
 - ruby
 title: Three things I didn't know Ruby does
 ---

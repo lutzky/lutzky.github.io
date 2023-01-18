@@ -1,7 +1,7 @@
 ---
 date: "2007-02-25T14:52:00Z"
 tags:
-- code
+- software
 - python
 title: Really liking the whole Python thing
 ---

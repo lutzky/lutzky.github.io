@@ -1,7 +1,7 @@
 ---
 date: "2007-01-25T15:04:00Z"
 tags:
-- code
+- software
 title: 3D effects for coders?
 ---
 

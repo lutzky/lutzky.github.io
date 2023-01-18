@@ -5,7 +5,7 @@ summary:
   and how we avoided using Matlab.
 tags:
   - git
-  - code
+  - software
 title: Seaplane - Github with a non-programmer
 ---
 
