@@ -6,7 +6,7 @@ title: The osutil yakshave
 
 I've been planning to write a blog post about *Mutation Testing*, and finally got around to it a couple of weeks ago. I set up my example, and looked to some publicly-available mutation testing tools for my programming language of choice, Go (I get to use it quite often as an engineer in Google). The best-maintained one appears to be [go-mutesting](https://github.com/zimmski/go-mutesting), so I figured I'll try it out. Unfortunately, I ran into a build issue with one of its depdencies:
 
-```
+```text
 ../../../github.com/zimmski/osutil/capture.go:79: cannot assign to _Cmacro_stderr()
 ../../../github.com/zimmski/osutil/capture.go:79: cannot assign to _Cmacro_stdout()
 ../../../github.com/zimmski/osutil/capture.go:103: cannot assign to _Cmacro_stderr()
@@ -45,7 +45,7 @@ Technically, the behavior-preserving solution could be to just use `freopen` ins
 
 To accomplish this, let's first have a look a how shells accomplish redirects.
 
-```shell
+```shell-session
 $ strace -f bash -c '/bin/echo hello > /tmp/redirected'
 ...
 [pid 20210] openat(AT_FDCWD, "/tmp/redirected", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3

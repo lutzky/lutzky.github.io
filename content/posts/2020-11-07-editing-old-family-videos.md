@@ -18,7 +18,7 @@ Here's my workflow, in case it's useful for anyone else:
 
 First, split the audio stream into a separate file so you can modify it with the software of your choice. I use `ffmpeg` for this. The `ffprobe` program lets me determine the current audio type, which is `aac` in my case, so I do:
 
-```
+```shell
 ffmpeg -i ORIGINAL_VIDEO.mov -vn -acodec copy output-audio.aac
 ```
 
@@ -32,7 +32,7 @@ There's a lot more processing you can do here (graphic equalization may be a goo
 
 Export this in the same audio format (again, aac in my case - I'd use `ffprobe` on the original to see the approximate bitrate, but it's not necessary to match it precisely), and recombine like so:
 
-```
+```shell
 ffmpeg -i ORIGINAL_VIDEO.mov -i output-audio-fixed.aac -c:v copy -map 0:v:0 -map 1:a:0 ORIGINAL_VIDEO_sound_fixed.mov
 ```
 
@@ -46,7 +46,7 @@ At this point, I watch the video through, writing down key points of what's goin
 
 After this, I decide on the section structure, and need to determine the precise frames where I want to split. Since most video players aren't designed to "go back one frame", I actually open the video in a video editor (the free HitFilm Express, in my case). I start with the rough time-codes from the previous step, and step frame-by-frame back-and-forth until I find the first and last usable frames of a section. I write these to a `points.txt` file with the following syntax:
 
-```
+```text
 00:00:00:00-00:15:48:13
 00:15:50:17-00:40:14:01
 ...
@@ -56,7 +56,7 @@ Here, the format is `Hour:Minute:Second:Frame` - in my case the video is 25 FPS,
 
 Next, I want to split the video using ffmpeg - this can be done without recoding, which is much faster (on my laptop - a few seconds per section, as opposed to multiple minutes) and doesn't degrade quality. For the timecodes above, the correct split commands are:
 
-```
+```shell
 ffmpeg -ss 0:00:00.000 -i audio_corrected.mov -to 0:15:48.520 -c copy segment_1.mov
 ffmpeg -ss 0:15:50.680 -i audio_corrected.mov -to 0:24:23.360 -c copy segment_2.mov
 ```

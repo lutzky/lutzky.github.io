@@ -1,6 +1,6 @@
 ---
 date: "2014-01-05T00:00:00Z"
-summary:  Distinguishing <code>EPERM</code> vs <code>EACCESS</code>, and how that helps
+summary:  Distinguishing `EPERM` vs `EACCESS` and how that helps
   debug file manipulation scripts.
 tags:
 - software

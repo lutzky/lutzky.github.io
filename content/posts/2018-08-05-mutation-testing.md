@@ -101,11 +101,12 @@ Running `go test -cover` will show us that we have 100% test coverage! Hurray! H
 
 Let's see if mutation testing can help us out. I put my code in `$GOPATH/src/github.com/lutzky/people`, so I install and run `zimmski/go-mutesting`:
 
-```
+```shell-session
 $ go get -v github.com/zimmski/go-mutesting
 $ go-mutesting github.com/lutzky/people/...
 PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.0" with checksum 252162809c884e5616872b71196c90df
 ```
+
 ```diff
 --- /home/lutzky/gopath/src/github.com/lutzky/people/people.go  2018-08-05 00:13:44.333319200 +0100
 +++ /tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.1    2018-08-05 10:15:30.013388991 +0100
@@ -118,7 +119,8 @@ PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/peop
  }
 
 ```
-```
+
+```no-highlight
 FAIL "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.1" with checksum 996748ab09eeca8feb3f87ecf23b8319
 PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.2" with checksum 7be514fe57e53f4d02ce1e128641333f
 PASS "/tmp/go-mutesting-036340603//home/lutzky/gopath/src/github.com/lutzky/people/people.go.3" with checksum 88a83b2731fda42ae4f3ac9350191c9f
