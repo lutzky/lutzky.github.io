@@ -8,6 +8,8 @@ tags:
 title: Test-driven procrastination
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 A conversation with a friend reminded me that, in fact, I've been doing
 test-driven development long before I knew it was called that. Back in
 Introduction to Systems Programming (a second-semester course revolving around

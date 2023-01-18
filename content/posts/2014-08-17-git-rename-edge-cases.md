@@ -8,6 +8,8 @@ tags:
 title: Git While You Sit 3 - "Rename" edge cases
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 This is part of the "Git While You Sit" series, a play on Google's [Testing on the Toilet](http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html). It's intended to fit on a printed page. Currently Chrome doesn't seem to correctly print columns, but Firefox does.
 {: .no-print }
 
@@ -41,14 +43,14 @@ In this case, the user thought he renamed `dir1/file.xml` to `dir2/file.xml` in 
 
 The fix here was to undo the merge:
 
-```console
-$ git reset --hard D
+```shell
+git reset --hard D
 ```
 
 ...and then edit the commit:
 
-```console
-$ git rebase -i A
+```shell
+git rebase -i A
 ```
 
 ...and set `B` to `edit` instead of `pick`. Amend the commit for `B` so that it doesn't just create `dir2/file.xml`, but also deletes `dir1/file.xml`. If it's indeed the same file (or has very similar contents), this will be automatically detected as a rename during `log` and `merge` operations.

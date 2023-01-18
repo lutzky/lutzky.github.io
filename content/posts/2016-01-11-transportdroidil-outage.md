@@ -6,9 +6,13 @@ title: TransportDroidIL outage
 tags: ["hebrew","software","TransportDroidIL"]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 {{< admonition type=info title="Hebrew post" >}}
 This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.
 {{< /admonition >}}
+
+<!-- markdownlint-disable MD025 -->
 
 {{< style "direction:rtl" >}}
 
@@ -23,7 +27,7 @@ This post is written in Hebrew due to the target audience. TL;DR - TransportDroi
 האפליקציה TransportDroidIL פועלת ע"י בקשת נתונים מאתר אגד או משרד אתר התחבורה, תוך שימוש במנגנון ה"שפה חופשית". שני האתרים השתנו בצורות שונות, שלא מאפשרות לאפליקציה לפעול יותר:
 
 * ב[אתר משרד התחבורה](http://bus.gov.il), מנגנון ה"שפה חופשית" כבר לא עובד כלל - קופצת ההודעה `[object Object]`, ומאחורי הקלעים ניתן לראות שהאתר לא מקבל מרכיב ה"שפה החופשית" תשובה.
-*  באתר [אגד](http://egged.co.il), מנגנון ה"שפה החופשית" עדיין פועל,והשתנה יחסית מעט, ויכול בהחלט להיות אפשרי לגרום לאפליקציה לעבוד איתו שוב, אבל...
+* באתר [אגד](http://egged.co.il), מנגנון ה"שפה החופשית" עדיין פועל,והשתנה יחסית מעט, ויכול בהחלט להיות אפשרי לגרום לאפליקציה לעבוד איתו שוב, אבל...
 
 ### רגע רגע, בעצם האפליקציה לא עושה שום דבר ומביאה את כל הנתונים מאתרים קיימים? אז למה כתבת אותה?
 

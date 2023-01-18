@@ -4,6 +4,8 @@ date: 2022-05-21T12:07:35Z
 tags: ["software"]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn't usually need it for night sleeps, but it's helpful for a "cranky-because-tired" nap or getting him to sleep for another half-hour when he decides to wake up very early.
 
 There are quite a few ways to play white noise, and many cheap mobile battery-powered devices will do the trick just fine. However, I wanted a bit more control, at least for when we're at home:
@@ -80,7 +82,7 @@ cards:
 
 This allows easily controlling the volume (when it's on!), reminds us of what the "usual" volume setting is, and also quickly displays how long ago it was last toggled. `slider-entity-row` is an extension, which can be obtained [here](https://github.com/thomasloven/lovelace-slider-entity-row).
 
-## Quirks {#quirks}
+## Quirks
 
 While this setup works quite well, it has a couple of annoying quirks. Firstly, the Google Home plays a fairly loud chime before starting to play the white noise. Secondly, this involves the Google Home loading a ~300MB file. Originally I used ogg, and although it's usually cached, in some cases this could be a ~30-second process, with no user feedback visible. I've considered having the script play a shorter clip multiple times over, but the playback has unpleasant gaps in that case (and risks repeating that loud chime).
 

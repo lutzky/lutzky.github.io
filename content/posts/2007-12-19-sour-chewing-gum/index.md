@@ -5,7 +5,8 @@ tags:
 title: Sour chewing gum
 ---
 
-On an online board, friends posted a photo from a party a while back, as I'm chewing some extra-sour chewing gum:
+On an online board, friends posted a photo from a party a while back, as I'm
+chewing some extra-sour chewing gum:
 
 {{< image src="dscf6400ff0.jpg" caption="חמוצקי נולד" >}}
 
@@ -14,4 +15,4 @@ Security course, we're going to compromise a windows-based server using a
 buffer overflow vulnerability. Unfortunately, this means we're going to have to
 use (as per the course's demands) Visual Studio 2003. My response (now known as חמוצקי):
 
-![](/images/sourtzky.gif)
+![חמוצקי](/images/sourtzky.gif)

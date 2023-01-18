@@ -5,6 +5,8 @@ tags: ["hebrew"]
 title: המצב של פלאש בלינוקס
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 {{< admonition type=info title="Hebrew post" >}}
 This post is written in Hebrew, which was the blog's language at the time.
 {{< /admonition >}}

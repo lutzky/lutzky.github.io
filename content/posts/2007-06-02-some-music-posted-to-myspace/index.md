@@ -15,7 +15,8 @@ song we posted, as well as an extra track (my personal favorite), Falsely
 Accused.
 
 - {{< link "Switchblade - Old School Daze - 02 - The Deal.mp3" "The deal" >}}
-- {{< link "Switchblade - Old School Daze - 06 - Falsely Accused.mp3" "Falsely Accused" >}}
+- {{< link "Switchblade - Old School Daze - 06 - Falsely Accused.mp3"
+    "Falsely Accused" >}}
 
 I really want to point out the **incredible** recording studio we used - it's a
 place called MIXסולידי in Tel Hanania. The man charged us very little, and the

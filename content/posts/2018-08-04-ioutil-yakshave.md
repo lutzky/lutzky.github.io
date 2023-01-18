@@ -4,6 +4,8 @@ summary:  How I had to fix zimmski/osutil in order to write the Mutation Testing
 title: The osutil yakshave
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 I've been planning to write a blog post about *Mutation Testing*, and finally got around to it a couple of weeks ago. I set up my example, and looked to some publicly-available mutation testing tools for my programming language of choice, Go (I get to use it quite often as an engineer in Google). The best-maintained one appears to be [go-mutesting](https://github.com/zimmski/go-mutesting), so I figured I'll try it out. Unfortunately, I ran into a build issue with one of its depdencies:
 
 ```text

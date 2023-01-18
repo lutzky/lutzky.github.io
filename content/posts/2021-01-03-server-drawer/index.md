@@ -6,6 +6,8 @@ tags:
 title: Server drawer
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 This is as good a time as any to give a quick tour of my "homelab" or server drawer.
 
 The external view is rather innocuous: A visually inoffensive Nest Wifi, a rather elegant Nest Thermostat (shame that the display can't be always-on), and the gorgeous Nintendo Switch dock cover my partner got me. The TV aerial is tucked to the back, a reasonable compromise between "gets reception" and "hidden away and ugly". The TV is mounted on upside-down IKEA boxes which we painted to roughly match the rest, hiding some botched carpentry behind the TV.

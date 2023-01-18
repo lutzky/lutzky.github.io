@@ -6,6 +6,8 @@ tags: ["software", "life"]
 categories: ["Newborn parenting software"]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 A few months ago, I became a father. To help overcome some of the challenges of raising a newborn, I decided to employ my standard MO - software; preferably the kind where I understand what it's doing. It's been working well, and I learned a lot doing it - several blog posts' worth, in fact.
 
 For this story to make sense, it bears mentioning that our conditions are pretty much optimal for it: My employer provides a generous parental leave for the non-birth parent; we decided in advance to formula-feed, which allows us to share that load, which means we need to communicate about it; my partner is an early bird whereas I am a night-owl, meaning we essentially have separate shifts necessitating a handoff; and, critically, we're the type of people who _like_ everything being super-organized and scheduled and spreadsheet-y (calms us down, gives us an illusion of control). Furthermore, our baby is remarkably consistent, being hungry right about every 3 hours - so the question we ended up constantly asking (of each other and our phones) was "how long since the baby ate".

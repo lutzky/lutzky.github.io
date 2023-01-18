@@ -6,6 +6,8 @@ tags:
 title: Upcoming features in TransportDroidIL
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a few new features:
 
 1. Separate "Source", "Destination" and "Time" fields. This is much better for
@@ -19,7 +21,6 @@ Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a
    - A "clear history" button
 
 Everyone loves screenshots:
-
 
 {{< image src="device2.png" caption="Separate source and destination fields" >}}
 

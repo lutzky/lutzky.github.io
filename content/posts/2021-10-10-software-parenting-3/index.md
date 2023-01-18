@@ -6,7 +6,9 @@ tags: ["software", "life", "hardware"]
 categories: ["Newborn parenting software"]
 ---
 
-As noted in the [previous post]({{<ref "2021-10-05-software-parenting-2">}}), I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn't have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available[^actually-available] on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it's quite capable as a microcontroller on its own (and the newer ESP32 is faster).
+<!-- markdownlint-disable MD013 -->
+
+As noted in the [previous post]({{< ref "2021-10-05-software-parenting-2" >}}), I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn't have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available[^actually-available] on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it's quite capable as a microcontroller on its own (and the newer ESP32 is faster).
 
 [^actually-available]: Actually available - as in, as opposed to Raspberry Pi 0w, they're in stock in many places at the moment.
 
@@ -24,7 +26,7 @@ Indeed, this version fits neatly onto a single (full-sized) breadboard. It's not
 
 [^formula-1]: We call this procedure [Formula 1](https://www.youtube.com/watch?v=BI75uWxEajA).
 
-I decided to repurpose my [shitty cardboard LCD case](https://lutzky.net/2021/03/14/pitemp/) for this project. These tactile buttons have quite short feet - they don't make it through the cardboard, and I insisted on avoiding using a perfboard and soldering iron - as, at the time, I had neither. I ultimately decided to reuse the mini-breadboard from [the previous version]({{<ref "2021-10-05-software-parenting-2">}}); like many (all?) breadboards, its bottom is an adhesive pad; I didn't even bother to remove the resistors from V1, they add a certain design flare to it. With a few iterations on the UI, it was wife-approved: Custom characters are fully supported in C++ (though, not in Go), so I got nice labels for the tactile buttons, as well as a heartbeat[^heartbeat] to indicate that NTP is still working.
+I decided to repurpose my [shitty cardboard LCD case](https://lutzky.net/2021/03/14/pitemp/) for this project. These tactile buttons have quite short feet - they don't make it through the cardboard, and I insisted on avoiding using a perfboard and soldering iron - as, at the time, I had neither. I ultimately decided to reuse the mini-breadboard from [the previous version]({{< ref "2021-10-05-software-parenting-2" >}}); like many (all?) breadboards, its bottom is an adhesive pad; I didn't even bother to remove the resistors from V1, they add a certain design flare to it. With a few iterations on the UI, it was wife-approved: Custom characters are fully supported in C++ (though, not in Go), so I got nice labels for the tactile buttons, as well as a heartbeat[^heartbeat] to indicate that NTP is still working.
 
 [^heartbeat]: 2nd row from the bottom, rightmost column; you can see it fading out in this shot. It blinks every second. Although the photo doesn't show it, the LCD's contrast is actually great in-person.
 

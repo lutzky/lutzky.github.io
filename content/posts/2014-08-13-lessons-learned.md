@@ -5,6 +5,8 @@ summary:  Some lessons learned from my role with the previous company as a DevOp
 title: Lessons learned
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 After 6 years with my previous employer, as a DevOps engineer and DevOps team leader, I've learned two important lessons. I wanted to get these in here before I start my new position (...as an SRE in Google Dublin, which I am very excited about!), as it's always fun to look back after a few years and see if what I wrote is still relevant.
 
 Keep it tidy

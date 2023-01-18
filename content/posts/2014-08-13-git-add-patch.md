@@ -8,6 +8,8 @@ tags:
 title: Git While You Sit 1 - Add --patch
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 This is part of the "Git While You Sit" series, a play on Google's [Testing on the Toilet](http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html). It's intended to fit on a printed page. Currently Chrome doesn't seem to correctly print columns, but Firefox does.
 {: .no-print }
 

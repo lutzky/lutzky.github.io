@@ -9,6 +9,8 @@ tags:
 title: Seaplane - Github with a non-programmer
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 ## The Faculty Programmer
 
 Sharon, a close friend of mine, has been studying psychology for the past few years. At some point she needed to run an experiment in the field of perception. While the exact form of the experiment was pending professor vetting, she did know that the experiment will take place with a user sitting in front of a desktop computer, responding to various stimuli, often with the reaction time being recorded. Seeing as programming is not in her faculty's curriculum (a mistake, in my opinion), the students are provided with a faculty programmer. Dozens of students would contact this jaded craftsman, describe what they need, wait patiently, and then - as it happens in the world of software - receive something almost, but not quite, entirely unlike what they asked for.

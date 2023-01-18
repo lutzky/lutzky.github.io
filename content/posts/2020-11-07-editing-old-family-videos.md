@@ -6,6 +6,8 @@ summary:
 title: Editing old family videos
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 In the 90s, my family (along with much of the rest of the world) filmed a lot of home videos. At some point we converted them to what we believed to be DVD for preservation and ease-of-access, but this was actually VCD (which has somewhat worse compatibility), burned on CD-R (which degrades faster than you might think), and optical media has pretty much become extinct as well. In a family visit in 2018 I found the old stash of original video cassettes, flew them with me from Israel to Ireland, and got a local shop called DVD Centre to re-rip them - these guys provide the great service of uploading directly to Dropbox.
 
 I've been spending some sporadic time on weekends rewatching all of these, cataloguing them into what Googlers call a "one-pager" - a long document that may span many pages if printed out, but can be loaded by normal software with simple search functionality (a Google Doc, in my case). This is great for searching by name or event to more easily locate the right video. The tapes are still quite long though - usually 1-2 hours, and can be logically split into smaller segments. They also often have audio issues, such as audio only coming out of one side or having very inconsistent volume.

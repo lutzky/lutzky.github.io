@@ -7,6 +7,8 @@ tags:
 title: Multiple library versions
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let's explore.
 
 ## Introduction
@@ -22,8 +24,8 @@ int getFoo();
 // foo.c version 1.2.3
 
 int getFoo() {
-	sleep(1000); // TODO improve performance
-	return 42
+  sleep(1000); // TODO improve performance
+  return 42
 }
 ```
 
@@ -36,8 +38,8 @@ best-selling `barApp` application:
 #include <stdio.h>
 
 int main() {
-	printf("%d\n", getFoo());
-	return 0;
+  printf("%d\n", getFoo());
+  return 0;
 }
 ```
 
@@ -46,16 +48,16 @@ makes sense to provide this function in a shared library (`libfoo.so`).
 However, this library will change in the future, in several ways:
 
 1. Binary-compatible changes
-  - Performance improvements (`sleep` will be removed)
-  - Additional functionality will become available (new functions)
+    - Performance improvements (`sleep` will be removed)
+    - Additional functionality will become available (new functions)
 2. Binary-incompatibile changes - at the very least, recompilation will be necessary
-  - For C, this is usually caused by changes to macros
-  - For C++, a plethora of reasons: Virtual function reimplementation, function
+    - For C, this is usually caused by changes to macros
+    - For C++, a plethora of reasons: Virtual function reimplementation, function
     inlining, new private data members...
 3. Source-incompatible changes - these will require you to change your source
    code (in `barApp`):
-  - Functions (which you use) being removed or renamed
-  - Semantic changes - `getFoo` could return 43
+    - Functions (which you use) being removed or renamed
+    - Semantic changes - `getFoo` could return 43
 
 This gets even more complicated due to the fact that `barApp` is an operational,
 mission-critical application for your organization. Developers may need to

@@ -7,9 +7,11 @@ tags:
 title: All hail the cow!
 ---
 
-{{< image src="534994007_ef57770ac3.jpg" caption="[Paradox the cow](http://www.flickr.com/photos/paradox_the_cow/)" >}}
+{{< image src="534994007_ef57770ac3.jpg"
+  caption="[Paradox the cow](http://www.flickr.com/photos/paradox_the_cow/)" >}}
 
-{{< image src="535038697_9b471a95b1_o.jpg" caption="Another action shot with Paradox" >}}
+{{< image src="535038697_9b471a95b1_o.jpg"
+    caption="Another action shot with Paradox" >}}
 
 I present to you, the only creature which is more of a celebrity in the
 undergrad CS world than I am... _The Cow_. (Paradox)

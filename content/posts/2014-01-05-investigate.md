@@ -8,6 +8,8 @@ tags:
 title: Weird permission issues with tvnamer
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 My show downloading stack lives on. I'm curious as to which will happen first: NetFlix hits Israel, or I switch over to Sick Beard.
 
 At any rate, nowadays I use `flexget`, `transmission`, `tvnamer` and `xbmc`, held together with some bash scripts. On debian- and ubuntu-based systems, the `transmission` daemon runs as a separate user (`debian-transmission`), so this requires a bit of care with file and group ownership. After rebuilding my system, I couldn't get `tvnamer` to work right for some reason, no matter how careful I was. I'd keep getting this error:

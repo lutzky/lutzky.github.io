@@ -8,6 +8,8 @@ tags:
 title: Fun with file descriptor leaks
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 Here's a fun little bash script:
 
 ```bash
@@ -19,7 +21,7 @@ ps -f $(pidof sleep)
 echo "Bye"
 ```
 
-Run it, and you'll notice a few things: 
+Run it, and you'll notice a few things:
 
 * Because the subshell running `sleep` dies immediately, `sleep` gets reparented to `init`. (Interestingly enough, on newer Ubuntu releases this isn't PID 1...), so the script doesn't have any child processes by the time it prints "Bye".
 * After "Bye" is shown, the script exits immediately, returning control to the shell.

@@ -9,6 +9,8 @@ useful - you'll only need to type your password once per session. But first,
 let's set the default username (so you don't have to tell SSH what user you are
 every time):
 
+<!-- markdownlint-disable MD010 -->
+
 ```console
 $ cd ~
 $ mkdir .ssh
@@ -39,8 +41,8 @@ Now you have a public and private key: `~/.ssh/id_rsa` is the private key
 this to everyone. Specifically, put it on the SSH server you want to log into,
 making sure the permissions are correct. There's a script which does this:
 
-```console
-$ ssh-copy-id t2.technion.ac.il
+```shell
+ssh-copy-id t2.technion.ac.il
 ```
 
 It basically does the following for you:
@@ -56,7 +58,8 @@ $ ssh t2.technion.ac.il
 > logout
 ```
 
-Now, when you log in to your local account, before using SSH for the first time, type the following command:
+Now, when you log in to your local account, before using SSH for the first time,
+type the following command:
 
 ```console
 $ ssh-add

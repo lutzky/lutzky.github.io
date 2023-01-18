@@ -5,6 +5,8 @@ summary: How to enter passphrases BEFORE rebooting your server
 tags: ["software"]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 I run a small home server, which - among other things - has backups of data from cloud providers, in case I lose access to them; this data is sensitive and should therefore be encrypted. However, disk encryption requires a secret, and there are - generally speaking - four ways to go about that:
 
 - Store the key on the same server as the encrypted disk

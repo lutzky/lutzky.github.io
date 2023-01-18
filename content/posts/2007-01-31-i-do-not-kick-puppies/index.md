@@ -9,4 +9,5 @@ I do type mesmerizingly fast, though... :)
 
 {{< image src="poster.jpg" caption="Wanted poster" >}}
 
-I am told these were scattered around Taub... I haven't been there to day, but it feels good to be infamous.
+I am told these were scattered around Taub... I haven't been there to day, but
+it feels good to be infamous.

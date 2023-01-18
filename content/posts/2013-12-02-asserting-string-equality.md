@@ -8,6 +8,8 @@ tags:
 title: Asserting string equality
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 I've had several opportunities to write unit tests for code that outputs large
 strings. It's important that your unit-testing framework handles this well.
 
