@@ -8,6 +8,13 @@
 		"ghcr.io/devcontainers/features/hugo:1": {
 			"extended": true
 		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"DavidAnson.vscode-markdownlint"
+			]
+		}
 	}
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

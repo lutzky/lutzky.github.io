@@ -1,0 +1,16 @@
+name: markdownlint
+
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - uses: DavidAnson/markdownlint-cli2-action@v9
+        with:
+          globs: 'content/**/*.md'
