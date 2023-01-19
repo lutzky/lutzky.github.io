@@ -5,3 +5,22 @@
 .post-author {
 	content-visibility: hidden;
 }
+
+.single .content code {
+	padding: 0 0.2rem;
+	border-radius: 0.3rem;
+}
+
+.single .content a code {
+	color: $single-link-color;
+	[theme=dark] & {
+		color: $single-link-color-dark;
+	}
+}
+
+.single .content a:hover code {
+	color: $single-link-hover-color;
+	[theme=dark] & {
+		color: $single-link-hover-color-dark;
+	}
+}
