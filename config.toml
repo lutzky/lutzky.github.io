@@ -44,6 +44,8 @@ enableEmoji = true
   [params.page]
     rssFullText = true
     lightGallery = true
+    [params.page.toc]
+      auto = false
     [params.page.share]
       enable = true
       Twitter = false
