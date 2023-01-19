@@ -1,0 +1,413 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>go - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/go/</link><description>go - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/go/" rel="self" type="application/rss+xml"/><item><title>I tried Rust</title><link>https://lutzky.net/2023/01/16/rust/</link><pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2023/01/16/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
+<p>As you can tell by previous posts on this blog, I used to be quite a fan of Go;
+I use it at work often, and some features about it are legitimately great:
+Package management, &ldquo;static duck typing&rdquo; (structural typing), providing
+interfaces while stepping away from inheritance, all quite nice (and present in
+Rust). I wasn&rsquo;t too unhappy with the repetitive error handling, generics are
+finally coming into play, and nothing I write is anywhere near
+performance-critical enough for me to care about GC overhead (though I did
+glance firmly at the binary size once in a while). But come December, as I
+decided to give <a href="https://adventofcode.com" target="_blank" rel="noopener noreffer ">Advent of Code</a> a go this year, I figured I&rsquo;d try to use
+it to learn a new language: Rust.</p>
+<p>Now, Rust has been steadily gaining popularity for a while, but two recent
+events caused me to pay attention: In September, a CTO from Microsoft gave Rust
+a <a href="https://www.theregister.com/2022/09/20/rust_microsoft_c/" target="_blank" rel="noopener noreffer ">significant endorsement</a>. In that same month,
+Linus Torvalds effectively announced that <a href="https://www.zdnet.com/article/linus-torvalds-rust-will-go-into-linux-6-1/" target="_blank" rel="noopener noreffer ">Rust was coming to the Linux
+kernel</a>. When those two agree on something, I figured, it&rsquo;s
+probably worth paying attention.</p>
+<p>To my delight, someone else &mdash; <a href="https://fasterthanli.me" target="_blank" rel="noopener noreffer ">fasterthanlime</a> &mdash; was doing Advent of Code in
+Rust. In fact, he was doing a day-by-day <a href="https://fasterthanli.me/series/advent-of-code-2022" target="_blank" rel="noopener noreffer ">&ldquo;let&rsquo;s learn rust while solving Advent
+of Code&rdquo;</a> series. <a href="https://fasterthanli.me/series/advent-of-code-2022/part-1" target="_blank" rel="noopener noreffer ">Part 1</a>
+includes everything you need to get started, tooling and all, and a delightfully
+unusual introduction to file I/O which I won&rsquo;t spoil.</p>
+<div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Other ways of getting started with Rust<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When getting started with Rust, I tried a few things out from
+<a href="https://www.rust-lang.org/learn" target="_blank" rel="noopener noreffer ">https://www.rust-lang.org/learn</a>, but my recommendation is this: Before
+installing it, before going to the book, before any of that &mdash; go do
+<a href="https://github.com/rust-lang/rustlings/" target="_blank" rel="noopener noreffer ">rustlings</a>, specifically use their
+Gitpod link. This will set up a free gitpod &ldquo;cloud IDE&rdquo; (VSCode-based),
+reasonably configured for Rust, and you can get right to live exercises.</div>
+        </div>
+    </div>
+<p>Having spent some time with Rust, I now see more and more faults with other
+programming languages. Others have written many words about this; fasterthanlime
+has a couple of <a href="https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride" target="_blank" rel="noopener noreffer ">very</a> <a href="https://fasterthanli.me/articles/lies-we-tell-ourselves-to-keep-using-golang" target="_blank" rel="noopener noreffer ">detailed</a> posts in this
+direction; the folks at Discord wrote a great post about <a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust" target="_blank" rel="noopener noreffer ">switching from go to
+rust to eliminate GC latency</a>. But I&rsquo;d like to talk about
+something far, far simpler.</p>
+<p>Let&rsquo;s talk about null checks.</p>
+<h2 id="things-that-may-or-may-not-be-there">Things that may or may not be there</h2>
+<p>My initial sense of Rust is that it involves a lot of fighting with the
+compiler&hellip; and the compiler being right. Getting code to build is much more
+difficult than I&rsquo;m used to, but when it builds &mdash; it works. Not always, but with
+a much higher likelihood than I&rsquo;ve seen elsewhere. To explain this phenomenon,
+let&rsquo;s take a look at cases when data is allowed to be absent.</p>
+<p>It is often useful, in code, to deal with something that may or may not be
+present. I&rsquo;ve recently had the unpleasant experience of dealing with
+soccer<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> for work<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>; I still don&rsquo;t quite get it, so this
+example might not make any sense, but bear with me: Let&rsquo;s imagine that a soccer
+<code>Team</code> has several <code>players</code> (each of which is a <code>Person</code> with a <code>name</code> and
+<code>age</code>), and may or may not have a <code>coach</code>, who is also a <code>Person</code>. In JSON, that
+would look like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;players&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;John Doe&#34;</span><span class="p">,</span> <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">24</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Richard Roe&#34;</span><span class="p">,</span> <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Might be absent:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;coach&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Mark Moe&#34;</span><span class="p">,</span> <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">53</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Suppose you write some code to handle such a <code>Team</code>, and, say, return whether or
+not any of the players are older than the coach.</p>
+<h3 id="go">Go</h3>
+<p>In Go, you&rsquo;d probably end up doing something like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nx">Team</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Players</span> <span class="p">[]</span><span class="nx">Person</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Coach</span> <span class="o">*</span><span class="nx">Person</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="o">*</span> <span class="nx">Team</span><span class="p">)</span> <span class="nf">anyPlayersOlderThanCoach</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// YOU WILL FORGET
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span>      <span class="c1">// TO DO THIS PART,
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>                   <span class="c1">// I ASSURE YOU.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">p</span> <span class="nx">in</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Players</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Age</span> <span class="p">&gt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span><span class="p">.</span><span class="nx">Age</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ...so ^^^^^^^ will sometimes crash.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>At some point you will encounter a team without a coach, and your code will
+panic and exit with an error. It won&rsquo;t even be a useful error message &mdash; it&rsquo;ll be
+something like this (but probably with many more goroutines).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">panic: runtime error: invalid memory address or nil pointer dereference
+</span></span><span class="line"><span class="cl">[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x480c76]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">goroutine 1 [running]:
+</span></span><span class="line"><span class="cl">main.main()
+</span></span><span class="line"><span class="cl">  /tmp/sandbox3217875017/prog.go:17 +0x16
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Program exited./Op
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The issue is that the null (well, <code>nil</code>) pointer is used as a way to indicate
+&ldquo;something that is not there&rdquo;, and Go &mdash; just like C &mdash; uses pointers both to
+indicate &ldquo;we&rsquo;re dealing with pointing at memory addresses&rdquo; and to indicate
+&ldquo;we&rsquo;re dealing with something that may be absent&rdquo;.</p>
+<p>Worse yet, because most teams <em>do</em> have coaches, this will be a rare case. It&rsquo;ll
+likely be shuffled off into the back of the bug queue as a &ldquo;rare crash&rdquo;, waiting
+to jump on you when somehow a coach-free team makes it to the world cup finals.</p>
+<h3 id="rust">Rust</h3>
+<p>Although rust does support pointers (null and otherwise), those are usually
+relegated to <a href="https://doc.rust-lang.org/std/keyword.unsafe.html" target="_blank" rel="noopener noreffer "><code>unsafe</code></a> code. In day-to-day rust, indicating that a
+value might be absent is done using <a href="https://doc.rust-lang.org/std/option/index.html" target="_blank" rel="noopener noreffer "><code>std::Option</code></a>. If you were
+recreating the same naive approach as Go, you&rsquo;d end up writing something like
+this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">players</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">coach</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">any_players_older_than_coach</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Don&#39;t code like this, but...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">is_none</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// This is the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="w">                     </span><span class="c1">// part you will
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">}</span><span class="w">                                  </span><span class="c1">// forget to do.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">coach_age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">age</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ...so this part will crash:      ^^^^^^^^
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">players</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">any</span><span class="p">(</span><span class="o">|</span><span class="n">p</span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">coach_age</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Yes, Rust&rsquo;s support for functional-style programming blows Go&rsquo;s out of the
+water. Yes, I&rsquo;m salty.</div>
+        </div>
+    </div>
+<p>The error you&rsquo;d get for forgetting to check whether <code>coach.as_ref().is_none()</code>
+is actually a bit better:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">thread &#39;main&#39; panicked at &#39;called `Option::unwrap()` on
+</span></span><span class="line"><span class="cl">a `None` value&#39;, src/main.rs:13:45
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>However, there&rsquo;s an extremely handy smoking gun here &mdash; <code>unwrap</code> itself. That&rsquo;s
+not a function that usually gets used in production<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> code. A
+reviewer or linter should be able to catch it. The function should actually be
+written like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">impl</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">any_players_older_than_coach</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Some</span><span class="p">(</span><span class="n">definitely_a_coach</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">players</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">any</span><span class="p">(</span><span class="o">|</span><span class="n">p</span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">definitely_a_coach</span><span class="p">.</span><span class="n">age</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// definitely_a_coach can be called &#34;coach&#34; as well,
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="c1">// and usually would - but it&#39;s a different variable
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="c1">// with a different type.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Importantly, the type of <code>definitely_a_coach</code> is <em>not</em> <code>Option&lt;Person&gt;</code> &mdash; it&rsquo;s
+<code>Person</code>. That is, when using <code>match</code> (which is fairly standard), the guarantee
+that &ldquo;you made sure the thing is actually there&rdquo; happens <em>at compile time</em>.
+Omitting the <code>None</code> case is a compilation error.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This is a great example of how Rust moves head-scratches from runtime to
+compile-time. It&rsquo;s a big part of why it&rsquo;s harder to get Rust code to build.</div>
+        </div>
+    </div>
+<p>In fact, there&rsquo;s an equivalent way to write this, shorter, but providing the
+same safety guarantees:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">impl</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">any_players_older_than_coach</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">definitely_a_coach</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">players</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">any</span><span class="p">(</span><span class="o">|</span><span class="n">p</span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">definitely_a_coach</span><span class="p">.</span><span class="n">age</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kc">false</span><span class="w"> </span><span class="c1">// Omitting this is also a compilation error;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="c1">// it won&#39;t let you forget the &#34;else&#34; case.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Importantly, the syntax that <em>might</em> panic (<code>unwrap</code>) is quite different, easy
+to pick out, and does not have to be used at all. In contrast, in other
+languages, like Go, we don&rsquo;t get the opportunity to notice that it&rsquo;s happening.
+The <code>coach</code> pointer gets dereferenced using the same syntax, whether or not it&rsquo;s
+guaranteed to not be <code>nil</code>.</p>
+<h3 id="other-languages">Other languages</h3>
+<h4 id="haskell">Haskell</h4>
+<p>This seems to be equivalent to the Haskell <code>Maybe</code> type. If I were smart enough
+to code in Haskell, I&rsquo;d be sure. One of the nice things about Rust is that it
+allows writing code in imperative style without understanding monads.</p>
+<h4 id="java">Java</h4>
+<p>Java 8 introduced <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener noreffer "><code>java.util.Optional</code></a>, which does the same
+thing as Rust&rsquo;s <code>Option</code>. However, the safety guarantees are more limited:</p>
+<ul>
+<li>
+<p>You can check <code>ifPresent()</code> and use <code>get()</code>, but this is no better than
+checking if a standard reference would be <code>null</code> (that is &mdash; nothing makes sure
+that you did so, and if nothing is there &mdash; <code>get()</code> throws an exception).</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Apparently some external inspectors do check for this, e.g.
+<a href="https://rules.sonarsource.com/java/RSPEC-3655" target="_blank" rel="noopener noreffer ">https://rules.sonarsource.com/java/RSPEC-3655</a></div>
+        </div>
+    </div>
+</li>
+<li>
+<p>You can use <code>orElse(defaultValue)</code>, which makes sense in some cases, but not
+always (what if it&rsquo;s a temperature-in-celsius that might be absent? You can&rsquo;t
+use 0° as a default value).</p>
+</li>
+<li>
+<p>You can use various other methods like <code>filter</code> and <code>map</code>, but that requires
+callback-style programming (which I don&rsquo;t <em>think</em> is the norm for Java).</p>
+</li>
+</ul>
+<p>At the end of the day, Java&rsquo;s legacy is probably a limiting factor here &mdash; your
+code likely needs to interoperate with a pile of code that simply uses <code>null</code>
+the traditional way for &ldquo;thing that is not there&rdquo;.</p>
+<p>Finally, researching for this post showed at least one guide claiming the
+following as <a href="https://www.baeldung.com/java-optional#misuages" target="_blank" rel="noopener noreffer ">Misuse of
+<code>Optional</code></a>:</p>
+<ul>
+<li>Passing an <code>Optional</code> parameter to a method</li>
+<li>Having an <code>Optional</code> field (also discussed <a href="https://stackoverflow.com/questions/23454952/uses-for-optional" target="_blank" rel="noopener noreffer ">here</a>), exactly
+as we&rsquo;re doing here.</li>
+</ul>
+<p>&hellip;so I guess you&rsquo;re stuck null-checking for those cases.</p>
+<h4 id="c">C++</h4>
+<p>C++17 adds <a href="https://en.cppreference.com/w/cpp/utility/optional" target="_blank" rel="noopener noreffer ">std::optional</a>. I haven&rsquo;t tried it out, but judging
+from <a href="https://devblogs.microsoft.com/cppblog/stdoptional-how-when-and-why/" target="_blank" rel="noopener noreffer ">a quick read</a>, it appears to be more robust than
+Java&rsquo;s, but still far less safe than Rust&rsquo;s: You&rsquo;re still checking <code>has_value()</code>
+and risking an exception when calling <code>value()</code> (&hellip;does your codebase even
+<a href="https://google.github.io/styleguide/cppguide.html#Exceptions" target="_blank" rel="noopener noreffer ">allow for exceptions</a>?), or using <code>value_or</code> if a
+sentinel value is acceptable.</p>
+<h2 id="why-does-this-matter">Why does this matter?</h2>
+<p>Go is often regarded as a memory-safe<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> language. And that&rsquo;s technically
+correct in this case &mdash; if you get a null dereference, your code will simply
+crash, as opposed to some crazy Undefined Behavior. Presumably your production
+setup is resilient to crashes, and you&rsquo;ll catch these crashes in pre-production
+anyway.</p>
+<p>&hellip;except, it&rsquo;ll take you a while to do that. And the crash will seem quite
+esoteric, and might not even happen in pre-production (does your test data
+contain teams without coaches?)&hellip; and, once again, if a coach-free team
+suddenly plays a very popular match, are you really set up to deal with such
+consistent crashes?</p>
+<p>It&rsquo;s possible to build automatic tooling for detecting these cases, and people
+far smarter than myself are already doing so. Unfortunately, applying them to
+legacy code is an even harder. I&rsquo;ve seen such a &ldquo;you did not check for null&rdquo;
+static analyzer completely miss a case quite similar to the above; and while we
+did catch it in pre-production, a lot of people wasted a lot of needless time on
+it.</p>
+<p>This is also only one (relatively-simple) example of what Rust does about
+safety. A more elaborate example is <a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html" target="_blank" rel="noopener noreffer ">mutexes</a>: A rust mutex &ldquo;holds&rdquo;
+the protected data, requiring you to <code>lock()</code> it to even access the data. This
+means that the type-system guarantees that the mutex protects whatever it&rsquo;s
+meant to protect. In Go, however, the protected value just <a href="https://dmitri.shuralyov.com/idiomatic-go#mutex-hat" target="_blank" rel="noopener noreffer ">wears the mutex as a
+hat</a> &mdash; so the compiler has no clue. (There&rsquo;s at least one person
+<a href="https://github.com/dragazo/rustex" target="_blank" rel="noopener noreffer ">porting this idea into C++</a>)</p>
+<p>So examine your programming language; see what safety guarantees you&rsquo;d like it
+to have (try to use the ones it already does!); and perhaps look at Rust for a
+bit of inspiration.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Short for &mdash; did you know? &mdash; Association Football. I live in Ireland,
+which plays multiple kinds of football, so I find &ldquo;soccer&rdquo; to be the more
+specific term.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>I really don&rsquo;t like watching any kind of sportsball, but there was
+a fair bit of excitement around the recent FIFA World Cup, and my
+involvement extended to having to watch some of those matches. Live 🙄. In
+contrast, to relax in the evenings, I did AoC &mdash; so I effectively watch
+soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Rust actually has many useful-while-prototyping functions, like
+<a href="https://doc.rust-lang.org/std/macro.todo.html" target="_blank" rel="noopener noreffer "><code>todo!()</code></a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>And people use that reasoning to build some pretty cool stuff, like
+<a href="https://gokrazy.org" target="_blank" rel="noopener noreffer ">https://gokrazy.org</a>.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></description></item></channel></rss>
