@@ -8,6 +8,10 @@ draft: true
 tags: ["software"]
 ---
 
+TODO some description here
+
+<!--more-->
+
 ## QBasic
 
 In the early 90s, when I was about 8 years old, someone showed me that my
@@ -21,7 +25,7 @@ classmates to play around with; y'know, like a professional software developer w
 
 [qbasic]: https://en.wikipedia.org/wiki/QBasic
 
-{{< image src="QBasic_Opening_Screen.png" caption="QBasic's opening screen" >}}
+{{< image src="QBasic_Opening_Screen.png" caption="QBasic's opening screen (Source: Wikipedia)" >}}
 
 This presented an interesting problem. The software, as I wrote it, was a
 collection of source code files - just text files with a `.BAS` extension. For
@@ -58,8 +62,47 @@ weren't both abbreviated "QB".
 {{< /admonition >}}
 
 I vaguely remember messing around blindly with files on my computer, trying to
-generate an EXE file complete with an icon. (Add note about PIF files)
+generate an EXE file complete with an icon. Efforts included taking something
+called the "PIF Editor", which creates shortcuts to files and ostensibly adds
+icons to them... and replacing one of the system `EXE` files with it, in case
+the filename was "magical". The real magic was young me learning the valuable
+lesson that I should've made a backup of this file before replacing it.
 
+## Visual Basic
 
+By the late 90s, Windows 9x came around along with Microsoft Office, which had a
+wonderful capability: [Visual Basic for Applications][vba]. this gave me my
+first experience writing actual GUI applications, strangely embedded within an
+Excel spreadsheet. Most memorably, Pokémon was a huge deal at the time, and I
+had created "APCO - A Pokémon Card Organizer" - a trivial deck building app.
 
-<!--more-->
+[vba]: https://en.wikipedia.org/wiki/Visual_Basic_for_Applications
+
+{{< admonition >}}
+
+On April 1st, 1997, the very first episode of the Pokémon anime was shown on
+Israel, on channel 6; I was the official "hero of the day" guest, as a Pokémon
+expert. I got to this position by nitpicking on some "kids' portal" website that
+their Pokémon page contained inaccuracies, which landed me a job as their
+Pokémon card strategy reviewer; I was 11, so they paid me in Pokémon cards.
+
+For the anime premiere I was interviewed by Dana Dvorin; I have sadly been
+unable to find any footage of this hialriously awkward interview.
+
+{{< /admonition >}}
+
+Once again, I wanted to distribute this software - perhaps using this magical
+thing I now had access to called *The Internet*. And, once again, sending an
+excel `XLS` file around with a big "click me to start the actual program button"
+seemed, well, janky. Amazingly, a friend had a copy of "really real Visual
+Basic" (the coveted *compiler* I had heard of), and was able to convert my janky
+app-in-`XLS` to a proper shiny `EXE` file. Slight caveat - there was a runtime
+library that had to be distributed alongside it, or it wouldn't work.
+
+This got me looking at *installers*. All of the "serious" software was proudly
+using InstallShield (this was before these newfangled `.MSI` files - even the
+installer was a shiny `.EXE`!), but looking at a trial version left me
+scratching my head at how things should be organized. Finally, a self-extracting
+RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfuly
+uploading the finished product to some download site of the era, probably
+Tucows.
