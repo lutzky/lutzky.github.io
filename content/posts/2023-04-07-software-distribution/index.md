@@ -25,7 +25,8 @@ classmates to play around with; y'know, like a professional software developer w
 
 [qbasic]: https://en.wikipedia.org/wiki/QBasic
 
-{{< image src="QBasic_Opening_Screen.png" caption="QBasic's opening screen (Source: Wikipedia)" >}}
+{{< image src="QBasic_Opening_Screen.png"
+    caption="QBasic's opening screen (Source: Wikipedia)" >}}
 
 This presented an interesting problem. The software, as I wrote it, was a
 collection of source code files - just text files with a `.BAS` extension. For
@@ -107,4 +108,6 @@ RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfuly
 uploading the finished product to some download site of the era, probably
 Tucows.
 
-{{< image src="installshield.png" caption="If your software didn't come this way in the 90s, was it even real software?" >}}
+{{< image src="installshield.png"
+    caption="If your software didn't come this way in the 90s, was it even real software?"
+>}}
