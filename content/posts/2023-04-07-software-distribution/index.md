@@ -106,3 +106,5 @@ scratching my head at how things should be organized. Finally, a self-extracting
 RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfuly
 uploading the finished product to some download site of the era, probably
 Tucows.
+
+{{< image src="installshield.png" caption="If your software didn't come this way in the 90s, was it even real software?" >}}
