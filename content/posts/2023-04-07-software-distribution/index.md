@@ -8,6 +8,11 @@ draft: true
 tags: ["software"]
 ---
 
+<!--
+    cSpell: ignore lastmod APCO Tucows QBasic
+    cSpell: word janky Lutzky
+-->
+
 TODO some description here
 
 <!--more-->
@@ -87,8 +92,10 @@ expert. I got to this position by nitpicking on some "kids' portal" website that
 their Pokémon page contained inaccuracies, which landed me a job as their
 Pokémon card strategy reviewer; I was 11, so they paid me in Pokémon cards.
 
+<!-- cSpell: ignore Dvorin -->
+
 For the anime premiere I was interviewed by Dana Dvorin; I have sadly been
-unable to find any footage of this hialriously awkward interview.
+unable to find any footage of this hilariously awkward interview.
 
 {{< /admonition >}}
 
@@ -100,14 +107,21 @@ Basic" (the coveted *compiler* I had heard of), and was able to convert my janky
 app-in-`XLS` to a proper shiny `EXE` file. Slight caveat - there was a runtime
 library that had to be distributed alongside it, or it wouldn't work.
 
+<!-- cSpell: ignore installshield -->
+
 This got me looking at *installers*. All of the "serious" software was proudly
 using InstallShield (this was before these newfangled `.MSI` files - even the
 installer was a shiny `.EXE`!), but looking at a trial version left me
 scratching my head at how things should be organized. Finally, a self-extracting
-RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfuly
+RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfully
 uploading the finished product to some download site of the era, probably
 Tucows.
 
 {{< image src="installshield.png"
     caption="If your software didn't come this way in the 90s, was it even real software?"
 >}}
+
+## Linux
+
+In high school, I was first introduced to Linux. It came in 3 CDs burned by a
+guy who couldn't have seemed shadier if he pulled them out of a trench-coat.
