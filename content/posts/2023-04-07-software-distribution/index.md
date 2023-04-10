@@ -10,7 +10,7 @@ tags: ["software"]
 
 <!--
     cSpell: ignore lastmod APCO Tucows QBasic
-    cSpell: word janky Lutzky
+    cSpell: word jank janky Lutzky
 -->
 
 TODO some description here
@@ -84,7 +84,7 @@ had created "APCO - A Pokémon Card Organizer" - a trivial deck building app.
 
 [vba]: https://en.wikipedia.org/wiki/Visual_Basic_for_Applications
 
-{{< admonition >}}
+{{< admonition open=false >}}
 
 On April 1st, 1997, the very first episode of the Pokémon anime was shown on
 Israel, on channel 6; I was the official "hero of the day" guest, as a Pokémon
@@ -125,3 +125,64 @@ Tucows.
 
 In high school, I was first introduced to Linux. It came in 3 CDs burned by a
 guy who couldn't have seemed shadier if he pulled them out of a trench-coat.
+Regardless, it was enlightening: How can this possibly be legally free? Wait, it
+just *comes* with a compiler? What do you mean the compiler doesn't contain a
+graphical user interface? It was a fascinating dive into understanding what my
+computer even *is*; while I was old enough to remember pre-Windows days, I had
+switched to Linux from Windows 98 (2000 had pretty much skipped home PCs around
+me, and XP was new and untrustworthy), so all of my experience with Windows was
+as a graphical wrapper running inside DOS; certainly not having drive letters
+(A, B nor C) was wild.
+
+{{< admonition open=false >}}
+
+I didn't spend long with Mandrake before switching to Gentoo Linux, where
+installing software is accomplished with the `emerge` command. The `emerge`
+command magically (to me, at the time) gets the software from the internet and
+*compiles* it. In my mind, I was an elite hacker software person. In reality,
+"sorry dad, you can't use the computer today, a new version of KDE just came out
+and the build will take a few hours". I stuck with Gentoo until
+college[^grandma], when a stack of remarkably slick-looking envelopes with
+Ubuntu CDs showed up. At this point Linux started seeming serious, and the "year
+of the linux desktop" meme started to get to me. Ubuntu also killed off
+install-fests[^install-fests], as installing it was too easy to justify getting friends
+and pizza together.
+
+[^grandma]: My grandma got my old PC with it, so I can proudly say my grandma is
+a former Gentoo user. She exclusively used the browser, but whenever she needed
+support I was the only one who could provide it, as any other support people
+invariably tried to get her to find the "start" menu, even when the problem was
+entirely within gmail.
+
+<!-- cSpell: ignore Moshik Afia פעם בחיים -->
+
+[^install-fests]: If anyone has footage of the install-fest I was forced to
+trick [Moshik Afia] to go to, as part of פעם בחיים on Yes, please send it my
+way!
+
+[Moshik Afia]: https://en.wikipedia.org/wiki/Moshik_Afia
+
+{{< /admonition >}}
+
+As I dove deeper into Linux, I realized I'm seeing some of the older jank once
+again. Lots of software comes as shell scripts that ran `java`, meaning you had
+to have the Java Runtime Environment installed. Python software came as scripts,
+which needed not only Python itself installed, but probably some additional
+python libraries. At this point I noticed the following:
+
+1. This only seems less janky in Linux because filename extensions aren't used
+for running software; the difference between a "clean `.EXE`" and a "janky
+`.BAT`" is tucked away in the file contents.
+1. "Proper" C programs also need a bunch of stuff installed along with them.
+
+The Linux ecosystem has a dizzying array of solutions to this problem. From
+meticulously[^deb-guide] packaging DEB files through FlatPak/Snap/whatever
+through Docker[^docker]. I'm the kind of nerd who's excitedly following
+[FasterThanLime's series][fasterthanlime-nix] about how Nix presumably does this
+better than anything else.
+
+[fasterthanlime-nix]: https://fasterthanli.me/series/building-a-rust-service-with-nix
+
+[^deb-guide]: The [Debian New Maintainers' Guide](https://www.debian.org/doc/manuals/maint-guide/), which explains how to do this, starts off with "social dynamics of Debian" before getting into the details of actually packaging anything.
+
+[^docker]: Sometimes described as "It works on your machine? Then we'll ship your machine." [credit](https://www.reddit.com/r/ProgrammerHumor/comments/cw58z7/it_works_on_my_machine/)
