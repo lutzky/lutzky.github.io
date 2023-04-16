@@ -5,7 +5,7 @@ title = "Shallow and Pedantic"
 theme = "LoveIt"
 
 disqusShortname = "shallowandpedantic"
-googleAnalytics = "G-TS2EN8XRNK" # See also params.analytics.google
+googleAnalytics = "G-1VCTD5H9YR" # See also params.analytics.google
 enableGitInfo = true
 enableEmoji = true
 
@@ -44,7 +44,7 @@ enableEmoji = true
     enable = true
     [params.analytics.google]
       # Unclear why we need to repeat this from googleAnalytics above
-      id = "G-TS2EN8XRNK"
+      id = "G-1VCTD5H9YR"
 
   [params.page]
     rssFullText = true
