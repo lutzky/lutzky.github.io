@@ -4,7 +4,6 @@ languageCode = "en-us"
 title = "Shallow and Pedantic"
 theme = "LoveIt"
 
-disqusShortname = "shallowandpedantic"
 googleAnalytics = "G-TS2EN8XRNK" # See also params.analytics.google
 enableGitInfo = true
 enableEmoji = true
@@ -60,6 +59,7 @@ enableEmoji = true
       enable = true
       [params.page.comment.disqus]
         enable = true
+        shortname = "shallowandpedantic"
 
   [params.header.title]
     name = "Shallow and Pedantic"
