@@ -13,11 +13,14 @@ tags: ["software"]
     cSpell: word jank janky Lutzky
 -->
 
-TODO some description here
+For as long as I've been interested in software development, I've been
+interested in how software makes it onto a computer. "Works on my machine" was
+never quite enough... how would it work on *someone else's* computer? Here's a
+stroll down memory lane... starting from the 90s.
 
 <!--more-->
 
-## QBasic
+## QBasic (early 90s)
 
 In the early 90s, when I was about 8 years old, someone showed me that my
 computer came with a piece of software called [QBasic][qbasic] - it came with
@@ -74,7 +77,7 @@ icons to them... and replacing one of the system `EXE` files with it, in case
 the filename was "magical". The real magic was young me learning the valuable
 lesson that I should've made a backup of this file before replacing it.
 
-## Visual Basic
+## Visual Basic (late 90s)
 
 By the late 90s, Windows 9x came around along with Microsoft Office, which had a
 wonderful capability: [Visual Basic for Applications][vba]. this gave me my
@@ -121,7 +124,7 @@ Tucows.
     caption="If your software didn't come this way in the 90s, was it even real software?"
 >}}
 
-## Linux
+## Linux (early 2000s)
 
 In high school, I was first introduced to Linux. It came in 3 CDs burned by a
 guy who couldn't have seemed shadier if he pulled them out of a trench-coat.
