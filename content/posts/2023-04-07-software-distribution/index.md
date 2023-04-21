@@ -16,7 +16,7 @@ tags: ["software"]
 For as long as I've been interested in software development, I've been
 interested in how software makes it onto a computer. "Works on my machine" was
 never quite enough... how would it work on *someone else's* computer? Here's a
-stroll down memory lane... starting from the 90s.
+stroll down memory lane, starting from the 90s.
 
 <!--more-->
 
@@ -31,7 +31,7 @@ recall as being very thorough. Having messed around with it and made a few
 animations and utilities, I thought it would be cool to give copies to my
 classmates to play around with; y'know, like a professional software developer would.
 
-[qbasic]: https://en.wikipedia.org/wiki/QBasic
+[qbasic]: https://archive.org/details/msdos_qbasic_megapack
 
 {{< image src="QBasic_Opening_Screen.png"
     caption="QBasic's opening screen (Source: Wikipedia)" >}}
