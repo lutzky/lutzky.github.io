@@ -47,7 +47,7 @@ janky* way to distribute software.
 
 What I actually wanted to do was provide a *"self-contained"* program, one where
 you simply enter its name and it starts up, like any other DOS program I'd seen.
-Ideally, it would have the coveted `.EXE` extension (the term "`EXE` file"
+Ideally, it would have the fashionable `.EXE` extension (the term "`EXE` file"
 seemed pretty much synonymous with "program").
 
 {{< admonition title="Note - Batch files" open=false >}}
