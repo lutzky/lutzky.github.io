@@ -136,8 +136,8 @@ library that had to be distributed alongside it, or it wouldn't work.
 
 <!-- cSpell: ignore installshield -->
 
-This got me looking at *installers*. All of the "serious" software was proudly
-using InstallShield (this was before these newfangled `.MSI` files - even the
+This got me looking at *installers*. All "serious" software was proudly using
+InstallShield (this was before these newfangled `.MSI` files - even the
 installer was a shiny `.EXE`!), but looking at a trial version left me
 scratching my head at how things should be organized. Finally, a self-extracting
 RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfully
@@ -150,30 +150,34 @@ Tucows.
 
 ## Linux (early 2000s)
 
-In high school, I was first introduced to Linux. It came in 3 CDs burned by a
-guy who couldn't have seemed shadier if he pulled them out of a trench-coat.
-Regardless, it was enlightening: How can this possibly be legally free? Wait, it
-just *comes* with a compiler? What do you mean the compiler doesn't contain a
-graphical user interface? It was a fascinating dive into understanding what my
+In high school, I was first introduced to Linux. It (Mandrake 8.1) came in 3 CDs
+burned by a guy who couldn't have seemed shadier if he had pulled them out of a
+trench-coat.  Regardless, it was enlightening: How can this possibly be legally
+free? Wait, it just *comes* with a compiler? What do you mean the compiler
+doesn't contain a GUI? It was a fascinating dive into understanding what my
 computer even *is*; while I was old enough to remember pre-Windows days, I had
-switched to Linux from Windows 98 (2000 had pretty much skipped home PCs around
-me, and XP was new and untrustworthy), so all of my experience with Windows was
-as a graphical wrapper running inside DOS; certainly not having drive letters
-(A, B nor C) was wild.
+switched to Linux from Windows 98[^win2000], so all of my experience with
+Windows was as a graphical wrapper running inside DOS. For instance, not having
+drive letters (A, B nor C) was *wild*.
 
-{{< admonition open=false >}}
+[^win2000]: Windows 2000 had pretty much skipped home PCs around me, and XP was new
+and untrustworthy.
+
+{{< admonition title="Note: Gentoo" open=false >}}
+
+<!-- cSpell: word Hackerman -->
 
 I didn't spend long with Mandrake before switching to Gentoo Linux, where
 installing software is accomplished with the `emerge` command. The `emerge`
 command magically (to me, at the time) gets the software from the internet and
-*compiles* it. In my mind, I was an elite hacker software person. In reality,
-"sorry dad, you can't use the computer today, a new version of KDE just came out
-and the build will take a few hours". I stuck with Gentoo until
-college[^grandma], when a stack of remarkably slick-looking envelopes with
+*compiles* it. In my mind, I was Hackerman. In reality, it
+was more often "sorry dad, you can't use the computer today, a new version of
+KDE just came out and the build will take a few hours". I stuck with Gentoo
+until college[^grandma], when a stack of remarkably slick-looking envelopes with
 Ubuntu CDs showed up. At this point Linux started seeming serious, and the "year
 of the linux desktop" meme started to get to me. Ubuntu also killed off
-install-fests[^install-fests], as installing it was too easy to justify getting friends
-and pizza together.
+install-fests[^install-fests], as installing it was too easy to justify getting
+friends and pizza together.
 
 [^grandma]: My grandma got my old PC with it, so I can proudly say my grandma is
 a former Gentoo user. She exclusively used the browser, but whenever she needed
@@ -192,14 +196,14 @@ way!
 {{< /admonition >}}
 
 As I dove deeper into Linux, I realized I'm seeing some of the older jank once
-again. Lots of software comes as shell scripts that ran `java`, meaning you had
+again. Lots of software came as shell scripts that ran `java`, meaning you had
 to have the Java Runtime Environment installed. Python software came as scripts,
-which needed not only Python itself installed, but probably some additional
+which needed not only Python itself installed, but usually some additional
 python libraries. At this point I noticed the following:
 
-1. This only seems less janky in Linux because filename extensions aren't used
-for running software; the difference between a "clean `.EXE`" and a "janky
-`.BAT`" is tucked away in the file contents.
+1. This only seems less janky in Linux because executables usually don't have
+  filename extensions; the difference between a "clean `.EXE`" and a "janky
+  `.BAT`" is tucked away in the file contents.
 1. "Proper" C programs also need a bunch of stuff installed along with them.
 
 The Linux ecosystem has a dizzying array of solutions to this problem. From
@@ -213,3 +217,16 @@ better than anything else.
 [^deb-guide]: The [Debian New Maintainers' Guide](https://www.debian.org/doc/manuals/maint-guide/), which explains how to do this, starts off with "social dynamics of Debian" before getting into the details of actually packaging anything.
 
 [^docker]: Sometimes described as "It works on your machine? Then we'll ship your machine." [credit](https://www.reddit.com/r/ProgrammerHumor/comments/cw58z7/it_works_on_my_machine/)
+
+## Afterword - the web
+
+<!-- cSpell: word transformative -->
+
+At some point, probably too gradually for me to notice, web apps became actual
+apps. XMLHttpRequest is horribly named, but pretty transformative when used by
+sites to dynamically fetch more information; Javascript had gradually
+transformed to "the Assembly language of the web" (i.e. it's the thing stuff
+compiles to[^wasm]; but the really cool thing about web apps remains
+distribution: [TODO finish]
+
+[^wasm]: I think compiling stuff to WASM is becoming more popular nowadays.
