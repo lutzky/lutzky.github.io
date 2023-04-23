@@ -1,4 +1,236 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>I tried Rust</title><link>https://lutzky.net/2023/01/16/rust/</link><pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2023/01/16/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 23 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Getting your code to your friends</title><link>https://lutzky.net/2023/04/23/software-distribution/</link><pubDate>Sun, 23 Apr 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2023/04/23/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
+interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
+never quite enough&hellip; how would it work on <em>someone else&rsquo;s</em> computer? Here&rsquo;s a
+stroll down memory lane, starting from the 90s.</p>
+<h2 id="qbasic-early-90s">QBasic (early 90s)</h2>
+<p>In the early 90s, when I was about 8 years old, someone showed me that my
+computer came with a piece of software called <a href="https://archive.org/details/msdos_qbasic_megapack" target="_blank" rel="noopener noreffer ">QBasic</a> - it came with
+the MS-DOS operating system.  Although nobody in my family knew how to use it,
+and this was long before I had access to the internet, it came with an
+impressive set of examples as well as an interactive reference manual that I
+recall as being very thorough. Having messed around with it and made a few
+animations and utilities, I thought it would be cool to give copies to my
+classmates to play around with; y&rsquo;know, like a professional software developer would.</p>
+<figure><a class="lightgallery" href="/2023/04/23/software-distribution/QBasic_Opening_Screen.png" title="/2023/04/23/software-distribution/QBasic_Opening_Screen.png" data-thumbnail="/2023/04/23/software-distribution/QBasic_Opening_Screen.png" data-sub-html="<h2>QBasic&rsquo;s opening screen</h2>">
+        
+    </a><figcaption class="image-caption">QBasic&rsquo;s opening screen</figcaption>
+    </figure>
+<p>The software, as I wrote it, was a collection of source code files - just text
+files with a <code>.BAS</code> extension. For anyone to run those programs, they&rsquo;d have to
+open QBasic themselves, select &ldquo;File→Open&rdquo;, navigate to my file, then use the
+&ldquo;Run&rdquo; menu to actually run the program. And presumably figure out how to exit
+QBasic when they&rsquo;re done.  Now, 8-year-olds in the 90s were used to computers
+being slightly harder to operate, e.g. typing out a command or two to open a
+game; indeed, friends did figure this out.  But this still felt like a <em>super
+janky</em> way to distribute software.</p>
+<p>What I actually wanted to do was provide a <em>&ldquo;self-contained&rdquo;</em> program, one where
+you simply enter its name and it starts up, like any other DOS program I&rsquo;d seen.
+Ideally, it would have the fashionable <code>.EXE</code> extension (the term &ldquo;<code>EXE</code> file&rdquo;
+seemed pretty much synonymous with &ldquo;program&rdquo;).</p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note - Batch files<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>What I wanted to do was allow people to run <code>LUTZKY1.BAS</code> with one command. This
+could&rsquo;ve been accomplished by adding a file <code>LUTZKY1.BAT</code> (<code>BAT</code> for MS-DOS
+Batch, not <code>BAS</code>) with these contents:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="line"><span class="cl"><span class="c1">REM Turn off janky &#34;print each command&#34; behavior</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">ECHO</span> OFF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">QBASIC /RUN LUTZKY1.BAS
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I would&rsquo;ve needed to terminate the program using the <code>SYSTEM</code> command rather
+than <code>END</code>. This way, indeed typing <code>LUTZKY1</code> into the prompt would&rsquo;ve run my
+program and exit normally. However:</p>
+<ul>
+<li>I don&rsquo;t think I knew how to do that</li>
+<li>It still flashes the QBasic IDE on startup</li>
+<li>I was still relying on QBasic being installed on the destination machine, and
+I knew (though?) older versions of MS-DOS didn&rsquo;t include it.</li>
+<li>Having things in multiple files still seemed &ldquo;off&rdquo;. I now wonder if I
+could&rsquo;ve designed a file to work both as the batch file and as the BASIC file.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<p>I had heard rumor of the &ldquo;professional, expensive&rdquo; bit of software I needed - a
+<em>compiler</em>, which would perform the right magic to me a shiny, self-contained
+<code>LUTZKY1.EXE</code>. But this sounded like an expensive thing to even ask my parents
+for, never mind the fact I had no idea where one <em>buys software</em> - the local
+shops only seemed to stock games and office productivity software.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In 2023, I found out that this software was called <a href="https://en.wikipedia.org/wiki/QuickBASIC" target="_blank" rel="noopener noreffer ">QuickBASIC</a>&hellip;
+not confusing at all, surely the Q in QBasic didn&rsquo;t stand for &ldquo;Quick&rdquo; and they
+weren&rsquo;t both abbreviated &ldquo;QB&rdquo;.</div>
+        </div>
+    </div>
+<p>For whatever reason, this was important enough to me to try some truly wacky
+stuff. I vaguely remember messing around blindly with files on my computer,
+trying to generate an <code>EXE</code> file complete with an icon - efforts included taking
+something called the &ldquo;PIF Editor&rdquo;, which creates shortcuts to files and
+ostensibly adds icons to them&hellip; and replacing one of the system <code>EXE</code> files
+with it, in case the filename was &ldquo;magical&rdquo;. The real magic was young me
+learning the valuable lesson that I should&rsquo;ve made a backup of this file before
+replacing it.</p>
+<h2 id="visual-basic-late-90s">Visual Basic (late 90s)</h2>
+<p>By the late 90s, Windows 9x came around along with Microsoft Office, which had a
+wonderful capability: <a href="https://en.wikipedia.org/wiki/Visual_Basic_for_Applications" target="_blank" rel="noopener noreffer ">Visual Basic for Applications</a>. this gave me my
+first experience writing actual GUI applications, strangely embedded within an
+Excel spreadsheet. Most memorably, Pokémon was a huge deal at the time, and I
+had created &ldquo;APCO - A Pokémon Card Organizer&rdquo; - a trivial deck building app.</p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note - Pokémon<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>On April 1st, 1997, the very first episode of the Pokémon anime was shown on
+Israel, on channel 6; I was the official &ldquo;hero of the day&rdquo; guest, as a Pokémon
+expert. I got to this position by nitpicking on some &ldquo;kids&rsquo; portal&rdquo; website that
+their Pokémon page contained inaccuracies, which landed me a job as their
+Pokémon card strategy reviewer; I was 11, so they paid me in Pokémon cards.</p>
+<!-- raw HTML omitted -->
+<p>For the anime premiere I was interviewed by Dana Dvorin; I have sadly been
+unable to find any footage of this hilariously awkward interview.</p>
+</div>
+        </div>
+    </div>
+<p>Once again, I wanted to distribute this software - perhaps using this magical
+thing I now had access to called <em>The Internet</em>. And, once again, sending an
+excel <code>XLS</code> file around with a big &ldquo;click me to start the actual program button&rdquo;
+seemed, well, janky. Amazingly, a friend had a copy of &ldquo;really real Visual
+Basic&rdquo; (the coveted <em>compiler</em> I had heard of), and was able to convert my janky
+app-in-<code>XLS</code> to a proper shiny <code>EXE</code> file. Slight caveat - there was a runtime
+library that had to be distributed alongside it, or it wouldn&rsquo;t work.</p>
+<!-- raw HTML omitted -->
+<p>This got me looking at <em>installers</em>. All &ldquo;serious&rdquo; software was proudly using
+InstallShield (this was before these newfangled <code>.MSI</code> files - even the
+installer was a shiny <code>.EXE</code>!), but looking at a trial version left me
+scratching my head at how things should be organized. Finally, a self-extracting
+RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfully
+uploading the finished product to some download site of the era, probably
+Tucows.</p>
+<figure><a class="lightgallery" href="/2023/04/23/software-distribution/installshield.png" title="/2023/04/23/software-distribution/installshield.png" data-thumbnail="/2023/04/23/software-distribution/installshield.png" data-sub-html="<h2>If your software didn&rsquo;t come this way in the 90s, was it even real software?</h2>">
+        
+    </a><figcaption class="image-caption">If your software didn&rsquo;t come this way in the 90s, was it even real software?</figcaption>
+    </figure>
+<h2 id="linux-early-2000s">Linux (early 2000s)</h2>
+<p>In high school, I was first introduced to Linux. It (Mandrake 8.1) came in 3 CDs
+burned by a guy who couldn&rsquo;t have seemed shadier if he had pulled them out of a
+trench-coat.  Regardless, it was enlightening: How can this possibly be legally
+free? Wait, it just <em>comes</em> with a compiler? What do you mean the compiler
+doesn&rsquo;t contain a GUI? It was a fascinating dive into understanding what my
+computer even <em>is</em>; while I was old enough to remember pre-Windows days, I had
+switched to Linux from Windows 98<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, so all of my experience with
+Windows was as a graphical wrapper running inside DOS. For instance, not having
+drive letters (A, B nor C) was <em>wild</em>.</p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note: Gentoo<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><!-- raw HTML omitted -->
+<p>I didn&rsquo;t spend long with Mandrake before switching to Gentoo Linux, where
+installing software is accomplished with the <code>emerge</code> command. The <code>emerge</code>
+command magically (to me, at the time) gets the software from the internet and
+<em>compiles</em> it. In my mind, I was Hackerman. In reality, it
+was more often &ldquo;sorry dad, you can&rsquo;t use the computer today, a new version of
+KDE just came out and the build will take a few hours&rdquo;. I stuck with Gentoo
+until college<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, when a stack of remarkably slick-looking envelopes with
+Ubuntu CDs showed up. At this point Linux started seeming serious, and the &ldquo;year
+of the linux desktop&rdquo; meme started to get to me. Ubuntu also killed off
+install-fests<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, as installing it was too easy to justify getting
+friends and pizza together.</p>
+<!-- raw HTML omitted -->
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>My grandma got my old PC with it, so I can proudly say my grandma is
+a former Gentoo user. She exclusively used the browser, but whenever she needed
+support I was the only one who could provide it, as any other support people
+invariably tried to get her to find the &ldquo;start&rdquo; menu, even when the problem was
+entirely within gmail.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>If anyone has footage of the install-fest I was forced to
+trick <a href="https://en.wikipedia.org/wiki/Moshik_Afia" target="_blank" rel="noopener noreffer ">Moshik Afia</a> to go to, as part of פעם בחיים on Yes, please send it my
+way!&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div>
+        </div>
+    </div>
+<p>As I dove deeper into Linux, I realized I&rsquo;m seeing some of the older jank once
+again. Lots of software came as shell scripts that ran <code>java</code>, meaning you had
+to have the Java Runtime Environment installed. Python software came as scripts,
+which needed not only Python itself installed, but usually some additional
+python libraries. At this point I noticed the following:</p>
+<ol>
+<li>This only seems less janky in Linux because executables usually don&rsquo;t have
+filename extensions; the difference between a &ldquo;clean <code>.EXE</code>&rdquo; and a &ldquo;janky
+<code>.BAT</code>&rdquo; is tucked away in the file contents.</li>
+<li>&ldquo;Proper&rdquo; C programs also need a bunch of stuff installed along with them.</li>
+</ol>
+<p>The Linux ecosystem has a dizzying array of solutions to this problem. From
+meticulously<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> packaging DEB files through FlatPak/Snap/whatever
+through Docker<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. I&rsquo;m the kind of nerd who&rsquo;s excitedly following
+<a href="https://fasterthanli.me/series/building-a-rust-service-with-nix" target="_blank" rel="noopener noreffer ">FasterThanLime&rsquo;s series</a> about how Nix presumably does this
+better than anything else.</p>
+<h2 id="afterword---the-web">Afterword - the web</h2>
+<!-- raw HTML omitted -->
+<p>At some point, probably too gradually for me to notice, web apps became actual
+apps. XMLHttpRequest is horribly named, but pretty transformative when used by
+sites to dynamically fetch more information; Javascript had gradually
+transformed to &ldquo;the Assembly language of the web&rdquo; (i.e. it&rsquo;s the thing stuff
+compiles to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>; but the really cool thing about web apps remains
+distribution: Just give people the URL.</p>
+<!-- raw HTML omitted -->
+<p>Yes, there&rsquo;s work to do. You need a server, you need to handle its uptime and
+connectivity (cloud has made this effectively trivial, even moreso for quick
+demos with things like <a href="https://ngrok.com" target="_blank" rel="noopener noreffer ">ngrok</a>). The app itself also needs to be written
+differently: updates are nontrivial, if any state is saved then
+backwards-compatibility becomes difficult, you need to handle different browsers
+(and different device types); it&rsquo;s not easy. But a giant ecosystem has developed
+around solving these problems, and the infrastructure to use the web has become,
+by comparison, effectively ubiquitous. And to my 8-year-old self, there&rsquo;d be
+nothing cooler than that: &ldquo;Forget the floppies, just give a note with your
+address to your classmates; it&rsquo;s basically guaranteed to work on their
+computer&rdquo;.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Windows 2000 had pretty much skipped home PCs around me, and XP was new
+and untrustworthy.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>The <a href="https://www.debian.org/doc/manuals/maint-guide/" target="_blank" rel="noopener noreffer ">Debian New Maintainers&rsquo; Guide</a>, which explains how to do this, starts off with &ldquo;social dynamics of Debian&rdquo; before getting into the details of actually packaging anything.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Sometimes described as &ldquo;It works on your machine? Then we&rsquo;ll ship your machine.&rdquo; <a href="https://www.reddit.com/r/ProgrammerHumor/comments/cw58z7/it_works_on_my_machine/" target="_blank" rel="noopener noreffer ">credit</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>I think compiling stuff to WASM is becoming more popular nowadays.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>]]></description></item><item><title>I tried Rust</title><link>https://lutzky.net/2023/01/16/rust/</link><pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2023/01/16/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
 <p>As you can tell by previous posts on this blog, I used to be quite a fan of Go;
 I use it at work often, and some features about it are legitimately great:
 Package management, &ldquo;static duck typing&rdquo; (structural typing), providing
@@ -1334,37 +1566,5 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 <p>בשלב כלשהו עלו אפליקציות חלופיות לרשת, דוגמת Moovit - אך אף אחד מהן לא מצאה חן בעיניי. בפרט, ל-Moovit לקח זמן רב לעלות, בעוד שהאפליקציה שלי הייתה מיועדת למבט מהיר תוך כדי שהאוטובוס מתקרב לתחנה.</p>
 <p>בשלב כלשהו (2012 לכל המאוחר) משרד התחבורה התחיל לפרסם מידע GTFS שאפשר לגוגל להציג מידע תחבורה ציבורית בישראל, ואני הפסקתי להשתמש באפליקציה שכתבתי. Google Maps מראה את התחנות על מפה, רשימת תחנות-ביניים ועוד. עם זאת, מאחר ולאפליקציה עוד היה מספר לא-קטן של משתמשים (קצת יותר מ-55,000 בשיא), המשכתי לתקן בעיות  קטנות כשהן צצו וכשהיה לי זמן.</p>
 <p>כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL 😄</p>
-</div>
-]]></description></item><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/2015/05/30/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2015/05/30/seaplane/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<h2 id="the-faculty-programmer">The Faculty Programmer</h2>
-<p>Sharon, a close friend of mine, has been studying psychology for the past few years. At some point she needed to run an experiment in the field of perception. While the exact form of the experiment was pending professor vetting, she did know that the experiment will take place with a user sitting in front of a desktop computer, responding to various stimuli, often with the reaction time being recorded. Seeing as programming is not in her faculty&rsquo;s curriculum (a mistake, in my opinion), the students are provided with a faculty programmer. Dozens of students would contact this jaded craftsman, describe what they need, wait patiently, and then - as it happens in the world of software - receive something almost, but not quite, entirely unlike what they asked for.</p>
-<p>I was all too happy to help (and owe Sharon an insurmountable number of favors to start with), but had nothing to start with at the time. The weeks and months passed, I was deep into my move and training at my new job<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and happily suggesting (using my limited understanding of psychology) experiments. When the final proposal was authorized, the timing was inconvenient - I was going on a business trip to California the next day, putting a 10 hour time difference between Sharon and myself.</p>
-<p>No matter. The experiment was fairly well-defined before I left - a word out of three word-sets, designated as &ldquo;up&rdquo;, &ldquo;down&rdquo; and &ldquo;neutral&rdquo;, was to flash in the middle of the screen, and then a circle would appear at the top or bottom. The user had to react to this circle as quickly as possible, and the idea was to test whether or not a word from the &ldquo;up&rdquo; category (such as &ldquo;sky&rdquo; or &ldquo;cloud&rdquo;) would correlate with better reaction time when the circle appeared at the top, and vice versa. There were some other details such as &ldquo;catch trials&rdquo; when no circle would show up at all, but it sounded fairly simple. (Keep reading for a demo!)</p>
-<h2 id="getting-started">Getting started</h2>
-<p>My experience had me worried, as no software project is ever as simple as it originally seems. Sharon and I agreed that, while this seems completely reasonable and quite thought-out, we would work in an iterative fashion, and have regular video-chats on what should be done next. Also, to simplify things, I asked to create the software as a web page intended for use on Chrome, rather than Matlab as suggested by her faculty programmer (who seemed convinced, for whatever reason, that Matlab could give better timing precision - this turned out to be false). She agreed, and within a few hours on a plane, I had a basic draft working.</p>
-<p>I emailed Sharon a copy of the draft; it was split into a simple <code>index.html</code> file, a <code>style.css</code> file, a <code>seaplane.js</code> code file, and a <code>config.js</code> code file. That last split was deliberate: Sharon, who has no experience in coding (and even claims to be a technophobe), could modify clearly defined configuration (including the sets of words and tuned delays) with no anxiety of &ldquo;messing up&rdquo; the more complex code. Soon enough, timezones flipped by, and Sharon was happy enough with the result to respond with a modified <code>config.js</code> file, and a list of changes she wanted - mostly present in the original requirements, but some which could only be understood while trying out the first draft. Naturally, some of the changes would require the syntax of <code>config.js</code> itself to change, and Sharon had more data to add to it. To avoid <code>seaplane7-final-really.zip</code> email attachments flying back and forth, version control would be required. Using Github would facilitate this, and also allow us to use its <em>Issues</em> mechanism for tracking remaining work.</p>
-<p>It took a few minutes over the phone to explain the basic concept of version control to Sharon, as well as how to create a Github account, modify files using the web-based interface, report and comment on issues. While I did mention Github for Windows as an option, I didn&rsquo;t pressure Sharon into using it, especially as I wasn&rsquo;t familiar enough with it myself.</p>
-<p>Over 10 days and 48 commits (27 mine, 20 Sharon&rsquo;s) we got the code working well enough to run the experiment. There were a few reported bugs, but nothing substantial that skewed the results, as far as we can tell. You&rsquo;re welcome to see a <a href="https://lutzky.github.io/seaplane" target="_blank" rel="noopener noreffer ">Demo of Seaplane</a>, as well as browse the <a href="https://github.com/lutzky/seaplane" target="_blank" rel="noopener noreffer ">Seaplane source code</a>. If you can read Hebrew, you can also read <a href="/2015/05/30/seaplane/seaplane_paper.pdf" rel="">Sharon's paper</a>.</p>
-<h2 id="what-worked">What worked</h2>
-<ul>
-<li>Issues worked quite well for tracking the work; Sharon and I found them more useful than emails for keeping state.</li>
-<li>Being a fully client-side web application, seaplane was (and still is) trivially hosted by Github Pages. This made deployment of new versions as easy as hitting F5.</li>
-<li>For changes that could be previewed in chrome using developer tools, Sharon got instant feedback on her changes without needing to commit anything.</li>
-<li>Sharon made 4 commits to change <code>config.js</code>, modifying the word sets according to discussions with her supervisor. Sharon also made 11 commits to change <code>style.css</code>, 2 commits to change <code>index.html</code>, and even 3 to change <code>seaplane.js</code>.</li>
-</ul>
-<h2 id="what-didnt-work">What didn&rsquo;t work</h2>
-<ul>
-<li>Github&rsquo;s UI for submitting changes online has a default value for the commit message, and no recommendations against using it. As a result, there are 8 commits called &ldquo;Update <code>style.css</code>&rdquo;.</li>
-<li>Sharon didn&rsquo;t have a working copy on her own machine, and not all changes could be easily previewed in chrome. As a result, there were some back-and-forth commits by Sharon and myself which weren&rsquo;t necessary. (I could&rsquo;ve avoided this by providing appropriate &ldquo;refresh&rdquo; functionality in the app)</li>
-<li>The format I chose for the word list made right-to-left issues rear their ugly head in the editor.</li>
-</ul>
-<p>All in all, the project went swimmingly. Using progamming-oriented version control software to collaborate with non-programmers may be less crazy than you think. I highly recommend giving it a try.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Oh yeah, I&rsquo;m a Site Reliability Engineer at Google Ireland now, which is too awesome to detail in this footnote.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
 </div>
 ]]></description></item></channel></rss>

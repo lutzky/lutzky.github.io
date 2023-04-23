@@ -1,4 +1,236 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - Shallow and Pedantic</title><link>https://lutzky.net/posts/</link><description>All Posts | Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/posts/" rel="self" type="application/rss+xml"/><item><title>I tried Rust</title><link>https://lutzky.net/2023/01/16/rust/</link><pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2023/01/16/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - Shallow and Pedantic</title><link>https://lutzky.net/posts/</link><description>All Posts | Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 23 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/posts/" rel="self" type="application/rss+xml"/><item><title>Getting your code to your friends</title><link>https://lutzky.net/2023/04/23/software-distribution/</link><pubDate>Sun, 23 Apr 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2023/04/23/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
+interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
+never quite enough&hellip; how would it work on <em>someone else&rsquo;s</em> computer? Here&rsquo;s a
+stroll down memory lane, starting from the 90s.</p>
+<h2 id="qbasic-early-90s">QBasic (early 90s)</h2>
+<p>In the early 90s, when I was about 8 years old, someone showed me that my
+computer came with a piece of software called <a href="https://archive.org/details/msdos_qbasic_megapack" target="_blank" rel="noopener noreffer ">QBasic</a> - it came with
+the MS-DOS operating system.  Although nobody in my family knew how to use it,
+and this was long before I had access to the internet, it came with an
+impressive set of examples as well as an interactive reference manual that I
+recall as being very thorough. Having messed around with it and made a few
+animations and utilities, I thought it would be cool to give copies to my
+classmates to play around with; y&rsquo;know, like a professional software developer would.</p>
+<figure><a class="lightgallery" href="/2023/04/23/software-distribution/QBasic_Opening_Screen.png" title="/2023/04/23/software-distribution/QBasic_Opening_Screen.png" data-thumbnail="/2023/04/23/software-distribution/QBasic_Opening_Screen.png" data-sub-html="<h2>QBasic&rsquo;s opening screen</h2>">
+        
+    </a><figcaption class="image-caption">QBasic&rsquo;s opening screen</figcaption>
+    </figure>
+<p>The software, as I wrote it, was a collection of source code files - just text
+files with a <code>.BAS</code> extension. For anyone to run those programs, they&rsquo;d have to
+open QBasic themselves, select &ldquo;File→Open&rdquo;, navigate to my file, then use the
+&ldquo;Run&rdquo; menu to actually run the program. And presumably figure out how to exit
+QBasic when they&rsquo;re done.  Now, 8-year-olds in the 90s were used to computers
+being slightly harder to operate, e.g. typing out a command or two to open a
+game; indeed, friends did figure this out.  But this still felt like a <em>super
+janky</em> way to distribute software.</p>
+<p>What I actually wanted to do was provide a <em>&ldquo;self-contained&rdquo;</em> program, one where
+you simply enter its name and it starts up, like any other DOS program I&rsquo;d seen.
+Ideally, it would have the fashionable <code>.EXE</code> extension (the term &ldquo;<code>EXE</code> file&rdquo;
+seemed pretty much synonymous with &ldquo;program&rdquo;).</p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note - Batch files<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>What I wanted to do was allow people to run <code>LUTZKY1.BAS</code> with one command. This
+could&rsquo;ve been accomplished by adding a file <code>LUTZKY1.BAT</code> (<code>BAT</code> for MS-DOS
+Batch, not <code>BAS</code>) with these contents:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="line"><span class="cl"><span class="c1">REM Turn off janky &#34;print each command&#34; behavior</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">ECHO</span> OFF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">QBASIC /RUN LUTZKY1.BAS
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I would&rsquo;ve needed to terminate the program using the <code>SYSTEM</code> command rather
+than <code>END</code>. This way, indeed typing <code>LUTZKY1</code> into the prompt would&rsquo;ve run my
+program and exit normally. However:</p>
+<ul>
+<li>I don&rsquo;t think I knew how to do that</li>
+<li>It still flashes the QBasic IDE on startup</li>
+<li>I was still relying on QBasic being installed on the destination machine, and
+I knew (though?) older versions of MS-DOS didn&rsquo;t include it.</li>
+<li>Having things in multiple files still seemed &ldquo;off&rdquo;. I now wonder if I
+could&rsquo;ve designed a file to work both as the batch file and as the BASIC file.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<p>I had heard rumor of the &ldquo;professional, expensive&rdquo; bit of software I needed - a
+<em>compiler</em>, which would perform the right magic to me a shiny, self-contained
+<code>LUTZKY1.EXE</code>. But this sounded like an expensive thing to even ask my parents
+for, never mind the fact I had no idea where one <em>buys software</em> - the local
+shops only seemed to stock games and office productivity software.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In 2023, I found out that this software was called <a href="https://en.wikipedia.org/wiki/QuickBASIC" target="_blank" rel="noopener noreffer ">QuickBASIC</a>&hellip;
+not confusing at all, surely the Q in QBasic didn&rsquo;t stand for &ldquo;Quick&rdquo; and they
+weren&rsquo;t both abbreviated &ldquo;QB&rdquo;.</div>
+        </div>
+    </div>
+<p>For whatever reason, this was important enough to me to try some truly wacky
+stuff. I vaguely remember messing around blindly with files on my computer,
+trying to generate an <code>EXE</code> file complete with an icon - efforts included taking
+something called the &ldquo;PIF Editor&rdquo;, which creates shortcuts to files and
+ostensibly adds icons to them&hellip; and replacing one of the system <code>EXE</code> files
+with it, in case the filename was &ldquo;magical&rdquo;. The real magic was young me
+learning the valuable lesson that I should&rsquo;ve made a backup of this file before
+replacing it.</p>
+<h2 id="visual-basic-late-90s">Visual Basic (late 90s)</h2>
+<p>By the late 90s, Windows 9x came around along with Microsoft Office, which had a
+wonderful capability: <a href="https://en.wikipedia.org/wiki/Visual_Basic_for_Applications" target="_blank" rel="noopener noreffer ">Visual Basic for Applications</a>. this gave me my
+first experience writing actual GUI applications, strangely embedded within an
+Excel spreadsheet. Most memorably, Pokémon was a huge deal at the time, and I
+had created &ldquo;APCO - A Pokémon Card Organizer&rdquo; - a trivial deck building app.</p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note - Pokémon<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>On April 1st, 1997, the very first episode of the Pokémon anime was shown on
+Israel, on channel 6; I was the official &ldquo;hero of the day&rdquo; guest, as a Pokémon
+expert. I got to this position by nitpicking on some &ldquo;kids&rsquo; portal&rdquo; website that
+their Pokémon page contained inaccuracies, which landed me a job as their
+Pokémon card strategy reviewer; I was 11, so they paid me in Pokémon cards.</p>
+<!-- raw HTML omitted -->
+<p>For the anime premiere I was interviewed by Dana Dvorin; I have sadly been
+unable to find any footage of this hilariously awkward interview.</p>
+</div>
+        </div>
+    </div>
+<p>Once again, I wanted to distribute this software - perhaps using this magical
+thing I now had access to called <em>The Internet</em>. And, once again, sending an
+excel <code>XLS</code> file around with a big &ldquo;click me to start the actual program button&rdquo;
+seemed, well, janky. Amazingly, a friend had a copy of &ldquo;really real Visual
+Basic&rdquo; (the coveted <em>compiler</em> I had heard of), and was able to convert my janky
+app-in-<code>XLS</code> to a proper shiny <code>EXE</code> file. Slight caveat - there was a runtime
+library that had to be distributed alongside it, or it wouldn&rsquo;t work.</p>
+<!-- raw HTML omitted -->
+<p>This got me looking at <em>installers</em>. All &ldquo;serious&rdquo; software was proudly using
+InstallShield (this was before these newfangled <code>.MSI</code> files - even the
+installer was a shiny <code>.EXE</code>!), but looking at a trial version left me
+scratching my head at how things should be organized. Finally, a self-extracting
+RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfully
+uploading the finished product to some download site of the era, probably
+Tucows.</p>
+<figure><a class="lightgallery" href="/2023/04/23/software-distribution/installshield.png" title="/2023/04/23/software-distribution/installshield.png" data-thumbnail="/2023/04/23/software-distribution/installshield.png" data-sub-html="<h2>If your software didn&rsquo;t come this way in the 90s, was it even real software?</h2>">
+        
+    </a><figcaption class="image-caption">If your software didn&rsquo;t come this way in the 90s, was it even real software?</figcaption>
+    </figure>
+<h2 id="linux-early-2000s">Linux (early 2000s)</h2>
+<p>In high school, I was first introduced to Linux. It (Mandrake 8.1) came in 3 CDs
+burned by a guy who couldn&rsquo;t have seemed shadier if he had pulled them out of a
+trench-coat.  Regardless, it was enlightening: How can this possibly be legally
+free? Wait, it just <em>comes</em> with a compiler? What do you mean the compiler
+doesn&rsquo;t contain a GUI? It was a fascinating dive into understanding what my
+computer even <em>is</em>; while I was old enough to remember pre-Windows days, I had
+switched to Linux from Windows 98<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, so all of my experience with
+Windows was as a graphical wrapper running inside DOS. For instance, not having
+drive letters (A, B nor C) was <em>wild</em>.</p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note: Gentoo<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><!-- raw HTML omitted -->
+<p>I didn&rsquo;t spend long with Mandrake before switching to Gentoo Linux, where
+installing software is accomplished with the <code>emerge</code> command. The <code>emerge</code>
+command magically (to me, at the time) gets the software from the internet and
+<em>compiles</em> it. In my mind, I was Hackerman. In reality, it
+was more often &ldquo;sorry dad, you can&rsquo;t use the computer today, a new version of
+KDE just came out and the build will take a few hours&rdquo;. I stuck with Gentoo
+until college<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, when a stack of remarkably slick-looking envelopes with
+Ubuntu CDs showed up. At this point Linux started seeming serious, and the &ldquo;year
+of the linux desktop&rdquo; meme started to get to me. Ubuntu also killed off
+install-fests<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, as installing it was too easy to justify getting
+friends and pizza together.</p>
+<!-- raw HTML omitted -->
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>My grandma got my old PC with it, so I can proudly say my grandma is
+a former Gentoo user. She exclusively used the browser, but whenever she needed
+support I was the only one who could provide it, as any other support people
+invariably tried to get her to find the &ldquo;start&rdquo; menu, even when the problem was
+entirely within gmail.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>If anyone has footage of the install-fest I was forced to
+trick <a href="https://en.wikipedia.org/wiki/Moshik_Afia" target="_blank" rel="noopener noreffer ">Moshik Afia</a> to go to, as part of פעם בחיים on Yes, please send it my
+way!&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div>
+        </div>
+    </div>
+<p>As I dove deeper into Linux, I realized I&rsquo;m seeing some of the older jank once
+again. Lots of software came as shell scripts that ran <code>java</code>, meaning you had
+to have the Java Runtime Environment installed. Python software came as scripts,
+which needed not only Python itself installed, but usually some additional
+python libraries. At this point I noticed the following:</p>
+<ol>
+<li>This only seems less janky in Linux because executables usually don&rsquo;t have
+filename extensions; the difference between a &ldquo;clean <code>.EXE</code>&rdquo; and a &ldquo;janky
+<code>.BAT</code>&rdquo; is tucked away in the file contents.</li>
+<li>&ldquo;Proper&rdquo; C programs also need a bunch of stuff installed along with them.</li>
+</ol>
+<p>The Linux ecosystem has a dizzying array of solutions to this problem. From
+meticulously<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> packaging DEB files through FlatPak/Snap/whatever
+through Docker<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. I&rsquo;m the kind of nerd who&rsquo;s excitedly following
+<a href="https://fasterthanli.me/series/building-a-rust-service-with-nix" target="_blank" rel="noopener noreffer ">FasterThanLime&rsquo;s series</a> about how Nix presumably does this
+better than anything else.</p>
+<h2 id="afterword---the-web">Afterword - the web</h2>
+<!-- raw HTML omitted -->
+<p>At some point, probably too gradually for me to notice, web apps became actual
+apps. XMLHttpRequest is horribly named, but pretty transformative when used by
+sites to dynamically fetch more information; Javascript had gradually
+transformed to &ldquo;the Assembly language of the web&rdquo; (i.e. it&rsquo;s the thing stuff
+compiles to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>; but the really cool thing about web apps remains
+distribution: Just give people the URL.</p>
+<!-- raw HTML omitted -->
+<p>Yes, there&rsquo;s work to do. You need a server, you need to handle its uptime and
+connectivity (cloud has made this effectively trivial, even moreso for quick
+demos with things like <a href="https://ngrok.com" target="_blank" rel="noopener noreffer ">ngrok</a>). The app itself also needs to be written
+differently: updates are nontrivial, if any state is saved then
+backwards-compatibility becomes difficult, you need to handle different browsers
+(and different device types); it&rsquo;s not easy. But a giant ecosystem has developed
+around solving these problems, and the infrastructure to use the web has become,
+by comparison, effectively ubiquitous. And to my 8-year-old self, there&rsquo;d be
+nothing cooler than that: &ldquo;Forget the floppies, just give a note with your
+address to your classmates; it&rsquo;s basically guaranteed to work on their
+computer&rdquo;.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Windows 2000 had pretty much skipped home PCs around me, and XP was new
+and untrustworthy.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>The <a href="https://www.debian.org/doc/manuals/maint-guide/" target="_blank" rel="noopener noreffer ">Debian New Maintainers&rsquo; Guide</a>, which explains how to do this, starts off with &ldquo;social dynamics of Debian&rdquo; before getting into the details of actually packaging anything.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Sometimes described as &ldquo;It works on your machine? Then we&rsquo;ll ship your machine.&rdquo; <a href="https://www.reddit.com/r/ProgrammerHumor/comments/cw58z7/it_works_on_my_machine/" target="_blank" rel="noopener noreffer ">credit</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>I think compiling stuff to WASM is becoming more popular nowadays.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>]]></description></item><item><title>I tried Rust</title><link>https://lutzky.net/2023/01/16/rust/</link><pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2023/01/16/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
 <p>As you can tell by previous posts on this blog, I used to be quite a fan of Go;
 I use it at work often, and some features about it are legitimately great:
 Package management, &ldquo;static duck typing&rdquo; (structural typing), providing
@@ -1326,58 +1558,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
         
     </a><figcaption class="image-caption">Power view</figcaption>
     </figure>
-]]></description></item><item><title>WFH Wifi</title><link>https://lutzky.net/2020/12/10/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2020/12/10/wfh-wifi/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>2020 being what it is, I&rsquo;ve been working from home for quite a while. We decided to convert our spare bedroom into a home office, and I realized how nice it is to have a proper desk at home, even for non-work stuff (I haven&rsquo;t had one in over 10 years!). That being said, wifi is a challenge with the apartment&rsquo;s structure.</p>
-<p>(Diagram below is approximate; I&rsquo;ll explain why and how it was created in a bit.)</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/base.png" title="/2020/12/10/wfh-wifi/base.png" data-thumbnail="/2020/12/10/wfh-wifi/base.png" data-sub-html="<h2>Approximate apartment structure; explanation on how and why it was created coming in a bit.</h2>">
-        
-    </a><figcaption class="image-caption">Approximate apartment structure; explanation on how and why it was created coming in a bit.</figcaption>
-    </figure>
-<p>My broadband comes in via a cable connection in the living room - the modem and router/AP sit in the bottom middle of the room. Before WFH times we would occasionally work from home, mostly from the living room, which was the only place with chairs. To get wifi in the bedrooms (one of which is now labeled &ldquo;office&rdquo;), I used a TP-link powerline pack - i.e. one thing stuck to a power socket by the router in the living room, and another in the bedroom. Or the hallway. The tradeoffs were these:</p>
-<ul>
-<li>We wanted to have it as close to the bedroom as possible, so we&rsquo;d have good reception there.</li>
-<li>Having it <em>in</em> the bedroom let us hard-wire the TV to it.</li>
-<li>It&rsquo;d have better performance the closer it was to the living room. While I&rsquo;m not sure what the electrical topology of my apartment is, the further from the living room it got, the worse its &ldquo;reception&rdquo; got - i.e. the slower and less reliable its communication with the one in the living room would be.</li>
-</ul>
-<p>So for the most part, it worked. We&rsquo;d get the odd disconnections or slowness, but it was used mostly on our phones, so we could switch wifi off (or, better yet, just go to sleep or get out of bed). There was one annoying issue though - roaming never worked right.</p>
-<ul>
-<li>Giving the powerline wifi network a different name worked OK, but we&rsquo;d have to manually switch networks; especially on my partner&rsquo;s iPhone, which tends to be &ldquo;sticky&rdquo; (and requires more taps to switch wifi networks to boot).</li>
-<li>Giving the powerline wifi network the same name (SSID) and password worked OK for roaming most of the time, but not always - and now it was quite difficult to tell, when a problem occurred, if it was due to our phones looking for the wrong AP; turning wifi off and on again didn&rsquo;t always fix this.</li>
-</ul>
-<p>Working from home, connectivity suddenly became <em>important</em>. We have a ton of video meetings, we&rsquo;re using our laptops all day, and sometimes we need to move around quickly - we can&rsquo;t both have meetings in the home office, so one of us needs to switch to the living room table and have the connection <em>work</em> with minimal extra fiddling.</p>
-<p>I decided two get a two-pack of Nest Wifi devices (a Router and a Point). Over time, I found a third one was necessary, and still doesn&rsquo;t always work quite right. Unfortunately, running ethernet to the home office isn&rsquo;t currently a possibility (&hellip;but should definitely be a priority for any renovation). After some messing around, I came up with a solution, but figured I&rsquo;d try and understand if I can do better by analyzing the apartment.</p>
-<p>So, step 1 - I needed a floor plan. I do not have one of my apartment, but the 3D visualization the realtor provided was still up and had a &ldquo;measurement&rdquo; tool. So I went to <a href="http://floorplanner.com" target="_blank" rel="noopener noreffer ">http://floorplanner.com</a> and used that visualization to sketch up the diagram above. The point of this was the next step: In a wonderful company-internal talk about home wifi (this is a common issue in Israel, where many apartments have <a href="https://en.wikipedia.org/wiki/Merkhav_Mugan" target="_blank" rel="noopener noreffer ">concrete-walled shelters</a>), the neat mapping capability of Unifi&rsquo;s controller software was shown. While I don&rsquo;t own any Unifi gear, I installed the controller software (available as <a href="https://docs.linuxserver.io/images/docker-unifi-controller" target="_blank" rel="noopener noreffer ">a neat docker container</a>), imported my diagram, drew the walls, and positioned my living room router.</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png" title="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png" data-sub-html="<h2>Router in the living room</h2>">
-        
-    </a><figcaption class="image-caption">Router in the living room</figcaption>
-    </figure>
-<p>This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren&rsquo;t taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally worse in 5ghz:</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/livingroom-5g-64dBm.png" title="/2020/12/10/wfh-wifi/livingroom-5g-64dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/livingroom-5g-64dBm.png" data-sub-html="<h2>5ghz is even worse</h2>">
-        
-    </a><figcaption class="image-caption">5ghz is even worse</figcaption>
-    </figure>
-<p>The spot we naturally chose for the point was the hallway (the utility room now seems like it would&rsquo;ve worked better for reception, but it&rsquo;s often quite damp and has no free power sockets anyway). Indeed, the Google Wifi app (which you still use for Nest Wifi) would say that the connection between it and the living room is &ldquo;Great&rdquo; (and that&rsquo;s as much detail as you&rsquo;ll get). But the reception in the office would still be pretty bad, sometimes leading to disconnections.</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/hallway-2g-60dBm.png" title="/2020/12/10/wfh-wifi/hallway-2g-60dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/hallway-2g-60dBm.png" data-sub-html="<h2>Wifi point in the hallway</h2>">
-        
-    </a><figcaption class="image-caption">Wifi point in the hallway</figcaption>
-    </figure>
-<p>I suspect the issue here might be that 5ghz connectivity is <em>just barely</em> available:</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/hallway-5g-60dBm.png" title="/2020/12/10/wfh-wifi/hallway-5g-60dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/hallway-5g-60dBm.png" data-sub-html="<h2>5ghz just barely available</h2>">
-        
-    </a><figcaption class="image-caption">5ghz just <em>barely</em> available</figcaption>
-    </figure>
-<p>At any rate, I decided to throw some more money at the problem, adding a 2nd Point in the office:</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/office-2g-60dBm.png" title="/2020/12/10/wfh-wifi/office-2g-60dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/office-2g-60dBm.png" data-sub-html="<h2>Wifi point in the office</h2>">
-        
-    </a><figcaption class="image-caption">Wifi point in the office</figcaption>
-    </figure>
-<p>There is now most certainly a strong connection between the office point and the hallway point (as well as the laptops in the office), and the hallway point has a good connection with the living room. However, as it turned out, the mesh test did not consistently give me good results - sometimes I would just get &ldquo;poor&rdquo; results. I suspect the issue is the dynamic nature of&hellip; doors.</p>
-<p>We tend to get quite loud in meetings, so when we have them, we close the office and living room doors - represented here as wooden walls. It seems that, when the doors are open, the office point could still just barely communicate with the router in the living room. It turns out that Nest does all it can to avoid daisy-chaining, so the office point would connect to the living room router if it could see it. Closing the doors would make that connection worse, but it&rsquo;d take the network some time to reconfigure. However, rebooting the system with all doors closed got a &ldquo;great mesh&rdquo; (presumably daisy-chained, though this can&rsquo;t be seen from the app). That meant that my wifi-signal depended on the particular state of the doors when the mesh network last decided to self-optimize.</p>
-<p>The solution I came up with was to move the point from the office to the bedroom (&hellip;where nobody is during the work day), and make sure that door stays open:</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/bedroom-opendoor-2g-60dBm.png" title="/2020/12/10/wfh-wifi/bedroom-opendoor-2g-60dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/bedroom-opendoor-2g-60dBm.png" data-sub-html="<h2>Wifi point in the bedroom, door open</h2>">
-        
-    </a><figcaption class="image-caption">Wifi point in the bedroom, door open</figcaption>
-    </figure>
-<p>I now have no idea if the network is daisy-chained or not, but it has been working consistently well&hellip; even at night when I stay up writing stuff like this blog post, and the bedroom door is closed.</p>
-<p>I&rsquo;d really want to get some CAT7 around the apartment, but for now - this works. Hopefully these tools and methods can help you out as well.</p>
 ]]></description></item></channel></rss>
