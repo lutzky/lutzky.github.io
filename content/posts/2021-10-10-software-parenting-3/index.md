@@ -20,7 +20,7 @@ Coding for the ESP8266 can be done using the same tooling as Arduino - namely, i
 
 One quirk of working with the BabyBuddy API is that reporting a diaper change requires supplying the time of change, even if our intention is "right now". That's easy enough on a Linux system, but microcontrollers don't generally have clocks. Thankfully, libraries such as [ESPDateTime](https://github.com/mcxiaoke/ESPDateTime) provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:
 
-{{< image src="poobuttons-v2.jpg" caption="Poobuttons v2 - nodeMCU on breadboard" >}}
+{{< image src="feature-poobuttons-v2.jpg" caption="Poobuttons v2 - nodeMCU on breadboard" >}}
 
 Indeed, this version fits neatly onto a single (full-sized) breadboard. It's not quite [Ben Eater](https://www.youtube.com/watch?v=PE-_rJqvDhQ) grade, but the NodeMCU is pretty good for breadboard mounting, and using solid-core jumpers let me make it much neater than the previous iteration. However, at this point we realized there was a missing feature: We were never quite sure if we had pressed the button, especially if we were performing a diaper change together[^formula-1] . A couple of LEDs can only convey so much information.
 

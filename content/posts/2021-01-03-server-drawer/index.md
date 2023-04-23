@@ -26,4 +26,4 @@ When opened, the drawer shows the Virgin Media router (in [Modem Mode][modem-mod
 
 Finally, here's how everything is powered. The guy who built it thought 10 sockets (8 in the drawer, 2 behind the TV) was overkill. It was not.
 
-{{< image src="power.jpg" caption="Power view" >}}
+{{< image src="feature-power.jpg" caption="Power view" >}}

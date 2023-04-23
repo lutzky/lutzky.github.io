@@ -35,7 +35,7 @@ I decided two get a two-pack of Nest Wifi devices (a Router and a Point). Over t
 
 So, step 1 - I needed a floor plan. I do not have one of my apartment, but the 3D visualization the realtor provided was still up and had a "measurement" tool. So I went to <http://floorplanner.com> and used that visualization to sketch up the diagram above. The point of this was the next step: In a wonderful company-internal talk about home wifi (this is a common issue in Israel, where many apartments have [concrete-walled shelters](https://en.wikipedia.org/wiki/Merkhav_Mugan)), the neat mapping capability of Unifi's controller software was shown. While I don't own any Unifi gear, I installed the controller software (available as [a neat docker container](https://docs.linuxserver.io/images/docker-unifi-controller)), imported my diagram, drew the walls, and positioned my living room router.
 
-{{< image src="livingroom-2g-64dBm.png" caption="Router in the living room" >}}
+{{< image src="feature-livingroom-2g-64dBm.png" caption="Router in the living room" >}}
 
 This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren't taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally worse in 5ghz:
 

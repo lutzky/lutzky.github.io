@@ -79,6 +79,6 @@ The PiOLED library (actually periph.io's ssd1306 library) essentially lets you r
 
 I'm quite happy with the final result:
 
-{{< image src="pioled.jpg" caption="PiTemp with PiOLED" >}}
+{{< image src="feature-pioled.jpg" caption="PiTemp with PiOLED" >}}
 
 Happy hacking!
