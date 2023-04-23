@@ -32,7 +32,7 @@ classmates to play around with; y'know, like a professional software developer w
 
 [qbasic]: https://archive.org/details/msdos_qbasic_megapack
 
-{{< image src="QBasic_Opening_Screen.png"
+{{< image src="feature_QBasic_Opening_Screen.png"
     caption="QBasic's opening screen" >}}
 
 The software, as I wrote it, was a collection of source code files - just text
