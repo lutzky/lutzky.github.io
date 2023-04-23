@@ -36,6 +36,7 @@ enableEmoji = true
     kiddie pool, the author of this blog is known to be quite shallow and \
     pedantic.\
     """
+  images = ["/images/bio-photo.jpg"]
 
   [params.search]
     enable = true
