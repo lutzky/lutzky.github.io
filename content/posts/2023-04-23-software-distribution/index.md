@@ -56,7 +56,8 @@ could've been accomplished by adding a file `LUTZKY1.BAT` (`BAT` for MS-DOS
 Batch, not `BAS`) with these contents:
 
 ```bat
-REM Turn off janky "print each command" behavior
+@REM Turn off janky "print each command" behavior
+@REM Mind the load-bearing @ at the start of each line...
 @ECHO OFF
 
 QBASIC /RUN LUTZKY1.BAS
@@ -225,7 +226,7 @@ At some point, probably too gradually for me to notice, web apps became actual
 apps. XMLHttpRequest is horribly named, but pretty transformative when used by
 sites to dynamically fetch more information; Javascript had gradually
 transformed to "the Assembly language of the web" (i.e. it's the thing stuff
-compiles to[^wasm]; but the really cool thing about web apps remains
+compiles to[^wasm]); but the really cool thing about web apps remains
 distribution: Just give people the URL.
 
 [^wasm]: I think compiling stuff to WASM is becoming more popular nowadays.
