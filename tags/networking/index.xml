@@ -16,7 +16,7 @@
     </a><figcaption class="image-caption">Top view</figcaption>
     </figure>
 <p>Finally, here&rsquo;s how everything is powered. The guy who built it thought 10 sockets (8 in the drawer, 2 behind the TV) was overkill. It was not.</p>
-<figure><a class="lightgallery" href="/2021/01/03/server-drawer/power.jpg" title="/2021/01/03/server-drawer/power.jpg" data-thumbnail="/2021/01/03/server-drawer/power.jpg" data-sub-html="<h2>Power view</h2>">
+<figure><a class="lightgallery" href="/2021/01/03/server-drawer/feature-power.jpg" title="/2021/01/03/server-drawer/feature-power.jpg" data-thumbnail="/2021/01/03/server-drawer/feature-power.jpg" data-sub-html="<h2>Power view</h2>">
         
     </a><figcaption class="image-caption">Power view</figcaption>
     </figure>
@@ -41,7 +41,7 @@
 <p>Working from home, connectivity suddenly became <em>important</em>. We have a ton of video meetings, we&rsquo;re using our laptops all day, and sometimes we need to move around quickly - we can&rsquo;t both have meetings in the home office, so one of us needs to switch to the living room table and have the connection <em>work</em> with minimal extra fiddling.</p>
 <p>I decided two get a two-pack of Nest Wifi devices (a Router and a Point). Over time, I found a third one was necessary, and still doesn&rsquo;t always work quite right. Unfortunately, running ethernet to the home office isn&rsquo;t currently a possibility (&hellip;but should definitely be a priority for any renovation). After some messing around, I came up with a solution, but figured I&rsquo;d try and understand if I can do better by analyzing the apartment.</p>
 <p>So, step 1 - I needed a floor plan. I do not have one of my apartment, but the 3D visualization the realtor provided was still up and had a &ldquo;measurement&rdquo; tool. So I went to <a href="http://floorplanner.com" target="_blank" rel="noopener noreffer ">http://floorplanner.com</a> and used that visualization to sketch up the diagram above. The point of this was the next step: In a wonderful company-internal talk about home wifi (this is a common issue in Israel, where many apartments have <a href="https://en.wikipedia.org/wiki/Merkhav_Mugan" target="_blank" rel="noopener noreffer ">concrete-walled shelters</a>), the neat mapping capability of Unifi&rsquo;s controller software was shown. While I don&rsquo;t own any Unifi gear, I installed the controller software (available as <a href="https://docs.linuxserver.io/images/docker-unifi-controller" target="_blank" rel="noopener noreffer ">a neat docker container</a>), imported my diagram, drew the walls, and positioned my living room router.</p>
-<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png" title="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/livingroom-2g-64dBm.png" data-sub-html="<h2>Router in the living room</h2>">
+<figure><a class="lightgallery" href="/2020/12/10/wfh-wifi/feature-livingroom-2g-64dBm.png" title="/2020/12/10/wfh-wifi/feature-livingroom-2g-64dBm.png" data-thumbnail="/2020/12/10/wfh-wifi/feature-livingroom-2g-64dBm.png" data-sub-html="<h2>Router in the living room</h2>">
         
     </a><figcaption class="image-caption">Router in the living room</figcaption>
     </figure>
