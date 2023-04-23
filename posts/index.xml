@@ -43,9 +43,11 @@ Batch, not <code>BAS</code>) with these contents:</p>
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="line"><span class="cl"><span class="c1">REM Turn off janky &#34;print each command&#34; behavior</span>
+<pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="line"><span class="cl"><span class="p">@</span><span class="c1">REM Turn off janky &#34;print each command&#34; behavior</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="c1">REM Mind the load-bearing @ at the start of each line...</span>
 </span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">ECHO</span> OFF
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">QBASIC /RUN LUTZKY1.BAS
@@ -199,7 +201,7 @@ better than anything else.</p>
 apps. XMLHttpRequest is horribly named, but pretty transformative when used by
 sites to dynamically fetch more information; Javascript had gradually
 transformed to &ldquo;the Assembly language of the web&rdquo; (i.e. it&rsquo;s the thing stuff
-compiles to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>; but the really cool thing about web apps remains
+compiles to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>); but the really cool thing about web apps remains
 distribution: Just give people the URL.</p>
 <!-- raw HTML omitted -->
 <p>Yes, there&rsquo;s work to do. You need a server, you need to handle its uptime and
