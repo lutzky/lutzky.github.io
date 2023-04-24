@@ -429,7 +429,7 @@ and if not - runs it in a detached screen session. Run this with your favorite
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> ! ps -o uname -C rtorrent <span class="p">|</span> grep -q <span class="sb">`</span>whoami<span class="sb">`</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">	screen -d -m rtorrent
+</span></span><span class="line"><span class="cl">  screen -d -m rtorrent
 </span></span><span class="line"><span class="cl"><span class="k">fi</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -502,14 +502,27 @@ source though: I&rsquo;ve detailed the precise installation procedure below; the
 confusing thing is that if you forget to install <code>libgtkspell-dev</code> or
 <code>libaspell-dev</code>, SwitchSpell will not be built, but the <code>configure</code> script
 tells you that it <em>will</em>.</p>
-<pre tabindex="0"><code>sudo apt-get install build-essential gettext libgtkspell-dev libaspell-dev pidgin-dev
-wget http://downloads.guifications.org/plugins//Plugin%20Pack/purple-plugin_pack-2.3.0.tar.bz2
-tar jxvf purple-plugin_pack-2.3.0.tar.bz2
-cd purple-plugin_pack-2.3.0
-./configure --with-plugins=switchspell
-make
-sudo make install
-</code></pre><p>At this point, the Switch Spell plugin should show up in your Pidgin
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install build-essential gettext libgtkspell-dev libaspell-dev pidgin-dev
+</span></span><span class="line"><span class="cl">wget http://downloads.guifications.org/plugins//Plugin%20Pack/purple-plugin_pack-2.3.0.tar.bz2
+</span></span><span class="line"><span class="cl">tar jxvf purple-plugin_pack-2.3.0.tar.bz2
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> purple-plugin_pack-2.3.0
+</span></span><span class="line"><span class="cl">./configure --with-plugins<span class="o">=</span>switchspell
+</span></span><span class="line"><span class="cl">make
+</span></span><span class="line"><span class="cl">sudo make install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>At this point, the Switch Spell plugin should show up in your Pidgin
 preferences. When you activate it, you should get a menu at the top of each
 conversation for choosing the dictionary in use. Enjoy!</p>
 ]]></description></item><item><title>My alarm clock</title><link>https://lutzky.net/posts/my-alarm-clock/</link><pubDate>Tue, 12 Feb 2008 23:37:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/my-alarm-clock/</guid><description><![CDATA[<p>YNet was running a story on how to use your computer as an alarm clock. Here&rsquo;s

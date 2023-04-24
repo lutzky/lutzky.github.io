@@ -77,16 +77,31 @@
 ]]></description></item><item><title>Home network wiring</title><link>https://lutzky.net/posts/home-network-wiring/</link><pubDate>Sun, 04 Sep 2011 18:53:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/home-network-wiring/</guid><description><![CDATA[<p>I don&rsquo;t like wireless connections; they&rsquo;re always second-best, be it in terms
 of security, speed, or reliability. Here&rsquo;s how my apartment looks (very
 approximately):</p>
-<pre tabindex="0"><code>.-P1----.  .-------------------P4-,---------,
-|  PC   |  |       COMFY SOFA     .         |
-|       |  |                      . Closed  |
-|  .-,  |  |      Living room     . Porch   |
-|  |B| P2  |                      .         |
-|  |E|     |                      .         |
-|  |D|  |      HUGE CUPBOARD   TV .  R PC   |
-`-------&#39;  `-P3-------------------&#39;--P5-----&#39;
- My room
-</code></pre><p>The room on the left is mine, with my (constantly torrenting) PC in bed-viewing
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">.-P1----.  .-------------------P4-,---------,
+</span></span><span class="line"><span class="cl">|  PC   |  |       COMFY SOFA     .         |
+</span></span><span class="line"><span class="cl">|       |  |                      . Closed  |
+</span></span><span class="line"><span class="cl">|  .-,  |  |      Living room     . Porch   |
+</span></span><span class="line"><span class="cl">|  |B| P2  |                      .         |
+</span></span><span class="line"><span class="cl">|  |E|     |                      .         |
+</span></span><span class="line"><span class="cl">|  |D|  |      HUGE CUPBOARD   TV .  R PC   |
+</span></span><span class="line"><span class="cl">`-------&#39;  `-P3-------------------&#39;--P5-----&#39;
+</span></span><span class="line"><span class="cl"> My room
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The room on the left is mine, with my (constantly torrenting) PC in bed-viewing
 position. The router (<code>R</code>) is in the closed porch, connected to my roommate&rsquo;s
 PC. Wifi doesn&rsquo;t stand a chance through two walls and the porch&rsquo;s glass screen.
 <code>P1</code> through <code>P5</code> are power outlets.</p>
@@ -144,10 +159,19 @@ the 3 years I used it).</p>
 common situation in the Technion. Here&rsquo;s one way to get around it: Assume you
 can directly ssh into <code>alpha</code>, and from <code>alpha</code> you can ssh into <code>beta</code>. Have
 the following code in your <code>~/.ssh/config</code>:</p>
-<pre tabindex="0"><code>Host beta
-        Hostname 1.2.3.4  # IP Address of beta
-        ProxyCommand ssh alpha nc -w 1 %h %p
-</code></pre><p>This requires you to have <code>nc</code> (netcat) installed on <code>alpha</code>. Once you do that,
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Host beta
+</span></span><span class="line"><span class="cl">        Hostname 1.2.3.4  # IP Address of beta
+</span></span><span class="line"><span class="cl">        ProxyCommand ssh alpha nc -w 1 %h %p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This requires you to have <code>nc</code> (netcat) installed on <code>alpha</code>. Once you do that,
 you can run <code>ssh beta</code> directly from your own box.</p>
 ]]></description></item><item><title>Tunelling even more stuff over SSH</title><link>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</link><pubDate>Tue, 17 Jun 2008 12:32:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</guid><description><![CDATA[<p>Today at the CS department of the Technion is a particularily Bad Network Day
 (TM) for laptop users; none of the wired connections at the farm work, and
