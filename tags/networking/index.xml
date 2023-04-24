@@ -186,12 +186,23 @@ excellent program called dante-client (that&rsquo;s an apt package, folks. if yo
 can&rsquo;t apt-get due to your network situation, get it at packages.ubuntu.com or
 packages.debian.org). Install it, and make sure <code>/etc/dante.conf</code> has the
 following lines:</p>
-<pre tabindex="0"><code>route {
-    from: 0.0.0.0/0   to: 0.0.0.0/0   via: 127.0.0.1 port = 9999
-    protocol: tcp
-    proxyprotocol: socks_v4 socks_v5
-}
-</code></pre><p>Then, run <code>socksify whatever-you-want-to-do</code>. For example, <code>sudo socksify apt-get install something</code>. Or perhaps <code>socksify ssh somewhere</code>. Or <code>sudo wget something</code>. Or <code>socksify git do-something-awesome</code>. (All of the above work for
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">route {
+</span></span><span class="line"><span class="cl">    from: 0.0.0.0/0   to: 0.0.0.0/0   via: 127.0.0.1 port = 9999
+</span></span><span class="line"><span class="cl">    protocol: tcp
+</span></span><span class="line"><span class="cl">    proxyprotocol: socks_v4 socks_v5
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then, run <code>socksify whatever-you-want-to-do</code>. For example, <code>sudo socksify apt-get install something</code>. Or perhaps <code>socksify ssh somewhere</code>. Or <code>sudo wget something</code>. Or <code>socksify git do-something-awesome</code>. (All of the above work for
 me)</p>
 ]]></description></item><item><title>Encrypted my Wi-fi</title><link>https://lutzky.net/posts/encrypted-my-wi-fi/</link><pubDate>Sun, 28 Oct 2007 22:05:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/encrypted-my-wi-fi/</guid><description><![CDATA[<p>Reading some backlog on this blog, I found the following gem:</p>
 <blockquote>

@@ -90,6 +90,7 @@ Android devices, but those don&rsquo;t really work with the Android SDK&rsquo;s 
 changes to the <code>system</code> directory aren&rsquo;t persistent. Here&rsquo;s how to get around
 that:</p>
 <p>First, a few downloads. You&rsquo;ll need:</p>
+<!-- raw HTML omitted -->
 <ol>
 <li>The android emulator (presumably you already have this, if not, you can get
 it at <a href="http://developer.android.com/" target="_blank" rel="noopener noreffer ">developer.android.com</a>)</li>
@@ -109,12 +110,26 @@ somewhere in your <code>$PATH</code> for convenience.</p>
 within your Android SDK directory, under <code>platforms/android-3/images</code> (or
 whatever version you&rsquo;re emulating). We&rsquo;ll extract that - create a temporary
 directory, say <code>/tmp/system.img.hebdroid</code>, and <code>cd</code> to it. Then run:</p>
-<pre tabindex="0"><code>unyaffs /path/to/system.img
-</code></pre><p>The whole <code>/system</code> filesystem should be extracted. Now extract the <code>ttf</code> files
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">unyaffs /path/to/system.img
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The whole <code>/system</code> filesystem should be extracted. Now extract the <code>ttf</code> files
 from <code>hebdroid.zip</code> into the fonts directory, replacing the original font
 files. To pack everything back up, run:</p>
-<pre tabindex="0"><code>mkyaffs2image /tmp/system.img.hebdroid system.img.hebdroid
-</code></pre><p>Now, I recommend putting renaming your original <code>system.img</code> to
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">mkyaffs2image /tmp/system.img.hebdroid system.img.hebdroid
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now, I recommend putting renaming your original <code>system.img</code> to
 <code>system.img.orig</code>, and using symlinking <code>system.img.hebdroid</code> as your new
 <code>system.img</code> (the emulator does indeed follow symlinks), but you can basically
 do whatever you like. You may have to recreate your AVD, but everything should

@@ -266,23 +266,44 @@ separate files in <code>/usr/share/zoneinfo</code>, say <code>IsraelIST</code> a
 <code>IsraelIDT</code>, and copy (or link) the relevant one as
 <code>/etc/localtime</code>. The trick is creating the <code>IsraelIDT</code> file.</p>
 <p>My first guess was the following zic source-file:</p>
-<pre tabindex="0"><code># Zone    NAME                GMTOFF  RULES/SAVE  FORMAT [UNTIL]
-Zone      IsraelIDT           2:00    01:00       IDT
-</code></pre><p>Now, this almost works. The problem is that both <code>is_dst</code> is set and
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl"># Zone    NAME                GMTOFF  RULES/SAVE  FORMAT [UNTIL]
+</span></span><span class="line"><span class="cl">Zone      IsraelIDT           2:00    01:00       IDT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now, this almost works. The problem is that both <code>is_dst</code> is set and
 <code>timezone = -10800</code> (3 hours - should be 2, as it should represent local
 standard time), so some software double-compensates here for a grand total of
 GMT+4:00. After some research (walking through <code>__tzfile_read</code> gave the
 biggest hint), it turns out that <code>timezone</code> is set according to the
 minimal local time type which is <em>transitioned into</em>. So I came up with
 this file:</p>
-<pre tabindex="0"><code># Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
-Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
-Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S
-Rule    ZionIDT 1940  max   -     Jan  1        00:00 1:00  D
-
-# Zone    NAME                GMTOFF  RULES/SAVE  FORMAT  [UNTIL]
-Zone      IsraelIDT           2:00    ZionIDT     I%sT
-</code></pre><p>Sounds about right, nay? Even my handy little
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl"># Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
+</span></span><span class="line"><span class="cl">Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
+</span></span><span class="line"><span class="cl">Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S
+</span></span><span class="line"><span class="cl">Rule    ZionIDT 1940  max   -     Jan  1        00:00 1:00  D
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Zone    NAME                GMTOFF  RULES/SAVE  FORMAT  [UNTIL]
+</span></span><span class="line"><span class="cl">Zone      IsraelIDT           2:00    ZionIDT     I%sT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Sounds about right, nay? Even my handy little
 <a href="http://github.com/lutzky/pyzdump" target="_blank" rel="noopener noreffer ">pyzdump</a> confirms that it looks about how I
 want it to:</p>
 <div class="highlight"><div class="chroma">
@@ -329,10 +350,19 @@ want it to:</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>And its results, as run at 14:42:17 UTC, which is 19:42:17 IDT:</p>
-<pre tabindex="0"><code>Timezone name is IDT, timezone=-7200
-The time is Sat Apr 18 14:42:17 2009
-Timezone name is UTC, timezone=0
-</code></pre><p>Or, as I described it to a friend:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Timezone name is IDT, timezone=-7200
+</span></span><span class="line"><span class="cl">The time is Sat Apr 18 14:42:17 2009
+</span></span><span class="line"><span class="cl">Timezone name is UTC, timezone=0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Or, as I described it to a friend:</p>
 <blockquote>
 <p>Me: Hi computer, do you know what timezone are we in?</p>
 <p>Computer: Yeah, it&rsquo;s Israel Daylight Savings time, GMT+2:00 for standard time.</p>
@@ -346,14 +376,27 @@ Timezone name is UTC, timezone=0
 <p>I&rsquo;ll get to the bottom of this eventually :/</p>
 <p><strong>Addendum:</strong> It seems that the problem is even more complicated. For the
 following timezone file, C programs seem to work fine:</p>
-<pre tabindex="0"><code># Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
-Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
-Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S
-Rule    ZionIDT 1940  2030  -     Jan  1        00:00 1:00  D
-Rule    ZionIDT 2030  max   -     Jan  1        00:00 0:00  S
-# Zone    NAME                GMTOFF  RULES/SAVE  FORMAT  [UNTIL]
-Zone      IsraelIDT           2:00    ZionIDT     I%sT
-</code></pre><p>However, Python programs still show <code>timezone = -10800</code>. Examining
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl"># Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
+</span></span><span class="line"><span class="cl">Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
+</span></span><span class="line"><span class="cl">Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S
+</span></span><span class="line"><span class="cl">Rule    ZionIDT 1940  2030  -     Jan  1        00:00 1:00  D
+</span></span><span class="line"><span class="cl">Rule    ZionIDT 2030  max   -     Jan  1        00:00 0:00  S
+</span></span><span class="line"><span class="cl"># Zone    NAME                GMTOFF  RULES/SAVE  FORMAT  [UNTIL]
+</span></span><span class="line"><span class="cl">Zone      IsraelIDT           2:00    ZionIDT     I%sT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>However, Python programs still show <code>timezone = -10800</code>. Examining
 Python&rsquo;s code, I found this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -468,9 +511,17 @@ receive ex-mode commands as parameters).</p>
 <li>
 <p>You can use git on a VFAT disk (for example, a USB key) without all of the
 annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
-<pre tabindex="0"><code>[core]
-filemode = false
-</code></pre><p>What I haven&rsquo;t figured out is how to do force a chmod in this situation; for
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[core]</span>
+</span></span><span class="line"><span class="cl"><span class="na">filemode</span> <span class="o">=</span> <span class="s">false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>What I haven&rsquo;t figured out is how to do force a chmod in this situation; for
 example, if I create a new script, I was hoping to be able to <code>git chmod +x</code>
 it.</p>
 </li>

@@ -33,7 +33,7 @@ generally, a hyperplane) separating them. Afterwards, it should be able to
 classify new points (without being told which set they belong to) by which side
 of the line they are. The following image (Wikipedia) shows a simple,
 two-dimensional case (the red line properly distinguishing the two sets):</p>
-<p>{: style=&ldquo;max-width:350px&rdquo;}</p>
+<p></p>
 <p>For our case, each <em>&ldquo;property&rdquo;</em> took a block of text, and translated it to an
 <em>n</em>-dimensional point. For some properties, the dimension was quite extreme.
 For example, the property of character trigrams gives each coordinate the value

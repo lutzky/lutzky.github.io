@@ -120,28 +120,56 @@ this script. We rerun <code>msmtp</code> until it succeeds because you will ofte
 &ldquo;connection timed out&rdquo; response from gmail (&hellip;at least on my ISP&hellip;). Here&rsquo;s
 <code>/etc/msmtprc.transmission</code> which is relevant to gmail (this is a bit tricky
 and took a lot of fiddling around with):</p>
-<pre tabindex="0"><code>defaults
-tls on
-tls_starttls on
-tls_trust_file /etc/ssl/certs/ca-certificates.crt
-timeout 60
-
-account default
-host smtp.gmail.com
-port 587
-auth on
-user yourusername@gmail.com
-password yourpasswordhere
-from yourusername@gmail.com
-syslog LOG_MAIL
-</code></pre><p>As usual, caution is required when saving your password in plaintext. I highly
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">defaults
+</span></span><span class="line"><span class="cl">tls on
+</span></span><span class="line"><span class="cl">tls_starttls on
+</span></span><span class="line"><span class="cl">tls_trust_file /etc/ssl/certs/ca-certificates.crt
+</span></span><span class="line"><span class="cl">timeout 60
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">account default
+</span></span><span class="line"><span class="cl">host smtp.gmail.com
+</span></span><span class="line"><span class="cl">port 587
+</span></span><span class="line"><span class="cl">auth on
+</span></span><span class="line"><span class="cl">user yourusername@gmail.com
+</span></span><span class="line"><span class="cl">password yourpasswordhere
+</span></span><span class="line"><span class="cl">from yourusername@gmail.com
+</span></span><span class="line"><span class="cl">syslog LOG_MAIL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As usual, caution is required when saving your password in plaintext. I highly
 recommend using Google&rsquo;s two-step authentication, which will have you creating
 a one-time password for each application - use one of those one-time passwords
 here.</p>
 <p>Finally, in <code>/etc/transmission-daemon/settings.json</code>, add the following code:</p>
-<pre tabindex="0"><code>&#34;script-torrent-done-enabled&#34;: true,
-&#34;script-torrent-done-filename&#34;: &#34;/usr/local/bin/notify_torrent_done&#34;,
-</code></pre><p><strong>Important:</strong> You need to run <code>/etc/init.d/transmission-daemon reload</code> at
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;script-torrent-done-enabled&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;script-torrent-done-filename&#34;</span><span class="err">:</span> <span class="s2">&#34;/usr/local/bin/notify_torrent_done&#34;</span><span class="err">,</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Important:</strong> You need to run <code>/etc/init.d/transmission-daemon reload</code> at
 this point, not <code>restart</code> - that would cause <code>settings.json</code> to be
 rewritten from runtime configuration.</p>
 <p>That&rsquo;s it. Enjoy!</p>
