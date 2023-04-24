@@ -1,5 +1,7 @@
 ---
 date: "2021-01-03T00:00:00Z"
+slug: server-drawer
+aliases: ["/2021/01/03/server-drawer/"]
 summary: A quick look at my partner-approved "server drawer"
 tags:
   - networking

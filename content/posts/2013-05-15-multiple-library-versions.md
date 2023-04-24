@@ -1,5 +1,7 @@
 ---
 date: "2013-05-15T00:00:00Z"
+slug: multiple-library-versions
+aliases: ["/2013/05/15/multiple-library-versions/"]
 tags:
 - software
 - c

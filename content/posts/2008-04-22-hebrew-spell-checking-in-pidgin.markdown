@@ -1,5 +1,7 @@
 ---
 date: "2008-04-22T14:13:00Z"
+slug: hebrew-spell-checking-in-pidgin
+aliases: ["/2008/04/22/hebrew-spell-checking-in-pidgin/"]
 tags:
 - linux
 title: Hebrew spell-checking in Pidgin

@@ -1,5 +1,7 @@
 ---
 date: "2014-08-15T00:00:00Z"
+slug: git-ignore
+aliases: ["/2014/08/15/git-ignore/"]
 summary:  Using `.gitignore` to exclude build artifacts from your repository.
 tags:
 - git-while-you-sit

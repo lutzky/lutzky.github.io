@@ -1,5 +1,7 @@
 ---
 date: "2008-07-23T16:19:00Z"
+slug: security-project
+aliases: ["/2008/07/23/security-project/"]
 tags:
 - security
 title: Security project

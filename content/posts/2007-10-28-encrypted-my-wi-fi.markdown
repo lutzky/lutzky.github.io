@@ -1,5 +1,7 @@
 ---
 date: "2007-10-28T22:05:00Z"
+slug: encrypted-my-wi-fi
+aliases: ["/2007/10/28/encrypted-my-wi-fi/"]
 tags:
 - networking
 title: Encrypted my Wi-fi

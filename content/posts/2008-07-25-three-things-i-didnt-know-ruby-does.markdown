@@ -1,5 +1,7 @@
 ---
 date: "2008-07-25T17:55:00Z"
+slug: three-things-i-didnt-know-ruby-does
+aliases: ["/2008/07/25/three-things-i-didnt-know-ruby-does/"]
 tags:
 - software
 - ruby

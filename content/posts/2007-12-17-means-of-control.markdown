@@ -1,5 +1,7 @@
 ---
 date: "2007-12-17T01:47:00Z"
+slug: means-of-control
+aliases: ["/2007/12/17/means-of-control/"]
 tags:
 - life
 title: Means of control

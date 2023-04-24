@@ -1,5 +1,7 @@
 ---
 date: "2007-12-19T01:45:00Z"
+slug: sour-chewing-gum
+aliases: ["/2007/12/19/sour-chewing-gum/"]
 tags:
   - asides
 title: Sour chewing gum

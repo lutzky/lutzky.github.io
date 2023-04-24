@@ -1,5 +1,7 @@
 ---
 date: "2014-04-26T00:00:00Z"
+slug: social-network-spoiler-prevention
+aliases: ["/2014/04/26/social-network-spoiler-prevention/"]
 summary:  A feature proposal for avoiding spoilers on social networks.
 title: Social network spoiler prevention
 ---

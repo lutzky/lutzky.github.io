@@ -1,5 +1,7 @@
 ---
 date: "2007-04-19T15:44:00Z"
+slug: grub-menu-lst-editor
+aliases: ["/2007/04/19/grub-menu-lst-editor/"]
 tags:
 - linux
 title: Grub menu.lst editor

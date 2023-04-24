@@ -1,5 +1,7 @@
 ---
 date: "2011-09-02T08:30:00Z"
+slug: upcoming-features-in-transportdroidil
+aliases: ["/2011/09/02/upcoming-features-in-transportdroidil/"]
 tags:
   - TransportDroidIL
   - android

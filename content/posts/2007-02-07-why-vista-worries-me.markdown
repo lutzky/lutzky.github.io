@@ -1,5 +1,7 @@
 ---
 date: "2007-02-07T18:22:00Z"
+slug: why-vista-worries-me
+aliases: ["/2007/02/07/why-vista-worries-me/"]
 tags:
 - software
 - security

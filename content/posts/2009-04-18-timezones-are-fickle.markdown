@@ -1,5 +1,7 @@
 ---
 date: "2009-04-18T16:45:00Z"
+slug: timezones-are-fickle
+aliases: ["/2009/04/18/timezones-are-fickle/"]
 summary:  Creating a manual "always-daylight-savings" timezone is hard. Let's peek
   at just how messy timezone logic gets.
 tags:

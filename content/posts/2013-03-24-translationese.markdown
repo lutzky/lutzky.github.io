@@ -1,5 +1,7 @@
 ---
 date: "2013-03-24T00:51:15Z"
+slug: translationese
+aliases: ["/2013/03/24/translationese/"]
 tags:
 - natural language processing
 - software

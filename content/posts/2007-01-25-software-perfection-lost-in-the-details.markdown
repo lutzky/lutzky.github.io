@@ -1,5 +1,7 @@
 ---
 date: "2007-01-25T00:32:00Z"
+slug: software-perfection-lost-in-the-details
+aliases: ["/2007/01/25/software-perfection-lost-in-the-details/"]
 tags:
 - software
 title: Software Perfection - Lost in the details

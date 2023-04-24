@@ -1,5 +1,7 @@
 ---
 date: "2007-02-14T22:23:00Z"
+slug: heres-hoping
+aliases: ["/2007/02/14/heres-hoping/"]
 tags:
 - technion
 title: Here's hoping

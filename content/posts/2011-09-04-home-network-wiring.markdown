@@ -1,5 +1,7 @@
 ---
 date: "2011-09-04T18:53:00Z"
+slug: home-network-wiring
+aliases: ["/2011/09/04/home-network-wiring/"]
 tags:
 - networking
 title: Home network wiring

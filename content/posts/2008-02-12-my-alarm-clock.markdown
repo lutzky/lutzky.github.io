@@ -1,5 +1,7 @@
 ---
 date: "2008-02-12T23:37:00Z"
+slug: my-alarm-clock
+aliases: ["/2008/02/12/my-alarm-clock/"]
 tags:
 - linux
 title: My alarm clock

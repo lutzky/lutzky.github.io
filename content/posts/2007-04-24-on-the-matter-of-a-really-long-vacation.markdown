@@ -1,5 +1,7 @@
 ---
 date: "2007-04-24T22:14:00Z"
+slug: on-the-matter-of-a-really-long-vacation
+aliases: ["/2007/04/24/on-the-matter-of-a-really-long-vacation/"]
 tags:
 - music
 - technion

@@ -1,5 +1,7 @@
 ---
 date: "2007-07-27T10:48:00Z"
+slug: nanuchka
+aliases: ["/2007/07/27/nanuchka/"]
 tags:
 - music
 title: NaNuchKa

@@ -1,5 +1,7 @@
 ---
 date: "2007-10-31T22:50:00Z"
+slug: computability-typed-lectures-and-tutorials
+aliases: ["/2007/10/31/computability-typed-lectures-and-tutorials/"]
 tags:
 - technion
 title: Computability - Typed Lectures and Tutorials

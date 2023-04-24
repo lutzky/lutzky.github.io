@@ -1,5 +1,7 @@
 ---
 date: "2008-07-11T11:58:00Z"
+slug: that-life-category-there
+aliases: ["/2008/07/11/that-life-category-there/"]
 tags:
 - life
 - technion

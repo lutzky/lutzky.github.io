@@ -1,5 +1,7 @@
 ---
 date: "2008-11-10T23:01:00Z"
+slug: another-ssh-trick
+aliases: ["/2008/11/10/another-ssh-trick/"]
 tags:
 - networking
 title: Another SSH trick

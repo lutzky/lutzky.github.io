@@ -1,5 +1,7 @@
 ---
 date: "2006-08-15T00:00:00Z"
+slug: katyusha-damage_copy
+aliases: ["/2006/08/15/katyusha-damage_copy/"]
 summary: (Hebrew) Comparative Katyusha damage
 tags: ["hebrew"]
 title: אהבתי את שני אלה

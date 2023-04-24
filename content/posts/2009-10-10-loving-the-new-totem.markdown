@@ -1,5 +1,7 @@
 ---
 date: "2009-10-10T13:04:00Z"
+slug: loving-the-new-totem
+aliases: ["/2009/10/10/loving-the-new-totem/"]
 tags:
 - show downloading
 title: Loving the new Totem

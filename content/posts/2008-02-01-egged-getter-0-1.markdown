@@ -1,5 +1,7 @@
 ---
 date: "2008-02-01T23:21:00Z"
+slug: egged-getter-0-1
+aliases: ["/2008/02/01/egged-getter-0-1/"]
 tags:
 - software
 title: Egged Getter 0.1

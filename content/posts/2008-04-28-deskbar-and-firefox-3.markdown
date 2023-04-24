@@ -1,5 +1,7 @@
 ---
 date: "2008-04-28T20:58:00Z"
+slug: deskbar-and-firefox-3
+aliases: ["/2008/04/28/deskbar-and-firefox-3/"]
 tags:
 - linux
 title: Deskbar and Firefox 3

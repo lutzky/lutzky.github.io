@@ -1,5 +1,7 @@
 ---
 date: "2009-09-05T13:42:00Z"
+slug: my-show-downloading-stack
+aliases: ["/2009/09/05/my-show-downloading-stack/"]
 tags:
 - show downloading
 title: My show downloading stack

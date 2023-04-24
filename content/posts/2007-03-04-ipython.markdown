@@ -1,5 +1,7 @@
 ---
 date: "2007-03-04T00:58:00Z"
+slug: ipython
+aliases: ["/2007/03/04/ipython/"]
 tags:
 - software
 - python

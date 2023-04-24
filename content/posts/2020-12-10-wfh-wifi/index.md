@@ -1,5 +1,7 @@
 ---
 date: "2020-12-10T00:00:00Z"
+slug: wfh-wifi
+aliases: ["/2020/12/10/wfh-wifi/"]
 summary: >
   My adventures in setting up wifi when working from home, working around limitations of my apartment form factor.
 tags:

@@ -1,5 +1,7 @@
 ---
 date: "2007-09-18T11:27:00Z"
+slug: really-liking-this-git-thing
+aliases: ["/2007/09/18/really-liking-this-git-thing/"]
 tags:
 - git
 title: Really liking this git thing

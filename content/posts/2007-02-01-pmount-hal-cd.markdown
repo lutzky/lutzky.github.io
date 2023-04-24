@@ -1,5 +1,7 @@
 ---
 date: "2007-02-01T19:46:00Z"
+slug: pmount-hal-cd
+aliases: ["/2007/02/01/pmount-hal-cd/"]
 tags:
 - linux
 title: Pmount-hal + cd

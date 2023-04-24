@@ -1,5 +1,7 @@
 ---
 date: "2007-02-08T17:24:00Z"
+slug: beautiful-ideas
+aliases: ["/2007/02/08/beautiful-ideas/"]
 tags:
 - software
 - linux

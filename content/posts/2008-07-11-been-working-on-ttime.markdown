@@ -1,5 +1,7 @@
 ---
 date: "2008-07-11T11:33:00Z"
+slug: been-working-on-ttime
+aliases: ["/2008/07/11/been-working-on-ttime/"]
 tags:
 - ttime
 title: Been working on TTime

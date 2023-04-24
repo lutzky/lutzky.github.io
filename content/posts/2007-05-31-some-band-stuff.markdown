@@ -1,5 +1,7 @@
 ---
 date: "2007-05-31T22:20:00Z"
+slug: some-band-stuff
+aliases: ["/2007/05/31/some-band-stuff/"]
 tags:
 - music
 title: Some band stuff

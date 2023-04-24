@@ -1,5 +1,7 @@
 ---
 date: "2009-04-04T12:23:00Z"
+slug: using-git-for-code-review
+aliases: ["/2009/04/04/using-git-for-code-review/"]
 tags:
 - git
 title: Using git for code review

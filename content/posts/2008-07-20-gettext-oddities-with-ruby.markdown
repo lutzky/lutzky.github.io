@@ -1,5 +1,7 @@
 ---
 date: "2008-07-20T19:19:00Z"
+slug: gettext-oddities-with-ruby
+aliases: ["/2008/07/20/gettext-oddities-with-ruby/"]
 tags:
 - ruby
 title: Gettext oddities with Ruby

@@ -1,5 +1,7 @@
 ---
 date: "2006-08-15T00:00:00Z"
+slug: shame-on-meretz_copy
+aliases: ["/2006/08/15/shame-on-meretz_copy/"]
 summary: (Hebrew) Shame on Meretz
 tags: ["hebrew"]
 title: בושה וחרפה למרצ

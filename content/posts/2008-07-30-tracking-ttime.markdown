@@ -1,5 +1,7 @@
 ---
 date: "2008-07-30T18:03:00Z"
+slug: tracking-ttime
+aliases: ["/2008/07/30/tracking-ttime/"]
 tags:
 - ttime
 title: Tracking TTime

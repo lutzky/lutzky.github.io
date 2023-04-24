@@ -1,5 +1,7 @@
 ---
 date: "2007-07-23T00:26:00Z"
+slug: some-things-make-you-feel-good
+aliases: ["/2007/07/23/some-things-make-you-feel-good/"]
 tags:
 - life
 title: Some things make you feel good

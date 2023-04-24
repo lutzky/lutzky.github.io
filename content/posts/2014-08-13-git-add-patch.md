@@ -1,5 +1,7 @@
 ---
 date: "2014-08-13T00:00:00Z"
+slug: git-add-patch
+aliases: ["/2014/08/13/git-add-patch/"]
 summary:  Using `git add -p` to eliminate those pesky `printf`-debugging
   statements.
 tags:

@@ -2,6 +2,8 @@
 title: "Getting your code to your friends"
 subtitle: "Reminiscing about software distribution"
 date: 2023-04-23T10:22:00Z
+slug: software-distribution
+aliases: ["/2023/04/23/software-distribution/"]
 lastmod: 2023-04-23T10:22:00Z
 
 tags: ["software"]

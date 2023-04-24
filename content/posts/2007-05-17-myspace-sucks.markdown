@@ -1,5 +1,7 @@
 ---
 date: "2007-05-17T14:26:00Z"
+slug: myspace-sucks
+aliases: ["/2007/05/17/myspace-sucks/"]
 tags:
 - music
 - software

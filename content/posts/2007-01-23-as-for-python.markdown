@@ -1,5 +1,7 @@
 ---
 date: "2007-01-23T21:33:00Z"
+slug: as-for-python
+aliases: ["/2007/01/23/as-for-python/"]
 tags:
 - software
 - technion

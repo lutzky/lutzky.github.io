@@ -1,5 +1,7 @@
 ---
 date: "2008-10-26T18:57:00Z"
+slug: quick-time-tracking-hack
+aliases: ["/2008/10/26/quick-time-tracking-hack/"]
 tags:
 - linux
 title: Quick time tracking hack

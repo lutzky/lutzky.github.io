@@ -1,5 +1,7 @@
 ---
 date: "2010-03-13T16:35:00Z"
+slug: my-music-player-has-sunk
+aliases: ["/2010/03/13/my-music-player-has-sunk/"]
 tags:
 - hardware
 title: My music player has sunk

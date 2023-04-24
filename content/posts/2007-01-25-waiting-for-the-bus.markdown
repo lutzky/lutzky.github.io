@@ -1,5 +1,7 @@
 ---
 date: "2007-01-25T17:53:00Z"
+slug: waiting-for-the-bus
+aliases: ["/2007/01/25/waiting-for-the-bus/"]
 tags:
 - networking
 title: Waiting for the bus

@@ -1,5 +1,7 @@
 ---
 date: "2015-05-30T00:00:00Z"
+slug: seaplane
+aliases: ["/2015/05/30/seaplane/"]
 summary:
   When I helped a non-programmer friend with some code for psychology research,
   and how we avoided using Matlab.

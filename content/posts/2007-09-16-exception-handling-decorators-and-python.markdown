@@ -1,5 +1,7 @@
 ---
 date: "2007-09-16T14:02:00Z"
+slug: exception-handling-decorators-and-python
+aliases: ["/2007/09/16/exception-handling-decorators-and-python/"]
 tags:
 - software
 - python

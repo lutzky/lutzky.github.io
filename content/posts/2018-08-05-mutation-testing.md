@@ -1,5 +1,7 @@
 ---
 date: "2018-08-05T00:00:00Z"
+slug: mutation-testing
+aliases: ["/2018/08/05/mutation-testing/"]
 summary:  Your test coverage might be very high, but it's possible that your tests
   wouldn't notice if you deleted some code. Let's check for that automatically!
 title: Mutation testing in Go

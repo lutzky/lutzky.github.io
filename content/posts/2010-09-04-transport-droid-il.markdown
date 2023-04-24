@@ -1,5 +1,7 @@
 ---
 date: "2010-09-04T16:21:00Z"
+slug: transport-droid-il
+aliases: ["/2010/09/04/transport-droid-il/"]
 tags:
 - TransportDroidIL
 - android

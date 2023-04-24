@@ -1,5 +1,7 @@
 ---
 date: "2011-04-25T16:58:00Z"
+slug: sms-and-why-it-annoys-me
+aliases: ["/2011/04/25/sms-and-why-it-annoys-me/"]
 tags:
 - phones
 title: SMS and why it annoys me

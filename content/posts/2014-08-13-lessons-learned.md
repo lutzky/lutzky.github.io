@@ -1,5 +1,7 @@
 ---
 date: "2014-08-13T00:00:00Z"
+slug: lessons-learned
+aliases: ["/2014/08/13/lessons-learned/"]
 summary:  Some lessons learned from my role with the previous company as a DevOps engineer
   and team lead. We discuss tidiness and prioritizing using pre-existing code.
 title: Lessons learned

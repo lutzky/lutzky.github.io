@@ -1,5 +1,7 @@
 ---
 date: "2008-06-02T20:33:00Z"
+slug: scheduling
+aliases: ["/2008/06/02/scheduling/"]
 tags:
 - ttime
 title: Scheduling

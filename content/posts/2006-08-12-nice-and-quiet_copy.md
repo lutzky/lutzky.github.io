@@ -1,5 +1,7 @@
 ---
 date: "2006-08-12T00:00:00Z"
+slug: nice-and-quiet_copy
+aliases: ["/2006/08/12/nice-and-quiet_copy/"]
 summary:  (Hebrew) Oh but it was nice and quiet. (wartime)
 tags: ["hebrew"]
 title: דווקא היה נחמד, שקט וכאלה

@@ -1,6 +1,8 @@
 ---
 title: "Newborn parenting software - part 1"
 date: 2021-10-03T17:00:00+01:00
+slug: software-parenting-1
+aliases: ["/2021/10/03/software-parenting-1/"]
 summary: Choosing and hacking on baby tracking apps
 tags: ["software", "life"]
 categories: ["Newborn parenting software"]

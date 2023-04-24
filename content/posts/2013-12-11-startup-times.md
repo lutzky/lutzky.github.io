@@ -1,5 +1,7 @@
 ---
 date: "2013-12-11T00:00:00Z"
+slug: startup-times
+aliases: ["/2013/12/11/startup-times/"]
 summary:  Starting new java processes in your scripts considered harmful. Let's compare
   "hello world" startup times for different languages.
 tags:

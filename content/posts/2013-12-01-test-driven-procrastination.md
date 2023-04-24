@@ -1,5 +1,7 @@
 ---
 date: "2013-12-01T00:00:00Z"
+slug: test-driven-procrastination
+aliases: ["/2013/12/01/test-driven-procrastination/"]
 summary:  How being lazy and procrastinating led me to adopt test-driven development
   before I realized it.
 tags:

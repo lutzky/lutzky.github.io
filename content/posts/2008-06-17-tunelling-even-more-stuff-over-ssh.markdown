@@ -1,5 +1,7 @@
 ---
 date: "2008-06-17T12:32:00Z"
+slug: tunelling-even-more-stuff-over-ssh
+aliases: ["/2008/06/17/tunelling-even-more-stuff-over-ssh/"]
 tags:
 - networking
 title: Tunelling even more stuff over SSH

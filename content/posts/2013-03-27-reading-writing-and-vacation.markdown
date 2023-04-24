@@ -1,5 +1,7 @@
 ---
 date: "2013-03-27T18:35:01Z"
+slug: reading-writing-and-vacation
+aliases: ["/2013/03/27/reading-writing-and-vacation/"]
 tags:
 - life
 title: Reading, writing and vacations

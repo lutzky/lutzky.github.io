@@ -1,6 +1,8 @@
 ---
 title: "Newborn parenting software - part 3"
 date: 2021-10-10T09:00:00Z
+slug: software-parenting-3
+aliases: ["/2021/10/10/software-parenting-3/"]
 summary: Transitioning PooButtons to a microcontroller
 tags: ["software", "life", "hardware"]
 categories: ["Newborn parenting software"]

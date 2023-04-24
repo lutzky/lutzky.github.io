@@ -1,5 +1,7 @@
 ---
 date: "2008-10-18T21:16:00Z"
+slug: delegating-methods-in-ruby
+aliases: ["/2008/10/18/delegating-methods-in-ruby/"]
 tags:
 - ruby
 title: Delegating methods in Ruby

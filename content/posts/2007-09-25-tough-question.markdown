@@ -1,5 +1,7 @@
 ---
 date: "2007-09-25T18:29:00Z"
+slug: tough-question
+aliases: ["/2007/09/25/tough-question/"]
 tags:
 - life
 title: Tough Question

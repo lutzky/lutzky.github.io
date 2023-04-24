@@ -1,5 +1,7 @@
 ---
 date: "2021-03-14T00:00:00Z"
+slug: pitemp
+aliases: ["/2021/03/14/pitemp/"]
 summary: An adventure with Raspberry Pi, Golang, and small displays.
 tags:
   - hardware

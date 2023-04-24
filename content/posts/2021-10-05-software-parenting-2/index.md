@@ -1,6 +1,8 @@
 ---
 title: "Newborn parenting software - part 2"
 date: 2021-10-05T21:57:09Z
+slug: software-parenting-2
+aliases: ["/2021/10/05/software-parenting-2/"]
 summary: Logging diapers with satisfying clicks
 tags: ["software", "life", "hardware"]
 categories: ["Newborn parenting software"]

@@ -1,5 +1,7 @@
 ---
 date: "2007-02-27T17:48:00Z"
+slug: using-jabber-from-within-the-technion
+aliases: ["/2007/02/27/using-jabber-from-within-the-technion/"]
 tags:
 - networking
 - technion

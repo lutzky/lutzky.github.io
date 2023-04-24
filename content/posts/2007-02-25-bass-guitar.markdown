@@ -1,5 +1,7 @@
 ---
 date: "2007-02-25T21:17:00Z"
+slug: bass-guitar
+aliases: ["/2007/02/25/bass-guitar/"]
 tags:
 - music
 title: Bass guitar

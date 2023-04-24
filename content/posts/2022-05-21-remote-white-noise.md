@@ -1,6 +1,8 @@
 ---
 title: "Remote White Noise"
 date: 2022-05-21T12:07:35Z
+slug: remote-white-noise
+aliases: ["/2022/05/21/remote-white-noise/"]
 tags: ["software"]
 ---
 

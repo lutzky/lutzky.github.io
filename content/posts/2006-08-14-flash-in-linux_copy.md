@@ -1,5 +1,7 @@
 ---
 date: "2006-08-14T00:00:00Z"
+slug: flash-in-linux_copy
+aliases: ["/2006/08/14/flash-in-linux_copy/"]
 summary:  (Hebrew) The absolute state of Flash in Linux
 tags: ["hebrew"]
 title: המצב של פלאש בלינוקס

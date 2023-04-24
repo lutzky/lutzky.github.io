@@ -1,5 +1,7 @@
 ---
 date: "2007-02-04T13:27:00Z"
+slug: on-vista
+aliases: ["/2007/02/04/on-vista/"]
 tags:
 - software
 title: On Vista

@@ -1,5 +1,7 @@
 ---
 date: "2007-02-05T23:08:00Z"
+slug: i-know-where-waldo-is
+aliases: ["/2007/02/05/i-know-where-waldo-is/"]
 tags:
 - security
 title: I know where waldo is

@@ -1,5 +1,7 @@
 ---
 date: "2014-06-22T00:00:00Z"
+slug: fun-with-file-descriptor-leaks
+aliases: ["/2014/06/22/fun-with-file-descriptor-leaks/"]
 summary:  How file descriptor leaks are causing your processes to stick around longer
   than they should.
 tags:

@@ -1,5 +1,7 @@
 ---
 date: "2007-06-02T22:44:00Z"
+slug: some-music-posted-to-myspace
+aliases: ["/2007/06/02/some-music-posted-to-myspace/"]
 tags:
   - music
 title: Some music posted to myspace

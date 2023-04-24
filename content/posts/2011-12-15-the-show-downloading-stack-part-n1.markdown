@@ -1,5 +1,7 @@
 ---
 date: "2011-12-15T12:08:00Z"
+slug: the-show-downloading-stack-part-n1
+aliases: ["/2011/12/15/the-show-downloading-stack-part-n1/"]
 tags:
 - show downloading
 title: The show downloading stack - part n+1

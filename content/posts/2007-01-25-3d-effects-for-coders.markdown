@@ -1,5 +1,7 @@
 ---
 date: "2007-01-25T15:04:00Z"
+slug: 3d-effects-for-coders
+aliases: ["/2007/01/25/3d-effects-for-coders/"]
 tags:
 - software
 title: 3D effects for coders?

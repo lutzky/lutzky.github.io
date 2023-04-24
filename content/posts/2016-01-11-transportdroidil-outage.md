@@ -1,5 +1,7 @@
 ---
 date: "2016-01-11T00:00:00Z"
+slug: transportdroidil-outage
+aliases: ["/2016/01/11/transportdroidil-outage/"]
 summary: (Hebrew) The tale of my now-defunct android app for fetching public transport
   information.
 title: TransportDroidIL outage

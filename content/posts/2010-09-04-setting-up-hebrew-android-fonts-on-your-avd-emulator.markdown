@@ -1,5 +1,7 @@
 ---
 date: "2010-09-04T09:54:00Z"
+slug: setting-up-hebrew-android-fonts-on-your-avd-emulator
+aliases: ["/2010/09/04/setting-up-hebrew-android-fonts-on-your-avd-emulator/"]
 tags:
 - android
 title: Setting up Hebrew Android fonts on your AVD emulator

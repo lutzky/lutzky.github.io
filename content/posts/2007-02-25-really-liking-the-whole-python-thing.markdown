@@ -1,5 +1,7 @@
 ---
 date: "2007-02-25T14:52:00Z"
+slug: really-liking-the-whole-python-thing
+aliases: ["/2007/02/25/really-liking-the-whole-python-thing/"]
 tags:
 - software
 - python

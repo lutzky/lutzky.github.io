@@ -1,5 +1,7 @@
 ---
 date: "2007-02-26T16:26:00Z"
+slug: before-reinstalling-your-server-for-raid
+aliases: ["/2007/02/26/before-reinstalling-your-server-for-raid/"]
 tags:
 - hardware
 title: Before reinstalling your server for RAID

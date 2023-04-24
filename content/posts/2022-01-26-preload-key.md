@@ -1,6 +1,8 @@
 ---
 title: "Preloading disk encryption keys"
 date: 2022-01-26T21:30:22Z
+slug: preload-key
+aliases: ["/2022/01/26/preload-key/"]
 summary: How to enter passphrases BEFORE rebooting your server
 tags: ["software"]
 ---

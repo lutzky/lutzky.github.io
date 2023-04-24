@@ -1,5 +1,7 @@
 ---
 date: "2014-08-17T00:00:00Z"
+slug: git-rename-edge-cases
+aliases: ["/2014/08/17/git-rename-edge-cases/"]
 summary:  |
   Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it's far more likely that git did the "right" thing after all.
 tags:

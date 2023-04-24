@@ -1,5 +1,7 @@
 ---
 date: "2007-02-10T20:37:00Z"
+slug: internet-in-haifa-bay-central
+aliases: ["/2007/02/10/internet-in-haifa-bay-central/"]
 tags:
 - networking
 title: Internet in Haifa Bay Central

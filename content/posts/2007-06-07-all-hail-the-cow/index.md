@@ -1,5 +1,7 @@
 ---
 date: "2007-06-07T00:00:00Z"
+slug: all-hail-the-cow
+aliases: ["/2007/06/07/all-hail-the-cow/"]
 summary: Silly post about a cow called Paradox.
 tags:
   - asides

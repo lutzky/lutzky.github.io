@@ -1,5 +1,7 @@
 ---
 date: "2011-10-08T19:43:00Z"
+slug: developing-transportdroidil-for-android
+aliases: ["/2011/10/08/developing-transportdroidil-for-android/"]
 tags:
 - android
 - TransportDroidIL

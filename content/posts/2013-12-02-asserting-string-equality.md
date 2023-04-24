@@ -1,5 +1,7 @@
 ---
 date: "2013-12-02T00:00:00Z"
+slug: asserting-string-equality
+aliases: ["/2013/12/02/asserting-string-equality/"]
 summary:  When comparing long strings in unit tests, make sure your assertion failures
   give you useful output.
 tags:

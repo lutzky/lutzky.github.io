@@ -1,5 +1,7 @@
 ---
 date: "2006-08-11T00:00:00Z"
+slug: green-helmet-guy
+aliases: ["/2006/08/11/green-helmet-guy/"]
 summary: (Hebrew) The green helmet guy - now with his own blog.
 tags: ["hebrew"]
 title: החבוב עם הקסדה הירוקה - עכשיו הבלוג

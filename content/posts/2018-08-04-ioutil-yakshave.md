@@ -1,5 +1,7 @@
 ---
 date: "2018-08-04T00:00:00Z"
+slug: ioutil-yakshave
+aliases: ["/2018/08/04/ioutil-yakshave/"]
 summary:  How I had to fix zimmski/osutil in order to write the Mutation Testing post.
 title: The osutil yakshave
 ---

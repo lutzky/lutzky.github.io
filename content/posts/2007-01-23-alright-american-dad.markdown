@@ -1,5 +1,7 @@
 ---
 date: "2007-01-23T22:13:00Z"
+slug: alright-american-dad
+aliases: ["/2007/01/23/alright-american-dad/"]
 tags:
 - show downloading
 title: Alright, American Dad!

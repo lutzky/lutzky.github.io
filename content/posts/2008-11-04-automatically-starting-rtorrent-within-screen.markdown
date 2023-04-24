@@ -1,5 +1,7 @@
 ---
 date: "2008-11-04T21:33:00Z"
+slug: automatically-starting-rtorrent-within-screen
+aliases: ["/2008/11/04/automatically-starting-rtorrent-within-screen/"]
 tags:
 - linux
 title: Automatically starting rtorrent within screen

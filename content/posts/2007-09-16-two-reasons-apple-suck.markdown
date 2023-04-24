@@ -1,5 +1,7 @@
 ---
 date: "2007-09-16T12:47:00Z"
+slug: two-reasons-apple-suck
+aliases: ["/2007/09/16/two-reasons-apple-suck/"]
 tags:
 - software
 title: Two reasons Apple suck

@@ -1,5 +1,7 @@
 ---
 date: "2007-04-16T10:43:00Z"
+slug: yasmin-back-up
+aliases: ["/2007/04/16/yasmin-back-up/"]
 tags:
 - linux
 title: Yasmin back up

@@ -1,5 +1,7 @@
 ---
 date: "2006-08-26T00:00:00Z"
+slug: openbox-cvs
+aliases: ["/2006/08/26/openbox-cvs/"]
 summary:  (Hebrew) A bit of excessive geekery
 tags: ["hebrew"]
 title: Openbox CVS

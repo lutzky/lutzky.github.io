@@ -1,5 +1,7 @@
 ---
 date: "2007-10-13T22:04:00Z"
+slug: on-threading-vs-processing
+aliases: ["/2007/10/13/on-threading-vs-processing/"]
 tags:
 - software
 - python

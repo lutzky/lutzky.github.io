@@ -1,5 +1,7 @@
 ---
 date: "2008-06-11T01:08:00Z"
+slug: valgrind-fail
+aliases: ["/2008/06/11/valgrind-fail/"]
 tags:
 - software
 title: Valgrind Fail

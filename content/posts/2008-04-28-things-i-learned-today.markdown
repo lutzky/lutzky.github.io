@@ -1,5 +1,7 @@
 ---
 date: "2008-04-28T21:10:00Z"
+slug: things-i-learned-today
+aliases: ["/2008/04/28/things-i-learned-today/"]
 tags:
 - linux
 - git

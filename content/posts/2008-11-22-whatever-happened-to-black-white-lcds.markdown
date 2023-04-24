@@ -1,5 +1,7 @@
 ---
 date: "2008-11-22T11:58:00Z"
+slug: whatever-happened-to-black-white-lcds
+aliases: ["/2008/11/22/whatever-happened-to-black-white-lcds/"]
 tags:
 - hardware
 - phones

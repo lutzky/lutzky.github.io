@@ -1,5 +1,7 @@
 ---
 date: "2007-11-04T00:27:00Z"
+slug: vacation
+aliases: ["/2007/11/04/vacation/"]
 tags:
 - life
 title: Vacation

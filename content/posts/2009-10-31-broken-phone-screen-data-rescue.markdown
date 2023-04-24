@@ -1,5 +1,7 @@
 ---
 date: "2009-10-31T02:32:00Z"
+slug: broken-phone-screen-data-rescue
+aliases: ["/2009/10/31/broken-phone-screen-data-rescue/"]
 tags:
 - hardware
 - phones

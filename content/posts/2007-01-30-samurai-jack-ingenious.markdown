@@ -1,5 +1,7 @@
 ---
 date: "2007-01-30T19:37:00Z"
+slug: samurai-jack-ingenious
+aliases: ["/2007/01/30/samurai-jack-ingenious/"]
 tags:
 - asides
 title: Samurai Jack - Ingenious!

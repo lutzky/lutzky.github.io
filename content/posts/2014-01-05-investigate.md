@@ -1,5 +1,7 @@
 ---
 date: "2014-01-05T00:00:00Z"
+slug: investigate
+aliases: ["/2014/01/05/investigate/"]
 summary:  Distinguishing `EPERM` vs `EACCESS` and how that helps
   debug file manipulation scripts.
 tags:

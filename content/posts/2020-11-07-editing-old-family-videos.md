@@ -1,5 +1,7 @@
 ---
 date: "2020-11-07T00:00:00Z"
+slug: editing-old-family-videos
+aliases: ["/2020/11/07/editing-old-family-videos/"]
 summary:
   Messing with old video from tapes, simple audio corrections, splitting and
   organizing for the family's benefit.

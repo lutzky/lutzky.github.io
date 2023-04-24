@@ -1,5 +1,7 @@
 ---
 date: "2008-04-16T00:49:00Z"
+slug: faster-languages
+aliases: ["/2008/04/16/faster-languages/"]
 tags:
 - software
 - c

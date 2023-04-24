@@ -1,5 +1,7 @@
 ---
 date: "2010-11-20T15:19:00Z"
+slug: dd-wrt-awesomeness
+aliases: ["/2010/11/20/dd-wrt-awesomeness/"]
 tags:
 - networking
 - hardware
