@@ -9,6 +9,8 @@ title: Before reinstalling your server for RAID
 
 Check that the RAID it supports is actual Raid. My experience today:
 
+<!-- markdownlint-disable MD013 -->
+
 1. Decide that secondary server should gradually become more and more primary
 2. Decide that since it has two 160GB hard drives and built-in RAID, we should use that for mirroring
 3. Mail (both!) users of the secondary server that it'll be down for rebuilding

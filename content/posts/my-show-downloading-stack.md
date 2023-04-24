@@ -46,7 +46,7 @@ For downloading torrents, I use [rtorrent](http://libtorrent.rakshasa.no/).
 It's a curses-based client which performs very well. My `.rtorrent.rc` file looks
 like this:
 
-```
+```plaintext
 download_rate = 30
 upload_rate = 2
 directory = /home/ohad/torrents/in_progress

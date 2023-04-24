@@ -18,7 +18,7 @@ separate files in `/usr/share/zoneinfo`, say `IsraelIST` and
 
 My first guess was the following zic source-file:
 
-```
+```plaintext
 # Zone    NAME                GMTOFF  RULES/SAVE  FORMAT [UNTIL]
 Zone      IsraelIDT           2:00    01:00       IDT
 ```
@@ -31,7 +31,7 @@ biggest hint), it turns out that `timezone` is set according to the
 minimal local time type which is _transitioned into_. So I came up with
 this file:
 
-```
+```plaintext
 # Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
 Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
 Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S
@@ -70,7 +70,7 @@ int main() {
 
 And its results, as run at 14:42:17 UTC, which is 19:42:17 IDT:
 
-```
+```plaintext
 Timezone name is IDT, timezone=-7200
 The time is Sat Apr 18 14:42:17 2009
 Timezone name is UTC, timezone=0
@@ -99,7 +99,7 @@ I'll get to the bottom of this eventually :/
 **Addendum:** It seems that the problem is even more complicated. For the
 following timezone file, C programs seem to work fine:
 
-```
+```plaintext
 # Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
 Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
 Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S

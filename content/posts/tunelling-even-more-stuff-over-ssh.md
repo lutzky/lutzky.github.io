@@ -24,7 +24,7 @@ can't apt-get due to your network situation, get it at packages.ubuntu.com or
 packages.debian.org). Install it, and make sure `/etc/dante.conf` has the
 following lines:
 
-```
+```plaintext
 route {
     from: 0.0.0.0/0   to: 0.0.0.0/0   via: 127.0.0.1 port = 9999
     protocol: tcp

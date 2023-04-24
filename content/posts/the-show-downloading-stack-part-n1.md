@@ -60,7 +60,7 @@ this script. We rerun `msmtp` until it succeeds because you will often get a
 `/etc/msmtprc.transmission` which is relevant to gmail (this is a bit tricky
 and took a lot of fiddling around with):
 
-```
+```plaintext
 defaults
 tls on
 tls_starttls on
@@ -84,11 +84,10 @@ here.
 
 Finally, in `/etc/transmission-daemon/settings.json`, add the following code:
 
-```
+```json
 "script-torrent-done-enabled": true,
 "script-torrent-done-filename": "/usr/local/bin/notify_torrent_done",
 ```
-
 
 **Important:** You need to run `/etc/init.d/transmission-daemon reload` at
 this point, not `restart` - that would cause `settings.json` to be

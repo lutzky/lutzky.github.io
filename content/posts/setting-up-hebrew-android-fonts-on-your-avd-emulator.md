@@ -15,6 +15,8 @@ that:
 
 First, a few downloads. You'll need:
 
+<!-- markdownlint-disable MD013 -->
+
 1. The android emulator (presumably you already have this, if not, you can get
    it at [developer.android.com](http://developer.android.com/))
 2. The [hebdroid fonts](http://firstpost.org/wp-content/uploads/2009/02/hebdroid.zip)
@@ -35,7 +37,7 @@ within your Android SDK directory, under `platforms/android-3/images` (or
 whatever version you're emulating). We'll extract that - create a temporary
 directory, say `/tmp/system.img.hebdroid`, and `cd` to it. Then run:
 
-```
+```plaintext
 unyaffs /path/to/system.img
 ```
 
@@ -43,7 +45,7 @@ The whole `/system` filesystem should be extracted. Now extract the `ttf` files
 from `hebdroid.zip` into the fonts directory, replacing the original font
 files. To pack everything back up, run:
 
-```
+```plaintext
 mkyaffs2image /tmp/system.img.hebdroid system.img.hebdroid
 ```
 

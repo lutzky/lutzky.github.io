@@ -12,7 +12,7 @@ common situation in the Technion. Here's one way to get around it: Assume you
 can directly ssh into `alpha`, and from `alpha` you can ssh into `beta`. Have
 the following code in your `~/.ssh/config`:
 
-```
+```plaintext
 Host beta
         Hostname 1.2.3.4  # IP Address of beta
         ProxyCommand ssh alpha nc -w 1 %h %p

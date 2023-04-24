@@ -13,7 +13,7 @@ approximately):
 
 <!--more-->
 
-```
+```plaintext
 .-P1----.  .-------------------P4-,---------,
 |  PC   |  |       COMFY SOFA     .         |
 |       |  |                      . Closed  |

@@ -23,7 +23,7 @@ confusing thing is that if you forget to install `libgtkspell-dev` or
 `libaspell-dev`, SwitchSpell will not be built, but the `configure` script
 tells you that it _will_.
 
-```
+```shell
 sudo apt-get install build-essential gettext libgtkspell-dev libaspell-dev pidgin-dev
 wget http://downloads.guifications.org/plugins//Plugin%20Pack/purple-plugin_pack-2.3.0.tar.bz2
 tar jxvf purple-plugin_pack-2.3.0.tar.bz2

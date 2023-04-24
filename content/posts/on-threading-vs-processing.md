@@ -22,6 +22,8 @@ down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
 or processes at the user's choice:
 
+<!-- markdownlint-disable MD010 -->
+
 ```python
 import processing
 import threading

@@ -21,7 +21,7 @@ libraries; specifically, for this project, we made heavy use of the [Natural
 Language Toolkit](http://nltk.org). We used Git for source control and Github
 for hosting, Travis for continuous integration, and ReadTheDocs for
 documentation. All of these culminate in the project being handed in as a
-single link: http://github.com/lutzky/translationese.
+single link: <http://github.com/lutzky/translationese>.
 
 The translationese project is a re-implementation of the concepts presented in
 "On The Features Of Translationese", an article describing an attempt to
@@ -50,7 +50,7 @@ classify new points (without being told which set they belong to) by which side
 of the line they are. The following image (Wikipedia) shows a simple,
 two-dimensional case (the red line properly distinguishing the two sets):
 
-![](http://upload.wikimedia.org/wikipedia/commons/b/b5/Svm_separating_hyperplanes_%28SVG%29.svg){: style="max-width:350px"}
+![SVM Separating hyperplanes](http://upload.wikimedia.org/wikipedia/commons/b/b5/Svm_separating_hyperplanes_%28SVG%29.svg)
 
 For our case, each _"property"_ took a block of text, and translated it to an
 _n_-dimensional point. For some properties, the dimension was quite extreme.

@@ -23,6 +23,6 @@ and if not - runs it in a detached screen session. Run this with your favorite
 # A simple script to make sure I am running rtorrent in a screen
 
 if ! ps -o uname -C rtorrent | grep -q `whoami`; then
-	screen -d -m rtorrent
+  screen -d -m rtorrent
 fi
 ```

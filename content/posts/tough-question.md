@@ -7,5 +7,5 @@ tags:
 title: Tough Question
 ---
 
-My girlfriend just asked me what just might be the hardest question I've heard all semester;
-What do I like better, The Simpsons or beer?
+My girlfriend just asked me what just might be the hardest question I've heard
+all semester; What do I like better, The Simpsons or beer?
