@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>linux - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/linux/</link><description>linux - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 22 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/linux/" rel="self" type="application/rss+xml"/><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2014/06/22/fun-with-file-descriptor-leaks/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>linux - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/linux/</link><description>linux - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 22 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/linux/" rel="self" type="application/rss+xml"/><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>Here&rsquo;s a fun little bash script:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -68,7 +68,7 @@
 </div>
 </div><p>This will close <code>stdout</code>, <code>stderr</code> and <code>stdin</code>. As a friend pointed out, it&rsquo;s often safer to do <code>&gt; /dev/null</code> rather than <code>&gt;&amp;-</code>, as some processes will crap out if they don&rsquo;t have some semblence of an <code>stdout</code>. However, <code>&gt;&amp;-</code> is shorter, faster, and perfectly safe for <code>sleep</code>.</p>
 <p>Of course, it&rsquo;s better to save the PID for this <code>sleep</code> and kill it when appropriate from within the script - otherwise, you might be accumulating many useless <code>sleep</code> processes.</p>
-]]></description></item><item><title>Multiple library versions</title><link>https://lutzky.net/2013/05/15/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2013/05/15/multiple-library-versions/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&rsquo;s explore.</p>
 <h2 id="introduction">Introduction</h2>
 <p>Assume you&rsquo;re working with an external vendor, who is providing you with code
@@ -259,7 +259,7 @@ the <code>libfoo.so</code> symlink. However, this would cause a conflict between
 <code>-dev</code> packages for two different generations of <code>libfoo</code>. I am curious as to
 how this problem is solved &ldquo;in the wild&rdquo;, as I&rsquo;m sure Debian have good reasons
 for suggesting this.</p>
-]]></description></item><item><title>Timezones are fickle</title><link>https://lutzky.net/2009/04/18/timezones-are-fickle/</link><pubDate>Sat, 18 Apr 2009 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2009/04/18/timezones-are-fickle/</guid><description><![CDATA[<p>I&rsquo;ve been trying to work out a system to be able to cleanly switch between IST
+]]></description></item><item><title>Timezones are fickle</title><link>https://lutzky.net/posts/timezones-are-fickle/</link><pubDate>Sat, 18 Apr 2009 16:45:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezones-are-fickle/</guid><description><![CDATA[<p>I&rsquo;ve been trying to work out a system to be able to cleanly switch between IST
 (Israel Standard Time, GMT+2:00) and IDT (Israel Daylight savings Time,
 GMT+3:00) on command. The logical way to do this, in my opinion, is to have two
 separate files in <code>/usr/share/zoneinfo</code>, say <code>IsraelIST</code> and
@@ -405,7 +405,7 @@ general, all internal time handling should be done in UTC; when reading times
 from the outside world, if they are in local time - use <code>mktime</code>. If
 they are in a specified timezone, use <code>timegm</code> and compensate manually.
 I&rsquo;d love to hear better ideas in the comments.</p>
-]]></description></item><item><title>Automatically starting rtorrent within screen</title><link>https://lutzky.net/2008/11/04/automatically-starting-rtorrent-within-screen/</link><pubDate>Tue, 04 Nov 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/11/04/automatically-starting-rtorrent-within-screen/</guid><description><![CDATA[<p>These days I don&rsquo;t stay at home often, but I do have an RSS/BitTorrent combo
+]]></description></item><item><title>Automatically starting rtorrent within screen</title><link>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</link><pubDate>Tue, 04 Nov 2008 21:33:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</guid><description><![CDATA[<p>These days I don&rsquo;t stay at home often, but I do have an RSS/BitTorrent combo
 fetching me all kinds of neat stuff for me, so I can have it ready for me on
 the weekend. I love <a href="http://libtorrent.rakshasa.no/" target="_blank" rel="noopener noreffer ">rtorrent</a>, especially due
 to the fact that I can run it in <code>screen</code>, ssh home and see how things are
@@ -433,7 +433,7 @@ and if not - runs it in a detached screen session. Run this with your favorite
 </span></span><span class="line"><span class="cl"><span class="k">fi</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/2008/10/26/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/10/26/quick-time-tracking-hack/</guid><description><![CDATA[<p>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
+</div>]]></description></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/posts/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 18:57:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/quick-time-tracking-hack/</guid><description><![CDATA[<p>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
 don&rsquo;t have Gnome 2.24 at work, but I do have a Unix-based operating system&hellip;
 Here&rsquo;s my new <code>~/bin/track</code>:</p>
 <div class="highlight"><div class="chroma">
@@ -464,12 +464,7 @@ receive ex-mode commands as parameters).</p>
 </span></span><span class="line"><span class="cl">vim ~/time_tracking + -c <span class="s1">&#39;startinsert!&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/2008/04/28/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/04/28/deskbar-and-firefox-3/</guid><description><![CDATA[<p><a href="raphael.slinckx.net/deskbar/" rel="">Deskbar</a> has a really neat plugin which allows
-you to search your browsing history and bookmarks. Firefox 3 has switched the
-storage format to an sqlite-based one. I&rsquo;ve been working on a new plugin to
-make use of that - so far it&rsquo;s very enjoyable to use :)</p>
-<p>» <a href="http://github.com/lutzky/deskbar_ff3" target="_blank" rel="noopener noreffer ">Deskbar_FF3</a></p>
-]]></description></item><item><title>Things I learned today</title><link>https://lutzky.net/2008/04/28/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/04/28/things-i-learned-today/</guid><description><![CDATA[<ol>
+</div>]]></description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description><![CDATA[<ol>
 <li>
 <p>You can use git on a VFAT disk (for example, a USB key) without all of the
 annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
@@ -489,7 +484,12 @@ usual job for us ordinary junkies :)</p>
 <p>Vertically, two cans of Pepsi fit very snugly into a Pringles can.</p>
 </li>
 </ol>
-]]></description></item><item><title>Hebrew spell-checking in Pidgin</title><link>https://lutzky.net/2008/04/22/hebrew-spell-checking-in-pidgin/</link><pubDate>Tue, 22 Apr 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/04/22/hebrew-spell-checking-in-pidgin/</guid><description><![CDATA[<p>This one took me a while to figure out, which is reason enough to post it here.</p>
+]]></description></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/posts/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 20:58:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/deskbar-and-firefox-3/</guid><description><![CDATA[<p><a href="raphael.slinckx.net/deskbar/" rel="">Deskbar</a> has a really neat plugin which allows
+you to search your browsing history and bookmarks. Firefox 3 has switched the
+storage format to an sqlite-based one. I&rsquo;ve been working on a new plugin to
+make use of that - so far it&rsquo;s very enjoyable to use :)</p>
+<p>» <a href="http://github.com/lutzky/deskbar_ff3" target="_blank" rel="noopener noreffer ">Deskbar_FF3</a></p>
+]]></description></item><item><title>Hebrew spell-checking in Pidgin</title><link>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</link><pubDate>Tue, 22 Apr 2008 14:13:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</guid><description><![CDATA[<p>This one took me a while to figure out, which is reason enough to post it here.</p>
 <p>First of all, you&rsquo;ll need <code>aspell-he</code>, as pidgin uses <code>gtkspell</code> (which, in
 turn, uses <code>aspell</code>) rather than <code>enchant</code> (which supports <code>hspell</code>). There is
 a patch for <code>gtkspell</code> which gets it to use <code>enchant</code>, but I don&rsquo;t know of a
@@ -512,7 +512,7 @@ sudo make install
 </code></pre><p>At this point, the Switch Spell plugin should show up in your Pidgin
 preferences. When you activate it, you should get a menu at the top of each
 conversation for choosing the dictionary in use. Enjoy!</p>
-]]></description></item><item><title>My alarm clock</title><link>https://lutzky.net/2008/02/12/my-alarm-clock/</link><pubDate>Tue, 12 Feb 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/02/12/my-alarm-clock/</guid><description><![CDATA[<p>YNet was running a story on how to use your computer as an alarm clock. Here&rsquo;s
+]]></description></item><item><title>My alarm clock</title><link>https://lutzky.net/posts/my-alarm-clock/</link><pubDate>Tue, 12 Feb 2008 23:37:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/my-alarm-clock/</guid><description><![CDATA[<p>YNet was running a story on how to use your computer as an alarm clock. Here&rsquo;s
 what I do, for our commandline junkies :)</p>
 <p>Here&rsquo;s <code>~/bin/run_alarm.sh</code>:</p>
 <div class="highlight"><div class="chroma">
@@ -571,7 +571,7 @@ around it for my comfort:</p>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> /home/ohad/bin/run_alarm.sh <span class="p">|</span> at <span class="nv">$1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/2007/04/19/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/04/19/grub-menu-lst-editor/</guid><description><![CDATA[<p>A lot of people ask me how to change the default operating system booted after
+</div>]]></description></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/posts/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 15:44:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/grub-menu-lst-editor/</guid><description><![CDATA[<p>A lot of people ask me how to change the default operating system booted after
 installing Linux. The answer they get in Ubuntu&rsquo;s case, &ldquo;Edit
 <code>/boot/grub/menu.lst</code>, it&rsquo;s self-explanatory&rdquo;, is often unsatisfactory.
 Attached is the solution :)</p>

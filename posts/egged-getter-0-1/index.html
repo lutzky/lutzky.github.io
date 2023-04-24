@@ -1,0 +1,256 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Egged Getter 0.1 - Shallow and Pedantic</title><meta name=Description content="A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic."><meta property="og:title" content="Egged Getter 0.1"><meta property="og:description" content="The Egged Getter has been lost in the mists of time. However, it&rsquo;s code has largely been integrated into TransportDroidIL. An old version of the Python code has been pasted at the end of this post.
+Here&rsquo;s a little something I&rsquo;ve been messing with: A simple fetcher script for the Egged (Israeli bus company) site. I&rsquo;ve made a deskbar applet which uses it, which was fun to do :) (I&rsquo;m looking for other cool ideas to implement as deskbar applets)"><meta property="og:type" content="article"><meta property="og:url" content="https://lutzky.net/posts/egged-getter-0-1/"><meta property="og:image" content="https://lutzky.net/images/bio-photo-small.jpg"><meta property="article:section" content="posts"><meta property="article:published_time" content="2008-02-01T23:21:00+00:00"><meta property="article:modified_time" content="2023-04-24T21:38:45+00:00"><meta property="og:site_name" content="Shallow and Pedantic"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://lutzky.net/images/bio-photo-small.jpg"><meta name=twitter:title content="Egged Getter 0.1"><meta name=twitter:description content="The Egged Getter has been lost in the mists of time. However, it&rsquo;s code has largely been integrated into TransportDroidIL. An old version of the Python code has been pasted at the end of this post.
+Here&rsquo;s a little something I&rsquo;ve been messing with: A simple fetcher script for the Egged (Israeli bus company) site. I&rsquo;ve made a deskbar applet which uses it, which was fun to do :) (I&rsquo;m looking for other cool ideas to implement as deskbar applets)"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://lutzky.net/posts/egged-getter-0-1/><link rel=prev href=https://lutzky.net/posts/sour-chewing-gum/><link rel=next href=https://lutzky.net/posts/nokia-6120-classic/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Egged Getter 0.1","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/lutzky.net\/posts\/egged-getter-0-1\/"},"genre":"posts","keywords":"software","wordcount":559,"url":"https:\/\/lutzky.net\/posts\/egged-getter-0-1\/","datePublished":"2008-02-01T23:21:00+00:00","dateModified":"2023-04-24T21:38:45+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Ohad Lutzky"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="Shallow and Pedantic">Shallow and Pedantic</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/stuff/>Stuff </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Shallow and Pedantic">Shallow and Pedantic</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>Cancel</a></div><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/stuff/ title>Stuff</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class="toc-content always-active" id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Egged Getter 0.1</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>Ohad Lutzky</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2008-02-01>2008-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;559 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;3 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div></div><div class=content id=content><blockquote><p>The Egged Getter has been lost in the mists of time. However, it&rsquo;s code has
+largely been integrated into <a href=https://github.com/lutzky/TransportDroidIL target=_blank rel="noopener noreffer">TransportDroidIL</a>. An old version of the Python
+code has been pasted at the end of this post.</p></blockquote><p>Here&rsquo;s a little something I&rsquo;ve been messing with: A simple fetcher script for
+the <a href=http://www.egged.co.il target=_blank rel="noopener noreffer">Egged</a> (Israeli bus company) site. I&rsquo;ve made a
+deskbar applet which uses it, which was fun to do :) (I&rsquo;m looking for other
+cool ideas to implement as deskbar applets)</p><p>You can get it at
+<a href=http://lutzky.net/files/egged_getter target=_blank rel="noopener noreffer">http://lutzky.net/files/egged_getter</a>.
+The readme file includes installation instructions (&mldr;which involve placing
+the two included scripts in
+<code>~/.gnome2/deskbar-plugin/modules-2.20-compatible/</code>.</p><p>There&rsquo;s also a <a href=http://git.or.cz target=_blank rel="noopener noreffer">git</a> repository here:
+<a href="http://git.lutzky.net/?p=ohad/egged_getter.git" target=_blank rel="noopener noreffer">http://git.lutzky.net/?p=ohad/egged_getter.git</a>.
+I don&rsquo;t think I&rsquo;ve mentioned git on the blog before&mldr; It&rsquo;s freaking awesome.
+It made me really despise subversion :). Besides the abundance of information
+on <a href=http://git.or.cz target=_blank rel="noopener noreffer">the main site</a>, there&rsquo;s <a href="http://www.youtube.com/watch?v=4XpnKHJAok8" target=_blank rel="noopener noreffer">an excellent (and very amusing)
+talk by Linus about it</a>. Also, I&rsquo;m
+giving a talk about it in Haifux - this coming Monday (February 4th), the Taub
+building of the Technion, room 6, at 18:30.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=ch>#!/usr/bin/python</span>
+</span></span><span class=line><span class=cl><span class=c1># coding: utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>socket</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>pyfribidi</span> <span class=kn>import</span> <span class=n>log2vis</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=ne>ImportError</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>log2vis</span><span class=p>(</span><span class=n>s</span><span class=p>):</span> <span class=k>return</span> <span class=n>s</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Original values which worked:</span>
+</span></span><span class=line><span class=cl><span class=c1># User agent (a sane browser agent):</span>
+</span></span><span class=line><span class=cl><span class=c1># USERAGENT=&#34;Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9b2) Gecko/2007121016 Firefox/3.0b2&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># Session ID: Can be retrieved from the site, but seems to have a very long</span>
+</span></span><span class=line><span class=cl><span class=c1># keepalive, and isn&#39;t checked anyway.</span>
+</span></span><span class=line><span class=cl><span class=c1># SESSION_ID=&#34;thjbzmnrhrks3a55w1dymvnx&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>BUF_LEN</span><span class=o>=</span><span class=mi>2048</span>
+</span></span><span class=line><span class=cl><span class=n>HOST</span><span class=o>=</span><span class=s1>&#39;mslworld.egged.co.il&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>PORT</span><span class=o>=</span><span class=mi>80</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DOUBLE_NEWLINE</span><span class=o>=</span><span class=s2>&#34;</span><span class=se>\r\n\r\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>USER_AGENT</span><span class=o>=</span><span class=s2>&#34;EggedGetter&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>SESSION_ID</span><span class=o>=</span><span class=s2>&#34;0&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>JSON_DATA</span><span class=o>=</span><span class=s2>&#34;&#34;&#34;{&#34;str1&#34;:&#34;</span><span class=si>%(query)s</span><span class=s2>&#34;,&#34;strSession&#34;:&#34;</span><span class=si>%(session_id)s</span><span class=s2>&#34;}&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>_payload</span><span class=o>=</span><span class=s2>&#34;&#34;&#34;POST /eggedtimetable/WebForms/wsUnicell.asmx/getAnswer HTTP/1.1
+</span></span></span><span class=line><span class=cl><span class=s2>Host: mslworld.egged.co.il
+</span></span></span><span class=line><span class=cl><span class=s2>User-Agent: </span><span class=si>%(user_agent)s</span><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+</span></span></span><span class=line><span class=cl><span class=s2>Accept-Language: en-us,en;q=0.5
+</span></span></span><span class=line><span class=cl><span class=s2>Accept-Charset: utf-8
+</span></span></span><span class=line><span class=cl><span class=s2>Keep-Alive: 300
+</span></span></span><span class=line><span class=cl><span class=s2>Connection: keep-alive
+</span></span></span><span class=line><span class=cl><span class=s2>Content-Type: application/json; charset=utf-8
+</span></span></span><span class=line><span class=cl><span class=s2>Referer: http://mslworld.egged.co.il/eggedtimetable/WebForms/wfrmMain.aspx?width=1280&amp;state=3&amp;taavura=0&amp;language=he&amp;freelang=
+</span></span></span><span class=line><span class=cl><span class=s2>Content-Length: </span><span class=si>%(content_length)d</span><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>Cookie: ASP.NET_SessionId=</span><span class=si>%(session_id)s</span><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>Pragma: no-cache
+</span></span></span><span class=line><span class=cl><span class=s2>Cache-Control: no-cache
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2></span><span class=si>%(json_data)s</span><span class=s2>&#34;&#34;&#34;</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span><span class=s2>&#34;</span><span class=se>\r\n</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>build_json_data</span><span class=p>(</span><span class=n>query</span><span class=p>,</span> <span class=n>session_id</span> <span class=o>=</span> <span class=n>SESSION_ID</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Build a JSON-formatted query for the egged site.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>JSON_DATA</span> <span class=o>%</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;query&#39;</span><span class=p>:</span><span class=n>query</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s1>&#39;&#34;&#39;</span><span class=p>,</span><span class=s1>&#39;</span><span class=se>\\</span><span class=s1>&#34;&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>encode</span><span class=p>(</span><span class=s2>&#34;utf-8&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;session_id&#39;</span><span class=p>:</span><span class=n>session_id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>build_request</span><span class=p>(</span><span class=n>query</span><span class=p>,</span> <span class=n>session_id</span> <span class=o>=</span> <span class=n>SESSION_ID</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Build an HTTP request for the egged site.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>json_data</span> <span class=o>=</span> <span class=n>build_json_data</span><span class=p>(</span><span class=n>query</span><span class=p>,</span> <span class=n>session_id</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>_payload</span> <span class=o>%</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;user_agent&#39;</span><span class=p>:</span><span class=n>USER_AGENT</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;content_length&#39;</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=n>json_data</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;session_id&#39;</span><span class=p>:</span><span class=n>session_id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;json_data&#39;</span><span class=p>:</span><span class=n>json_data</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>send_query</span><span class=p>(</span><span class=n>query</span><span class=p>,</span> <span class=n>session_id</span> <span class=o>=</span> <span class=n>SESSION_ID</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Prepare and send query to site. Returned data is raw.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>http_data</span> <span class=o>=</span> <span class=n>build_request</span><span class=p>(</span><span class=n>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=o>=</span> <span class=n>socket</span><span class=o>.</span><span class=n>socket</span><span class=p>(</span><span class=n>socket</span><span class=o>.</span><span class=n>AF_INET</span><span class=p>,</span> <span class=n>socket</span><span class=o>.</span><span class=n>SOCK_STREAM</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span><span class=o>.</span><span class=n>connect</span><span class=p>((</span><span class=n>HOST</span><span class=p>,</span><span class=n>PORT</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>http_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span> <span class=o>=</span> <span class=n>s</span><span class=o>.</span><span class=n>recv</span><span class=p>(</span><span class=n>BUF_LEN</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>data</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>clean_response_html</span><span class=p>(</span><span class=n>response</span><span class=p>,</span><span class=n>linebreak</span><span class=o>=</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span><span class=n>item</span><span class=o>=</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2> * &#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>response</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>==</span> <span class=n>response</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>==</span> <span class=s1>&#39;&#34;&#39;</span><span class=p>:</span> <span class=n>response</span> <span class=o>=</span> <span class=n>response</span><span class=p>[</span><span class=mi>1</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>BR</span> <span class=o>=</span> <span class=s2>&#34;</span><span class=se>\u003c</span><span class=s2>br</span><span class=se>\u003e</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>LI</span> <span class=o>=</span> <span class=s2>&#34;</span><span class=se>\u003c</span><span class=s2>li</span><span class=se>\u003e</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NBSP</span> <span class=o>=</span> <span class=s2>&#34;&amp;nbsp&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>response</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=n>BR</span><span class=p>,</span><span class=n>linebreak</span><span class=p>)</span> \
+</span></span><span class=line><span class=cl>                   <span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=n>LI</span><span class=p>,</span><span class=n>item</span><span class=p>)</span> \
+</span></span><span class=line><span class=cl>                   <span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=n>NBSP</span><span class=p>,</span><span class=s2>&#34; &#34;</span><span class=p>)</span> \
+</span></span><span class=line><span class=cl>                   <span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\\</span><span class=s2>&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>query_site</span><span class=p>(</span><span class=n>query</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Query the egged site with query&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>site_response</span> <span class=o>=</span> <span class=n>send_query</span><span class=p>(</span><span class=n>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>returned_data</span> <span class=o>=</span> <span class=n>site_response</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=n>DOUBLE_NEWLINE</span><span class=p>)[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>cleaned_data</span> <span class=o>=</span> <span class=n>clean_response_html</span><span class=p>(</span><span class=n>returned_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span> <span class=s2>&#34;Error occured when trying to clean up the following response:&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span> <span class=s2>&#34;site_response:&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span> <span class=n>site_response</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span> <span class=s2>&#34;returned_data:&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span> <span class=n>returned_data</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>unicode</span><span class=p>(</span><span class=n>cleaned_data</span><span class=p>,</span> <span class=s2>&#34;utf-8&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>query</span> <span class=o>=</span> <span class=n>unicode</span><span class=p>(</span><span class=n>raw_input</span><span class=p>(</span><span class=s2>&#34;Enter query for Egged site: &#34;</span><span class=p>),</span><span class=s2>&#34;utf-8&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>result</span> <span class=o>=</span> <span class=n>query_site</span><span class=p>(</span><span class=n>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span> <span class=n>log2vis</span><span class=p>(</span><span class=n>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span> <span class=ne>UnicodeEncodeError</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span> <span class=n>log2vis</span><span class=p>(</span><span class=n>unicode</span><span class=o>.</span><span class=n>encode</span><span class=p>(</span><span class=n>result</span><span class=p>,</span><span class=s2>&#34;utf-8&#34;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-04-24</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://lutzky.net/posts/egged-getter-0-1/ data-hashtag=software><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on WhatsApp" data-sharer=whatsapp data-url=https://lutzky.net/posts/egged-getter-0-1/ data-title="Egged Getter 0.1" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://lutzky.net/posts/egged-getter-0-1/ data-title="Egged Getter 0.1"><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://lutzky.net/posts/egged-getter-0-1/ data-title="Egged Getter 0.1"><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/software/>software</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/sour-chewing-gum/ class=prev rel=prev title="Sour chewing gum"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Sour chewing gum</a>
+<a href=/posts/nokia-6120-classic/ class=next rel=next title="Nokia 6120 Classic">Nokia 6120 Classic<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=disqus_thread class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://disqus.com/?ref_noscript>Disqus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Ohad Lutzky</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css><script type=text/javascript src=https://shallowandpedantic.disqus.com/embed.js defer></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},lightgallery:!0,search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-1VCTD5H9YR",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-1VCTD5H9YR" async></script></body></html>

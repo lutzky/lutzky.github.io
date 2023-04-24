@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>asides - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/asides/</link><description>asides - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 28 Apr 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/asides/" rel="self" type="application/rss+xml"/><item><title>Things I learned today</title><link>https://lutzky.net/2008/04/28/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/04/28/things-i-learned-today/</guid><description><![CDATA[<ol>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>asides - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/asides/</link><description>asides - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 28 Apr 2008 21:10:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/asides/" rel="self" type="application/rss+xml"/><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description><![CDATA[<ol>
 <li>
 <p>You can use git on a VFAT disk (for example, a USB key) without all of the
 annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
@@ -18,9 +18,9 @@ usual job for us ordinary junkies :)</p>
 <p>Vertically, two cans of Pepsi fit very snugly into a Pringles can.</p>
 </li>
 </ol>
-]]></description></item><item><title>Sour chewing gum</title><link>https://lutzky.net/2007/12/19/sour-chewing-gum/</link><pubDate>Wed, 19 Dec 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/12/19/sour-chewing-gum/</guid><description><![CDATA[<p>On an online board, friends posted a photo from a party a while back, as I&rsquo;m
+]]></description></item><item><title>Sour chewing gum</title><link>https://lutzky.net/posts/sour-chewing-gum/</link><pubDate>Wed, 19 Dec 2007 01:45:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/sour-chewing-gum/</guid><description><![CDATA[<p>On an online board, friends posted a photo from a party a while back, as I&rsquo;m
 chewing some extra-sour chewing gum:</p>
-<figure><a class="lightgallery" href="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" title="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" data-thumbnail="/2007/12/19/sour-chewing-gum/dscf6400ff0.jpg" data-sub-html="<h2>חמוצקי נולד</h2>">
+<figure><a class="lightgallery" href="/posts/sour-chewing-gum/dscf6400ff0.jpg" title="/posts/sour-chewing-gum/dscf6400ff0.jpg" data-thumbnail="/posts/sour-chewing-gum/dscf6400ff0.jpg" data-sub-html="<h2>חמוצקי נולד</h2>">
         
     </a><figcaption class="image-caption">חמוצקי נולד</figcaption>
     </figure>
@@ -29,11 +29,11 @@ Security course, we&rsquo;re going to compromise a windows-based server using a
 buffer overflow vulnerability. Unfortunately, this means we&rsquo;re going to have to
 use (as per the course&rsquo;s demands) Visual Studio 2003. My response (now known as חמוצקי):</p>
 <p></p>
-]]></description></item><item><title>All hail the cow!</title><link>https://lutzky.net/2007/06/07/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/06/07/all-hail-the-cow/</guid><description><![CDATA[<figure><a class="lightgallery" href="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" title="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" data-thumbnail="/2007/06/07/all-hail-the-cow/534994007_ef57770ac3.jpg" data-sub-html="<h2>Paradox the cow</h2>">
+]]></description></item><item><title>All hail the cow!</title><link>https://lutzky.net/posts/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/all-hail-the-cow/</guid><description><![CDATA[<figure><a class="lightgallery" href="/posts/all-hail-the-cow/534994007_ef57770ac3.jpg" title="/posts/all-hail-the-cow/534994007_ef57770ac3.jpg" data-thumbnail="/posts/all-hail-the-cow/534994007_ef57770ac3.jpg" data-sub-html="<h2>Paradox the cow</h2>">
         
     </a><figcaption class="image-caption"><a href="http://www.flickr.com/photos/paradox_the_cow/" target="_blank" rel="noopener noreffer ">Paradox the cow</a></figcaption>
     </figure>
-<figure><a class="lightgallery" href="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" title="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-thumbnail="/2007/06/07/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-sub-html="<h2>Another action shot with Paradox</h2>">
+<figure><a class="lightgallery" href="/posts/all-hail-the-cow/535038697_9b471a95b1_o.jpg" title="/posts/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-thumbnail="/posts/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-sub-html="<h2>Another action shot with Paradox</h2>">
         
     </a><figcaption class="image-caption">Another action shot with Paradox</figcaption>
     </figure>
@@ -42,14 +42,14 @@ undergrad CS world than I am&hellip; <em>The Cow</em>. (Paradox)</p>
 <p><strong>Edit:</strong> Yes, that&rsquo;s me. No, that&rsquo;s not my bass. That&rsquo;s a very good friend&rsquo;s
 Fender Fat Stratocaster. So smooooth&hellip;</p>
 <p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman" target="_blank" rel="noopener noreffer ">some chum</a> ;)</p>
-]]></description></item><item><title>I do NOT kick puppies!</title><link>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</link><pubDate>Wed, 31 Jan 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/01/31/i-do-not-kick-puppies/</guid><description><![CDATA[<p>I do type mesmerizingly fast, though&hellip; :)</p>
-<figure><a class="lightgallery" href="/2007/01/31/i-do-not-kick-puppies/poster.jpg" title="/2007/01/31/i-do-not-kick-puppies/poster.jpg" data-thumbnail="/2007/01/31/i-do-not-kick-puppies/poster.jpg" data-sub-html="<h2>Wanted poster</h2>">
+]]></description></item><item><title>I do NOT kick puppies!</title><link>https://lutzky.net/posts/i-do-not-kick-puppies/</link><pubDate>Wed, 31 Jan 2007 16:45:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/i-do-not-kick-puppies/</guid><description><![CDATA[<p>I do type mesmerizingly fast, though&hellip; :)</p>
+<figure><a class="lightgallery" href="/posts/i-do-not-kick-puppies/poster.jpg" title="/posts/i-do-not-kick-puppies/poster.jpg" data-thumbnail="/posts/i-do-not-kick-puppies/poster.jpg" data-sub-html="<h2>Wanted poster</h2>">
         
     </a><figcaption class="image-caption">Wanted poster</figcaption>
     </figure>
 <p>I am told these were scattered around Taub&hellip; I haven&rsquo;t been there to day, but
 it feels good to be infamous.</p>
-]]></description></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2007/01/30/samurai-jack-ingenious/</guid><description><![CDATA[<p>When approaching a port, the Scotsman:</p>
+]]></description></item><item><title>Samurai Jack - Ingenious!</title><link>https://lutzky.net/posts/samurai-jack-ingenious/</link><pubDate>Tue, 30 Jan 2007 19:37:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/samurai-jack-ingenious/</guid><description><![CDATA[<p>When approaching a port, the Scotsman:</p>
 <blockquote>
 <p>You will never find a more wretched hive of scum and villany. And the crab
 cakes ain&rsquo;t too bad, either!</p>

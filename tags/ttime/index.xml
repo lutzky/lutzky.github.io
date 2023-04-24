@@ -1,11 +1,11 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>ttime - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/ttime/</link><description>ttime - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Wed, 30 Jul 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ttime/" rel="self" type="application/rss+xml"/><item><title>Tracking TTime</title><link>https://lutzky.net/2008/07/30/tracking-ttime/</link><pubDate>Wed, 30 Jul 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/07/30/tracking-ttime/</guid><description><![CDATA[<blockquote>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>ttime - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/ttime/</link><description>ttime - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Wed, 30 Jul 2008 18:03:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ttime/" rel="self" type="application/rss+xml"/><item><title>Tracking TTime</title><link>https://lutzky.net/posts/tracking-ttime/</link><pubDate>Wed, 30 Jul 2008 18:03:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/tracking-ttime/</guid><description><![CDATA[<blockquote>
 <p>Ditz was lost in the mists of time, and I guess if ttime were maintained,
 issues would be tracked using Github.</p>
 </blockquote>
 <p>I&rsquo;ve added <a href="http://lutzky.net/ttime/ditz" target="_blank" rel="noopener noreffer ">issue tracking for ttime</a> using the
 fantastic <a href="http://ditz.rubyforge.org" target="_blank" rel="noopener noreffer ">ditz</a>. I&rsquo;ve also added <a href="http://lutzky.net/ttime/doc" target="_blank" rel="noopener noreffer ">ttime&rsquo;s rdoc
 documentation</a>. (Note: Version 0.8.5 is out)</p>
-]]></description></item><item><title>Been working on TTime</title><link>https://lutzky.net/2008/07/11/been-working-on-ttime/</link><pubDate>Fri, 11 Jul 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/07/11/been-working-on-ttime/</guid><description><![CDATA[<p>I&rsquo;ve found myself working on TTime, the Technion Timetable Scheduler, quite a
+]]></description></item><item><title>Been working on TTime</title><link>https://lutzky.net/posts/been-working-on-ttime/</link><pubDate>Fri, 11 Jul 2008 11:33:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/been-working-on-ttime/</guid><description><![CDATA[<p>I&rsquo;ve found myself working on TTime, the Technion Timetable Scheduler, quite a
 bit lately. Lots of cool stuff went in:</p>
 <ul>
 <li>Boaz Goldstein&rsquo;s TCal, a Cairo-based schedule renderer (could you believe the
@@ -22,7 +22,7 @@ format</li>
 <code>setup.rb</code>, or the updated Debian package. I think it may soon be time to tag a
 release :)</p>
 <p><a href="http://github.com/lutzky/ttime" target="_blank" rel="noopener noreffer ">Sources at Github</a></p>
-]]></description></item><item><title>Scheduling</title><link>https://lutzky.net/2008/06/02/scheduling/</link><pubDate>Mon, 02 Jun 2008 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/2008/06/02/scheduling/</guid><description><![CDATA[<p>So, I see I forgot to post my schedule for this semester&hellip;</p>
+]]></description></item><item><title>Scheduling</title><link>https://lutzky.net/posts/scheduling/</link><pubDate>Mon, 02 Jun 2008 20:33:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/scheduling/</guid><description><![CDATA[<p>So, I see I forgot to post my schedule for this semester&hellip;</p>
 <blockquote>
 <p><em>&hellip;ttime screenshot lost in the mists of time&hellip;</em></p>
 </blockquote>
