@@ -1,6 +1,6 @@
 ---
 date: "2006-08-15T00:00:00Z"
-slug: katyusha-damage_copy
+slug: katyusha-damage
 aliases: ["/2006/08/15/katyusha-damage_copy/"]
 summary: (Hebrew) Comparative Katyusha damage
 tags: ["hebrew"]

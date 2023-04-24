@@ -1,6 +1,6 @@
 ---
 date: "2006-08-11T00:00:00Z"
-slug: recording-booms_copy
+slug: recording-booms
 aliases: ["/2006/08/11/recording-booms_copy/"]
 summary: (Hebrew) Loudness fight - artillery vs bass guitar
 tags: ["hebrew"]
