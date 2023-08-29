@@ -139,7 +139,47 @@
 </div>
 </div><p>It&rsquo;s not ideal, but it seemed to work; certainly seemed like it should be library code, for someone smarter to debug. Indeed, it turns out that the <code>periph.io</code> library had a <a href="https://pkg.go.dev/periph.io/x/conn/v3@v3.6.8/gpio/gpioutil#Debounce" target="_blank" rel="noopener noreffer ">Debounce function</a> to help with this, but at the time it <a href="https://github.com/periph/conn/issues/5" target="_blank" rel="noopener noreffer ">wasn&rsquo;t implemented at all</a> (and now that I&rsquo;ve spent some time on it, it&rsquo;s partially implemented).</p>
 <p>Ultimately, the device worked rather well, and the button pushes were quite satisfying, especially after a particularly nasty diaper change (AKA a poonami). However, it did leave a lot to be desired: The cabling was flimsy and patchy (the pins coming from the ribbon were easy to disconnect), and using a Raspberry Pi here was overkill. Indeed, I ended up using that Raspberry Pi (and OLED display) as a <a href="https://pikvm.org/" target="_blank" rel="noopener noreffer ">PiKVM</a>, and using a microcontroller for the diaper change buttons instead. More on that in the next post.</p>
-]]></description></item><item><title>PiTemp</title><link>https://lutzky.net/posts/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/pitemp/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Charge-only USB cables</title><link>https://lutzky.net/posts/Charge-only-USB-cables/</link><pubDate>Thu, 09 Sep 2021 23:45:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/Charge-only-USB-cables/</guid><description><![CDATA[<p>Here&rsquo;s how to quickly determine if a USB cable is fully operational or charge-only.</p>
+<ol>
+<li>Purchase several identical USB gadgets that require data transfer but are
+cheap and therefore don&rsquo;t come with their own cables; e.g. a fun microcontroller
+like an ESP8266.</li>
+<li>Grab a cable from your big box &lsquo;o cables that you can&rsquo;t bring yourself to
+throw out</li>
+<li>Test it, doesn&rsquo;t work - powers on, but not identified on computer.</li>
+<li>Test with two other cables, just to be sure it&rsquo;s not the cable.</li>
+<li>Test all of the gadgets you got - same problem across the board.</li>
+<li>Suspect your computer; try another one. Try another OS or two.</li>
+<li>Read up about debugging the device and whether this is a known fault;
+identify online posts about several similar-sounding but ultimately unrelated
+issues.</li>
+<li>Begin to package gadgets for return/trash, nearly admitting defeat</li>
+<li>In a moment of desperation, try hooking up another micro-USB gadget to your
+computer. Discover that doesn&rsquo;t work either.</li>
+<li>Question own sanity.</li>
+<li>Try three other cables from your big box &lsquo;o cables. One finally works with
+the other gadget.</li>
+<li>Try that cable with the little microcontroller. Still doesn&rsquo;t work.</li>
+<li>Discover this is actually yet another cable, which looks identical to the
+one that does work.</li>
+<li>Become very angry.</li>
+<li>Get some brightly-colored electrical tape in two colors.</li>
+<li>Use the electrical tape to mark each and every last damned cable in the
+damned box, with the two colors denoting &ldquo;worked at least once&rdquo; and &ldquo;POS cable
+for charging ancient crap only&rdquo;</li>
+<li>You can now easily identify the fully-operational USB cables, as they will
+have a brightly-colored electrical tape indicating this!</li>
+</ol>
+<p>(if any additional unmarked micro-USB cables should appear, go back to step 14)</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is backported from Facebook, for the sole reason of, in August 2023, replying
+to <a href="https://mastodon.social/@geerlingguy/110973213585771396" target="_blank" rel="noopener noreffer ">this post about a device that makes it easier</a>.</div>
+        </div>
+    </div>]]></description></item><item><title>PiTemp</title><link>https://lutzky.net/posts/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/pitemp/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>I had been looking for an excuse to mess around with Raspberry Pi for a while, and found one: I wanted a graph of temperature and humidity over time, and - while we&rsquo;re at it - a nice display of those two. Technically speaking, I already have a Nest thermostat which should provide those, but it won&rsquo;t display humidity and there&rsquo;s no easy way to get a graph off it (besides, then I&rsquo;d need another excuse for messing around with a Pi).</p>
 <p>The code for the final result is in <a href="https://github.com/lutzky/pitemp" target="_blank" rel="noopener noreffer ">https://github.com/lutzky/pitemp</a>.</p>
 <h2 id="stage-1-lcd-and-dht">Stage 1: LCD and DHT</h2>
@@ -435,26 +475,4 @@ so have black &amp; white display technologies (E-Paper, anyone?).</p>
 true. The simple reason is that they would be totally unmarketable. Even
 business-types like color screens nowadays. So I&rsquo;ll just keep holding out for a
 folding E-Paper mobile browser.</p>
-]]></description></item><item><title>Nokia 6120 Classic</title><link>https://lutzky.net/posts/nokia-6120-classic/</link><pubDate>Mon, 11 Feb 2008 14:03:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/nokia-6120-classic/</guid><description><![CDATA[<p>I&rsquo;ve switched to a <a href="http://europe.nokia.com/A4399010" target="_blank" rel="noopener noreffer ">Nokia 6120 Classic</a>, and
-I&rsquo;ve switched my carrier over to Orange. I&rsquo;m very happy with it: The price is
-right, at 0 NIS a month (if your monthly bill adds up to over 100 NIS without
-it, which it does). It&rsquo;s very small, but has a nice screen and a respectable 2
-megapixel camera. It&rsquo;s &ldquo;3.5G&rdquo;, which means it has a very fast internet
-connection (I&rsquo;ve clocked over 50kbyte/sec), and the Symbian S60 operating
-system lets me use it well - it comes with a very, very nice webkit-based
-browser and RSS reader, and a fast GMail client is a few clicks away.</p>
-<p>Another nice feature is the built-in MP3 player - which is actually made
-relevant due to the micro-SD support and included 1GB SD card. The device has a
-standard USB connection (cable included, but it&rsquo;s an ordinary Mini-to-A cable),
-and has a Mass Storage Device mode, so it works well with any OS. It can also
-automatically text-to-speech the name of the caller (or dial by voice
-recognition, which works remarkably well), which is handy when listening to
-MP3s.</p>
-<p>I&rsquo;ve only had two problems with it so far - first, when viewing a long web page
-(on wikipedia, specifically), it gave an &ldquo;out of RAM&rdquo; message and rebooted. I&rsquo;m
-curious as to whether there&rsquo;s a simpler, non-CSS version of Wikipedia, or a way
-to get the phone to ignore the CSS - this will probably save on RAM. Another
-problem I had was that the vibration feature didn&rsquo;t work until I rebooted it -
-but this no longer seems to occur.</p>
-<p>I wonder how well puTTy would work on this&hellip;</p>
 ]]></description></item></channel></rss>

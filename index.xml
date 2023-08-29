@@ -1268,7 +1268,47 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 <p>In addition to being quick and comfortable to use, BabyBuddy allowed me to set up two integrations that I had in mind. The first is an always-on display, essentially intended as &ldquo;the baby clock&rdquo;. It&rsquo;s positioned by the couch where we usually feed, so it&rsquo;s great as a feeding timer as well. I had started out with an old tablet (Huawei T3 Mediapad) running <a href="https://github.com/thanksmister/wallpanel-android" target="_blank" rel="noopener noreffer ">wallpanel</a> - this is a form of &ldquo;kiosk&rdquo; application, which locks the device into a mode where it always runs the browser on a particular page (the device has no other credentials on it, so it&rsquo;s reasonably safe). The tablet&rsquo;s battery, unfortunately, did <em>not</em> like that - seemingly having the screen on discharges it faster than it can charge, and after a few weeks the tablet refused to charge at all. I&rsquo;ve therefore switched to using an old ASUS C100P Chromebook running <a href="https://chrome.google.com/webstore/detail/kiosk/afhcomalholahplbjhnmahkoekoijban?hl=en" target="_blank" rel="noopener noreffer ">kiosk</a> - this gives the benefit of having a physical keyboard, useful for entering the food amounts.</p>
 <p>The second integration I call &ldquo;poobuttons&rdquo; - a couple of tactile buttons on the changing dresser which tell BabyBuddy to mark a diaper (they are labeled &ldquo;poo&rdquo; and &ldquo;pee&rdquo;). This is both easier than fumbling with a phone touchscreen and, frankly, way more satisfying. The next posts will detail the iterations of these buttons and how I built them.</p>
 <p>This has been a wonderful and challenging journey so far. I wonder what else I&rsquo;ll find myself building.</p>
-]]></description></item><item><title>Code comments</title><link>https://lutzky.net/posts/comments/</link><pubDate>Sun, 02 May 2021 11:02:57 +0100</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/comments/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Charge-only USB cables</title><link>https://lutzky.net/posts/Charge-only-USB-cables/</link><pubDate>Thu, 09 Sep 2021 23:45:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/Charge-only-USB-cables/</guid><description><![CDATA[<p>Here&rsquo;s how to quickly determine if a USB cable is fully operational or charge-only.</p>
+<ol>
+<li>Purchase several identical USB gadgets that require data transfer but are
+cheap and therefore don&rsquo;t come with their own cables; e.g. a fun microcontroller
+like an ESP8266.</li>
+<li>Grab a cable from your big box &lsquo;o cables that you can&rsquo;t bring yourself to
+throw out</li>
+<li>Test it, doesn&rsquo;t work - powers on, but not identified on computer.</li>
+<li>Test with two other cables, just to be sure it&rsquo;s not the cable.</li>
+<li>Test all of the gadgets you got - same problem across the board.</li>
+<li>Suspect your computer; try another one. Try another OS or two.</li>
+<li>Read up about debugging the device and whether this is a known fault;
+identify online posts about several similar-sounding but ultimately unrelated
+issues.</li>
+<li>Begin to package gadgets for return/trash, nearly admitting defeat</li>
+<li>In a moment of desperation, try hooking up another micro-USB gadget to your
+computer. Discover that doesn&rsquo;t work either.</li>
+<li>Question own sanity.</li>
+<li>Try three other cables from your big box &lsquo;o cables. One finally works with
+the other gadget.</li>
+<li>Try that cable with the little microcontroller. Still doesn&rsquo;t work.</li>
+<li>Discover this is actually yet another cable, which looks identical to the
+one that does work.</li>
+<li>Become very angry.</li>
+<li>Get some brightly-colored electrical tape in two colors.</li>
+<li>Use the electrical tape to mark each and every last damned cable in the
+damned box, with the two colors denoting &ldquo;worked at least once&rdquo; and &ldquo;POS cable
+for charging ancient crap only&rdquo;</li>
+<li>You can now easily identify the fully-operational USB cables, as they will
+have a brightly-colored electrical tape indicating this!</li>
+</ol>
+<p>(if any additional unmarked micro-USB cables should appear, go back to step 14)</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This post is backported from Facebook, for the sole reason of, in August 2023, replying
+to <a href="https://mastodon.social/@geerlingguy/110973213585771396" target="_blank" rel="noopener noreffer ">this post about a device that makes it easier</a>.</div>
+        </div>
+    </div>]]></description></item><item><title>Code comments</title><link>https://lutzky.net/posts/comments/</link><pubDate>Sun, 02 May 2021 11:02:57 +0100</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/comments/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>Good code comments only describe <em>why</em> the code is (or isn&rsquo;t!) doing something.</p>
 <p>When teaching coding or reviewing code, I sometimes encounter comments describing <em>what</em> it&rsquo;s doing, and those are almost always harmful.</p>
 <p>To be clear, I&rsquo;m talking about <em>code comments</em>, not <em>documentation comments</em>. This nuance is different in every language and setup, but for Go, this is it:</p>
@@ -1538,26 +1578,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
     </a><figcaption class="image-caption">PiTemp with PiOLED</figcaption>
     </figure>
 <p>Happy hacking!</p>
-]]></description></item><item><title>Server drawer</title><link>https://lutzky.net/posts/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/server-drawer/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>This is as good a time as any to give a quick tour of my &ldquo;homelab&rdquo; or server drawer.</p>
-<p>The external view is rather innocuous: A visually inoffensive Nest Wifi, a rather elegant Nest Thermostat (shame that the display can&rsquo;t be always-on), and the gorgeous Nintendo Switch dock cover my partner got me. The TV aerial is tucked to the back, a reasonable compromise between &ldquo;gets reception&rdquo; and &ldquo;hidden away and ugly&rdquo;. The TV is mounted on upside-down IKEA boxes which we painted to roughly match the rest, hiding some botched carpentry behind the TV.</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/external.jpg" title="/posts/server-drawer/external.jpg" data-thumbnail="/posts/server-drawer/external.jpg" data-sub-html="<h2>External view</h2>">
-        
-    </a><figcaption class="image-caption">External view</figcaption>
-    </figure>
-<p>You may note some cables heading down through a hole in the woodwork (yeah, I could probably make them a bit neater on the way down):</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/hole.jpg" title="/posts/server-drawer/hole.jpg" data-thumbnail="/posts/server-drawer/hole.jpg" data-sub-html="<h2>Through the hole</h2>">
-        
-    </a><figcaption class="image-caption">Through the hole</figcaption>
-    </figure>
-<p>When opened, the drawer shows the Virgin Media router (in <a href="https://www.virginmedia.com/help/virgin-media-hub-modem-mode" target="_blank" rel="noopener noreffer ">Modem Mode</a>), hooked up to the Nest Wifi and back into a small switch. The TV is hardwired in, and so is the NUC i3 media server (&ldquo;Michael&rdquo;, replacing the previous server &ldquo;George&rdquo;). The NUC is wearing a 4TB USB HDD as a hat. Everything is quite low-powered, and Michael usually hovers around 42°C.</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/top.jpg" title="/posts/server-drawer/top.jpg" data-thumbnail="/posts/server-drawer/top.jpg" data-sub-html="<h2>Top view</h2>">
-        
-    </a><figcaption class="image-caption">Top view</figcaption>
-    </figure>
-<p>Finally, here&rsquo;s how everything is powered. The guy who built it thought 10 sockets (8 in the drawer, 2 behind the TV) was overkill. It was not.</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/feature-power.jpg" title="/posts/server-drawer/feature-power.jpg" data-thumbnail="/posts/server-drawer/feature-power.jpg" data-sub-html="<h2>Power view</h2>">
-        
-    </a><figcaption class="image-caption">Power view</figcaption>
-    </figure>
 ]]></description></item></channel></rss>
