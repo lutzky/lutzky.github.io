@@ -1,15 +1,31 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Oct 2023 19:54:39 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible idea, even if it weren&rsquo;t at war at the time.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Oct 2023 19:54:39 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
+to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible
+idea, even if it weren&rsquo;t at war at the time.</p>
 <h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
-<p>Through the northern city of Haifa, the <a href="https://en.wikipedia.org/wiki/Carmel_Tunnels" target="_blank" rel="noopener noreffer ">Carmel Tunnels</a> are a toll bypass of the city. About 10 years ago, on September 8-9, 2013 (yes that date will be relevant), the tunnels were <a href="https://www.ynet.co.il/articles/0,7340,L-4446249,00.html" target="_blank" rel="noopener noreffer ">shut down due to a &ldquo;cyber attack&rdquo;</a>; rumor is that the toll system didn&rsquo;t function, and rather than take the loss, the tunnels stayed closed for many hours, causing traffic chaos.</p>
+<p>Through the northern city of Haifa, the <a href="https://en.wikipedia.org/wiki/Carmel_Tunnels" target="_blank" rel="noopener noreffer ">Carmel Tunnels</a> are a toll bypass of
+the city. About 10 years ago, on September 8-9, 2013 (yes that date will be
+relevant), the tunnels were <a href="https://www.ynet.co.il/articles/0,7340,L-4446249,00.html" target="_blank" rel="noopener noreffer ">shut down due to a &ldquo;cyber attack&rdquo;</a>;
+rumor is that the toll system didn&rsquo;t function, and rather than take the loss,
+the tunnels stayed closed for many hours, causing traffic chaos.</p>
 <p>I don&rsquo;t think it was a cyber attack.</p>
 <h2 id="timezones-in-israel">Timezones in Israel</h2>
-<p>Timezone legislation in Israel is complicated (this sometimes <a href="https://darwinawards.com/darwin/darwin1999-38.html" target="_blank" rel="noopener noreffer ">saves lives</a>). Between 2005 and 2012, DST was set to end on the Last Sunday before the 10th of Tishrei. Tishrei is a month in the traditional Jewish calendar, which is less common in day-to-day use in Israel, but does determine holidays (similar to Easter). However, legislation managed to change - twice - between 2012 and 2013. The first change (November 2012) had DST ending on the first Sunday after October 1st, and the second (2013) had DST ending on the <em>last</em> Sunday of October.</p>
+<p>Timezone legislation in Israel is complicated (this sometimes <a href="https://darwinawards.com/darwin/darwin1999-38.html" target="_blank" rel="noopener noreffer ">saves
+lives</a>). Between 2005 and 2012, DST was set to end on the Last
+Sunday before the 10th of Tishrei. Tishrei is a month in the traditional Jewish
+calendar, which is less common in day-to-day use in Israel, but does determine
+holidays (similar to Easter). However, legislation managed to change - twice -
+between 2012 and 2013. The first change (November 2012) had DST ending on the
+first Sunday after October 1st, and the second (2013) had DST ending on the
+<em>last</em> Sunday of October.</p>
 <div class="details admonition note open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><p>Until 2013, the Israeli law for daylight savings time relied on the lunar calendar, so the rule couldn&rsquo;t be represented easily using the Gregorian calendar. If you look at the <a href="https://www.iana.org/time-zones" target="_blank" rel="noopener noreffer ">timezone database</a> source data, you can see things suddenly got very efficient:</p>
+            <div class="admonition-content"><p>Until 2013, the Israeli law for daylight savings time relied on the lunar
+calendar, so the rule couldn&rsquo;t be represented easily using the Gregorian
+calendar. If you look at the <a href="https://www.iana.org/time-zones" target="_blank" rel="noopener noreffer ">timezone database</a> source data, you can see things
+suddenly got very efficient:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -35,9 +51,25 @@
 </div></div>
         </div>
     </div>
-<p>Anyway, if one were to go by the pre-2012 law but apply it 2013, daylight savings time should have ended on - you guessed it - September 8th. So, in my opinion, a much likelier scenario than a &ldquo;cyber attack&rdquo; is simply that some of the systems suddenly found themselves one hour out of sync with the rest, and things got pretty confused. <a href="https://he.wikipedia.org/wiki/%D7%A9%D7%A2%D7%95%D7%9F_%D7%94%D7%A7%D7%99%D7%A5_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C#%D7%94%D7%97%D7%95%D7%A7_%D7%94%D7%A0%D7%95%D7%9B%D7%97%D7%99_-_%D7%94%D7%97%D7%9C_%D7%9E%D7%A9%D7%A0%D7%AA_2013" target="_blank" rel="noopener noreffer ">Wikipedia notes</a> that, on this day (as well as October 6th, due to the 2012 law), many smartphones showed an incorrect time because they hadn&rsquo;t been updated with the latest legislation. And that&rsquo;s despite having, for September 8th, almost a year&rsquo;s notice; expecting everyone&rsquo;s personal devices to be updated in two weeks is pure fantasy.</p>
+<p>Anyway, if one were to go by the pre-2012 law but apply it 2013, daylight
+savings time should have ended on - you guessed it - September 8th. So, in my
+opinion, a much likelier scenario than a &ldquo;cyber attack&rdquo; is simply that some of
+the systems suddenly found themselves one hour out of sync with the rest, and
+things got pretty confused. <a href="https://he.wikipedia.org/wiki/%D7%A9%D7%A2%D7%95%D7%9F_%D7%94%D7%A7%D7%99%D7%A5_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C#%D7%94%D7%97%D7%95%D7%A7_%D7%94%D7%A0%D7%95%D7%9B%D7%97%D7%99_-_%D7%94%D7%97%D7%9C_%D7%9E%D7%A9%D7%A0%D7%AA_2013" target="_blank" rel="noopener noreffer ">Wikipedia notes</a>
+that, on this day (as well as October 6th, due to the 2012 law), many
+smartphones showed an incorrect time because they hadn&rsquo;t been updated with the
+latest legislation. And that&rsquo;s despite having, for September 8th, almost a
+year&rsquo;s notice; expecting everyone&rsquo;s personal devices to be updated in two weeks
+is pure fantasy.</p>
 <h2 id="nobodys-up-changing-the-clocks-at-2am">Nobody&rsquo;s up changing the clocks at 2AM</h2>
-<p>It&rsquo;s important to understand that this is how it all works; computer-based systems have a file somewhere that says &ldquo;this is when the daylight savings change will happen&rdquo;, and things happen automatically on that basis; they have to, for a simultaneous transition of all computing systems. Any change to that timezone file takes time and effort to create, test, and distribute, for each different type of computing system. This is not something to be done under time pressure as a &ldquo;would-be-nice&rdquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Not unless you want to have &ldquo;cyber attacks&rdquo;.</p>
+<p>It&rsquo;s important to understand that this is how it all works; computer-based
+systems have a file somewhere that says &ldquo;this is when the daylight savings
+change will happen&rdquo;, and things happen automatically on that basis; they have
+to, for a simultaneous transition of all computing systems. Any change to that
+timezone file takes time and effort to create, test, and distribute, for each
+different type of computing system. This is not something to be done under time
+pressure as a &ldquo;would-be-nice&rdquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Not unless you want to
+have &ldquo;cyber attacks&rdquo;.</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
