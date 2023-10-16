@@ -1,4 +1,51 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 23 Apr 2023 10:22:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Oct 2023 19:54:39 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Timezone Changes</title><link>https://lutzky.net/posts/Timezone-Changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/Timezone-Changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible idea, even if it weren&rsquo;t at war at the time.</p>
+<h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
+<p>Through the northern city of Haifa, the <a href="https://en.wikipedia.org/wiki/Carmel_Tunnels" target="_blank" rel="noopener noreffer ">Carmel Tunnels</a> are a toll bypass of the city. About 10 years ago, on September 8-9, 2013 (yes that date will be relevant), the tunnels were <a href="https://www.ynet.co.il/articles/0,7340,L-4446249,00.html" target="_blank" rel="noopener noreffer ">shut down due to a &ldquo;cyber attack&rdquo;</a>; rumor is that the toll system didn&rsquo;t function, and rather than take the loss, the tunnels stayed closed for many hours, causing traffic chaos.</p>
+<p>I don&rsquo;t think it was a cyber attack.</p>
+<h2 id="timezones-in-israel">Timezones in Israel</h2>
+<p>Timezone legislation in Israel is complicated (this sometimes <a href="https://darwinawards.com/darwin/darwin1999-38.html" target="_blank" rel="noopener noreffer ">saves lives</a>). Between 2005 and 2012, DST was set to end on the Last Sunday before the 10th of Tishrei. Tishrei is a month in the traditional Jewish calendar, which is less common in day-to-day use in Israel, but does determine holidays (similar to Easter). However, legislation managed to change - twice - between 2012 and 2013. The first change (November 2012) had DST ending on the first Sunday after October 1st, and the second (2013) had DST ending on the <em>last</em> Sunday of October.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Until 2013, the Israeli law for daylight savings time relied on the lunar calendar, so the rule couldn&rsquo;t be represented easily using the Gregorian calendar. If you look at the <a href="https://www.iana.org/time-zones" target="_blank" rel="noopener noreffer ">timezone database</a> source data, you can see things suddenly got very efficient:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># Rule&gt; NAME&gt;   FROM&gt;   TO&gt;     -&gt;      IN&gt;     ON&gt;     AT&gt;     SAVE&gt;   LETTER/S
+</span></span><span class="line"><span class="cl"># ...explicit lines for every year since 1940...
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2010&gt;   only&gt;   -&gt;      Sep&gt;    12&gt;     2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2011&gt;   only&gt;   -&gt;      Oct&gt;     2&gt;     2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2012&gt;   only&gt;   -&gt;      Sep&gt;    23&gt;     2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2013&gt;   max&gt;    -&gt;      Mar&gt;    Fri&gt;=23&gt;2:00&gt;   1:00&gt;   D
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2013&gt;   max&gt;    -&gt;      Oct&gt;    lastSun&gt;2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl"># ...and that&#39;s it.
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>Anyway, if one were to go by the pre-2012 law but apply it 2013, daylight savings time should have ended on - you guessed it - September 8th. So, in my opinion, a much likelier scenario than a &ldquo;cyber attack&rdquo; is simply that some of the systems suddenly found themselves one hour out of sync with the rest, and things got pretty confused. <a href="https://he.wikipedia.org/wiki/%D7%A9%D7%A2%D7%95%D7%9F_%D7%94%D7%A7%D7%99%D7%A5_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C#%D7%94%D7%97%D7%95%D7%A7_%D7%94%D7%A0%D7%95%D7%9B%D7%97%D7%99_-_%D7%94%D7%97%D7%9C_%D7%9E%D7%A9%D7%A0%D7%AA_2013" target="_blank" rel="noopener noreffer ">Wikipedia notes</a> that, on this day (as well as October 6th, due to the 2012 law), many smartphones showed an incorrect time because they hadn&rsquo;t been updated with the latest legislation. And that&rsquo;s despite having, for September 8th, almost a year&rsquo;s notice; expecting everyone&rsquo;s personal devices to be updated in two weeks is pure fantasy.</p>
+<h2 id="nobodys-up-changing-the-clocks-at-2am">Nobody&rsquo;s up changing the clocks at 2AM</h2>
+<p>It&rsquo;s important to understand that this is how it all works; computer-based systems have a file somewhere that says &ldquo;this is when the daylight savings change will happen&rdquo;, and things happen automatically on that basis; they have to, for a simultaneous transition of all computing systems. Any change to that timezone file takes time and effort to create, test, and distribute, for each different type of computing system. This is not something to be done under time pressure as a &ldquo;would-be-nice&rdquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Not unless you want to have &ldquo;cyber attacks&rdquo;.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Many years ago, I described an effort to coerce the timezone system into a &ldquo;change on demand&rdquo; mode; see post <a href="/posts/timezones-are-fickle/" rel="">Timezones are fickle</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
 interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
@@ -1538,35 +1585,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
     </a><figcaption class="image-caption">PiTemp with PiOLED</figcaption>
     </figure>
 <p>Happy hacking!</p>
-]]></description></item><item><title>TransportDroidIL outage</title><link>https://lutzky.net/posts/transportdroidil-outage/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/transportdroidil-outage/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.</div>
-        </div>
-    </div>
-<!-- raw HTML omitted -->
-<div id="id-1"><h1 id="תקלה-ב-transportdroidil">תקלה ב-TransportDroidIL</h1>
-<p>לצערי, האפליקציה TransportDroidIL הפסיקה לפעול, והסיבה היא כזו שלא מאפשרת תיקון. אני ממליץ בחום על החלופה <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.maps" target="_blank" rel="noopener noreffer ">Google Maps</a>.</p>
-<h2 id="שאלות-ותשובות">שאלות ותשובות</h2>
-<h3 id="למה-האפליקציה-הפסיקה-לעבוד">למה האפליקציה הפסיקה לעבוד?</h3>
-<p>האפליקציה TransportDroidIL פועלת ע&quot;י בקשת נתונים מאתר אגד או משרד אתר התחבורה, תוך שימוש במנגנון ה&quot;שפה חופשית&quot;. שני האתרים השתנו בצורות שונות, שלא מאפשרות לאפליקציה לפעול יותר:</p>
-<ul>
-<li>ב<a href="http://bus.gov.il" target="_blank" rel="noopener noreffer ">אתר משרד התחבורה</a>, מנגנון ה&quot;שפה חופשית&quot; כבר לא עובד כלל - קופצת ההודעה <code>[object Object]</code>, ומאחורי הקלעים ניתן לראות שהאתר לא מקבל מרכיב ה&quot;שפה החופשית&quot; תשובה.</li>
-<li>באתר <a href="http://egged.co.il" target="_blank" rel="noopener noreffer ">אגד</a>, מנגנון ה&quot;שפה החופשית&quot; עדיין פועל,והשתנה יחסית מעט, ויכול בהחלט להיות אפשרי לגרום לאפליקציה לעבוד איתו שוב, אבל&hellip;</li>
-</ul>
-<h3 id="רגע-רגע-בעצם-האפליקציה-לא-עושה-שום-דבר-ומביאה-את-כל-הנתונים-מאתרים-קיימים-אז-למה-כתבת-אותה">רגע רגע, בעצם האפליקציה לא עושה שום דבר ומביאה את כל הנתונים מאתרים קיימים? אז למה כתבת אותה?</h3>
-<p>נכון! הסיבה שכתבתי את האפליקציה הייתה שהאתרים האלה, בספטמבר 2010, לא היו מותאמים לטלפונים ניידים והשימוש בהם מהנייד היה כאב-ראש מוחלט. למעשה, <a href="http://bus.gov.il" target="_blank" rel="noopener noreffer ">אתר משרד התחבורה</a> עדיין לא מותאם, ונראה כיום דומה מאוד לאיך שאתר אגד נראה ב-2010. האפליקציה הייתה מיועדת אך ורק לתת ממשק משתמש נוח יותר לאותם האתרים.</p>
-<p>למרבה השמחה, אתר <a href="http://egged.co.il" target="_blank" rel="noopener noreffer ">אגד</a> מותאם כיום בצורה פחות-או-יותר סבירה לטלפונים ניידים. לא מושלם, אבל בהחלט שמיש. אך, חשוב מכל&hellip;</p>
-<h3 id="בתכלס-יש-אפליקציות-יותר-מוצלחות-כמו-google-maps-אז-למה-להשתמש-באתרים-האלה-בכלל">בתכל&rsquo;ס יש אפליקציות יותר מוצלחות, כמו Google Maps, אז למה להשתמש באתרים האלה בכלל?</h3>
-<p>אין יותר סיבה! ב-2010 Google Maps אמנם לא סיפקה מידע תחבורה ציבורית בישראל, אבל כיום המידע קיים שם בצורה מלאה ומקיפה. המידע מגיע לגוגל ישירות מ<a href="https://data.gov.il/dataset/383" target="_blank" rel="noopener noreffer ">אתר מאגרי המידע הממשלתיים</a>, בפורמט GTFS המותאם לכך. זו האפליקציה בה אני משתמש כיום.</p>
-<p>המידע המסופק הוא, כמו תמיד, מידע של לוחות זמנים ולא מידע זמן-אמת. כולי תקווה שחברות האוטובוסים יתחילו לפרסם מידע זמן-אמת בפורמט <a href="https://developers.google.com/transit/gtfs-realtime/?hl=en" target="_blank" rel="noopener noreffer ">GTFS-realtime</a>, אשר יגרום לכך ש-Google Maps ואפליקציות אחרות יוכלו להראות מידע מציאות יותר על זמן הגעת האוטובוסים.</p>
-<h3 id="מי-פיתח-את-האפליקציה-ומה-הקשר-שלו-לעניין">מי פיתח את האפליקציה ומה הקשר שלו לעניין?</h3>
-<p>אני המפתח המקורי של האפליקציה - שמי אוהד לוצקי. התחלתי לעבוד על תוכנות שמביאות מידע מאתר משרד התחבורה בזמן שהייתי סטודנט בטכניון שנוסע הרבה באוטובוסים, בערך ב-2007. ב-2010 המרתי את התוכנה לאפליקציית אנדרואיד כשהייתי בצבא ונסעתי הרבה באוטובוסים; כמה חברים התעניינו, והעליתי את התוכנה ל-Play Store. חבר טוב מהלימודים, חגי, שלח מספר שיפורים ואף <a href="https://github.com/lutzky/TransportDroidIL/pull/15" target="_blank" rel="noopener noreffer ">הוסיף מנגנון עדכוני-זמן-אמת</a>, אשר היה תלוי בחסדי האתרים של חברות אוטובוס ספציפיות שסיפקו, גם הן, את המידע בצורה לא-סטנדרטית.</p>
-<p>בשלב כלשהו עלו אפליקציות חלופיות לרשת, דוגמת Moovit - אך אף אחד מהן לא מצאה חן בעיניי. בפרט, ל-Moovit לקח זמן רב לעלות, בעוד שהאפליקציה שלי הייתה מיועדת למבט מהיר תוך כדי שהאוטובוס מתקרב לתחנה.</p>
-<p>בשלב כלשהו (2012 לכל המאוחר) משרד התחבורה התחיל לפרסם מידע GTFS שאפשר לגוגל להציג מידע תחבורה ציבורית בישראל, ואני הפסקתי להשתמש באפליקציה שכתבתי. Google Maps מראה את התחנות על מפה, רשימת תחנות-ביניים ועוד. עם זאת, מאחר ולאפליקציה עוד היה מספר לא-קטן של משתמשים (קצת יותר מ-55,000 בשיא), המשכתי לתקן בעיות  קטנות כשהן צצו וכשהיה לי זמן.</p>
-<p>כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL 😄</p>
-</div>
 ]]></description></item></channel></rss>

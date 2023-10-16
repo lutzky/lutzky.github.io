@@ -1,4 +1,51 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 23 Apr 2023 10:22:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Oct 2023 19:54:39 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Timezone Changes</title><link>https://lutzky.net/posts/Timezone-Changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/Timezone-Changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible idea, even if it weren&rsquo;t at war at the time.</p>
+<h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
+<p>Through the northern city of Haifa, the <a href="https://en.wikipedia.org/wiki/Carmel_Tunnels" target="_blank" rel="noopener noreffer ">Carmel Tunnels</a> are a toll bypass of the city. About 10 years ago, on September 8-9, 2013 (yes that date will be relevant), the tunnels were <a href="https://www.ynet.co.il/articles/0,7340,L-4446249,00.html" target="_blank" rel="noopener noreffer ">shut down due to a &ldquo;cyber attack&rdquo;</a>; rumor is that the toll system didn&rsquo;t function, and rather than take the loss, the tunnels stayed closed for many hours, causing traffic chaos.</p>
+<p>I don&rsquo;t think it was a cyber attack.</p>
+<h2 id="timezones-in-israel">Timezones in Israel</h2>
+<p>Timezone legislation in Israel is complicated (this sometimes <a href="https://darwinawards.com/darwin/darwin1999-38.html" target="_blank" rel="noopener noreffer ">saves lives</a>). Between 2005 and 2012, DST was set to end on the Last Sunday before the 10th of Tishrei. Tishrei is a month in the traditional Jewish calendar, which is less common in day-to-day use in Israel, but does determine holidays (similar to Easter). However, legislation managed to change - twice - between 2012 and 2013. The first change (November 2012) had DST ending on the first Sunday after October 1st, and the second (2013) had DST ending on the <em>last</em> Sunday of October.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Until 2013, the Israeli law for daylight savings time relied on the lunar calendar, so the rule couldn&rsquo;t be represented easily using the Gregorian calendar. If you look at the <a href="https://www.iana.org/time-zones" target="_blank" rel="noopener noreffer ">timezone database</a> source data, you can see things suddenly got very efficient:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># Rule&gt; NAME&gt;   FROM&gt;   TO&gt;     -&gt;      IN&gt;     ON&gt;     AT&gt;     SAVE&gt;   LETTER/S
+</span></span><span class="line"><span class="cl"># ...explicit lines for every year since 1940...
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2010&gt;   only&gt;   -&gt;      Sep&gt;    12&gt;     2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2011&gt;   only&gt;   -&gt;      Oct&gt;     2&gt;     2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2012&gt;   only&gt;   -&gt;      Sep&gt;    23&gt;     2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2013&gt;   max&gt;    -&gt;      Mar&gt;    Fri&gt;=23&gt;2:00&gt;   1:00&gt;   D
+</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2013&gt;   max&gt;    -&gt;      Oct&gt;    lastSun&gt;2:00&gt;   0&gt;      S
+</span></span><span class="line"><span class="cl"># ...and that&#39;s it.
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>Anyway, if one were to go by the pre-2012 law but apply it 2013, daylight savings time should have ended on - you guessed it - September 8th. So, in my opinion, a much likelier scenario than a &ldquo;cyber attack&rdquo; is simply that some of the systems suddenly found themselves one hour out of sync with the rest, and things got pretty confused. <a href="https://he.wikipedia.org/wiki/%D7%A9%D7%A2%D7%95%D7%9F_%D7%94%D7%A7%D7%99%D7%A5_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C#%D7%94%D7%97%D7%95%D7%A7_%D7%94%D7%A0%D7%95%D7%9B%D7%97%D7%99_-_%D7%94%D7%97%D7%9C_%D7%9E%D7%A9%D7%A0%D7%AA_2013" target="_blank" rel="noopener noreffer ">Wikipedia notes</a> that, on this day (as well as October 6th, due to the 2012 law), many smartphones showed an incorrect time because they hadn&rsquo;t been updated with the latest legislation. And that&rsquo;s despite having, for September 8th, almost a year&rsquo;s notice; expecting everyone&rsquo;s personal devices to be updated in two weeks is pure fantasy.</p>
+<h2 id="nobodys-up-changing-the-clocks-at-2am">Nobody&rsquo;s up changing the clocks at 2AM</h2>
+<p>It&rsquo;s important to understand that this is how it all works; computer-based systems have a file somewhere that says &ldquo;this is when the daylight savings change will happen&rdquo;, and things happen automatically on that basis; they have to, for a simultaneous transition of all computing systems. Any change to that timezone file takes time and effort to create, test, and distribute, for each different type of computing system. This is not something to be done under time pressure as a &ldquo;would-be-nice&rdquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Not unless you want to have &ldquo;cyber attacks&rdquo;.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Many years ago, I described an effort to coerce the timezone system into a &ldquo;change on demand&rdquo; mode; see post <a href="/posts/timezones-are-fickle/" rel="">Timezones are fickle</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
 interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
@@ -1516,66 +1563,4 @@ to <a href="https://mastodon.social/@geerlingguy/110973213585771396" target="_bl
 </div>
 </div><p>In this case, <code>x = 3</code> was there for testing &ldquo;what if <code>getMaxValue</code> returns 3&rdquo;. You should not commit this. However, a possible exception can be if you&rsquo;re documenting &ldquo;why not&rdquo; as above - if it comes with an explanation.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Code is meant to be read by machines and humans, with comments generally being intended for humans to read. Therefore, all of these should be taken as guidelines rather than gospel. Hopefully this post can be of some use for people trying to reason about comment etiquette, or perhaps for code reviewers wanting to point their reviewees at a preexisting summary.</p>]]></description></item><item><title>PiTemp</title><link>https://lutzky.net/posts/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/pitemp/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>I had been looking for an excuse to mess around with Raspberry Pi for a while, and found one: I wanted a graph of temperature and humidity over time, and - while we&rsquo;re at it - a nice display of those two. Technically speaking, I already have a Nest thermostat which should provide those, but it won&rsquo;t display humidity and there&rsquo;s no easy way to get a graph off it (besides, then I&rsquo;d need another excuse for messing around with a Pi).</p>
-<p>The code for the final result is in <a href="https://github.com/lutzky/pitemp" target="_blank" rel="noopener noreffer ">https://github.com/lutzky/pitemp</a>.</p>
-<h2 id="stage-1-lcd-and-dht">Stage 1: LCD and DHT</h2>
-<p>Hardware:</p>
-<ul>
-<li>A <a href="https://www.raspberrypi.org/products/raspberry-pi-zero-w/" target="_blank" rel="noopener noreffer ">Raspberry Pi Zero W</a> a friend gave me (that&rsquo;ll become important later on)</li>
-<li>A <a href="https://www.amazon.co.uk/gp/product/B07L83K6CF" target="_blank" rel="noopener noreffer ">DHT11</a> temperature &amp; humidity sensor</li>
-<li>A <a href="https://www.amazon.co.uk/gp/product/B07QNKCLJM" target="_blank" rel="noopener noreffer ">4x20 character LCD</a>; apparently an HD44780 controller or compatible.</li>
-</ul>
-<p>This was my first time coding for hardware on the raspberry pi, and it went fairly well.</p>
-<h3 id="lcd-quirks">LCD quirks</h3>
-<p>Getting the degree symbol (°, ASCII <code>0xb0</code>) was a bit of a challenge. While the official HD44780 spec shows it should be available with &ldquo;ROM Code A02&rdquo; (i.e. Latin mode), it&rsquo;s not clear if this can be toggled in software, and the characters my unit displayed matched &ldquo;ROM Code A00&rdquo; (Japanese)&hellip; mostly, that is. Some characters were malformed, and the <a href="https://github.com/d2r2/go-hd44780" target="_blank" rel="noopener noreffer ">unofficial library I used</a> didn&rsquo;t support custom characters (which the hardware seems to support). Fortunately, the Japanese ROM code had a Handakuten symbol (ﾟ, like the circle from ぽ but as a separate character), which is close enough.</p>
-<p>The LCD was also quite slow to refresh, the way I was using it; any faster than 1 hz would lead to corruption, meaning that the &ldquo;second-by-second&rdquo; clock display I wanted wasn&rsquo;t feasible.</p>
-<p>Finally, the LCD unit is much, <em>much</em> large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a &ldquo;case&rdquo;.</p>
-<figure><a class="lightgallery" href="/posts/pitemp/lcd_box.jpg" title="/posts/pitemp/lcd_box.jpg" data-thumbnail="/posts/pitemp/lcd_box.jpg" data-sub-html="<h2>LCD in a cardboard box &ldquo;case&rdquo;</h2>">
-        
-    </a><figcaption class="image-caption">LCD in a cardboard box &ldquo;case&rdquo;</figcaption>
-    </figure>
-<h3 id="cross-compilation">Cross compilation</h3>
-<p>While the Pi Zero is certainly <em>capable</em> of being a fully-fledged Go development environment, it&rsquo;s not a fast one (and me using a cheap old SD card isn&rsquo;t helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and <code>scp</code>-ing the result over. That&rsquo;s despite Go&rsquo;s hefty statically-build binaries (7-12MB for these, depending on stripping).</p>
-<p>Cross compiling is done like so (e.g. in a <a href="https://github.com/lutzky/pitemp/blob/main/build.sh" target="_blank" rel="noopener noreffer ">convenience script</a>):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt install gcc-arm-linux-gnueabi
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>arm-linux-gnueabi-gcc <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARM</span><span class="o">=</span><span class="m">6</span> <span class="nv">GOARCH</span><span class="o">=</span>arm
-</span></span><span class="line"><span class="cl">go -o main.arm build main.go
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>For build-and-run-on-save, this can be used with <code>entr</code>. However, because you can&rsquo;t modify an executable file as it runs (in this case), you need to use a temporary file. On my laptop, I run:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Then, on the pi, I run:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="stage-2-pioled">Stage 2: PiOLED</h2>
-<p>I looked for a not-so-ridiculously-large display, and found <a href="https://www.adafruit.com/product/3527" target="_blank" rel="noopener noreffer ">adafruit&rsquo;s PiOLED</a> to be perfect. Its HAT form factor makes for a much tidier device, and the display itself is reminiscent of the 2007 Sansa Clip m300 (albeit monochromatic). Library support is also much better, thanks to <a href="http://periph.io" target="_blank" rel="noopener noreffer ">http://periph.io</a>.</p>
-<p>That being said, my friend soldered the Pi&rsquo;s pins on &ldquo;downwards&rdquo;, as this is apparently more convenient when using it on a breadboard. I figured it&rsquo;s time to order my own Pi Zero (you can get them with the pins pre-soldered, facing &ldquo;up&rdquo;); I later found that <a href="https://pkg.go.dev/periph.io/x/devices/v3/ssd1306#Opts" target="_blank" rel="noopener noreffer ">this might be configurable</a>, but it&rsquo;d still be pretty awkward.</p>
-<p>The PiOLED library (actually periph.io&rsquo;s ssd1306 library) essentially lets you render an <code>image.Image</code>; since these are also trivially renderable to PNG, I could speed up development even further by adding an HTTP endpoint to serve the current image, even if the hardware isn&rsquo;t present; this also let me zoom into the rendered image instead of squinting at the actual display, making it easier to align things pixel-by-pixel. I eventually ended up separating the code into two binaries - <code>pitemp</code> would communicate with the sensors and provide an HTTP endpoint, whereas <code>pitemp_pioled</code> (and <code>pitemp_lcd</code>) would communicate with <code>pitemp</code> and the physical display (or run in <code>--simulator</code> mode on my laptop, for HTTP-endpoint-only rendering).</p>
-<p>I&rsquo;m quite happy with the final result:</p>
-<figure><a class="lightgallery" href="/posts/pitemp/feature-pioled.jpg" title="/posts/pitemp/feature-pioled.jpg" data-thumbnail="/posts/pitemp/feature-pioled.jpg" data-sub-html="<h2>PiTemp with PiOLED</h2>">
-        
-    </a><figcaption class="image-caption">PiTemp with PiOLED</figcaption>
-    </figure>
-<p>Happy hacking!</p>
-]]></description></item></channel></rss>
+<p>Code is meant to be read by machines and humans, with comments generally being intended for humans to read. Therefore, all of these should be taken as guidelines rather than gospel. Hopefully this post can be of some use for people trying to reason about comment etiquette, or perhaps for code reviewers wanting to point their reviewees at a preexisting summary.</p>]]></description></item></channel></rss>
