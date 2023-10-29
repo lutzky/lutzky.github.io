@@ -69,6 +69,7 @@ enableEmoji = true
 
   [params.home]
     [params.home.profile]
+      typeit = false
       title = "Shallow and Pedantic"
       avatarURL = "/images/bio-photo-small.jpg"
       subtitle = """\
@@ -76,9 +77,6 @@ enableEmoji = true
         kiddie pool, the author of this blog is known to be quite shallow and \
         pedantic.\
         """
-    [params.typeit]
-      speed = 50
-      duration = 2000
 
   [params.social]
     "Github" = "lutzky"
