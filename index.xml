@@ -1,4 +1,59 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Oct 2023 19:54:39 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 29 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Front Door Display</title><link>https://lutzky.net/posts/front-door-display/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/front-door-display/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Let&rsquo;s make a tiny display for stuff you check right before leaving home!</p>
+<p>I keep forgetting to turn off my alarm as I leave home, and then scrambling to
+turn it off<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Even if I do remember to turn it off, I&rsquo;m
+never quite sure that I did, so I take my phone out, open the appropriate app,
+and check. It would be super convenient if I had a little indicator near the
+door, so I (or anyone else leaving) could check more quickly. A single red LED
+would technically do the job&hellip; but wouldn&rsquo;t be wife-approved.</p>
+<p>I love <a href="https://lutzky.net/posts/pitemp/#stage-2-pioled" rel="">tiny OLED displays</a>. Let&rsquo;s use one of those! I got an
+<a href="https://www.aliexpress.com/item/1005004839191268.html" target="_blank" rel="noopener noreffer ">ESP8266 with an onboard OLED display</a>, and thanks to
+<a href="https://esphome.io/" target="_blank" rel="noopener noreffer ">ESPhome</a>, having a display of the alarm status is easy enough. There&rsquo;s
+still plenty of room on the display, so I figured I can add a couple of other
+things I quickly check before leaving home: Weather and tram times. I used the
+<a href="https://www.dafont.com/edit-undo.font" target="_blank" rel="noopener noreffer ">Edit Undo font</a> and some <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreffer ">Material Icons</a> for a
+bit of styling. I ended up having to mess with exact spacing <em>a lot</em> until I was
+happy with it; it would be super helpful if there were a simulator like <a href="https://wokwi.com/" target="_blank" rel="noopener noreffer ">wokwi</a>
+for ESPHome to iterate on this more quickly!</p>
+<figure><a class="lightgallery" href="/posts/front-door-display/no-case.png" title="/posts/front-door-display/no-case.png" data-thumbnail="/posts/front-door-display/no-case.png" data-sub-html="<h2>The resulting device without a case</h2>">
+        
+    </a><figcaption class="image-caption">The resulting device without a case</figcaption>
+    </figure>
+<p>Next step is to create a case for it. This is necessary both for wife-approval
+and for cleaner mounting to the wall. I use <a href="https://onshape.com" target="_blank" rel="noopener noreffer ">Onshape</a> for this, as it&rsquo;s both
+free and parametric - that is, I can change numbers later to adjust the design
+without fully re-doing it; and if there&rsquo;s one thing I&rsquo;ve learned about designing
+for 3D printing, is that it takes a few iterations to get it right: Print, learn
+that it <em>almost</em> works, adjust, repeat.</p>
+<figure><a class="lightgallery" href="/posts/front-door-display/case-iterations.png" title="/posts/front-door-display/case-iterations.png" data-thumbnail="/posts/front-door-display/case-iterations.png" data-sub-html="<h2>Iterating on the case design in Onshape</h2>">
+        
+    </a><figcaption class="image-caption">Iterating on the case design in Onshape</figcaption>
+    </figure>
+<p>With this design, I got some nice <a href="https://www.youtube.com/watch?v=8dhFhU7Nl_0" target="_blank" rel="noopener noreffer ">shadow lines</a>. I had originally planned to
+use screws, but it turned out to be fairly annoying: While the PCB does have
+holes for mounting screws, there isn&rsquo;t a lot of room for nuts; it ended up being
+simpler to make a fully plastic snap-fit design. Snap-fit, especially with 3D
+printing, is an even worse source of trial-and-error iterations, as there seems
+to be a fine line between &ldquo;doesn&rsquo;t snap&rdquo; and &ldquo;snaps off altogether&rdquo;, especially
+with smaller designs.</p>
+<p>It doesn&rsquo;t help that I&rsquo;m using a somewhat older Ultimaker 5 printer with PLA
+material; I know there are more modern and robust printers, but the Ultimaker 5
+is maintained by experts at our maker room, which only allows PLA, and I figured
+it should be doable. Thankfully, I was right! I&rsquo;m really happy with the final
+result, and it&rsquo;s proving to be at-a-glance useful every day.</p>
+<figure><a class="lightgallery" href="/posts/front-door-display/final.png" title="/posts/front-door-display/final.png" data-thumbnail="/posts/front-door-display/final.png" data-sub-html="<h2>Final result</h2>">
+        
+    </a><figcaption class="image-caption">Final result</figcaption>
+    </figure>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>The alarm app has added a feature, after I created the device described in this post, to turn it off if any indoors motion is detected at the appropriate time, mostly solving this issue.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>]]></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
 to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible
 idea, even if it weren&rsquo;t at war at the time.</p>
 <h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
@@ -1387,212 +1442,4 @@ have a brightly-colored electrical tape indicating this!</li>
             <div class="admonition-content">This post is backported from Facebook, for the sole reason of, in August 2023, replying
 to <a href="https://mastodon.social/@geerlingguy/110973213585771396" target="_blank" rel="noopener noreffer ">this post about a device that makes it easier</a>.</div>
         </div>
-    </div>]]></description></item><item><title>Code comments</title><link>https://lutzky.net/posts/comments/</link><pubDate>Sun, 02 May 2021 11:02:57 +0100</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/comments/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>Good code comments only describe <em>why</em> the code is (or isn&rsquo;t!) doing something.</p>
-<p>When teaching coding or reviewing code, I sometimes encounter comments describing <em>what</em> it&rsquo;s doing, and those are almost always harmful.</p>
-<p>To be clear, I&rsquo;m talking about <em>code comments</em>, not <em>documentation comments</em>. This nuance is different in every language and setup, but for Go, this is it:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// UsefulFunction does useful things. This is a documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1">// comment, and will be displayed in godoc, IDE autocomplete,
-</span></span></span><span class="line"><span class="cl"><span class="c1">// and more.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">UsefulFunction</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// this and all of the below are code comments
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// count visitors //
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// x is the visitor counter
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">x</span> <span class="o">:=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">x</span><span class="o">++</span> <span class="c1">// increment x
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="why">Document &ldquo;why&rdquo;</h2>
-<p>In some code, things are done for non-intuitive reasons. It&rsquo;s worth pointing that out - it makes your code easier to read for a newcomer trying to understand why it&rsquo;s written that way. In this example, technically <code>sumOfIntsWithThreshold</code> will work absolutely correctly without its input being sorted, but it <a href="https://stackoverflow.com/questions/11227809" target="_blank" rel="noopener noreffer ">turns out that it will be faster if it is</a>.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">sort</span><span class="p">.</span><span class="nf">Ints</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// improves performance; see https://stackoverflow.com/questions/11227809
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">x</span> <span class="o">:=</span> <span class="nf">sumOfIntsWithThreshold</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Other good &ldquo;why&rdquo; examples are code being written in a less-intuitive way to make a particular test possible or to avoid a specific edge-case - be sure to note what those are.</p>
-<p>If a well-researched algorithm is being used, definitely add a reference to it, including the best URL you have for someone who wants a quick overview of how it works.</p>
-<h2 id="why-not">Document &ldquo;why not&rdquo;</h2>
-<p>In some code, the reader might see something missing, a pattern apparently broken. Sometimes this is for a good reason, as keeping with the pattern would cause a bug. More specifically, you might be <em>fixing</em> a bug by breaking the pattern.</p>
-<p>In this example, especially if you&rsquo;re removing a line <code>sort.Strings(c)</code>, it&rsquo;s a good idea to leave a comment explaining why it shouldn&rsquo;t be there.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// don&#39;t sort c, we need to keep its original order for foo
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">foo</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="trivial">Don&rsquo;t document &ldquo;what&rdquo; when it&rsquo;s trivial</h2>
-<p>You might be asking yourself &ldquo;what&rsquo;s the harm in a comment if it isn&rsquo;t needed. The answer is that it can be misleading; code will function correctly even if it&rsquo;s out-of-sync with its comments, so comments aren&rsquo;t always updated when code is changed, leading to this canonical example:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// increment x by 1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">x</span> <span class="o">+=</span> <span class="mi">2</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In less-trivial cases, the reader can be left scratching their head for far longer than they would&rsquo;ve if the comment weren&rsquo;t there in the first place.</p>
-<h2 id="sections">Documenting &ldquo;sections&rdquo; is a code smell</h2>
-<p>If your code looks is divided using comments into &ldquo;sections&rdquo;, it&rsquo;s probably long and difficult to reason about:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">//// Get site data ////
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;data.md&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">parser</span> <span class="o">:=</span> <span class="nx">markdown</span><span class="p">.</span><span class="nf">NewParser</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">data</span> <span class="o">:=</span> <span class="nx">parser</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">//// Get layout data ////
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">f2</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;layout.cfg&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f2</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">layoutReader</span> <span class="o">:=</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">layoutOpts</span><span class="p">.</span><span class="nx">Defaults</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Name &#34;data&#34; is already in use&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">dataOfLayout</span> <span class="o">:=</span> <span class="nx">layoutReader</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">f2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">//// Set up HTML renderer ////
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">renderer</span> <span class="o">:=</span> <span class="nx">htmlrender</span><span class="p">.</span><span class="nf">NewRenderer</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">SetHTMLMode</span><span class="p">(</span><span class="s">&#34;my-favorite-html-style&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">SetCompression</span><span class="p">(</span><span class="s">&#34;max-compression&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">Render</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataOfLayout</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This gets even messier if you don&rsquo;t sneakily omit error handling. In any case, the section headers are reasonable (albeit not great) candidates for function names:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">siteData</span> <span class="o">:=</span> <span class="nf">getSiteData</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">layoutData</span> <span class="o">:=</span> <span class="nf">getLayoutData</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span> <span class="o">:=</span> <span class="nf">setupHTMLRenderer</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">Render</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataOfLayout</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getSiteData</span><span class="p">()</span> <span class="nx">markdown</span><span class="p">.</span><span class="nx">Data</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;data.md&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">markdown</span><span class="p">.</span><span class="nf">NewParser</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getLayoutData</span><span class="p">()</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nx">Data</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;layout.cfg&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">layoutOpts</span><span class="p">.</span><span class="nx">Defaults</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">layoutReader</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">setupHTMLRenderer</span><span class="p">()</span> <span class="nx">htmlrenderer</span><span class="p">.</span><span class="nx">Renderer</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">htmlrender</span><span class="p">.</span><span class="nf">NewRenderer</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span><span class="p">.</span><span class="nf">SetHTMLMode</span><span class="p">(</span><span class="s">&#34;my-favorite-html-style&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span><span class="p">.</span><span class="nf">SetCompression</span><span class="p">(</span><span class="s">&#34;max-compression&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">r</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The main <code>ServeSite</code> function is now much easier to read. The &ldquo;section names&rdquo; are now function names, and are less likely to fall out of date. And as a bonus, the scope of many variables is reduced - so the reader doesn&rsquo;t have to keep them in mind, and we can use short names for them.</p>
-<h2 id="code-scars">Don&rsquo;t leave code scars around</h2>
-<p>Finally, just a pet peeve - while it&rsquo;s absolutely fine to &ldquo;comment out&rdquo; code while developing, you usually shouldn&rsquo;t commit this to version control. I like calling these &ldquo;code scars&rdquo;:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">x</span> <span class="o">:=</span> <span class="nf">getMaxValue</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// x = 3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">handle</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In this case, <code>x = 3</code> was there for testing &ldquo;what if <code>getMaxValue</code> returns 3&rdquo;. You should not commit this. However, a possible exception can be if you&rsquo;re documenting &ldquo;why not&rdquo; as above - if it comes with an explanation.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Code is meant to be read by machines and humans, with comments generally being intended for humans to read. Therefore, all of these should be taken as guidelines rather than gospel. Hopefully this post can be of some use for people trying to reason about comment etiquette, or perhaps for code reviewers wanting to point their reviewees at a preexisting summary.</p>]]></description></item></channel></rss>
+    </div>]]></description></item></channel></rss>

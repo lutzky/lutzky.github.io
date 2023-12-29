@@ -27,7 +27,7 @@
 <p>אני המפתח המקורי של האפליקציה - שמי אוהד לוצקי. התחלתי לעבוד על תוכנות שמביאות מידע מאתר משרד התחבורה בזמן שהייתי סטודנט בטכניון שנוסע הרבה באוטובוסים, בערך ב-2007. ב-2010 המרתי את התוכנה לאפליקציית אנדרואיד כשהייתי בצבא ונסעתי הרבה באוטובוסים; כמה חברים התעניינו, והעליתי את התוכנה ל-Play Store. חבר טוב מהלימודים, חגי, שלח מספר שיפורים ואף <a href="https://github.com/lutzky/TransportDroidIL/pull/15" target="_blank" rel="noopener noreffer ">הוסיף מנגנון עדכוני-זמן-אמת</a>, אשר היה תלוי בחסדי האתרים של חברות אוטובוס ספציפיות שסיפקו, גם הן, את המידע בצורה לא-סטנדרטית.</p>
 <p>בשלב כלשהו עלו אפליקציות חלופיות לרשת, דוגמת Moovit - אך אף אחד מהן לא מצאה חן בעיניי. בפרט, ל-Moovit לקח זמן רב לעלות, בעוד שהאפליקציה שלי הייתה מיועדת למבט מהיר תוך כדי שהאוטובוס מתקרב לתחנה.</p>
 <p>בשלב כלשהו (2012 לכל המאוחר) משרד התחבורה התחיל לפרסם מידע GTFS שאפשר לגוגל להציג מידע תחבורה ציבורית בישראל, ואני הפסקתי להשתמש באפליקציה שכתבתי. Google Maps מראה את התחנות על מפה, רשימת תחנות-ביניים ועוד. עם זאת, מאחר ולאפליקציה עוד היה מספר לא-קטן של משתמשים (קצת יותר מ-55,000 בשיא), המשכתי לתקן בעיות  קטנות כשהן צצו וכשהיה לי זמן.</p>
-<p>כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL 😄</p>
+<p>כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL &#x1f604;</p>
 </div>
 ]]></description></item><item><title>Developing TransportDroidIL for Android</title><link>https://lutzky.net/posts/developing-transportdroidil-for-android/</link><pubDate>Sat, 08 Oct 2011 19:43:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/developing-transportdroidil-for-android/</guid><description><![CDATA[<p>Here are a few words on developing <a href="https://market.android.com/details?id=net.lutzky.transportdroidil" target="_blank" rel="noopener noreffer ">TransportDroidIL</a>, a small
 utility to query Israeli public transportation sites more easily using an

@@ -1,4 +1,59 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>hardware - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/hardware/</link><description>hardware - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 10 Oct 2021 09:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/hardware/" rel="self" type="application/rss+xml"/><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>hardware - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/hardware/</link><description>hardware - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 29 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/hardware/" rel="self" type="application/rss+xml"/><item><title>Front Door Display</title><link>https://lutzky.net/posts/front-door-display/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/front-door-display/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Let&rsquo;s make a tiny display for stuff you check right before leaving home!</p>
+<p>I keep forgetting to turn off my alarm as I leave home, and then scrambling to
+turn it off<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Even if I do remember to turn it off, I&rsquo;m
+never quite sure that I did, so I take my phone out, open the appropriate app,
+and check. It would be super convenient if I had a little indicator near the
+door, so I (or anyone else leaving) could check more quickly. A single red LED
+would technically do the job&hellip; but wouldn&rsquo;t be wife-approved.</p>
+<p>I love <a href="https://lutzky.net/posts/pitemp/#stage-2-pioled" rel="">tiny OLED displays</a>. Let&rsquo;s use one of those! I got an
+<a href="https://www.aliexpress.com/item/1005004839191268.html" target="_blank" rel="noopener noreffer ">ESP8266 with an onboard OLED display</a>, and thanks to
+<a href="https://esphome.io/" target="_blank" rel="noopener noreffer ">ESPhome</a>, having a display of the alarm status is easy enough. There&rsquo;s
+still plenty of room on the display, so I figured I can add a couple of other
+things I quickly check before leaving home: Weather and tram times. I used the
+<a href="https://www.dafont.com/edit-undo.font" target="_blank" rel="noopener noreffer ">Edit Undo font</a> and some <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreffer ">Material Icons</a> for a
+bit of styling. I ended up having to mess with exact spacing <em>a lot</em> until I was
+happy with it; it would be super helpful if there were a simulator like <a href="https://wokwi.com/" target="_blank" rel="noopener noreffer ">wokwi</a>
+for ESPHome to iterate on this more quickly!</p>
+<figure><a class="lightgallery" href="/posts/front-door-display/no-case.png" title="/posts/front-door-display/no-case.png" data-thumbnail="/posts/front-door-display/no-case.png" data-sub-html="<h2>The resulting device without a case</h2>">
+        
+    </a><figcaption class="image-caption">The resulting device without a case</figcaption>
+    </figure>
+<p>Next step is to create a case for it. This is necessary both for wife-approval
+and for cleaner mounting to the wall. I use <a href="https://onshape.com" target="_blank" rel="noopener noreffer ">Onshape</a> for this, as it&rsquo;s both
+free and parametric - that is, I can change numbers later to adjust the design
+without fully re-doing it; and if there&rsquo;s one thing I&rsquo;ve learned about designing
+for 3D printing, is that it takes a few iterations to get it right: Print, learn
+that it <em>almost</em> works, adjust, repeat.</p>
+<figure><a class="lightgallery" href="/posts/front-door-display/case-iterations.png" title="/posts/front-door-display/case-iterations.png" data-thumbnail="/posts/front-door-display/case-iterations.png" data-sub-html="<h2>Iterating on the case design in Onshape</h2>">
+        
+    </a><figcaption class="image-caption">Iterating on the case design in Onshape</figcaption>
+    </figure>
+<p>With this design, I got some nice <a href="https://www.youtube.com/watch?v=8dhFhU7Nl_0" target="_blank" rel="noopener noreffer ">shadow lines</a>. I had originally planned to
+use screws, but it turned out to be fairly annoying: While the PCB does have
+holes for mounting screws, there isn&rsquo;t a lot of room for nuts; it ended up being
+simpler to make a fully plastic snap-fit design. Snap-fit, especially with 3D
+printing, is an even worse source of trial-and-error iterations, as there seems
+to be a fine line between &ldquo;doesn&rsquo;t snap&rdquo; and &ldquo;snaps off altogether&rdquo;, especially
+with smaller designs.</p>
+<p>It doesn&rsquo;t help that I&rsquo;m using a somewhat older Ultimaker 5 printer with PLA
+material; I know there are more modern and robust printers, but the Ultimaker 5
+is maintained by experts at our maker room, which only allows PLA, and I figured
+it should be doable. Thankfully, I was right! I&rsquo;m really happy with the final
+result, and it&rsquo;s proving to be at-a-glance useful every day.</p>
+<figure><a class="lightgallery" href="/posts/front-door-display/final.png" title="/posts/front-door-display/final.png" data-thumbnail="/posts/front-door-display/final.png" data-sub-html="<h2>Final result</h2>">
+        
+    </a><figcaption class="image-caption">Final result</figcaption>
+    </figure>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>The alarm app has added a feature, after I created the device described in this post, to turn it off if any indoors motion is detected at the appropriate time, mostly solving this issue.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>]]></description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>As noted in the <a href="https://lutzky.net/posts/software-parenting-2/" rel="">previous post</a>, I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn&rsquo;t have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it&rsquo;s quite capable as a microcontroller on its own (and the newer ESP32 is faster).</p>
 <p>So what&rsquo;s the difference between a (very small) computer and a microcontroller? A Raspberry Pi boots off an SD card, usually to a full-fledged Linux operating system; you&rsquo;d operate it either directly with a monitor and keyboard, or connect remotely using SSH. You can install/create software on it as you would on a &ldquo;full-size&rdquo; computer, and I usually do this in Go (although Python is more popular). Conversely, a microcontroller will usually run only one program, which you need to build on a separate computer, connect it over USB to the microcontroller board, and flash it. This has a number of advantages, including simplicity and pretty-much-instant boot.</p>
 <p>Coding for the ESP8266 can be done using the same tooling as Arduino - namely, in C++<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, on the Arduino IDE. However, during this project I learned of <a href="https://platformio.org/" target="_blank" rel="noopener noreffer ">PlatformIO</a>, which is far more comfortable to work with: It&rsquo;s integrated into VSCode, and git, auto-formatting, autocomplete and <a href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim" target="_blank" rel="noopener noreffer ">VIM keybindings</a> all work nicely. It also provides a more organized approach to unit testing (practically absent in Arduino IDE) and per-project dependency management (you can list what each project needs and have it auto-install). This made the project fun enough for a few iterations.</p>
@@ -452,27 +507,4 @@ connectors on the power cord. A hardware guy I know says he&rsquo;s never heard 
 such a problem either.</p>
 <p>Naturally, these things never happen when I mess with hardware at work, where
 there are plenty of spare parts&hellip;</p>
-]]></description></item><item><title>Whatever happened to black &amp;amp; white LCDs?</title><link>https://lutzky.net/posts/whatever-happened-to-black-white-lcds/</link><pubDate>Sat, 22 Nov 2008 11:58:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/whatever-happened-to-black-white-lcds/</guid><description><![CDATA[<p>I had a <a href="http://en.wikipedia.org/wiki/Game_boy" target="_blank" rel="noopener noreffer ">Game Boy</a> once. I could play it
-just about anywhere, and battery life - for the time - was great. I lost it at
-one point, and replaced it with a <a href="http://en.wikipedia.org/wiki/Game_gear" target="_blank" rel="noopener noreffer ">Game
-Gear</a>, which sucked the life out of 6
-AA batteries rather quickly. The <a href="http://en.wikipedia.org/wiki/Game_Boy_Color" target="_blank" rel="noopener noreffer ">Game Boy
-Color</a> was actually decent on
-battery life, but since it didn&rsquo;t have a backlight, you had to play it at very
-specific angles.</p>
-<p>For gaming, I can appreciate the need for a color screen. My point has to do
-with cellphones. True, most cellphones today come with cameras, are able to
-play video, and are rather capable mobile gaming platforms (when compared to
-the Game Boy, that is). All this does, in fact, require a color screen.
-However, I believe that there is a market for cellphones which do not support
-these features, but do support neat things like 3G internet connectivity (GMail
-and RSS on the phone is a major Win, in my opinion), and have a comfortable SMS
-interface. These features actually suffer from having a color screen: Battery
-life (for the powerful backlight), viewing angle, and screen resolution take a
-hit. While it&rsquo;s true that color LCDs have come a long way since the Game Gear,
-so have black &amp; white display technologies (E-Paper, anyone?).</p>
-<p>Of course, my wish for a modern B&amp;W-screen cellphone will likely never come
-true. The simple reason is that they would be totally unmarketable. Even
-business-types like color screens nowadays. So I&rsquo;ll just keep holding out for a
-folding E-Paper mobile browser.</p>
 ]]></description></item></channel></rss>
