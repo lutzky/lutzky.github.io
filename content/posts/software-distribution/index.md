@@ -9,11 +9,6 @@ lastmod: 2023-04-23T10:22:00Z
 tags: ["software"]
 ---
 
-<!--
-    cSpell: ignore lastmod APCO Tucows QBasic
-    cSpell: word jank janky Lutzky
--->
-
 For as long as I've been interested in software development, I've been
 interested in how software makes it onto a computer. "Works on my machine" was
 never quite enough... how would it work on *someone else's* computer? Here's a
@@ -222,8 +217,6 @@ better than anything else.
 
 ## Afterword - the web
 
-<!-- cSpell: word transformative -->
-
 At some point, probably too gradually for me to notice, web apps became actual
 apps. XMLHttpRequest is horribly named, but pretty transformative when used by
 sites to dynamically fetch more information; Javascript had gradually
@@ -233,10 +226,8 @@ distribution: Just give people the URL.
 
 [^wasm]: I think compiling stuff to WASM is becoming more popular nowadays.
 
-<!-- cSpell: word moreso -->
-
 Yes, there's work to do. You need a server, you need to handle its uptime and
-connectivity (cloud has made this effectively trivial, even moreso for quick
+connectivity (cloud has made this effectively trivial, even more so for quick
 demos with things like [ngrok]). The app itself also needs to be written
 differently: updates are nontrivial, if any state is saved then
 backwards-compatibility becomes difficult, you need to handle different browsers
