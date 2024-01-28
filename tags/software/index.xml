@@ -1,4 +1,69 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Oct 2023 19:54:39 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 28 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
+great tools for it&hellip; if we&rsquo;re talking about files on a local hard drive.</p>
+<p>Tools like the textual <a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener noreffer "><code>ncdu</code></a> and the graphical
+<a href="https://wiki.gnome.org/Apps/DiskUsageAnalyzer" target="_blank" rel="noopener noreffer ">baobab</a> let you start with a
+high-level summary, and dive into specific directories to find out what&rsquo;s taking
+up all of the space.</p>
+<figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot.png" title="/posts/ncdu-import/ncdu-screenshot.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot.png" data-sub-html="<h2>Screenshot of ncdu</h2>">
+        
+    </a><figcaption class="image-caption">Screenshot of ncdu</figcaption>
+    </figure>
+<p>However, sometimes what you have is on a cloud storage system, which is happy to
+<em>bill</em> you for space your files take, but the UI doesn&rsquo;t make it super-easy to
+figure out which directories take up that storage. For example, with Google
+Cloud Storage, you <em>can</em> use <code>rclone ncdu</code>, but my modest backup bucket had it
+consistently timing out. For this purpose, the recommended path appears to be
+<a href="https://cloud.google.com/storage/docs/insights/inventory-reports" target="_blank" rel="noopener noreffer ">Storage Inventory</a>, which will provide you with a CSV listing of all of the
+files in your bucket.  The apparent recommendation is to analyze it using a
+custom-crafted BigQuery query, which is nowhere near as handy as <code>ncdu</code>.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">$ cat inventory-reports_VERY_LONG_ID.csv | cut -f3,10 -d,
+</span></span><span class="line"><span class="cl">name,size
+</span></span><span class="line"><span class="cl">esphome/config/esphome-tester.yaml,5254
+</span></span><span class="line"><span class="cl">esphome/config/esphome-tester2.yaml,1049
+</span></span><span class="line"><span class="cl">meta/esphome/docker-compose.yml,308
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 1.stl,1484
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 2.stl,1033884
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 3.stl,1591184
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/light_switch_covers.gcode,919652
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/Part Studio 1 - Part 2.stl,1033884
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/Part Studio 1 - Part 3.stl,1603784
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/light_switch_covers.ufp,142725
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/light_switch_covers_gcode.ufp,627744
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- raw HTML omitted -->
+<p>Fortunately, <code>ncdu</code> has an import/export feature, for those slow scans. <code>ncdu -o foo.json</code> will save such a report (slowly), and <code>ncdu -f foo.json</code> will display
+it (quickly). So, how about if we cheat, and convert our CSV of
+files-in-the-cloud to <code>ncdu</code>-compatible JSON?</p>
+<p>That&rsquo;s where <a href="https://github.com/lutzky/ncdu-import" target="_blank" rel="noopener noreffer "><code>ncdu-import</code></a> comes in.  Bring it a CSV file which has a &ldquo;path&rdquo;
+column and a &ldquo;size&rdquo; column (tell it what the columns are), and it&rsquo;ll spit out a
+JSON file loadable by <code>ncdu</code> for quick and convenient analysis. You can look at
+the <a href="https://github.com/lutzky/ncdu-import/tree/main/testdata" target="_blank" rel="noopener noreffer ">testdata dir</a> to get a few examples of what it&rsquo;s doing.</p>
+<figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot-with-import.png" title="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-sub-html="<h2>ncdu showing output ncdu-import on the sample CSV above</h2>">
+        
+    </a><figcaption class="image-caption"><code>ncdu</code> showing output <code>ncdu-import</code> on the sample CSV above</figcaption>
+    </figure>]]></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
 to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible
 idea, even if it weren&rsquo;t at war at the time.</p>
 <h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
@@ -77,9 +142,7 @@ have &ldquo;cyber attacks&rdquo;.</p>
 <p>Many years ago, I described an effort to coerce the timezone system into a &ldquo;change on demand&rdquo; mode; see post <a href="/posts/timezones-are-fickle/" rel="">Timezones are fickle</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
+</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
 interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
 never quite enough&hellip; how would it work on <em>someone else&rsquo;s</em> computer? Here&rsquo;s a
 stroll down memory lane, starting from the 90s.</p>
@@ -275,16 +338,14 @@ through Docker<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-n
 <a href="https://fasterthanli.me/series/building-a-rust-service-with-nix" target="_blank" rel="noopener noreffer ">FasterThanLime&rsquo;s series</a> about how Nix presumably does this
 better than anything else.</p>
 <h2 id="afterword---the-web">Afterword - the web</h2>
-<!-- raw HTML omitted -->
 <p>At some point, probably too gradually for me to notice, web apps became actual
 apps. XMLHttpRequest is horribly named, but pretty transformative when used by
 sites to dynamically fetch more information; Javascript had gradually
 transformed to &ldquo;the Assembly language of the web&rdquo; (i.e. it&rsquo;s the thing stuff
 compiles to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>); but the really cool thing about web apps remains
 distribution: Just give people the URL.</p>
-<!-- raw HTML omitted -->
 <p>Yes, there&rsquo;s work to do. You need a server, you need to handle its uptime and
-connectivity (cloud has made this effectively trivial, even moreso for quick
+connectivity (cloud has made this effectively trivial, even more so for quick
 demos with things like <a href="https://ngrok.com" target="_blank" rel="noopener noreffer ">ngrok</a>). The app itself also needs to be written
 differently: updates are nontrivial, if any state is saved then
 backwards-compatibility becomes difficult, you need to handle different browsers
@@ -1555,66 +1616,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </div>
 </div><p>In this case, <code>x = 3</code> was there for testing &ldquo;what if <code>getMaxValue</code> returns 3&rdquo;. You should not commit this. However, a possible exception can be if you&rsquo;re documenting &ldquo;why not&rdquo; as above - if it comes with an explanation.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Code is meant to be read by machines and humans, with comments generally being intended for humans to read. Therefore, all of these should be taken as guidelines rather than gospel. Hopefully this post can be of some use for people trying to reason about comment etiquette, or perhaps for code reviewers wanting to point their reviewees at a preexisting summary.</p>]]></description></item><item><title>PiTemp</title><link>https://lutzky.net/posts/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/pitemp/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>I had been looking for an excuse to mess around with Raspberry Pi for a while, and found one: I wanted a graph of temperature and humidity over time, and - while we&rsquo;re at it - a nice display of those two. Technically speaking, I already have a Nest thermostat which should provide those, but it won&rsquo;t display humidity and there&rsquo;s no easy way to get a graph off it (besides, then I&rsquo;d need another excuse for messing around with a Pi).</p>
-<p>The code for the final result is in <a href="https://github.com/lutzky/pitemp" target="_blank" rel="noopener noreffer ">https://github.com/lutzky/pitemp</a>.</p>
-<h2 id="stage-1-lcd-and-dht">Stage 1: LCD and DHT</h2>
-<p>Hardware:</p>
-<ul>
-<li>A <a href="https://www.raspberrypi.org/products/raspberry-pi-zero-w/" target="_blank" rel="noopener noreffer ">Raspberry Pi Zero W</a> a friend gave me (that&rsquo;ll become important later on)</li>
-<li>A <a href="https://www.amazon.co.uk/gp/product/B07L83K6CF" target="_blank" rel="noopener noreffer ">DHT11</a> temperature &amp; humidity sensor</li>
-<li>A <a href="https://www.amazon.co.uk/gp/product/B07QNKCLJM" target="_blank" rel="noopener noreffer ">4x20 character LCD</a>; apparently an HD44780 controller or compatible.</li>
-</ul>
-<p>This was my first time coding for hardware on the raspberry pi, and it went fairly well.</p>
-<h3 id="lcd-quirks">LCD quirks</h3>
-<p>Getting the degree symbol (°, ASCII <code>0xb0</code>) was a bit of a challenge. While the official HD44780 spec shows it should be available with &ldquo;ROM Code A02&rdquo; (i.e. Latin mode), it&rsquo;s not clear if this can be toggled in software, and the characters my unit displayed matched &ldquo;ROM Code A00&rdquo; (Japanese)&hellip; mostly, that is. Some characters were malformed, and the <a href="https://github.com/d2r2/go-hd44780" target="_blank" rel="noopener noreffer ">unofficial library I used</a> didn&rsquo;t support custom characters (which the hardware seems to support). Fortunately, the Japanese ROM code had a Handakuten symbol (ﾟ, like the circle from ぽ but as a separate character), which is close enough.</p>
-<p>The LCD was also quite slow to refresh, the way I was using it; any faster than 1 hz would lead to corruption, meaning that the &ldquo;second-by-second&rdquo; clock display I wanted wasn&rsquo;t feasible.</p>
-<p>Finally, the LCD unit is much, <em>much</em> large than the Raspberry Pi Zero, and has to be wired awkwardly to it. With some covid-lockdown-induced creativity, a twist tie, and a bit of sewing thread (!), I turned the box it came in into a &ldquo;case&rdquo;.</p>
-<figure><a class="lightgallery" href="/posts/pitemp/lcd_box.jpg" title="/posts/pitemp/lcd_box.jpg" data-thumbnail="/posts/pitemp/lcd_box.jpg" data-sub-html="<h2>LCD in a cardboard box &ldquo;case&rdquo;</h2>">
-        
-    </a><figcaption class="image-caption">LCD in a cardboard box &ldquo;case&rdquo;</figcaption>
-    </figure>
-<h3 id="cross-compilation">Cross compilation</h3>
-<p>While the Pi Zero is certainly <em>capable</em> of being a fully-fledged Go development environment, it&rsquo;s not a fast one (and me using a cheap old SD card isn&rsquo;t helping). I got a much faster edit-compile-run loop by working on my main laptop, cross-compiling for ARM, and <code>scp</code>-ing the result over. That&rsquo;s despite Go&rsquo;s hefty statically-build binaries (7-12MB for these, depending on stripping).</p>
-<p>Cross compiling is done like so (e.g. in a <a href="https://github.com/lutzky/pitemp/blob/main/build.sh" target="_blank" rel="noopener noreffer ">convenience script</a>):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt install gcc-arm-linux-gnueabi
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>arm-linux-gnueabi-gcc <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARM</span><span class="o">=</span><span class="m">6</span> <span class="nv">GOARCH</span><span class="o">=</span>arm
-</span></span><span class="line"><span class="cl">go -o main.arm build main.go
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>For build-and-run-on-save, this can be used with <code>entr</code>. However, because you can&rsquo;t modify an executable file as it runs (in this case), you need to use a temporary file. On my laptop, I run:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">find <span class="p">|</span> entr -c -s <span class="s2">&#34;./build.sh &amp;&amp; scp main.arm TARGET-MACHINE:main.arm.new
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Then, on the pi, I run:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ls main.arm.new <span class="p">|</span> sudo entr -r -c -s <span class="s2">&#34;cp main.arm.new main &amp;&amp; exec ./main&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="stage-2-pioled">Stage 2: PiOLED</h2>
-<p>I looked for a not-so-ridiculously-large display, and found <a href="https://www.adafruit.com/product/3527" target="_blank" rel="noopener noreffer ">adafruit&rsquo;s PiOLED</a> to be perfect. Its HAT form factor makes for a much tidier device, and the display itself is reminiscent of the 2007 Sansa Clip m300 (albeit monochromatic). Library support is also much better, thanks to <a href="http://periph.io" target="_blank" rel="noopener noreffer ">http://periph.io</a>.</p>
-<p>That being said, my friend soldered the Pi&rsquo;s pins on &ldquo;downwards&rdquo;, as this is apparently more convenient when using it on a breadboard. I figured it&rsquo;s time to order my own Pi Zero (you can get them with the pins pre-soldered, facing &ldquo;up&rdquo;); I later found that <a href="https://pkg.go.dev/periph.io/x/devices/v3/ssd1306#Opts" target="_blank" rel="noopener noreffer ">this might be configurable</a>, but it&rsquo;d still be pretty awkward.</p>
-<p>The PiOLED library (actually periph.io&rsquo;s ssd1306 library) essentially lets you render an <code>image.Image</code>; since these are also trivially renderable to PNG, I could speed up development even further by adding an HTTP endpoint to serve the current image, even if the hardware isn&rsquo;t present; this also let me zoom into the rendered image instead of squinting at the actual display, making it easier to align things pixel-by-pixel. I eventually ended up separating the code into two binaries - <code>pitemp</code> would communicate with the sensors and provide an HTTP endpoint, whereas <code>pitemp_pioled</code> (and <code>pitemp_lcd</code>) would communicate with <code>pitemp</code> and the physical display (or run in <code>--simulator</code> mode on my laptop, for HTTP-endpoint-only rendering).</p>
-<p>I&rsquo;m quite happy with the final result:</p>
-<figure><a class="lightgallery" href="/posts/pitemp/feature-pioled.jpg" title="/posts/pitemp/feature-pioled.jpg" data-thumbnail="/posts/pitemp/feature-pioled.jpg" data-sub-html="<h2>PiTemp with PiOLED</h2>">
-        
-    </a><figcaption class="image-caption">PiTemp with PiOLED</figcaption>
-    </figure>
-<p>Happy hacking!</p>
-]]></description></item></channel></rss>
+<p>Code is meant to be read by machines and humans, with comments generally being intended for humans to read. Therefore, all of these should be taken as guidelines rather than gospel. Hopefully this post can be of some use for people trying to reason about comment etiquette, or perhaps for code reviewers wanting to point their reviewees at a preexisting summary.</p>]]></description></item></channel></rss>

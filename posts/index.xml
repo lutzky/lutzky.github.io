@@ -1,4 +1,69 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - Shallow and Pedantic</title><link>https://lutzky.net/posts/</link><description>All Posts | Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 29 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/posts/" rel="self" type="application/rss+xml"/><item><title>Front Door Display</title><link>https://lutzky.net/posts/front-door-display/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/front-door-display/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - Shallow and Pedantic</title><link>https://lutzky.net/posts/</link><description>All Posts | Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 28 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/posts/" rel="self" type="application/rss+xml"/><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
+great tools for it&hellip; if we&rsquo;re talking about files on a local hard drive.</p>
+<p>Tools like the textual <a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener noreffer "><code>ncdu</code></a> and the graphical
+<a href="https://wiki.gnome.org/Apps/DiskUsageAnalyzer" target="_blank" rel="noopener noreffer ">baobab</a> let you start with a
+high-level summary, and dive into specific directories to find out what&rsquo;s taking
+up all of the space.</p>
+<figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot.png" title="/posts/ncdu-import/ncdu-screenshot.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot.png" data-sub-html="<h2>Screenshot of ncdu</h2>">
+        
+    </a><figcaption class="image-caption">Screenshot of ncdu</figcaption>
+    </figure>
+<p>However, sometimes what you have is on a cloud storage system, which is happy to
+<em>bill</em> you for space your files take, but the UI doesn&rsquo;t make it super-easy to
+figure out which directories take up that storage. For example, with Google
+Cloud Storage, you <em>can</em> use <code>rclone ncdu</code>, but my modest backup bucket had it
+consistently timing out. For this purpose, the recommended path appears to be
+<a href="https://cloud.google.com/storage/docs/insights/inventory-reports" target="_blank" rel="noopener noreffer ">Storage Inventory</a>, which will provide you with a CSV listing of all of the
+files in your bucket.  The apparent recommendation is to analyze it using a
+custom-crafted BigQuery query, which is nowhere near as handy as <code>ncdu</code>.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">$ cat inventory-reports_VERY_LONG_ID.csv | cut -f3,10 -d,
+</span></span><span class="line"><span class="cl">name,size
+</span></span><span class="line"><span class="cl">esphome/config/esphome-tester.yaml,5254
+</span></span><span class="line"><span class="cl">esphome/config/esphome-tester2.yaml,1049
+</span></span><span class="line"><span class="cl">meta/esphome/docker-compose.yml,308
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 1.stl,1484
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 2.stl,1033884
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 3.stl,1591184
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/light_switch_covers.gcode,919652
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/Part Studio 1 - Part 2.stl,1033884
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/Part Studio 1 - Part 3.stl,1603784
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/light_switch_covers.ufp,142725
+</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/light_switch_covers_gcode.ufp,627744
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- raw HTML omitted -->
+<p>Fortunately, <code>ncdu</code> has an import/export feature, for those slow scans. <code>ncdu -o foo.json</code> will save such a report (slowly), and <code>ncdu -f foo.json</code> will display
+it (quickly). So, how about if we cheat, and convert our CSV of
+files-in-the-cloud to <code>ncdu</code>-compatible JSON?</p>
+<p>That&rsquo;s where <a href="https://github.com/lutzky/ncdu-import" target="_blank" rel="noopener noreffer "><code>ncdu-import</code></a> comes in.  Bring it a CSV file which has a &ldquo;path&rdquo;
+column and a &ldquo;size&rdquo; column (tell it what the columns are), and it&rsquo;ll spit out a
+JSON file loadable by <code>ncdu</code> for quick and convenient analysis. You can look at
+the <a href="https://github.com/lutzky/ncdu-import/tree/main/testdata" target="_blank" rel="noopener noreffer ">testdata dir</a> to get a few examples of what it&rsquo;s doing.</p>
+<figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot-with-import.png" title="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-sub-html="<h2>ncdu showing output ncdu-import on the sample CSV above</h2>">
+        
+    </a><figcaption class="image-caption"><code>ncdu</code> showing output <code>ncdu-import</code> on the sample CSV above</figcaption>
+    </figure>]]></description></item><item><title>Front Door Display</title><link>https://lutzky.net/posts/front-door-display/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/front-door-display/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <p>Let&rsquo;s make a tiny display for stuff you check right before leaving home!</p>
 <p>I keep forgetting to turn off my alarm as I leave home, and then scrambling to
@@ -132,9 +197,7 @@ have &ldquo;cyber attacks&rdquo;.</p>
 <p>Many years ago, I described an effort to coerce the timezone system into a &ldquo;change on demand&rdquo; mode; see post <a href="/posts/timezones-are-fickle/" rel="">Timezones are fickle</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
+</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
 interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
 never quite enough&hellip; how would it work on <em>someone else&rsquo;s</em> computer? Here&rsquo;s a
 stroll down memory lane, starting from the 90s.</p>
@@ -330,16 +393,14 @@ through Docker<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-n
 <a href="https://fasterthanli.me/series/building-a-rust-service-with-nix" target="_blank" rel="noopener noreffer ">FasterThanLime&rsquo;s series</a> about how Nix presumably does this
 better than anything else.</p>
 <h2 id="afterword---the-web">Afterword - the web</h2>
-<!-- raw HTML omitted -->
 <p>At some point, probably too gradually for me to notice, web apps became actual
 apps. XMLHttpRequest is horribly named, but pretty transformative when used by
 sites to dynamically fetch more information; Javascript had gradually
 transformed to &ldquo;the Assembly language of the web&rdquo; (i.e. it&rsquo;s the thing stuff
 compiles to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>); but the really cool thing about web apps remains
 distribution: Just give people the URL.</p>
-<!-- raw HTML omitted -->
 <p>Yes, there&rsquo;s work to do. You need a server, you need to handle its uptime and
-connectivity (cloud has made this effectively trivial, even moreso for quick
+connectivity (cloud has made this effectively trivial, even more so for quick
 demos with things like <a href="https://ngrok.com" target="_blank" rel="noopener noreffer ">ngrok</a>). The app itself also needs to be written
 differently: updates are nontrivial, if any state is saved then
 backwards-compatibility becomes difficult, you need to handle different browsers
@@ -1402,44 +1463,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 <p>In addition to being quick and comfortable to use, BabyBuddy allowed me to set up two integrations that I had in mind. The first is an always-on display, essentially intended as &ldquo;the baby clock&rdquo;. It&rsquo;s positioned by the couch where we usually feed, so it&rsquo;s great as a feeding timer as well. I had started out with an old tablet (Huawei T3 Mediapad) running <a href="https://github.com/thanksmister/wallpanel-android" target="_blank" rel="noopener noreffer ">wallpanel</a> - this is a form of &ldquo;kiosk&rdquo; application, which locks the device into a mode where it always runs the browser on a particular page (the device has no other credentials on it, so it&rsquo;s reasonably safe). The tablet&rsquo;s battery, unfortunately, did <em>not</em> like that - seemingly having the screen on discharges it faster than it can charge, and after a few weeks the tablet refused to charge at all. I&rsquo;ve therefore switched to using an old ASUS C100P Chromebook running <a href="https://chrome.google.com/webstore/detail/kiosk/afhcomalholahplbjhnmahkoekoijban?hl=en" target="_blank" rel="noopener noreffer ">kiosk</a> - this gives the benefit of having a physical keyboard, useful for entering the food amounts.</p>
 <p>The second integration I call &ldquo;poobuttons&rdquo; - a couple of tactile buttons on the changing dresser which tell BabyBuddy to mark a diaper (they are labeled &ldquo;poo&rdquo; and &ldquo;pee&rdquo;). This is both easier than fumbling with a phone touchscreen and, frankly, way more satisfying. The next posts will detail the iterations of these buttons and how I built them.</p>
 <p>This has been a wonderful and challenging journey so far. I wonder what else I&rsquo;ll find myself building.</p>
-]]></description></item><item><title>Charge-only USB cables</title><link>https://lutzky.net/posts/charge-only-usb-cables/</link><pubDate>Thu, 09 Sep 2021 23:45:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/charge-only-usb-cables/</guid><description><![CDATA[<p>Here&rsquo;s how to quickly determine if a USB cable is fully operational or charge-only.</p>
-<ol>
-<li>Purchase several identical USB gadgets that require data transfer but are
-cheap and therefore don&rsquo;t come with their own cables; e.g. a fun microcontroller
-like an ESP8266.</li>
-<li>Grab a cable from your big box &lsquo;o cables that you can&rsquo;t bring yourself to
-throw out</li>
-<li>Test it, doesn&rsquo;t work - powers on, but not identified on computer.</li>
-<li>Test with two other cables, just to be sure it&rsquo;s not the cable.</li>
-<li>Test all of the gadgets you got - same problem across the board.</li>
-<li>Suspect your computer; try another one. Try another OS or two.</li>
-<li>Read up about debugging the device and whether this is a known fault;
-identify online posts about several similar-sounding but ultimately unrelated
-issues.</li>
-<li>Begin to package gadgets for return/trash, nearly admitting defeat</li>
-<li>In a moment of desperation, try hooking up another micro-USB gadget to your
-computer. Discover that doesn&rsquo;t work either.</li>
-<li>Question own sanity.</li>
-<li>Try three other cables from your big box &lsquo;o cables. One finally works with
-the other gadget.</li>
-<li>Try that cable with the little microcontroller. Still doesn&rsquo;t work.</li>
-<li>Discover this is actually yet another cable, which looks identical to the
-one that does work.</li>
-<li>Become very angry.</li>
-<li>Get some brightly-colored electrical tape in two colors.</li>
-<li>Use the electrical tape to mark each and every last damned cable in the
-damned box, with the two colors denoting &ldquo;worked at least once&rdquo; and &ldquo;POS cable
-for charging ancient crap only&rdquo;</li>
-<li>You can now easily identify the fully-operational USB cables, as they will
-have a brightly-colored electrical tape indicating this!</li>
-</ol>
-<p>(if any additional unmarked micro-USB cables should appear, go back to step 14)</p>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">This post is backported from Facebook, for the sole reason of, in August 2023, replying
-to <a href="https://mastodon.social/@geerlingguy/110973213585771396" target="_blank" rel="noopener noreffer ">this post about a device that makes it easier</a>.</div>
-        </div>
-    </div>]]></description></item></channel></rss>
+]]></description></item></channel></rss>
