@@ -1,4 +1,160 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 28 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 23 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<p>Rebooting a modern desktop computer really shouldn&rsquo;t take very long, so when it
+was somewhat-regularly taking well over 10 minutes just to shut down, I got
+curious, and ended up looking at netdata, jitter, anacron, and even ansible.</p>
+<p>By default in Ubuntu, the shutdown process is hidden, but pressing ESC showed
+that anacron was waiting on something indefinitely&hellip; and indeed, given a few
+dozen minutes, it would complete. Sure, Raising Small Elephants Is Utterly
+Boring<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> can fix that, but something seemed wrong.</p>
+<p>Adding some logging to anacron, it turned out that the bit which was taking so
+long was something called <code>netdata-updater</code>.</p>
+<h2 id="netdata">Netdata</h2>
+<p>There&rsquo;s lots of ways to get information about your various networked machines,
+but my favorite for works-out-of-the-box laziness is
+<a href="https://www.netdata.cloud/" target="_blank" rel="noopener noreffer ">netdata</a>. I like to run this on my desktop as well,
+so I can retroactively diagnose issues or obsess over the specific fan speeds
+that led to a mildly annoying hum in the quiet evening.</p>
+<p>Netdata installs a self-update cron job, which is sensible. It&rsquo;s installed in
+<code>/etc/cron.daily</code>, which by default is launched every day at 6:25 AM. This would
+cause all machines it&rsquo;s installed on, within a timezone, to hit the servers
+simultaneously; to avoid this, they added <em>jitter</em> - the update script randomly
+waits between 0 and <code>NETDATA_UPDATER_JITTER</code>, the default being 60 minutes. So,
+if you&rsquo;re trying to reboot just after 06:25 AM, you&rsquo;re probably going to wait an
+extra 30-ish minutes.</p>
+<p>Although adding jitter arguably makes sense on systems running <em>cron</em>, it makes
+far less sense on ones running <em>Anacron</em>.</p>
+<h2 id="anacron">Anacron</h2>
+<p>Cron works well for machines that stay on all the time, e.g. servers. However,
+machines that are often off or suspended would likely miss the specific timing
+of the scheduled tasks. For such machines, anacron is used instead, and tries to
+make sure that daily tasks still occur daily: Once an hour, anacron will wake up
+(if the machine is on) and check whether any daily tasks still need to be run
+that day. That means that if I first turn on my computer in the evening, it has
+updates and wants to reboot, and I let it - I have a really high chance of
+<code>netdata-updater</code> being called, and of this little maneuver costing me 30-ish
+minute of precious gaming time.</p>
+<p>Anacron naturally introduces jitter, and anacron has additional
+jitter-introducing mechanisms<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.  Indeed, there&rsquo;s no need
+to add jitter to <code>netdata-updater</code> running under anacron, so I changed
+<code>NETDATA_UPDATER_JITTER</code> to 0, and indeed <a href="https://github.com/netdata/netdata/issues/17745" target="_blank" rel="noopener noreffer ">my suggestion to make this the
+default under anacron</a> was accepted.</p>
+<p>That being said, it still seemed there&rsquo;s no good reason for shutdown to wait
+over 10 minutes for anacron to shutdown. The shutdown screen showed that the
+timeout was infinite, although the systemd default<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> is 90
+seconds. That&rsquo;s because <code>anacron.service</code> has this line:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">TimeoutStopSec</span><span class="o">=</span><span class="s">infinity</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- raw HTML omitted -->
+<p>This was added <a href="https://salsa.debian.org/debian/anacron/-/commit/e83000966d446830ad93eef7af2c5ea62efe01db" target="_blank" rel="noopener noreffer ">in this commit</a>, to resolve <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=915379" target="_blank" rel="noopener noreffer ">this
+bug</a>. A more elegant solution is possible, but discouraged
+because anacron is meant to be replaced by something called &ldquo;cronie&rdquo;; <a href="https://goomics.net/50/" target="_blank" rel="noopener noreffer ">I am
+familiar with this pain</a>.</p>
+<p>One way or another, I disagree with the reasoning, at least in my own particular
+case, and have decided to comment out the infinite timeout line.</p>
+<h2 id="remembering-this-config">Remembering this config</h2>
+<!-- raw HTML omitted -->
+<p>I like to version-control and automate my configuration. I&rsquo;ve been doing this
+for <a href="https://github.com/lutzky/dotfiles" target="_blank" rel="noopener noreffer ">my dotfiles</a> for quite a while, but not for my overall machine
+config. Tweaks like this, to my system config, are something I&rsquo;d rather have a
+script to do rather than writing it down in a checklist.</p>
+<p>As it turns out, <a href="https://www.ansible.com/" target="_blank" rel="noopener noreffer ">Ansible</a> is considered to be a good tool for this. I thought
+it&rsquo;s only useful for &ldquo;apply some settings to a large set of servers&rdquo;, but
+apparently &ldquo;maintain config for my one server&rdquo; is not such a strange use-case.
+I&rsquo;m completely unfamiliar with Ansible; a coworker tells me that&rsquo;s because I&rsquo;ve
+worked at Google<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> for almost 10 years, and that&rsquo;s roughly as long
+as Ansible&rsquo;s been well-known.</p>
+<p>After a bit of futzing around, I&rsquo;ve come up with this <code>playbook.yml</code>:</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Fix slow shutdown</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Finite timeout for anacron</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/lib/systemd/system/anacron.service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;TimeoutStopSec=infinity&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;# TimeoutStopSec=infinity # Causes slow shutdown&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Force netdata jitter to 0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/netdata/netdata-updater.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^NETDATA_UPDATER_JITTER=.*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NETDATA_UPDATER_JITTER=&#34;0&#34;&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then, to get everything to play nice with the local config, I have this <code>ansible.cfg</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[defaults]</span>
+</span></span><span class="line"><span class="cl"><span class="na">inventory</span> <span class="o">=</span> <span class="s">inventory</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And this <code>inventory</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">localhost ansible_connection=local
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Sure, this could&rsquo;ve been a shell script, but this seems easier to extend and
+maintain. One thing I like about this is that I can run <code>ansible-playbook --check --diff playbook.yml</code>, and get a preview of what it&rsquo;ll do. I&rsquo;ll likely be
+looking deeper into ansible and seeing whether it&rsquo;s worthwhile getting it to
+maintain some of my server configs.</p>
+<p>This has been a fun dive into a slight annoyance with my system, and as always I
+ended up learning a few interesting things. Please do jitter your clients, but
+please don&rsquo;t leave users hanging.  Also, feel free to let me know in the
+comments that I&rsquo;m holding Ansible wrong 😄.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>This is a mnemonic for Alt+SysRq+{r,s,e,i,u,b}, a somewhat
+aggressive mechanism to <a href="https://en.wikipedia.org/wiki/Magic_SysRq_key" target="_blank" rel="noopener noreffer ">reboot a linux system</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>In Ubuntu 24.04, this is accomplished by the <code>anacron.timer</code> systemd unit having <code>RandomizedDelaySec=5m</code> configured.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><code>DefaultTimeoutStopSec</code> under <code>man 5 systemd-system.conf</code>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Google is known for having a &ldquo;tech island&rdquo;, and specifically the
+type of problems which Ansible deals with, at least in my line of work, have
+preexisting in-house solutions, so I never had the chance to learn Ansible.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>]]></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
 great tools for it&hellip; if we&rsquo;re talking about files on a local hard drive.</p>
 <p>Tools like the textual <a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener noreffer "><code>ncdu</code></a> and the graphical
 <a href="https://wiki.gnome.org/Apps/DiskUsageAnalyzer" target="_blank" rel="noopener noreffer ">baobab</a> let you start with a
@@ -1408,212 +1564,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 <p>In addition to being quick and comfortable to use, BabyBuddy allowed me to set up two integrations that I had in mind. The first is an always-on display, essentially intended as &ldquo;the baby clock&rdquo;. It&rsquo;s positioned by the couch where we usually feed, so it&rsquo;s great as a feeding timer as well. I had started out with an old tablet (Huawei T3 Mediapad) running <a href="https://github.com/thanksmister/wallpanel-android" target="_blank" rel="noopener noreffer ">wallpanel</a> - this is a form of &ldquo;kiosk&rdquo; application, which locks the device into a mode where it always runs the browser on a particular page (the device has no other credentials on it, so it&rsquo;s reasonably safe). The tablet&rsquo;s battery, unfortunately, did <em>not</em> like that - seemingly having the screen on discharges it faster than it can charge, and after a few weeks the tablet refused to charge at all. I&rsquo;ve therefore switched to using an old ASUS C100P Chromebook running <a href="https://chrome.google.com/webstore/detail/kiosk/afhcomalholahplbjhnmahkoekoijban?hl=en" target="_blank" rel="noopener noreffer ">kiosk</a> - this gives the benefit of having a physical keyboard, useful for entering the food amounts.</p>
 <p>The second integration I call &ldquo;poobuttons&rdquo; - a couple of tactile buttons on the changing dresser which tell BabyBuddy to mark a diaper (they are labeled &ldquo;poo&rdquo; and &ldquo;pee&rdquo;). This is both easier than fumbling with a phone touchscreen and, frankly, way more satisfying. The next posts will detail the iterations of these buttons and how I built them.</p>
 <p>This has been a wonderful and challenging journey so far. I wonder what else I&rsquo;ll find myself building.</p>
-]]></description></item><item><title>Code comments</title><link>https://lutzky.net/posts/comments/</link><pubDate>Sun, 02 May 2021 11:02:57 +0100</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/comments/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>Good code comments only describe <em>why</em> the code is (or isn&rsquo;t!) doing something.</p>
-<p>When teaching coding or reviewing code, I sometimes encounter comments describing <em>what</em> it&rsquo;s doing, and those are almost always harmful.</p>
-<p>To be clear, I&rsquo;m talking about <em>code comments</em>, not <em>documentation comments</em>. This nuance is different in every language and setup, but for Go, this is it:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// UsefulFunction does useful things. This is a documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1">// comment, and will be displayed in godoc, IDE autocomplete,
-</span></span></span><span class="line"><span class="cl"><span class="c1">// and more.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">UsefulFunction</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// this and all of the below are code comments
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// count visitors //
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// x is the visitor counter
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">x</span> <span class="o">:=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">x</span><span class="o">++</span> <span class="c1">// increment x
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="why">Document &ldquo;why&rdquo;</h2>
-<p>In some code, things are done for non-intuitive reasons. It&rsquo;s worth pointing that out - it makes your code easier to read for a newcomer trying to understand why it&rsquo;s written that way. In this example, technically <code>sumOfIntsWithThreshold</code> will work absolutely correctly without its input being sorted, but it <a href="https://stackoverflow.com/questions/11227809" target="_blank" rel="noopener noreffer ">turns out that it will be faster if it is</a>.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">sort</span><span class="p">.</span><span class="nf">Ints</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// improves performance; see https://stackoverflow.com/questions/11227809
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">x</span> <span class="o">:=</span> <span class="nf">sumOfIntsWithThreshold</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Other good &ldquo;why&rdquo; examples are code being written in a less-intuitive way to make a particular test possible or to avoid a specific edge-case - be sure to note what those are.</p>
-<p>If a well-researched algorithm is being used, definitely add a reference to it, including the best URL you have for someone who wants a quick overview of how it works.</p>
-<h2 id="why-not">Document &ldquo;why not&rdquo;</h2>
-<p>In some code, the reader might see something missing, a pattern apparently broken. Sometimes this is for a good reason, as keeping with the pattern would cause a bug. More specifically, you might be <em>fixing</em> a bug by breaking the pattern.</p>
-<p>In this example, especially if you&rsquo;re removing a line <code>sort.Strings(c)</code>, it&rsquo;s a good idea to leave a comment explaining why it shouldn&rsquo;t be there.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">sort</span><span class="p">.</span><span class="nf">Strings</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// don&#39;t sort c, we need to keep its original order for foo
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">foo</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="trivial">Don&rsquo;t document &ldquo;what&rdquo; when it&rsquo;s trivial</h2>
-<p>You might be asking yourself &ldquo;what&rsquo;s the harm in a comment if it isn&rsquo;t needed. The answer is that it can be misleading; code will function correctly even if it&rsquo;s out-of-sync with its comments, so comments aren&rsquo;t always updated when code is changed, leading to this canonical example:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// increment x by 1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">x</span> <span class="o">+=</span> <span class="mi">2</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In less-trivial cases, the reader can be left scratching their head for far longer than they would&rsquo;ve if the comment weren&rsquo;t there in the first place.</p>
-<h2 id="sections">Documenting &ldquo;sections&rdquo; is a code smell</h2>
-<p>If your code looks is divided using comments into &ldquo;sections&rdquo;, it&rsquo;s probably long and difficult to reason about:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">//// Get site data ////
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;data.md&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">parser</span> <span class="o">:=</span> <span class="nx">markdown</span><span class="p">.</span><span class="nf">NewParser</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">data</span> <span class="o">:=</span> <span class="nx">parser</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">//// Get layout data ////
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">f2</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;layout.cfg&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f2</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">layoutReader</span> <span class="o">:=</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">layoutOpts</span><span class="p">.</span><span class="nx">Defaults</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Name &#34;data&#34; is already in use&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">dataOfLayout</span> <span class="o">:=</span> <span class="nx">layoutReader</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">f2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">//// Set up HTML renderer ////
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">renderer</span> <span class="o">:=</span> <span class="nx">htmlrender</span><span class="p">.</span><span class="nf">NewRenderer</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">SetHTMLMode</span><span class="p">(</span><span class="s">&#34;my-favorite-html-style&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">SetCompression</span><span class="p">(</span><span class="s">&#34;max-compression&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">Render</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataOfLayout</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This gets even messier if you don&rsquo;t sneakily omit error handling. In any case, the section headers are reasonable (albeit not great) candidates for function names:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">ServeSite</span><span class="p">(</span><span class="nx">o</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">siteData</span> <span class="o">:=</span> <span class="nf">getSiteData</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">layoutData</span> <span class="o">:=</span> <span class="nf">getLayoutData</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span> <span class="o">:=</span> <span class="nf">setupHTMLRenderer</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">renderer</span><span class="p">.</span><span class="nf">Render</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataOfLayout</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getSiteData</span><span class="p">()</span> <span class="nx">markdown</span><span class="p">.</span><span class="nx">Data</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;data.md&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">markdown</span><span class="p">.</span><span class="nf">NewParser</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getLayoutData</span><span class="p">()</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nx">Data</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;layout.cfg&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">awesomelayout</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">layoutOpts</span><span class="p">.</span><span class="nx">Defaults</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">layoutReader</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">setupHTMLRenderer</span><span class="p">()</span> <span class="nx">htmlrenderer</span><span class="p">.</span><span class="nx">Renderer</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">htmlrender</span><span class="p">.</span><span class="nf">NewRenderer</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span><span class="p">.</span><span class="nf">SetHTMLMode</span><span class="p">(</span><span class="s">&#34;my-favorite-html-style&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">r</span><span class="p">.</span><span class="nf">SetCompression</span><span class="p">(</span><span class="s">&#34;max-compression&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">r</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The main <code>ServeSite</code> function is now much easier to read. The &ldquo;section names&rdquo; are now function names, and are less likely to fall out of date. And as a bonus, the scope of many variables is reduced - so the reader doesn&rsquo;t have to keep them in mind, and we can use short names for them.</p>
-<h2 id="code-scars">Don&rsquo;t leave code scars around</h2>
-<p>Finally, just a pet peeve - while it&rsquo;s absolutely fine to &ldquo;comment out&rdquo; code while developing, you usually shouldn&rsquo;t commit this to version control. I like calling these &ldquo;code scars&rdquo;:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">x</span> <span class="o">:=</span> <span class="nf">getMaxValue</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// x = 3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">handle</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In this case, <code>x = 3</code> was there for testing &ldquo;what if <code>getMaxValue</code> returns 3&rdquo;. You should not commit this. However, a possible exception can be if you&rsquo;re documenting &ldquo;why not&rdquo; as above - if it comes with an explanation.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Code is meant to be read by machines and humans, with comments generally being intended for humans to read. Therefore, all of these should be taken as guidelines rather than gospel. Hopefully this post can be of some use for people trying to reason about comment etiquette, or perhaps for code reviewers wanting to point their reviewees at a preexisting summary.</p>]]></description></item></channel></rss>
+]]></description></item></channel></rss>
