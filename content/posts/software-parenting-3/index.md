@@ -11,7 +11,7 @@ featuredImagePreview: poobuttons-v3.jpg
 
 <!-- markdownlint-disable MD013 -->
 
-As noted in the [previous post]({{< ref "software-parenting-2" >}}), I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn't have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available[^actually-available] on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it's quite capable as a microcontroller on its own (and the newer ESP32 is faster).
+As noted in the [previous post]({{< ref "software-parenting-2" >}}), I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn't have wifi (the one with wifi is ~\$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available[^actually-available] on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it's quite capable as a microcontroller on its own (and the newer ESP32 is faster).
 
 [^actually-available]: Actually available - as in, as opposed to Raspberry Pi 0w, they're in stock in many places at the moment.
 

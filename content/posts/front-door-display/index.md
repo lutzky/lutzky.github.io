@@ -24,17 +24,15 @@ would technically do the job... but wouldn't be wife-approved.
 
 [^turns-off-automatically]: The alarm app has added a feature, after I created the device described in this post, to turn it off if any indoors motion is detected at the appropriate time, mostly solving this issue.
 
-I love [tiny OLED displays][tiny-oled]. Let's use one of those! I got an
-[ESP8266 with an onboard OLED display][esp8266-with-display], and thanks to
-[ESPhome][esphome], having a display of the alarm status is easy enough. There's
-still plenty of room on the display, so I figured I can add a couple of other
-things I quickly check before leaving home: Weather and tram times. I used the
-[Edit Undo font][edit-undo-font] and some [Material Icons][material-icons] for a
-bit of styling. I ended up having to mess with exact spacing *a lot* until I was
-happy with it; it would be super helpful if there were a simulator like [wokwi]
-for ESPHome to iterate on this more quickly!
-
-[tiny-oled]: {{<ref "pitemp#stage-2-pioled" >}}
+I love [tiny OLED displays]({{%ref "pitemp#stage-2-pioled" %}}). Let's use one of
+those! I got an [ESP8266 with an onboard OLED display][esp8266-with-display],
+and thanks to [ESPhome][esphome], having a display of the alarm status is easy
+enough. There's still plenty of room on the display, so I figured I can add a
+couple of other things I quickly check before leaving home: Weather and tram
+times. I used the [Edit Undo font][edit-undo-font] and some [Material
+Icons][material-icons] for a bit of styling. I ended up having to mess with
+exact spacing *a lot* until I was happy with it; it would be super helpful if
+there were a simulator like [wokwi] for ESPHome to iterate on this more quickly!
 
 [esp8266-with-display]: https://www.aliexpress.com/item/1005004839191268.html
 [esphome]: https://esphome.io/
