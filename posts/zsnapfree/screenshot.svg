@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="741.25333304" height="410.66656400000005" font-family="Consolas, Menlo, 'Bitstream Vera Sans Mono', monospace, 'Powerline Symbols'" font-size="14px">
+  <style>
+    .br { font-weight: bold }
+    .fa { fill-opacity: 0.5 }
+    .it { font-style: italic }
+    .un { text-decoration: underline }
+  </style>
+
+  <rect width="100%" height="100%" style="fill: #121314" rx="4" ry="4"></rect>
+
+  <svg x="8.42333333" y="9.333331000000001" class="default-text-fill">
+    <g style="shape-rendering: optimizeSpeed">
+
+        <rect x="8.42333333" y="130.66663400000002" width="707.5599997200001" height="18.666662000000002" style="fill: #26b0d7"></rect>
+
+
+    </g>
+
+    <text style="fill: #cccccc">
+      <tspan y="0.0">
+        <tspan dy="1em" x="0.0">
+┏
+        </tspan><tspan x="16.84666666" class="br">
+Snapshots for nagmash/media 
+        </tspan><tspan x="252.6999999">
+━
+        </tspan><tspan x="261.12333323">
+━
+        </tspan><tspan x="269.54666656">
+━
+        </tspan><tspan x="277.96999989">
+━
+        </tspan><tspan x="286.39333322">
+━
+        </tspan><tspan x="294.81666655">
+━
+        </tspan><tspan x="303.23999988">
+━
+        </tspan><tspan x="311.66333321">
+━
+        </tspan><tspan x="320.08666654">
+━
+        </tspan><tspan x="328.50999987">
+━
+        </tspan><tspan x="336.9333332">
+━
+        </tspan><tspan x="345.35666653">
+━
+        </tspan><tspan x="353.77999986000003">
+━
+        </tspan><tspan x="362.20333319">
+━
+        </tspan><tspan x="370.62666652">
+━
+        </tspan><tspan x="379.04999985">
+━
+        </tspan><tspan x="387.47333318">
+━
+        </tspan><tspan x="395.89666651">
+━
+        </tspan><tspan x="404.31999984000004">
+━
+        </tspan><tspan x="412.74333317">
+━
+        </tspan><tspan x="421.1666665">
+━
+        </tspan><tspan x="429.58999983">
+━
+        </tspan><tspan x="438.01333316">
+━
+        </tspan><tspan x="446.43666649">
+━
+        </tspan><tspan x="454.85999982">
+━
+        </tspan><tspan x="463.28333315000003">
+━
+        </tspan><tspan x="471.70666648">
+━
+        </tspan><tspan x="480.12999981">
+━
+        </tspan><tspan x="488.55333314">
+━
+        </tspan><tspan x="496.97666647">
+━
+        </tspan><tspan x="505.3999998">
+━
+        </tspan><tspan x="513.82333313">
+━
+        </tspan><tspan x="522.24666646">
+━
+        </tspan><tspan x="530.66999979">
+━
+        </tspan><tspan x="539.09333312">
+━
+        </tspan><tspan x="547.51666645">
+━
+        </tspan><tspan x="555.93999978">
+━
+        </tspan><tspan x="564.36333311">
+━
+        </tspan><tspan x="572.78666644">
+━
+        </tspan><tspan x="581.20999977">
+━
+        </tspan><tspan x="589.6333331">
+━
+        </tspan><tspan x="598.0566664300001">
+━
+        </tspan><tspan x="606.47999976">
+━
+        </tspan><tspan x="614.90333309">
+━
+        </tspan><tspan x="623.32666642">
+━
+        </tspan><tspan x="631.74999975">
+━
+        </tspan><tspan x="640.17333308">
+━
+        </tspan><tspan x="648.59666641">
+━
+        </tspan><tspan x="657.01999974">
+━
+        </tspan><tspan x="665.44333307">
+━
+        </tspan><tspan x="673.8666664">
+━
+        </tspan><tspan x="682.28999973">
+━
+        </tspan><tspan x="690.71333306">
+━
+        </tspan><tspan x="699.13666639">
+━
+        </tspan><tspan x="707.5599997200001">
+━
+        </tspan><tspan x="715.98333305">
+┓
+        </tspan>
+      </tspan><tspan y="18.666662000000002">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2023-09-01-0552
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="37.333324000000005">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2023-10-01-0552
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="55.99998600000001">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2023-11-01-0652
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="74.66664800000001">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2023-12-01-0652
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="93.33331000000001">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2024-01-01-0652
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="111.99997200000001">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2024-02-01-0652
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="130.66663400000002">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="8.42333333" style="fill: #000000">
+&gt; + zfs-auto-snap_monthly-2024-03-01-0652
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="149.33329600000002">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2024-04-01-0552
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="167.99995800000002">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2024-05-01-0552
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="186.66662000000002">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2024-06-01-0552
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="205.33328200000003">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_weekly-2024-06-30-0547
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="223.99994400000003">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_monthly-2024-07-01-0552
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="242.66660600000003">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_weekly-2024-07-07-0547
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="261.33326800000003">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_weekly-2024-07-14-0547
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="279.99993">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_weekly-2024-07-21-0547
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="298.66659200000004">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_daily-2024-07-24-0531
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="317.333254">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="25.269999990000002" style="fill: #ddaf3c">
++ zfs-auto-snap_daily-2024-07-25-0526
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="335.99991600000004">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="42.11666665">
+zfs-auto-snap_daily-2024-07-26-0616
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="354.666578">
+        <tspan dy="1em" x="0.0">
+┃
+        </tspan><tspan x="42.11666665">
+zfs-auto-snap_daily-2024-07-27-0616
+        </tspan><tspan x="715.98333305">
+┃
+        </tspan>
+      </tspan><tspan y="373.33324000000005">
+        <tspan dy="1em" x="0.0">
+┗
+        </tspan><tspan x="16.84666666" class="br" style="fill: #26b0d7">
+Destroying 
+        </tspan><tspan x="109.50333329">
+17
+        </tspan><tspan x="134.77333328" class="br" style="fill: #26b0d7">
+snapshots would reclaim 
+        </tspan><tspan x="336.9333332">
+4.3 GiB 
+        </tspan><tspan x="404.31999984000004">
+━
+        </tspan><tspan x="412.74333317">
+━
+        </tspan><tspan x="421.1666665">
+━
+        </tspan><tspan x="429.58999983">
+━
+        </tspan><tspan x="438.01333316">
+━
+        </tspan><tspan x="446.43666649">
+━
+        </tspan><tspan x="454.85999982">
+━
+        </tspan><tspan x="463.28333315000003">
+━
+        </tspan><tspan x="471.70666648">
+━
+        </tspan><tspan x="480.12999981">
+━
+        </tspan><tspan x="488.55333314">
+━
+        </tspan><tspan x="496.97666647">
+━
+        </tspan><tspan x="505.3999998">
+━
+        </tspan><tspan x="513.82333313">
+━
+        </tspan><tspan x="522.24666646">
+━
+        </tspan><tspan x="530.66999979">
+━
+        </tspan><tspan x="539.09333312">
+━
+        </tspan><tspan x="547.51666645">
+━
+        </tspan><tspan x="555.93999978">
+━
+        </tspan><tspan x="564.36333311">
+━
+        </tspan><tspan x="572.78666644">
+━
+        </tspan><tspan x="581.20999977">
+━
+        </tspan><tspan x="589.6333331">
+━
+        </tspan><tspan x="598.0566664300001">
+━
+        </tspan><tspan x="606.47999976">
+━
+        </tspan><tspan x="614.90333309">
+━
+        </tspan><tspan x="623.32666642">
+━
+        </tspan><tspan x="631.74999975">
+━
+        </tspan><tspan x="640.17333308">
+━
+        </tspan><tspan x="648.59666641">
+━
+        </tspan><tspan x="657.01999974">
+━
+        </tspan><tspan x="665.44333307">
+━
+        </tspan><tspan x="673.8666664">
+━
+        </tspan><tspan x="682.28999973">
+━
+        </tspan><tspan x="690.71333306">
+━
+        </tspan><tspan x="699.13666639">
+━
+        </tspan><tspan x="707.5599997200001">
+━
+        </tspan><tspan x="715.98333305">
+┛
+        </tspan>
+      </tspan>
+    </text>
+  </svg>
+
+  <g transform="translate(-40 -40)">
+    <svg x="50%" y="50%" width="80" height="80">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 1000.0" style="filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.4))">
+  <defs>
+    <mask id="small-triangle-mask">
+      <rect width="100%" height="100%" fill="white"></rect>
+      <polygon points="700.0 500.0, 400.00000000000006 326.7949192431122, 399.9999999999999 673.2050807568877" fill="black">
+      </polygon>
+    </mask>
+  </defs>
+  <polygon points="1000.0 500.0, 250.0000000000001 66.98729810778059, 249.99999999999977 933.0127018922192" mask="url(#small-triangle-mask)" fill="white">
+  </polygon>
+  <polyline points="673.2050807568878 400.0, 326.7949192431123 600.0" stroke="white" stroke-width="90">
+  </polyline>
+</svg>
+    </svg>
+  </g>
+</svg>

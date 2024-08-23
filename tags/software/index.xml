@@ -1,4 +1,123 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 23 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
+reclaim disk space can be a bit confusing. Let&rsquo;s have a quick primer on how
+those work, and look at a small utility to help reason about it.</p>
+<p><a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree</a> is a TUI for showing how much
+space can be reclaimed by freeing zfs snapshots. It is a TUI wrapper over the
+standard zfs tool.</p>
+<p>If you just want to see zsnapfree in action, skip to <a href="#the-good-stuff" rel="">the screencast</a>.</p>
+<h2 id="what-are-cow-snapshots">What are COW snapshots?</h2>
+<p>We all have little accidents with our files. Although the &ldquo;Recycle bin&rdquo; protects
+you against accidentally <em>deleting</em> files, most filesystems don&rsquo;t protect
+against accidentally <em>modifying</em> them. To change files back, you want a
+filesystems with <em>snapshots</em>.</p>
+<p>A snapshot is extremely fast to make, and lets you access the contents of the
+file as it was when the snapshot was taken. In ZFS, with <code>zfs-auto-snapshot</code>
+installed, the experience might look like this:</p>
+<ul>
+<li>A ZFS filesystem called <code>/tank/videos</code> exists.</li>
+<li>A file <code>/tank/videos/renders/my_video.mp4</code> exists, but I accidentally
+overwrite it.</li>
+<li>The file has existed for a while, so <code>zfs-auto-snapshot</code> has already created
+a snapshot of the good version at 14:17; specifically, it&rsquo;s called <code>zfs-auto-snap_hourly-2024-08-20-1417</code>.</li>
+<li>The good version is therefore available at (takes a breath)
+<code>/tank/videos/.zfs/snapshot/zfs-auto-snap_hourly-2024-08-20-1417</code>.</li>
+</ul>
+<p>We&rsquo;ll get back to those long snapshot names later. For now, it&rsquo;s worth sketching
+out how this works.</p>
+<p>The actual ZFS implementation is more complex, but roughly speaking, you can
+imagine that the <code>videos</code> &ldquo;current-state&rdquo; is represented by a table that
+includes rows describing what 128KB blocks make up each file. If our file
+<code>renders/my_video.mp4</code> is 128MB, it will be made up of 1024 blocks, and the
+table might have a section like this:</p>
+<ul>
+<li>File <code>renders/my_video</code> is represented by virtual blocks 1000 through 2023.</li>
+<li>Virtual block 1000 is in physical location 5001</li>
+<li>Virtual block 1001 is in physical location 6713</li>
+<li>&hellip;</li>
+</ul>
+<p>To create a snapshot, we only need to duplicate the information above, which is
+roughly 8KB, so this can be done quickly and for very little extra space.
+However, what happens when the data changes? Snapshots should remain immutable
+even if the &ldquo;current-state&rdquo; changes.</p>
+<p>Suppose for instance we change the very first block in the file - virtual block
+1000. What happens now is the titular &ldquo;copy-on-write&rdquo; - the block which needs to
+be rewritten will first be copied. Physical location 5001 would be duplicated to
+a new location, say 7001, and this version of the block will be modified. The
+current-state table would be updated to say that virtual block 1000 is in
+physical location 7001 (but the snapshot would still have it listed as physical
+location 5001).</p>
+<p>Importantly, physical location 5001 is still in use, and cannot be freed. There
+would likely be a table keeping reference counts for each physical location;
+after the last snapshot referencing it would be deleted, this space can be
+reclaimed.</p>
+<h2 id="accidentally-storing-big-files">Accidentally storing big files</h2>
+<p>Suppose you accidentally store <code>useless_data.zip</code>, a 100GB file, in a filesystem
+that takes snapshots. You find yourself running out of space, and decide to
+delete that file&hellip; but no space is recovered. The reason is that snapshots
+still hold this data, and you would need to delete all of those snapshots in
+order to reclaim it.</p>
+<p>The question is&hellip; which ones? Although you can run <code>zfs list -t snapshot -o space</code>, the <code>USED</code> column there only counts space used by files which are
+<em>unique to that snapshot</em>. That is, if another snapshot has been created (e.g.
+by <code>zfs-auto-snapshot</code>), the <code>USED</code> column will count that file as zero.</p>
+<p>Fortunately, ZFS has a great utility for previewing this. If we believe that the
+file was created just before <code>snapshot1</code>, and deleted just after <code>snapshot3</code>,
+then we can do this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ zfs destroy -nv tank/video@snapshot1,snapshot2,snapshot3
+</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot1
+</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot2
+</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot3
+</span></span><span class="line"><span class="cl">would reclaim 100GB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This command actually does nothing (<code>-n</code>) except show information. Critically,
+running it with just one or two of the snapshots would reclaim 0GB, so this is
+great for harmless reasoning about what snapshots we&rsquo;d need to sacrifice to
+reclaim space. There&rsquo;s even a handy <code>%</code> &ldquo;range&rdquo; operator, so we could rewrite
+the above as <code>tank/videos@snapshot1%snapshot3</code>.</p>
+<h2 id="the-good-stuff">Dealing with long snapshot names</h2>
+<p>The unrealistic thing about the previous example is the short and convenient
+snapshot names. <code>zfs-auto-snapshot</code> is great, but the snapshot names are more
+like <code>zfs-auto-snap_hourly-2024-08-20-1417</code>. This makes trying different
+snapshot selections cumbersome, and prompted me to write my very first TUI app
+in Rust. It&rsquo;s a simple wrapper around the <code>zfs</code> command, and, well, a video is
+worth several words:</p>
+
+<div id='zsnapfree'></div>
+<script src="https://lutzky.net//js/asciinema-player.min.js"></script>
+<script>
+    AsciinemaPlayer.create('/casts/zsnapfree.cast', document.getElementById('zsnapfree'), {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+     });
+</script>
+
+<p>When selecting snapshots, the tool runs (after a short delay) <code>zfs destroy -n</code>
+to show how much space would be reclaimed. On exit, it shows the appropriate
+commandline to check its findings and, if removing <code>-n</code>, actually perform the
+deletion. Hopefully this is of some use for ZFS users, and I would love any
+patches to add support for other filesystems that have snapshot support!</p>
+]]></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>Rebooting a modern desktop computer really shouldn&rsquo;t take very long, so when it
 was somewhat-regularly taking well over 10 minutes just to shut down, I got
 curious, and ended up looking at netdata, jitter, anacron, and even ansible.</p>
@@ -1540,28 +1659,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </div>
 </div><p>It&rsquo;s not ideal, but it seemed to work; certainly seemed like it should be library code, for someone smarter to debug. Indeed, it turns out that the <code>periph.io</code> library had a <a href="https://pkg.go.dev/periph.io/x/conn/v3@v3.6.8/gpio/gpioutil#Debounce" target="_blank" rel="noopener noreffer ">Debounce function</a> to help with this, but at the time it <a href="https://github.com/periph/conn/issues/5" target="_blank" rel="noopener noreffer ">wasn&rsquo;t implemented at all</a> (and now that I&rsquo;ve spent some time on it, it&rsquo;s partially implemented).</p>
 <p>Ultimately, the device worked rather well, and the button pushes were quite satisfying, especially after a particularly nasty diaper change (AKA a poonami). However, it did leave a lot to be desired: The cabling was flimsy and patchy (the pins coming from the ribbon were easy to disconnect), and using a Raspberry Pi here was overkill. Indeed, I ended up using that Raspberry Pi (and OLED display) as a <a href="https://pikvm.org/" target="_blank" rel="noopener noreffer ">PiKVM</a>, and using a microcontroller for the diaper change buttons instead. More on that in the next post.</p>
-]]></description></item><item><title>Newborn parenting software - part 1</title><link>https://lutzky.net/posts/software-parenting-1/</link><pubDate>Sun, 03 Oct 2021 17:00:00 +0100</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-1/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>A few months ago, I became a father. To help overcome some of the challenges of raising a newborn, I decided to employ my standard MO - software; preferably the kind where I understand what it&rsquo;s doing. It&rsquo;s been working well, and I learned a lot doing it - several blog posts&rsquo; worth, in fact.</p>
-<p>For this story to make sense, it bears mentioning that our conditions are pretty much optimal for it: My employer provides a generous parental leave for the non-birth parent; we decided in advance to formula-feed, which allows us to share that load, which means we need to communicate about it; my partner is an early bird whereas I am a night-owl, meaning we essentially have separate shifts necessitating a handoff; and, critically, we&rsquo;re the type of people who <em>like</em> everything being super-organized and scheduled and spreadsheet-y (calms us down, gives us an illusion of control). Furthermore, our baby is remarkably consistent, being hungry right about every 3 hours - so the question we ended up constantly asking (of each other and our phones) was &ldquo;how long since the baby ate&rdquo;.</p>
-<p>We knew in advance we&rsquo;d need some sort of a baby tracking app, of which there are <em>many</em>. After some research, I found that few of the free ones are designed to be used from multiple devices (e.g. dad&rsquo;s and mom&rsquo;s phones), which is a hard requirement. We found two contenders: Baby+ and BabyBuddy.</p>
-<h2 id="baby">Baby+</h2>
-<p><a href="https://philips-digital.com/baby-new/" target="_blank" rel="noopener noreffer ">Baby+</a> is an Android and iPhone app for tracking babies; it follows <a href="https://philips-digital.com/pregnancy-new/" target="_blank" rel="noopener noreffer ">pregnancy+</a>, which we were quite happy with (especially as, before the birth, our responsiveness requirements were looser - I&rsquo;ll get to that). It can track quite a few things, but not Tummy Time for one (in our case it turns out to be pretty important). Like pregnancy+, the design is very aesthetically pleasing, and it regularly shows timely, short, and useful articles for the parents.</p>
-<p>While the app does have cloud sync, it doesn&rsquo;t have a web UI (it&rsquo;s phone/tablet-only) nor an open HTTP API for me to reasonably code against. It does have an export function, but it&rsquo;s only really intended for importing by the app itself as backup. It&rsquo;s super-clunky to work with - I know because I ended up using it to perform some analysis with a spreadsheet(&ldquo;how long is the baby going between feeds&rdquo;).</p>
-<p>The biggest disadvantage of Baby+ is that it doesn&rsquo;t <em>really</em> support multiple users. From the app&rsquo;s internal FAQ (only available after installing it and setting up an account):</p>
-<blockquote>
-<p><strong>How can I use this app with my partner?</strong></p>
-<p>You can share the app by logging in with the <strong>same email and password</strong>. If you use your device and enter data (e.g. a note) then you need to minimise or close the app for it to send the new data to the server <em>[&hellip;]</em>.</p>
-<p><strong>Important</strong>: the app is designed to be used by on person at a a time <em>[&hellip;]</em> otherwise data can be overwritten or deleted. <em>[&hellip;]</em> allow a few mins for the data to sync (the second device should also have the app closed for a few mins at this point so it can fetch the data <em>[&hellip;]</em>).</p>
-<p>Please note that you will encounter data loss if you are using the app on two devices at the same time.</p>
-</blockquote>
-<p>I&rsquo;d guess that the app basically talks to the server on startup, compares timestamps of its entire database, and downloads or uploads the entire database depending on which version is newer. The startup time checks out:</p>
-<p>Starting Baby+ on an android phone, after closing it so it syncs, takes about 7 seconds; an eternity in screaming-baby-debug-time. Furthermore, that doesn&rsquo;t include sync time, and old data will be shown for a few more seconds before the sync is complete; that starts off with slight frights (&ldquo;the baby didn&rsquo;t eat for 5 hours?! oh, wait, actually 1 hour&rdquo;), and eventually devolves into distrusting the app.</p>
-<p>This felt like a silly problem to have; almost any web-based app would have none of these issues. Furthermore, I thought, there&rsquo;s surely an open-source one where I could fix any annoyances I have myself. Indeed, that would be BabyBuddy.</p>
-<h2 id="babybuddy">BabyBuddy</h2>
-<p><a href="https://github.com/babybuddy/babybuddy" target="_blank" rel="noopener noreffer ">BabyBuddy</a> is an open-source web app, self-described as &ldquo;to help caregivers track sleep, feedings, diaper changes, and tummy time to learn about and predict baby&rsquo;s needs without (as much) guess work&rdquo;. I describe it as &ldquo;the dumbest-sounding idea ever - sleep-deprived parents of newborns creating and maintaining baby-tracking software as a hobby&rdquo;. It turns out to be wonderful, and is what we use today. It requires self-hosting (but provides a button to do that easily on Heroku), but works remarkably well. It didn&rsquo;t work <em>exactly</em> like I wanted, but that just provided ample opportunity to hack on it.</p>
-<p>Before we could use it, I had to make it more mobile-friendly. While it technically worked on phones, it had several usability issues, which I described in <a href="https://github.com/babybuddy/babybuddy/issues/229" target="_blank" rel="noopener noreffer ">#229</a>: horizontal scrolling was needed in places; the &ldquo;Timeline&rdquo; view didn&rsquo;t show a lot of the critical bits of info, requiring more clicks; the contrast was too low for sunlight; and more. Fortunately, through some wonderful collaboration from the author, I was able to quickly get it into a wife-acceptable state and transition us over from Baby+.</p>
-<p>As I hacked on the project, I added a <a href="https://gitpod.io" target="_blank" rel="noopener noreffer ">Gitpod</a> <a href="https://github.com/babybuddy/babybuddy/blob/master/.gitpod.yml" target="_blank" rel="noopener noreffer ">config</a> and a link to the README. This allows people to hack on Babybuddy without installing any software whatsoever - everything is done through, essentially, a free tier cloud instance (on which my config will install everything needed) with a browser-builtin VSCode UI. I used this today to whip up <a href="https://github.com/babybuddy/babybuddy/pull/316" target="_blank" rel="noopener noreffer ">another pull request</a>.</p>
-<p>In addition to being quick and comfortable to use, BabyBuddy allowed me to set up two integrations that I had in mind. The first is an always-on display, essentially intended as &ldquo;the baby clock&rdquo;. It&rsquo;s positioned by the couch where we usually feed, so it&rsquo;s great as a feeding timer as well. I had started out with an old tablet (Huawei T3 Mediapad) running <a href="https://github.com/thanksmister/wallpanel-android" target="_blank" rel="noopener noreffer ">wallpanel</a> - this is a form of &ldquo;kiosk&rdquo; application, which locks the device into a mode where it always runs the browser on a particular page (the device has no other credentials on it, so it&rsquo;s reasonably safe). The tablet&rsquo;s battery, unfortunately, did <em>not</em> like that - seemingly having the screen on discharges it faster than it can charge, and after a few weeks the tablet refused to charge at all. I&rsquo;ve therefore switched to using an old ASUS C100P Chromebook running <a href="https://chrome.google.com/webstore/detail/kiosk/afhcomalholahplbjhnmahkoekoijban?hl=en" target="_blank" rel="noopener noreffer ">kiosk</a> - this gives the benefit of having a physical keyboard, useful for entering the food amounts.</p>
-<p>The second integration I call &ldquo;poobuttons&rdquo; - a couple of tactile buttons on the changing dresser which tell BabyBuddy to mark a diaper (they are labeled &ldquo;poo&rdquo; and &ldquo;pee&rdquo;). This is both easier than fumbling with a phone touchscreen and, frankly, way more satisfying. The next posts will detail the iterations of these buttons and how I built them.</p>
-<p>This has been a wonderful and challenging journey so far. I wonder what else I&rsquo;ll find myself building.</p>
 ]]></description></item></channel></rss>

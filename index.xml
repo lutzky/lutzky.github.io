@@ -1,4 +1,123 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 23 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
+reclaim disk space can be a bit confusing. Let&rsquo;s have a quick primer on how
+those work, and look at a small utility to help reason about it.</p>
+<p><a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree</a> is a TUI for showing how much
+space can be reclaimed by freeing zfs snapshots. It is a TUI wrapper over the
+standard zfs tool.</p>
+<p>If you just want to see zsnapfree in action, skip to <a href="#the-good-stuff" rel="">the screencast</a>.</p>
+<h2 id="what-are-cow-snapshots">What are COW snapshots?</h2>
+<p>We all have little accidents with our files. Although the &ldquo;Recycle bin&rdquo; protects
+you against accidentally <em>deleting</em> files, most filesystems don&rsquo;t protect
+against accidentally <em>modifying</em> them. To change files back, you want a
+filesystems with <em>snapshots</em>.</p>
+<p>A snapshot is extremely fast to make, and lets you access the contents of the
+file as it was when the snapshot was taken. In ZFS, with <code>zfs-auto-snapshot</code>
+installed, the experience might look like this:</p>
+<ul>
+<li>A ZFS filesystem called <code>/tank/videos</code> exists.</li>
+<li>A file <code>/tank/videos/renders/my_video.mp4</code> exists, but I accidentally
+overwrite it.</li>
+<li>The file has existed for a while, so <code>zfs-auto-snapshot</code> has already created
+a snapshot of the good version at 14:17; specifically, it&rsquo;s called <code>zfs-auto-snap_hourly-2024-08-20-1417</code>.</li>
+<li>The good version is therefore available at (takes a breath)
+<code>/tank/videos/.zfs/snapshot/zfs-auto-snap_hourly-2024-08-20-1417</code>.</li>
+</ul>
+<p>We&rsquo;ll get back to those long snapshot names later. For now, it&rsquo;s worth sketching
+out how this works.</p>
+<p>The actual ZFS implementation is more complex, but roughly speaking, you can
+imagine that the <code>videos</code> &ldquo;current-state&rdquo; is represented by a table that
+includes rows describing what 128KB blocks make up each file. If our file
+<code>renders/my_video.mp4</code> is 128MB, it will be made up of 1024 blocks, and the
+table might have a section like this:</p>
+<ul>
+<li>File <code>renders/my_video</code> is represented by virtual blocks 1000 through 2023.</li>
+<li>Virtual block 1000 is in physical location 5001</li>
+<li>Virtual block 1001 is in physical location 6713</li>
+<li>&hellip;</li>
+</ul>
+<p>To create a snapshot, we only need to duplicate the information above, which is
+roughly 8KB, so this can be done quickly and for very little extra space.
+However, what happens when the data changes? Snapshots should remain immutable
+even if the &ldquo;current-state&rdquo; changes.</p>
+<p>Suppose for instance we change the very first block in the file - virtual block
+1000. What happens now is the titular &ldquo;copy-on-write&rdquo; - the block which needs to
+be rewritten will first be copied. Physical location 5001 would be duplicated to
+a new location, say 7001, and this version of the block will be modified. The
+current-state table would be updated to say that virtual block 1000 is in
+physical location 7001 (but the snapshot would still have it listed as physical
+location 5001).</p>
+<p>Importantly, physical location 5001 is still in use, and cannot be freed. There
+would likely be a table keeping reference counts for each physical location;
+after the last snapshot referencing it would be deleted, this space can be
+reclaimed.</p>
+<h2 id="accidentally-storing-big-files">Accidentally storing big files</h2>
+<p>Suppose you accidentally store <code>useless_data.zip</code>, a 100GB file, in a filesystem
+that takes snapshots. You find yourself running out of space, and decide to
+delete that file&hellip; but no space is recovered. The reason is that snapshots
+still hold this data, and you would need to delete all of those snapshots in
+order to reclaim it.</p>
+<p>The question is&hellip; which ones? Although you can run <code>zfs list -t snapshot -o space</code>, the <code>USED</code> column there only counts space used by files which are
+<em>unique to that snapshot</em>. That is, if another snapshot has been created (e.g.
+by <code>zfs-auto-snapshot</code>), the <code>USED</code> column will count that file as zero.</p>
+<p>Fortunately, ZFS has a great utility for previewing this. If we believe that the
+file was created just before <code>snapshot1</code>, and deleted just after <code>snapshot3</code>,
+then we can do this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ zfs destroy -nv tank/video@snapshot1,snapshot2,snapshot3
+</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot1
+</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot2
+</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot3
+</span></span><span class="line"><span class="cl">would reclaim 100GB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This command actually does nothing (<code>-n</code>) except show information. Critically,
+running it with just one or two of the snapshots would reclaim 0GB, so this is
+great for harmless reasoning about what snapshots we&rsquo;d need to sacrifice to
+reclaim space. There&rsquo;s even a handy <code>%</code> &ldquo;range&rdquo; operator, so we could rewrite
+the above as <code>tank/videos@snapshot1%snapshot3</code>.</p>
+<h2 id="the-good-stuff">Dealing with long snapshot names</h2>
+<p>The unrealistic thing about the previous example is the short and convenient
+snapshot names. <code>zfs-auto-snapshot</code> is great, but the snapshot names are more
+like <code>zfs-auto-snap_hourly-2024-08-20-1417</code>. This makes trying different
+snapshot selections cumbersome, and prompted me to write my very first TUI app
+in Rust. It&rsquo;s a simple wrapper around the <code>zfs</code> command, and, well, a video is
+worth several words:</p>
+
+<div id='zsnapfree'></div>
+<script src="https://lutzky.net//js/asciinema-player.min.js"></script>
+<script>
+    AsciinemaPlayer.create('/casts/zsnapfree.cast', document.getElementById('zsnapfree'), {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+     });
+</script>
+
+<p>When selecting snapshots, the tool runs (after a short delay) <code>zfs destroy -n</code>
+to show how much space would be reclaimed. On exit, it shows the appropriate
+commandline to check its findings and, if removing <code>-n</code>, actually perform the
+deletion. Hopefully this is of some use for ZFS users, and I would love any
+patches to add support for other filesystems that have snapshot support!</p>
+]]></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>Rebooting a modern desktop computer really shouldn&rsquo;t take very long, so when it
 was somewhat-regularly taking well over 10 minutes just to shut down, I got
 curious, and ended up looking at netdata, jitter, anacron, and even ansible.</p>
@@ -1487,112 +1606,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </li>
 </ol>
 </div>
-]]></description></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/posts/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 21:57:09 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-2/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>With BabyBuddy now installed and running properly (see <a href="https://lutzky.net/posts/software-parenting-1/" rel="">previous post</a>), and an always-on display showing the latest information, we now got into the swing of using it. We loved the timeline for &ldquo;what happened while I as sleeping&rdquo;; we loved the food amount reports; and because we had a consistent &ldquo;feed, then change, then wait 15 minutes with baby upright to reduce spit-up&rdquo; system, the display&rsquo;s &ldquo;time since last change&rdquo; box was super useful as well. However, as you might imagine, we did <em>not</em> love handling a freshly-re-diapered baby with one hand while using the other to unlock the phone and navigate to the &ldquo;yes he pooped now&rdquo; page in a web app.</p>
-<p>My first idea was to create voice commands for the Nest Home Mini in the room. However, it&rsquo;s prone to misunderstanding us; you have to enunciate, and even then the speech recognition is mostly tuned to preexisting Google Assistant commands, and tends to guess that we aren&rsquo;t really saying words like &ldquo;pee&rdquo; or &ldquo;poo&rdquo;. Furthermore, the baby might be crying, or worse yet - lightly sleeping, at risk of being woken up by our voice (or the assistant&rsquo;s). What we needed was a button (well, two - one for pee and one for poo).</p>
-<p>I had a Raspberry Pi ZeroW lying around <a href="https://lutzky.net/posts/pitemp/" rel="">from a previous project</a> and decided to use it for this (the small OLED display wasn&rsquo;t used for this project, but I didn&rsquo;t find a good reason to take it off yet; more on that later). With bits I had from a generic &ldquo;learn electronics&rdquo; kit (which I bought for the specific purpose of having such bits), I created the user interface: Two buttons, a green LED for &ldquo;OK&rdquo;, a red LED for &ldquo;something went wrong&rdquo;; all tied together by some jumper cables and a mini breadboard. The Raspberry Pi would handle communicating with BabyBuddy&rsquo;s API (over wifi), reading the buttons, and driving the LEDs. The setup was indeed quite similar to PiTemp&rsquo;s with the software written in Go, cross-compiled, and run on startup using systemd.</p>
-<figure><a class="lightgallery" href="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" title="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" data-thumbnail="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" data-sub-html="<h2>PooButtons on Raspberry Pi ZeroW</h2>">
-        
-    </a><figcaption class="image-caption">PooButtons on Raspberry Pi ZeroW</figcaption>
-    </figure>
-<p>One annoying quirk with the Raspberry Pi Zero for this is that it would register phantom button presses; they&rsquo;d be quite rare, fewer than 5 a day, but that&rsquo;s certainly enough to mess up diaper reporting. I&rsquo;m not sure if it&rsquo;s something about the particular GPIO pins I used (GPIO24, GPIO22), and disconnecting the OLED display didn&rsquo;t work. I ended up following the old joke:</p>
-<blockquote>
-<p>How many software engineers does it take to change a lightbulb?</p>
-<p>None, it&rsquo;s a hardware problem.</p>
-<p>How many hardware engineers does it take to change a lightbulb?</p>
-<p>None, they&rsquo;ll fix it in the software drivers.</p>
-</blockquote>
-<p>Specifically it ended up looking something like this (with another goroutine listening on the resulting channel):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">debounceTime</span> <span class="p">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">stableTime</span>   <span class="p">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">listenButtons</span><span class="p">(</span><span class="nx">ch</span> <span class="kd">chan</span><span class="o">&lt;-</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">pull</span> <span class="o">:=</span> <span class="nx">gpio</span><span class="p">.</span><span class="nx">PullUp</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">edge</span> <span class="o">:=</span> <span class="nx">gpio</span><span class="p">.</span><span class="nx">FallingEdge</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">level</span> <span class="o">:=</span> <span class="nx">gpio</span><span class="p">.</span><span class="nx">Low</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pin</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="nx">gpio</span><span class="p">.</span><span class="nx">PinIO</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pinButton1</span><span class="p">,</span>  <span class="c1">// GPIO24
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">pinButton2</span><span class="p">,</span>  <span class="c1">// GPIO22
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">n</span> <span class="o">:=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pin</span> <span class="o">:=</span> <span class="nx">pin</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">debounceTime</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">pin</span><span class="p">.</span><span class="nf">In</span><span class="p">(</span><span class="nx">pull</span><span class="p">,</span> <span class="nx">edge</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Failed to set pin to input: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">pin</span><span class="p">.</span><span class="nf">WaitForEdge</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Got edge, waiting %v for stability&#34;</span><span class="p">,</span> <span class="nx">stableTime</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">stableTime</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="nx">pin</span><span class="p">.</span><span class="nf">Read</span><span class="p">()</span> <span class="o">==</span> <span class="nx">level</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;Signal was stable, counting as press&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="nx">n</span>
-</span></span><span class="line"><span class="cl">          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;Signal did not remain stable, discarding&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;WaitForEdge returned false, ignoring&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}()</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>It&rsquo;s not ideal, but it seemed to work; certainly seemed like it should be library code, for someone smarter to debug. Indeed, it turns out that the <code>periph.io</code> library had a <a href="https://pkg.go.dev/periph.io/x/conn/v3@v3.6.8/gpio/gpioutil#Debounce" target="_blank" rel="noopener noreffer ">Debounce function</a> to help with this, but at the time it <a href="https://github.com/periph/conn/issues/5" target="_blank" rel="noopener noreffer ">wasn&rsquo;t implemented at all</a> (and now that I&rsquo;ve spent some time on it, it&rsquo;s partially implemented).</p>
-<p>Ultimately, the device worked rather well, and the button pushes were quite satisfying, especially after a particularly nasty diaper change (AKA a poonami). However, it did leave a lot to be desired: The cabling was flimsy and patchy (the pins coming from the ribbon were easy to disconnect), and using a Raspberry Pi here was overkill. Indeed, I ended up using that Raspberry Pi (and OLED display) as a <a href="https://pikvm.org/" target="_blank" rel="noopener noreffer ">PiKVM</a>, and using a microcontroller for the diaper change buttons instead. More on that in the next post.</p>
 ]]></description></item></channel></rss>
