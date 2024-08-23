@@ -7,15 +7,15 @@ never quite sure that I did, so I take my phone out, open the appropriate app,
 and check. It would be super convenient if I had a little indicator near the
 door, so I (or anyone else leaving) could check more quickly. A single red LED
 would technically do the job&hellip; but wouldn&rsquo;t be wife-approved.</p>
-<p>I love <a href="https://lutzky.net/posts/pitemp/#stage-2-pioled" rel="">tiny OLED displays</a>. Let&rsquo;s use one of those! I got an
-<a href="https://www.aliexpress.com/item/1005004839191268.html" target="_blank" rel="noopener noreffer ">ESP8266 with an onboard OLED display</a>, and thanks to
-<a href="https://esphome.io/" target="_blank" rel="noopener noreffer ">ESPhome</a>, having a display of the alarm status is easy enough. There&rsquo;s
-still plenty of room on the display, so I figured I can add a couple of other
-things I quickly check before leaving home: Weather and tram times. I used the
-<a href="https://www.dafont.com/edit-undo.font" target="_blank" rel="noopener noreffer ">Edit Undo font</a> and some <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreffer ">Material Icons</a> for a
-bit of styling. I ended up having to mess with exact spacing <em>a lot</em> until I was
-happy with it; it would be super helpful if there were a simulator like <a href="https://wokwi.com/" target="_blank" rel="noopener noreffer ">wokwi</a>
-for ESPHome to iterate on this more quickly!</p>
+<p>I love <a href="https://lutzky.net/posts/pitemp/#stage-2-pioled" target="_blank" rel="noopener noreffer ">tiny OLED displays</a>. Let&rsquo;s use one of
+those! I got an <a href="https://www.aliexpress.com/item/1005004839191268.html" target="_blank" rel="noopener noreffer ">ESP8266 with an onboard OLED display</a>,
+and thanks to <a href="https://esphome.io/" target="_blank" rel="noopener noreffer ">ESPhome</a>, having a display of the alarm status is easy
+enough. There&rsquo;s still plenty of room on the display, so I figured I can add a
+couple of other things I quickly check before leaving home: Weather and tram
+times. I used the <a href="https://www.dafont.com/edit-undo.font" target="_blank" rel="noopener noreffer ">Edit Undo font</a> and some <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreffer ">Material
+Icons</a> for a bit of styling. I ended up having to mess with
+exact spacing <em>a lot</em> until I was happy with it; it would be super helpful if
+there were a simulator like <a href="https://wokwi.com/" target="_blank" rel="noopener noreffer ">wokwi</a> for ESPHome to iterate on this more quickly!</p>
 <figure><a class="lightgallery" href="/posts/front-door-display/no-case.png" title="/posts/front-door-display/no-case.png" data-thumbnail="/posts/front-door-display/no-case.png" data-sub-html="<h2>The resulting device without a case</h2>">
         
     </a><figcaption class="image-caption">The resulting device without a case</figcaption>
