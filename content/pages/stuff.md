@@ -6,6 +6,6 @@ url: /stuff/
 
 The blog has accumulated a few unrelated bits and bobs, linked here:
 
-- [Russian stress mark]({{< ref "/russian-stress" >}})
-- [Linux stuff]({{< ref "/linux-stuff" >}})
+- [Russian stress mark]({{< ref "russian-stress" >}})
+- [Linux stuff]({{< ref "linux-stuff" >}})
 - [TTime3](https://lutzky.net/ttime3)
