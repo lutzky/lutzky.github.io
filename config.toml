@@ -27,10 +27,6 @@ enableEmoji = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
-[author]
-  name = "Ohad Lutzky"
-  email = "lutzky@gmail.com"
-
 [params]
   title = "Shallow and Pedantic"
   description = """\
@@ -39,6 +35,10 @@ enableEmoji = true
     pedantic.\
     """
   images = ["/images/bio-photo-small.jpg"]
+
+  [params.author]
+    name = "Ohad Lutzky"
+    email = "lutzky@gmail.com"
 
   [params.search]
     enable = true
