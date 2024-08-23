@@ -4,6 +4,7 @@ subtitle: ""
 date: 2023-12-29
 slug: front-door-display
 tags: ["hardware"]
+featuredImagePreview: no-case.png
 ---
 
 <!--

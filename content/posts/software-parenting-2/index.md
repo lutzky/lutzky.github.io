@@ -6,6 +6,7 @@ aliases: ["/2021/10/05/software-parenting-2/"]
 summary: Logging diapers with satisfying clicks
 tags: ["software", "life", "hardware"]
 categories: ["Newborn parenting software"]
+featuredImagePreview: feature-poobuttons-rpi0w.jpg
 ---
 
 <!-- markdownlint-disable MD013 -->

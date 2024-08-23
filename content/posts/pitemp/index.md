@@ -7,6 +7,7 @@ tags:
   - hardware
   - software
 title: PiTemp
+featuredImagePreview: feature-pioled.jpg
 ---
 
 <!-- markdownlint-disable MD013 -->

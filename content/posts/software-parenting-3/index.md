@@ -6,6 +6,7 @@ aliases: ["/2021/10/10/software-parenting-3/"]
 summary: Transitioning PooButtons to a microcontroller
 tags: ["software", "life", "hardware"]
 categories: ["Newborn parenting software"]
+featuredImagePreview: poobuttons-v3.jpg
 ---
 
 <!-- markdownlint-disable MD013 -->
