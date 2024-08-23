@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Testing - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/testing/</link><description>Testing - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/testing/" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/fakefile/</guid><description><![CDATA[<!-- raw HTML omitted -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Testing - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/testing/</link><description>Testing - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/testing/" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/fakefile/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -51,7 +51,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile" target="_blank" rel="noopener noreffer ">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs" target="_blank" rel="noopener noreffer ">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
-]]></description></item><item><title>Asserting string equality</title><link>https://lutzky.net/posts/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/asserting-string-equality/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Asserting string equality</title><link>https://lutzky.net/posts/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/asserting-string-equality/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>I&rsquo;ve had several opportunities to write unit tests for code that outputs large
 strings. It&rsquo;s important that your unit-testing framework handles this well.</p>
 <p>Here&rsquo;s my example data:</p>
@@ -194,7 +194,7 @@ are similar comparison methods for other large data types.</p>
 </div>
 </div><p>Does your unit testing framework provide helpful output for failed unit tests?
 This is something you can and should demand of it.</p>
-]]></description></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/posts/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/test-driven-procrastination/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/posts/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/test-driven-procrastination/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>A conversation with a friend reminded me that, in fact, I&rsquo;ve been doing
 test-driven development long before I knew it was called that. Back in
 Introduction to Systems Programming (a second-semester course revolving around

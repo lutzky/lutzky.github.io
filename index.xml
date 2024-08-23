@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
 reclaim disk space can be a bit confusing. Let&rsquo;s have a quick primer on how
 those work, and look at a small utility to help reason about it.</p>
 <p><a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree</a> is a TUI for showing how much
@@ -117,7 +117,7 @@ to show how much space would be reclaimed. On exit, it shows the appropriate
 commandline to check its findings and, if removing <code>-n</code>, actually perform the
 deletion. Hopefully this is of some use for ZFS users, and I would love any
 patches to add support for other filesystems that have snapshot support!</p>
-]]></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>Rebooting a modern desktop computer really shouldn&rsquo;t take very long, so when it
 was somewhat-regularly taking well over 10 minutes just to shut down, I got
 curious, and ended up looking at netdata, jitter, anacron, and even ansible.</p>
@@ -273,7 +273,7 @@ type of problems which Ansible deals with, at least in my line of work, have
 preexisting in-house solutions, so I never had the chance to learn Ansible.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
+</div>]]></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
 great tools for it&hellip; if we&rsquo;re talking about files on a local hard drive.</p>
 <p>Tools like the textual <a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener noreffer "><code>ncdu</code></a> and the graphical
 <a href="https://wiki.gnome.org/Apps/DiskUsageAnalyzer" target="_blank" rel="noopener noreffer ">baobab</a> let you start with a
@@ -338,7 +338,7 @@ the <a href="https://github.com/lutzky/ncdu-import/tree/main/testdata" target="_
 <figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot-with-import.png" title="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-sub-html="<h2>ncdu showing output ncdu-import on the sample CSV above</h2>">
         
     </a><figcaption class="image-caption"><code>ncdu</code> showing output <code>ncdu-import</code> on the sample CSV above</figcaption>
-    </figure>]]></description></item><item><title>Front Door Display</title><link>https://lutzky.net/posts/front-door-display/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/front-door-display/</guid><description><![CDATA[<!-- raw HTML omitted -->
+    </figure>]]></description></item><item><title>Front Door Display</title><link>https://lutzky.net/posts/front-door-display/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/front-door-display/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <p>Let&rsquo;s make a tiny display for stuff you check right before leaving home!</p>
 <p>I keep forgetting to turn off my alarm as I leave home, and then scrambling to
@@ -393,7 +393,7 @@ result, and it&rsquo;s proving to be at-a-glance useful every day.</p>
 <p>The alarm app has added a feature, after I created the device described in this post, to turn it off if any indoors motion is detected at the appropriate time, mostly solving this issue.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
+</div>]]></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
 to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible
 idea, even if it weren&rsquo;t at war at the time.</p>
 <h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
@@ -472,7 +472,7 @@ have &ldquo;cyber attacks&rdquo;.</p>
 <p>Many years ago, I described an effort to coerce the timezone system into a &ldquo;change on demand&rdquo; mode; see post <a href="/posts/timezones-are-fickle/" rel="">Timezones are fickle</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
+</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
 interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
 never quite enough&hellip; how would it work on <em>someone else&rsquo;s</em> computer? Here&rsquo;s a
 stroll down memory lane, starting from the 90s.</p>
@@ -702,7 +702,7 @@ and untrustworthy.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-ba
 <p>I think compiling stuff to WASM is becoming more popular nowadays.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
+</div>]]></description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
 <p>As you can tell by previous posts on this blog, I used to be quite a fan of Go;
 I use it at work often, and some features about it are legitimately great:
 Package management, &ldquo;static duck typing&rdquo; (structural typing), providing
@@ -1114,7 +1114,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </li>
 </ol>
 </div>
-]]></description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&rsquo;t usually need it for night sleeps, but it&rsquo;s helpful for a &ldquo;cranky-because-tired&rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.</p>
 <p>There are quite a few ways to play white noise, and many cheap mobile battery-powered devices will do the trick just fine. However, I wanted a bit more control, at least for when we&rsquo;re at home:</p>
 <ul>
@@ -1211,7 +1211,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 <p>However, it seems that when pointing to an <em>mp3</em> file, audio starts playing immediately, without having to first finish downloading the whole file. The Google Home is pretty opaque about this, but experimentation seems to show this is consistent.</p>
 <h2 id="afterword">Afterword</h2>
 <p>Overall, this process of getting familiar with HomeAssistant and its various integrations has been delightful, with great community support and debuggability. My first thoughts were &ldquo;I don&rsquo;t need this - my projects are simple and I can code them myself&rdquo; - but the plethora of readily available integrations and the polished UI has made it well worth my time learning, and making changes is a breeze. And if my child sleeps better for it, that&rsquo;s a win in my book.</p>
-]]></description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/preload-key/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/preload-key/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>I run a small home server, which - among other things - has backups of data from cloud providers, in case I lose access to them; this data is sensitive and should therefore be encrypted. However, disk encryption requires a secret, and there are - generally speaking - four ways to go about that:</p>
 <ul>
 <li>Store the key on the same server as the encrypted disk</li>
@@ -1573,7 +1573,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<!-- raw HTML omitted -->
+</div>]]></description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>As noted in the <a href="https://lutzky.net/posts/software-parenting-2/" rel="">previous post</a>, I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn&rsquo;t have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it&rsquo;s quite capable as a microcontroller on its own (and the newer ESP32 is faster).</p>
 <p>So what&rsquo;s the difference between a (very small) computer and a microcontroller? A Raspberry Pi boots off an SD card, usually to a full-fledged Linux operating system; you&rsquo;d operate it either directly with a monitor and keyboard, or connect remotely using SSH. You can install/create software on it as you would on a &ldquo;full-size&rdquo; computer, and I usually do this in Go (although Python is more popular). Conversely, a microcontroller will usually run only one program, which you need to build on a separate computer, connect it over USB to the microcontroller board, and flash it. This has a number of advantages, including simplicity and pretty-much-instant boot.</p>
 <p>Coding for the ESP8266 can be done using the same tooling as Arduino - namely, in C++<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, on the Arduino IDE. However, during this project I learned of <a href="https://platformio.org/" target="_blank" rel="noopener noreffer ">PlatformIO</a>, which is far more comfortable to work with: It&rsquo;s integrated into VSCode, and git, auto-formatting, autocomplete and <a href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim" target="_blank" rel="noopener noreffer ">VIM keybindings</a> all work nicely. It also provides a more organized approach to unit testing (practically absent in Arduino IDE) and per-project dependency management (you can list what each project needs and have it auto-install). This made the project fun enough for a few iterations.</p>

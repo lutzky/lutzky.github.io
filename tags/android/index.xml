@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Android - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/android/</link><description>Android - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sat, 08 Oct 2011 19:43:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/android/" rel="self" type="application/rss+xml"/><item><title>Developing TransportDroidIL for Android</title><link>https://lutzky.net/posts/developing-transportdroidil-for-android/</link><pubDate>Sat, 08 Oct 2011 19:43:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/developing-transportdroidil-for-android/</guid><description><![CDATA[<p>Here are a few words on developing <a href="https://market.android.com/details?id=net.lutzky.transportdroidil" target="_blank" rel="noopener noreffer ">TransportDroidIL</a>, a small
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Android - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/android/</link><description>Android - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 08 Oct 2011 19:43:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/android/" rel="self" type="application/rss+xml"/><item><title>Developing TransportDroidIL for Android</title><link>https://lutzky.net/posts/developing-transportdroidil-for-android/</link><pubDate>Sat, 08 Oct 2011 19:43:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/developing-transportdroidil-for-android/</guid><description><![CDATA[<p>Here are a few words on developing <a href="https://market.android.com/details?id=net.lutzky.transportdroidil" target="_blank" rel="noopener noreffer ">TransportDroidIL</a>, a small
 utility to query Israeli public transportation sites more easily using an
 Android phone.</p>
 <p>Source control is super important. Mistakes will be made, other coders will
@@ -45,7 +45,7 @@ sometimes don&rsquo;t work for all applications. This causes numbers to appear
 backwards in TransportDroidIL, which in turn caused me to implement an
 <a href="https://github.com/lutzky/TransportDroidIL/commit/713a9bd89547763776bb8a1c991ceb23bd6426c5" target="_blank" rel="noopener noreffer ">ugly</a> <a href="https://github.com/lutzky/TransportDroidIL/commit/6ba21053a8e981882bd0b1f808f257979a2bf488" target="_blank" rel="noopener noreffer ">hack</a>. I hope the upcoming Ice Cream Sandwich
 release fixes this.</p>
-]]></description></item><item><title>Upcoming features in TransportDroidIL</title><link>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</link><pubDate>Fri, 02 Sep 2011 08:30:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</guid><description><![CDATA[<!-- raw HTML omitted -->
+]]></description></item><item><title>Upcoming features in TransportDroidIL</title><link>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</link><pubDate>Fri, 02 Sep 2011 08:30:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</guid><description><![CDATA[<!-- raw HTML omitted -->
 <p>Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a few new features:</p>
 <ol>
 <li>Separate &ldquo;Source&rdquo;, &ldquo;Destination&rdquo; and &ldquo;Time&rdquo; fields. This is much better for
@@ -76,7 +76,7 @@ interface for this unobtrusive.</li>
     </figure>
 <p>For a sneak peek, go to <a href="http://github.com/lutzky/TransportDroidIL" target="_blank" rel="noopener noreffer ">http://github.com/lutzky/TransportDroidIL</a> for the
 latest sources. You can also report issues there.</p>
-]]></description></item><item><title>Transport Droid IL</title><link>https://lutzky.net/posts/transport-droid-il/</link><pubDate>Sat, 04 Sep 2010 16:21:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/transport-droid-il/</guid><description><![CDATA[<p>After a couple of days&rsquo; messing with it, I&rsquo;m releasing it: <em>Transport Droid
+]]></description></item><item><title>Transport Droid IL</title><link>https://lutzky.net/posts/transport-droid-il/</link><pubDate>Sat, 04 Sep 2010 16:21:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/transport-droid-il/</guid><description><![CDATA[<p>After a couple of days&rsquo; messing with it, I&rsquo;m releasing it: <em>Transport Droid
 IL</em>! It&rsquo;s a handy little app for querying <a href="http://egged.co.il/" target="_blank" rel="noopener noreffer ">Egged&rsquo;s site</a>,
 as well as the new <a href="http://bus.gov.il/" target="_blank" rel="noopener noreffer ">Ministry of Transportation site</a>, on
 transportation information. This is pretty beta, but seems to work well enough.</p>
@@ -84,7 +84,7 @@ transportation information. This is pretty beta, but seems to work well enough.<
 <a href="http://lutzky.github.com/TransportDroidIL" target="_blank" rel="noopener noreffer ">http://lutzky.github.com/TransportDroidIL</a></p>
 <p><strong>APK File:</strong>
 <a href="http://lutzky.github.com/TransportDroidIL/TransportDroidIL.apk" target="_blank" rel="noopener noreffer ">TransportDroidIL.APK</a></p>
-]]></description></item><item><title>Setting up Hebrew Android fonts on your AVD emulator</title><link>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</link><pubDate>Sat, 04 Sep 2010 09:54:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</guid><description><![CDATA[<p>There are several good guides for installing <a href="http://benyossef.com/" target="_blank" rel="noopener noreffer ">Gilad
+]]></description></item><item><title>Setting up Hebrew Android fonts on your AVD emulator</title><link>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</link><pubDate>Sat, 04 Sep 2010 09:54:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</guid><description><![CDATA[<p>There are several good guides for installing <a href="http://benyossef.com/" target="_blank" rel="noopener noreffer ">Gilad
 Ben-Yossef</a>&rsquo;s excellent Hebdroid fonts on physical
 Android devices, but those don&rsquo;t really work with the Android SDK&rsquo;s emulator -
 changes to the <code>system</code> directory aren&rsquo;t persistent. Here&rsquo;s how to get around
@@ -134,7 +134,7 @@ files. To pack everything back up, run:</p>
 <code>system.img</code> (the emulator does indeed follow symlinks), but you can basically
 do whatever you like. You may have to recreate your AVD, but everything should
 work. Happy hacking!</p>
-]]></description></item><item><title>Android</title><link>https://lutzky.net/posts/android/</link><pubDate>Sat, 04 Sep 2010 09:26:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/android/</guid><description><![CDATA[<p>I&rsquo;ve finally gotten the chance to get one of those newfangled Android phones.</p>
+]]></description></item><item><title>Android</title><link>https://lutzky.net/posts/android/</link><pubDate>Sat, 04 Sep 2010 09:26:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/android/</guid><description><![CDATA[<p>I&rsquo;ve finally gotten the chance to get one of those newfangled Android phones.</p>
 <p>I&rsquo;ve recently &ldquo;bought&rdquo; a <a href="http://en.wikipedia.org/wiki/Samsung_Galaxy" target="_blank" rel="noopener noreffer ">Samsung Galaxy
 Android</a> phone (the older i7500,
 not the newer i9000 &ldquo;S&rdquo;) model. It&rsquo;s a seriously serious upgrade from my old
