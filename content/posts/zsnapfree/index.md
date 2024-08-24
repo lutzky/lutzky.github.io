@@ -34,7 +34,7 @@ installed, the experience might look like this:
 * The file has existed for a while, so `zfs-auto-snapshot` has already created
   a snapshot of the good version at 14:17; specifically, it's called `zfs-auto-snap_hourly-2024-08-20-1417`.
 * The good version is therefore available at (takes a breath)
-  `/tank/videos/.zfs/snapshot/zfs-auto-snap_hourly-2024-08-20-1417`.
+  `/tank/videos/.zfs/snapshot/zfs-auto-snap_hourly-2024-08-20-1417/renders/my_video.mp4`.
 
 We'll get back to those long snapshot names later. For now, it's worth sketching
 out how this works.
