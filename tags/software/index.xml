@@ -20,7 +20,7 @@ overwrite it.</li>
 <li>The file has existed for a while, so <code>zfs-auto-snapshot</code> has already created
 a snapshot of the good version at 14:17; specifically, it&rsquo;s called <code>zfs-auto-snap_hourly-2024-08-20-1417</code>.</li>
 <li>The good version is therefore available at (takes a breath)
-<code>/tank/videos/.zfs/snapshot/zfs-auto-snap_hourly-2024-08-20-1417</code>.</li>
+<code>/tank/videos/.zfs/snapshot/zfs-auto-snap_hourly-2024-08-20-1417/renders/my_video.mp4</code>.</li>
 </ul>
 <p>We&rsquo;ll get back to those long snapshot names later. For now, it&rsquo;s worth sketching
 out how this works.</p>
