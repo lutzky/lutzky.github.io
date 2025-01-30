@@ -17,7 +17,7 @@ standard zfs tool.
 
 If you just want to see zsnapfree in action, skip to [the screencast](#the-good-stuff).
 
-## What are COW snapshots?
+## What are COW snapshots? 🐮
 
 We all have little accidents with our files. Although the "Recycle bin" protects
 you against accidentally *deleting* files, most filesystems don't protect
