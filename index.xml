@@ -5,7 +5,7 @@ those work, and look at a small utility to help reason about it.</p>
 space can be reclaimed by freeing zfs snapshots. It is a TUI wrapper over the
 standard zfs tool.</p>
 <p>If you just want to see zsnapfree in action, skip to <a href="#the-good-stuff" rel="">the screencast</a>.</p>
-<h2 id="what-are-cow-snapshots">What are COW snapshots?</h2>
+<h2 id="what-are-cow-snapshots-">What are COW snapshots? 🐮</h2>
 <p>We all have little accidents with our files. Although the &ldquo;Recycle bin&rdquo; protects
 you against accidentally <em>deleting</em> files, most filesystems don&rsquo;t protect
 against accidentally <em>modifying</em> them. To change files back, you want a
