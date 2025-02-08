@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Go - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/go/</link><description>Go - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 16 Jan 2023 15:34:25 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/go/" rel="self" type="application/rss+xml"/><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Go - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/go/</link><description>Go - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 16 Jan 2023 15:34:25 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/go/" rel="self" type="application/rss+xml"/><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
 <p>As you can tell by previous posts on this blog, I used to be quite a fan of Go;
 I use it at work often, and some features about it are legitimately great:
 Package management, &ldquo;static duck typing&rdquo; (structural typing), providing
@@ -108,14 +108,14 @@ not any of the players are older than the coach.</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="o">*</span> <span class="nx">Team</span><span class="p">)</span> <span class="nf">anyPlayersOlderThanCoach</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// YOU WILL FORGET
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span>      <span class="c1">// TO DO THIS PART,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>                   <span class="c1">// I ASSURE YOU.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// YOU WILL FORGET</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span>      <span class="c1">// TO DO THIS PART,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>                   <span class="c1">// I ASSURE YOU.</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">p</span> <span class="nx">in</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Players</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Age</span> <span class="p">&gt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span><span class="p">.</span><span class="nx">Age</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// ...so ^^^^^^^ will sometimes crash.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ...so ^^^^^^^ will sometimes crash.</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>

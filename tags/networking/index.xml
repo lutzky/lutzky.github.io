@@ -1,5 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Networking - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/networking/</link><description>Networking - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/networking/" rel="self" type="application/rss+xml"/><item><title>Server drawer</title><link>https://lutzky.net/posts/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/server-drawer/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>This is as good a time as any to give a quick tour of my &ldquo;homelab&rdquo; or server drawer.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Networking - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/networking/</link><description>Networking - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/networking/" rel="self" type="application/rss+xml"/><item><title>Server drawer</title><link>https://lutzky.net/posts/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/server-drawer/</guid><description><![CDATA[<p>This is as good a time as any to give a quick tour of my &ldquo;homelab&rdquo; or server drawer.</p>
 <p>The external view is rather innocuous: A visually inoffensive Nest Wifi, a rather elegant Nest Thermostat (shame that the display can&rsquo;t be always-on), and the gorgeous Nintendo Switch dock cover my partner got me. The TV aerial is tucked to the back, a reasonable compromise between &ldquo;gets reception&rdquo; and &ldquo;hidden away and ugly&rdquo;. The TV is mounted on upside-down IKEA boxes which we painted to roughly match the rest, hiding some botched carpentry behind the TV.</p>
 <figure><a class="lightgallery" href="/posts/server-drawer/external.jpg" title="/posts/server-drawer/external.jpg" data-thumbnail="/posts/server-drawer/external.jpg" data-sub-html="<h2>External view</h2>">
         
@@ -20,8 +19,7 @@
         
     </a><figcaption class="image-caption">Power view</figcaption>
     </figure>
-]]></description></item><item><title>WFH Wifi</title><link>https://lutzky.net/posts/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/wfh-wifi/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>2020 being what it is, I&rsquo;ve been working from home for quite a while. We decided to convert our spare bedroom into a home office, and I realized how nice it is to have a proper desk at home, even for non-work stuff (I haven&rsquo;t had one in over 10 years!). That being said, wifi is a challenge with the apartment&rsquo;s structure.</p>
+]]></description></item><item><title>WFH Wifi</title><link>https://lutzky.net/posts/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/wfh-wifi/</guid><description><![CDATA[<p>2020 being what it is, I&rsquo;ve been working from home for quite a while. We decided to convert our spare bedroom into a home office, and I realized how nice it is to have a proper desk at home, even for non-work stuff (I haven&rsquo;t had one in over 10 years!). That being said, wifi is a challenge with the apartment&rsquo;s structure.</p>
 <p>(Diagram below is approximate; I&rsquo;ll explain why and how it was created in a bit.)</p>
 <figure><a class="lightgallery" href="/posts/wfh-wifi/base.png" title="/posts/wfh-wifi/base.png" data-thumbnail="/posts/wfh-wifi/base.png" data-sub-html="<h2>Approximate apartment structure; explanation on how and why it was created coming in a bit.</h2>">
         
@@ -74,7 +72,7 @@
     </figure>
 <p>I now have no idea if the network is daisy-chained or not, but it has been working consistently well&hellip; even at night when I stay up writing stuff like this blog post, and the bedroom door is closed.</p>
 <p>I&rsquo;d really want to get some CAT7 around the apartment, but for now - this works. Hopefully these tools and methods can help you out as well.</p>
-]]></description></item><item><title>Home network wiring</title><link>https://lutzky.net/posts/home-network-wiring/</link><pubDate>Sun, 04 Sep 2011 18:53:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/home-network-wiring/</guid><description><![CDATA[<p>I don&rsquo;t like wireless connections; they&rsquo;re always second-best, be it in terms
+]]></description></item><item><title>Home network wiring</title><link>https://lutzky.net/posts/home-network-wiring/</link><pubDate>Sun, 04 Sep 2011 18:53:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/home-network-wiring/</guid><description><![CDATA[<p>I don&rsquo;t like wireless connections; they&rsquo;re always second-best, be it in terms
 of security, speed, or reliability. Here&rsquo;s how my apartment looks (very
 approximately):</p>
 <div class="highlight"><div class="chroma">
@@ -126,7 +124,7 @@ the homeplug connection dies on me, proverbially the last straw.</p>
 (read: haven&rsquo;t measured it) network cable. Moved the homeplug to P3, hid the
 cable behind the Huge Cupboard. Problem solved.  On a side note, I would have
 preferred a <a href="http://boxee.tv" target="_blank" rel="noopener noreffer ">Boxee Box</a>, but sadly it doesn&rsquo;t support lame old
-RCA connections.</p>]]></description></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/posts/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 15:19:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/dd-wrt-awesomeness/</guid><description><![CDATA[<p>Since I&rsquo;ve last posted, I&rsquo;ve moved to a new apartment. First order of business -
+RCA connections.</p>]]></description></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/posts/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 15:19:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/dd-wrt-awesomeness/</guid><description><![CDATA[<p>Since I&rsquo;ve last posted, I&rsquo;ve moved to a new apartment. First order of business -
 get a working internet connection. This is extra-challenging when your
 primary machine doesn&rsquo;t even have a wireless network card.</p>
 <p>My first hack used my trusty laptop - it has a properly working wireless card,
@@ -155,7 +153,7 @@ problem - the router has a high-pitched whine. This may have something to do
 with the fact that the AC/DC adapter it came with is rated for 12V @ 1A,
 whereas the router is rated 5V @ 1.2A. Let&rsquo;s hope it doesn&rsquo;t fry (hasn&rsquo;t for
 the 3 years I used it).</p>
-]]></description></item><item><title>Another SSH trick</title><link>https://lutzky.net/posts/another-ssh-trick/</link><pubDate>Mon, 10 Nov 2008 23:01:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/another-ssh-trick/</guid><description><![CDATA[<p>Ever have a machine you can only ssh into through another machine? It&rsquo;s a very
+]]></description></item><item><title>Another SSH trick</title><link>https://lutzky.net/posts/another-ssh-trick/</link><pubDate>Mon, 10 Nov 2008 23:01:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/another-ssh-trick/</guid><description><![CDATA[<p>Ever have a machine you can only ssh into through another machine? It&rsquo;s a very
 common situation in the Technion. Here&rsquo;s one way to get around it: Assume you
 can directly ssh into <code>alpha</code>, and from <code>alpha</code> you can ssh into <code>beta</code>. Have
 the following code in your <code>~/.ssh/config</code>:</p>
@@ -173,7 +171,7 @@ the following code in your <code>~/.ssh/config</code>:</p>
 </div>
 </div><p>This requires you to have <code>nc</code> (netcat) installed on <code>alpha</code>. Once you do that,
 you can run <code>ssh beta</code> directly from your own box.</p>
-]]></description></item><item><title>Tunelling even more stuff over SSH</title><link>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</link><pubDate>Tue, 17 Jun 2008 12:32:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</guid><description><![CDATA[<p>Today at the CS department of the Technion is a particularily Bad Network Day
+]]></description></item><item><title>Tunelling even more stuff over SSH</title><link>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</link><pubDate>Tue, 17 Jun 2008 12:32:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</guid><description><![CDATA[<p>Today at the CS department of the Technion is a particularily Bad Network Day
 (TM) for laptop users; none of the wired connections at the farm work, and
 wireless doesn&rsquo;t seem to working for HTTP at all.</p>
 <p>It does, however, work for SSH. Ka-ching! :)</p>
@@ -204,29 +202,28 @@ following lines:</p>
 </div>
 </div><p>Then, run <code>socksify whatever-you-want-to-do</code>. For example, <code>sudo socksify apt-get install something</code>. Or perhaps <code>socksify ssh somewhere</code>. Or <code>sudo wget something</code>. Or <code>socksify git do-something-awesome</code>. (All of the above work for
 me)</p>
-]]></description></item><item><title>Encrypted my Wi-fi</title><link>https://lutzky.net/posts/encrypted-my-wi-fi/</link><pubDate>Sun, 28 Oct 2007 22:05:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/encrypted-my-wi-fi/</guid><description><![CDATA[<p>Reading some backlog on this blog, I found the following gem:</p>
+]]></description></item><item><title>Encrypted my Wi-fi</title><link>https://lutzky.net/posts/encrypted-my-wi-fi/</link><pubDate>Sun, 28 Oct 2007 22:05:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/encrypted-my-wi-fi/</guid><description><![CDATA[<p>Reading some backlog on this blog, I found the following gem:</p>
 <blockquote>
 <p>It’s a sad state of affairs that people go ahead and limit access to their
-wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.</p>
-</blockquote>
+wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.</p></blockquote>
 <p>Yeah&hellip; not so anymore. For about four weeks (just a bit before the semester
 started), my net connection was working excrutiatingly slow. Now, we&rsquo;re four
 roommates here, so we started blaming each other. But then I had a guess - I
 encrypted my connection with WPA/TKIP, and presto; the connection is now once
 again too fast for my browser to handle (&hellip;which sent me back to Epiphany).
 Guys, if you mooch wi-fi, please&hellip; be nice about it :(</p>
-]]></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description><![CDATA[<p>A very neat find for those of you who want to use Jabber from within the
+]]></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description><![CDATA[<p>A very neat find for those of you who want to use Jabber from within the
 Technion, but with your client of choice rather than a web-based one: Many
 Jabber servers, including Google Talk, support using Port 443 over SSL. Since
 the Technion does not block outbound SSL connections, this will work there as
 well. Be sure to mark the appropriate &lsquo;Use old SSL protocol&rsquo; option in your
 jabber client (that&rsquo;s what it&rsquo;s called in gaim and pidgin, at any rate).</p>
-]]></description></item><item><title>Internet in Haifa Bay Central</title><link>https://lutzky.net/posts/internet-in-haifa-bay-central/</link><pubDate>Sat, 10 Feb 2007 20:37:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/internet-in-haifa-bay-central/</guid><description><![CDATA[<p>In the Haifa Bay Central bus station (מרכזית המפרץ), it&rsquo;s possible to get an
+]]></description></item><item><title>Internet in Haifa Bay Central</title><link>https://lutzky.net/posts/internet-in-haifa-bay-central/</link><pubDate>Sat, 10 Feb 2007 20:37:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/internet-in-haifa-bay-central/</guid><description><![CDATA[<p>In the Haifa Bay Central bus station (מרכזית המפרץ), it&rsquo;s possible to get an
 internet connection. HTTPS works automatically, and setting the proxy to
 <code>proxy.technion.ac.il:8080</code> works for HTTP. I was unsuccessful in using
 corkscrew to get SSH connections to tunnel over it as well, but perhaps there
 is still a way.</p>
-]]></description></item><item><title>Waiting for the bus</title><link>https://lutzky.net/posts/waiting-for-the-bus/</link><pubDate>Thu, 25 Jan 2007 17:53:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/waiting-for-the-bus/</guid><description><![CDATA[<p>I&rsquo;m going home for the weekend, as usual. Unfortunately, the first bus of my
+]]></description></item><item><title>Waiting for the bus</title><link>https://lutzky.net/posts/waiting-for-the-bus/</link><pubDate>Thu, 25 Jan 2007 17:53:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/waiting-for-the-bus/</guid><description><![CDATA[<p>I&rsquo;m going home for the weekend, as usual. Unfortunately, the first bus of my
 route comes by at highly unpredictable times - I&rsquo;ve had it be an hour late on
 me once. There are plenty of Wi-fi networks around the station - either WPA,
 WEP or MAC-whitelisted&hellip; fortunately, someone was using the latter long enough

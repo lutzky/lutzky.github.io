@@ -1,5 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Python - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>Python - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/fakefile/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Python - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>Python - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/fakefile/</guid><description><![CDATA[<p>I&rsquo;ve recently been rewriting a mess of bash, tcsh and Python code as a Python script, and this has proven interesting to test. I&rsquo;ve written a tiny Python library called <code>fakefile</code> to help out with it, so I can write code like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -51,7 +50,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>The library is available on github as <a href="http://github.com/lutzky/fakefile" target="_blank" rel="noopener noreffer ">lutzky/fakefile</a>. Naturally, however, it turns out I&rsquo;ve been outdone by Google&rsquo;s <a href="https://pypi.python.org/pypi/pyfakefs" target="_blank" rel="noopener noreffer ">pyfakefs</a>. They have some clever bast^H^H^H^Hgooglers working there!</p>
-]]></description></item><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/translationese/</guid><description><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
+]]></description></item><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/translationese/</guid><description><![CDATA[<p>As part of my M.Sc. studies, I&rsquo;ve recently completed a small laboratory project
 in natural language processing. I&rsquo;ve learned quite a bit from it, and had a
 chance to use a few of my favorite technologies.</p>
 <p>The project was coded in Python, which is <em>not</em> my favorite programming
@@ -119,7 +118,7 @@ look up its index in a 17,576-entry list and increment it by a factor), I&rsquo;
 have no chance of ever understanding how it works. In essence, I&rsquo;ve written
 code to have my computer learn how to do something, but it cannot practically
 teach me what it has learned.</p>
-]]></description></item><item><title>Faster Languages</title><link>https://lutzky.net/posts/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:49:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/faster-languages/</guid><description><![CDATA[<p>Due to an exercise in an AI course, I&rsquo;m forced to confront an old nemesis -
+]]></description></item><item><title>Faster Languages</title><link>https://lutzky.net/posts/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:49:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/faster-languages/</guid><description><![CDATA[<p>Due to an exercise in an AI course, I&rsquo;m forced to confront an old nemesis -
 C++. Part of the reason is that the exercise contains a time-limited
 tournament, and the code needs to run very quickly. Another reason is, I guess,
 the fact that C++ serves as a sort of lowest common denominator in the course
@@ -310,7 +309,7 @@ are implemented in a usable way, and extremely well-documented.</p>
 </div>
 </div><p>The C code runs much faster, and I suspect is more maintainable then its
 original counterpart (which uses embedded python in C).</p>
-]]></description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/posts/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 22:04:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/on-threading-vs-processing/</guid><description><![CDATA[<p>Writing multi-threaded applications in Python is often a headache because of
+]]></description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/posts/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 22:04:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/on-threading-vs-processing/</guid><description><![CDATA[<p>Writing multi-threaded applications in Python is often a headache because of
 the Global Interpreter Lock - only one Python thread can run at any given
 moment, which makes multi-threading useful only in the case where all modules
 but one actually run C code. However, thanks to the impressive new <a href="http://pythonmagazine.com" target="_blank" rel="noopener noreffer ">Python
@@ -323,7 +322,6 @@ applications; updating a progressbar in the application doesn&rsquo;t need to sl
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
 or processes at the user&rsquo;s choice:</p>
-<!-- raw HTML omitted -->
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -448,13 +446,12 @@ or processes at the user&rsquo;s choice:</p>
 </span></span><span class="line"><span class="cl">	<span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/posts/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 14:02:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/exception-handling-decorators-and-python/</guid><description><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
+</div>]]></description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/posts/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 14:02:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/exception-handling-decorators-and-python/</guid><description><![CDATA[<p>Lately I&rsquo;ve been working on a project that has me using DBus a lot. After
 trying to figure out how to work DBus with C, and seeing how easy it is to do
 in Python, we figured we&rsquo;d try to use embedded Python to do this. Fortunately,
 it&rsquo;s very simple to use - especially thanks to <a href="http://www.developer.com/lang/other/article.php/2217941" target="_blank" rel="noopener noreffer ">this guide</a>.</p>
 <blockquote>
-<p>It later turned out to be much easier to do in C, as described in <em><a href="/2008/04/16/faster-languages" rel="">Faster Languages</a></em>.</p>
-</blockquote>
+<p>It later turned out to be much easier to do in C, as described in <em><a href="/2008/04/16/faster-languages" rel="">Faster Languages</a></em>.</p></blockquote>
 <p>Now, we couldn&rsquo;t have the Python code throwing exceptions outwards, so we had
 each function return, along with its actual return value (if any), a numeric
 code identifying the error. Unfortunately, this made the code get really big,
@@ -575,7 +572,7 @@ it&hellip;). Here&rsquo;s the decorator I wrote:</p>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">exception_wrapped</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>IPython</title><link>https://lutzky.net/posts/ipython/</link><pubDate>Sun, 04 Mar 2007 00:58:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/ipython/</guid><description><![CDATA[<p>The more I use Python, the nicer it becomes. I&rsquo;m currently working on a project
+</div>]]></description></item><item><title>IPython</title><link>https://lutzky.net/posts/ipython/</link><pubDate>Sun, 04 Mar 2007 00:58:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ipython/</guid><description><![CDATA[<p>The more I use Python, the nicer it becomes. I&rsquo;m currently working on a project
 for a course, which involves somewhat heavy-duty database and algorithm work.
 Python is my language of choice for it - let&rsquo;s hope it works out well.</p>
 <p>In the meantime, I&rsquo;ve found a really nice python shell called iPython
@@ -585,7 +582,7 @@ adds a whole lot more.</p>
 <p>Looks like I&rsquo;ll have to check django out as well. I&rsquo;ve been working with Ruby
 on Rails for quite a while now (and that&rsquo;s how I got introduced to Ruby in the
 first place). Odd as it may be&hellip; do I have a new favorite language?</p>
-]]></description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/posts/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 14:52:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/really-liking-the-whole-python-thing/</guid><description><![CDATA[<p>I&rsquo;ve converted my <em>Antigibberish script</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+]]></description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/posts/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 14:52:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/really-liking-the-whole-python-thing/</guid><description><![CDATA[<p>I&rsquo;ve converted my <em>Antigibberish script</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
 (converts &ldquo;broken hebrew&rdquo; into proper hebrew, useful for sent-offline ICQ
 messages) to Python&hellip; it&rsquo;s quite a nice language, and the interpreter is FAST!
 I&rsquo;m really torn between it and Ruby :(</p>

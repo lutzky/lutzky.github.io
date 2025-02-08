@@ -1,5 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Hebrew - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/hebrew/</link><description>Hebrew - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 11 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/hebrew/" rel="self" type="application/rss+xml"/><item><title>TransportDroidIL outage</title><link>https://lutzky.net/posts/transportdroidil-outage/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/transportdroidil-outage/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Hebrew - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/hebrew/</link><description>Hebrew - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 11 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/hebrew/" rel="self" type="application/rss+xml"/><item><title>TransportDroidIL outage</title><link>https://lutzky.net/posts/transportdroidil-outage/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/transportdroidil-outage/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
@@ -7,7 +6,6 @@
             <div class="admonition-content">This post is written in Hebrew due to the target audience. TL;DR - TransportDroidIL can no longer function.</div>
         </div>
     </div>
-<!-- raw HTML omitted -->
 <div id="id-1"><h1 id="תקלה-ב-transportdroidil">תקלה ב-TransportDroidIL</h1>
 <p>לצערי, האפליקציה TransportDroidIL הפסיקה לפעול, והסיבה היא כזו שלא מאפשרת תיקון. אני ממליץ בחום על החלופה <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.maps" target="_blank" rel="noopener noreffer ">Google Maps</a>.</p>
 <h2 id="שאלות-ותשובות">שאלות ותשובות</h2>
@@ -29,8 +27,7 @@
 <p>בשלב כלשהו (2012 לכל המאוחר) משרד התחבורה התחיל לפרסם מידע GTFS שאפשר לגוגל להציג מידע תחבורה ציבורית בישראל, ואני הפסקתי להשתמש באפליקציה שכתבתי. Google Maps מראה את התחנות על מפה, רשימת תחנות-ביניים ועוד. עם זאת, מאחר ולאפליקציה עוד היה מספר לא-קטן של משתמשים (קצת יותר מ-55,000 בשיא), המשכתי לתקן בעיות  קטנות כשהן צצו וכשהיה לי זמן.</p>
 <p>כיום אני עובד בגוגל בעצמי - לא בצוות של Google Maps, אלא בצוות Search. אני בהחלט חושב שגוגל מספקים מענה טוב יותר לתחבורה ציבורית מאשר TransportDroidIL &#x1f604;</p>
 </div>
-]]></description></item><item><title>Openbox CVS</title><link>https://lutzky.net/posts/openbox-cvs/</link><pubDate>Sat, 26 Aug 2006 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/openbox-cvs/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+]]></description></item><item><title>Openbox CVS</title><link>https://lutzky.net/posts/openbox-cvs/</link><pubDate>Sat, 26 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/openbox-cvs/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
@@ -48,8 +45,7 @@
 <p>(תמונת-המסך נשמרה ב-Imageshack, ומאז נמחקה)</p>
 <p>עריכה: אני רוצה גם לציין לשבח את <a href="https://web.archive.org/web/20061119211209/http://obmenu.sf.net/" target="_blank" rel="noopener noreffer ">Obmenu</a>, תוכנה שמאוד מקלה על עריכת התפריטים של Openbox.</p>
 </div>
-]]></description></item><item><title>אהבתי את שני אלה</title><link>https://lutzky.net/posts/katyusha-damage/</link><pubDate>Tue, 15 Aug 2006 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/katyusha-damage/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+]]></description></item><item><title>אהבתי את שני אלה</title><link>https://lutzky.net/posts/katyusha-damage/</link><pubDate>Tue, 15 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/katyusha-damage/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
@@ -61,8 +57,7 @@
 <p>בנוסף, אל תכנסו לבלוג של אחמדיניג&rsquo;אד עם אקספלורר. <a href="http://olehgirl.blogspot.com/2006/08/pres-ahmadinejad-trying-to-infect.html" target="_blank" rel="noopener noreffer ">זה מסוכן</a>.</p>
 <p>מוות לקיצונים 😉</p>
 </div>
-]]></description></item><item><title>בושה וחרפה למרצ</title><link>https://lutzky.net/posts/shame-on-meretz/</link><pubDate>Tue, 15 Aug 2006 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/shame-on-meretz/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+]]></description></item><item><title>בושה וחרפה למרצ</title><link>https://lutzky.net/posts/shame-on-meretz/</link><pubDate>Tue, 15 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/shame-on-meretz/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
@@ -73,8 +68,7 @@
 <div id="id-1"><p><a href="http://www.ynet.co.il/articles/0,7340,L-3291668,00.html" target="_blank" rel="noopener noreffer ">מרצ מציעה: להוציא את שיתוף הקבצים אל מחוץ לחוק</a>. הכותרת אולי נשמעת מטעה, יחשוב לו הקורא התמים - הרי וודאי וּוודאי שלמרץ אין בעיה עם שיתוף קבצים באופן כללי, וכמובן שהמאבק שלהם מרוסן לעניין עבירות בנושא קניין רוחני. אך לא ולא - הסעיף הרביעי בהצעת החוק שלהם מוציא מחוץ לחוק תוכנות ושירותים לשיתוף קבצים. בכלל. זה שמאל זה? זו פרימיטיוויוּת מחשבתית חמורה ממה שאנחנו רואים מה-RIAA.</p>
 <p>לזכותם יאמר כי הם תומכים בפתרון בדמות מיסוי של הגולשים - אבל עושה רושם שהם ממהרים לוותר בחזית זו. אכזבה עמוקה ממפלגה שראיתי בה סיכוי לרפורמה ב&quot;קניין רוחני&quot; ותמיכה בתוכנה חופשית.</p>
 </div>
-]]></description></item><item><title>המצב של פלאש בלינוקס</title><link>https://lutzky.net/posts/flash-in-linux/</link><pubDate>Mon, 14 Aug 2006 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/flash-in-linux/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+]]></description></item><item><title>המצב של פלאש בלינוקס</title><link>https://lutzky.net/posts/flash-in-linux/</link><pubDate>Mon, 14 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/flash-in-linux/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
@@ -90,8 +84,7 @@
 <p>ורק עוד נקודה אחת. אומרים בפורומים אחרים שזה בעיה של קהילת הקוד הפתוח שלא פיתחנו גרסה משלנו לפלאש. למרבה הצער, פלאש משתמש במספר אלמנטים קנייניים - החשוב ביניהם הוא הקודק החדש של הווידאו. מה לעשות, כאן אנחנו תלויים ב-Adobe.</p>
 <p>זהו, יצא הקיטור. בחזרה ל-Youtube. 🙂</p>
 </div>
-]]></description></item><item><title>דווקא היה נחמד, שקט וכאלה</title><link>https://lutzky.net/posts/nice-and-quiet/</link><pubDate>Sat, 12 Aug 2006 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/nice-and-quiet/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+]]></description></item><item><title>דווקא היה נחמד, שקט וכאלה</title><link>https://lutzky.net/posts/nice-and-quiet/</link><pubDate>Sat, 12 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/nice-and-quiet/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
@@ -102,8 +95,7 @@
 <div id="id-1"><p>ממש שקט. לא שמתי שעון מעורר, כי סמכתי על הנסראללה המעורר. בכלל, הישוב שלי מחובר לאזעקות של כל הארץ (כי הוא באמצע שום מקום) אז אנחנו מקבלים גם אזעקות של קרית שמונה.</p>
 <p>כבר היה כל כך שקט, שאבא שלי קצת הלך לישון&hellip; ואז אני שומע דרך המזגן אזעקה, צועק &ldquo;אזעקה&rdquo;, ואמא שלי אומרת להיות בשקט כי אבא ישן&hellip;</p>
 </div>
-]]></description></item><item><title>החבוב עם הקסדה הירוקה - עכשיו הבלוג</title><link>https://lutzky.net/posts/green-helmet-guy/</link><pubDate>Fri, 11 Aug 2006 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/green-helmet-guy/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+]]></description></item><item><title>החבוב עם הקסדה הירוקה - עכשיו הבלוג</title><link>https://lutzky.net/posts/green-helmet-guy/</link><pubDate>Fri, 11 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/green-helmet-guy/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
@@ -114,8 +106,7 @@
 <div id="id-1"><p>כולנו ראינו אותו בטלוויזיה ובתמונות. קראנו את הכתבות, ראינו את הצילומים של איך שהוא מוריד את הגופות מהאמבולנס כדי שיצלמו שוב, עם פוקוס יותר טוב ובלי שאנשים יסתירו. איך במשך שעות הוא סוחב אותה גופה הלוך ושוב בשביל המצלמות. ושאיכשהו הוא תמיד מצליח להגיע לכל זירה מצולמת.</p>
 <p>ועכשיו יש לו <a href="http://greenhelmetguy.blogspot.com/" target="_blank" rel="noopener noreffer ">בלוג משלו</a>! 🙂</p>
 </div>
-]]></description></item><item><title>מקליטים בומים</title><link>https://lutzky.net/posts/recording-booms/</link><pubDate>Fri, 11 Aug 2006 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/recording-booms/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<div class="details admonition info open">
+]]></description></item><item><title>מקליטים בומים</title><link>https://lutzky.net/posts/recording-booms/</link><pubDate>Fri, 11 Aug 2006 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/recording-booms/</guid><description><![CDATA[<div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hebrew post<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>

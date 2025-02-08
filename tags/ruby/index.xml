@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Ruby - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/ruby/</link><description>Ruby - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 18 Oct 2008 21:16:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ruby/" rel="self" type="application/rss+xml"/><item><title>Delegating methods in Ruby</title><link>https://lutzky.net/posts/delegating-methods-in-ruby/</link><pubDate>Sat, 18 Oct 2008 21:16:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/delegating-methods-in-ruby/</guid><description><![CDATA[<p>Sometimes, when constructing a compound object, we are interested in exporting
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Ruby - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/ruby/</link><description>Ruby - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sat, 18 Oct 2008 21:16:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ruby/" rel="self" type="application/rss+xml"/><item><title>Delegating methods in Ruby</title><link>https://lutzky.net/posts/delegating-methods-in-ruby/</link><pubDate>Sat, 18 Oct 2008 21:16:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/delegating-methods-in-ruby/</guid><description><![CDATA[<p>Sometimes, when constructing a compound object, we are interested in exporting
 functionality while retaining encapsulation. For example, suppose we have a
 <code>Secretary</code> class:</p>
 <div class="highlight"><div class="chroma">
@@ -91,7 +91,7 @@ function for each of these methods, it would be nice to do the following:</p>
 meant to accept blocks. I&rsquo;m not sure how to get that to happen, short of using
 a string-based <code>class_eval</code>, which I&rsquo;m not very fond of. (I find <code>eval</code> to be,
 well, evil&hellip;)</p>
-]]></description></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 17:55:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</guid><description><![CDATA[<p><strong>Edit: I was misled!</strong></p>
+]]></description></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 17:55:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</guid><description><![CDATA[<p><strong>Edit: I was misled!</strong></p>
 <p>Illustrated here. Hints below.</p>
 <pre tabindex="0"><code class="language-irb" data-lang="irb">&gt;&gt; def inspect_x_and_y(x,y); puts &#34;x: %p, y: %p&#34; % [x, y]; end
 =&gt; nil
@@ -106,7 +106,7 @@ in python. <strong>No you can&rsquo;t! This code sets external variables called 
 x.</strong></li>
 </ol>
 <p>How embarassing&hellip; :(</p>
-]]></description></item><item><title>Gettext oddities with Ruby</title><link>https://lutzky.net/posts/gettext-oddities-with-ruby/</link><pubDate>Sun, 20 Jul 2008 19:19:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/gettext-oddities-with-ruby/</guid><description><![CDATA[<p>I was having a lot of trouble with
+]]></description></item><item><title>Gettext oddities with Ruby</title><link>https://lutzky.net/posts/gettext-oddities-with-ruby/</link><pubDate>Sun, 20 Jul 2008 19:19:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/gettext-oddities-with-ruby/</guid><description><![CDATA[<p>I was having a lot of trouble with
 <a href="http://en.wikipedia.org/wiki/Gettext" target="_blank" rel="noopener noreffer ">gettext</a> in Ruby, mostly due to lacking
 documentation. Here are some useful things I figured out while writing TTime. I
 ended up having a single <code>gettext_settings.rb</code>, included from every file which

@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
 reclaim disk space can be a bit confusing. Let&rsquo;s have a quick primer on how
 those work, and look at a small utility to help reason about it.</p>
 <p><a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree</a> is a TUI for showing how much
@@ -117,8 +117,7 @@ to show how much space would be reclaimed. On exit, it shows the appropriate
 commandline to check its findings and, if removing <code>-n</code>, actually perform the
 deletion. Hopefully this is of some use for ZFS users, and I would love any
 patches to add support for other filesystems that have snapshot support!</p>
-]]></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>Rebooting a modern desktop computer really shouldn&rsquo;t take very long, so when it
+]]></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<p>Rebooting a modern desktop computer really shouldn&rsquo;t take very long, so when it
 was somewhat-regularly taking well over 10 minutes just to shut down, I got
 curious, and ended up looking at netdata, jitter, anacron, and even ansible.</p>
 <p>By default in Ubuntu, the shutdown process is hidden, but pressing ESC showed
@@ -169,15 +168,13 @@ seconds. That&rsquo;s because <code>anacron.service</code> has this line:</p>
 <pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">TimeoutStopSec</span><span class="o">=</span><span class="s">infinity</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><!-- raw HTML omitted -->
-<p>This was added <a href="https://salsa.debian.org/debian/anacron/-/commit/e83000966d446830ad93eef7af2c5ea62efe01db" target="_blank" rel="noopener noreffer ">in this commit</a>, to resolve <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=915379" target="_blank" rel="noopener noreffer ">this
+</div><p>This was added <a href="https://salsa.debian.org/debian/anacron/-/commit/e83000966d446830ad93eef7af2c5ea62efe01db" target="_blank" rel="noopener noreffer ">in this commit</a>, to resolve <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=915379" target="_blank" rel="noopener noreffer ">this
 bug</a>. A more elegant solution is possible, but discouraged
 because anacron is meant to be replaced by something called &ldquo;cronie&rdquo;; <a href="https://goomics.net/50/" target="_blank" rel="noopener noreffer ">I am
 familiar with this pain</a>.</p>
 <p>One way or another, I disagree with the reasoning, at least in my own particular
 case, and have decided to comment out the infinite timeout line.</p>
 <h2 id="remembering-this-config">Remembering this config</h2>
-<!-- raw HTML omitted -->
 <p>I like to version-control and automate my configuration. I&rsquo;ve been doing this
 for <a href="https://github.com/lutzky/dotfiles" target="_blank" rel="noopener noreffer ">my dotfiles</a> for quite a while, but not for my overall machine
 config. Tweaks like this, to my system config, are something I&rsquo;d rather have a
@@ -189,7 +186,6 @@ I&rsquo;m completely unfamiliar with Ansible; a coworker tells me that&rsquo;s b
 worked at Google<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> for almost 10 years, and that&rsquo;s roughly as long
 as Ansible&rsquo;s been well-known.</p>
 <p>After a bit of futzing around, I&rsquo;ve come up with this <code>playbook.yml</code>:</p>
-<!-- raw HTML omitted -->
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -273,7 +269,7 @@ type of problems which Ansible deals with, at least in my line of work, have
 preexisting in-house solutions, so I never had the chance to learn Ansible.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
+</div>]]></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
 great tools for it&hellip; if we&rsquo;re talking about files on a local hard drive.</p>
 <p>Tools like the textual <a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener noreffer "><code>ncdu</code></a> and the graphical
 <a href="https://wiki.gnome.org/Apps/DiskUsageAnalyzer" target="_blank" rel="noopener noreffer ">baobab</a> let you start with a
@@ -291,8 +287,6 @@ consistently timing out. For this purpose, the recommended path appears to be
 <a href="https://cloud.google.com/storage/docs/insights/inventory-reports" target="_blank" rel="noopener noreffer ">Storage Inventory</a>, which will provide you with a CSV listing of all of the
 files in your bucket.  The apparent recommendation is to analyze it using a
 custom-crafted BigQuery query, which is nowhere near as handy as <code>ncdu</code>.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -327,8 +321,7 @@ custom-crafted BigQuery query, which is nowhere near as handy as <code>ncdu</cod
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
-</div><!-- raw HTML omitted -->
-<p>Fortunately, <code>ncdu</code> has an import/export feature, for those slow scans. <code>ncdu -o foo.json</code> will save such a report (slowly), and <code>ncdu -f foo.json</code> will display
+</div><p>Fortunately, <code>ncdu</code> has an import/export feature, for those slow scans. <code>ncdu -o foo.json</code> will save such a report (slowly), and <code>ncdu -f foo.json</code> will display
 it (quickly). So, how about if we cheat, and convert our CSV of
 files-in-the-cloud to <code>ncdu</code>-compatible JSON?</p>
 <p>That&rsquo;s where <a href="https://github.com/lutzky/ncdu-import" target="_blank" rel="noopener noreffer "><code>ncdu-import</code></a> comes in.  Bring it a CSV file which has a &ldquo;path&rdquo;
@@ -338,7 +331,7 @@ the <a href="https://github.com/lutzky/ncdu-import/tree/main/testdata" target="_
 <figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot-with-import.png" title="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-sub-html="<h2>ncdu showing output ncdu-import on the sample CSV above</h2>">
         
     </a><figcaption class="image-caption"><code>ncdu</code> showing output <code>ncdu-import</code> on the sample CSV above</figcaption>
-    </figure>]]></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
+    </figure>]]></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
 to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible
 idea, even if it weren&rsquo;t at war at the time.</p>
 <h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
@@ -417,7 +410,7 @@ have &ldquo;cyber attacks&rdquo;.</p>
 <p>Many years ago, I described an effort to coerce the timezone system into a &ldquo;change on demand&rdquo; mode; see post <a href="/posts/timezones-are-fickle/" rel="">Timezones are fickle</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
+</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
 interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
 never quite enough&hellip; how would it work on <em>someone else&rsquo;s</em> computer? Here&rsquo;s a
 stroll down memory lane, starting from the 90s.</p>
@@ -523,7 +516,6 @@ Israel, on channel 6; I was the official &ldquo;hero of the day&rdquo; guest, as
 expert. I got to this position by nitpicking on some &ldquo;kids&rsquo; portal&rdquo; website that
 their Pokémon page contained inaccuracies, which landed me a job as their
 Pokémon card strategy reviewer; I was 11, so they paid me in Pokémon cards.</p>
-<!-- raw HTML omitted -->
 <p>For the anime premiere I was interviewed by Dana Dvorin; I have sadly been
 unable to find any footage of this hilariously awkward interview.</p>
 </div>
@@ -536,7 +528,6 @@ seemed, well, janky. Amazingly, a friend had a copy of &ldquo;really real Visual
 Basic&rdquo; (the coveted <em>compiler</em> I had heard of), and was able to convert my janky
 app-in-<code>XLS</code> to a proper shiny <code>EXE</code> file. Slight caveat - there was a runtime
 library that had to be distributed alongside it, or it wouldn&rsquo;t work.</p>
-<!-- raw HTML omitted -->
 <p>This got me looking at <em>installers</em>. All &ldquo;serious&rdquo; software was proudly using
 InstallShield (this was before these newfangled <code>.MSI</code> files - even the
 installer was a shiny <code>.EXE</code>!), but looking at a trial version left me
@@ -563,8 +554,7 @@ drive letters (A, B nor C) was <em>wild</em>.</p>
             <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note: Gentoo<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><!-- raw HTML omitted -->
-<p>I didn&rsquo;t spend long with Mandrake before switching to Gentoo Linux, where
+            <div class="admonition-content"><p>I didn&rsquo;t spend long with Mandrake before switching to Gentoo Linux, where
 installing software is accomplished with the <code>emerge</code> command. The <code>emerge</code>
 command magically (to me, at the time) gets the software from the internet and
 <em>compiles</em> it. In my mind, I was Hackerman. In reality, it
@@ -575,7 +565,6 @@ Ubuntu CDs showed up. At this point Linux started seeming serious, and the &ldqu
 of the linux desktop&rdquo; meme started to get to me. Ubuntu also killed off
 install-fests<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, as installing it was too easy to justify getting
 friends and pizza together.</p>
-<!-- raw HTML omitted -->
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -647,7 +636,7 @@ and untrustworthy.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-ba
 <p>I think compiling stuff to WASM is becoming more popular nowadays.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>]]></description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
+</div>]]></description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
 <p>As you can tell by previous posts on this blog, I used to be quite a fan of Go;
 I use it at work often, and some features about it are legitimately great:
 Package management, &ldquo;static duck typing&rdquo; (structural typing), providing
@@ -757,14 +746,14 @@ not any of the players are older than the coach.</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="o">*</span> <span class="nx">Team</span><span class="p">)</span> <span class="nf">anyPlayersOlderThanCoach</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// YOU WILL FORGET
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span>      <span class="c1">// TO DO THIS PART,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>                   <span class="c1">// I ASSURE YOU.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// YOU WILL FORGET</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span>      <span class="c1">// TO DO THIS PART,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>                   <span class="c1">// I ASSURE YOU.</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">p</span> <span class="nx">in</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Players</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Age</span> <span class="p">&gt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span><span class="p">.</span><span class="nx">Age</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// ...so ^^^^^^^ will sometimes crash.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ...so ^^^^^^^ will sometimes crash.</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -1059,8 +1048,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </li>
 </ol>
 </div>
-]]></description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&rsquo;t usually need it for night sleeps, but it&rsquo;s helpful for a &ldquo;cranky-because-tired&rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.</p>
+]]></description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description><![CDATA[<p>One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&rsquo;t usually need it for night sleeps, but it&rsquo;s helpful for a &ldquo;cranky-because-tired&rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.</p>
 <p>There are quite a few ways to play white noise, and many cheap mobile battery-powered devices will do the trick just fine. However, I wanted a bit more control, at least for when we&rsquo;re at home:</p>
 <ul>
 <li>It&rsquo;d be useful to turn on the noise remotely, as entering a cranky baby&rsquo;s room sometimes riles him up.</li>
@@ -1156,8 +1144,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 <p>However, it seems that when pointing to an <em>mp3</em> file, audio starts playing immediately, without having to first finish downloading the whole file. The Google Home is pretty opaque about this, but experimentation seems to show this is consistent.</p>
 <h2 id="afterword">Afterword</h2>
 <p>Overall, this process of getting familiar with HomeAssistant and its various integrations has been delightful, with great community support and debuggability. My first thoughts were &ldquo;I don&rsquo;t need this - my projects are simple and I can code them myself&rdquo; - but the plethora of readily available integrations and the polished UI has made it well worth my time learning, and making changes is a breeze. And if my child sleeps better for it, that&rsquo;s a win in my book.</p>
-]]></description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/preload-key/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>I run a small home server, which - among other things - has backups of data from cloud providers, in case I lose access to them; this data is sensitive and should therefore be encrypted. However, disk encryption requires a secret, and there are - generally speaking - four ways to go about that:</p>
+]]></description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/preload-key/</guid><description><![CDATA[<p>I run a small home server, which - among other things - has backups of data from cloud providers, in case I lose access to them; this data is sensitive and should therefore be encrypted. However, disk encryption requires a secret, and there are - generally speaking - four ways to go about that:</p>
 <ul>
 <li>Store the key on the same server as the encrypted disk</li>
 <li>Store the key on detachable media, attached to the same server as the encrypted disk</li>
@@ -1405,8 +1392,8 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//go:embed *.tmpl
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">templatesFS</span> <span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//go:embed *.tmpl</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">templatesFS</span> <span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">templates</span>   <span class="p">=</span> <span class="nx">template</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nf">ParseFS</span><span class="p">(</span><span class="nx">templatesFS</span><span class="p">,</span> <span class="s">&#34;*.tmpl&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nx">skipPasswordCheck</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Bool</span><span class="p">(</span><span class="s">&#34;skip_password_check&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;Do not check entered passwords&#34;</span><span class="p">)</span>
@@ -1518,8 +1505,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>As noted in the <a href="https://lutzky.net/posts/software-parenting-2/" rel="">previous post</a>, I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn&rsquo;t have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it&rsquo;s quite capable as a microcontroller on its own (and the newer ESP32 is faster).</p>
+</div>]]></description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<p>As noted in the <a href="https://lutzky.net/posts/software-parenting-2/" rel="">previous post</a>, I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn&rsquo;t have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it&rsquo;s quite capable as a microcontroller on its own (and the newer ESP32 is faster).</p>
 <p>So what&rsquo;s the difference between a (very small) computer and a microcontroller? A Raspberry Pi boots off an SD card, usually to a full-fledged Linux operating system; you&rsquo;d operate it either directly with a monitor and keyboard, or connect remotely using SSH. You can install/create software on it as you would on a &ldquo;full-size&rdquo; computer, and I usually do this in Go (although Python is more popular). Conversely, a microcontroller will usually run only one program, which you need to build on a separate computer, connect it over USB to the microcontroller board, and flash it. This has a number of advantages, including simplicity and pretty-much-instant boot.</p>
 <p>Coding for the ESP8266 can be done using the same tooling as Arduino - namely, in C++<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, on the Arduino IDE. However, during this project I learned of <a href="https://platformio.org/" target="_blank" rel="noopener noreffer ">PlatformIO</a>, which is far more comfortable to work with: It&rsquo;s integrated into VSCode, and git, auto-formatting, autocomplete and <a href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim" target="_blank" rel="noopener noreffer ">VIM keybindings</a> all work nicely. It also provides a more organized approach to unit testing (practically absent in Arduino IDE) and per-project dependency management (you can list what each project needs and have it auto-install). This made the project fun enough for a few iterations.</p>
 <p>One quirk of working with the BabyBuddy API is that reporting a diaper change requires supplying the time of change, even if our intention is &ldquo;right now&rdquo;. That&rsquo;s easy enough on a Linux system, but microcontrollers don&rsquo;t generally have clocks. Thankfully, libraries such as <a href="https://github.com/mcxiaoke/ESPDateTime" target="_blank" rel="noopener noreffer ">ESPDateTime</a> provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:</p>
@@ -1551,8 +1537,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </li>
 </ol>
 </div>
-]]></description></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/posts/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 21:57:09 +0000</pubDate><author>Author</author><guid>https://lutzky.net/posts/software-parenting-2/</guid><description><![CDATA[<!-- raw HTML omitted -->
-<p>With BabyBuddy now installed and running properly (see <a href="https://lutzky.net/posts/software-parenting-1/" rel="">previous post</a>), and an always-on display showing the latest information, we now got into the swing of using it. We loved the timeline for &ldquo;what happened while I as sleeping&rdquo;; we loved the food amount reports; and because we had a consistent &ldquo;feed, then change, then wait 15 minutes with baby upright to reduce spit-up&rdquo; system, the display&rsquo;s &ldquo;time since last change&rdquo; box was super useful as well. However, as you might imagine, we did <em>not</em> love handling a freshly-re-diapered baby with one hand while using the other to unlock the phone and navigate to the &ldquo;yes he pooped now&rdquo; page in a web app.</p>
+]]></description></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/posts/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 21:57:09 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-2/</guid><description><![CDATA[<p>With BabyBuddy now installed and running properly (see <a href="https://lutzky.net/posts/software-parenting-1/" rel="">previous post</a>), and an always-on display showing the latest information, we now got into the swing of using it. We loved the timeline for &ldquo;what happened while I as sleeping&rdquo;; we loved the food amount reports; and because we had a consistent &ldquo;feed, then change, then wait 15 minutes with baby upright to reduce spit-up&rdquo; system, the display&rsquo;s &ldquo;time since last change&rdquo; box was super useful as well. However, as you might imagine, we did <em>not</em> love handling a freshly-re-diapered baby with one hand while using the other to unlock the phone and navigate to the &ldquo;yes he pooped now&rdquo; page in a web app.</p>
 <p>My first idea was to create voice commands for the Nest Home Mini in the room. However, it&rsquo;s prone to misunderstanding us; you have to enunciate, and even then the speech recognition is mostly tuned to preexisting Google Assistant commands, and tends to guess that we aren&rsquo;t really saying words like &ldquo;pee&rdquo; or &ldquo;poo&rdquo;. Furthermore, the baby might be crying, or worse yet - lightly sleeping, at risk of being woken up by our voice (or the assistant&rsquo;s). What we needed was a button (well, two - one for pee and one for poo).</p>
 <p>I had a Raspberry Pi ZeroW lying around <a href="https://lutzky.net/posts/pitemp/" rel="">from a previous project</a> and decided to use it for this (the small OLED display wasn&rsquo;t used for this project, but I didn&rsquo;t find a good reason to take it off yet; more on that later). With bits I had from a generic &ldquo;learn electronics&rdquo; kit (which I bought for the specific purpose of having such bits), I created the user interface: Two buttons, a green LED for &ldquo;OK&rdquo;, a red LED for &ldquo;something went wrong&rdquo;; all tied together by some jumper cables and a mini breadboard. The Raspberry Pi would handle communicating with BabyBuddy&rsquo;s API (over wifi), reading the buttons, and driving the LEDs. The setup was indeed quite similar to PiTemp&rsquo;s with the software written in Go, cross-compiled, and run on startup using systemd.</p>
 <figure><a class="lightgallery" href="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" title="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" data-thumbnail="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" data-sub-html="<h2>PooButtons on Raspberry Pi ZeroW</h2>">
@@ -1564,8 +1549,7 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 <p>How many software engineers does it take to change a lightbulb?</p>
 <p>None, it&rsquo;s a hardware problem.</p>
 <p>How many hardware engineers does it take to change a lightbulb?</p>
-<p>None, they&rsquo;ll fix it in the software drivers.</p>
-</blockquote>
+<p>None, they&rsquo;ll fix it in the software drivers.</p></blockquote>
 <p>Specifically it ended up looking something like this (with another goroutine listening on the resulting channel):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1624,9 +1608,9 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </span></span><span class="line"><span class="cl">  <span class="nx">level</span> <span class="o">:=</span> <span class="nx">gpio</span><span class="p">.</span><span class="nx">Low</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pin</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="nx">gpio</span><span class="p">.</span><span class="nx">PinIO</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pinButton1</span><span class="p">,</span>  <span class="c1">// GPIO24
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">pinButton2</span><span class="p">,</span>  <span class="c1">// GPIO22
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pinButton1</span><span class="p">,</span>  <span class="c1">// GPIO24</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pinButton2</span><span class="p">,</span>  <span class="c1">// GPIO22</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">n</span> <span class="o">:=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">pin</span> <span class="o">:=</span> <span class="nx">pin</span>
 </span></span><span class="line"><span class="cl">
