@@ -11,6 +11,10 @@ $global-font-secondary-color-dark: #98989a;
 
 // Adapted from catppuccin-latte (hugo gen chromastyles + massaging)
 
+.page {
+  max-width: 800px;
+}
+
 $code-color: #4c4f69;
 $code-background-color: #eff1f5;
 
