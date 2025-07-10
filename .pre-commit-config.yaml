@@ -12,3 +12,8 @@ repos:
   rev: v0.18.1
   hooks:
   - id: markdownlint-cli2
+
+- repo: https://github.com/streetsidesoftware/cspell-cli
+  rev: v9.1.0
+  hooks:
+    - id: cspell
