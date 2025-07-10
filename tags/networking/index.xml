@@ -1,233 +1,60 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Networking - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/networking/</link><description>Networking - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/networking/" rel="self" type="application/rss+xml"/><item><title>Server drawer</title><link>https://lutzky.net/posts/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/server-drawer/</guid><description><![CDATA[<p>This is as good a time as any to give a quick tour of my &ldquo;homelab&rdquo; or server drawer.</p>
-<p>The external view is rather innocuous: A visually inoffensive Nest Wifi, a rather elegant Nest Thermostat (shame that the display can&rsquo;t be always-on), and the gorgeous Nintendo Switch dock cover my partner got me. The TV aerial is tucked to the back, a reasonable compromise between &ldquo;gets reception&rdquo; and &ldquo;hidden away and ugly&rdquo;. The TV is mounted on upside-down IKEA boxes which we painted to roughly match the rest, hiding some botched carpentry behind the TV.</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/external.jpg" title="/posts/server-drawer/external.jpg" data-thumbnail="/posts/server-drawer/external.jpg" data-sub-html="<h2>External view</h2>">
-        
-    </a><figcaption class="image-caption">External view</figcaption>
-    </figure>
-<p>You may note some cables heading down through a hole in the woodwork (yeah, I could probably make them a bit neater on the way down):</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/hole.jpg" title="/posts/server-drawer/hole.jpg" data-thumbnail="/posts/server-drawer/hole.jpg" data-sub-html="<h2>Through the hole</h2>">
-        
-    </a><figcaption class="image-caption">Through the hole</figcaption>
-    </figure>
-<p>When opened, the drawer shows the Virgin Media router (in <a href="https://www.virginmedia.com/help/virgin-media-hub-modem-mode" target="_blank" rel="noopener noreffer ">Modem Mode</a>), hooked up to the Nest Wifi and back into a small switch. The TV is hardwired in, and so is the NUC i3 media server (&ldquo;Michael&rdquo;, replacing the previous server &ldquo;George&rdquo;). The NUC is wearing a 4TB USB HDD as a hat. Everything is quite low-powered, and Michael usually hovers around 42°C.</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/top.jpg" title="/posts/server-drawer/top.jpg" data-thumbnail="/posts/server-drawer/top.jpg" data-sub-html="<h2>Top view</h2>">
-        
-    </a><figcaption class="image-caption">Top view</figcaption>
-    </figure>
-<p>Finally, here&rsquo;s how everything is powered. The guy who built it thought 10 sockets (8 in the drawer, 2 behind the TV) was overkill. It was not.</p>
-<figure><a class="lightgallery" href="/posts/server-drawer/feature-power.jpg" title="/posts/server-drawer/feature-power.jpg" data-thumbnail="/posts/server-drawer/feature-power.jpg" data-sub-html="<h2>Power view</h2>">
-        
-    </a><figcaption class="image-caption">Power view</figcaption>
-    </figure>
-]]></description></item><item><title>WFH Wifi</title><link>https://lutzky.net/posts/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/wfh-wifi/</guid><description><![CDATA[<p>2020 being what it is, I&rsquo;ve been working from home for quite a while. We decided to convert our spare bedroom into a home office, and I realized how nice it is to have a proper desk at home, even for non-work stuff (I haven&rsquo;t had one in over 10 years!). That being said, wifi is a challenge with the apartment&rsquo;s structure.</p>
-<p>(Diagram below is approximate; I&rsquo;ll explain why and how it was created in a bit.)</p>
-<figure><a class="lightgallery" href="/posts/wfh-wifi/base.png" title="/posts/wfh-wifi/base.png" data-thumbnail="/posts/wfh-wifi/base.png" data-sub-html="<h2>Approximate apartment structure; explanation on how and why it was created coming in a bit.</h2>">
-        
-    </a><figcaption class="image-caption">Approximate apartment structure; explanation on how and why it was created coming in a bit.</figcaption>
-    </figure>
-<p>My broadband comes in via a cable connection in the living room - the modem and router/AP sit in the bottom middle of the room. Before WFH times we would occasionally work from home, mostly from the living room, which was the only place with chairs. To get wifi in the bedrooms (one of which is now labeled &ldquo;office&rdquo;), I used a TP-link powerline pack - i.e. one thing stuck to a power socket by the router in the living room, and another in the bedroom. Or the hallway. The tradeoffs were these:</p>
-<ul>
-<li>We wanted to have it as close to the bedroom as possible, so we&rsquo;d have good reception there.</li>
-<li>Having it <em>in</em> the bedroom let us hard-wire the TV to it.</li>
-<li>It&rsquo;d have better performance the closer it was to the living room. While I&rsquo;m not sure what the electrical topology of my apartment is, the further from the living room it got, the worse its &ldquo;reception&rdquo; got - i.e. the slower and less reliable its communication with the one in the living room would be.</li>
-</ul>
-<p>So for the most part, it worked. We&rsquo;d get the odd disconnections or slowness, but it was used mostly on our phones, so we could switch wifi off (or, better yet, just go to sleep or get out of bed). There was one annoying issue though - roaming never worked right.</p>
-<ul>
-<li>Giving the powerline wifi network a different name worked OK, but we&rsquo;d have to manually switch networks; especially on my partner&rsquo;s iPhone, which tends to be &ldquo;sticky&rdquo; (and requires more taps to switch wifi networks to boot).</li>
-<li>Giving the powerline wifi network the same name (SSID) and password worked OK for roaming most of the time, but not always - and now it was quite difficult to tell, when a problem occurred, if it was due to our phones looking for the wrong AP; turning wifi off and on again didn&rsquo;t always fix this.</li>
-</ul>
-<p>Working from home, connectivity suddenly became <em>important</em>. We have a ton of video meetings, we&rsquo;re using our laptops all day, and sometimes we need to move around quickly - we can&rsquo;t both have meetings in the home office, so one of us needs to switch to the living room table and have the connection <em>work</em> with minimal extra fiddling.</p>
-<p>I decided two get a two-pack of Nest Wifi devices (a Router and a Point). Over time, I found a third one was necessary, and still doesn&rsquo;t always work quite right. Unfortunately, running ethernet to the home office isn&rsquo;t currently a possibility (&hellip;but should definitely be a priority for any renovation). After some messing around, I came up with a solution, but figured I&rsquo;d try and understand if I can do better by analyzing the apartment.</p>
-<p>So, step 1 - I needed a floor plan. I do not have one of my apartment, but the 3D visualization the realtor provided was still up and had a &ldquo;measurement&rdquo; tool. So I went to <a href="http://floorplanner.com" target="_blank" rel="noopener noreffer ">http://floorplanner.com</a> and used that visualization to sketch up the diagram above. The point of this was the next step: In a wonderful company-internal talk about home wifi (this is a common issue in Israel, where many apartments have <a href="https://en.wikipedia.org/wiki/Merkhav_Mugan" target="_blank" rel="noopener noreffer ">concrete-walled shelters</a>), the neat mapping capability of Unifi&rsquo;s controller software was shown. While I don&rsquo;t own any Unifi gear, I installed the controller software (available as <a href="https://docs.linuxserver.io/images/docker-unifi-controller" target="_blank" rel="noopener noreffer ">a neat docker container</a>), imported my diagram, drew the walls, and positioned my living room router.</p>
-<figure><a class="lightgallery" href="/posts/wfh-wifi/feature-livingroom-2g-64dBm.png" title="/posts/wfh-wifi/feature-livingroom-2g-64dBm.png" data-thumbnail="/posts/wfh-wifi/feature-livingroom-2g-64dBm.png" data-sub-html="<h2>Router in the living room</h2>">
-        
-    </a><figcaption class="image-caption">Router in the living room</figcaption>
-    </figure>
-<p>This is, naturally, only an estimate; the AP model is wrong, the -64dBm client sensitivity is just a guess, as are the wall widths and materials; reflections also aren&rsquo;t taken into account (and I suspect the Nest Wifi is making good use of those). The washing machine and dryer in the utility room are modeled as a steel box, perhaps overestimating their attenuation. This is the diagram for 2.4ghz - things are naturally worse in 5ghz:</p>
-<figure><a class="lightgallery" href="/posts/wfh-wifi/livingroom-5g-64dBm.png" title="/posts/wfh-wifi/livingroom-5g-64dBm.png" data-thumbnail="/posts/wfh-wifi/livingroom-5g-64dBm.png" data-sub-html="<h2>5ghz is even worse</h2>">
-        
-    </a><figcaption class="image-caption">5ghz is even worse</figcaption>
-    </figure>
-<p>The spot we naturally chose for the point was the hallway (the utility room now seems like it would&rsquo;ve worked better for reception, but it&rsquo;s often quite damp and has no free power sockets anyway). Indeed, the Google Wifi app (which you still use for Nest Wifi) would say that the connection between it and the living room is &ldquo;Great&rdquo; (and that&rsquo;s as much detail as you&rsquo;ll get). But the reception in the office would still be pretty bad, sometimes leading to disconnections.</p>
-<figure><a class="lightgallery" href="/posts/wfh-wifi/hallway-2g-60dBm.png" title="/posts/wfh-wifi/hallway-2g-60dBm.png" data-thumbnail="/posts/wfh-wifi/hallway-2g-60dBm.png" data-sub-html="<h2>Wifi point in the hallway</h2>">
-        
-    </a><figcaption class="image-caption">Wifi point in the hallway</figcaption>
-    </figure>
-<p>I suspect the issue here might be that 5ghz connectivity is <em>just barely</em> available:</p>
-<figure><a class="lightgallery" href="/posts/wfh-wifi/hallway-5g-60dBm.png" title="/posts/wfh-wifi/hallway-5g-60dBm.png" data-thumbnail="/posts/wfh-wifi/hallway-5g-60dBm.png" data-sub-html="<h2>5ghz just barely available</h2>">
-        
-    </a><figcaption class="image-caption">5ghz just <em>barely</em> available</figcaption>
-    </figure>
-<p>At any rate, I decided to throw some more money at the problem, adding a 2nd Point in the office:</p>
-<figure><a class="lightgallery" href="/posts/wfh-wifi/office-2g-60dBm.png" title="/posts/wfh-wifi/office-2g-60dBm.png" data-thumbnail="/posts/wfh-wifi/office-2g-60dBm.png" data-sub-html="<h2>Wifi point in the office</h2>">
-        
-    </a><figcaption class="image-caption">Wifi point in the office</figcaption>
-    </figure>
-<p>There is now most certainly a strong connection between the office point and the hallway point (as well as the laptops in the office), and the hallway point has a good connection with the living room. However, as it turned out, the mesh test did not consistently give me good results - sometimes I would just get &ldquo;poor&rdquo; results. I suspect the issue is the dynamic nature of&hellip; doors.</p>
-<p>We tend to get quite loud in meetings, so when we have them, we close the office and living room doors - represented here as wooden walls. It seems that, when the doors are open, the office point could still just barely communicate with the router in the living room. It turns out that Nest does all it can to avoid daisy-chaining, so the office point would connect to the living room router if it could see it. Closing the doors would make that connection worse, but it&rsquo;d take the network some time to reconfigure. However, rebooting the system with all doors closed got a &ldquo;great mesh&rdquo; (presumably daisy-chained, though this can&rsquo;t be seen from the app). That meant that my wifi-signal depended on the particular state of the doors when the mesh network last decided to self-optimize.</p>
-<p>The solution I came up with was to move the point from the office to the bedroom (&hellip;where nobody is during the work day), and make sure that door stays open:</p>
-<figure><a class="lightgallery" href="/posts/wfh-wifi/bedroom-opendoor-2g-60dBm.png" title="/posts/wfh-wifi/bedroom-opendoor-2g-60dBm.png" data-thumbnail="/posts/wfh-wifi/bedroom-opendoor-2g-60dBm.png" data-sub-html="<h2>Wifi point in the bedroom, door open</h2>">
-        
-    </a><figcaption class="image-caption">Wifi point in the bedroom, door open</figcaption>
-    </figure>
-<p>I now have no idea if the network is daisy-chained or not, but it has been working consistently well&hellip; even at night when I stay up writing stuff like this blog post, and the bedroom door is closed.</p>
-<p>I&rsquo;d really want to get some CAT7 around the apartment, but for now - this works. Hopefully these tools and methods can help you out as well.</p>
-]]></description></item><item><title>Home network wiring</title><link>https://lutzky.net/posts/home-network-wiring/</link><pubDate>Sun, 04 Sep 2011 18:53:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/home-network-wiring/</guid><description><![CDATA[<p>I don&rsquo;t like wireless connections; they&rsquo;re always second-best, be it in terms
-of security, speed, or reliability. Here&rsquo;s how my apartment looks (very
-approximately):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">.-P1----.  .-------------------P4-,---------,
-</span></span><span class="line"><span class="cl">|  PC   |  |       COMFY SOFA     .         |
-</span></span><span class="line"><span class="cl">|       |  |                      . Closed  |
-</span></span><span class="line"><span class="cl">|  .-,  |  |      Living room     . Porch   |
-</span></span><span class="line"><span class="cl">|  |B| P2  |                      .         |
-</span></span><span class="line"><span class="cl">|  |E|     |                      .         |
-</span></span><span class="line"><span class="cl">|  |D|  |      HUGE CUPBOARD   TV .  R PC   |
-</span></span><span class="line"><span class="cl">`-------&#39;  `-P3-------------------&#39;--P5-----&#39;
-</span></span><span class="line"><span class="cl"> My room
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The room on the left is mine, with my (constantly torrenting) PC in bed-viewing
-position. The router (<code>R</code>) is in the closed porch, connected to my roommate&rsquo;s
-PC. Wifi doesn&rsquo;t stand a chance through two walls and the porch&rsquo;s glass screen.
-<code>P1</code> through <code>P5</code> are power outlets.</p>
-<h2 id="first-solution">First solution</h2>
-<p>Put a <a href="/2010/11/20/dd-wrt-awesomeness" rel="">reverse DD-WRT router</a> at P2 (with a cable going across the room from
-the PC). Slow connection, not very reliable.  This worked well enough for
-several months.</p>
-<h2 id="second-solution">Second solution</h2>
-<p>Get a pair of <a href="http://www.aztech.com/sg/homeplug_hl110e.html" target="_blank" rel="noopener noreffer ">homeplugs</a>. Stick
-one at P1 (connected through a power strip shared by the PC, speakers, screen
-and guitar amp). Stick another at P5 (connected through a power strip shared by
-the other PC, router, modem, TV, fan, printer, speakers and a lamp). It
-<em>shouldn&rsquo;t</em> work - but it does. It blinks red, is nowhere near the promised
-200Mbps, but it&rsquo;s still faster (and more reliable) than my internet connection.
-These homeplug devices are fantastic - they require literally no configuration
-(unless you want to reconfigure the encryption keys) and work very well, I
-highly recommend them.  The problem was when I got an Xtreamer - a cute device
-to watch my shows on my living room TV (see: comfy sofa). Once I plug it in,
-the homeplug connection dies on me, proverbially the last straw.</p>
-<h2 id="third-solution">Third solution</h2>
-<p>Thankfully, I have my Big Box of Electronic Junk, which contained a Super Long
-(read: haven&rsquo;t measured it) network cable. Moved the homeplug to P3, hid the
-cable behind the Huge Cupboard. Problem solved.  On a side note, I would have
-preferred a <a href="http://boxee.tv" target="_blank" rel="noopener noreffer ">Boxee Box</a>, but sadly it doesn&rsquo;t support lame old
-RCA connections.</p>]]></description></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/posts/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 15:19:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/dd-wrt-awesomeness/</guid><description><![CDATA[<p>Since I&rsquo;ve last posted, I&rsquo;ve moved to a new apartment. First order of business -
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Networking on Shallow and Pedantic</title><link>https://lutzky.net/tags/networking/</link><description>Recent content in Networking on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/networking/index.xml" rel="self" type="application/rss+xml"/><item><title>Server drawer</title><link>https://lutzky.net/posts/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/server-drawer/</guid><description>A quick look at my partner-approved &amp;ldquo;server drawer&amp;rdquo;</description></item><item><title>WFH Wifi</title><link>https://lutzky.net/posts/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/wfh-wifi/</guid><description>My adventures in setting up wifi when working from home, working around limitations of my apartment form factor.</description></item><item><title>Home network wiring</title><link>https://lutzky.net/posts/home-network-wiring/</link><pubDate>Sun, 04 Sep 2011 18:53:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/home-network-wiring/</guid><description>&lt;p>I don&amp;rsquo;t like wireless connections; they&amp;rsquo;re always second-best, be it in terms
+of security, speed, or reliability. Here&amp;rsquo;s how my apartment looks (very
+approximately):&lt;/p></description></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/posts/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 15:19:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/dd-wrt-awesomeness/</guid><description>&lt;p>Since I&amp;rsquo;ve last posted, I&amp;rsquo;ve moved to a new apartment. First order of business -
 get a working internet connection. This is extra-challenging when your
-primary machine doesn&rsquo;t even have a wireless network card.</p>
-<p>My first hack used my trusty laptop - it has a properly working wireless card,
-and could connect to my roommate&rsquo;s router quite easily. It runs Ubuntu, and as
+primary machine doesn&amp;rsquo;t even have a wireless network card.&lt;/p>
+&lt;p>My first hack used my trusty laptop - it has a properly working wireless card,
+and could connect to my roommate&amp;rsquo;s router quite easily. It runs Ubuntu, and as
 it turns out, that means sharing the connection was dead-simple: Right-click on
-the network manager icon, add a new wired connection called &ldquo;Shared&rdquo;, and under
-IPv4 settings, choose &ldquo;Shared to other computers&rdquo;. That&rsquo;s it. Once I connected
+the network manager icon, add a new wired connection called &amp;ldquo;Shared&amp;rdquo;, and under
+IPv4 settings, choose &amp;ldquo;Shared to other computers&amp;rdquo;. That&amp;rsquo;s it. Once I connected
 my desktop to my laptop, it automatically got all of its settings, and I was
-good to go.</p>
-<p>However, this was kind of annoying - I had to leave my laptop on, the reception
-in my room isn&rsquo;t perfect so it would sometimes disconnect (requiring manual
-intervention), and my laptop wasn&rsquo;t free for ordinary use (if I wanted my
-torrents to keep going).</p>
-<p>The solution: I grabbed my (horrible) old D-Link DIR-300 router, and installed
-DD-WRT on it. This gave it an awesome &ldquo;client mode&rdquo; feature, which allowed it
-to use it the same way I used my laptop to bridge my wireless connection.
-Flashing it worked quite well by following the guide (the updated version in
-the wiki, that is - it has proper instructions for connecting to RedBoot, the
-D-Link flashing interface, from Linux), and another guide helped me set up
-Client mode. All seems well, except for two issues:</p>
-<p>First, port forwarding doesn&rsquo;t seem to work properly - it works well on the
-internal network (that is, I can SSH into my desktop using my laptop), but not
-on the internet (SSH port shows up as open, but I can&rsquo;t connect). I&rsquo;m also
-guessing that UPnP/NAT-PMP won&rsquo;t work properly. Second, and this is an old
-problem - the router has a high-pitched whine. This may have something to do
-with the fact that the AC/DC adapter it came with is rated for 12V @ 1A,
-whereas the router is rated 5V @ 1.2A. Let&rsquo;s hope it doesn&rsquo;t fry (hasn&rsquo;t for
-the 3 years I used it).</p>
-]]></description></item><item><title>Another SSH trick</title><link>https://lutzky.net/posts/another-ssh-trick/</link><pubDate>Mon, 10 Nov 2008 23:01:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/another-ssh-trick/</guid><description><![CDATA[<p>Ever have a machine you can only ssh into through another machine? It&rsquo;s a very
-common situation in the Technion. Here&rsquo;s one way to get around it: Assume you
-can directly ssh into <code>alpha</code>, and from <code>alpha</code> you can ssh into <code>beta</code>. Have
-the following code in your <code>~/.ssh/config</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Host beta
-</span></span><span class="line"><span class="cl">        Hostname 1.2.3.4  # IP Address of beta
-</span></span><span class="line"><span class="cl">        ProxyCommand ssh alpha nc -w 1 %h %p
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This requires you to have <code>nc</code> (netcat) installed on <code>alpha</code>. Once you do that,
-you can run <code>ssh beta</code> directly from your own box.</p>
-]]></description></item><item><title>Tunelling even more stuff over SSH</title><link>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</link><pubDate>Tue, 17 Jun 2008 12:32:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</guid><description><![CDATA[<p>Today at the CS department of the Technion is a particularily Bad Network Day
+good to go.&lt;/p></description></item><item><title>Another SSH trick</title><link>https://lutzky.net/posts/another-ssh-trick/</link><pubDate>Mon, 10 Nov 2008 23:01:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/another-ssh-trick/</guid><description>&lt;p>Ever have a machine you can only ssh into through another machine? It&amp;rsquo;s a very
+common situation in the Technion. Here&amp;rsquo;s one way to get around it: Assume you
+can directly ssh into &lt;code>alpha&lt;/code>, and from &lt;code>alpha&lt;/code> you can ssh into &lt;code>beta&lt;/code>. Have
+the following code in your &lt;code>~/.ssh/config&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plaintext" data-lang="plaintext">&lt;span class="line">&lt;span class="cl">Host beta
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hostname 1.2.3.4 # IP Address of beta
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ProxyCommand ssh alpha nc -w 1 %h %p
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This requires you to have &lt;code>nc&lt;/code> (netcat) installed on &lt;code>alpha&lt;/code>. Once you do that,
+you can run &lt;code>ssh beta&lt;/code> directly from your own box.&lt;/p></description></item><item><title>Tunelling even more stuff over SSH</title><link>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</link><pubDate>Tue, 17 Jun 2008 12:32:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</guid><description>&lt;p>Today at the CS department of the Technion is a particularily Bad Network Day
 (TM) for laptop users; none of the wired connections at the farm work, and
-wireless doesn&rsquo;t seem to working for HTTP at all.</p>
-<p>It does, however, work for SSH. Ka-ching! :)</p>
-<p>Tunneling your browser over SSH is a pretty simple affair - SSH into somewhere
+wireless doesn&amp;rsquo;t seem to working for HTTP at all.&lt;/p>
+&lt;p>It does, however, work for SSH. Ka-ching! :)&lt;/p>
+&lt;p>Tunneling your browser over SSH is a pretty simple affair - SSH into somewhere
 which has a decent connection, and use the -D9999 flag (9999 works, but it can
 be any 16-bit number over 1024). Then, configure your browser to work over a
-SOCKS proxy at 127.0.0.1:9999.</p>
-<p>How do you, however, get other things to work over that tunnel? There&rsquo;s an
-excellent program called dante-client (that&rsquo;s an apt package, folks. if you
-can&rsquo;t apt-get due to your network situation, get it at packages.ubuntu.com or
-packages.debian.org). Install it, and make sure <code>/etc/dante.conf</code> has the
-following lines:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">route {
-</span></span><span class="line"><span class="cl">    from: 0.0.0.0/0   to: 0.0.0.0/0   via: 127.0.0.1 port = 9999
-</span></span><span class="line"><span class="cl">    protocol: tcp
-</span></span><span class="line"><span class="cl">    proxyprotocol: socks_v4 socks_v5
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Then, run <code>socksify whatever-you-want-to-do</code>. For example, <code>sudo socksify apt-get install something</code>. Or perhaps <code>socksify ssh somewhere</code>. Or <code>sudo wget something</code>. Or <code>socksify git do-something-awesome</code>. (All of the above work for
-me)</p>
-]]></description></item><item><title>Encrypted my Wi-fi</title><link>https://lutzky.net/posts/encrypted-my-wi-fi/</link><pubDate>Sun, 28 Oct 2007 22:05:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/encrypted-my-wi-fi/</guid><description><![CDATA[<p>Reading some backlog on this blog, I found the following gem:</p>
-<blockquote>
-<p>It’s a sad state of affairs that people go ahead and limit access to their
-wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.</p></blockquote>
-<p>Yeah&hellip; not so anymore. For about four weeks (just a bit before the semester
-started), my net connection was working excrutiatingly slow. Now, we&rsquo;re four
+SOCKS proxy at 127.0.0.1:9999.&lt;/p></description></item><item><title>Encrypted my Wi-fi</title><link>https://lutzky.net/posts/encrypted-my-wi-fi/</link><pubDate>Sun, 28 Oct 2007 22:05:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/encrypted-my-wi-fi/</guid><description>&lt;p>Reading some backlog on this blog, I found the following gem:&lt;/p>
+&lt;blockquote>
+&lt;p>It’s a sad state of affairs that people go ahead and limit access to their
+wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.&lt;/p>&lt;/blockquote>
+&lt;p>Yeah&amp;hellip; not so anymore. For about four weeks (just a bit before the semester
+started), my net connection was working excrutiatingly slow. Now, we&amp;rsquo;re four
 roommates here, so we started blaming each other. But then I had a guess - I
 encrypted my connection with WPA/TKIP, and presto; the connection is now once
-again too fast for my browser to handle (&hellip;which sent me back to Epiphany).
-Guys, if you mooch wi-fi, please&hellip; be nice about it :(</p>
-]]></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description><![CDATA[<p>A very neat find for those of you who want to use Jabber from within the
+again too fast for my browser to handle (&amp;hellip;which sent me back to Epiphany).
+Guys, if you mooch wi-fi, please&amp;hellip; be nice about it :(&lt;/p></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description>&lt;p>A very neat find for those of you who want to use Jabber from within the
 Technion, but with your client of choice rather than a web-based one: Many
 Jabber servers, including Google Talk, support using Port 443 over SSL. Since
 the Technion does not block outbound SSL connections, this will work there as
-well. Be sure to mark the appropriate &lsquo;Use old SSL protocol&rsquo; option in your
-jabber client (that&rsquo;s what it&rsquo;s called in gaim and pidgin, at any rate).</p>
-]]></description></item><item><title>Internet in Haifa Bay Central</title><link>https://lutzky.net/posts/internet-in-haifa-bay-central/</link><pubDate>Sat, 10 Feb 2007 20:37:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/internet-in-haifa-bay-central/</guid><description><![CDATA[<p>In the Haifa Bay Central bus station (מרכזית המפרץ), it&rsquo;s possible to get an
+well. Be sure to mark the appropriate &amp;lsquo;Use old SSL protocol&amp;rsquo; option in your
+jabber client (that&amp;rsquo;s what it&amp;rsquo;s called in gaim and pidgin, at any rate).&lt;/p></description></item><item><title>Internet in Haifa Bay Central</title><link>https://lutzky.net/posts/internet-in-haifa-bay-central/</link><pubDate>Sat, 10 Feb 2007 20:37:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/internet-in-haifa-bay-central/</guid><description>&lt;p>In the Haifa Bay Central bus station (מרכזית המפרץ), it&amp;rsquo;s possible to get an
 internet connection. HTTPS works automatically, and setting the proxy to
-<code>proxy.technion.ac.il:8080</code> works for HTTP. I was unsuccessful in using
+&lt;code>proxy.technion.ac.il:8080&lt;/code> works for HTTP. I was unsuccessful in using
 corkscrew to get SSH connections to tunnel over it as well, but perhaps there
-is still a way.</p>
-]]></description></item><item><title>Waiting for the bus</title><link>https://lutzky.net/posts/waiting-for-the-bus/</link><pubDate>Thu, 25 Jan 2007 17:53:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/waiting-for-the-bus/</guid><description><![CDATA[<p>I&rsquo;m going home for the weekend, as usual. Unfortunately, the first bus of my
-route comes by at highly unpredictable times - I&rsquo;ve had it be an hour late on
+is still a way.&lt;/p></description></item><item><title>Waiting for the bus</title><link>https://lutzky.net/posts/waiting-for-the-bus/</link><pubDate>Thu, 25 Jan 2007 17:53:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/waiting-for-the-bus/</guid><description>&lt;p>I&amp;rsquo;m going home for the weekend, as usual. Unfortunately, the first bus of my
+route comes by at highly unpredictable times - I&amp;rsquo;ve had it be an hour late on
 me once. There are plenty of Wi-fi networks around the station - either WPA,
-WEP or MAC-whitelisted&hellip; fortunately, someone was using the latter long enough
-for me to catch him with Kismet. Thank you, stranger! :)</p>
-<p>It&rsquo;s a sad state of affairs that people go ahead and limit access to their
-wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.</p>
-]]></description></item></channel></rss>
+WEP or MAC-whitelisted&amp;hellip; fortunately, someone was using the latter long enough
+for me to catch him with Kismet. Thank you, stranger! :)&lt;/p>
+&lt;p>It&amp;rsquo;s a sad state of affairs that people go ahead and limit access to their
+wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.&lt;/p></description></item></channel></rss>

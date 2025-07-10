@@ -1,1646 +1,197 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Software - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Software - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/software/" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
-reclaim disk space can be a bit confusing. Let&rsquo;s have a quick primer on how
-those work, and look at a small utility to help reason about it.</p>
-<p><a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree</a> is a TUI for showing how much
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Software on Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Recent content in Software on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Thu, 10 Jul 2025 22:35:59 +0100</lastBuildDate><atom:link href="https://lutzky.net/tags/software/index.xml" rel="self" type="application/rss+xml"/><item><title>Newborn parenting software - part 4</title><link>https://lutzky.net/posts/software-parenting-4/</link><pubDate>Thu, 10 Jul 2025 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-4/</guid><description>Booby buttons! 😄</description></item><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description>&lt;p>Copy-on-write makes snapshots fast and accessible, but deleting them to
+reclaim disk space can be a bit confusing. Let&amp;rsquo;s have a quick primer on how
+those work, and look at a small utility to help reason about it.&lt;/p>
+&lt;p>&lt;a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree&lt;/a> is a TUI for showing how much
 space can be reclaimed by freeing zfs snapshots. It is a TUI wrapper over the
-standard zfs tool.</p>
-<p>If you just want to see zsnapfree in action, skip to <a href="#the-good-stuff" rel="">the screencast</a>.</p>
-<h2 id="what-are-cow-snapshots-">What are COW snapshots? 🐮</h2>
-<p>We all have little accidents with our files. Although the &ldquo;Recycle bin&rdquo; protects
-you against accidentally <em>deleting</em> files, most filesystems don&rsquo;t protect
-against accidentally <em>modifying</em> them. To change files back, you want a
-filesystems with <em>snapshots</em>.</p>
-<p>A snapshot is extremely fast to make, and lets you access the contents of the
-file as it was when the snapshot was taken. In ZFS, with <code>zfs-auto-snapshot</code>
-installed, the experience might look like this:</p>
-<ul>
-<li>A ZFS filesystem called <code>/tank/videos</code> exists.</li>
-<li>A file <code>/tank/videos/renders/my_video.mp4</code> exists, but I accidentally
-overwrite it.</li>
-<li>The file has existed for a while, so <code>zfs-auto-snapshot</code> has already created
-a snapshot of the good version at 14:17; specifically, it&rsquo;s called <code>zfs-auto-snap_hourly-2024-08-20-1417</code>.</li>
-<li>The good version is therefore available at (takes a breath)
-<code>/tank/videos/.zfs/snapshot/zfs-auto-snap_hourly-2024-08-20-1417/renders/my_video.mp4</code>.</li>
-</ul>
-<p>We&rsquo;ll get back to those long snapshot names later. For now, it&rsquo;s worth sketching
-out how this works.</p>
-<p>The actual ZFS implementation is more complex, but roughly speaking, you can
-imagine that the <code>videos</code> &ldquo;current-state&rdquo; is represented by a table that
-includes rows describing what 128KB blocks make up each file. If our file
-<code>renders/my_video.mp4</code> is 128MB, it will be made up of 1024 blocks, and the
-table might have a section like this:</p>
-<ul>
-<li>File <code>renders/my_video</code> is represented by virtual blocks 1000 through 2023.</li>
-<li>Virtual block 1000 is in physical location 5001</li>
-<li>Virtual block 1001 is in physical location 6713</li>
-<li>&hellip;</li>
-</ul>
-<p>To create a snapshot, we only need to duplicate the information above, which is
-roughly 8KB, so this can be done quickly and for very little extra space.
-However, what happens when the data changes? Snapshots should remain immutable
-even if the &ldquo;current-state&rdquo; changes.</p>
-<p>Suppose for instance we change the very first block in the file - virtual block
-1000. What happens now is the titular &ldquo;copy-on-write&rdquo; - the block which needs to
-be rewritten will first be copied. Physical location 5001 would be duplicated to
-a new location, say 7001, and this version of the block will be modified. The
-current-state table would be updated to say that virtual block 1000 is in
-physical location 7001 (but the snapshot would still have it listed as physical
-location 5001).</p>
-<p>Importantly, physical location 5001 is still in use, and cannot be freed. There
-would likely be a table keeping reference counts for each physical location;
-after the last snapshot referencing it would be deleted, this space can be
-reclaimed.</p>
-<h2 id="accidentally-storing-big-files">Accidentally storing big files</h2>
-<p>Suppose you accidentally store <code>useless_data.zip</code>, a 100GB file, in a filesystem
-that takes snapshots. You find yourself running out of space, and decide to
-delete that file&hellip; but no space is recovered. The reason is that snapshots
-still hold this data, and you would need to delete all of those snapshots in
-order to reclaim it.</p>
-<p>The question is&hellip; which ones? Although you can run <code>zfs list -t snapshot -o space</code>, the <code>USED</code> column there only counts space used by files which are
-<em>unique to that snapshot</em>. That is, if another snapshot has been created (e.g.
-by <code>zfs-auto-snapshot</code>), the <code>USED</code> column will count that file as zero.</p>
-<p>Fortunately, ZFS has a great utility for previewing this. If we believe that the
-file was created just before <code>snapshot1</code>, and deleted just after <code>snapshot3</code>,
-then we can do this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ zfs destroy -nv tank/video@snapshot1,snapshot2,snapshot3
-</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot1
-</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot2
-</span></span><span class="line"><span class="cl">would destroy tank/video@snapshot3
-</span></span><span class="line"><span class="cl">would reclaim 100GB
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This command actually does nothing (<code>-n</code>) except show information. Critically,
-running it with just one or two of the snapshots would reclaim 0GB, so this is
-great for harmless reasoning about what snapshots we&rsquo;d need to sacrifice to
-reclaim space. There&rsquo;s even a handy <code>%</code> &ldquo;range&rdquo; operator, so we could rewrite
-the above as <code>tank/videos@snapshot1%snapshot3</code>.</p>
-<h2 id="the-good-stuff">Dealing with long snapshot names</h2>
-<p>The unrealistic thing about the previous example is the short and convenient
-snapshot names. <code>zfs-auto-snapshot</code> is great, but the snapshot names are more
-like <code>zfs-auto-snap_hourly-2024-08-20-1417</code>. This makes trying different
-snapshot selections cumbersome, and prompted me to write my very first TUI app
-in Rust. It&rsquo;s a simple wrapper around the <code>zfs</code> command, and, well, a video is
-worth several words:</p>
-
-<div id='zsnapfree'></div>
-<script src="https://lutzky.net//js/asciinema-player.min.js"></script>
-<script>
-    AsciinemaPlayer.create('/casts/zsnapfree.cast', document.getElementById('zsnapfree'), {
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-     });
-</script>
-
-<p>When selecting snapshots, the tool runs (after a short delay) <code>zfs destroy -n</code>
-to show how much space would be reclaimed. On exit, it shows the appropriate
-commandline to check its findings and, if removing <code>-n</code>, actually perform the
-deletion. Hopefully this is of some use for ZFS users, and I would love any
-patches to add support for other filesystems that have snapshot support!</p>
-]]></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/slow-boot/</guid><description><![CDATA[<p>Rebooting a modern desktop computer really shouldn&rsquo;t take very long, so when it
+standard zfs tool.&lt;/p>
+&lt;p>If you just want to see zsnapfree in action, skip to &lt;a href="#the-good-stuff" rel="">the screencast&lt;/a>.&lt;/p></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/slow-boot/</guid><description>&lt;p>Rebooting a modern desktop computer really shouldn&amp;rsquo;t take very long, so when it
 was somewhat-regularly taking well over 10 minutes just to shut down, I got
-curious, and ended up looking at netdata, jitter, anacron, and even ansible.</p>
-<p>By default in Ubuntu, the shutdown process is hidden, but pressing ESC showed
-that anacron was waiting on something indefinitely&hellip; and indeed, given a few
-dozen minutes, it would complete. Sure, Raising Small Elephants Is Utterly
-Boring<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> can fix that, but something seemed wrong.</p>
-<p>Adding some logging to anacron, it turned out that the bit which was taking so
-long was something called <code>netdata-updater</code>.</p>
-<h2 id="netdata">Netdata</h2>
-<p>There&rsquo;s lots of ways to get information about your various networked machines,
-but my favorite for works-out-of-the-box laziness is
-<a href="https://www.netdata.cloud/" target="_blank" rel="noopener noreffer ">netdata</a>. I like to run this on my desktop as well,
-so I can retroactively diagnose issues or obsess over the specific fan speeds
-that led to a mildly annoying hum in the quiet evening.</p>
-<p>Netdata installs a self-update cron job, which is sensible. It&rsquo;s installed in
-<code>/etc/cron.daily</code>, which by default is launched every day at 6:25 AM. This would
-cause all machines it&rsquo;s installed on, within a timezone, to hit the servers
-simultaneously; to avoid this, they added <em>jitter</em> - the update script randomly
-waits between 0 and <code>NETDATA_UPDATER_JITTER</code>, the default being 60 minutes. So,
-if you&rsquo;re trying to reboot just after 06:25 AM, you&rsquo;re probably going to wait an
-extra 30-ish minutes.</p>
-<p>Although adding jitter arguably makes sense on systems running <em>cron</em>, it makes
-far less sense on ones running <em>Anacron</em>.</p>
-<h2 id="anacron">Anacron</h2>
-<p>Cron works well for machines that stay on all the time, e.g. servers. However,
-machines that are often off or suspended would likely miss the specific timing
-of the scheduled tasks. For such machines, anacron is used instead, and tries to
-make sure that daily tasks still occur daily: Once an hour, anacron will wake up
-(if the machine is on) and check whether any daily tasks still need to be run
-that day. That means that if I first turn on my computer in the evening, it has
-updates and wants to reboot, and I let it - I have a really high chance of
-<code>netdata-updater</code> being called, and of this little maneuver costing me 30-ish
-minute of precious gaming time.</p>
-<p>Anacron naturally introduces jitter, and anacron has additional
-jitter-introducing mechanisms<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.  Indeed, there&rsquo;s no need
-to add jitter to <code>netdata-updater</code> running under anacron, so I changed
-<code>NETDATA_UPDATER_JITTER</code> to 0, and indeed <a href="https://github.com/netdata/netdata/issues/17745" target="_blank" rel="noopener noreffer ">my suggestion to make this the
-default under anacron</a> was accepted.</p>
-<p>That being said, it still seemed there&rsquo;s no good reason for shutdown to wait
-over 10 minutes for anacron to shutdown. The shutdown screen showed that the
-timeout was infinite, although the systemd default<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> is 90
-seconds. That&rsquo;s because <code>anacron.service</code> has this line:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">TimeoutStopSec</span><span class="o">=</span><span class="s">infinity</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This was added <a href="https://salsa.debian.org/debian/anacron/-/commit/e83000966d446830ad93eef7af2c5ea62efe01db" target="_blank" rel="noopener noreffer ">in this commit</a>, to resolve <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=915379" target="_blank" rel="noopener noreffer ">this
-bug</a>. A more elegant solution is possible, but discouraged
-because anacron is meant to be replaced by something called &ldquo;cronie&rdquo;; <a href="https://goomics.net/50/" target="_blank" rel="noopener noreffer ">I am
-familiar with this pain</a>.</p>
-<p>One way or another, I disagree with the reasoning, at least in my own particular
-case, and have decided to comment out the infinite timeout line.</p>
-<h2 id="remembering-this-config">Remembering this config</h2>
-<p>I like to version-control and automate my configuration. I&rsquo;ve been doing this
-for <a href="https://github.com/lutzky/dotfiles" target="_blank" rel="noopener noreffer ">my dotfiles</a> for quite a while, but not for my overall machine
-config. Tweaks like this, to my system config, are something I&rsquo;d rather have a
-script to do rather than writing it down in a checklist.</p>
-<p>As it turns out, <a href="https://www.ansible.com/" target="_blank" rel="noopener noreffer ">Ansible</a> is considered to be a good tool for this. I thought
-it&rsquo;s only useful for &ldquo;apply some settings to a large set of servers&rdquo;, but
-apparently &ldquo;maintain config for my one server&rdquo; is not such a strange use-case.
-I&rsquo;m completely unfamiliar with Ansible; a coworker tells me that&rsquo;s because I&rsquo;ve
-worked at Google<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> for almost 10 years, and that&rsquo;s roughly as long
-as Ansible&rsquo;s been well-known.</p>
-<p>After a bit of futzing around, I&rsquo;ve come up with this <code>playbook.yml</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Fix slow shutdown</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Finite timeout for anacron</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/lib/systemd/system/anacron.service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;TimeoutStopSec=infinity&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;# TimeoutStopSec=infinity # Causes slow shutdown&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Force netdata jitter to 0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/netdata/netdata-updater.conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^NETDATA_UPDATER_JITTER=.*&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NETDATA_UPDATER_JITTER=&#34;0&#34;&#39;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Then, to get everything to play nice with the local config, I have this <code>ansible.cfg</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[defaults]</span>
-</span></span><span class="line"><span class="cl"><span class="na">inventory</span> <span class="o">=</span> <span class="s">inventory</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And this <code>inventory</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">localhost ansible_connection=local
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Sure, this could&rsquo;ve been a shell script, but this seems easier to extend and
-maintain. One thing I like about this is that I can run <code>ansible-playbook --check --diff playbook.yml</code>, and get a preview of what it&rsquo;ll do. I&rsquo;ll likely be
-looking deeper into ansible and seeing whether it&rsquo;s worthwhile getting it to
-maintain some of my server configs.</p>
-<p>This has been a fun dive into a slight annoyance with my system, and as always I
-ended up learning a few interesting things. Please do jitter your clients, but
-please don&rsquo;t leave users hanging.  Also, feel free to let me know in the
-comments that I&rsquo;m holding Ansible wrong 😄.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>This is a mnemonic for Alt+SysRq+{r,s,e,i,u,b}, a somewhat
-aggressive mechanism to <a href="https://en.wikipedia.org/wiki/Magic_SysRq_key" target="_blank" rel="noopener noreffer ">reboot a linux system</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>In Ubuntu 24.04, this is accomplished by the <code>anacron.timer</code> systemd unit having <code>RandomizedDelaySec=5m</code> configured.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p><code>DefaultTimeoutStopSec</code> under <code>man 5 systemd-system.conf</code>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>Google is known for having a &ldquo;tech island&rdquo;, and specifically the
-type of problems which Ansible deals with, at least in my line of work, have
-preexisting in-house solutions, so I never had the chance to learn Ansible.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>]]></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description><![CDATA[<p>Figuring out what&rsquo;s taking up space is a well-known issue, with a variety of
-great tools for it&hellip; if we&rsquo;re talking about files on a local hard drive.</p>
-<p>Tools like the textual <a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener noreffer "><code>ncdu</code></a> and the graphical
-<a href="https://wiki.gnome.org/Apps/DiskUsageAnalyzer" target="_blank" rel="noopener noreffer ">baobab</a> let you start with a
-high-level summary, and dive into specific directories to find out what&rsquo;s taking
-up all of the space.</p>
-<figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot.png" title="/posts/ncdu-import/ncdu-screenshot.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot.png" data-sub-html="<h2>Screenshot of ncdu</h2>">
-        
-    </a><figcaption class="image-caption">Screenshot of ncdu</figcaption>
-    </figure>
-<p>However, sometimes what you have is on a cloud storage system, which is happy to
-<em>bill</em> you for space your files take, but the UI doesn&rsquo;t make it super-easy to
-figure out which directories take up that storage. For example, with Google
-Cloud Storage, you <em>can</em> use <code>rclone ncdu</code>, but my modest backup bucket had it
-consistently timing out. For this purpose, the recommended path appears to be
-<a href="https://cloud.google.com/storage/docs/insights/inventory-reports" target="_blank" rel="noopener noreffer ">Storage Inventory</a>, which will provide you with a CSV listing of all of the
-files in your bucket.  The apparent recommendation is to analyze it using a
-custom-crafted BigQuery query, which is nowhere near as handy as <code>ncdu</code>.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">$ cat inventory-reports_VERY_LONG_ID.csv | cut -f3,10 -d,
-</span></span><span class="line"><span class="cl">name,size
-</span></span><span class="line"><span class="cl">esphome/config/esphome-tester.yaml,5254
-</span></span><span class="line"><span class="cl">esphome/config/esphome-tester2.yaml,1049
-</span></span><span class="line"><span class="cl">meta/esphome/docker-compose.yml,308
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 1.stl,1484
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 2.stl,1033884
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/Part Studio 1 - Part 3.stl,1591184
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/light_switch_covers.gcode,919652
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/Part Studio 1 - Part 2.stl,1033884
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/Part Studio 1 - Part 3.stl,1603784
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/light_switch_covers.ufp,142725
-</span></span><span class="line"><span class="cl">misc_backed_up/ohad/3dprint/light_switch_covers/old_too_small/light_switch_covers_gcode.ufp,627744
-</span></span><span class="line"><span class="cl">...
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Fortunately, <code>ncdu</code> has an import/export feature, for those slow scans. <code>ncdu -o foo.json</code> will save such a report (slowly), and <code>ncdu -f foo.json</code> will display
-it (quickly). So, how about if we cheat, and convert our CSV of
-files-in-the-cloud to <code>ncdu</code>-compatible JSON?</p>
-<p>That&rsquo;s where <a href="https://github.com/lutzky/ncdu-import" target="_blank" rel="noopener noreffer "><code>ncdu-import</code></a> comes in.  Bring it a CSV file which has a &ldquo;path&rdquo;
-column and a &ldquo;size&rdquo; column (tell it what the columns are), and it&rsquo;ll spit out a
-JSON file loadable by <code>ncdu</code> for quick and convenient analysis. You can look at
-the <a href="https://github.com/lutzky/ncdu-import/tree/main/testdata" target="_blank" rel="noopener noreffer ">testdata dir</a> to get a few examples of what it&rsquo;s doing.</p>
-<figure><a class="lightgallery" href="/posts/ncdu-import/ncdu-screenshot-with-import.png" title="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-thumbnail="/posts/ncdu-import/ncdu-screenshot-with-import.png" data-sub-html="<h2>ncdu showing output ncdu-import on the sample CSV above</h2>">
-        
-    </a><figcaption class="image-caption"><code>ncdu</code> showing output <code>ncdu-import</code> on the sample CSV above</figcaption>
-    </figure>]]></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description><![CDATA[<p>In October 2023, two weeks before daylight savings time (&ldquo;summer time&rdquo;) was set
-to end, Israel briefly considered delaying this. That would&rsquo;ve been a terrible
-idea, even if it weren&rsquo;t at war at the time.</p>
-<h2 id="a-hacked-toll-tunnel">A hacked toll tunnel?</h2>
-<p>Through the northern city of Haifa, the <a href="https://en.wikipedia.org/wiki/Carmel_Tunnels" target="_blank" rel="noopener noreffer ">Carmel Tunnels</a> are a toll bypass of
-the city. About 10 years ago, on September 8-9, 2013 (yes that date will be
-relevant), the tunnels were <a href="https://www.ynet.co.il/articles/0,7340,L-4446249,00.html" target="_blank" rel="noopener noreffer ">shut down due to a &ldquo;cyber attack&rdquo;</a>;
-rumor is that the toll system didn&rsquo;t function, and rather than take the loss,
-the tunnels stayed closed for many hours, causing traffic chaos.</p>
-<p>I don&rsquo;t think it was a cyber attack.</p>
-<h2 id="timezones-in-israel">Timezones in Israel</h2>
-<p>Timezone legislation in Israel is complicated (this sometimes <a href="https://darwinawards.com/darwin/darwin1999-38.html" target="_blank" rel="noopener noreffer ">saves
-lives</a>). Between 2005 and 2012, DST was set to end on the Last
-Sunday before the 10th of Tishrei. Tishrei is a month in the traditional Jewish
-calendar, which is less common in day-to-day use in Israel, but does determine
-holidays (similar to Easter). However, legislation managed to change - twice -
-between 2012 and 2013. The first change (November 2012) had DST ending on the
-first Sunday after October 1st, and the second (2013) had DST ending on the
-<em>last</em> Sunday of October.</p>
-<div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>Until 2013, the Israeli law for daylight savings time relied on the lunar
-calendar, so the rule couldn&rsquo;t be represented easily using the Gregorian
-calendar. If you look at the <a href="https://www.iana.org/time-zones" target="_blank" rel="noopener noreffer ">timezone database</a> source data, you can see things
-suddenly got very efficient:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># Rule&gt; NAME&gt;   FROM&gt;   TO&gt;     -&gt;      IN&gt;     ON&gt;     AT&gt;     SAVE&gt;   LETTER/S
-</span></span><span class="line"><span class="cl"># ...explicit lines for every year since 1940...
-</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2010&gt;   only&gt;   -&gt;      Sep&gt;    12&gt;     2:00&gt;   0&gt;      S
-</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2011&gt;   only&gt;   -&gt;      Oct&gt;     2&gt;     2:00&gt;   0&gt;      S
-</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2012&gt;   only&gt;   -&gt;      Sep&gt;    23&gt;     2:00&gt;   0&gt;      S
-</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2013&gt;   max&gt;    -&gt;      Mar&gt;    Fri&gt;=23&gt;2:00&gt;   1:00&gt;   D
-</span></span><span class="line"><span class="cl">Rule&gt;   Zion&gt;   2013&gt;   max&gt;    -&gt;      Oct&gt;    lastSun&gt;2:00&gt;   0&gt;      S
-</span></span><span class="line"><span class="cl"># ...and that&#39;s it.
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<p>Anyway, if one were to go by the pre-2012 law but apply it 2013, daylight
-savings time should have ended on - you guessed it - September 8th. So, in my
-opinion, a much likelier scenario than a &ldquo;cyber attack&rdquo; is simply that some of
-the systems suddenly found themselves one hour out of sync with the rest, and
-things got pretty confused. <a href="https://he.wikipedia.org/wiki/%D7%A9%D7%A2%D7%95%D7%9F_%D7%94%D7%A7%D7%99%D7%A5_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C#%D7%94%D7%97%D7%95%D7%A7_%D7%94%D7%A0%D7%95%D7%9B%D7%97%D7%99_-_%D7%94%D7%97%D7%9C_%D7%9E%D7%A9%D7%A0%D7%AA_2013" target="_blank" rel="noopener noreffer ">Wikipedia notes</a>
-that, on this day (as well as October 6th, due to the 2012 law), many
-smartphones showed an incorrect time because they hadn&rsquo;t been updated with the
-latest legislation. And that&rsquo;s despite having, for September 8th, almost a
-year&rsquo;s notice; expecting everyone&rsquo;s personal devices to be updated in two weeks
-is pure fantasy.</p>
-<h2 id="nobodys-up-changing-the-clocks-at-2am">Nobody&rsquo;s up changing the clocks at 2AM</h2>
-<p>It&rsquo;s important to understand that this is how it all works; computer-based
-systems have a file somewhere that says &ldquo;this is when the daylight savings
-change will happen&rdquo;, and things happen automatically on that basis; they have
-to, for a simultaneous transition of all computing systems. Any change to that
-timezone file takes time and effort to create, test, and distribute, for each
-different type of computing system. This is not something to be done under time
-pressure as a &ldquo;would-be-nice&rdquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Not unless you want to
-have &ldquo;cyber attacks&rdquo;.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Many years ago, I described an effort to coerce the timezone system into a &ldquo;change on demand&rdquo; mode; see post <a href="/posts/timezones-are-fickle/" rel="">Timezones are fickle</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>]]></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-distribution/</guid><description><![CDATA[<p>For as long as I&rsquo;ve been interested in software development, I&rsquo;ve been
-interested in how software makes it onto a computer. &ldquo;Works on my machine&rdquo; was
-never quite enough&hellip; how would it work on <em>someone else&rsquo;s</em> computer? Here&rsquo;s a
-stroll down memory lane, starting from the 90s.</p>
-<h2 id="qbasic-early-90s">QBasic (early 90s)</h2>
-<p>In the early 90s, when I was about 8 years old, someone showed me that my
-computer came with a piece of software called <a href="https://archive.org/details/msdos_qbasic_megapack" target="_blank" rel="noopener noreffer ">QBasic</a> - it came with
-the MS-DOS operating system.  Although nobody in my family knew how to use it,
-and this was long before I had access to the internet, it came with an
-impressive set of examples as well as an interactive reference manual that I
-recall as being very thorough. Having messed around with it and made a few
-animations and utilities, I thought it would be cool to give copies to my
-classmates to play around with; y&rsquo;know, like a professional software developer would.</p>
-<figure><a class="lightgallery" href="/posts/software-distribution/feature_QBasic_Opening_Screen.png" title="/posts/software-distribution/feature_QBasic_Opening_Screen.png" data-thumbnail="/posts/software-distribution/feature_QBasic_Opening_Screen.png" data-sub-html="<h2>QBasic&rsquo;s opening screen</h2>">
-        
-    </a><figcaption class="image-caption">QBasic&rsquo;s opening screen</figcaption>
-    </figure>
-<p>The software, as I wrote it, was a collection of source code files - just text
-files with a <code>.BAS</code> extension. For anyone to run those programs, they&rsquo;d have to
-open QBasic themselves, select &ldquo;File→Open&rdquo;, navigate to my file, then use the
-&ldquo;Run&rdquo; menu to actually run the program. And presumably figure out how to exit
-QBasic when they&rsquo;re done.  Now, 8-year-olds in the 90s were used to computers
-being slightly harder to operate, e.g. typing out a command or two to open a
-game; indeed, friends did figure this out.  But this still felt like a <em>super
-janky</em> way to distribute software.</p>
-<p>What I actually wanted to do was provide a <em>&ldquo;self-contained&rdquo;</em> program, one where
-you simply enter its name and it starts up, like any other DOS program I&rsquo;d seen.
-Ideally, it would have the fashionable <code>.EXE</code> extension (the term &ldquo;<code>EXE</code> file&rdquo;
-seemed pretty much synonymous with &ldquo;program&rdquo;).</p>
-<div class="details admonition note">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note - Batch files<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>What I wanted to do was allow people to run <code>LUTZKY1.BAS</code> with one command. This
-could&rsquo;ve been accomplished by adding a file <code>LUTZKY1.BAT</code> (<code>BAT</code> for MS-DOS
-Batch, not <code>BAS</code>) with these contents:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="line"><span class="cl"><span class="p">@</span><span class="c1">REM Turn off janky &#34;print each command&#34; behavior</span>
-</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="c1">REM Mind the load-bearing @ at the start of each line...</span>
-</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">ECHO</span> OFF
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">QBASIC /RUN LUTZKY1.BAS
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>I would&rsquo;ve needed to terminate the program using the <code>SYSTEM</code> command rather
-than <code>END</code>. This way, indeed typing <code>LUTZKY1</code> into the prompt would&rsquo;ve run my
-program and exit normally. However:</p>
-<ul>
-<li>I don&rsquo;t think I knew how to do that</li>
-<li>It still flashes the QBasic IDE on startup</li>
-<li>I was still relying on QBasic being installed on the destination machine, and
-I knew (though?) older versions of MS-DOS didn&rsquo;t include it.</li>
-<li>Having things in multiple files still seemed &ldquo;off&rdquo;. I now wonder if I
-could&rsquo;ve designed a file to work both as the batch file and as the BASIC file.</li>
-</ul>
-</div>
-        </div>
-    </div>
-<p>I had heard rumor of the &ldquo;professional, expensive&rdquo; bit of software I needed - a
-<em>compiler</em>, which would perform the right magic to me a shiny, self-contained
-<code>LUTZKY1.EXE</code>. But this sounded like an expensive thing to even ask my parents
-for, never mind the fact I had no idea where one <em>buys software</em> - the local
-shops only seemed to stock games and office productivity software.</p>
-<div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">In 2023, I found out that this software was called <a href="https://en.wikipedia.org/wiki/QuickBASIC" target="_blank" rel="noopener noreffer ">QuickBASIC</a>&hellip;
-not confusing at all, surely the Q in QBasic didn&rsquo;t stand for &ldquo;Quick&rdquo; and they
-weren&rsquo;t both abbreviated &ldquo;QB&rdquo;.</div>
-        </div>
-    </div>
-<p>For whatever reason, this was important enough to me to try some truly wacky
-stuff. I vaguely remember messing around blindly with files on my computer,
-trying to generate an <code>EXE</code> file complete with an icon - efforts included taking
-something called the &ldquo;PIF Editor&rdquo;, which creates shortcuts to files and
-ostensibly adds icons to them&hellip; and replacing one of the system <code>EXE</code> files
-with it, in case the filename was &ldquo;magical&rdquo;. The real magic was young me
-learning the valuable lesson that I should&rsquo;ve made a backup of this file before
-replacing it.</p>
-<h2 id="visual-basic-late-90s">Visual Basic (late 90s)</h2>
-<p>By the late 90s, Windows 9x came around along with Microsoft Office, which had a
-wonderful capability: <a href="https://en.wikipedia.org/wiki/Visual_Basic_for_Applications" target="_blank" rel="noopener noreffer ">Visual Basic for Applications</a>. this gave me my
-first experience writing actual GUI applications, strangely embedded within an
-Excel spreadsheet. Most memorably, Pokémon was a huge deal at the time, and I
-had created &ldquo;APCO - A Pokémon Card Organizer&rdquo; - a trivial deck building app.</p>
-<div class="details admonition note">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note - Pokémon<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>On April 1st, 1997, the very first episode of the Pokémon anime was shown on
-Israel, on channel 6; I was the official &ldquo;hero of the day&rdquo; guest, as a Pokémon
-expert. I got to this position by nitpicking on some &ldquo;kids&rsquo; portal&rdquo; website that
-their Pokémon page contained inaccuracies, which landed me a job as their
-Pokémon card strategy reviewer; I was 11, so they paid me in Pokémon cards.</p>
-<p>For the anime premiere I was interviewed by Dana Dvorin; I have sadly been
-unable to find any footage of this hilariously awkward interview.</p>
-</div>
-        </div>
-    </div>
-<p>Once again, I wanted to distribute this software - perhaps using this magical
-thing I now had access to called <em>The Internet</em>. And, once again, sending an
-excel <code>XLS</code> file around with a big &ldquo;click me to start the actual program button&rdquo;
-seemed, well, janky. Amazingly, a friend had a copy of &ldquo;really real Visual
-Basic&rdquo; (the coveted <em>compiler</em> I had heard of), and was able to convert my janky
-app-in-<code>XLS</code> to a proper shiny <code>EXE</code> file. Slight caveat - there was a runtime
-library that had to be distributed alongside it, or it wouldn&rsquo;t work.</p>
-<p>This got me looking at <em>installers</em>. All &ldquo;serious&rdquo; software was proudly using
-InstallShield (this was before these newfangled <code>.MSI</code> files - even the
-installer was a shiny <code>.EXE</code>!), but looking at a trial version left me
-scratching my head at how things should be organized. Finally, a self-extracting
-RAR file (yay shareware WinRAR) did the trick. I vaguely recall successfully
-uploading the finished product to some download site of the era, probably
-Tucows.</p>
-<figure><a class="lightgallery" href="/posts/software-distribution/installshield.png" title="/posts/software-distribution/installshield.png" data-thumbnail="/posts/software-distribution/installshield.png" data-sub-html="<h2>If your software didn&rsquo;t come this way in the 90s, was it even real software?</h2>">
-        
-    </a><figcaption class="image-caption">If your software didn&rsquo;t come this way in the 90s, was it even real software?</figcaption>
-    </figure>
-<h2 id="linux-early-2000s">Linux (early 2000s)</h2>
-<p>In high school, I was first introduced to Linux. It (Mandrake 8.1) came in 3 CDs
-burned by a guy who couldn&rsquo;t have seemed shadier if he had pulled them out of a
-trench-coat.  Regardless, it was enlightening: How can this possibly be legally
-free? Wait, it just <em>comes</em> with a compiler? What do you mean the compiler
-doesn&rsquo;t contain a GUI? It was a fascinating dive into understanding what my
-computer even <em>is</em>; while I was old enough to remember pre-Windows days, I had
-switched to Linux from Windows 98<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, so all of my experience with
-Windows was as a graphical wrapper running inside DOS. For instance, not having
-drive letters (A, B nor C) was <em>wild</em>.</p>
-<div class="details admonition note">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note: Gentoo<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>I didn&rsquo;t spend long with Mandrake before switching to Gentoo Linux, where
-installing software is accomplished with the <code>emerge</code> command. The <code>emerge</code>
-command magically (to me, at the time) gets the software from the internet and
-<em>compiles</em> it. In my mind, I was Hackerman. In reality, it
-was more often &ldquo;sorry dad, you can&rsquo;t use the computer today, a new version of
-KDE just came out and the build will take a few hours&rdquo;. I stuck with Gentoo
-until college<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, when a stack of remarkably slick-looking envelopes with
-Ubuntu CDs showed up. At this point Linux started seeming serious, and the &ldquo;year
-of the linux desktop&rdquo; meme started to get to me. Ubuntu also killed off
-install-fests<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, as installing it was too easy to justify getting
-friends and pizza together.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>My grandma got my old PC with it, so I can proudly say my grandma is
-a former Gentoo user. She exclusively used the browser, but whenever she needed
-support I was the only one who could provide it, as any other support people
-invariably tried to get her to find the &ldquo;start&rdquo; menu, even when the problem was
-entirely within gmail.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>If anyone has footage of the install-fest I was forced to
-trick <a href="https://en.wikipedia.org/wiki/Moshik_Afia" target="_blank" rel="noopener noreffer ">Moshik Afia</a> to go to, as part of פעם בחיים on Yes, please send it my
-way!&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-</div>
-        </div>
-    </div>
-<p>As I dove deeper into Linux, I realized I&rsquo;m seeing some of the older jank once
-again. Lots of software came as shell scripts that ran <code>java</code>, meaning you had
-to have the Java Runtime Environment installed. Python software came as scripts,
-which needed not only Python itself installed, but usually some additional
-python libraries. At this point I noticed the following:</p>
-<ol>
-<li>This only seems less janky in Linux because executables usually don&rsquo;t have
-filename extensions; the difference between a &ldquo;clean <code>.EXE</code>&rdquo; and a &ldquo;janky
-<code>.BAT</code>&rdquo; is tucked away in the file contents.</li>
-<li>&ldquo;Proper&rdquo; C programs also need a bunch of stuff installed along with them.</li>
-</ol>
-<p>The Linux ecosystem has a dizzying array of solutions to this problem. From
-meticulously<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> packaging DEB files through FlatPak/Snap/whatever
-through Docker<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. I&rsquo;m the kind of nerd who&rsquo;s excitedly following
-<a href="https://fasterthanli.me/series/building-a-rust-service-with-nix" target="_blank" rel="noopener noreffer ">FasterThanLime&rsquo;s series</a> about how Nix presumably does this
-better than anything else.</p>
-<h2 id="afterword---the-web">Afterword - the web</h2>
-<p>At some point, probably too gradually for me to notice, web apps became actual
-apps. XMLHttpRequest is horribly named, but pretty transformative when used by
-sites to dynamically fetch more information; Javascript had gradually
-transformed to &ldquo;the Assembly language of the web&rdquo; (i.e. it&rsquo;s the thing stuff
-compiles to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>); but the really cool thing about web apps remains
-distribution: Just give people the URL.</p>
-<p>Yes, there&rsquo;s work to do. You need a server, you need to handle its uptime and
-connectivity (cloud has made this effectively trivial, even more so for quick
-demos with things like <a href="https://ngrok.com" target="_blank" rel="noopener noreffer ">ngrok</a>). The app itself also needs to be written
-differently: updates are nontrivial, if any state is saved then
-backwards-compatibility becomes difficult, you need to handle different browsers
-(and different device types); it&rsquo;s not easy. But a giant ecosystem has developed
-around solving these problems, and the infrastructure to use the web has become,
-by comparison, effectively ubiquitous. And to my 8-year-old self, there&rsquo;d be
-nothing cooler than that: &ldquo;Forget the floppies, just give a note with your
-address to your classmates; it&rsquo;s basically guaranteed to work on their
-computer&rdquo;.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Windows 2000 had pretty much skipped home PCs around me, and XP was new
-and untrustworthy.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>The <a href="https://www.debian.org/doc/manuals/maint-guide/" target="_blank" rel="noopener noreffer ">Debian New Maintainers&rsquo; Guide</a>, which explains how to do this, starts off with &ldquo;social dynamics of Debian&rdquo; before getting into the details of actually packaging anything.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>Sometimes described as &ldquo;It works on your machine? Then we&rsquo;ll ship your machine.&rdquo; <a href="https://www.reddit.com/r/ProgrammerHumor/comments/cw58z7/it_works_on_my_machine/" target="_blank" rel="noopener noreffer ">credit</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>I think compiling stuff to WASM is becoming more popular nowadays.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>]]></description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/rust/</guid><description><![CDATA[<h2 id="its-december-2022-lets-try-rust-">It&rsquo;s December 2022, let&rsquo;s try Rust 🦀</h2>
-<p>As you can tell by previous posts on this blog, I used to be quite a fan of Go;
-I use it at work often, and some features about it are legitimately great:
-Package management, &ldquo;static duck typing&rdquo; (structural typing), providing
-interfaces while stepping away from inheritance, all quite nice (and present in
-Rust). I wasn&rsquo;t too unhappy with the repetitive error handling, generics are
-finally coming into play, and nothing I write is anywhere near
-performance-critical enough for me to care about GC overhead (though I did
-glance firmly at the binary size once in a while). But come December, as I
-decided to give <a href="https://adventofcode.com" target="_blank" rel="noopener noreffer ">Advent of Code</a> a go this year, I figured I&rsquo;d try to use
-it to learn a new language: Rust.</p>
-<p>Now, Rust has been steadily gaining popularity for a while, but two recent
-events caused me to pay attention: In September, a CTO from Microsoft gave Rust
-a <a href="https://www.theregister.com/2022/09/20/rust_microsoft_c/" target="_blank" rel="noopener noreffer ">significant endorsement</a>. In that same month,
-Linus Torvalds effectively announced that <a href="https://www.zdnet.com/article/linus-torvalds-rust-will-go-into-linux-6-1/" target="_blank" rel="noopener noreffer ">Rust was coming to the Linux
-kernel</a>. When those two agree on something, I figured, it&rsquo;s
-probably worth paying attention.</p>
-<p>To my delight, someone else &mdash; <a href="https://fasterthanli.me" target="_blank" rel="noopener noreffer ">fasterthanlime</a> &mdash; was doing Advent of Code in
-Rust. In fact, he was doing a day-by-day <a href="https://fasterthanli.me/series/advent-of-code-2022" target="_blank" rel="noopener noreffer ">&ldquo;let&rsquo;s learn rust while solving Advent
-of Code&rdquo;</a> series. <a href="https://fasterthanli.me/series/advent-of-code-2022/part-1" target="_blank" rel="noopener noreffer ">Part 1</a>
-includes everything you need to get started, tooling and all, and a delightfully
-unusual introduction to file I/O which I won&rsquo;t spoil.</p>
-<div class="details admonition tip">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Other ways of getting started with Rust<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">When getting started with Rust, I tried a few things out from
-<a href="https://www.rust-lang.org/learn" target="_blank" rel="noopener noreffer ">https://www.rust-lang.org/learn</a>, but my recommendation is this: Before
-installing it, before going to the book, before any of that &mdash; go do
-<a href="https://github.com/rust-lang/rustlings/" target="_blank" rel="noopener noreffer ">rustlings</a>, specifically use their
-Gitpod link. This will set up a free gitpod &ldquo;cloud IDE&rdquo; (VSCode-based),
-reasonably configured for Rust, and you can get right to live exercises.</div>
-        </div>
-    </div>
-<p>Having spent some time with Rust, I now see more and more faults with other
-programming languages. Others have written many words about this; fasterthanlime
-has a couple of <a href="https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride" target="_blank" rel="noopener noreffer ">very</a> <a href="https://fasterthanli.me/articles/lies-we-tell-ourselves-to-keep-using-golang" target="_blank" rel="noopener noreffer ">detailed</a> posts in this
-direction; the folks at Discord wrote a great post about <a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust" target="_blank" rel="noopener noreffer ">switching from go to
-rust to eliminate GC latency</a>. But I&rsquo;d like to talk about
-something far, far simpler.</p>
-<p>Let&rsquo;s talk about null checks.</p>
-<h2 id="things-that-may-or-may-not-be-there">Things that may or may not be there</h2>
-<p>My initial sense of Rust is that it involves a lot of fighting with the
-compiler&hellip; and the compiler being right. Getting code to build is much more
-difficult than I&rsquo;m used to, but when it builds &mdash; it works. Not always, but with
-a much higher likelihood than I&rsquo;ve seen elsewhere. To explain this phenomenon,
-let&rsquo;s take a look at cases when data is allowed to be absent.</p>
-<p>It is often useful, in code, to deal with something that may or may not be
-present. I&rsquo;ve recently had the unpleasant experience of dealing with
-soccer<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> for work<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>; I still don&rsquo;t quite get it, so this
-example might not make any sense, but bear with me: Let&rsquo;s imagine that a soccer
-<code>Team</code> has several <code>players</code> (each of which is a <code>Person</code> with a <code>name</code> and
-<code>age</code>), and may or may not have a <code>coach</code>, who is also a <code>Person</code>. In JSON, that
-would look like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;players&#34;</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;John Doe&#34;</span><span class="p">,</span> <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">24</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Richard Roe&#34;</span><span class="p">,</span> <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Might be absent:
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;coach&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Mark Moe&#34;</span><span class="p">,</span> <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">53</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Suppose you write some code to handle such a <code>Team</code>, and, say, return whether or
-not any of the players are older than the coach.</p>
-<h3 id="go">Go</h3>
-<p>In Go, you&rsquo;d probably end up doing something like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nx">Team</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">Players</span> <span class="p">[]</span><span class="nx">Person</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">Coach</span> <span class="o">*</span><span class="nx">Person</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="o">*</span> <span class="nx">Team</span><span class="p">)</span> <span class="nf">anyPlayersOlderThanCoach</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// YOU WILL FORGET</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span>      <span class="c1">// TO DO THIS PART,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>                   <span class="c1">// I ASSURE YOU.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">p</span> <span class="nx">in</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Players</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Age</span> <span class="p">&gt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Coach</span><span class="p">.</span><span class="nx">Age</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// ...so ^^^^^^^ will sometimes crash.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kc">false</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>At some point you will encounter a team without a coach, and your code will
-panic and exit with an error. It won&rsquo;t even be a useful error message &mdash; it&rsquo;ll be
-something like this (but probably with many more goroutines).</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">panic: runtime error: invalid memory address or nil pointer dereference
-</span></span><span class="line"><span class="cl">[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x480c76]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">goroutine 1 [running]:
-</span></span><span class="line"><span class="cl">main.main()
-</span></span><span class="line"><span class="cl">  /tmp/sandbox3217875017/prog.go:17 +0x16
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Program exited./Op
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The issue is that the null (well, <code>nil</code>) pointer is used as a way to indicate
-&ldquo;something that is not there&rdquo;, and Go &mdash; just like C &mdash; uses pointers both to
-indicate &ldquo;we&rsquo;re dealing with pointing at memory addresses&rdquo; and to indicate
-&ldquo;we&rsquo;re dealing with something that may be absent&rdquo;.</p>
-<p>Worse yet, because most teams <em>do</em> have coaches, this will be a rare case. It&rsquo;ll
-likely be shuffled off into the back of the bug queue as a &ldquo;rare crash&rdquo;, waiting
-to jump on you when somehow a coach-free team makes it to the world cup finals.</p>
-<h3 id="rust">Rust</h3>
-<p>Although rust does support pointers (null and otherwise), those are usually
-relegated to <a href="https://doc.rust-lang.org/std/keyword.unsafe.html" target="_blank" rel="noopener noreffer "><code>unsafe</code></a> code. In day-to-day rust, indicating that a
-value might be absent is done using <a href="https://doc.rust-lang.org/std/option/index.html" target="_blank" rel="noopener noreffer "><code>std::Option</code></a>. If you were
-recreating the same naive approach as Go, you&rsquo;d end up writing something like
-this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">players</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">coach</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">any_players_older_than_coach</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Don&#39;t code like this, but...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">is_none</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// This is the
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="w">                     </span><span class="c1">// part you will
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">}</span><span class="w">                                  </span><span class="c1">// forget to do.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">coach_age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">age</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ...so this part will crash:      ^^^^^^^^
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">players</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">any</span><span class="p">(</span><span class="o">|</span><span class="n">p</span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">coach_age</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Yes, Rust&rsquo;s support for functional-style programming blows Go&rsquo;s out of the
-water. Yes, I&rsquo;m salty.</div>
-        </div>
-    </div>
-<p>The error you&rsquo;d get for forgetting to check whether <code>coach.as_ref().is_none()</code>
-is actually a bit better:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">thread &#39;main&#39; panicked at &#39;called `Option::unwrap()` on
-</span></span><span class="line"><span class="cl">a `None` value&#39;, src/main.rs:13:45
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>However, there&rsquo;s an extremely handy smoking gun here &mdash; <code>unwrap</code> itself. That&rsquo;s
-not a function that usually gets used in production<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> code. A
-reviewer or linter should be able to catch it. The function should actually be
-written like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">impl</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">any_players_older_than_coach</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Some</span><span class="p">(</span><span class="n">definitely_a_coach</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">players</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">any</span><span class="p">(</span><span class="o">|</span><span class="n">p</span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">definitely_a_coach</span><span class="p">.</span><span class="n">age</span><span class="p">),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// definitely_a_coach can be called &#34;coach&#34; as well,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="c1">// and usually would - but it&#39;s a different variable
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="c1">// with a different type.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Importantly, the type of <code>definitely_a_coach</code> is <em>not</em> <code>Option&lt;Person&gt;</code> &mdash; it&rsquo;s
-<code>Person</code>. That is, when using <code>match</code> (which is fairly standard), the guarantee
-that &ldquo;you made sure the thing is actually there&rdquo; happens <em>at compile time</em>.
-Omitting the <code>None</code> case is a compilation error.</p>
-<div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">This is a great example of how Rust moves head-scratches from runtime to
-compile-time. It&rsquo;s a big part of why it&rsquo;s harder to get Rust code to build.</div>
-        </div>
-    </div>
-<p>In fact, there&rsquo;s an equivalent way to write this, shorter, but providing the
-same safety guarantees:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">impl</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">any_players_older_than_coach</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">definitely_a_coach</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">coach</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">players</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">any</span><span class="p">(</span><span class="o">|</span><span class="n">p</span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">definitely_a_coach</span><span class="p">.</span><span class="n">age</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kc">false</span><span class="w"> </span><span class="c1">// Omitting this is also a compilation error;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="c1">// it won&#39;t let you forget the &#34;else&#34; case.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Importantly, the syntax that <em>might</em> panic (<code>unwrap</code>) is quite different, easy
-to pick out, and does not have to be used at all. In contrast, in other
-languages, like Go, we don&rsquo;t get the opportunity to notice that it&rsquo;s happening.
-The <code>coach</code> pointer gets dereferenced using the same syntax, whether or not it&rsquo;s
-guaranteed to not be <code>nil</code>.</p>
-<h3 id="other-languages">Other languages</h3>
-<h4 id="haskell">Haskell</h4>
-<p>This seems to be equivalent to the Haskell <code>Maybe</code> type. If I were smart enough
-to code in Haskell, I&rsquo;d be sure. One of the nice things about Rust is that it
-allows writing code in imperative style without understanding monads.</p>
-<h4 id="java">Java</h4>
-<p>Java 8 introduced <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener noreffer "><code>java.util.Optional</code></a>, which does the same
-thing as Rust&rsquo;s <code>Option</code>. However, the safety guarantees are more limited:</p>
-<ul>
-<li>
-<p>You can check <code>ifPresent()</code> and use <code>get()</code>, but this is no better than
-checking if a standard reference would be <code>null</code> (that is &mdash; nothing makes sure
-that you did so, and if nothing is there &mdash; <code>get()</code> throws an exception).</p>
-<div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Apparently some external inspectors do check for this, e.g.
-<a href="https://rules.sonarsource.com/java/RSPEC-3655" target="_blank" rel="noopener noreffer ">https://rules.sonarsource.com/java/RSPEC-3655</a></div>
-        </div>
-    </div>
-</li>
-<li>
-<p>You can use <code>orElse(defaultValue)</code>, which makes sense in some cases, but not
-always (what if it&rsquo;s a temperature-in-celsius that might be absent? You can&rsquo;t
-use 0° as a default value).</p>
-</li>
-<li>
-<p>You can use various other methods like <code>filter</code> and <code>map</code>, but that requires
-callback-style programming (which I don&rsquo;t <em>think</em> is the norm for Java).</p>
-</li>
-</ul>
-<p>At the end of the day, Java&rsquo;s legacy is probably a limiting factor here &mdash; your
-code likely needs to interoperate with a pile of code that simply uses <code>null</code>
-the traditional way for &ldquo;thing that is not there&rdquo;.</p>
-<p>Finally, researching for this post showed at least one guide claiming the
-following as <a href="https://www.baeldung.com/java-optional#misuages" target="_blank" rel="noopener noreffer ">Misuse of
-<code>Optional</code></a>:</p>
-<ul>
-<li>Passing an <code>Optional</code> parameter to a method</li>
-<li>Having an <code>Optional</code> field (also discussed <a href="https://stackoverflow.com/questions/23454952/uses-for-optional" target="_blank" rel="noopener noreffer ">here</a>), exactly
-as we&rsquo;re doing here.</li>
-</ul>
-<p>&hellip;so I guess you&rsquo;re stuck null-checking for those cases.</p>
-<h4 id="c">C++</h4>
-<p>C++17 adds <a href="https://en.cppreference.com/w/cpp/utility/optional" target="_blank" rel="noopener noreffer ">std::optional</a>. I haven&rsquo;t tried it out, but judging
-from <a href="https://devblogs.microsoft.com/cppblog/stdoptional-how-when-and-why/" target="_blank" rel="noopener noreffer ">a quick read</a>, it appears to be more robust than
-Java&rsquo;s, but still far less safe than Rust&rsquo;s: You&rsquo;re still checking <code>has_value()</code>
-and risking an exception when calling <code>value()</code> (&hellip;does your codebase even
-<a href="https://google.github.io/styleguide/cppguide.html#Exceptions" target="_blank" rel="noopener noreffer ">allow for exceptions</a>?), or using <code>value_or</code> if a
-sentinel value is acceptable.</p>
-<h2 id="why-does-this-matter">Why does this matter?</h2>
-<p>Go is often regarded as a memory-safe<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> language. And that&rsquo;s technically
-correct in this case &mdash; if you get a null dereference, your code will simply
-crash, as opposed to some crazy Undefined Behavior. Presumably your production
-setup is resilient to crashes, and you&rsquo;ll catch these crashes in pre-production
-anyway.</p>
-<p>&hellip;except, it&rsquo;ll take you a while to do that. And the crash will seem quite
-esoteric, and might not even happen in pre-production (does your test data
-contain teams without coaches?)&hellip; and, once again, if a coach-free team
-suddenly plays a very popular match, are you really set up to deal with such
-consistent crashes?</p>
-<p>It&rsquo;s possible to build automatic tooling for detecting these cases, and people
-far smarter than myself are already doing so. Unfortunately, applying them to
-legacy code is an even harder. I&rsquo;ve seen such a &ldquo;you did not check for null&rdquo;
-static analyzer completely miss a case quite similar to the above; and while we
-did catch it in pre-production, a lot of people wasted a lot of needless time on
-it.</p>
-<p>This is also only one (relatively-simple) example of what Rust does about
-safety. A more elaborate example is <a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html" target="_blank" rel="noopener noreffer ">mutexes</a>: A rust mutex &ldquo;holds&rdquo;
-the protected data, requiring you to <code>lock()</code> it to even access the data. This
-means that the type-system guarantees that the mutex protects whatever it&rsquo;s
-meant to protect. In Go, however, the protected value just <a href="https://dmitri.shuralyov.com/idiomatic-go#mutex-hat" target="_blank" rel="noopener noreffer ">wears the mutex as a
-hat</a> &mdash; so the compiler has no clue. (There&rsquo;s at least one person
-<a href="https://github.com/dragazo/rustex" target="_blank" rel="noopener noreffer ">porting this idea into C++</a>)</p>
-<p>So examine your programming language; see what safety guarantees you&rsquo;d like it
-to have (try to use the ones it already does!); and perhaps look at Rust for a
-bit of inspiration.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Short for &mdash; did you know? &mdash; Association Football. I live in Ireland,
-which plays multiple kinds of football, so I find &ldquo;soccer&rdquo; to be the more
-specific term.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>I really don&rsquo;t like watching any kind of sportsball, but there was
-a fair bit of excitement around the recent FIFA World Cup, and my
-involvement extended to having to watch some of those matches. Live 🙄. In
-contrast, to relax in the evenings, I did AoC &mdash; so I effectively watch
-soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>Rust actually has many useful-while-prototyping functions, like
-<a href="https://doc.rust-lang.org/std/macro.todo.html" target="_blank" rel="noopener noreffer "><code>todo!()</code></a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>And people use that reasoning to build some pretty cool stuff, like
-<a href="https://gokrazy.org" target="_blank" rel="noopener noreffer ">https://gokrazy.org</a>.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description><![CDATA[<p>One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&rsquo;t usually need it for night sleeps, but it&rsquo;s helpful for a &ldquo;cranky-because-tired&rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.</p>
-<p>There are quite a few ways to play white noise, and many cheap mobile battery-powered devices will do the trick just fine. However, I wanted a bit more control, at least for when we&rsquo;re at home:</p>
-<ul>
-<li>It&rsquo;d be useful to turn on the noise remotely, as entering a cranky baby&rsquo;s room sometimes riles him up.</li>
-<li>It&rsquo;d be useful to (gradually!) turn <em>off</em> the noise remotely, especially as my wife doesn&rsquo;t like the sound and it can be made worse with a baby monitor.</li>
-<li>I&rsquo;d like to customize the sound itself (we&rsquo;re actually going for more of a <a href="https://www.youtube.com/watch?v=ZXtimhT-ff4" target="_blank" rel="noopener noreffer ">pink</a>/<a href="https://www.youtube.com/watch?v=RqzGzwTY-6w" target="_blank" rel="noopener noreffer ">brown</a> noise)</li>
-</ul>
-<p>After trying out several options, I went for using a Google Home Mini; we have several of those lying around (they used to come as free gifts with various purchases), the audio quality is reasonable, and it&rsquo;s compact and clean-looking. Although it does respond to a &ldquo;play white noise&rdquo; command, that plays <a href="http://www.gstatic.com/voice_delight/sounds/long/pink_noise.mp3" target="_blank" rel="noopener noreffer ">this 1-hour-long segment</a>, which is too short. Instead, I created a 10 hour version with customized parameters like so (mostly inspired <a href="https://askubuntu.com/questions/789465/generate-white-noise-to-calm-a-baby" target="_blank" rel="noopener noreffer ">here</a>):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sox -c1 -n result.ogg <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  synth <span class="m">36000</span> brownnoise synth pinknoise <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  mix synth sine amod 0.1 <span class="m">90</span>
-</span></span><span class="line"><span class="cl">ffmpeg -i result.ogg result.mp3
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Why is the conversion to MP3 important? See <a href="#quirks" rel="">quirks</a>.</p>
-<p>The rest is a matter of hooking it up to <a href="https://www.home-assistant.io/" target="_blank" rel="noopener noreffer ">homeassistant</a>. The <code>media_player.play_media</code> service gets it to play just fine. To make it easy to toggle, I created an <a href="https://www.home-assistant.io/integrations/input_boolean/" target="_blank" rel="noopener noreffer ">input boolean</a> and automation to start or stop media when it changes. Because the google home can also be stopped directly, I added a second automation which sets the input boolean off when that happens.</p>
-<h2 id="main-dashboard-toggle">Main dashboard toggle</h2>
-<p>Having the white-noise-toggle on the main dashboard (an old chromebook in kiosk mode) is quite useful, especially when babysitters are involved. (There&rsquo;s also a physical button, driven by ESPHome, in the nursery - but that&rsquo;s not quite remote).</p>
-<p>My wife had a great idea for styling this toggle - showing a picture of the baby awake when the white noise is off, and asleep when it&rsquo;s on:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">picture-entity</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">show_state</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">show_name</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">entity</span><span class="p">:</span><span class="w"> </span><span class="l">input_boolean.white_noise_toggle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">state_image</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;off&#34;: </span><span class="l">local/awake.jpg</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;on&#34;: </span><span class="l">local/sleeping.jpg</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">White Noise</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">tap_action</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l">toggle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">hold_action</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l">more-info</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>The <code>hold_action: more-info</code> thing is quite useful, as it can quickly indicate how long the white noise was on, approximating how long the nap has been so far (assuming the white noise does its job).</p>
-<h2 id="secondary-controls">Secondary controls</h2>
-<p>For additional control, in a separate <a href="https://www.home-assistant.io/dashboards/views/" target="_blank" rel="noopener noreffer ">tab</a> of the dashboard, I have the following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">vertical-stack</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cards</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">entities</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">entities</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">entity</span><span class="p">:</span><span class="w"> </span><span class="l">media_player.googlehome1234</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">custom:slider-entity-row</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="l">mdi:volume-high</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">White noise volume</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">entity</span><span class="p">:</span><span class="w"> </span><span class="l">input_boolean.white_noise_toggle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">secondary_info</span><span class="p">:</span><span class="w"> </span><span class="l">last-changed</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">markdown</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Note: White noise volume is usually 40%. If it&#39;s off, it shows as 0%.&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>This allows easily controlling the volume (when it&rsquo;s on!), reminds us of what the &ldquo;usual&rdquo; volume setting is, and also quickly displays how long ago it was last toggled. <code>slider-entity-row</code> is an extension, which can be obtained <a href="https://github.com/thomasloven/lovelace-slider-entity-row" target="_blank" rel="noopener noreffer ">here</a>.</p>
-<h2 id="quirks">Quirks</h2>
-<p>While this setup works quite well, it has a couple of annoying quirks. Firstly, the Google Home plays a fairly loud chime before starting to play the white noise. Secondly, this involves the Google Home loading a ~300MB file. Originally I used ogg, and although it&rsquo;s usually cached, in some cases this could be a ~30-second process, with no user feedback visible. I&rsquo;ve considered having the script play a shorter clip multiple times over, but the playback has unpleasant gaps in that case (and risks repeating that loud chime).</p>
-<p>However, it seems that when pointing to an <em>mp3</em> file, audio starts playing immediately, without having to first finish downloading the whole file. The Google Home is pretty opaque about this, but experimentation seems to show this is consistent.</p>
-<h2 id="afterword">Afterword</h2>
-<p>Overall, this process of getting familiar with HomeAssistant and its various integrations has been delightful, with great community support and debuggability. My first thoughts were &ldquo;I don&rsquo;t need this - my projects are simple and I can code them myself&rdquo; - but the plethora of readily available integrations and the polished UI has made it well worth my time learning, and making changes is a breeze. And if my child sleeps better for it, that&rsquo;s a win in my book.</p>
-]]></description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/preload-key/</guid><description><![CDATA[<p>I run a small home server, which - among other things - has backups of data from cloud providers, in case I lose access to them; this data is sensitive and should therefore be encrypted. However, disk encryption requires a secret, and there are - generally speaking - four ways to go about that:</p>
-<ul>
-<li>Store the key on the same server as the encrypted disk</li>
-<li>Store the key on detachable media, attached to the same server as the encrypted disk</li>
-<li>Store the key on a different server</li>
-<li>Store the key in your brain (this is known as a &ldquo;passphrase&rdquo; or &ldquo;password&rdquo;)</li>
-</ul>
-<p>Using a separate server is a bit more complicated than I&rsquo;d like to go (and is not always supported, e.g. in the free version of TrueNAS Core), and storing the key on the same server won&rsquo;t protect me in case the server is stolen. For my usecase, it&rsquo;s an easily burgler-accessible NUC. Detchable media will have to remain attached, as I want to be able to reboot remotely (I&rsquo;ve heard some interesting suggestions, e.g. &ldquo;store the key in a USB key glued to your desk so the burgler will probably just disconnect it from the server&rdquo;). The last option is the simplest and most convenient, except when rebooting.</p>
-<p>When rebooting an encrypted system that uses a passphrase, you essentially have to do the following:</p>
-<ol>
-<li>Learn that a reboot is required (about once every 12 days on my server, for a kernel security update)</li>
-<li>Connect to the server to reboot it</li>
-<li>Wait for it to reboot</li>
-<li>Connect to the server again to input the passphrases</li>
-</ol>
-<p>I always hate actions with a &ldquo;wait&rdquo; part to them, so I figured - wouldn&rsquo;t it be nice to input the passphrases as part of the reboot process? That way I essentially shave off steps 3 and 4. The idea is to allow <em>just the next boot</em> to load the encrypted bits without entering any passwords, authorized by, well, someone who knows the relevant passwords. Hopefully burglars aren&rsquo;t sophisticated enough to target my machine on kernel patch days.</p>
-<p>My particular system uses ZFS-on-linux with a couple of encrypted filesystems, and the following is an implementation using systemd and Go. I do think the idea is useful enough for other passphrase-encrypted systems (e.g. LUKS).</p>
-<p>The overall design is:</p>
-<ol>
-<li>Before rebooting, you run the go binary on the server as root. It will:
-<ol>
-<li>Figure out which ZFS filesystems currently have a loaded key</li>
-<li>Ask for the password for those (and check that it&rsquo;s correct)</li>
-<li>Create <code>/zfs-reboot-passphrase.sh</code> with the passphrases embedded
-<ul>
-<li><code>shellescape</code> turns out to be useful, as <code>fmt.Sprintf(&quot;%q&quot;, password)</code> insists on using double quotes, which doesn&rsquo;t prevent bash from interpreting strings.</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>On boot, the <code>zfs-reboot-passphrase</code> systemd service will check if <code>/zfs-reboot-passphrase.sh</code> exists and run it. It will:
-<ol>
-<li>Load the embedded passphrases and mount the relevant filesystems</li>
-<li><code>shred -u</code> itself - rewrite itself with random data to prevent undeletion, and then delete itself.</li>
-</ol>
-</li>
-</ol>
-<p>The specific implementation isn&rsquo;t super-clean nor important, but I&rsquo;m attaching it as-is (buyer beware) for completeness. Hopefully it serves as inspiration for something useful.</p>
-<p><strong><code>/lib/systemd/system/zfs-reboot-passphrase.service</code>:</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Unit]</span>
-</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">Mount remaining ZFS filesystems with passphrase</span>
-</span></span><span class="line"><span class="cl"><span class="na">After</span><span class="o">=</span><span class="s">zfs.service</span>
-</span></span><span class="line"><span class="cl"><span class="na">ConditionPathExists</span><span class="o">=</span><span class="s">/zfs-reboot-passphrase.sh</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
-</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
-</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/zfs-reboot-passphrase.sh</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
-</span></span><span class="line"><span class="cl"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong><code>load_keys.tmpl</code>:</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="o">{{</span> range <span class="nv">$path</span>, <span class="nv">$password</span> :<span class="o">=</span> .<span class="o">}}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">{{</span> <span class="nv">$password</span> <span class="o">}}</span> <span class="p">|</span> zfs load-key <span class="o">{{</span> <span class="nv">$path</span> <span class="o">}}</span>
-</span></span><span class="line"><span class="cl"><span class="o">{{</span> end <span class="o">}}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">{{</span> range <span class="nv">$path</span>, <span class="nv">$password</span> :<span class="o">=</span> . <span class="o">}}</span>
-</span></span><span class="line"><span class="cl">zfs mount <span class="o">{{</span> <span class="nv">$path</span> <span class="o">}}</span>
-</span></span><span class="line"><span class="cl"><span class="o">{{</span> end <span class="o">}}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">exec</span> shred -u <span class="nv">$0</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong><code>main.go</code>:</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;embed&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;flag&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;fmt&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;io&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;os&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;os/exec&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;os/user&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;strings&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;text/template&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;golang.org/x/term&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;gopkg.in/alessio/shellescape.v1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//go:embed *.tmpl</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">templatesFS</span> <span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">templates</span>   <span class="p">=</span> <span class="nx">template</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nf">ParseFS</span><span class="p">(</span><span class="nx">templatesFS</span><span class="p">,</span> <span class="s">&#34;*.tmpl&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nx">skipPasswordCheck</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Bool</span><span class="p">(</span><span class="s">&#34;skip_password_check&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;Do not check entered passwords&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">outputFile</span>        <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;output_file&#34;</span><span class="p">,</span> <span class="s">&#34;/zfs-reboot-passphrase.sh&#34;</span><span class="p">,</span> <span class="s">&#34;Write output to this file (blank is stdout)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nf">mustBeRoot</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nx">fileSystems</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">fileSystemsWithKeyStatus</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nx">templateData</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">fs</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">fileSystems</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">password</span> <span class="o">:=</span> <span class="nf">getPassword</span><span class="p">(</span><span class="nx">fs</span><span class="p">);</span> <span class="nx">password</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">templateData</span><span class="p">[</span><span class="nx">fs</span><span class="p">]</span> <span class="p">=</span> <span class="nx">shellescape</span><span class="p">.</span><span class="nf">Quote</span><span class="p">(</span><span class="nx">password</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintln</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;Skipping&#34;</span><span class="p">,</span> <span class="nx">fs</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">out</span> <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">*</span><span class="nx">outputFile</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">out</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">OpenFile</span><span class="p">(</span><span class="o">*</span><span class="nx">outputFile</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">O_RDWR</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_TRUNC</span><span class="p">,</span> <span class="mo">0700</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;Can&#39;t write to &#34;</span> <span class="o">+</span> <span class="o">*</span><span class="nx">outputFile</span> <span class="o">+</span> <span class="s">&#34;: &#34;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nx">templates</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span> <span class="nx">templateData</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">out</span> <span class="o">!=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintln</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;Wrote&#34;</span><span class="p">,</span> <span class="o">*</span><span class="nx">outputFile</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getPassword</span><span class="p">(</span><span class="nx">fs</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;Password for %s (empty to skip): &#34;</span><span class="p">,</span> <span class="nx">fs</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pass</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">term</span><span class="p">.</span><span class="nf">ReadPassword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdin</span><span class="p">.</span><span class="nf">Fd</span><span class="p">()))</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintln</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">pass</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="s">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">checkPassword</span><span class="p">(</span><span class="nx">fs</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">pass</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;Password mismatch: %v\n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">pass</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">mustBeRoot</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">u</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">user</span><span class="p">.</span><span class="nf">Current</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;Could not check I&#39;m root&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">u</span><span class="p">.</span><span class="nx">Uid</span> <span class="o">!=</span> <span class="s">&#34;0&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;Must run as root&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">fileSystemsWithKeyStatus</span><span class="p">()</span> <span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">result</span> <span class="p">[]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">keyStatus</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">exec</span><span class="p">.</span><span class="nf">Command</span><span class="p">(</span><span class="s">&#34;zfs&#34;</span><span class="p">,</span> <span class="s">&#34;get&#34;</span><span class="p">,</span> <span class="s">&#34;-H&#34;</span><span class="p">,</span> <span class="s">&#34;-t&#34;</span><span class="p">,</span> <span class="s">&#34;filesystem&#34;</span><span class="p">,</span> <span class="s">&#34;keystatus&#34;</span><span class="p">).</span><span class="nf">Output</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;failed to check filesystems with keys: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">line</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Split</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">keyStatus</span><span class="p">),</span> <span class="s">&#34;\n&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">spl</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Fields</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">line</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">spl</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="nx">spl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#34;available&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">spl</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">result</span><span class="p">,</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">checkPassword</span><span class="p">(</span><span class="nx">fs</span><span class="p">,</span> <span class="nx">password</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">*</span><span class="nx">skipPasswordCheck</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">cmd</span> <span class="o">:=</span> <span class="nx">exec</span><span class="p">.</span><span class="nf">Command</span><span class="p">(</span><span class="s">&#34;zfs&#34;</span><span class="p">,</span> <span class="s">&#34;load-key&#34;</span><span class="p">,</span> <span class="s">&#34;-n&#34;</span><span class="p">,</span> <span class="nx">fs</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">stdin</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cmd</span><span class="p">.</span><span class="nf">StdinPipe</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;failed to send password to zfs load-key: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">stdin</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="nx">stdin</span><span class="p">,</span> <span class="nx">password</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">output</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cmd</span><span class="p">.</span><span class="nf">CombinedOutput</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;password verification failed: %s&#34;</span><span class="p">,</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">TrimSpace</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">output</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<p>As noted in the <a href="https://lutzky.net/posts/software-parenting-2/" rel="">previous post</a>, I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn&rsquo;t have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it&rsquo;s quite capable as a microcontroller on its own (and the newer ESP32 is faster).</p>
-<p>So what&rsquo;s the difference between a (very small) computer and a microcontroller? A Raspberry Pi boots off an SD card, usually to a full-fledged Linux operating system; you&rsquo;d operate it either directly with a monitor and keyboard, or connect remotely using SSH. You can install/create software on it as you would on a &ldquo;full-size&rdquo; computer, and I usually do this in Go (although Python is more popular). Conversely, a microcontroller will usually run only one program, which you need to build on a separate computer, connect it over USB to the microcontroller board, and flash it. This has a number of advantages, including simplicity and pretty-much-instant boot.</p>
-<p>Coding for the ESP8266 can be done using the same tooling as Arduino - namely, in C++<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, on the Arduino IDE. However, during this project I learned of <a href="https://platformio.org/" target="_blank" rel="noopener noreffer ">PlatformIO</a>, which is far more comfortable to work with: It&rsquo;s integrated into VSCode, and git, auto-formatting, autocomplete and <a href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim" target="_blank" rel="noopener noreffer ">VIM keybindings</a> all work nicely. It also provides a more organized approach to unit testing (practically absent in Arduino IDE) and per-project dependency management (you can list what each project needs and have it auto-install). This made the project fun enough for a few iterations.</p>
-<p>One quirk of working with the BabyBuddy API is that reporting a diaper change requires supplying the time of change, even if our intention is &ldquo;right now&rdquo;. That&rsquo;s easy enough on a Linux system, but microcontrollers don&rsquo;t generally have clocks. Thankfully, libraries such as <a href="https://github.com/mcxiaoke/ESPDateTime" target="_blank" rel="noopener noreffer ">ESPDateTime</a> provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:</p>
-<figure><a class="lightgallery" href="/posts/software-parenting-3/feature-poobuttons-v2.jpg" title="/posts/software-parenting-3/feature-poobuttons-v2.jpg" data-thumbnail="/posts/software-parenting-3/feature-poobuttons-v2.jpg" data-sub-html="<h2>Poobuttons v2 - nodeMCU on breadboard</h2>">
-        
-    </a><figcaption class="image-caption">Poobuttons v2 - nodeMCU on breadboard</figcaption>
-    </figure>
-<p>Indeed, this version fits neatly onto a single (full-sized) breadboard. It&rsquo;s not quite <a href="https://www.youtube.com/watch?v=PE-_rJqvDhQ" target="_blank" rel="noopener noreffer ">Ben Eater</a> grade, but the NodeMCU is pretty good for breadboard mounting, and using solid-core jumpers let me make it much neater than the previous iteration. However, at this point we realized there was a missing feature: We were never quite sure if we had pressed the button, especially if we were performing a diaper change together<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> . A couple of LEDs can only convey so much information.</p>
-<p>I decided to repurpose my <a href="https://lutzky.net/2021/03/14/pitemp/" target="_blank" rel="noopener noreffer ">shitty cardboard LCD case</a> for this project. These tactile buttons have quite short feet - they don&rsquo;t make it through the cardboard, and I insisted on avoiding using a perfboard and soldering iron - as, at the time, I had neither. I ultimately decided to reuse the mini-breadboard from <a href="https://lutzky.net/posts/software-parenting-2/" rel="">the previous version</a>; like many (all?) breadboards, its bottom is an adhesive pad; I didn&rsquo;t even bother to remove the resistors from V1, they add a certain design flare to it. With a few iterations on the UI, it was wife-approved: Custom characters are fully supported in C++ (though, not in Go), so I got nice labels for the tactile buttons, as well as a heartbeat<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> to indicate that NTP is still working.</p>
-<figure><a class="lightgallery" href="/posts/software-parenting-3/poobuttons-v3.jpg" title="/posts/software-parenting-3/poobuttons-v3.jpg" data-thumbnail="/posts/software-parenting-3/poobuttons-v3.jpg" data-sub-html="<h2>Poobuttons v3 - nodeMCU with LCD in cardboard</h2>">
-        
-    </a><figcaption class="image-caption">Poobuttons v3 - nodeMCU with LCD in cardboard</figcaption>
-    </figure>
-<p>Overall, the project has been a blast, and the result is everyday-useful. Working on it has made me realize how much I need my own space for late-night electronics projects, but that&rsquo;s a project for another day.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Actually available - as in, as opposed to Raspberry Pi 0w, they&rsquo;re in stock in many places at the moment.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>Unfortunately, <a href="https://tinygo.org/docs/reference/microcontrollers/nodemcu/" target="_blank" rel="noopener noreffer ">TinyGo does not yet support wifi</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>We call this procedure <a href="https://www.youtube.com/watch?v=BI75uWxEajA" target="_blank" rel="noopener noreffer ">Formula 1</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>2nd row from the bottom, rightmost column; you can see it fading out in this shot. It blinks every second. Although the photo doesn&rsquo;t show it, the LCD&rsquo;s contrast is actually great in-person.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></description></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/posts/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 21:57:09 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-2/</guid><description><![CDATA[<p>With BabyBuddy now installed and running properly (see <a href="https://lutzky.net/posts/software-parenting-1/" rel="">previous post</a>), and an always-on display showing the latest information, we now got into the swing of using it. We loved the timeline for &ldquo;what happened while I as sleeping&rdquo;; we loved the food amount reports; and because we had a consistent &ldquo;feed, then change, then wait 15 minutes with baby upright to reduce spit-up&rdquo; system, the display&rsquo;s &ldquo;time since last change&rdquo; box was super useful as well. However, as you might imagine, we did <em>not</em> love handling a freshly-re-diapered baby with one hand while using the other to unlock the phone and navigate to the &ldquo;yes he pooped now&rdquo; page in a web app.</p>
-<p>My first idea was to create voice commands for the Nest Home Mini in the room. However, it&rsquo;s prone to misunderstanding us; you have to enunciate, and even then the speech recognition is mostly tuned to preexisting Google Assistant commands, and tends to guess that we aren&rsquo;t really saying words like &ldquo;pee&rdquo; or &ldquo;poo&rdquo;. Furthermore, the baby might be crying, or worse yet - lightly sleeping, at risk of being woken up by our voice (or the assistant&rsquo;s). What we needed was a button (well, two - one for pee and one for poo).</p>
-<p>I had a Raspberry Pi ZeroW lying around <a href="https://lutzky.net/posts/pitemp/" rel="">from a previous project</a> and decided to use it for this (the small OLED display wasn&rsquo;t used for this project, but I didn&rsquo;t find a good reason to take it off yet; more on that later). With bits I had from a generic &ldquo;learn electronics&rdquo; kit (which I bought for the specific purpose of having such bits), I created the user interface: Two buttons, a green LED for &ldquo;OK&rdquo;, a red LED for &ldquo;something went wrong&rdquo;; all tied together by some jumper cables and a mini breadboard. The Raspberry Pi would handle communicating with BabyBuddy&rsquo;s API (over wifi), reading the buttons, and driving the LEDs. The setup was indeed quite similar to PiTemp&rsquo;s with the software written in Go, cross-compiled, and run on startup using systemd.</p>
-<figure><a class="lightgallery" href="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" title="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" data-thumbnail="/posts/software-parenting-2/feature-poobuttons-rpi0w.jpg" data-sub-html="<h2>PooButtons on Raspberry Pi ZeroW</h2>">
-        
-    </a><figcaption class="image-caption">PooButtons on Raspberry Pi ZeroW</figcaption>
-    </figure>
-<p>One annoying quirk with the Raspberry Pi Zero for this is that it would register phantom button presses; they&rsquo;d be quite rare, fewer than 5 a day, but that&rsquo;s certainly enough to mess up diaper reporting. I&rsquo;m not sure if it&rsquo;s something about the particular GPIO pins I used (GPIO24, GPIO22), and disconnecting the OLED display didn&rsquo;t work. I ended up following the old joke:</p>
-<blockquote>
-<p>How many software engineers does it take to change a lightbulb?</p>
-<p>None, it&rsquo;s a hardware problem.</p>
-<p>How many hardware engineers does it take to change a lightbulb?</p>
-<p>None, they&rsquo;ll fix it in the software drivers.</p></blockquote>
-<p>Specifically it ended up looking something like this (with another goroutine listening on the resulting channel):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">debounceTime</span> <span class="p">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">stableTime</span>   <span class="p">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">listenButtons</span><span class="p">(</span><span class="nx">ch</span> <span class="kd">chan</span><span class="o">&lt;-</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">pull</span> <span class="o">:=</span> <span class="nx">gpio</span><span class="p">.</span><span class="nx">PullUp</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">edge</span> <span class="o">:=</span> <span class="nx">gpio</span><span class="p">.</span><span class="nx">FallingEdge</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">level</span> <span class="o">:=</span> <span class="nx">gpio</span><span class="p">.</span><span class="nx">Low</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pin</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="nx">gpio</span><span class="p">.</span><span class="nx">PinIO</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pinButton1</span><span class="p">,</span>  <span class="c1">// GPIO24</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pinButton2</span><span class="p">,</span>  <span class="c1">// GPIO22</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">n</span> <span class="o">:=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pin</span> <span class="o">:=</span> <span class="nx">pin</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">debounceTime</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">pin</span><span class="p">.</span><span class="nf">In</span><span class="p">(</span><span class="nx">pull</span><span class="p">,</span> <span class="nx">edge</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Failed to set pin to input: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">pin</span><span class="p">.</span><span class="nf">WaitForEdge</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Got edge, waiting %v for stability&#34;</span><span class="p">,</span> <span class="nx">stableTime</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">stableTime</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="nx">pin</span><span class="p">.</span><span class="nf">Read</span><span class="p">()</span> <span class="o">==</span> <span class="nx">level</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;Signal was stable, counting as press&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="nx">n</span>
-</span></span><span class="line"><span class="cl">          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;Signal did not remain stable, discarding&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;WaitForEdge returned false, ignoring&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}()</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>It&rsquo;s not ideal, but it seemed to work; certainly seemed like it should be library code, for someone smarter to debug. Indeed, it turns out that the <code>periph.io</code> library had a <a href="https://pkg.go.dev/periph.io/x/conn/v3@v3.6.8/gpio/gpioutil#Debounce" target="_blank" rel="noopener noreffer ">Debounce function</a> to help with this, but at the time it <a href="https://github.com/periph/conn/issues/5" target="_blank" rel="noopener noreffer ">wasn&rsquo;t implemented at all</a> (and now that I&rsquo;ve spent some time on it, it&rsquo;s partially implemented).</p>
-<p>Ultimately, the device worked rather well, and the button pushes were quite satisfying, especially after a particularly nasty diaper change (AKA a poonami). However, it did leave a lot to be desired: The cabling was flimsy and patchy (the pins coming from the ribbon were easy to disconnect), and using a Raspberry Pi here was overkill. Indeed, I ended up using that Raspberry Pi (and OLED display) as a <a href="https://pikvm.org/" target="_blank" rel="noopener noreffer ">PiKVM</a>, and using a microcontroller for the diaper change buttons instead. More on that in the next post.</p>
-]]></description></item></channel></rss>
+curious, and ended up looking at netdata, jitter, anacron, and even ansible.&lt;/p></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description>&lt;p>Figuring out what&amp;rsquo;s taking up space is a well-known issue, with a variety of
+great tools for it&amp;hellip; if we&amp;rsquo;re talking about files on a local hard drive.&lt;/p></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description>&lt;p>In October 2023, two weeks before daylight savings time (&amp;ldquo;summer time&amp;rdquo;) was set
+to end, Israel briefly considered delaying this. That would&amp;rsquo;ve been a terrible
+idea, even if it weren&amp;rsquo;t at war at the time.&lt;/p></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-distribution/</guid><description>&lt;p>For as long as I&amp;rsquo;ve been interested in software development, I&amp;rsquo;ve been
+interested in how software makes it onto a computer. &amp;ldquo;Works on my machine&amp;rdquo; was
+never quite enough&amp;hellip; how would it work on &lt;em>someone else&amp;rsquo;s&lt;/em> computer? Here&amp;rsquo;s a
+stroll down memory lane, starting from the 90s.&lt;/p></description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/rust/</guid><description>&amp;hellip;and now I hate all other programming languages. The lament of a regular Go user.</description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description>&lt;p>One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&amp;rsquo;t usually need it for night sleeps, but it&amp;rsquo;s helpful for a &amp;ldquo;cranky-because-tired&amp;rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.&lt;/p></description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/preload-key/</guid><description>How to enter passphrases BEFORE rebooting your server</description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description>Transitioning PooButtons to a microcontroller</description></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/posts/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 21:57:09 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-2/</guid><description>Logging diapers with satisfying clicks</description></item><item><title>Newborn parenting software - part 1</title><link>https://lutzky.net/posts/software-parenting-1/</link><pubDate>Sun, 03 Oct 2021 17:00:00 +0100</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-1/</guid><description>Choosing and hacking on baby tracking apps</description></item><item><title>Code comments</title><link>https://lutzky.net/posts/comments/</link><pubDate>Sun, 02 May 2021 11:02:57 +0100</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/comments/</guid><description>&lt;p>Good code comments only describe &lt;em>why&lt;/em> the code is (or isn&amp;rsquo;t!) doing something.&lt;/p></description></item><item><title>PiTemp</title><link>https://lutzky.net/posts/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/pitemp/</guid><description>An adventure with Raspberry Pi, Golang, and small displays.</description></item><item><title>TransportDroidIL outage</title><link>https://lutzky.net/posts/transportdroidil-outage/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/transportdroidil-outage/</guid><description>(Hebrew) The tale of my now-defunct android app for fetching public transport information.</description></item><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/posts/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description></item><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description></item><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description></item><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/posts/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/investigate/</guid><description>Distinguishing &lt;code>EPERM&lt;/code> vs &lt;code>EACCESS&lt;/code> and how that helps debug file manipulation scripts.</description></item><item><title>Startup times</title><link>https://lutzky.net/posts/startup-times/</link><pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/startup-times/</guid><description>Starting new java processes in your scripts considered harmful. Let&amp;rsquo;s compare &amp;ldquo;hello world&amp;rdquo; startup times for different languages.</description></item><item><title>Asserting string equality</title><link>https://lutzky.net/posts/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/posts/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description>&lt;p>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.&lt;/p>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Assume you&amp;rsquo;re working with an external vendor, who is providing you with code
+for a wonderful function &lt;code>getFoo&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.h version 1.2.3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.c version 1.2.3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// TODO improve performance
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">42&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You use this function in many of your products - for example, in your
+best-selling &lt;code>barApp&lt;/code> application:&lt;/p></description></item><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/translationese/</guid><description>&lt;p>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project
+in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a
+chance to use a few of my favorite technologies.&lt;/p>
+&lt;p>The project was coded in Python, which is &lt;em>not&lt;/em> my favorite programming
+language - Ruby is. However, since Python is more popular at my workplace, and
+seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown
+to love it almost as much over the years. It&amp;rsquo;s quick, easy, and has fantastic
+libraries; specifically, for this project, we made heavy use of the &lt;a href="http://nltk.org" target="_blank" rel="noopener noreffer ">Natural
+Language Toolkit&lt;/a>. We used Git for source control and Github
+for hosting, Travis for continuous integration, and ReadTheDocs for
+documentation. All of these culminate in the project being handed in as a
+single link: &lt;a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer ">http://github.com/lutzky/translationese&lt;/a>.&lt;/p></description></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 17:55:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</guid><description>&lt;p>&lt;strong>Edit: I was misled!&lt;/strong>&lt;/p>
+&lt;p>Illustrated here. Hints below.&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-irb" data-lang="irb">&amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;#34;x: %p, y: %p&amp;#34; % [x, y]; end
+=&amp;gt; nil
+&amp;gt;&amp;gt; inspect_x_and_y(y={&amp;#34;hello&amp;#34; =&amp;gt; &amp;#34;world&amp;#34;},x=[1,2,3])
+x: {&amp;#34;hello&amp;#34;=&amp;gt;&amp;#34;world&amp;#34;}, y: [1, 2, 3]
+&lt;/code>&lt;/pre>&lt;p>The bits I didn&amp;rsquo;t know about:&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>&amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ]&lt;/code>&lt;/li>
+&lt;li>The &lt;code>%p&lt;/code> formatting character is the same as &lt;code>inspect&lt;/code>.&lt;/li>
+&lt;li>You can call methods with &lt;code>method_name(param2=val2, param1=val1)&lt;/code>, also like
+in python. &lt;strong>No you can&amp;rsquo;t! This code sets external variables called y and
+x.&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;p>How embarassing&amp;hellip; :(&lt;/p></description></item><item><title>Valgrind Fail</title><link>https://lutzky.net/posts/valgrind-fail/</link><pubDate>Wed, 11 Jun 2008 01:08:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/valgrind-fail/</guid><description>&lt;p>I neglected to post this here somehow, it&amp;rsquo;s about a month old by now&amp;hellip;&lt;/p>
+&lt;blockquote>
+&lt;p>Screenshot lost in the mist of time&amp;hellip; shows a program segfaulting, and then
+working properly when run within valgrind.&lt;/p>&lt;/blockquote>
+&lt;p>The problem turned out to be an imprecise (false-positve) comparison operator
+implemented for a class used as a hash key. God, I hate C++.&lt;/p></description></item><item><title>Faster Languages</title><link>https://lutzky.net/posts/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:49:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/faster-languages/</guid><description>&lt;p>Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis -
+C++. Part of the reason is that the exercise contains a time-limited
+tournament, and the code needs to run very quickly. Another reason is, I guess,
+the fact that C++ serves as a sort of lowest common denominator in the course
+(which used, by the way, to be taught in LISP, along with the language).&lt;/p></description></item><item><title>Egged Getter 0.1</title><link>https://lutzky.net/posts/egged-getter-0-1/</link><pubDate>Fri, 01 Feb 2008 23:21:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/egged-getter-0-1/</guid><description>&lt;blockquote>
+&lt;p>The Egged Getter has been lost in the mists of time. However, it&amp;rsquo;s code has
+largely been integrated into &lt;a href="https://github.com/lutzky/TransportDroidIL" target="_blank" rel="noopener noreffer ">TransportDroidIL&lt;/a>. An old version of the Python
+code has been pasted at the end of this post.&lt;/p>&lt;/blockquote>
+&lt;p>Here&amp;rsquo;s a little something I&amp;rsquo;ve been messing with: A simple fetcher script for
+the &lt;a href="http://www.egged.co.il" target="_blank" rel="noopener noreffer ">Egged&lt;/a> (Israeli bus company) site. I&amp;rsquo;ve made a
+deskbar applet which uses it, which was fun to do :) (I&amp;rsquo;m looking for other
+cool ideas to implement as deskbar applets)&lt;/p></description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/posts/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 22:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-threading-vs-processing/</guid><description>&lt;p>Writing multi-threaded applications in Python is often a headache because of
+the Global Interpreter Lock - only one Python thread can run at any given
+moment, which makes multi-threading useful only in the case where all modules
+but one actually run C code. However, thanks to the impressive new &lt;a href="http://pythonmagazine.com" target="_blank" rel="noopener noreffer ">Python
+Magazine&lt;/a>, I&amp;rsquo;ve stumbled across a package called
+&lt;code>processing&lt;/code>, paraphrasing python&amp;rsquo;s built-in &lt;code>threading&lt;/code> package. Essentially,
+the package provides an API identical to Python&amp;rsquo;s threading, but uses processes
+and pipes (or other mechanisms on non-posix operating systems) instead. What
+the magazine does not cover is the fact that this can also benefit GUI
+applications; updating a progressbar in the application doesn&amp;rsquo;t need to slow
+down heavy computations being done in a separate thread. To show how easy the
+integration is, take the following example which shows usage of either threads
+or processes at the user&amp;rsquo;s choice:&lt;/p></description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/posts/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 14:02:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/exception-handling-decorators-and-python/</guid><description>&lt;p>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After
+trying to figure out how to work DBus with C, and seeing how easy it is to do
+in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately,
+it&amp;rsquo;s very simple to use - especially thanks to &lt;a href="http://www.developer.com/lang/other/article.php/2217941" target="_blank" rel="noopener noreffer ">this guide&lt;/a>.&lt;/p>
+&lt;blockquote>
+&lt;p>It later turned out to be much easier to do in C, as described in &lt;em>&lt;a href="https://lutzky.net/2008/04/16/faster-languages" rel="">Faster Languages&lt;/a>&lt;/em>.&lt;/p></description></item><item><title>Two reasons Apple suck</title><link>https://lutzky.net/posts/two-reasons-apple-suck/</link><pubDate>Sun, 16 Sep 2007 12:47:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/two-reasons-apple-suck/</guid><description>&lt;p>First of all, &lt;a href="http://www.boingboing.net/2007/09/14/new-ipods-reengineer.html" target="_blank" rel="noopener noreffer ">new iPods won&amp;rsquo;t work on
+Linux&lt;/a>. Now,
+while it&amp;rsquo;s very obvious that the idea is to block competition against other
+music vendors, that makes it even less legitimate. Good thing we&amp;rsquo;re starting to
+see some very nice cheap players out there - I&amp;rsquo;ve been rather impressed with
+the &lt;a href="http://en.meizu.com/product_m6.asp" target="_blank" rel="noopener noreffer ">Meizu M6 MiniPlayer&lt;/a>.&lt;/p>
+&lt;p>Secondly, they didn&amp;rsquo;t think of this: &lt;a href="http://www.gnome.org/start/2.20/notes/en/index.html#rnusers-file-management" target="_blank" rel="noopener noreffer ">Indexed search within the &amp;ldquo;Open&amp;rdquo;
+dialog&lt;/a>.
+It&amp;rsquo;s in Ubuntu Gutsy, and really makes desktop search (implemented with Tracker
+in gutsy) worthwhile. Especially when attaching files in GMail :)&lt;/p></description></item><item><title>Myspace sucks</title><link>https://lutzky.net/posts/myspace-sucks/</link><pubDate>Thu, 17 May 2007 14:26:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/myspace-sucks/</guid><description>&lt;p>Life is good, for the most part. And as a technology enthusiast, there are many
+new and cool things to see online. For example, there&amp;rsquo;s the new
+&lt;a href="http://schools.whatsup.org.il" target="_blank" rel="noopener noreffer ">Schools&lt;/a> site, part of the Vaya project which
+helps Israeli schools use Linux; this site uses the up-and-coming
+&lt;a href="http://lahak.python-hosting.com" target="_blank" rel="noopener noreffer ">Lahak&lt;/a> CMS, built on the Django framework,
+and looks very promising to the eyes of the bidi-lingual webmaster.&lt;/p>
+&lt;p>However, some things just plain suck. One of them is myspace; today, in an
+attempt to make it more legible, I found that &lt;a href="http://myspace.com/switchblade777" target="_blank" rel="noopener noreffer ">My Band&amp;rsquo;s
+Page&lt;/a> implements all of its styling changes
+by a &amp;ldquo;style&amp;rdquo; tag hidden within the &amp;ldquo;Members&amp;rdquo; text block. Myspace doesn&amp;rsquo;t filter
+this out - nor does it provide any other means of changing the styling. This,
+combined with myspace&amp;rsquo;s horrid administration interface, makes editing
+incredible unwieldy. I&amp;rsquo;m considering opening another Wordpress site for the
+band here on this server&amp;hellip;&lt;/p></description></item><item><title>IPython</title><link>https://lutzky.net/posts/ipython/</link><pubDate>Sun, 04 Mar 2007 00:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ipython/</guid><description>&lt;p>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project
+for a course, which involves somewhat heavy-duty database and algorithm work.
+Python is my language of choice for it - let&amp;rsquo;s hope it works out well.&lt;/p>
+&lt;p>In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython
+(available in apt) - it adds a bunch of stuff to the python shell which I
+sorely missed from irb - autocompletion, auto-indentation, and - it seems -
+adds a whole lot more.&lt;/p></description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/posts/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 14:52:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-the-whole-python-thing/</guid><description>&lt;p>I&amp;rsquo;ve converted my &lt;em>Antigibberish script&lt;/em>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>
+(converts &amp;ldquo;broken hebrew&amp;rdquo; into proper hebrew, useful for sent-offline ICQ
+messages) to Python&amp;hellip; it&amp;rsquo;s quite a nice language, and the interpreter is FAST!
+I&amp;rsquo;m really torn between it and Ruby :(&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>Used to have a copy of &lt;code>antigibberish.py&lt;/code>, but it&amp;rsquo;s been lost in
+the mists of time. It used to do the equivalent of this:&lt;/p>
+&lt;p>&lt;code>iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p></description></item><item><title>Beautiful ideas</title><link>https://lutzky.net/posts/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 17:24:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/beautiful-ideas/</guid><description>&lt;p>This man has &lt;a href="http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html" target="_blank" rel="noopener noreffer ">some beautiful design
+ideas&lt;/a>
+for the Linux desktop.&lt;/p></description></item><item><title>Why Vista worries me</title><link>https://lutzky.net/posts/why-vista-worries-me/</link><pubDate>Wed, 07 Feb 2007 18:22:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/why-vista-worries-me/</guid><description>&lt;p>I&amp;rsquo;ve heard &lt;a href="http://www.twit.tv/sn77" target="_blank" rel="noopener noreffer ">the latest Security Now&lt;/a>, regarding the
+debate between Dave Marsh and Peter Guttman on DRM in Windows Vista. While a
+few good points were made, the major one - in my opinion - was not.&lt;/p>
+&lt;p>DRM, in a practical sense, is deeply flawed: The idea is to give you your
+media - say, a WMA piece of music - and a program to play it with - say, Windows
+Media Player - but encrypt the media. Now, naturally, Media Player will need
+the decryption key for the media, and the idea is that Media Player will verify
+that you are allowed to listen to the song, and only then decrypt it - as it is
+played.&lt;/p></description></item><item><title>On Vista</title><link>https://lutzky.net/posts/on-vista/</link><pubDate>Sun, 04 Feb 2007 13:27:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-vista/</guid><description>&lt;p>Everyone knew this was going to be an interesting one to watch. Die-hard
+Microsoft fans were sure Vista would be the final nail in the Open Source
+coffin, die-hard Linux fans were sure that the release would be Microsoft&amp;rsquo;s
+demise. Myself - I&amp;rsquo;m sitting and enjoying the show.&lt;/p>
+&lt;p>It&amp;rsquo;s always very interesting to show Beryl to non-Linux users. They are almost
+always highly impressed, and are often completely in shock that Linux is a
+graphical system - many people still believe Linux is command-line only. But
+the funniest thing is that they always seem to care more about useless,
+spinning, transparent desktop cubes than, say, security. This holds for Vista&amp;rsquo;s
+flashy new graphics, as well - mainstream media seems to be focusing on Vista&amp;rsquo;s
+GUI a lot more than they are about its controversial new security features.
+Very interesting, keeping in mind that Windows has never been &amp;ldquo;not pretty
+enough&amp;rdquo; in consumer&amp;rsquo;s eyes, but rather too unstable or virus-prone.&lt;/p></description></item><item><title>3D effects for coders?</title><link>https://lutzky.net/posts/3d-effects-for-coders/</link><pubDate>Thu, 25 Jan 2007 15:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/3d-effects-for-coders/</guid><description>&lt;p>My new work desktop has a GeForce 4 MX, so I naturally installed Beryl on it.
+The graphics card has relatively little RAM, so it finds handling my 1280x1024
+resolution difficult when additional texture memory is needed - so using
+something like Firefox really slows it down when Beryl is activated, making me
+keep it off most of the time. However, for coding, I&amp;rsquo;m finding that Beryl is
+very useful - it actually helps me that the code windows are transparent, so
+that I can see what&amp;rsquo;s underneath them, and the &amp;ldquo;Expose&amp;rdquo; effect still leaves
+text legible, which is great for reading off a lot of terminals at once. So is
+Beryl&amp;hellip; a programmer&amp;rsquo;s tool?&lt;/p></description></item><item><title>Software Perfection - Lost in the details</title><link>https://lutzky.net/posts/software-perfection-lost-in-the-details/</link><pubDate>Thu, 25 Jan 2007 00:32:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-perfection-lost-in-the-details/</guid><description>&lt;p>Sometimes imperfections in Software drive me nuts. It&amp;rsquo;s what drove me away from
+Windows. It&amp;rsquo;s what keeps me switching back and forth between desktop
+environments. It&amp;rsquo;s what has me wasting a lot of time getting the software to do
+what I want, instead of getting anything done. I even have two particularily
+good examples.&lt;/p>
+&lt;p>Firefox and Opera are my two favorite browsers. Opera is actually not as good,
+in my taste, as Firefox. Firefox&amp;rsquo;s slew of extensions (especially my latest
+favorites - &lt;a href="http://del.icio.us/help/firefox/extension" target="_blank" rel="noopener noreffer ">Del.icio.us bookmarks&lt;/a>
+and &lt;a href="http://www.getfirebug.com/" target="_blank" rel="noopener noreffer ">Firebug&lt;/a>), better font handling (on Linux) and
+Open-Source nature keep it ahead, if all things were equal. However, Opera
+is much faster on my laptop. &lt;strong>Way&lt;/strong> faster. And with the kind of browsing I
+usually do - zillions of tabs open and all, that difference counts.&lt;/p></description></item><item><title>As for Python</title><link>https://lutzky.net/posts/as-for-python/</link><pubDate>Tue, 23 Jan 2007 21:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/as-for-python/</guid><description>&lt;p>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to
+&lt;a href="http://tryruby.hobix.com" target="_blank" rel="noopener noreffer ">TryRuby&lt;/a>, code my sites using Rails, am surprised
+that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes
+called the Japanese Python, and comparisons are inevitable. I know very little
+about Python, but I do know that&amp;hellip;&lt;/p>
+&lt;ul>
+&lt;li>It has a larger community&lt;/li>
+&lt;li>More GUI applications are written in it&lt;/li>
+&lt;li>More bindings are available for it&lt;/li>
+&lt;li>Its interpreter is much faster&lt;/li>
+&lt;li>Not a far inferior language&lt;/li>
+&lt;/ul>
+&lt;p>Ruby certainly does have its advantages over it - trivial class expansion,
+extremely concise syntax, seemingly better-suited for heavy usage of closures,
+and Matz. Ya gotta love Matz.&lt;/p></description></item></channel></rss>

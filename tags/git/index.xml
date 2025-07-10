@@ -1,359 +1,60 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Git - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/git/</link><description>Git - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sat, 30 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/git/" rel="self" type="application/rss+xml"/><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/posts/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/seaplane/</guid><description><![CDATA[<h2 id="the-faculty-programmer">The Faculty Programmer</h2>
-<p>Sharon, a close friend of mine, has been studying psychology for the past few years. At some point she needed to run an experiment in the field of perception. While the exact form of the experiment was pending professor vetting, she did know that the experiment will take place with a user sitting in front of a desktop computer, responding to various stimuli, often with the reaction time being recorded. Seeing as programming is not in her faculty&rsquo;s curriculum (a mistake, in my opinion), the students are provided with a faculty programmer. Dozens of students would contact this jaded craftsman, describe what they need, wait patiently, and then - as it happens in the world of software - receive something almost, but not quite, entirely unlike what they asked for.</p>
-<p>I was all too happy to help (and owe Sharon an insurmountable number of favors to start with), but had nothing to start with at the time. The weeks and months passed, I was deep into my move and training at my new job<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and happily suggesting (using my limited understanding of psychology) experiments. When the final proposal was authorized, the timing was inconvenient - I was going on a business trip to California the next day, putting a 10 hour time difference between Sharon and myself.</p>
-<p>No matter. The experiment was fairly well-defined before I left - a word out of three word-sets, designated as &ldquo;up&rdquo;, &ldquo;down&rdquo; and &ldquo;neutral&rdquo;, was to flash in the middle of the screen, and then a circle would appear at the top or bottom. The user had to react to this circle as quickly as possible, and the idea was to test whether or not a word from the &ldquo;up&rdquo; category (such as &ldquo;sky&rdquo; or &ldquo;cloud&rdquo;) would correlate with better reaction time when the circle appeared at the top, and vice versa. There were some other details such as &ldquo;catch trials&rdquo; when no circle would show up at all, but it sounded fairly simple. (Keep reading for a demo!)</p>
-<h2 id="getting-started">Getting started</h2>
-<p>My experience had me worried, as no software project is ever as simple as it originally seems. Sharon and I agreed that, while this seems completely reasonable and quite thought-out, we would work in an iterative fashion, and have regular video-chats on what should be done next. Also, to simplify things, I asked to create the software as a web page intended for use on Chrome, rather than Matlab as suggested by her faculty programmer (who seemed convinced, for whatever reason, that Matlab could give better timing precision - this turned out to be false). She agreed, and within a few hours on a plane, I had a basic draft working.</p>
-<p>I emailed Sharon a copy of the draft; it was split into a simple <code>index.html</code> file, a <code>style.css</code> file, a <code>seaplane.js</code> code file, and a <code>config.js</code> code file. That last split was deliberate: Sharon, who has no experience in coding (and even claims to be a technophobe), could modify clearly defined configuration (including the sets of words and tuned delays) with no anxiety of &ldquo;messing up&rdquo; the more complex code. Soon enough, timezones flipped by, and Sharon was happy enough with the result to respond with a modified <code>config.js</code> file, and a list of changes she wanted - mostly present in the original requirements, but some which could only be understood while trying out the first draft. Naturally, some of the changes would require the syntax of <code>config.js</code> itself to change, and Sharon had more data to add to it. To avoid <code>seaplane7-final-really.zip</code> email attachments flying back and forth, version control would be required. Using Github would facilitate this, and also allow us to use its <em>Issues</em> mechanism for tracking remaining work.</p>
-<p>It took a few minutes over the phone to explain the basic concept of version control to Sharon, as well as how to create a Github account, modify files using the web-based interface, report and comment on issues. While I did mention Github for Windows as an option, I didn&rsquo;t pressure Sharon into using it, especially as I wasn&rsquo;t familiar enough with it myself.</p>
-<p>Over 10 days and 48 commits (27 mine, 20 Sharon&rsquo;s) we got the code working well enough to run the experiment. There were a few reported bugs, but nothing substantial that skewed the results, as far as we can tell. You&rsquo;re welcome to see a <a href="https://lutzky.github.io/seaplane" target="_blank" rel="noopener noreffer ">Demo of Seaplane</a>, as well as browse the <a href="https://github.com/lutzky/seaplane" target="_blank" rel="noopener noreffer ">Seaplane source code</a>. If you can read Hebrew, you can also read <a href="/posts/seaplane/seaplane_paper.pdf" rel="">Sharon's paper</a>.</p>
-<h2 id="what-worked">What worked</h2>
-<ul>
-<li>Issues worked quite well for tracking the work; Sharon and I found them more useful than emails for keeping state.</li>
-<li>Being a fully client-side web application, seaplane was (and still is) trivially hosted by Github Pages. This made deployment of new versions as easy as hitting F5.</li>
-<li>For changes that could be previewed in chrome using developer tools, Sharon got instant feedback on her changes without needing to commit anything.</li>
-<li>Sharon made 4 commits to change <code>config.js</code>, modifying the word sets according to discussions with her supervisor. Sharon also made 11 commits to change <code>style.css</code>, 2 commits to change <code>index.html</code>, and even 3 to change <code>seaplane.js</code>.</li>
-</ul>
-<h2 id="what-didnt-work">What didn&rsquo;t work</h2>
-<ul>
-<li>Github&rsquo;s UI for submitting changes online has a default value for the commit message, and no recommendations against using it. As a result, there are 8 commits called &ldquo;Update <code>style.css</code>&rdquo;.</li>
-<li>Sharon didn&rsquo;t have a working copy on her own machine, and not all changes could be easily previewed in chrome. As a result, there were some back-and-forth commits by Sharon and myself which weren&rsquo;t necessary. (I could&rsquo;ve avoided this by providing appropriate &ldquo;refresh&rdquo; functionality in the app)</li>
-<li>The format I chose for the word list made right-to-left issues rear their ugly head in the editor.</li>
-</ul>
-<p>All in all, the project went swimmingly. Using progamming-oriented version control software to collaborate with non-programmers may be less crazy than you think. I highly recommend giving it a try.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Oh yeah, I&rsquo;m a Site Reliability Engineer at Google Ireland now, which is too awesome to detail in this footnote.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></description></item><item><title>Git While You Sit 3 - "Rename" edge cases</title><link>https://lutzky.net/posts/git-rename-edge-cases/</link><pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/git-rename-edge-cases/</guid><description><![CDATA[<p>This is part of the &ldquo;Git While You Sit&rdquo; series, a play on Google&rsquo;s <a href="http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html" target="_blank" rel="noopener noreffer ">Testing on the Toilet</a>. It&rsquo;s intended to fit on a printed page. Currently Chrome doesn&rsquo;t seem to correctly print columns, but Firefox does.
-{: .no-print }</p>
-<p>Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it&rsquo;s far more likely that git did the &ldquo;right&rdquo; thing after all. Here are a couple of examples I&rsquo;ve seen recently.</p>
-<h2 id="first-case">First case</h2>
-<p>When rebasing, conflicts might occur <em>before</em> renames:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">o---o---E---F---G (master)
-</span></span><span class="line"><span class="cl">     \
-</span></span><span class="line"><span class="cl">      A---B---RENAME---C (feature *)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>When the current branch is <em>feature</em>, and running <code>git rebase master</code>, what happens is that the commits from <code>feature</code> will be <code>cherry-pick</code>ed onto <code>G</code> in order - <code>A</code>, <code>B</code>, <code>RENAME</code>, and <code>C</code>. If a conflict occurs in <code>B</code>, in a file that was later renamed (in <code>RENAME</code>), conflict resolution will have to happen <em>using the original name</em>. If there was a massive reworking, it might be simpler and more sensible to <em>merge</em> in this case.</p>
-<h2 id="second-case">Second case</h2>
-<p>It wasn&rsquo;t a rename, it was a copy.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--o---E----F [MODIFY]----G (master)
-</span></span><span class="line"><span class="cl">   \                      \
-</span></span><span class="line"><span class="cl">    A---B [COPY]---C---D---M (feature *)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In this case, the user thought he renamed <code>dir1/file.xml</code> to <code>dir2/file.xml</code> in <code>B [COPY]</code>. Then, when he merged <code>master</code> into <code>feature</code>, he expected that the modifications in <code>file.xml</code> in <code>F [MODIFY]</code> would, as part of the merge in <code>M</code>, be applied to <code>dir2/file.xml</code>. This would indeed have happened if <code>B</code> had a move operation. However, it doesn&rsquo;t make sense for git to merge the changes from a <em>copy</em> of a file, so it didn&rsquo;t.</p>
-<p>The fix here was to undo the merge:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git reset --hard D
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>&hellip;and then edit the commit:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git rebase -i A
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>&hellip;and set <code>B</code> to <code>edit</code> instead of <code>pick</code>. Amend the commit for <code>B</code> so that it doesn&rsquo;t just create <code>dir2/file.xml</code>, but also deletes <code>dir1/file.xml</code>. If it&rsquo;s indeed the same file (or has very similar contents), this will be automatically detected as a rename during <code>log</code> and <code>merge</code> operations.</p>
-<p>It should be noted that git doesn&rsquo;t track renames (or copies) at all during commits. It only figures out that they happened retroactively when it&rsquo;s relevant (<code>log</code>, <code>merge</code>, <code>cherry-pick</code>, <code>diff</code>&hellip;), by comparing the contents. This is why those operations have options like <code>rename-threshold</code>, <code>find-renames</code>, <code>find-copies</code> and even <code>find-copies-harder</code>.</p>
-]]></description></item><item><title>Git While You Sit 2 - .gitignore</title><link>https://lutzky.net/posts/git-ignore/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/git-ignore/</guid><description><![CDATA[<p>This is part of the &ldquo;Git While You Sit&rdquo; series, a play on Google&rsquo;s <a href="http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html" target="_blank" rel="noopener noreffer ">Testing on the Toilet</a>. It&rsquo;s intended to fit on a printed page. Currently Chrome doesn&rsquo;t seem to correctly print columns, but Firefox does.
-{: .no-print }</p>
-<p>Your repository has files which are generated as part of your build process or as part of running your software, which you don&rsquo;t want in source control. They keep showing up in <code>git status</code>. What to do?</p>
-<p>You can create a file called <code>.gitignore</code> - note that the filename starts with a <code>.</code>, which is standard for configuration files in Unix and causes them to be hidden from normal listing. Each <code>.gitignore</code> file affects the current directory and its subdirectories - you can have multiple <code>.gitignore</code> files to create more specific rules for subdirectories.</p>
-<p><em>Note:</em> <code>.gitignore</code> can only be used for files which shouldn&rsquo;t be in source code <em>at all</em> (those show up as &ldquo;Untracked files&rdquo;. <em>Modified</em> files can&rsquo;t be ignored in this way. If you really want to, you can force git to ignore modifications with this command:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git update-index --assume-unchanged FILE
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>However, this is usually a bad idea and indicates you need to refactor your file handling - split files which get modified locally from files which contain information which should be source-controlled.</p>
-<p>Here is an annotated excerpt from a <code>.gitignore</code> file:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># Extensions of compiled files
-</span></span><span class="line"><span class="cl">*.a
-</span></span><span class="line"><span class="cl">*.so
-</span></span><span class="line"><span class="cl">*.o
-</span></span><span class="line"><span class="cl"># ...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># Files generated by build system
-</span></span><span class="line"><span class="cl">build.ninja
-</span></span><span class="line"><span class="cl">.ninja_deps
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># Ignore bin/ and obj/, as they contain
-</span></span><span class="line"><span class="cl"># compiled files. This is ignored
-</span></span><span class="line"><span class="cl"># recursively within the repository.
-</span></span><span class="line"><span class="cl">bin/
-</span></span><span class="line"><span class="cl">obj/
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># ...except (&#34;!&#34;) for the scripts, which
-</span></span><span class="line"><span class="cl"># are in the &#34;scripts&#34; dir in the same
-</span></span><span class="line"><span class="cl"># one as this .gitignore file (hence the
-</span></span><span class="line"><span class="cl"># leading &#34;/&#34;)
-</span></span><span class="line"><span class="cl">!/scripts/bin
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Addendum: A reader has mentioned <a href="http://gitignore.io" target="_blank" rel="noopener noreffer ">gitignore.io</a>, which auto-generates useful <code>.gitignore</code> files.</p>
-]]></description></item><item><title>Git While You Sit 1 - Add --patch</title><link>https://lutzky.net/posts/git-add-patch/</link><pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/git-add-patch/</guid><description><![CDATA[<p>This is part of the &ldquo;Git While You Sit&rdquo; series, a play on Google&rsquo;s <a href="http://googletesting.blogspot.co.il/2007/01/introducing-testing-on-toilet.html" target="_blank" rel="noopener noreffer ">Testing on the Toilet</a>. It&rsquo;s intended to fit on a printed page. Currently Chrome doesn&rsquo;t seem to correctly print columns, but Firefox does.
-{: .no-print }</p>
-<p>Ever find yourself <code>printf</code>-debugging? You found the bug, but now you have <code>printf</code> statements all over the place. Running <code>git diff</code>, you get:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gh">diff --git a/hello.c b/hello.c
-</span></span></span><span class="line"><span class="cl"><span class="gh">index 93ca08c..c7d354a 100644
-</span></span></span><span class="line"><span class="cl"><span class="gh"></span><span class="gd">--- a/hello.c
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+++ b/hello.c
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span><span class="gu">@@ -4,6 +4,7 @@
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span> void b();
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"> void a() {
-</span></span><span class="line"><span class="cl"><span class="gi">+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>     return;
-</span></span><span class="line"><span class="cl"> }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="gu">@@ -13,9 +14,10 @@ int main() {
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span> 
-</span></span><span class="line"><span class="cl">     printf(&#34;Hello, world!\n&#34;);
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="gd">-    return 1;
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+    return 0; // Found it!
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span> }
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"> void b() {
-</span></span><span class="line"><span class="cl"><span class="gi">+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>     return;
-</span></span><span class="line"><span class="cl"> }
-</span></span><span class="line"><span class="cl"> 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>It&rsquo;s actually pretty easy to get rid of them. Run <code>git add -p</code> and you will be shown each patch &ldquo;hunk&rdquo; separately:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gh">diff --git a/hello.c b/hello.c
-</span></span></span><span class="line"><span class="cl"><span class="gh">index 93ca08c..c7d354a 100644
-</span></span></span><span class="line"><span class="cl"><span class="gh"></span><span class="gd">--- a/hello.c
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+++ b/hello.c
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span><span class="gu">@@ -4,6 +4,7 @@
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span> void b();
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"> void a() {
-</span></span><span class="line"><span class="cl"><span class="gi">+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>     return;
-</span></span><span class="line"><span class="cl"> }
-</span></span><span class="line"><span class="cl">### Stage this hunk [...]? n (No) ###
-</span></span><span class="line"><span class="cl"><span class="gu">@@ -13,9 +14,10 @@ int main() {
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span> 
-</span></span><span class="line"><span class="cl">     printf(&#34;Hello, world!\n&#34;);
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="gd">-    return 1;
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+    return 0; // Found it!
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span> }
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"> void b() {
-</span></span><span class="line"><span class="cl"><span class="gi">+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>     return;
-</span></span><span class="line"><span class="cl"> }
-</span></span><span class="line"><span class="cl">### Stage this hunk? [...] s (Split)  ###
-</span></span><span class="line"><span class="cl"><span class="gu">@@ -13,7 +14,7 @@ int main() {
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span> 
-</span></span><span class="line"><span class="cl">     printf(&#34;Hello, world!\n&#34;);
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="gd">-    return 1;
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+    return 0; // Found it!
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
-</span></span><span class="line"><span class="cl">### Stage this hunk [...]? y (Yes) ###
-</span></span><span class="line"><span class="cl"> void b() {
-</span></span><span class="line"><span class="cl"><span class="gi">+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>     return;
-</span></span><span class="line"><span class="cl"> }
-</span></span><span class="line"><span class="cl">### Stage this hunk [...]? n (No) ###
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now, only the <code>return 0</code> line is stage for commit. To get rid of the rest of the changes, run <code>git checkout -- hello.c</code>. Now the <code>printf</code> statements have been removed!</p>
-]]></description></item><item><title>Using git for code review</title><link>https://lutzky.net/posts/using-git-for-code-review/</link><pubDate>Sat, 04 Apr 2009 12:23:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/using-git-for-code-review/</guid><description><![CDATA[<p>At my workplace, I&rsquo;ve recently been using git for code review purposes. I work
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Shallow and Pedantic</title><link>https://lutzky.net/tags/git/</link><description>Recent content in Git on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/posts/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description></item><item><title>Git While You Sit 3 - "Rename" edge cases</title><link>https://lutzky.net/posts/git-rename-edge-cases/</link><pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-rename-edge-cases/</guid><description>Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it&amp;rsquo;s far more likely that git did the &amp;ldquo;right&amp;rdquo; thing after all.</description></item><item><title>Git While You Sit 2 - .gitignore</title><link>https://lutzky.net/posts/git-ignore/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-ignore/</guid><description>Using &lt;code>.gitignore&lt;/code> to exclude build artifacts from your repository.</description></item><item><title>Git While You Sit 1 - Add --patch</title><link>https://lutzky.net/posts/git-add-patch/</link><pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-add-patch/</guid><description>Using &lt;code>git add -p&lt;/code> to eliminate those pesky &lt;code>printf&lt;/code>-debugging statements.</description></item><item><title>Using git for code review</title><link>https://lutzky.net/posts/using-git-for-code-review/</link><pubDate>Sat, 04 Apr 2009 12:23:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/using-git-for-code-review/</guid><description>&lt;p>At my workplace, I&amp;rsquo;ve recently been using git for code review purposes. I work
 on code in my own git clone, and ask a peer to review it. It works somewhat
-like this:</p>
-<ol>
-<li><code>master</code> branch is same code as currently in upstream.</li>
-<li>Working to resolve issue #1234 pertaining to &ldquo;Performance for gizmo&rdquo;, I work
-on a branch <code>1234-gizmo-performance</code>.</li>
-<li>I mail a peer, John, with this information, as well as my repository
-location.</li>
-<li>John adds my repository as a remote, lutzky. Then he branches <code>review1</code> (or
-<code>review2</code> if that is taken, and so on) at <code>lutzky/1234-gizmo-performance.</code></li>
-<li>John adds comments with nice big <code>FIXME</code> tags, which are highlighted in
+like this:&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>master&lt;/code> branch is same code as currently in upstream.&lt;/li>
+&lt;li>Working to resolve issue #1234 pertaining to &amp;ldquo;Performance for gizmo&amp;rdquo;, I work
+on a branch &lt;code>1234-gizmo-performance&lt;/code>.&lt;/li>
+&lt;li>I mail a peer, John, with this information, as well as my repository
+location.&lt;/li>
+&lt;li>John adds my repository as a remote, lutzky. Then he branches &lt;code>review1&lt;/code> (or
+&lt;code>review2&lt;/code> if that is taken, and so on) at &lt;code>lutzky/1234-gizmo-performance.&lt;/code>&lt;/li>
+&lt;li>John adds comments with nice big &lt;code>FIXME&lt;/code> tags, which are highlighted in
 any decent editor. He commits this, the commit-message stating that it was
-code review.</li>
-<li>John tags his final review commit (or, if he had no comments -
-<code>lutzky/1234-gizmo-performance</code>) with a <code>reviewed1</code> (or <code>reviewed2</code>, etc.)
+code review.&lt;/li>
+&lt;li>John tags his final review commit (or, if he had no comments -
+&lt;code>lutzky/1234-gizmo-performance&lt;/code>) with a &lt;code>reviewed1&lt;/code> (or &lt;code>reviewed2&lt;/code>, etc.)
 annotated tag. Since the annotated tag includes all the necessary
-information (who tagged, when, and what), the number doesn&rsquo;t really matter.</li>
-<li>I merge <code>john/review1</code>, incorporate the changes (or reject them) and remove
+information (who tagged, when, and what), the number doesn&amp;rsquo;t really matter.&lt;/li>
+&lt;li>I merge &lt;code>john/review1&lt;/code>, incorporate the changes (or reject them) and remove
 the comments. If no further review is necessary, I submit this - and once
-submitted, I merge this back into master.</li>
-</ol>
-<p>It&rsquo;s a nice system. I wonder what other methods there are of doing this.</p>
-]]></description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description><![CDATA[<ol>
-<li>
-<p>You can use git on a VFAT disk (for example, a USB key) without all of the
-annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[core]</span>
-</span></span><span class="line"><span class="cl"><span class="na">filemode</span> <span class="o">=</span> <span class="s">false</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>What I haven&rsquo;t figured out is how to do force a chmod in this situation; for
-example, if I create a new script, I was hoping to be able to <code>git chmod +x</code>
-it.</p>
-</li>
-<li>
-<p><a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer ">Cream</a> is a very good editor if you&rsquo;re used
-to Windows applications. It&rsquo;s a set of plugins for VIM which make it
+submitted, I merge this back into master.&lt;/li>
+&lt;/ol>
+&lt;p>It&amp;rsquo;s a nice system. I wonder what other methods there are of doing this.&lt;/p></description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description>&lt;ol>
+&lt;li>
+&lt;p>You can use git on a VFAT disk (for example, a USB key) without all of the
+annoying mode issues, by using the following setting in &lt;code>.git/config&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ini" data-lang="ini">&lt;span class="line">&lt;span class="cl">&lt;span class="k">[core]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">filemode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for
+example, if I create a new script, I was hoping to be able to &lt;code>git chmod +x&lt;/code>
+it.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer ">Cream&lt;/a> is a very good editor if you&amp;rsquo;re used
+to Windows applications. It&amp;rsquo;s a set of plugins for VIM which make it
 modeless and (very) familiar to Windows users. However, Ctrl-O still has its
-usual job for us ordinary junkies :)</p>
-</li>
-<li>
-<p>Vertically, two cans of Pepsi fit very snugly into a Pringles can.</p>
-</li>
-</ol>
-]]></description></item><item><title>Really liking this git thing</title><link>https://lutzky.net/posts/really-liking-this-git-thing/</link><pubDate>Tue, 18 Sep 2007 11:27:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/really-liking-this-git-thing/</guid><description><![CDATA[<p>I&rsquo;ve been a very big proponent of Subversion so far, especially as a tool for
-collaborating on coding homework. However, I&rsquo;ve recently been trying out
-Linus&rsquo;s <a href="http://git.or.cz/" target="_blank" rel="noopener noreffer ">git</a>. It&rsquo;s very nice so far, and really seems to be
-catching on. Some good points:</p>
-<ul>
-<li>Fast as all hell (much faster than Bazaar, although I haven&rsquo;t given that the
-proper attention)</li>
-<li>No need for a central server; hell, no need for an internet connection at
-all, everything can be done over USB keys or whatnot</li>
-<li>No real need to configure any special server; just install git on it</li>
-<li>Very nice alternative to configuring write-control for all of the users</li>
-<li>Very easy branching and merging, finally! SVN really shows its weakness here</li>
-</ul>
-<p>One thing I couldn&rsquo;t find out how to do is limiting read-access to git
+usual job for us ordinary junkies :)&lt;/p></description></item><item><title>Really liking this git thing</title><link>https://lutzky.net/posts/really-liking-this-git-thing/</link><pubDate>Tue, 18 Sep 2007 11:27:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-this-git-thing/</guid><description>&lt;p>I&amp;rsquo;ve been a very big proponent of Subversion so far, especially as a tool for
+collaborating on coding homework. However, I&amp;rsquo;ve recently been trying out
+Linus&amp;rsquo;s &lt;a href="http://git.or.cz/" target="_blank" rel="noopener noreffer ">git&lt;/a>. It&amp;rsquo;s very nice so far, and really seems to be
+catching on. Some good points:&lt;/p>
+&lt;ul>
+&lt;li>Fast as all hell (much faster than Bazaar, although I haven&amp;rsquo;t given that the
+proper attention)&lt;/li>
+&lt;li>No need for a central server; hell, no need for an internet connection at
+all, everything can be done over USB keys or whatnot&lt;/li>
+&lt;li>No real need to configure any special server; just install git on it&lt;/li>
+&lt;li>Very nice alternative to configuring write-control for all of the users&lt;/li>
+&lt;li>Very easy branching and merging, finally! SVN really shows its weakness here&lt;/li>
+&lt;/ul>
+&lt;p>One thing I couldn&amp;rsquo;t find out how to do is limiting read-access to git
 repositories without special server configuration. It would be nice if git had
-support for <code>.htpasswd</code>-compatible authentication, those are pretty easy to use.</p>
-]]></description></item></channel></rss>
+support for &lt;code>.htpasswd&lt;/code>-compatible authentication, those are pretty easy to use.&lt;/p></description></item></channel></rss>

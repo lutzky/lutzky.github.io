@@ -1,199 +1,116 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Technion - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/technion/</link><description>Technion - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 11 Jul 2008 11:58:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/technion/" rel="self" type="application/rss+xml"/><item><title>That "Life" category there</title><link>https://lutzky.net/posts/that-life-category-there/</link><pubDate>Fri, 11 Jul 2008 11:58:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/that-life-category-there/</guid><description><![CDATA[<p>I has it. Sorta.</p>
-<p>A few weeks ago, the lovely <a href="http://nanuchka.com" target="_blank" rel="noopener noreffer ">NaNuchKa</a> visited Israel for
-two and a half shows (the half-show was warming for Berry Sacharof). &ldquo;Three
-shows in two weeks?&rdquo;, people ask - well, yeah. They only come once a year.
-Their set is already too long to play <a href="http://youtube.com/watch?v=tn4RITTXkjw" target="_blank" rel="noopener noreffer ">all the songs I
-like</a>, and that&rsquo;s actually quite
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Technion on Shallow and Pedantic</title><link>https://lutzky.net/tags/technion/</link><description>Recent content in Technion on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:38:45 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/technion/index.xml" rel="self" type="application/rss+xml"/><item><title>That "Life" category there</title><link>https://lutzky.net/posts/that-life-category-there/</link><pubDate>Fri, 11 Jul 2008 11:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/that-life-category-there/</guid><description>&lt;p>I has it. Sorta.&lt;/p>
+&lt;p>A few weeks ago, the lovely &lt;a href="http://nanuchka.com" target="_blank" rel="noopener noreffer ">NaNuchKa&lt;/a> visited Israel for
+two and a half shows (the half-show was warming for Berry Sacharof). &amp;ldquo;Three
+shows in two weeks?&amp;rdquo;, people ask - well, yeah. They only come once a year.
+Their set is already too long to play &lt;a href="http://youtube.com/watch?v=tn4RITTXkjw" target="_blank" rel="noopener noreffer ">all the songs I
+like&lt;/a>, and that&amp;rsquo;s actually quite
 excellent - new EP and all. Great stuff :) Deep Purple should be coming to
 Israel this summer (holy crap!), and I need to see what I can do about getting
-tickets for that.</p>
-<p>This is my last semester at the Technion - then it&rsquo;s off to the military for
-me. Courses for this semester are Electronic Switching Circuits (bleh&hellip;),
-Signals and Systems (which is actually turning out to be quite awesome!), and
-the neat Compilation Theory. After having thoroughly enjoyed <a href="http://www.cs.technion.ac.il/~biham/" target="_blank" rel="noopener noreffer ">Eli
-Biham</a>&rsquo;s excellent Modern Cryptology last
-semester, I&rsquo;m visiting (but not taking) his advanced topics course this
-semester. I also have two projects: One in computer security, where we mess
-with Google, and another in EE, where we try using transactional memory in
-order to optimize Apache.</p>
-<p>And finally - next week on Thursday, Shlomi Shaban is doing a piano show in
-Haifa, just like the good old days. He was supposed to join NaNuchKa for one of
-their shows, but had to cancel, so my lovely lady (who introduced me to his
-work in the first place) and I haven&rsquo;t been to his shows in quite a while. It
-seems that will be able to use the new <a href="http://www.egged.co.il/main.asp?lngCategoryID=6109" target="_blank" rel="noopener noreffer ">200
-line</a> - part of a long
-overdue project to have cheap public transportation available all night long.</p>
-]]></description></item><item><title>Computability - Typed Lectures and Tutorials</title><link>https://lutzky.net/posts/computability-typed-lectures-and-tutorials/</link><pubDate>Wed, 31 Oct 2007 22:50:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/computability-typed-lectures-and-tutorials/</guid><description><![CDATA[<blockquote>
-<p>All links in this post have been lost to the mists of time. I&rsquo;ve kept it here
-out of pure nostalgia.</p></blockquote>
-<p>I&rsquo;m typing the lectures of the course 236343 Computability Theory this
-semester. Attached are my lectures notes in PDF form:</p>
-<p><a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_lecture.pdf" target="_blank" rel="noopener noreffer ">Computability Lecture Notes</a>
-<a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_tutorial.pdf" target="_blank" rel="noopener noreffer ">Computability Tutorial Notes</a></p>
-<p>If you also type the notes and would like to collaborate with me, I use a git
-repository stored here:</p>
-<p><a href="http://yasmin.technion.ac.il/ohad/git/computability.git" target="_blank" rel="noopener noreffer ">http://yasmin.technion.ac.il/ohad/git/computability.git</a></p>
-<p>To use it, install <code>git-core</code> and curl, and run</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">git clone http://yasmin.technion.ac.il/ohad/git/computability.git
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Any changes you have - send to me as patches, or push to your own repository
-and send me a link. (Drawings would be most welcome, and you&rsquo;re obviously
-welcome to add your name to the list of typers)</p>
-<p>If you need git storage, try <a href="http://repo.or.cz" target="_blank" rel="noopener noreffer ">repo.or.cz</a>, or ask the T2
-admins to install git :)</p>
-]]></description></item><item><title>All hail the cow!</title><link>https://lutzky.net/posts/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/all-hail-the-cow/</guid><description><![CDATA[<figure><a class="lightgallery" href="/posts/all-hail-the-cow/534994007_ef57770ac3.jpg" title="/posts/all-hail-the-cow/534994007_ef57770ac3.jpg" data-thumbnail="/posts/all-hail-the-cow/534994007_ef57770ac3.jpg" data-sub-html="<h2>Paradox the cow</h2>">
-        
-    </a><figcaption class="image-caption"><a href="http://www.flickr.com/photos/paradox_the_cow/" target="_blank" rel="noopener noreffer ">Paradox the cow</a></figcaption>
-    </figure>
-<figure><a class="lightgallery" href="/posts/all-hail-the-cow/535038697_9b471a95b1_o.jpg" title="/posts/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-thumbnail="/posts/all-hail-the-cow/535038697_9b471a95b1_o.jpg" data-sub-html="<h2>Another action shot with Paradox</h2>">
-        
-    </a><figcaption class="image-caption">Another action shot with Paradox</figcaption>
-    </figure>
-<p>I present to you, the only creature which is more of a celebrity in the
-undergrad CS world than I am&hellip; <em>The Cow</em>. (Paradox)</p>
-<p><strong>Edit:</strong> Yes, that&rsquo;s me. No, that&rsquo;s not my bass. That&rsquo;s a very good friend&rsquo;s
-Fender Fat Stratocaster. So smooooth&hellip;</p>
-<p><strong>Edit:</strong> Photo by <a href="http://flickr.com/photos/talgoldman" target="_blank" rel="noopener noreffer ">some chum</a> ;)</p>
-]]></description></item><item><title>On the matter of a really long vacation</title><link>https://lutzky.net/posts/on-the-matter-of-a-really-long-vacation/</link><pubDate>Tue, 24 Apr 2007 22:14:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/on-the-matter-of-a-really-long-vacation/</guid><description><![CDATA[<p>By now I&rsquo;ve lost count of how long ago my last class was. The strike has begun
+tickets for that.&lt;/p></description></item><item><title>Computability - Typed Lectures and Tutorials</title><link>https://lutzky.net/posts/computability-typed-lectures-and-tutorials/</link><pubDate>Wed, 31 Oct 2007 22:50:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/computability-typed-lectures-and-tutorials/</guid><description>&lt;blockquote>
+&lt;p>All links in this post have been lost to the mists of time. I&amp;rsquo;ve kept it here
+out of pure nostalgia.&lt;/p>&lt;/blockquote>
+&lt;p>I&amp;rsquo;m typing the lectures of the course 236343 Computability Theory this
+semester. Attached are my lectures notes in PDF form:&lt;/p>
+&lt;p>&lt;a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_lecture.pdf" target="_blank" rel="noopener noreffer ">Computability Lecture Notes&lt;/a>
+&lt;a href="http://yasmin.technion.ac.il/ohad/winter_2007/computability/computability_tutorial.pdf" target="_blank" rel="noopener noreffer ">Computability Tutorial Notes&lt;/a>&lt;/p>
+&lt;p>If you also type the notes and would like to collaborate with me, I use a git
+repository stored here:&lt;/p></description></item><item><title>All hail the cow!</title><link>https://lutzky.net/posts/all-hail-the-cow/</link><pubDate>Thu, 07 Jun 2007 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/all-hail-the-cow/</guid><description>Silly post about a cow called Paradox.</description></item><item><title>On the matter of a really long vacation</title><link>https://lutzky.net/posts/on-the-matter-of-a-really-long-vacation/</link><pubDate>Tue, 24 Apr 2007 22:14:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-the-matter-of-a-really-long-vacation/</guid><description>&lt;p>By now I&amp;rsquo;ve lost count of how long ago my last class was. The strike has begun
 immediately after passover, and is certainly beginning to take its toll. For
 one thing, I have no homework deadlines - a rare situation indeed for the
 Technion student. Furthermore, contemplations are rising about whether or not
 this coming summer semester will be held, as the current semester will most
-likely leak into it. This is of special interest to me, as I&rsquo;m behind on my
+likely leak into it. This is of special interest to me, as I&amp;rsquo;m behind on my
 degree, which is problematic because of my military scholarship. This is
-shaping up to be the second time in which, while I&rsquo;ve been authorized by the
+shaping up to be the second time in which, while I&amp;rsquo;ve been authorized by the
 military to take a summer semester for completion, I am not able to. However,
 one cannot trivially dismiss this strike; in a country which is known worldwide
-mostly for its technological exports and frequent bloodbaths, one shouldn&rsquo;t
-take the matter of tuition lightly.</p>
-<p>The vacation was not, however, boring - I got to spend a lot of time with my
-lovely girlfriend, a chance to see friends I have not seen in a long time, and
-a lot of posts racked up in various forums. The vacation actually expanded far
-enough to contain independence day, so I managed to experience the closest
-thing to a hangover I&rsquo;d ever had (But that was some great scotch). Actually,
-independence day could have been truly superb; the whole thing got me thinking
-about what the perfect night out would be: It&rsquo;s obviously best with my
-girlfriend. It would probably start with a rock show of sorts, continue with
-food and beer, and end in my girlfriend&rsquo;s bed. Better yet - if I&rsquo;m <em>in</em> the
-show. Better still - if there&rsquo;s no reason to get up early the following day.</p>
-<p>Another item of interest is that I&rsquo;ve joined a band. Hopefully I&rsquo;ll be able to
-keep up the 3-hours-on-Saturday rehearsals. It&rsquo;s a &ldquo;Trash Metal&rdquo; band which has
-evidently had really bad experience with bass players. Unfortunately, we seem
-to have a <a href="http://myspace.com/switchblade777" target="_blank" rel="noopener noreffer ">myspace page</a>. It looks&hellip;
-myspaceish. However, I really think the group has potential, as well as
-excellent influences. Furthermore, I&rsquo;m an attention whore :D. Hopefully I&rsquo;ll be
-able to help influence the band into more of a heavy-metal direction by
-harassing them with melodic basslines.</p>
-<p>Very little geek news this time, other than the fact that <a href="http://ubuntu.com" target="_blank" rel="noopener noreffer ">Feisty
-Fawn</a> is out. My verdict - get it. It&rsquo;s awesome. Period.
-Suspend works much better, NetworkManager is now installed by default, a lot of
-things have really been polished, and - can you believe it - Sudoku :)! If you
-already run Ubuntu, I&rsquo;d advise against using the update manager - it works, but
-it takes a long time, and cannot run unattended. Also, a word of caution to
-server admins though - sqlite3 is the new default, so if you have sqlite2
-databases you&rsquo;ll need to convert them (use the sqlite and sqlite3 binaries to
-do this) - otherwise you&rsquo;ll get &ldquo;file is not a database, or is encrypted&rdquo;
-errors.</p>
-<p>Whew - that&rsquo;s much better. My thoughts have been depleted into the bits and
-bytes before you. I&rsquo;ll just <a href="http://gadial.net" target="_blank" rel="noopener noreffer ">plug a friend&rsquo;s blog</a> and hit
-the publish button now ;)</p>
-]]></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description><![CDATA[<p>A very neat find for those of you who want to use Jabber from within the
+mostly for its technological exports and frequent bloodbaths, one shouldn&amp;rsquo;t
+take the matter of tuition lightly.&lt;/p></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description>&lt;p>A very neat find for those of you who want to use Jabber from within the
 Technion, but with your client of choice rather than a web-based one: Many
 Jabber servers, including Google Talk, support using Port 443 over SSL. Since
 the Technion does not block outbound SSL connections, this will work there as
-well. Be sure to mark the appropriate &lsquo;Use old SSL protocol&rsquo; option in your
-jabber client (that&rsquo;s what it&rsquo;s called in gaim and pidgin, at any rate).</p>
-]]></description></item><item><title>Here's hoping</title><link>https://lutzky.net/posts/heres-hoping/</link><pubDate>Wed, 14 Feb 2007 22:23:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/heres-hoping/</guid><description><![CDATA[<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="n">grade</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">empty?</span> <span class="c1"># Optimistic, eh?</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">case</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">  <span class="k">when</span> <span class="ss">:pass</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">55</span>
-</span></span><span class="line"><span class="cl">  <span class="k">when</span> <span class="ss">:fail</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">54</span>
-</span></span><span class="line"><span class="cl">  <span class="k">when</span> <span class="ss">:root</span>
-</span></span><span class="line"><span class="cl">    <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
-</span></span><span class="line"><span class="cl">  <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">grade</span> <span class="o">=</span> <span class="n">grade</span><span class="o">.</span><span class="n">to_f</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">params</span><span class="o">[</span><span class="ss">:proc</span><span class="o">].</span><span class="n">call</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:proc</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">grade</span> <span class="o">*=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:coefficient</span><span class="o">]</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:coefficient</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">/=</span> <span class="mi">100</span>
-</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">**=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:gamma</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">*=</span> <span class="mi">100</span>
-</span></span><span class="line"><span class="cl">  <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:offset</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">grade</span> <span class="o">+=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:offset</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">  <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">grade</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:idnoclip</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> <span class="n">grade</span><span class="p">,</span> <span class="mi">100</span> <span class="o">].</span><span class="n">min</span>
-</span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/posts/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 21:21:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/i-might-need-these-tomorrow/</guid><description>&lt;p>My lecture slides. Have a peek if you like :)&lt;/p>
-&lt;a href="/posts/i-might-need-these-tomorrow/sybils.pdf" rel="">sybilproof Reputation Mechanisms - Seminar&lt;/a>
-</description></item><item><title>As for Python</title><link>https://lutzky.net/posts/as-for-python/</link><pubDate>Tue, 23 Jan 2007 21:33:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/as-for-python/</guid><description><![CDATA[<p>Myself, I&rsquo;m a Ruby hacker. I send everyone within earshot to
-<a href="http://tryruby.hobix.com" target="_blank" rel="noopener noreffer ">TryRuby</a>, code my sites using Rails, am surprised
-that I&rsquo;m using a php-based blog&hellip; you get the picture. Ruby is sometimes
+well. Be sure to mark the appropriate &amp;lsquo;Use old SSL protocol&amp;rsquo; option in your
+jabber client (that&amp;rsquo;s what it&amp;rsquo;s called in gaim and pidgin, at any rate).&lt;/p></description></item><item><title>Here's hoping</title><link>https://lutzky.net/posts/heres-hoping/</link><pubDate>Wed, 14 Feb 2007 22:23:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/heres-hoping/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ruby" data-lang="ruby">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">factor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">grade&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">params&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">100&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">empty?&lt;/span> &lt;span class="c1"># Optimistic, eh?&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:type&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">when&lt;/span> &lt;span class="ss">:pass&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">55&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">when&lt;/span> &lt;span class="ss">:fail&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">54&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">when&lt;/span> &lt;span class="ss">:root&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:gamma&lt;/span>&lt;span class="o">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grade&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">grade&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to_f&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:proc&lt;/span>&lt;span class="o">].&lt;/span>&lt;span class="n">call&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">grade&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:proc&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grade&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:coefficient&lt;/span>&lt;span class="o">]&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:coefficient&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:gamma&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grade&lt;/span> &lt;span class="o">/=&lt;/span> &lt;span class="mi">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grade&lt;/span> &lt;span class="o">**=&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:gamma&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grade&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:offset&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grade&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:offset&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">grade&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="ss">:idnoclip&lt;/span>&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span> &lt;span class="n">grade&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">100&lt;/span> &lt;span class="o">].&lt;/span>&lt;span class="n">min&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>I might need these tomorrow...</title><link>https://lutzky.net/posts/i-might-need-these-tomorrow/</link><pubDate>Tue, 30 Jan 2007 21:21:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/i-might-need-these-tomorrow/</guid><description>&lt;p>My lecture slides. Have a peek if you like :)&lt;/p>
+&lt;a href="https://lutzky.net/posts/i-might-need-these-tomorrow/sybils.pdf" rel="">sybilproof Reputation Mechanisms - Seminar&lt;/a></description></item><item><title>As for Python</title><link>https://lutzky.net/posts/as-for-python/</link><pubDate>Tue, 23 Jan 2007 21:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/as-for-python/</guid><description>&lt;p>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to
+&lt;a href="http://tryruby.hobix.com" target="_blank" rel="noopener noreffer ">TryRuby&lt;/a>, code my sites using Rails, am surprised
+that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes
 called the Japanese Python, and comparisons are inevitable. I know very little
-about Python, but I do know that&hellip;</p>
-<ul>
-<li>It has a larger community</li>
-<li>More GUI applications are written in it</li>
-<li>More bindings are available for it</li>
-<li>Its interpreter is much faster</li>
-<li>Not a far inferior language</li>
-</ul>
-<p>Ruby certainly does have its advantages over it - trivial class expansion,
+about Python, but I do know that&amp;hellip;&lt;/p>
+&lt;ul>
+&lt;li>It has a larger community&lt;/li>
+&lt;li>More GUI applications are written in it&lt;/li>
+&lt;li>More bindings are available for it&lt;/li>
+&lt;li>Its interpreter is much faster&lt;/li>
+&lt;li>Not a far inferior language&lt;/li>
+&lt;/ul>
+&lt;p>Ruby certainly does have its advantages over it - trivial class expansion,
 extremely concise syntax, seemingly better-suited for heavy usage of closures,
-and Matz. Ya gotta love Matz.</p>
-<p>I will be giving Python a try soon&hellip; I love learning new programming
-languages. That&rsquo;s why I&rsquo;m taking Programming Languages this coming semester.</p>
-]]></description></item></channel></rss>
+and Matz. Ya gotta love Matz.&lt;/p></description></item></channel></rss>

@@ -1,644 +1,164 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Linux - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/linux/</link><description>Linux - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Sun, 22 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/linux/" rel="self" type="application/rss+xml"/><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description><![CDATA[<p>Here&rsquo;s a fun little bash script:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">(</span>
-</span></span><span class="line"><span class="cl">  sleep <span class="m">20</span> <span class="p">&amp;</span>
-</span></span><span class="line"><span class="cl"><span class="o">)</span>
-</span></span><span class="line"><span class="cl">ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Run it, and you&rsquo;ll notice a few things:</p>
-<ul>
-<li>Because the subshell running <code>sleep</code> dies immediately, <code>sleep</code> gets reparented to <code>init</code>. (Interestingly enough, on newer Ubuntu releases this isn&rsquo;t PID 1&hellip;), so the script doesn&rsquo;t have any child processes by the time it prints &ldquo;Bye&rdquo;.</li>
-<li>After &ldquo;Bye&rdquo; is shown, the script exits immediately, returning control to the shell.</li>
-</ul>
-<p>Now, call the script <code>pied_piper.sh</code>, and try the following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./pied_piper.sh <span class="p">|</span> cat
-</span></span><span class="line"><span class="cl">./pied_piper.sh <span class="p">|</span> ts  <span class="c1"># Awesome timestamping utility, same problem though</span>
-</span></span><span class="line"><span class="cl">ssh localhost ./pied_piper.sh
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Annoying, isn&rsquo;t it? These commands won&rsquo;t finish for 20 seconds! The problem is that <code>sleep</code> is keeping its <code>stdout</code> open, which is the input pipe for <code>cat</code>, <code>ts</code>, <code>ssh</code>, or whatever else you&rsquo;re piping to (this is very annoying on Jenkins jobs as well).</p>
-<p>If a third-party product is pissing you off this way - that is, it died, but somehow still keeps its pipe open, you can find the culprit like so:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fuser -v /proc/<span class="nv">$PID_OF_PROCESS_WITH_OPEN_PIPE</span>/fd/0
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This will usually yield a <code>sleep</code> process as the culprit, with the useless parent information of <code>init</code> (as per my example). The only information you have is the precise delay - in my experience, it helps to find all &ldquo;sleep&rdquo; commands lurking about, and tinker with the delay amounts: Found a <code>sleep 30</code>? Change it to <code>sleep 29</code>, see if that&rsquo;s what shows up.</p>
-<p>Here&rsquo;s how to actually fix the problem:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">(</span>
-</span></span><span class="line"><span class="cl">  sleep <span class="m">20</span> &gt;<span class="p">&amp;</span>- 2&gt;<span class="p">&amp;</span>- &lt;<span class="p">&amp;</span>- <span class="p">&amp;</span>
-</span></span><span class="line"><span class="cl"><span class="o">)</span>
-</span></span><span class="line"><span class="cl">ps -f <span class="k">$(</span>pidof sleep<span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Bye&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This will close <code>stdout</code>, <code>stderr</code> and <code>stdin</code>. As a friend pointed out, it&rsquo;s often safer to do <code>&gt; /dev/null</code> rather than <code>&gt;&amp;-</code>, as some processes will crap out if they don&rsquo;t have some semblence of an <code>stdout</code>. However, <code>&gt;&amp;-</code> is shorter, faster, and perfectly safe for <code>sleep</code>.</p>
-<p>Of course, it&rsquo;s better to save the PID for this <code>sleep</code> and kill it when appropriate from within the script - otherwise, you might be accumulating many useless <code>sleep</code> processes.</p>
-]]></description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description><![CDATA[<p>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&rsquo;s explore.</p>
-<h2 id="introduction">Introduction</h2>
-<p>Assume you&rsquo;re working with an external vendor, who is providing you with code
-for a wonderful function <code>getFoo</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// foo.h version 1.2.3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">getFoo</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// foo.c version 1.2.3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">getFoo</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">// TODO improve performance
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="mi">42</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You use this function in many of your products - for example, in your
-best-selling <code>barApp</code> application:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// barApp.c
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">getFoo</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>So <code>barApp</code>, and other applications, would want to use a <code>foo</code> library.  It
-makes sense to provide this function in a shared library (<code>libfoo.so</code>).
-However, this library will change in the future, in several ways:</p>
-<ol>
-<li>Binary-compatible changes
-<ul>
-<li>Performance improvements (<code>sleep</code> will be removed)</li>
-<li>Additional functionality will become available (new functions)</li>
-</ul>
-</li>
-<li>Binary-incompatibile changes - at the very least, recompilation will be necessary
-<ul>
-<li>For C, this is usually caused by changes to macros</li>
-<li>For C++, a plethora of reasons: Virtual function reimplementation, function
-inlining, new private data members&hellip;</li>
-</ul>
-</li>
-<li>Source-incompatible changes - these will require you to change your source
-code (in <code>barApp</code>):
-<ul>
-<li>Functions (which you use) being removed or renamed</li>
-<li>Semantic changes - <code>getFoo</code> could return 43</li>
-</ul>
-</li>
-</ol>
-<p>This gets even more complicated due to the fact that <code>barApp</code> is an operational,
-mission-critical application for your organization. Developers may need to
-hotfix older versions of <code>barApp</code>, which use older versions of <code>libfoo</code>. The build
-servers and developer boxes will need to be able to have multiple versions of
-<code>libfoo</code> installed simultaneously.</p>
-<h2 id="compiling-installing-and-using-a-shared-library-properly">Compiling, installing, and using a shared library properly</h2>
-<p>First, the upstream vendor should compile <code>libfoo.so</code> with an <code>SONAME</code>, like so:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -shared -Wl,-soname,libfoo.so.1 -o libfoo.so.1.2.3 foo.c
-</span></span><span class="line"><span class="cl">objdump -x libfoo.so.1.2.3 <span class="p">|</span> grep SONAME
-</span></span><span class="line"><span class="cl"><span class="c1"># SONAME               libfoo.so.1</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The guarantee the upstream vendor should give is this: As long as <code>SONAME</code>
-doesn&rsquo;t change, binary compatibility will be retained.</p>
-<p>Now, you (or, preferably, your package manager) should install the package on your machine like so:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p /usr/include/foo1
-</span></span><span class="line"><span class="cl">cp foo.h /usr/include/foo1
-</span></span><span class="line"><span class="cl">cp libfoo.so.1.2.3 /usr/lib
-</span></span><span class="line"><span class="cl">ldconfig -v <span class="p">|</span> grep libfoo
-</span></span><span class="line"><span class="cl"><span class="c1"># libfoo.so.1 -&gt; libfoo.so.1.2.3</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now, traditionally <em>another</em> symlink <code>libfoo.so</code> -&gt; <code>libfoo.so.1.2.3</code> would be
-created, so you could compile <code>barApp</code> with <code>-lfoo</code>. However, here&rsquo;s an
-alternative:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -I/usr/include/foo1 -l:libfoo.so.1 barApp.c -o barApp
-</span></span><span class="line"><span class="cl">ldd barApp
-</span></span><span class="line"><span class="cl"><span class="c1"># linux-vdso.so.1 =&gt;  (0x00007fff8edfe000)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># libfoo.so.1 =&gt; /usr/lib/libfoo.so.1 (0x00007fb367cce000)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb367906000)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># /lib64/ld-linux-x86-64.so.2 (0x00007fb367ef2000)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now <code>barApp</code> is compiled, and looks for <code>libfoo.so.1</code> - it will find it thanks
-to the symlink created by <code>ldconfig</code>, and use <code>libfoo.so.1.2.3</code>.</p>
-<h2 id="aftermath">Aftermath</h2>
-<h3 id="binary-compatible-updates">Binary-compatible updates</h3>
-<p>Suppose a new, compatible, faster version of <code>libfoo</code> is released - say version
-\1.3.0, which has removed that pesky <code>sleep</code>. Well, just place it in <code>/usr/lib</code>
-and rerun <code>ldconfig</code>.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp libfoo.so.1.3.0 /usr/lib
-</span></span><span class="line"><span class="cl">ldconfig -v <span class="p">|</span> grep libfoo
-</span></span><span class="line"><span class="cl"><span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The symlink has been updated, and now all applications (<code>barApp</code>, for example)
-which were linked against <code>libfoo.so.1</code> will have improved performance.</p>
-<h3 id="incompatible-updates">Incompatible updates</h3>
-<p>Suppose a new, incompatible version 2.0.0 of <code>libfoo</code> is released, which would
-force the newer <code>barApp2.0</code> to be recompiled against the new, different
-headers. No problem:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p /usr/include/foo2
-</span></span><span class="line"><span class="cl">cp foo.h /usr/include/foo2
-</span></span><span class="line"><span class="cl">cp libfoo.so.2.0.0 /usr/lib
-</span></span><span class="line"><span class="cl">ldconfig -v <span class="p">|</span> grep libfoo
-</span></span><span class="line"><span class="cl"><span class="c1"># -&gt; libfoo.so.2 -&gt; libfoo.so.2.0.0</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># -&gt; libfoo.so.1 -&gt; libfoo.so.1.3.0</span>
-</span></span><span class="line"><span class="cl">gcc -I/usr/include/foo2 -l:libfoo.so.2 barApp2.0.c -o barApp2.0
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Both versions of <code>libfoo</code> are installed simultaneously, and do not conflict.</p>
-<h2 id="final-thoughts">Final thoughts</h2>
-<p>The <a href="http://www.debian.org/doc/debian-policy/ch-sharedlibs.html#s-sharedlibs-runtime" target="_blank" rel="noopener noreffer ">Debian policy guide</a> states that <code>-dev</code> packages should include
-the <code>libfoo.so</code> symlink. However, this would cause a conflict between the
-<code>-dev</code> packages for two different generations of <code>libfoo</code>. I am curious as to
-how this problem is solved &ldquo;in the wild&rdquo;, as I&rsquo;m sure Debian have good reasons
-for suggesting this.</p>
-]]></description></item><item><title>Timezones are fickle</title><link>https://lutzky.net/posts/timezones-are-fickle/</link><pubDate>Sat, 18 Apr 2009 16:45:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/timezones-are-fickle/</guid><description><![CDATA[<p>I&rsquo;ve been trying to work out a system to be able to cleanly switch between IST
-(Israel Standard Time, GMT+2:00) and IDT (Israel Daylight savings Time,
-GMT+3:00) on command. The logical way to do this, in my opinion, is to have two
-separate files in <code>/usr/share/zoneinfo</code>, say <code>IsraelIST</code> and
-<code>IsraelIDT</code>, and copy (or link) the relevant one as
-<code>/etc/localtime</code>. The trick is creating the <code>IsraelIDT</code> file.</p>
-<p>My first guess was the following zic source-file:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl"># Zone    NAME                GMTOFF  RULES/SAVE  FORMAT [UNTIL]
-</span></span><span class="line"><span class="cl">Zone      IsraelIDT           2:00    01:00       IDT
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now, this almost works. The problem is that both <code>is_dst</code> is set and
-<code>timezone = -10800</code> (3 hours - should be 2, as it should represent local
-standard time), so some software double-compensates here for a grand total of
-GMT+4:00. After some research (walking through <code>__tzfile_read</code> gave the
-biggest hint), it turns out that <code>timezone</code> is set according to the
-minimal local time type which is <em>transitioned into</em>. So I came up with
-this file:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl"># Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
-</span></span><span class="line"><span class="cl">Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
-</span></span><span class="line"><span class="cl">Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S
-</span></span><span class="line"><span class="cl">Rule    ZionIDT 1940  max   -     Jan  1        00:00 1:00  D
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># Zone    NAME                GMTOFF  RULES/SAVE  FORMAT  [UNTIL]
-</span></span><span class="line"><span class="cl">Zone      IsraelIDT           2:00    ZionIDT     I%sT
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Sounds about right, nay? Even my handy little
-<a href="http://github.com/lutzky/pyzdump" target="_blank" rel="noopener noreffer ">pyzdump</a> confirms that it looks about how I
-want it to:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> ./pyzdump.py /usr/share/zoneinfo/IsraelIDT
-</span></span><span class="line"><span class="cl"><span class="go">Transitions: [&#39;At Sat Dec 31 23:00:00 1938, switch to IST&#39;,
-</span></span></span><span class="line"><span class="cl"><span class="go">&#39;At Sun Dec 31 22:00:00 1939, switch to IDT&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="go">Types: [&lt;tztype dst=&#34;True&#34; idt:=&#34;&#34; utc+10800=&#34;&#34;&gt;,
-</span></span></span><span class="line"><span class="cl"><span class="go">&lt;tztype dst=&#34;False&#34; ist:=&#34;&#34; utc+7200=&#34;&#34;&gt;]
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>However, it still doesn&rsquo;t work. A test program:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">tzset</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">time_t</span> <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Timezone name is %s, timezone=%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">__tzname</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">timezone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;The time is %s&#34;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Timezone name is %s, timezone=%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">__tzname</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">timezone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And its results, as run at 14:42:17 UTC, which is 19:42:17 IDT:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Timezone name is IDT, timezone=-7200
-</span></span><span class="line"><span class="cl">The time is Sat Apr 18 14:42:17 2009
-</span></span><span class="line"><span class="cl">Timezone name is UTC, timezone=0
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Or, as I described it to a friend:</p>
-<blockquote>
-<p>Me: Hi computer, do you know what timezone are we in?</p>
-<p>Computer: Yeah, it&rsquo;s Israel Daylight Savings time, GMT+2:00 for standard time.</p>
-<p>Me: OK, and what time is it?</p>
-<p>Computer: 14:42</p>
-<p>Me: No, that&rsquo;s 3 hours late. What timezone are we in?</p>
-<p>Computer: Umm&hellip; UTC?</p>
-<p>Me: You just said IDT.</p>
-<p>Computer: Nuh-uh.</p></blockquote>
-<p>I&rsquo;ll get to the bottom of this eventually :/</p>
-<p><strong>Addendum:</strong> It seems that the problem is even more complicated. For the
-following timezone file, C programs seem to work fine:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl"># Rule  NAME    FROM  TO    TYPE  IN   ON       AT    SAVE  LETTER/S
-</span></span><span class="line"><span class="cl">Rule    ZionIDT min   1939  -     Jan  1        00:00 1:00  D
-</span></span><span class="line"><span class="cl">Rule    ZionIDT 1939  only  -     Jan  1        00:00 0:00  S
-</span></span><span class="line"><span class="cl">Rule    ZionIDT 1940  2030  -     Jan  1        00:00 1:00  D
-</span></span><span class="line"><span class="cl">Rule    ZionIDT 2030  max   -     Jan  1        00:00 0:00  S
-</span></span><span class="line"><span class="cl"># Zone    NAME                GMTOFF  RULES/SAVE  FORMAT  [UNTIL]
-</span></span><span class="line"><span class="cl">Zone      IsraelIDT           2:00    ZionIDT     I%sT
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>However, Python programs still show <code>timezone = -10800</code>. Examining
-Python&rsquo;s code, I found this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span> <span class="n">janzone</span> <span class="o">&lt;</span> <span class="n">julyzone</span> <span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/* DST is reversed in the southern hemisphere */</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;timezone&#34;</span><span class="p">,</span> <span class="n">julyzone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;altzone&#34;</span><span class="p">,</span> <span class="n">janzone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;daylight&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">janzone</span> <span class="o">!=</span> <span class="n">julyzone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PyModule_AddObject</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;tzname&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Py_BuildValue</span><span class="p">(</span><span class="s">&#34;(zz)&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">julyname</span><span class="p">,</span> <span class="n">janname</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;timezone&#34;</span><span class="p">,</span> <span class="n">janzone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;altzone&#34;</span><span class="p">,</span> <span class="n">julyzone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddIntConstant</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;daylight&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">janzone</span> <span class="o">!=</span> <span class="n">julyzone</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PyModule_AddObject</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">&#34;tzname&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Py_BuildValue</span><span class="p">(</span><span class="s">&#34;(zz)&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">janname</span><span class="p">,</span> <span class="n">julyname</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And since June and July have the same timezone in our case, there&rsquo;s a good
-chance that this is what&rsquo;s going wrong. The moral of the story seems to be
-this - I should go with the first, simplest &ldquo;always-DST&rdquo; solution. Programs
-should ignore the <code>timezone</code> variable, as in our context it isn&rsquo;t reliable. In
-general, all internal time handling should be done in UTC; when reading times
-from the outside world, if they are in local time - use <code>mktime</code>. If
-they are in a specified timezone, use <code>timegm</code> and compensate manually.
-I&rsquo;d love to hear better ideas in the comments.</p>
-]]></description></item><item><title>Automatically starting rtorrent within screen</title><link>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</link><pubDate>Tue, 04 Nov 2008 21:33:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</guid><description><![CDATA[<p>These days I don&rsquo;t stay at home often, but I do have an RSS/BitTorrent combo
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Shallow and Pedantic</title><link>https://lutzky.net/tags/linux/</link><description>Recent content in Linux on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description>&lt;p>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.&lt;/p>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Assume you&amp;rsquo;re working with an external vendor, who is providing you with code
+for a wonderful function &lt;code>getFoo&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.h version 1.2.3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.c version 1.2.3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// TODO improve performance
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">42&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You use this function in many of your products - for example, in your
+best-selling &lt;code>barApp&lt;/code> application:&lt;/p></description></item><item><title>Timezones are fickle</title><link>https://lutzky.net/posts/timezones-are-fickle/</link><pubDate>Sat, 18 Apr 2009 16:45:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/timezones-are-fickle/</guid><description>Creating a manual &amp;ldquo;always-daylight-savings&amp;rdquo; timezone is hard. Let&amp;rsquo;s peek at just how messy timezone logic gets.</description></item><item><title>Automatically starting rtorrent within screen</title><link>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</link><pubDate>Tue, 04 Nov 2008 21:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</guid><description>&lt;p>These days I don&amp;rsquo;t stay at home often, but I do have an RSS/BitTorrent combo
 fetching me all kinds of neat stuff for me, so I can have it ready for me on
-the weekend. I love <a href="http://libtorrent.rakshasa.no/" target="_blank" rel="noopener noreffer ">rtorrent</a>, especially due
-to the fact that I can run it in <code>screen</code>, ssh home and see how things are
+the weekend. I love &lt;a href="http://libtorrent.rakshasa.no/" target="_blank" rel="noopener noreffer ">rtorrent&lt;/a>, especially due
+to the fact that I can run it in &lt;code>screen&lt;/code>, ssh home and see how things are
 doing (or add more torrent to the download). However, sometimes my net
 connection breaks down, computers gets shut off, or things like that. This week
-my router broke down, so I can&rsquo;t even ssh home to manually start up rtorrent.
+my router broke down, so I can&amp;rsquo;t even ssh home to manually start up rtorrent.
 My solution: A small script, which checks whether rtorrent is already running,
 and if not - runs it in a detached screen session. Run this with your favorite
-<code>cron</code> software.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># A simple script to make sure I am running rtorrent in a screen</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> ! ps -o uname -C rtorrent <span class="p">|</span> grep -q <span class="sb">`</span>whoami<span class="sb">`</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">  screen -d -m rtorrent
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/posts/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 18:57:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/quick-time-tracking-hack/</guid><description><![CDATA[<p>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
-don&rsquo;t have Gnome 2.24 at work, but I do have a Unix-based operating system&hellip;
-Here&rsquo;s my new <code>~/bin/track</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>date &gt;&gt; ~/time_tracking
-</span></span><span class="line"><span class="cl">vim ~/time_tracking +
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now, if I could only get vim to automatically hit &ldquo;A&rdquo; and space for me
-afterwards&hellip; (I&rsquo;m betting there&rsquo;s a way to do it, but AFAIK vim can only
-receive ex-mode commands as parameters).</p>
-<p><strong>Edit:</strong> &hellip;and, of course it&rsquo;s possible. Here&rsquo;s the new version:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;`date` &#34;</span> &gt;&gt; ~/time_tracking
-</span></span><span class="line"><span class="cl">vim ~/time_tracking + -c <span class="s1">&#39;startinsert!&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description><![CDATA[<ol>
-<li>
-<p>You can use git on a VFAT disk (for example, a USB key) without all of the
-annoying mode issues, by using the following setting in <code>.git/config</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[core]</span>
-</span></span><span class="line"><span class="cl"><span class="na">filemode</span> <span class="o">=</span> <span class="s">false</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>What I haven&rsquo;t figured out is how to do force a chmod in this situation; for
-example, if I create a new script, I was hoping to be able to <code>git chmod +x</code>
-it.</p>
-</li>
-<li>
-<p><a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer ">Cream</a> is a very good editor if you&rsquo;re used
-to Windows applications. It&rsquo;s a set of plugins for VIM which make it
+&lt;code>cron&lt;/code> software.&lt;/p></description></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/posts/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 18:57:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/quick-time-tracking-hack/</guid><description>&lt;p>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
+don&amp;rsquo;t have Gnome 2.24 at work, but I do have a Unix-based operating system&amp;hellip;
+Here&amp;rsquo;s my new &lt;code>~/bin/track&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>date &amp;gt;&amp;gt; ~/time_tracking
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vim ~/time_tracking +
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now, if I could only get vim to automatically hit &amp;ldquo;A&amp;rdquo; and space for me
+afterwards&amp;hellip; (I&amp;rsquo;m betting there&amp;rsquo;s a way to do it, but AFAIK vim can only
+receive ex-mode commands as parameters).&lt;/p></description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description>&lt;ol>
+&lt;li>
+&lt;p>You can use git on a VFAT disk (for example, a USB key) without all of the
+annoying mode issues, by using the following setting in &lt;code>.git/config&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ini" data-lang="ini">&lt;span class="line">&lt;span class="cl">&lt;span class="k">[core]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">filemode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for
+example, if I create a new script, I was hoping to be able to &lt;code>git chmod +x&lt;/code>
+it.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer ">Cream&lt;/a> is a very good editor if you&amp;rsquo;re used
+to Windows applications. It&amp;rsquo;s a set of plugins for VIM which make it
 modeless and (very) familiar to Windows users. However, Ctrl-O still has its
-usual job for us ordinary junkies :)</p>
-</li>
-<li>
-<p>Vertically, two cans of Pepsi fit very snugly into a Pringles can.</p>
-</li>
-</ol>
-]]></description></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/posts/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 20:58:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/deskbar-and-firefox-3/</guid><description><![CDATA[<p><a href="raphael.slinckx.net/deskbar/" rel="">Deskbar</a> has a really neat plugin which allows
+usual job for us ordinary junkies :)&lt;/p></description></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/posts/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 20:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/deskbar-and-firefox-3/</guid><description>&lt;p>&lt;a href="raphael.slinckx.net/deskbar/" rel="">Deskbar&lt;/a> has a really neat plugin which allows
 you to search your browsing history and bookmarks. Firefox 3 has switched the
-storage format to an sqlite-based one. I&rsquo;ve been working on a new plugin to
-make use of that - so far it&rsquo;s very enjoyable to use :)</p>
-<p>» <a href="http://github.com/lutzky/deskbar_ff3" target="_blank" rel="noopener noreffer ">Deskbar_FF3</a></p>
-]]></description></item><item><title>Hebrew spell-checking in Pidgin</title><link>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</link><pubDate>Tue, 22 Apr 2008 14:13:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</guid><description><![CDATA[<p>This one took me a while to figure out, which is reason enough to post it here.</p>
-<p>First of all, you&rsquo;ll need <code>aspell-he</code>, as pidgin uses <code>gtkspell</code> (which, in
-turn, uses <code>aspell</code>) rather than <code>enchant</code> (which supports <code>hspell</code>). There is
-a patch for <code>gtkspell</code> which gets it to use <code>enchant</code>, but I don&rsquo;t know of a
-simple way to get it to work in my distribution of choice, Ubuntu.</p>
-<p>Now you need a neat little plugin from the
-<a href="http://plugins.guifications.org/" target="_blank" rel="noopener noreffer ">Guifications</a> plugin pack, called
-SwitchSpell. Unfortunately, it&rsquo;s in version 2.3.0 of the pack, whereas the
-current Ubuntu version is 2.0.0. It&rsquo;s not complicated to install this from
-source though: I&rsquo;ve detailed the precise installation procedure below; the
-confusing thing is that if you forget to install <code>libgtkspell-dev</code> or
-<code>libaspell-dev</code>, SwitchSpell will not be built, but the <code>configure</code> script
-tells you that it <em>will</em>.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install build-essential gettext libgtkspell-dev libaspell-dev pidgin-dev
-</span></span><span class="line"><span class="cl">wget http://downloads.guifications.org/plugins//Plugin%20Pack/purple-plugin_pack-2.3.0.tar.bz2
-</span></span><span class="line"><span class="cl">tar jxvf purple-plugin_pack-2.3.0.tar.bz2
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> purple-plugin_pack-2.3.0
-</span></span><span class="line"><span class="cl">./configure --with-plugins<span class="o">=</span>switchspell
-</span></span><span class="line"><span class="cl">make
-</span></span><span class="line"><span class="cl">sudo make install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>At this point, the Switch Spell plugin should show up in your Pidgin
-preferences. When you activate it, you should get a menu at the top of each
-conversation for choosing the dictionary in use. Enjoy!</p>
-]]></description></item><item><title>My alarm clock</title><link>https://lutzky.net/posts/my-alarm-clock/</link><pubDate>Tue, 12 Feb 2008 23:37:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/my-alarm-clock/</guid><description><![CDATA[<p>YNet was running a story on how to use your computer as an alarm clock. Here&rsquo;s
-what I do, for our commandline junkies :)</p>
-<p>Here&rsquo;s <code>~/bin/run_alarm.sh</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl">find ~/music/ -name <span class="s1">&#39;*.mp3&#39;</span> -print0 <span class="p">|</span> xargs -0 mplayer -shuffle <span class="p">&amp;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">MAXVOL</span><span class="o">=</span><span class="m">31</span>
-</span></span><span class="line"><span class="cl"><span class="nv">TIME</span><span class="o">=</span><span class="m">900</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">((</span> <span class="nv">i</span> <span class="o">=</span> 0<span class="p">;</span> i &lt;<span class="o">=</span> <span class="nv">$MAXVOL</span><span class="p">;</span> i++ <span class="o">))</span><span class="p">;</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">        amixer <span class="nb">set</span> Master <span class="nv">$i</span> &gt; /dev/null<span class="p">;</span>
-</span></span><span class="line"><span class="cl">        sleep <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$TIME</span> / <span class="nv">$MAXVOL</span> <span class="p">|</span> bc -l<span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="k">done</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This basically plays all of my MP3 files, in random order. The <code>-print0</code> and <code>-0</code>
+storage format to an sqlite-based one. I&amp;rsquo;ve been working on a new plugin to
+make use of that - so far it&amp;rsquo;s very enjoyable to use :)&lt;/p>
+&lt;p>» &lt;a href="http://github.com/lutzky/deskbar_ff3" target="_blank" rel="noopener noreffer ">Deskbar_FF3&lt;/a>&lt;/p></description></item><item><title>Hebrew spell-checking in Pidgin</title><link>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</link><pubDate>Tue, 22 Apr 2008 14:13:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</guid><description>&lt;p>This one took me a while to figure out, which is reason enough to post it here.&lt;/p>
+&lt;p>First of all, you&amp;rsquo;ll need &lt;code>aspell-he&lt;/code>, as pidgin uses &lt;code>gtkspell&lt;/code> (which, in
+turn, uses &lt;code>aspell&lt;/code>) rather than &lt;code>enchant&lt;/code> (which supports &lt;code>hspell&lt;/code>). There is
+a patch for &lt;code>gtkspell&lt;/code> which gets it to use &lt;code>enchant&lt;/code>, but I don&amp;rsquo;t know of a
+simple way to get it to work in my distribution of choice, Ubuntu.&lt;/p>
+&lt;p>Now you need a neat little plugin from the
+&lt;a href="http://plugins.guifications.org/" target="_blank" rel="noopener noreffer ">Guifications&lt;/a> plugin pack, called
+SwitchSpell. Unfortunately, it&amp;rsquo;s in version 2.3.0 of the pack, whereas the
+current Ubuntu version is 2.0.0. It&amp;rsquo;s not complicated to install this from
+source though: I&amp;rsquo;ve detailed the precise installation procedure below; the
+confusing thing is that if you forget to install &lt;code>libgtkspell-dev&lt;/code> or
+&lt;code>libaspell-dev&lt;/code>, SwitchSpell will not be built, but the &lt;code>configure&lt;/code> script
+tells you that it &lt;em>will&lt;/em>.&lt;/p></description></item><item><title>My alarm clock</title><link>https://lutzky.net/posts/my-alarm-clock/</link><pubDate>Tue, 12 Feb 2008 23:37:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/my-alarm-clock/</guid><description>&lt;p>YNet was running a story on how to use your computer as an alarm clock. Here&amp;rsquo;s
+what I do, for our commandline junkies :)&lt;/p>
+&lt;p>Here&amp;rsquo;s &lt;code>~/bin/run_alarm.sh&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">find ~/music/ -name &lt;span class="s1">&amp;#39;*.mp3&amp;#39;&lt;/span> -print0 &lt;span class="p">|&lt;/span> xargs -0 mplayer -shuffle &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">MAXVOL&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">31&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TIME&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">900&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span> &lt;span class="o">=&lt;/span> 0&lt;span class="p">;&lt;/span> i &amp;lt;&lt;span class="o">=&lt;/span> &lt;span class="nv">$MAXVOL&lt;/span>&lt;span class="p">;&lt;/span> i++ &lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> amixer &lt;span class="nb">set&lt;/span> Master &lt;span class="nv">$i&lt;/span> &amp;gt; /dev/null&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep &lt;span class="sb">`&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$TIME&lt;/span> / &lt;span class="nv">$MAXVOL&lt;/span> &lt;span class="p">|&lt;/span> bc -l&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This basically plays all of my MP3 files, in random order. The &lt;code>-print0&lt;/code> and &lt;code>-0&lt;/code>
 arguments make it a null-terminated list, as some (most) files have spaces in
 their names. This process is backgrounded, and the script proceeds to gradually
-sweep the volume from 0 to the maximum, for a more gentle wakeup :)</p>
-<p>This script is basically intended for use with <code>at</code>. I made a little wrapper
-around it for my comfort:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;Usage: </span><span class="nv">$0</span><span class="s2"> [time]&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">exit</span> 1<span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> /home/ohad/bin/run_alarm.sh <span class="p">|</span> at <span class="nv">$1</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/posts/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 15:44:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/grub-menu-lst-editor/</guid><description><![CDATA[<p>A lot of people ask me how to change the default operating system booted after
-installing Linux. The answer they get in Ubuntu&rsquo;s case, &ldquo;Edit
-<code>/boot/grub/menu.lst</code>, it&rsquo;s self-explanatory&rdquo;, is often unsatisfactory.
-Attached is the solution :)</p>
-<blockquote>
-<p>Actual script lost in the mists of time&hellip;</p></blockquote>
-<p>Download the file, open a terminal, and run <code>gksudo python grubmenu.py</code></p>
-<p>I&rsquo;ll try and make a package of this soon, so it becomes a menu entry and that
-much easier to use.</p>
-]]></description></item></channel></rss>
+sweep the volume from 0 to the maximum, for a more gentle wakeup :)&lt;/p></description></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/posts/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 15:44:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/grub-menu-lst-editor/</guid><description>&lt;p>A lot of people ask me how to change the default operating system booted after
+installing Linux. The answer they get in Ubuntu&amp;rsquo;s case, &amp;ldquo;Edit
+&lt;code>/boot/grub/menu.lst&lt;/code>, it&amp;rsquo;s self-explanatory&amp;rdquo;, is often unsatisfactory.
+Attached is the solution :)&lt;/p>
+&lt;blockquote>
+&lt;p>Actual script lost in the mists of time&amp;hellip;&lt;/p>&lt;/blockquote>
+&lt;p>Download the file, open a terminal, and run &lt;code>gksudo python grubmenu.py&lt;/code>&lt;/p>
+&lt;p>I&amp;rsquo;ll try and make a package of this soon, so it becomes a menu entry and that
+much easier to use.&lt;/p></description></item><item><title>Yasmin back up</title><link>https://lutzky.net/posts/yasmin-back-up/</link><pubDate>Mon, 16 Apr 2007 10:43:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/yasmin-back-up/</guid><description>&lt;p>Why was it down, you ask? Well, it was out here in the lab, because of a
+shortage of network ports in the server room. From the acpid log:&lt;/p>
+&lt;p>&lt;code>[Sun Apr 15 18:53:07 2007] received event &amp;quot;button/power PWRF 00000080 00000001&amp;quot;&lt;/code>&lt;/p>
+&lt;p>That is, at 18:53, someone simply pushed the power button. The server promptly
+closed all processes and properly shut itself down. I&amp;rsquo;ve moved it into the
+server room now&amp;hellip;&lt;/p></description></item><item><title>Beautiful ideas</title><link>https://lutzky.net/posts/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 17:24:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/beautiful-ideas/</guid><description>&lt;p>This man has &lt;a href="http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html" target="_blank" rel="noopener noreffer ">some beautiful design
+ideas&lt;/a>
+for the Linux desktop.&lt;/p></description></item><item><title>Pmount-hal + cd</title><link>https://lutzky.net/posts/pmount-hal-cd/</link><pubDate>Thu, 01 Feb 2007 19:46:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/pmount-hal-cd/</guid><description>&lt;p>If you&amp;rsquo;re like me, and don&amp;rsquo;t use Gnome or KDE, then you probably use the pmount
+or pmount-hal applications to mount removable media. Here&amp;rsquo;s a neat thing to add
+to your &lt;code>.bash_aliases&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="k">function&lt;/span> pmh &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pmount-hal &lt;span class="nv">$1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">UDI&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>hal-find-by-property --key block.device --string &lt;span class="nv">$1&lt;/span>&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">cd&lt;/span> &lt;span class="s2">&amp;#34;`hal-get-property --udi &lt;/span>&lt;span class="nv">$UDI&lt;/span>&lt;span class="s2"> --key volume.mount_point`&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

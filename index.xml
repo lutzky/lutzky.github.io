@@ -1,4 +1,41 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shallow and Pedantic</title><link>https://lutzky.net/</link><description>A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Thu, 10 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Newborn parenting software - part 4</title><link>https://lutzky.net/posts/software-parenting-4/</link><pubDate>Thu, 10 Jul 2025 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-4/</guid><description><![CDATA[<p>About 4 years later, we&rsquo;ve done it again! With kid #2, we&rsquo;re older, wiser, more
+tired, and have a slightly different strategy. We still love tracking stuff,
+and BabyBuddy (a self-hosted baby tracking application) is still
+<a href="https://lutzky.net/posts/software-parenting-1/" rel="">the best option</a>. However, a
+couple of things have changed: First, the
+<a href="https://lutzky.net/posts/software-parenting-2/" rel="">poo buttons</a> have largely been
+replaced with a wall-mounted tablet displaying our HomeAssistant UI (which,
+indeed, has buttons for nappy recording). Secondly, and more significantly -
+kid #2 is breastfed.</p>
+<p>One of the advantages of breastfeeding is that some moms can, in the middle of
+the night, feed a hungry baby while barely waking up themselves. Unfortunately,
+if mom is interested in tracking the breastfeeding, and needs to
+unlock the phone (<em>multiple times</em>) and perform additional taps, this doesn&rsquo;t
+work, and she wakes up. Most interactive software is, perhaps unsurprisingly,
+designed for people who are <em>wide awake</em>.</p>
+<p>So - home automation to the rescue! I already have a bunch of IKEA shortcut
+buttons which work nicely with HomeAssistant through a my
+<a href="https://phoscon.de/en/conbee2" target="_blank" rel="noopener noreffer ">ConnBee 2</a>, and IKEA&rsquo;s newer
+<a href="https://www.ikea.com/ie/en/p/somrig-shortcut-button-white-smart-70560347/" target="_blank" rel="noopener noreffer ">SOMRIG shortcut buttons</a>
+provide 2-buttons-in-1. All I need is 3 options (provided by 2 such SOMRIG
+units) - &ldquo;start timer&rdquo;, &ldquo;stop timer and mark that as a left-breast feeding&rdquo;,
+and &ldquo;stop timer and mark that as right-breast&rdquo;.</p>
+<p>These button devices are wonderfully compact and their batteries last pretty
+long. This has to do with the fact that they have no screen, so unfortunately
+no way of indicating whether they worked or not; and they don&rsquo;t always work on
+the first click. Fortunately, I had an old IKEA desk-lamp with a Zigbee RGB
+lightbulb I hadn&rsquo;t really found use for. This lamp has no become a floor-based
+night-light to indicate the status:</p>
+<ol>
+<li>Dim blue when the timer is on (during feeding)</li>
+<li>When feeding is done, green or orange for a few seconds (depending on the side)</li>
+<li>&hellip;and back off.</li>
+</ol>
+<p>Indeed, a few smart buttons and a literal lightbulb-moment of an idea are
+allowing my wife to go back to sleep much more quickly, without giving up on
+our shared tracking obsession. It&rsquo;s amazing how much of a quality-of-life
+difference you can make with some straightforward home automation.</p>
+]]></description></item><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description><![CDATA[<p>Copy-on-write makes snapshots fast and accessible, but deleting them to
 reclaim disk space can be a bit confusing. Let&rsquo;s have a quick primer on how
 those work, and look at a small utility to help reason about it.</p>
 <p><a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree</a> is a TUI for showing how much
@@ -1558,36 +1595,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description><![CDATA[<p>As noted in the <a href="https://lutzky.net/posts/software-parenting-2/" rel="">previous post</a>, I decided that the implementation is more appropriate for a microcontroller than a full-fledged computer. While the Arduino is probably the best-known microcontroller, the standard one doesn&rsquo;t have wifi (the one with wifi is ~$50). The ESP8266, on the other hand, is a microcontroller chip with wifi capabilities, available<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on dev boards like the NodeMCU for about $2 apiece - so I bought a few of them. The ESP8266 is sometimes used as a wifi add-on for Arduino, but it&rsquo;s quite capable as a microcontroller on its own (and the newer ESP32 is faster).</p>
-<p>So what&rsquo;s the difference between a (very small) computer and a microcontroller? A Raspberry Pi boots off an SD card, usually to a full-fledged Linux operating system; you&rsquo;d operate it either directly with a monitor and keyboard, or connect remotely using SSH. You can install/create software on it as you would on a &ldquo;full-size&rdquo; computer, and I usually do this in Go (although Python is more popular). Conversely, a microcontroller will usually run only one program, which you need to build on a separate computer, connect it over USB to the microcontroller board, and flash it. This has a number of advantages, including simplicity and pretty-much-instant boot.</p>
-<p>Coding for the ESP8266 can be done using the same tooling as Arduino - namely, in C++<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, on the Arduino IDE. However, during this project I learned of <a href="https://platformio.org/" target="_blank" rel="noopener noreffer ">PlatformIO</a>, which is far more comfortable to work with: It&rsquo;s integrated into VSCode, and git, auto-formatting, autocomplete and <a href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim" target="_blank" rel="noopener noreffer ">VIM keybindings</a> all work nicely. It also provides a more organized approach to unit testing (practically absent in Arduino IDE) and per-project dependency management (you can list what each project needs and have it auto-install). This made the project fun enough for a few iterations.</p>
-<p>One quirk of working with the BabyBuddy API is that reporting a diaper change requires supplying the time of change, even if our intention is &ldquo;right now&rdquo;. That&rsquo;s easy enough on a Linux system, but microcontrollers don&rsquo;t generally have clocks. Thankfully, libraries such as <a href="https://github.com/mcxiaoke/ESPDateTime" target="_blank" rel="noopener noreffer ">ESPDateTime</a> provide NTP support baked right into your program. At this point, the NodeMCU version worked, and replaced the previous implementation:</p>
-<figure><a class="lightgallery" href="/posts/software-parenting-3/feature-poobuttons-v2.jpg" title="/posts/software-parenting-3/feature-poobuttons-v2.jpg" data-thumbnail="/posts/software-parenting-3/feature-poobuttons-v2.jpg" data-sub-html="<h2>Poobuttons v2 - nodeMCU on breadboard</h2>">
-        
-    </a><figcaption class="image-caption">Poobuttons v2 - nodeMCU on breadboard</figcaption>
-    </figure>
-<p>Indeed, this version fits neatly onto a single (full-sized) breadboard. It&rsquo;s not quite <a href="https://www.youtube.com/watch?v=PE-_rJqvDhQ" target="_blank" rel="noopener noreffer ">Ben Eater</a> grade, but the NodeMCU is pretty good for breadboard mounting, and using solid-core jumpers let me make it much neater than the previous iteration. However, at this point we realized there was a missing feature: We were never quite sure if we had pressed the button, especially if we were performing a diaper change together<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> . A couple of LEDs can only convey so much information.</p>
-<p>I decided to repurpose my <a href="https://lutzky.net/2021/03/14/pitemp/" target="_blank" rel="noopener noreffer ">shitty cardboard LCD case</a> for this project. These tactile buttons have quite short feet - they don&rsquo;t make it through the cardboard, and I insisted on avoiding using a perfboard and soldering iron - as, at the time, I had neither. I ultimately decided to reuse the mini-breadboard from <a href="https://lutzky.net/posts/software-parenting-2/" rel="">the previous version</a>; like many (all?) breadboards, its bottom is an adhesive pad; I didn&rsquo;t even bother to remove the resistors from V1, they add a certain design flare to it. With a few iterations on the UI, it was wife-approved: Custom characters are fully supported in C++ (though, not in Go), so I got nice labels for the tactile buttons, as well as a heartbeat<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> to indicate that NTP is still working.</p>
-<figure><a class="lightgallery" href="/posts/software-parenting-3/poobuttons-v3.jpg" title="/posts/software-parenting-3/poobuttons-v3.jpg" data-thumbnail="/posts/software-parenting-3/poobuttons-v3.jpg" data-sub-html="<h2>Poobuttons v3 - nodeMCU with LCD in cardboard</h2>">
-        
-    </a><figcaption class="image-caption">Poobuttons v3 - nodeMCU with LCD in cardboard</figcaption>
-    </figure>
-<p>Overall, the project has been a blast, and the result is everyday-useful. Working on it has made me realize how much I need my own space for late-night electronics projects, but that&rsquo;s a project for another day.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Actually available - as in, as opposed to Raspberry Pi 0w, they&rsquo;re in stock in many places at the moment.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>Unfortunately, <a href="https://tinygo.org/docs/reference/microcontrollers/nodemcu/" target="_blank" rel="noopener noreffer ">TinyGo does not yet support wifi</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>We call this procedure <a href="https://www.youtube.com/watch?v=BI75uWxEajA" target="_blank" rel="noopener noreffer ">Formula 1</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>2nd row from the bottom, rightmost column; you can see it fading out in this shot. It blinks every second. Although the photo doesn&rsquo;t show it, the LCD&rsquo;s contrast is actually great in-person.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></description></item></channel></rss>
+</div>]]></description></item></channel></rss>

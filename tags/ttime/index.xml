@@ -1,34 +1,30 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Ttime - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/ttime/</link><description>Ttime - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Wed, 30 Jul 2008 18:03:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ttime/" rel="self" type="application/rss+xml"/><item><title>Tracking TTime</title><link>https://lutzky.net/posts/tracking-ttime/</link><pubDate>Wed, 30 Jul 2008 18:03:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/tracking-ttime/</guid><description><![CDATA[<blockquote>
-<p>Ditz was lost in the mists of time, and I guess if ttime were maintained,
-issues would be tracked using Github.</p></blockquote>
-<p>I&rsquo;ve added <a href="http://lutzky.net/ttime/ditz" target="_blank" rel="noopener noreffer ">issue tracking for ttime</a> using the
-fantastic <a href="http://ditz.rubyforge.org" target="_blank" rel="noopener noreffer ">ditz</a>. I&rsquo;ve also added <a href="http://lutzky.net/ttime/doc" target="_blank" rel="noopener noreffer ">ttime&rsquo;s rdoc
-documentation</a>. (Note: Version 0.8.5 is out)</p>
-]]></description></item><item><title>Been working on TTime</title><link>https://lutzky.net/posts/been-working-on-ttime/</link><pubDate>Fri, 11 Jul 2008 11:33:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/been-working-on-ttime/</guid><description><![CDATA[<p>I&rsquo;ve found myself working on TTime, the Technion Timetable Scheduler, quite a
-bit lately. Lots of cool stuff went in:</p>
-<ul>
-<li>Boaz Goldstein&rsquo;s TCal, a Cairo-based schedule renderer (could you believe the
-old version used MozEmbed?)</li>
-<li>Sports courses are now correctly parsed</li>
-<li>Ability to select specific lectures and groups for the automated scheduler</li>
-<li>A manual scheduler - given an existing schedule, you can ask to show all
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ttime on Shallow and Pedantic</title><link>https://lutzky.net/tags/ttime/</link><description>Recent content in Ttime on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:38:45 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/ttime/index.xml" rel="self" type="application/rss+xml"/><item><title>Tracking TTime</title><link>https://lutzky.net/posts/tracking-ttime/</link><pubDate>Wed, 30 Jul 2008 18:03:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/tracking-ttime/</guid><description>&lt;blockquote>
+&lt;p>Ditz was lost in the mists of time, and I guess if ttime were maintained,
+issues would be tracked using Github.&lt;/p>&lt;/blockquote>
+&lt;p>I&amp;rsquo;ve added &lt;a href="http://lutzky.net/ttime/ditz" target="_blank" rel="noopener noreffer ">issue tracking for ttime&lt;/a> using the
+fantastic &lt;a href="http://ditz.rubyforge.org" target="_blank" rel="noopener noreffer ">ditz&lt;/a>. I&amp;rsquo;ve also added &lt;a href="http://lutzky.net/ttime/doc" target="_blank" rel="noopener noreffer ">ttime&amp;rsquo;s rdoc
+documentation&lt;/a>. (Note: Version 0.8.5 is out)&lt;/p></description></item><item><title>Been working on TTime</title><link>https://lutzky.net/posts/been-working-on-ttime/</link><pubDate>Fri, 11 Jul 2008 11:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/been-working-on-ttime/</guid><description>&lt;p>I&amp;rsquo;ve found myself working on TTime, the Technion Timetable Scheduler, quite a
+bit lately. Lots of cool stuff went in:&lt;/p>
+&lt;ul>
+&lt;li>Boaz Goldstein&amp;rsquo;s TCal, a Cairo-based schedule renderer (could you believe the
+old version used MozEmbed?)&lt;/li>
+&lt;li>Sports courses are now correctly parsed&lt;/li>
+&lt;li>Ability to select specific lectures and groups for the automated scheduler&lt;/li>
+&lt;li>A manual scheduler - given an existing schedule, you can ask to show all
 alternatives at once, and hand-pick them. Some people
-(<a href="http://iiafw.com" target="_blank" rel="noopener noreffer ">Tom</a>, for example) prefer this.</li>
-<li>Just for kicks - interoperability with <a href="http://udonkey.com" target="_blank" rel="noopener noreffer ">Grandpa</a>&rsquo;s XML
-format</li>
-</ul>
-<p>I&rsquo;ve also cleaned up the packaging quite a bit - it can now be installed using
-<code>setup.rb</code>, or the updated Debian package. I think it may soon be time to tag a
-release :)</p>
-<p><a href="http://github.com/lutzky/ttime" target="_blank" rel="noopener noreffer ">Sources at Github</a></p>
-]]></description></item><item><title>Scheduling</title><link>https://lutzky.net/posts/scheduling/</link><pubDate>Mon, 02 Jun 2008 20:33:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/scheduling/</guid><description><![CDATA[<p>So, I see I forgot to post my schedule for this semester&hellip;</p>
-<blockquote>
-<p><em>&hellip;ttime screenshot lost in the mists of time&hellip;</em></p></blockquote>
-<p>As you can see, it&rsquo;s TTime! With a shiny new Cairo interface. We&rsquo;re back to the
+(&lt;a href="http://iiafw.com" target="_blank" rel="noopener noreffer ">Tom&lt;/a>, for example) prefer this.&lt;/li>
+&lt;li>Just for kicks - interoperability with &lt;a href="http://udonkey.com" target="_blank" rel="noopener noreffer ">Grandpa&lt;/a>&amp;rsquo;s XML
+format&lt;/li>
+&lt;/ul>
+&lt;p>I&amp;rsquo;ve also cleaned up the packaging quite a bit - it can now be installed using
+&lt;code>setup.rb&lt;/code>, or the updated Debian package. I think it may soon be time to tag a
+release :)&lt;/p></description></item><item><title>Scheduling</title><link>https://lutzky.net/posts/scheduling/</link><pubDate>Mon, 02 Jun 2008 20:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/scheduling/</guid><description>&lt;p>So, I see I forgot to post my schedule for this semester&amp;hellip;&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;em>&amp;hellip;ttime screenshot lost in the mists of time&amp;hellip;&lt;/em>&lt;/p>&lt;/blockquote>
+&lt;p>As you can see, it&amp;rsquo;s TTime! With a shiny new Cairo interface. We&amp;rsquo;re back to the
 Ruby version, too - as we have another coder on board, which is using his
-compilation skills in order to write a new REPY parser.</p>
-<p>You can also see it&rsquo;s only found one schedule. This is thanks to the <a href="https://github.com/lutzky/ttime/blob/master/lib/ttime/constraints/group_constraints.rb" target="_blank" rel="noopener noreffer ">group
-selection constraint</a> which was finally coded. Yes, that&rsquo;s a link to
-the <a href="http://github.com/lutzky/ttime" target="_blank" rel="noopener noreffer ">Github repository for TTime</a>. You&rsquo;re
-welcome to help write some constraints :)</p>
-]]></description></item></channel></rss>
+compilation skills in order to write a new REPY parser.&lt;/p>
+&lt;p>You can also see it&amp;rsquo;s only found one schedule. This is thanks to the &lt;a href="https://github.com/lutzky/ttime/blob/master/lib/ttime/constraints/group_constraints.rb" target="_blank" rel="noopener noreffer ">group
+selection constraint&lt;/a> which was finally coded. Yes, that&amp;rsquo;s a link to
+the &lt;a href="http://github.com/lutzky/ttime" target="_blank" rel="noopener noreffer ">Github repository for TTime&lt;/a>. You&amp;rsquo;re
+welcome to help write some constraints :)&lt;/p></description></item></channel></rss>

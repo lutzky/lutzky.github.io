@@ -1,174 +1,34 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Phones - Tag - Shallow and Pedantic</title><link>https://lutzky.net/tags/phones/</link><description>Phones - Tag - Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 25 Apr 2011 16:58:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/phones/" rel="self" type="application/rss+xml"/><item><title>SMS and why it annoys me</title><link>https://lutzky.net/posts/sms-and-why-it-annoys-me/</link><pubDate>Mon, 25 Apr 2011 16:58:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/sms-and-why-it-annoys-me/</guid><description><![CDATA[<p>Don&rsquo;t get me wrong. I love being able to communicate textually with friends,
-coworkers and family. It&rsquo;s ideal for a noisy pub; a somewhat-private
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Phones on Shallow and Pedantic</title><link>https://lutzky.net/tags/phones/</link><description>Recent content in Phones on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:38:45 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/phones/index.xml" rel="self" type="application/rss+xml"/><item><title>SMS and why it annoys me</title><link>https://lutzky.net/posts/sms-and-why-it-annoys-me/</link><pubDate>Mon, 25 Apr 2011 16:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/sms-and-why-it-annoys-me/</guid><description>&lt;p>Don&amp;rsquo;t get me wrong. I love being able to communicate textually with friends,
+coworkers and family. It&amp;rsquo;s ideal for a noisy pub; a somewhat-private
 conversation on a crowded bus; telling something to someone who may be asleep,
 so they see it first thing when they wake up; making quick responses while in a
-meeting without being rude (well, at least at my workplace it&rsquo;s considered
-perfectly acceptable). It&rsquo;s also very handy when you want to tell someone
+meeting without being rude (well, at least at my workplace it&amp;rsquo;s considered
+perfectly acceptable). It&amp;rsquo;s also very handy when you want to tell someone
 something they ought to write down, such as a phone number or something they
-should remember to buy. My problem isn&rsquo;t with the concept of mobile textual
-messaging - it&rsquo;s with SMS, the &ldquo;Short Message Service&rdquo;, as provided by Israeli
-carriers (and possibly worldwide).</p>
-<p>The first problem I&rsquo;d like to discuss is length. SMS messages are limited to
-160 characters, or rather - 160 bytes. If your message includes any foreign
-characters, such as Hebrew letters, then UTF-16 mode takes effect, and your
-message is limited to 70 characters, which is ridiculously short. While the
-name of the service, SMS, implies that the messages should indeed be short,
-this is not the only common usage: If you want to have an actual conversation
-with someone (and this is a perfectly reasonable situation), messages will be
-longer than 160 characters, and certainly longer than 70. The problem becomes
-worse if u dont want to use shorthands n skip punctuations like many smsers do.
-(Ever found yourself about to send a 75-character message, going over it to
-find 5 characters to trim without looking like an idiot?)</p>
-<p>There have been several attempts to overcome the short-message problem, all of
-them implemented as workarounds in cellphone software. The initial, primitive
-approach was to simply split a message up into appropriately-sized chunks, and
-send out those chunks as separate messages: A 150-character Hebrew message
-would be sent out as 3 separate messages (70, 70, 10 characters respectively).
-Later on, a mechanism was invented for the phones to detect the split messages,
-stitch them back up on the recipient&rsquo;s phone, and notify the recipient if the
-message is incomplete. Poor man&rsquo;s TCP.</p>
-<p>The split-message solution is very problematic, especially when taking into
-account two other problems with SMS: Reliability and price. The reliability
-problem is subtle: SMS message <em>usually</em> make it across, but when they don&rsquo;t
-(and sometimes, in fact, they don&rsquo;t), no notification is given. Where E-mail
-servers notify you about delivery failure, where instant messaging services
-tell you that the other party has disconnected, SMS has&hellip; nothing. There&rsquo;s no
-way to know that your message hasn&rsquo;t been received, unless a little-known,
-not-supported-everywhere and highly annoying &ldquo;read receipt&rdquo; feature is enabled.</p>
-<p>The price problem is completely absurd: I have a small 1GB plan at Orange,
-which costs 70₪/month. That&rsquo;s 70 NIS / 1GB, 1GB being 109 bytes. That comes to
-7 &amp;times 10-6 Agorot per byte. Suppose that an SMS-style service would need a
-bloated 100-byte header, so an SMS message is 260 bytes. Therefore, an SMS
-message should cost 0.00182 Agorot. In reality, it costs 44 Agorot
-(inter-carrier average) without a plan, or 14 Agorot (at best, requiring a
-1000-SMS plan) with a plan. That&rsquo;s between 7692× and 24176× as much.</p>
-<p>One additional problem with SMS is the fact that they&rsquo;re locked into your
-device. Got a new phone? You have to go through a very complicated process to
-transfer your SMS messages over, and this isn&rsquo;t possible for every phone. Lost
-your old phone? Unless you were backing up manually, your messages are gone.
-Have a separate work-phone? You&rsquo;ll need to use each phone to see messages sent
-specifically to it. None of these problems occur with an online E-mail
-provider, why should they happen with mobile texting?</p>
-<p>With modern phones, sending and receiving E-mail is just as easy as sending and
-receiving SMS messages. The main problem is that not everyone has a modern
-phone, and E-mail on older phones is quite cumbersome. Worse yet, older phones
-don&rsquo;t immediately notify you of E-mails. There could be some good money in
-creating an E-mail-to-SMS gateway - and it would be quite convenient to use if
-done properly. Imagine having your SMS messages united with your E-mails,
-organized and searchable by your favorite E-mail client. If you have a modern
-phone with proper E-mail notification and sending abilities, this could be very
-handy. Just sayin'.</p>
-<p><strong>Addendum:</strong> It seems that <a href="http://www.youtube.com/watch?v=zpgMJ7Hv6tk" target="_blank" rel="noopener noreffer ">Google Voice</a> already does exactly
-what I want, but is not available in Israel. Thanks, Shachar.</p>
-]]></description></item><item><title>Android</title><link>https://lutzky.net/posts/android/</link><pubDate>Sat, 04 Sep 2010 09:26:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/android/</guid><description><![CDATA[<p>I&rsquo;ve finally gotten the chance to get one of those newfangled Android phones.</p>
-<p>I&rsquo;ve recently &ldquo;bought&rdquo; a <a href="http://en.wikipedia.org/wiki/Samsung_Galaxy" target="_blank" rel="noopener noreffer ">Samsung Galaxy
-Android</a> phone (the older i7500,
-not the newer i9000 &ldquo;S&rdquo;) model. It&rsquo;s a seriously serious upgrade from my old
-<a href="http://en.wikipedia.org/wiki/Nokia_6120_classic" target="_blank" rel="noopener noreffer ">Nokia 6120 Classic</a>, and as I
-broke the 6120&rsquo;s screen and reverted back to my trusty old <a href="http://en.wikipedia.org/wiki/Nokia_6070" target="_blank" rel="noopener noreffer ">Nokia
-6070</a> (which I couldn&rsquo;t even get to
-run the GMail app), I was quite a happy camper switching to a modern phone.</p>
-<p>The whole idea of Android has always been very appealing to me - Nokia&rsquo;s
-software has been declining in quality, and while Motorola and Samsung have
-always made excellent hardware, they could never get the knack of good
-software. Google has. Problem solved, right?</p>
-<p>The Android software is miles ahead of anything I&rsquo;ve ever seen, including
-iPhone. I now have connectivity everywhere, and apps to sync all of my favorite
-things - GMail and Google Calendar are included, GTasks is great for tasks,
-Paperdroid is great for Read It Later, NewsRob is great for Google Reader. The
-Facebook and Twidroyd applications are also quite nice, and the convenience has
-me using those networks more. I even have nifty stuff like Transdroid, a
-Transmission web client which is actually very good at <strong>adding</strong> torrents
-while I&rsquo;m away, so they&rsquo;re done by the time I get home. I get my reading done
-with Aldiko and ACV (for comics). Even Israeli sites have some good
-applications up, such as YNet and <a href="http://d.co.il/" target="_blank" rel="noopener noreffer ">Dapei Zahav</a> have a nice
-Android app, though not as nice as their iPhone ones. And of course, there&rsquo;s
-the wonderful <a href="http://waze.co.il/" target="_blank" rel="noopener noreffer ">Waze</a>, which is the most Israeli solution to
-the road congestion problem I&rsquo;ve ever seen. I&rsquo;ve even had the chance to do some
-on-foot navigation with Google Maps, which is also handy.</p>
-<p>The phone itself has a beautiful AMOLED screen, great audio quality (comes with
-quite a good set of headphones as well), and looks sleek. The touchscreen is
-responsive enough (though not anywhere near new Android devices nor the
-iPhone/iPod touch), and it even comes with a free extra 8GB SD card, for a
-total of 16GB.</p>
-<p>And now, to rant.</p>
-<p>Battery life isn&rsquo;t what is should be - the phone is awesome, I want to use it,
-and it can barely get through the day - especially if I&rsquo;m doing heavy stuff
-like Waze (GPS + Data + screen is always on + voice), but even if I&rsquo;m just
-surfing casually. The unlock button is located inconveniently on the bottom
-part of the right side, just above the camera button. The home button is
-located between the Back and Send buttons, meaning it&rsquo;s very easy to hit by
-accident; it&rsquo;s not even labeled. The CPU isn&rsquo;t always fast enough to keep
-everything completely smooth, and while this is generally acceptable, it gets
-rather irksome in odd places: If you turn on screen auto-rotation (which uses
-more battery power), rotation takes a while and might be accidental. However,
-there is no <em>manual</em> screen rotation option as far as I can tell.</p>
-<p>As a music player (relating to my previous post), the device works well enough -
-but I couldn&rsquo;t, for the life of me, get Hebrew support in ID3 tags (no matter
-what the encoding is), and only a limited subset of ID3 tag versions is
-supported, and everything works much better with Ogg files.</p>
-<p>The flaws I&rsquo;ve mentioned are relatively minor and nitpicky - for Waze, you can
-use the car charger (which comes with the phone, thankfully). The buttons are
-OK after some getting used to (and installing the excellent AnySoftKeyboard),
-and operation is generally smooth. However, there is a major issue I can&rsquo;t wrap
-my head around - the shipped firmware is 1.5 cupcake, and there are absolutely
-zero updates available from Samsung. There is a semi-official leaked 1.6 update
-which, as I&rsquo;ve heard, is quite buggy. An awesome guy called
-<a href="http://www.drakaz.com/" target="_blank" rel="noopener noreffer ">drakaz</a> has been working on a Froyo (2.2) port for the
-Galaxy, which I really should check out, but Samsung&rsquo;s behavior on this topic
-is inexcusable in my opinion.</p>
-<p>All-in-all, however, I&rsquo;m happy with my phone. It&rsquo;s a joy to use, and the price
-is hard to beat - free with my phone plan, provided I can rake up a bill of
-150₪ (which I can, with some help from the 70₪ 1GB data plan, which comes in
-quite handy). My next phone will, however, probably not be a Samsung.</p>
-]]></description></item><item><title>Broken phone screen - data rescue</title><link>https://lutzky.net/posts/broken-phone-screen-data-rescue/</link><pubDate>Sat, 31 Oct 2009 02:32:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/broken-phone-screen-data-rescue/</guid><description><![CDATA[<p>Last weekend I broke my Nokia 6120&rsquo;s screen. I have a military phone, which is
-far cheaper, so I&rsquo;ve decided to keep it offline. However, being the sentimental
+should remember to buy. My problem isn&amp;rsquo;t with the concept of mobile textual
+messaging - it&amp;rsquo;s with SMS, the &amp;ldquo;Short Message Service&amp;rdquo;, as provided by Israeli
+carriers (and possibly worldwide).&lt;/p></description></item><item><title>Android</title><link>https://lutzky.net/posts/android/</link><pubDate>Sat, 04 Sep 2010 09:26:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/android/</guid><description>&lt;p>I&amp;rsquo;ve finally gotten the chance to get one of those newfangled Android phones.&lt;/p>
+&lt;p>I&amp;rsquo;ve recently &amp;ldquo;bought&amp;rdquo; a &lt;a href="http://en.wikipedia.org/wiki/Samsung_Galaxy" target="_blank" rel="noopener noreffer ">Samsung Galaxy
+Android&lt;/a> phone (the older i7500,
+not the newer i9000 &amp;ldquo;S&amp;rdquo;) model. It&amp;rsquo;s a seriously serious upgrade from my old
+&lt;a href="http://en.wikipedia.org/wiki/Nokia_6120_classic" target="_blank" rel="noopener noreffer ">Nokia 6120 Classic&lt;/a>, and as I
+broke the 6120&amp;rsquo;s screen and reverted back to my trusty old &lt;a href="http://en.wikipedia.org/wiki/Nokia_6070" target="_blank" rel="noopener noreffer ">Nokia
+6070&lt;/a> (which I couldn&amp;rsquo;t even get to
+run the GMail app), I was quite a happy camper switching to a modern phone.&lt;/p></description></item><item><title>Broken phone screen - data rescue</title><link>https://lutzky.net/posts/broken-phone-screen-data-rescue/</link><pubDate>Sat, 31 Oct 2009 02:32:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/broken-phone-screen-data-rescue/</guid><description>&lt;p>Last weekend I broke my Nokia 6120&amp;rsquo;s screen. I have a military phone, which is
+far cheaper, so I&amp;rsquo;ve decided to keep it offline. However, being the sentimental
 guy that I am, I did want to save all of my contacts and SMS messages (in
 addition to the photos, which presented less of a problem). This proved to be a
-bit of a challenge without the screen working.</p>
-<p>Usually, when you connect the phone via USB, it asks if you want &ldquo;PC Suite
-mode&rdquo; or &ldquo;Data Transfer mode&rdquo;. The &ldquo;Data Transfer&rdquo; mode has the phone show up
+bit of a challenge without the screen working.&lt;/p>
+&lt;p>Usually, when you connect the phone via USB, it asks if you want &amp;ldquo;PC Suite
+mode&amp;rdquo; or &amp;ldquo;Data Transfer mode&amp;rdquo;. The &amp;ldquo;Data Transfer&amp;rdquo; mode has the phone show up
 as a standard USB storage device, which allows for easy transfer of MP3 files,
 photos and videos to and from the phone, without any nokia-specific software.
-However, it only works for the external SD card, so you can&rsquo;t use that to
-access SMS messages or contacts.</p>
-<p>I usually only need &ldquo;Data Transfer&rdquo; mode, so I changed the default to that.
-Today I regret that decision, as it cost me a couple of hours&rsquo; work. I called
-the Orange hotline, and they did their best to help me, including trying to
-blind-guide me through the menus, which failed because the menus are actually
-dynamic and I didn&rsquo;t have the default setup. They actually got me 90% of the
-way there - here&rsquo;s the solution I found: Hit the red (disconnect) button, and
-type the Soft Reset GSM code: <code>*#7780#</code>. Now press the &ldquo;left menu&rdquo; key (not the
-left key, nor the menu key - the left of the two &ldquo;dynamic&rdquo; keys) - this part
-was what the Orange hotline missed, because it seemed so obvious. Then hit
-12345 (this is the default &ldquo;secret code&rdquo;), and the left menu key again. I found
-this by watching a demo of the soft reset on YouTube.</p>
-<p>At this point I used VirtualBox and the Nokia PC suite (both are
-free-as-in-beer) to do the heavy lifting. I now have a text file with all of my
-contacts, a CSV file with all of my SMS messages, and all of my images saved
-both to my computer and a DR site. Now I just need to upgrade my military phone
-(Mirs)&hellip;</p>
-]]></description></item><item><title>Whatever happened to black &amp;amp; white LCDs?</title><link>https://lutzky.net/posts/whatever-happened-to-black-white-lcds/</link><pubDate>Sat, 22 Nov 2008 11:58:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/whatever-happened-to-black-white-lcds/</guid><description><![CDATA[<p>I had a <a href="http://en.wikipedia.org/wiki/Game_boy" target="_blank" rel="noopener noreffer ">Game Boy</a> once. I could play it
+However, it only works for the external SD card, so you can&amp;rsquo;t use that to
+access SMS messages or contacts.&lt;/p></description></item><item><title>Whatever happened to black &amp;amp; white LCDs?</title><link>https://lutzky.net/posts/whatever-happened-to-black-white-lcds/</link><pubDate>Sat, 22 Nov 2008 11:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/whatever-happened-to-black-white-lcds/</guid><description>&lt;p>I had a &lt;a href="http://en.wikipedia.org/wiki/Game_boy" target="_blank" rel="noopener noreffer ">Game Boy&lt;/a> once. I could play it
 just about anywhere, and battery life - for the time - was great. I lost it at
-one point, and replaced it with a <a href="http://en.wikipedia.org/wiki/Game_gear" target="_blank" rel="noopener noreffer ">Game
-Gear</a>, which sucked the life out of 6
-AA batteries rather quickly. The <a href="http://en.wikipedia.org/wiki/Game_Boy_Color" target="_blank" rel="noopener noreffer ">Game Boy
-Color</a> was actually decent on
-battery life, but since it didn&rsquo;t have a backlight, you had to play it at very
-specific angles.</p>
-<p>For gaming, I can appreciate the need for a color screen. My point has to do
-with cellphones. True, most cellphones today come with cameras, are able to
-play video, and are rather capable mobile gaming platforms (when compared to
-the Game Boy, that is). All this does, in fact, require a color screen.
-However, I believe that there is a market for cellphones which do not support
-these features, but do support neat things like 3G internet connectivity (GMail
-and RSS on the phone is a major Win, in my opinion), and have a comfortable SMS
-interface. These features actually suffer from having a color screen: Battery
-life (for the powerful backlight), viewing angle, and screen resolution take a
-hit. While it&rsquo;s true that color LCDs have come a long way since the Game Gear,
-so have black &amp; white display technologies (E-Paper, anyone?).</p>
-<p>Of course, my wish for a modern B&amp;W-screen cellphone will likely never come
-true. The simple reason is that they would be totally unmarketable. Even
-business-types like color screens nowadays. So I&rsquo;ll just keep holding out for a
-folding E-Paper mobile browser.</p>
-]]></description></item></channel></rss>
+one point, and replaced it with a &lt;a href="http://en.wikipedia.org/wiki/Game_gear" target="_blank" rel="noopener noreffer ">Game
+Gear&lt;/a>, which sucked the life out of 6
+AA batteries rather quickly. The &lt;a href="http://en.wikipedia.org/wiki/Game_Boy_Color" target="_blank" rel="noopener noreffer ">Game Boy
+Color&lt;/a> was actually decent on
+battery life, but since it didn&amp;rsquo;t have a backlight, you had to play it at very
+specific angles.&lt;/p></description></item></channel></rss>
