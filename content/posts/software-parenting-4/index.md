@@ -45,7 +45,7 @@ These button devices are wonderfully compact and their batteries last pretty
 long. This has to do with the fact that they have no screen, so unfortunately
 no way of indicating whether they worked or not; and they don't always work on
 the first click. Fortunately, I had an old IKEA desk-lamp with a Zigbee RGB
-lightbulb I hadn't really found use for. This lamp has no become a floor-based
+lightbulb I hadn't really found use for. This lamp has now become a floor-based
 night-light to indicate the status:
 
 1. Dim blue when the timer is on (during feeding)
