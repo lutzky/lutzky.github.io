@@ -1,60 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Networking on Shallow and Pedantic</title><link>https://lutzky.net/tags/networking/</link><description>Recent content in Networking on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/networking/index.xml" rel="self" type="application/rss+xml"/><item><title>Server drawer</title><link>https://lutzky.net/posts/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/server-drawer/</guid><description>A quick look at my partner-approved &amp;ldquo;server drawer&amp;rdquo;</description></item><item><title>WFH Wifi</title><link>https://lutzky.net/posts/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/wfh-wifi/</guid><description>My adventures in setting up wifi when working from home, working around limitations of my apartment form factor.</description></item><item><title>Home network wiring</title><link>https://lutzky.net/posts/home-network-wiring/</link><pubDate>Sun, 04 Sep 2011 18:53:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/home-network-wiring/</guid><description>&lt;p>I don&amp;rsquo;t like wireless connections; they&amp;rsquo;re always second-best, be it in terms
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Networking on Shallow and Pedantic</title><link>https://lutzky.net/tags/networking/</link><description>Recent content in Networking on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/networking/index.xml" rel="self" type="application/rss+xml"/><item><title>Server drawer</title><link>https://lutzky.net/posts/server-drawer/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/server-drawer/</guid><description>A quick look at my partner-approved &amp;ldquo;server drawer&amp;rdquo;</description></item><item><title>WFH Wifi</title><link>https://lutzky.net/posts/wfh-wifi/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/wfh-wifi/</guid><description>My adventures in setting up wifi when working from home, working around limitations of my apartment form factor.</description></item><item><title>Home network wiring</title><link>https://lutzky.net/posts/home-network-wiring/</link><pubDate>Sun, 04 Sep 2011 18:53:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/home-network-wiring/</guid><description>&lt;p&gt;I don&amp;rsquo;t like wireless connections; they&amp;rsquo;re always second-best, be it in terms
 of security, speed, or reliability. Here&amp;rsquo;s how my apartment looks (very
-approximately):&lt;/p></description></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/posts/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 15:19:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/dd-wrt-awesomeness/</guid><description>&lt;p>Since I&amp;rsquo;ve last posted, I&amp;rsquo;ve moved to a new apartment. First order of business -
+approximately):&lt;/p&gt;</description></item><item><title>DD-WRT awesomeness</title><link>https://lutzky.net/posts/dd-wrt-awesomeness/</link><pubDate>Sat, 20 Nov 2010 15:19:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/dd-wrt-awesomeness/</guid><description>&lt;p&gt;Since I&amp;rsquo;ve last posted, I&amp;rsquo;ve moved to a new apartment. First order of business -
 get a working internet connection. This is extra-challenging when your
-primary machine doesn&amp;rsquo;t even have a wireless network card.&lt;/p>
-&lt;p>My first hack used my trusty laptop - it has a properly working wireless card,
+primary machine doesn&amp;rsquo;t even have a wireless network card.&lt;/p&gt;
+&lt;p&gt;My first hack used my trusty laptop - it has a properly working wireless card,
 and could connect to my roommate&amp;rsquo;s router quite easily. It runs Ubuntu, and as
 it turns out, that means sharing the connection was dead-simple: Right-click on
 the network manager icon, add a new wired connection called &amp;ldquo;Shared&amp;rdquo;, and under
 IPv4 settings, choose &amp;ldquo;Shared to other computers&amp;rdquo;. That&amp;rsquo;s it. Once I connected
 my desktop to my laptop, it automatically got all of its settings, and I was
-good to go.&lt;/p></description></item><item><title>Another SSH trick</title><link>https://lutzky.net/posts/another-ssh-trick/</link><pubDate>Mon, 10 Nov 2008 23:01:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/another-ssh-trick/</guid><description>&lt;p>Ever have a machine you can only ssh into through another machine? It&amp;rsquo;s a very
+good to go.&lt;/p&gt;</description></item><item><title>Another SSH trick</title><link>https://lutzky.net/posts/another-ssh-trick/</link><pubDate>Mon, 10 Nov 2008 23:01:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/another-ssh-trick/</guid><description>&lt;p&gt;Ever have a machine you can only ssh into through another machine? It&amp;rsquo;s a very
 common situation in the Technion. Here&amp;rsquo;s one way to get around it: Assume you
-can directly ssh into &lt;code>alpha&lt;/code>, and from &lt;code>alpha&lt;/code> you can ssh into &lt;code>beta&lt;/code>. Have
-the following code in your &lt;code>~/.ssh/config&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-plaintext" data-lang="plaintext">&lt;span class="line">&lt;span class="cl">Host beta
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hostname 1.2.3.4 # IP Address of beta
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ProxyCommand ssh alpha nc -w 1 %h %p
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>This requires you to have &lt;code>nc&lt;/code> (netcat) installed on &lt;code>alpha&lt;/code>. Once you do that,
-you can run &lt;code>ssh beta&lt;/code> directly from your own box.&lt;/p></description></item><item><title>Tunelling even more stuff over SSH</title><link>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</link><pubDate>Tue, 17 Jun 2008 12:32:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</guid><description>&lt;p>Today at the CS department of the Technion is a particularily Bad Network Day
+can directly ssh into &lt;code&gt;alpha&lt;/code&gt;, and from &lt;code&gt;alpha&lt;/code&gt; you can ssh into &lt;code&gt;beta&lt;/code&gt;. Have
+the following code in your &lt;code&gt;~/.ssh/config&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plaintext" data-lang="plaintext"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host beta
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Hostname 1.2.3.4 # IP Address of beta
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ProxyCommand ssh alpha nc -w 1 %h %p
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;This requires you to have &lt;code&gt;nc&lt;/code&gt; (netcat) installed on &lt;code&gt;alpha&lt;/code&gt;. Once you do that,
+you can run &lt;code&gt;ssh beta&lt;/code&gt; directly from your own box.&lt;/p&gt;</description></item><item><title>Tunelling even more stuff over SSH</title><link>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</link><pubDate>Tue, 17 Jun 2008 12:32:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/tunelling-even-more-stuff-over-ssh/</guid><description>&lt;p&gt;Today at the CS department of the Technion is a particularily Bad Network Day
 (TM) for laptop users; none of the wired connections at the farm work, and
-wireless doesn&amp;rsquo;t seem to working for HTTP at all.&lt;/p>
-&lt;p>It does, however, work for SSH. Ka-ching! :)&lt;/p>
-&lt;p>Tunneling your browser over SSH is a pretty simple affair - SSH into somewhere
+wireless doesn&amp;rsquo;t seem to working for HTTP at all.&lt;/p&gt;
+&lt;p&gt;It does, however, work for SSH. Ka-ching! :)&lt;/p&gt;
+&lt;p&gt;Tunneling your browser over SSH is a pretty simple affair - SSH into somewhere
 which has a decent connection, and use the -D9999 flag (9999 works, but it can
 be any 16-bit number over 1024). Then, configure your browser to work over a
-SOCKS proxy at 127.0.0.1:9999.&lt;/p></description></item><item><title>Encrypted my Wi-fi</title><link>https://lutzky.net/posts/encrypted-my-wi-fi/</link><pubDate>Sun, 28 Oct 2007 22:05:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/encrypted-my-wi-fi/</guid><description>&lt;p>Reading some backlog on this blog, I found the following gem:&lt;/p>
-&lt;blockquote>
-&lt;p>It’s a sad state of affairs that people go ahead and limit access to their
-wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.&lt;/p>&lt;/blockquote>
-&lt;p>Yeah&amp;hellip; not so anymore. For about four weeks (just a bit before the semester
+SOCKS proxy at 127.0.0.1:9999.&lt;/p&gt;</description></item><item><title>Encrypted my Wi-fi</title><link>https://lutzky.net/posts/encrypted-my-wi-fi/</link><pubDate>Sun, 28 Oct 2007 22:05:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/encrypted-my-wi-fi/</guid><description>&lt;p&gt;Reading some backlog on this blog, I found the following gem:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It’s a sad state of affairs that people go ahead and limit access to their
+wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Yeah&amp;hellip; not so anymore. For about four weeks (just a bit before the semester
 started), my net connection was working excrutiatingly slow. Now, we&amp;rsquo;re four
 roommates here, so we started blaming each other. But then I had a guess - I
 encrypted my connection with WPA/TKIP, and presto; the connection is now once
 again too fast for my browser to handle (&amp;hellip;which sent me back to Epiphany).
-Guys, if you mooch wi-fi, please&amp;hellip; be nice about it :(&lt;/p></description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description>&lt;p>A very neat find for those of you who want to use Jabber from within the
+Guys, if you mooch wi-fi, please&amp;hellip; be nice about it :(&lt;/p&gt;</description></item><item><title>Using Jabber from within the Technion</title><link>https://lutzky.net/posts/using-jabber-from-within-the-technion/</link><pubDate>Tue, 27 Feb 2007 17:48:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/using-jabber-from-within-the-technion/</guid><description>&lt;p&gt;A very neat find for those of you who want to use Jabber from within the
 Technion, but with your client of choice rather than a web-based one: Many
 Jabber servers, including Google Talk, support using Port 443 over SSL. Since
 the Technion does not block outbound SSL connections, this will work there as
 well. Be sure to mark the appropriate &amp;lsquo;Use old SSL protocol&amp;rsquo; option in your
-jabber client (that&amp;rsquo;s what it&amp;rsquo;s called in gaim and pidgin, at any rate).&lt;/p></description></item><item><title>Internet in Haifa Bay Central</title><link>https://lutzky.net/posts/internet-in-haifa-bay-central/</link><pubDate>Sat, 10 Feb 2007 20:37:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/internet-in-haifa-bay-central/</guid><description>&lt;p>In the Haifa Bay Central bus station (מרכזית המפרץ), it&amp;rsquo;s possible to get an
+jabber client (that&amp;rsquo;s what it&amp;rsquo;s called in gaim and pidgin, at any rate).&lt;/p&gt;</description></item><item><title>Internet in Haifa Bay Central</title><link>https://lutzky.net/posts/internet-in-haifa-bay-central/</link><pubDate>Sat, 10 Feb 2007 20:37:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/internet-in-haifa-bay-central/</guid><description>&lt;p&gt;In the Haifa Bay Central bus station (מרכזית המפרץ), it&amp;rsquo;s possible to get an
 internet connection. HTTPS works automatically, and setting the proxy to
-&lt;code>proxy.technion.ac.il:8080&lt;/code> works for HTTP. I was unsuccessful in using
+&lt;code&gt;proxy.technion.ac.il:8080&lt;/code&gt; works for HTTP. I was unsuccessful in using
 corkscrew to get SSH connections to tunnel over it as well, but perhaps there
-is still a way.&lt;/p></description></item><item><title>Waiting for the bus</title><link>https://lutzky.net/posts/waiting-for-the-bus/</link><pubDate>Thu, 25 Jan 2007 17:53:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/waiting-for-the-bus/</guid><description>&lt;p>I&amp;rsquo;m going home for the weekend, as usual. Unfortunately, the first bus of my
+is still a way.&lt;/p&gt;</description></item><item><title>Waiting for the bus</title><link>https://lutzky.net/posts/waiting-for-the-bus/</link><pubDate>Thu, 25 Jan 2007 17:53:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/waiting-for-the-bus/</guid><description>&lt;p&gt;I&amp;rsquo;m going home for the weekend, as usual. Unfortunately, the first bus of my
 route comes by at highly unpredictable times - I&amp;rsquo;ve had it be an hour late on
 me once. There are plenty of Wi-fi networks around the station - either WPA,
 WEP or MAC-whitelisted&amp;hellip; fortunately, someone was using the latter long enough
-for me to catch him with Kismet. Thank you, stranger! :)&lt;/p>
-&lt;p>It&amp;rsquo;s a sad state of affairs that people go ahead and limit access to their
-wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.&lt;/p></description></item></channel></rss>
+for me to catch him with Kismet. Thank you, stranger! :)&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a sad state of affairs that people go ahead and limit access to their
+wireless network. I keep mine wide open - מי שאוכל לבד, מת לבד.&lt;/p&gt;</description></item></channel></rss>

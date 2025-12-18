@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Show Downloading on Shallow and Pedantic</title><link>https://lutzky.net/tags/show-downloading/</link><description>Recent content in Show Downloading on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/show-downloading/index.xml" rel="self" type="application/rss+xml"/><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/posts/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/investigate/</guid><description>Distinguishing &lt;code>EPERM&lt;/code> vs &lt;code>EACCESS&lt;/code> and how that helps debug file manipulation scripts.</description></item><item><title>The show downloading stack - part n+1</title><link>https://lutzky.net/posts/the-show-downloading-stack-part-n1/</link><pubDate>Thu, 15 Dec 2011 12:08:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/the-show-downloading-stack-part-n1/</guid><description>&lt;p>I&amp;rsquo;ve &lt;a href="https://lutzky.net/2009/09/05/my-show-downloading-stack" rel="">already mentioned&lt;/a> my show downloading stack on this blog. It&amp;rsquo;s
-changed a bit since - I now use &lt;a href="http://transmission-bt.org/" target="_blank" rel="noopener noreffer ">Transmission&lt;/a>
-rather than rtorrent, as it has the excellent &lt;code>transmission-daemon&lt;/code> package
-which has it acting exactly the way I like (without using &lt;code>screen&lt;/code>). Also, it
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Show Downloading on Shallow and Pedantic</title><link>https://lutzky.net/tags/show-downloading/</link><description>Recent content in Show Downloading on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/show-downloading/index.xml" rel="self" type="application/rss+xml"/><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/posts/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/investigate/</guid><description>Distinguishing &lt;code&gt;EPERM&lt;/code&gt; vs &lt;code&gt;EACCESS&lt;/code&gt; and how that helps debug file manipulation scripts.</description></item><item><title>The show downloading stack - part n+1</title><link>https://lutzky.net/posts/the-show-downloading-stack-part-n1/</link><pubDate>Thu, 15 Dec 2011 12:08:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/the-show-downloading-stack-part-n1/</guid><description>&lt;p&gt;I&amp;rsquo;ve &lt;a href="https://lutzky.net/2009/09/05/my-show-downloading-stack" rel=""&gt;already mentioned&lt;/a&gt; my show downloading stack on this blog. It&amp;rsquo;s
+changed a bit since - I now use &lt;a href="http://transmission-bt.org/" target="_blank" rel="noopener noreffer "&gt;Transmission&lt;/a&gt;
+rather than rtorrent, as it has the excellent &lt;code&gt;transmission-daemon&lt;/code&gt; package
+which has it acting exactly the way I like (without using &lt;code&gt;screen&lt;/code&gt;). Also, it
 now E-mails me when a torrent is done downloading. So while this may be how TV
-works for you:&lt;/p>
-&lt;ol>
-&lt;li>Notice that a new episode is out&lt;/li>
-&lt;li>Torrent it&lt;/li>
-&lt;li>Wait for the download to finish&lt;/li>
-&lt;li>Watch it&lt;/li>
-&lt;/ol>
-&lt;p>&amp;hellip;this is how TV works for me now:&lt;/p></description></item><item><title>Loving the new Totem</title><link>https://lutzky.net/posts/loving-the-new-totem/</link><pubDate>Sat, 10 Oct 2009 13:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/loving-the-new-totem/</guid><description>&lt;p>Totem is Gnome&amp;rsquo;s built-in media player, and it really annoyed me in previous
+works for you:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Notice that a new episode is out&lt;/li&gt;
+&lt;li&gt;Torrent it&lt;/li&gt;
+&lt;li&gt;Wait for the download to finish&lt;/li&gt;
+&lt;li&gt;Watch it&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&amp;hellip;this is how TV works for me now:&lt;/p&gt;</description></item><item><title>Loving the new Totem</title><link>https://lutzky.net/posts/loving-the-new-totem/</link><pubDate>Sat, 10 Oct 2009 13:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/loving-the-new-totem/</guid><description>&lt;p&gt;Totem is Gnome&amp;rsquo;s built-in media player, and it really annoyed me in previous
 versions, and had me switching to VLC. However, the version included in the
 Ubuntu 9.10 release candidate has two features which are very important, in my
 opinion. The first feature is smooth graphical integration with compositing
 managers (such as compiz). In previous versions, as well as VLC, once you
 fullscreen the window, moving the mouse (which causes the cursor and the
 partial interface to appear) causes a very annoying flicker. This has been
-fixed (at least on my box, using an NVidia card).&lt;/p></description></item><item><title>My show downloading stack</title><link>https://lutzky.net/posts/my-show-downloading-stack/</link><pubDate>Sat, 05 Sep 2009 13:42:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/my-show-downloading-stack/</guid><description>&lt;p>I love watching TV, and hate it. Regular show schedules are horrible,
+fixed (at least on my box, using an NVidia card).&lt;/p&gt;</description></item><item><title>My show downloading stack</title><link>https://lutzky.net/posts/my-show-downloading-stack/</link><pubDate>Sat, 05 Sep 2009 13:42:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/my-show-downloading-stack/</guid><description>&lt;p&gt;I love watching TV, and hate it. Regular show schedules are horrible,
 commercial breaks are annoying, and the ability to rewind is very important. I
 love Hot&amp;rsquo;s VOD service (and happily pay to watch the shows I enjoy), but my
 true favorite for getting my entertainment is everyone&amp;rsquo;s favorite
-not-a-dumptruck, the internet. In this post, I will describe how I do it.&lt;/p>
-&lt;p>Everything I describe in this post can be done using
-&lt;a href="http://getmiro.com/" target="_blank" rel="noopener noreffer ">miro&lt;/a>. It&amp;rsquo;s a neat piece of software, which lacked polish
+not-a-dumptruck, the internet. In this post, I will describe how I do it.&lt;/p&gt;
+&lt;p&gt;Everything I describe in this post can be done using
+&lt;a href="http://getmiro.com/" target="_blank" rel="noopener noreffer "&gt;miro&lt;/a&gt;. It&amp;rsquo;s a neat piece of software, which lacked polish
 in version 2.4 (2.5 is out now though), but there are a few things I don&amp;rsquo;t like
-about it:&lt;/p></description></item><item><title>Alright, American Dad!</title><link>https://lutzky.net/posts/alright-american-dad/</link><pubDate>Tue, 23 Jan 2007 22:13:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/alright-american-dad/</guid><description>&lt;p>Just finished downloading an episode of American Dad off Bittorrent. TV has
+about it:&lt;/p&gt;</description></item><item><title>Alright, American Dad!</title><link>https://lutzky.net/posts/alright-american-dad/</link><pubDate>Tue, 23 Jan 2007 22:13:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/alright-american-dad/</guid><description>&lt;p&gt;Just finished downloading an episode of American Dad off Bittorrent. TV has
 ancient episodes of Family Guy. Took about an hour though&amp;hellip; I tells ya, I&amp;rsquo;d
-pay for this kind of service if it were faster&amp;hellip; ;)&lt;/p></description></item></channel></rss>
+pay for this kind of service if it were faster&amp;hellip; ;)&lt;/p&gt;</description></item></channel></rss>

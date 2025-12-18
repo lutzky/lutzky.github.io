@@ -1,60 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Shallow and Pedantic</title><link>https://lutzky.net/tags/git/</link><description>Recent content in Git on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/posts/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description></item><item><title>Git While You Sit 3 - "Rename" edge cases</title><link>https://lutzky.net/posts/git-rename-edge-cases/</link><pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-rename-edge-cases/</guid><description>Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it&amp;rsquo;s far more likely that git did the &amp;ldquo;right&amp;rdquo; thing after all.</description></item><item><title>Git While You Sit 2 - .gitignore</title><link>https://lutzky.net/posts/git-ignore/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-ignore/</guid><description>Using &lt;code>.gitignore&lt;/code> to exclude build artifacts from your repository.</description></item><item><title>Git While You Sit 1 - Add --patch</title><link>https://lutzky.net/posts/git-add-patch/</link><pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-add-patch/</guid><description>Using &lt;code>git add -p&lt;/code> to eliminate those pesky &lt;code>printf&lt;/code>-debugging statements.</description></item><item><title>Using git for code review</title><link>https://lutzky.net/posts/using-git-for-code-review/</link><pubDate>Sat, 04 Apr 2009 12:23:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/using-git-for-code-review/</guid><description>&lt;p>At my workplace, I&amp;rsquo;ve recently been using git for code review purposes. I work
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Shallow and Pedantic</title><link>https://lutzky.net/tags/git/</link><description>Recent content in Git on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/posts/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description></item><item><title>Git While You Sit 3 - "Rename" edge cases</title><link>https://lutzky.net/posts/git-rename-edge-cases/</link><pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-rename-edge-cases/</guid><description>Sometimes, git does something unexpected while merging or rebasing. It might seem like git misunderstood a rename, but it&amp;rsquo;s far more likely that git did the &amp;ldquo;right&amp;rdquo; thing after all.</description></item><item><title>Git While You Sit 2 - .gitignore</title><link>https://lutzky.net/posts/git-ignore/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-ignore/</guid><description>Using &lt;code&gt;.gitignore&lt;/code&gt; to exclude build artifacts from your repository.</description></item><item><title>Git While You Sit 1 - Add --patch</title><link>https://lutzky.net/posts/git-add-patch/</link><pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/git-add-patch/</guid><description>Using &lt;code&gt;git add -p&lt;/code&gt; to eliminate those pesky &lt;code&gt;printf&lt;/code&gt;-debugging statements.</description></item><item><title>Using git for code review</title><link>https://lutzky.net/posts/using-git-for-code-review/</link><pubDate>Sat, 04 Apr 2009 12:23:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/using-git-for-code-review/</guid><description>&lt;p&gt;At my workplace, I&amp;rsquo;ve recently been using git for code review purposes. I work
 on code in my own git clone, and ask a peer to review it. It works somewhat
-like this:&lt;/p>
-&lt;ol>
-&lt;li>&lt;code>master&lt;/code> branch is same code as currently in upstream.&lt;/li>
-&lt;li>Working to resolve issue #1234 pertaining to &amp;ldquo;Performance for gizmo&amp;rdquo;, I work
-on a branch &lt;code>1234-gizmo-performance&lt;/code>.&lt;/li>
-&lt;li>I mail a peer, John, with this information, as well as my repository
-location.&lt;/li>
-&lt;li>John adds my repository as a remote, lutzky. Then he branches &lt;code>review1&lt;/code> (or
-&lt;code>review2&lt;/code> if that is taken, and so on) at &lt;code>lutzky/1234-gizmo-performance.&lt;/code>&lt;/li>
-&lt;li>John adds comments with nice big &lt;code>FIXME&lt;/code> tags, which are highlighted in
+like this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;master&lt;/code&gt; branch is same code as currently in upstream.&lt;/li&gt;
+&lt;li&gt;Working to resolve issue #1234 pertaining to &amp;ldquo;Performance for gizmo&amp;rdquo;, I work
+on a branch &lt;code&gt;1234-gizmo-performance&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;I mail a peer, John, with this information, as well as my repository
+location.&lt;/li&gt;
+&lt;li&gt;John adds my repository as a remote, lutzky. Then he branches &lt;code&gt;review1&lt;/code&gt; (or
+&lt;code&gt;review2&lt;/code&gt; if that is taken, and so on) at &lt;code&gt;lutzky/1234-gizmo-performance.&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;John adds comments with nice big &lt;code&gt;FIXME&lt;/code&gt; tags, which are highlighted in
 any decent editor. He commits this, the commit-message stating that it was
-code review.&lt;/li>
-&lt;li>John tags his final review commit (or, if he had no comments -
-&lt;code>lutzky/1234-gizmo-performance&lt;/code>) with a &lt;code>reviewed1&lt;/code> (or &lt;code>reviewed2&lt;/code>, etc.)
+code review.&lt;/li&gt;
+&lt;li&gt;John tags his final review commit (or, if he had no comments -
+&lt;code&gt;lutzky/1234-gizmo-performance&lt;/code&gt;) with a &lt;code&gt;reviewed1&lt;/code&gt; (or &lt;code&gt;reviewed2&lt;/code&gt;, etc.)
 annotated tag. Since the annotated tag includes all the necessary
-information (who tagged, when, and what), the number doesn&amp;rsquo;t really matter.&lt;/li>
-&lt;li>I merge &lt;code>john/review1&lt;/code>, incorporate the changes (or reject them) and remove
+information (who tagged, when, and what), the number doesn&amp;rsquo;t really matter.&lt;/li&gt;
+&lt;li&gt;I merge &lt;code&gt;john/review1&lt;/code&gt;, incorporate the changes (or reject them) and remove
 the comments. If no further review is necessary, I submit this - and once
-submitted, I merge this back into master.&lt;/li>
-&lt;/ol>
-&lt;p>It&amp;rsquo;s a nice system. I wonder what other methods there are of doing this.&lt;/p></description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description>&lt;ol>
-&lt;li>
-&lt;p>You can use git on a VFAT disk (for example, a USB key) without all of the
-annoying mode issues, by using the following setting in &lt;code>.git/config&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-ini" data-lang="ini">&lt;span class="line">&lt;span class="cl">&lt;span class="k">[core]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">filemode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">false&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for
-example, if I create a new script, I was hoping to be able to &lt;code>git chmod +x&lt;/code>
-it.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer ">Cream&lt;/a> is a very good editor if you&amp;rsquo;re used
+submitted, I merge this back into master.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It&amp;rsquo;s a nice system. I wonder what other methods there are of doing this.&lt;/p&gt;</description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can use git on a VFAT disk (for example, a USB key) without all of the
+annoying mode issues, by using the following setting in &lt;code&gt;.git/config&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;[core]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;filemode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for
+example, if I create a new script, I was hoping to be able to &lt;code&gt;git chmod +x&lt;/code&gt;
+it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer "&gt;Cream&lt;/a&gt; is a very good editor if you&amp;rsquo;re used
 to Windows applications. It&amp;rsquo;s a set of plugins for VIM which make it
 modeless and (very) familiar to Windows users. However, Ctrl-O still has its
-usual job for us ordinary junkies :)&lt;/p></description></item><item><title>Really liking this git thing</title><link>https://lutzky.net/posts/really-liking-this-git-thing/</link><pubDate>Tue, 18 Sep 2007 11:27:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-this-git-thing/</guid><description>&lt;p>I&amp;rsquo;ve been a very big proponent of Subversion so far, especially as a tool for
+usual job for us ordinary junkies :)&lt;/p&gt;</description></item><item><title>Really liking this git thing</title><link>https://lutzky.net/posts/really-liking-this-git-thing/</link><pubDate>Tue, 18 Sep 2007 11:27:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-this-git-thing/</guid><description>&lt;p&gt;I&amp;rsquo;ve been a very big proponent of Subversion so far, especially as a tool for
 collaborating on coding homework. However, I&amp;rsquo;ve recently been trying out
-Linus&amp;rsquo;s &lt;a href="http://git.or.cz/" target="_blank" rel="noopener noreffer ">git&lt;/a>. It&amp;rsquo;s very nice so far, and really seems to be
-catching on. Some good points:&lt;/p>
-&lt;ul>
-&lt;li>Fast as all hell (much faster than Bazaar, although I haven&amp;rsquo;t given that the
-proper attention)&lt;/li>
-&lt;li>No need for a central server; hell, no need for an internet connection at
-all, everything can be done over USB keys or whatnot&lt;/li>
-&lt;li>No real need to configure any special server; just install git on it&lt;/li>
-&lt;li>Very nice alternative to configuring write-control for all of the users&lt;/li>
-&lt;li>Very easy branching and merging, finally! SVN really shows its weakness here&lt;/li>
-&lt;/ul>
-&lt;p>One thing I couldn&amp;rsquo;t find out how to do is limiting read-access to git
+Linus&amp;rsquo;s &lt;a href="http://git.or.cz/" target="_blank" rel="noopener noreffer "&gt;git&lt;/a&gt;. It&amp;rsquo;s very nice so far, and really seems to be
+catching on. Some good points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fast as all hell (much faster than Bazaar, although I haven&amp;rsquo;t given that the
+proper attention)&lt;/li&gt;
+&lt;li&gt;No need for a central server; hell, no need for an internet connection at
+all, everything can be done over USB keys or whatnot&lt;/li&gt;
+&lt;li&gt;No real need to configure any special server; just install git on it&lt;/li&gt;
+&lt;li&gt;Very nice alternative to configuring write-control for all of the users&lt;/li&gt;
+&lt;li&gt;Very easy branching and merging, finally! SVN really shows its weakness here&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One thing I couldn&amp;rsquo;t find out how to do is limiting read-access to git
 repositories without special server configuration. It would be nice if git had
-support for &lt;code>.htpasswd&lt;/code>-compatible authentication, those are pretty easy to use.&lt;/p></description></item></channel></rss>
+support for &lt;code&gt;.htpasswd&lt;/code&gt;-compatible authentication, those are pretty easy to use.&lt;/p&gt;</description></item></channel></rss>

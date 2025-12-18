@@ -1,164 +1,165 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Shallow and Pedantic</title><link>https://lutzky.net/tags/linux/</link><description>Recent content in Linux on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description>&lt;p>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.&lt;/p>
-&lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;p>Assume you&amp;rsquo;re working with an external vendor, who is providing you with code
-for a wonderful function &lt;code>getFoo&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.h version 1.2.3
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.c version 1.2.3
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// TODO improve performance
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">42&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>You use this function in many of your products - for example, in your
-best-selling &lt;code>barApp&lt;/code> application:&lt;/p></description></item><item><title>Timezones are fickle</title><link>https://lutzky.net/posts/timezones-are-fickle/</link><pubDate>Sat, 18 Apr 2009 16:45:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/timezones-are-fickle/</guid><description>Creating a manual &amp;ldquo;always-daylight-savings&amp;rdquo; timezone is hard. Let&amp;rsquo;s peek at just how messy timezone logic gets.</description></item><item><title>Automatically starting rtorrent within screen</title><link>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</link><pubDate>Tue, 04 Nov 2008 21:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</guid><description>&lt;p>These days I don&amp;rsquo;t stay at home often, but I do have an RSS/BitTorrent combo
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Shallow and Pedantic</title><link>https://lutzky.net/tags/linux/</link><description>Recent content in Linux on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description>&lt;p&gt;Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.&lt;/p&gt;
+&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Assume you&amp;rsquo;re working with an external vendor, who is providing you with code
+for a wonderful function &lt;code&gt;getFoo&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// foo.h version 1.2.3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;getFoo&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// foo.c version 1.2.3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;getFoo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// TODO improve performance
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;You use this function in many of your products - for example, in your
+best-selling &lt;code&gt;barApp&lt;/code&gt; application:&lt;/p&gt;</description></item><item><title>Timezones are fickle</title><link>https://lutzky.net/posts/timezones-are-fickle/</link><pubDate>Sat, 18 Apr 2009 16:45:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/timezones-are-fickle/</guid><description>Creating a manual &amp;ldquo;always-daylight-savings&amp;rdquo; timezone is hard. Let&amp;rsquo;s peek at just how messy timezone logic gets.</description></item><item><title>Automatically starting rtorrent within screen</title><link>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</link><pubDate>Tue, 04 Nov 2008 21:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/automatically-starting-rtorrent-within-screen/</guid><description>&lt;p&gt;These days I don&amp;rsquo;t stay at home often, but I do have an RSS/BitTorrent combo
 fetching me all kinds of neat stuff for me, so I can have it ready for me on
-the weekend. I love &lt;a href="http://libtorrent.rakshasa.no/" target="_blank" rel="noopener noreffer ">rtorrent&lt;/a>, especially due
-to the fact that I can run it in &lt;code>screen&lt;/code>, ssh home and see how things are
+the weekend. I love &lt;a href="http://libtorrent.rakshasa.no/" target="_blank" rel="noopener noreffer "&gt;rtorrent&lt;/a&gt;, especially due
+to the fact that I can run it in &lt;code&gt;screen&lt;/code&gt;, ssh home and see how things are
 doing (or add more torrent to the download). However, sometimes my net
 connection breaks down, computers gets shut off, or things like that. This week
 my router broke down, so I can&amp;rsquo;t even ssh home to manually start up rtorrent.
 My solution: A small script, which checks whether rtorrent is already running,
 and if not - runs it in a detached screen session. Run this with your favorite
-&lt;code>cron&lt;/code> software.&lt;/p></description></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/posts/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 18:57:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/quick-time-tracking-hack/</guid><description>&lt;p>Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
+&lt;code&gt;cron&lt;/code&gt; software.&lt;/p&gt;</description></item><item><title>Quick time tracking hack</title><link>https://lutzky.net/posts/quick-time-tracking-hack/</link><pubDate>Sun, 26 Oct 2008 18:57:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/quick-time-tracking-hack/</guid><description>&lt;p&gt;Gnome 2.24 adds a new Time Tracking feature, which I would have found useful. I
 don&amp;rsquo;t have Gnome 2.24 at work, but I do have a Unix-based operating system&amp;hellip;
-Here&amp;rsquo;s my new &lt;code>~/bin/track&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>date &amp;gt;&amp;gt; ~/time_tracking
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vim ~/time_tracking +
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>Now, if I could only get vim to automatically hit &amp;ldquo;A&amp;rdquo; and space for me
+Here&amp;rsquo;s my new &lt;code&gt;~/bin/track&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&lt;/span&gt;date &amp;gt;&amp;gt; ~/time_tracking
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vim ~/time_tracking +
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Now, if I could only get vim to automatically hit &amp;ldquo;A&amp;rdquo; and space for me
 afterwards&amp;hellip; (I&amp;rsquo;m betting there&amp;rsquo;s a way to do it, but AFAIK vim can only
-receive ex-mode commands as parameters).&lt;/p></description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description>&lt;ol>
-&lt;li>
-&lt;p>You can use git on a VFAT disk (for example, a USB key) without all of the
-annoying mode issues, by using the following setting in &lt;code>.git/config&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-ini" data-lang="ini">&lt;span class="line">&lt;span class="cl">&lt;span class="k">[core]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">filemode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">false&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for
-example, if I create a new script, I was hoping to be able to &lt;code>git chmod +x&lt;/code>
-it.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer ">Cream&lt;/a> is a very good editor if you&amp;rsquo;re used
+receive ex-mode commands as parameters).&lt;/p&gt;</description></item><item><title>Things I learned today</title><link>https://lutzky.net/posts/things-i-learned-today/</link><pubDate>Mon, 28 Apr 2008 21:10:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/things-i-learned-today/</guid><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can use git on a VFAT disk (for example, a USB key) without all of the
+annoying mode issues, by using the following setting in &lt;code&gt;.git/config&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;[core]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;filemode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;What I haven&amp;rsquo;t figured out is how to do force a chmod in this situation; for
+example, if I create a new script, I was hoping to be able to &lt;code&gt;git chmod +x&lt;/code&gt;
+it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://cream.sourceforge.net" target="_blank" rel="noopener noreffer "&gt;Cream&lt;/a&gt; is a very good editor if you&amp;rsquo;re used
 to Windows applications. It&amp;rsquo;s a set of plugins for VIM which make it
 modeless and (very) familiar to Windows users. However, Ctrl-O still has its
-usual job for us ordinary junkies :)&lt;/p></description></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/posts/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 20:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/deskbar-and-firefox-3/</guid><description>&lt;p>&lt;a href="raphael.slinckx.net/deskbar/" rel="">Deskbar&lt;/a> has a really neat plugin which allows
+usual job for us ordinary junkies :)&lt;/p&gt;</description></item><item><title>Deskbar and Firefox 3</title><link>https://lutzky.net/posts/deskbar-and-firefox-3/</link><pubDate>Mon, 28 Apr 2008 20:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/deskbar-and-firefox-3/</guid><description>&lt;p&gt;&lt;a href="raphael.slinckx.net/deskbar/" rel=""&gt;Deskbar&lt;/a&gt; has a really neat plugin which allows
 you to search your browsing history and bookmarks. Firefox 3 has switched the
 storage format to an sqlite-based one. I&amp;rsquo;ve been working on a new plugin to
-make use of that - so far it&amp;rsquo;s very enjoyable to use :)&lt;/p>
-&lt;p>» &lt;a href="http://github.com/lutzky/deskbar_ff3" target="_blank" rel="noopener noreffer ">Deskbar_FF3&lt;/a>&lt;/p></description></item><item><title>Hebrew spell-checking in Pidgin</title><link>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</link><pubDate>Tue, 22 Apr 2008 14:13:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</guid><description>&lt;p>This one took me a while to figure out, which is reason enough to post it here.&lt;/p>
-&lt;p>First of all, you&amp;rsquo;ll need &lt;code>aspell-he&lt;/code>, as pidgin uses &lt;code>gtkspell&lt;/code> (which, in
-turn, uses &lt;code>aspell&lt;/code>) rather than &lt;code>enchant&lt;/code> (which supports &lt;code>hspell&lt;/code>). There is
-a patch for &lt;code>gtkspell&lt;/code> which gets it to use &lt;code>enchant&lt;/code>, but I don&amp;rsquo;t know of a
-simple way to get it to work in my distribution of choice, Ubuntu.&lt;/p>
-&lt;p>Now you need a neat little plugin from the
-&lt;a href="http://plugins.guifications.org/" target="_blank" rel="noopener noreffer ">Guifications&lt;/a> plugin pack, called
+make use of that - so far it&amp;rsquo;s very enjoyable to use :)&lt;/p&gt;
+&lt;p&gt;» &lt;a href="http://github.com/lutzky/deskbar_ff3" target="_blank" rel="noopener noreffer "&gt;Deskbar_FF3&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Hebrew spell-checking in Pidgin</title><link>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</link><pubDate>Tue, 22 Apr 2008 14:13:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/hebrew-spell-checking-in-pidgin/</guid><description>&lt;p&gt;This one took me a while to figure out, which is reason enough to post it here.&lt;/p&gt;
+&lt;p&gt;First of all, you&amp;rsquo;ll need &lt;code&gt;aspell-he&lt;/code&gt;, as pidgin uses &lt;code&gt;gtkspell&lt;/code&gt; (which, in
+turn, uses &lt;code&gt;aspell&lt;/code&gt;) rather than &lt;code&gt;enchant&lt;/code&gt; (which supports &lt;code&gt;hspell&lt;/code&gt;). There is
+a patch for &lt;code&gt;gtkspell&lt;/code&gt; which gets it to use &lt;code&gt;enchant&lt;/code&gt;, but I don&amp;rsquo;t know of a
+simple way to get it to work in my distribution of choice, Ubuntu.&lt;/p&gt;
+&lt;p&gt;Now you need a neat little plugin from the
+&lt;a href="http://plugins.guifications.org/" target="_blank" rel="noopener noreffer "&gt;Guifications&lt;/a&gt; plugin pack, called
 SwitchSpell. Unfortunately, it&amp;rsquo;s in version 2.3.0 of the pack, whereas the
 current Ubuntu version is 2.0.0. It&amp;rsquo;s not complicated to install this from
 source though: I&amp;rsquo;ve detailed the precise installation procedure below; the
-confusing thing is that if you forget to install &lt;code>libgtkspell-dev&lt;/code> or
-&lt;code>libaspell-dev&lt;/code>, SwitchSpell will not be built, but the &lt;code>configure&lt;/code> script
-tells you that it &lt;em>will&lt;/em>.&lt;/p></description></item><item><title>My alarm clock</title><link>https://lutzky.net/posts/my-alarm-clock/</link><pubDate>Tue, 12 Feb 2008 23:37:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/my-alarm-clock/</guid><description>&lt;p>YNet was running a story on how to use your computer as an alarm clock. Here&amp;rsquo;s
-what I do, for our commandline junkies :)&lt;/p>
-&lt;p>Here&amp;rsquo;s &lt;code>~/bin/run_alarm.sh&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">find ~/music/ -name &lt;span class="s1">&amp;#39;*.mp3&amp;#39;&lt;/span> -print0 &lt;span class="p">|&lt;/span> xargs -0 mplayer -shuffle &lt;span class="p">&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">MAXVOL&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">31&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TIME&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">900&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span> &lt;span class="o">=&lt;/span> 0&lt;span class="p">;&lt;/span> i &amp;lt;&lt;span class="o">=&lt;/span> &lt;span class="nv">$MAXVOL&lt;/span>&lt;span class="p">;&lt;/span> i++ &lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> amixer &lt;span class="nb">set&lt;/span> Master &lt;span class="nv">$i&lt;/span> &amp;gt; /dev/null&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep &lt;span class="sb">`&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$TIME&lt;/span> / &lt;span class="nv">$MAXVOL&lt;/span> &lt;span class="p">|&lt;/span> bc -l&lt;span class="sb">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">done&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>This basically plays all of my MP3 files, in random order. The &lt;code>-print0&lt;/code> and &lt;code>-0&lt;/code>
+confusing thing is that if you forget to install &lt;code&gt;libgtkspell-dev&lt;/code&gt; or
+&lt;code&gt;libaspell-dev&lt;/code&gt;, SwitchSpell will not be built, but the &lt;code&gt;configure&lt;/code&gt; script
+tells you that it &lt;em&gt;will&lt;/em&gt;.&lt;/p&gt;</description></item><item><title>My alarm clock</title><link>https://lutzky.net/posts/my-alarm-clock/</link><pubDate>Tue, 12 Feb 2008 23:37:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/my-alarm-clock/</guid><description>&lt;p&gt;YNet was running a story on how to use your computer as an alarm clock. Here&amp;rsquo;s
+what I do, for our commandline junkies :)&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s &lt;code&gt;~/bin/run_alarm.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;find ~/music/ -name &lt;span class="s1"&gt;&amp;#39;*.mp3&amp;#39;&lt;/span&gt; -print0 &lt;span class="p"&gt;|&lt;/span&gt; xargs -0 mplayer -shuffle &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;MAXVOL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;31&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;TIME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;900&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;((&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 0&lt;span class="p"&gt;;&lt;/span&gt; i &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$MAXVOL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; i++ &lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; amixer &lt;span class="nb"&gt;set&lt;/span&gt; Master &lt;span class="nv"&gt;$i&lt;/span&gt; &amp;gt; /dev/null&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sleep &lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$TIME&lt;/span&gt; / &lt;span class="nv"&gt;$MAXVOL&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; bc -l&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;This basically plays all of my MP3 files, in random order. The &lt;code&gt;-print0&lt;/code&gt; and &lt;code&gt;-0&lt;/code&gt;
 arguments make it a null-terminated list, as some (most) files have spaces in
 their names. This process is backgrounded, and the script proceeds to gradually
-sweep the volume from 0 to the maximum, for a more gentle wakeup :)&lt;/p></description></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/posts/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 15:44:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/grub-menu-lst-editor/</guid><description>&lt;p>A lot of people ask me how to change the default operating system booted after
+sweep the volume from 0 to the maximum, for a more gentle wakeup :)&lt;/p&gt;</description></item><item><title>Grub menu.lst editor</title><link>https://lutzky.net/posts/grub-menu-lst-editor/</link><pubDate>Thu, 19 Apr 2007 15:44:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/grub-menu-lst-editor/</guid><description>&lt;p&gt;A lot of people ask me how to change the default operating system booted after
 installing Linux. The answer they get in Ubuntu&amp;rsquo;s case, &amp;ldquo;Edit
-&lt;code>/boot/grub/menu.lst&lt;/code>, it&amp;rsquo;s self-explanatory&amp;rdquo;, is often unsatisfactory.
-Attached is the solution :)&lt;/p>
-&lt;blockquote>
-&lt;p>Actual script lost in the mists of time&amp;hellip;&lt;/p>&lt;/blockquote>
-&lt;p>Download the file, open a terminal, and run &lt;code>gksudo python grubmenu.py&lt;/code>&lt;/p>
-&lt;p>I&amp;rsquo;ll try and make a package of this soon, so it becomes a menu entry and that
-much easier to use.&lt;/p></description></item><item><title>Yasmin back up</title><link>https://lutzky.net/posts/yasmin-back-up/</link><pubDate>Mon, 16 Apr 2007 10:43:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/yasmin-back-up/</guid><description>&lt;p>Why was it down, you ask? Well, it was out here in the lab, because of a
-shortage of network ports in the server room. From the acpid log:&lt;/p>
-&lt;p>&lt;code>[Sun Apr 15 18:53:07 2007] received event &amp;quot;button/power PWRF 00000080 00000001&amp;quot;&lt;/code>&lt;/p>
-&lt;p>That is, at 18:53, someone simply pushed the power button. The server promptly
+&lt;code&gt;/boot/grub/menu.lst&lt;/code&gt;, it&amp;rsquo;s self-explanatory&amp;rdquo;, is often unsatisfactory.
+Attached is the solution :)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Actual script lost in the mists of time&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Download the file, open a terminal, and run &lt;code&gt;gksudo python grubmenu.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll try and make a package of this soon, so it becomes a menu entry and that
+much easier to use.&lt;/p&gt;</description></item><item><title>Yasmin back up</title><link>https://lutzky.net/posts/yasmin-back-up/</link><pubDate>Mon, 16 Apr 2007 10:43:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/yasmin-back-up/</guid><description>&lt;p&gt;Why was it down, you ask? Well, it was out here in the lab, because of a
+shortage of network ports in the server room. From the acpid log:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[Sun Apr 15 18:53:07 2007] received event &amp;quot;button/power PWRF 00000080 00000001&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;That is, at 18:53, someone simply pushed the power button. The server promptly
 closed all processes and properly shut itself down. I&amp;rsquo;ve moved it into the
-server room now&amp;hellip;&lt;/p></description></item><item><title>Beautiful ideas</title><link>https://lutzky.net/posts/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 17:24:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/beautiful-ideas/</guid><description>&lt;p>This man has &lt;a href="http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html" target="_blank" rel="noopener noreffer ">some beautiful design
-ideas&lt;/a>
-for the Linux desktop.&lt;/p></description></item><item><title>Pmount-hal + cd</title><link>https://lutzky.net/posts/pmount-hal-cd/</link><pubDate>Thu, 01 Feb 2007 19:46:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/pmount-hal-cd/</guid><description>&lt;p>If you&amp;rsquo;re like me, and don&amp;rsquo;t use Gnome or KDE, then you probably use the pmount
+server room now&amp;hellip;&lt;/p&gt;</description></item><item><title>Beautiful ideas</title><link>https://lutzky.net/posts/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 17:24:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/beautiful-ideas/</guid><description>&lt;p&gt;This man has &lt;a href="http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html" target="_blank" rel="noopener noreffer "&gt;some beautiful design
+ideas&lt;/a&gt;
+for the Linux desktop.&lt;/p&gt;</description></item><item><title>Pmount-hal + cd</title><link>https://lutzky.net/posts/pmount-hal-cd/</link><pubDate>Thu, 01 Feb 2007 19:46:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/pmount-hal-cd/</guid><description>&lt;p&gt;If you&amp;rsquo;re like me, and don&amp;rsquo;t use Gnome or KDE, then you probably use the pmount
 or pmount-hal applications to mount removable media. Here&amp;rsquo;s a neat thing to add
-to your &lt;code>.bash_aliases&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="k">function&lt;/span> pmh &lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pmount-hal &lt;span class="nv">$1&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">UDI&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>hal-find-by-property --key block.device --string &lt;span class="nv">$1&lt;/span>&lt;span class="sb">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">cd&lt;/span> &lt;span class="s2">&amp;#34;`hal-get-property --udi &lt;/span>&lt;span class="nv">$UDI&lt;/span>&lt;span class="s2"> --key volume.mount_point`&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div></description></item></channel></rss>
+to your &lt;code&gt;.bash_aliases&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;function&lt;/span&gt; pmh &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; pmount-hal &lt;span class="nv"&gt;$1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;UDI&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;hal-find-by-property --key block.device --string &lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;`hal-get-property --udi &lt;/span&gt;&lt;span class="nv"&gt;$UDI&lt;/span&gt;&lt;span class="s2"&gt; --key volume.mount_point`&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item></channel></rss>

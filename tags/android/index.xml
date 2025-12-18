@@ -1,59 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on Shallow and Pedantic</title><link>https://lutzky.net/tags/android/</link><description>Recent content in Android on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>Developing TransportDroidIL for Android</title><link>https://lutzky.net/posts/developing-transportdroidil-for-android/</link><pubDate>Sat, 08 Oct 2011 19:43:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/developing-transportdroidil-for-android/</guid><description>&lt;p>Here are a few words on developing &lt;a href="https://market.android.com/details?id=net.lutzky.transportdroidil" target="_blank" rel="noopener noreffer ">TransportDroidIL&lt;/a>, a small
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on Shallow and Pedantic</title><link>https://lutzky.net/tags/android/</link><description>Recent content in Android on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>Developing TransportDroidIL for Android</title><link>https://lutzky.net/posts/developing-transportdroidil-for-android/</link><pubDate>Sat, 08 Oct 2011 19:43:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/developing-transportdroidil-for-android/</guid><description>&lt;p&gt;Here are a few words on developing &lt;a href="https://market.android.com/details?id=net.lutzky.transportdroidil" target="_blank" rel="noopener noreffer "&gt;TransportDroidIL&lt;/a&gt;, a small
 utility to query Israeli public transportation sites more easily using an
-Android phone.&lt;/p>
-&lt;p>Source control is super important. Mistakes will be made, other coders will
+Android phone.&lt;/p&gt;
+&lt;p&gt;Source control is super important. Mistakes will be made, other coders will
 want to join in, and experimental features will want to be in their own
-branches. &lt;a href="http://git-scm.com/" target="_blank" rel="noopener noreffer ">Git&lt;/a> is awesome; it does source control
-&lt;em>right&lt;/em>, gives me powerful tools, and isn&amp;rsquo;t a hassle to set up - even for a
-small project like this. &lt;a href="http://github.com/" target="_blank" rel="noopener noreffer ">Github&lt;/a> is also awesome; it makes
+branches. &lt;a href="http://git-scm.com/" target="_blank" rel="noopener noreffer "&gt;Git&lt;/a&gt; is awesome; it does source control
+&lt;em&gt;right&lt;/em&gt;, gives me powerful tools, and isn&amp;rsquo;t a hassle to set up - even for a
+small project like this. &lt;a href="http://github.com/" target="_blank" rel="noopener noreffer "&gt;Github&lt;/a&gt; is also awesome; it makes
 collaboration with other coders - even just one, in my case - easy, organized,
-and fun.&lt;/p></description></item><item><title>Upcoming features in TransportDroidIL</title><link>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</link><pubDate>Fri, 02 Sep 2011 08:30:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</guid><description>&lt;p>Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a few new features:&lt;/p>
-&lt;ol>
-&lt;li>Separate &amp;ldquo;Source&amp;rdquo;, &amp;ldquo;Destination&amp;rdquo; and &amp;ldquo;Time&amp;rdquo; fields. This is much better for
-auto-completion as well.&lt;/li>
-&lt;li>Automatic location-based detection of &amp;ldquo;Source&amp;rdquo;. Hopefully you&amp;rsquo;ll find the
-interface for this unobtrusive.&lt;/li>
-&lt;li>Quick reversal of &amp;ldquo;Source&amp;rdquo; and &amp;ldquo;Destination&amp;rdquo;, for your return trip.&lt;/li>
-&lt;li>A new settings screen, with:
-&lt;ul>
-&lt;li>Provider selection (currently Egged or MOT)&lt;/li>
-&lt;li>A small attempt at right-to-left fixes for non-supporting devices.&lt;/li>
-&lt;li>A &amp;ldquo;clear history&amp;rdquo; button&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;p>Everyone loves screenshots:&lt;/p></description></item><item><title>Transport Droid IL</title><link>https://lutzky.net/posts/transport-droid-il/</link><pubDate>Sat, 04 Sep 2010 16:21:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/transport-droid-il/</guid><description>&lt;p>After a couple of days&amp;rsquo; messing with it, I&amp;rsquo;m releasing it: &lt;em>Transport Droid
-IL&lt;/em>! It&amp;rsquo;s a handy little app for querying &lt;a href="http://egged.co.il/" target="_blank" rel="noopener noreffer ">Egged&amp;rsquo;s site&lt;/a>,
-as well as the new &lt;a href="http://bus.gov.il/" target="_blank" rel="noopener noreffer ">Ministry of Transportation site&lt;/a>, on
-transportation information. This is pretty beta, but seems to work well enough.&lt;/p>
-&lt;p>More info, source code:
-&lt;a href="http://lutzky.github.com/TransportDroidIL" target="_blank" rel="noopener noreffer ">http://lutzky.github.com/TransportDroidIL&lt;/a>&lt;/p>
-&lt;p>&lt;strong>APK File:&lt;/strong>
-&lt;a href="http://lutzky.github.com/TransportDroidIL/TransportDroidIL.apk" target="_blank" rel="noopener noreffer ">TransportDroidIL.APK&lt;/a>&lt;/p></description></item><item><title>Setting up Hebrew Android fonts on your AVD emulator</title><link>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</link><pubDate>Sat, 04 Sep 2010 09:54:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</guid><description>&lt;p>There are several good guides for installing &lt;a href="http://benyossef.com/" target="_blank" rel="noopener noreffer ">Gilad
-Ben-Yossef&lt;/a>&amp;rsquo;s excellent Hebdroid fonts on physical
+and fun.&lt;/p&gt;</description></item><item><title>Upcoming features in TransportDroidIL</title><link>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</link><pubDate>Fri, 02 Sep 2011 08:30:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/upcoming-features-in-transportdroidil/</guid><description>&lt;p&gt;Hello everyone, TransportDroidIL 1.0 will be released this month. It has quite a few new features:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Separate &amp;ldquo;Source&amp;rdquo;, &amp;ldquo;Destination&amp;rdquo; and &amp;ldquo;Time&amp;rdquo; fields. This is much better for
+auto-completion as well.&lt;/li&gt;
+&lt;li&gt;Automatic location-based detection of &amp;ldquo;Source&amp;rdquo;. Hopefully you&amp;rsquo;ll find the
+interface for this unobtrusive.&lt;/li&gt;
+&lt;li&gt;Quick reversal of &amp;ldquo;Source&amp;rdquo; and &amp;ldquo;Destination&amp;rdquo;, for your return trip.&lt;/li&gt;
+&lt;li&gt;A new settings screen, with:
+&lt;ul&gt;
+&lt;li&gt;Provider selection (currently Egged or MOT)&lt;/li&gt;
+&lt;li&gt;A small attempt at right-to-left fixes for non-supporting devices.&lt;/li&gt;
+&lt;li&gt;A &amp;ldquo;clear history&amp;rdquo; button&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Everyone loves screenshots:&lt;/p&gt;</description></item><item><title>Transport Droid IL</title><link>https://lutzky.net/posts/transport-droid-il/</link><pubDate>Sat, 04 Sep 2010 16:21:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/transport-droid-il/</guid><description>&lt;p&gt;After a couple of days&amp;rsquo; messing with it, I&amp;rsquo;m releasing it: &lt;em&gt;Transport Droid
+IL&lt;/em&gt;! It&amp;rsquo;s a handy little app for querying &lt;a href="http://egged.co.il/" target="_blank" rel="noopener noreffer "&gt;Egged&amp;rsquo;s site&lt;/a&gt;,
+as well as the new &lt;a href="http://bus.gov.il/" target="_blank" rel="noopener noreffer "&gt;Ministry of Transportation site&lt;/a&gt;, on
+transportation information. This is pretty beta, but seems to work well enough.&lt;/p&gt;
+&lt;p&gt;More info, source code:
+&lt;a href="http://lutzky.github.com/TransportDroidIL" target="_blank" rel="noopener noreffer "&gt;http://lutzky.github.com/TransportDroidIL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;APK File:&lt;/strong&gt;
+&lt;a href="http://lutzky.github.com/TransportDroidIL/TransportDroidIL.apk" target="_blank" rel="noopener noreffer "&gt;TransportDroidIL.APK&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Setting up Hebrew Android fonts on your AVD emulator</title><link>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</link><pubDate>Sat, 04 Sep 2010 09:54:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/setting-up-hebrew-android-fonts-on-your-avd-emulator/</guid><description>&lt;p&gt;There are several good guides for installing &lt;a href="http://benyossef.com/" target="_blank" rel="noopener noreffer "&gt;Gilad
+Ben-Yossef&lt;/a&gt;&amp;rsquo;s excellent Hebdroid fonts on physical
 Android devices, but those don&amp;rsquo;t really work with the Android SDK&amp;rsquo;s emulator -
-changes to the &lt;code>system&lt;/code> directory aren&amp;rsquo;t persistent. Here&amp;rsquo;s how to get around
-that:&lt;/p>
-&lt;p>First, a few downloads. You&amp;rsquo;ll need:&lt;/p>
-&lt;ol>
-&lt;li>The android emulator (presumably you already have this, if not, you can get
-it at &lt;a href="http://developer.android.com/" target="_blank" rel="noopener noreffer ">developer.android.com&lt;/a>)&lt;/li>
-&lt;li>The &lt;a href="http://firstpost.org/wp-content/uploads/2009/02/hebdroid.zip" target="_blank" rel="noopener noreffer ">hebdroid fonts&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://code.google.com/p/unyaffs/" target="_blank" rel="noopener noreffer ">unyaffs&lt;/a>, which will extract the &lt;code>system.img&lt;/code> file&lt;/li>
-&lt;li>&lt;a href="http://www.aleph1.co.uk/gitweb?p=yaffs2/.git;a=snapshot;h=69808485ec796bfa2b4806f91828281eccd0827b;sf=tgz" target="_blank" rel="noopener noreffer ">A snapshot of
-yaffs2&lt;/a>,
-which will create our new &lt;code>system.img&lt;/code> file. This is actually today&amp;rsquo;s
+changes to the &lt;code&gt;system&lt;/code&gt; directory aren&amp;rsquo;t persistent. Here&amp;rsquo;s how to get around
+that:&lt;/p&gt;
+&lt;p&gt;First, a few downloads. You&amp;rsquo;ll need:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The android emulator (presumably you already have this, if not, you can get
+it at &lt;a href="http://developer.android.com/" target="_blank" rel="noopener noreffer "&gt;developer.android.com&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;The &lt;a href="http://firstpost.org/wp-content/uploads/2009/02/hebdroid.zip" target="_blank" rel="noopener noreffer "&gt;hebdroid fonts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://code.google.com/p/unyaffs/" target="_blank" rel="noopener noreffer "&gt;unyaffs&lt;/a&gt;, which will extract the &lt;code&gt;system.img&lt;/code&gt; file&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.aleph1.co.uk/gitweb?p=yaffs2/.git;a=snapshot;h=69808485ec796bfa2b4806f91828281eccd0827b;sf=tgz" target="_blank" rel="noopener noreffer "&gt;A snapshot of
+yaffs2&lt;/a&gt;,
+which will create our new &lt;code&gt;system.img&lt;/code&gt; file. This is actually today&amp;rsquo;s
 snapshot from the git repository, which worked for me. For later versions,
-take a look at &lt;a href="http://www.yaffs.net/node/346" target="_blank" rel="noopener noreffer ">the git repository&lt;/a>.&lt;/li>
-&lt;/ol>
-&lt;p>Building &lt;code>unyaffs&lt;/code> is simple enough, or you can use the prebuilt version from
-the site. Building &lt;code>mkyaffs2image&lt;/code> is also quite easy - just untar the
-snapshot, and run &lt;code>make&lt;/code> in the &lt;code>utils&lt;/code> directory. Put both of these utilities
-somewhere in your &lt;code>$PATH&lt;/code> for convenience.&lt;/p></description></item><item><title>Android</title><link>https://lutzky.net/posts/android/</link><pubDate>Sat, 04 Sep 2010 09:26:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/android/</guid><description>&lt;p>I&amp;rsquo;ve finally gotten the chance to get one of those newfangled Android phones.&lt;/p>
-&lt;p>I&amp;rsquo;ve recently &amp;ldquo;bought&amp;rdquo; a &lt;a href="http://en.wikipedia.org/wiki/Samsung_Galaxy" target="_blank" rel="noopener noreffer ">Samsung Galaxy
-Android&lt;/a> phone (the older i7500,
+take a look at &lt;a href="http://www.yaffs.net/node/346" target="_blank" rel="noopener noreffer "&gt;the git repository&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Building &lt;code&gt;unyaffs&lt;/code&gt; is simple enough, or you can use the prebuilt version from
+the site. Building &lt;code&gt;mkyaffs2image&lt;/code&gt; is also quite easy - just untar the
+snapshot, and run &lt;code&gt;make&lt;/code&gt; in the &lt;code&gt;utils&lt;/code&gt; directory. Put both of these utilities
+somewhere in your &lt;code&gt;$PATH&lt;/code&gt; for convenience.&lt;/p&gt;</description></item><item><title>Android</title><link>https://lutzky.net/posts/android/</link><pubDate>Sat, 04 Sep 2010 09:26:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/android/</guid><description>&lt;p&gt;I&amp;rsquo;ve finally gotten the chance to get one of those newfangled Android phones.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve recently &amp;ldquo;bought&amp;rdquo; a &lt;a href="http://en.wikipedia.org/wiki/Samsung_Galaxy" target="_blank" rel="noopener noreffer "&gt;Samsung Galaxy
+Android&lt;/a&gt; phone (the older i7500,
 not the newer i9000 &amp;ldquo;S&amp;rdquo;) model. It&amp;rsquo;s a seriously serious upgrade from my old
-&lt;a href="http://en.wikipedia.org/wiki/Nokia_6120_classic" target="_blank" rel="noopener noreffer ">Nokia 6120 Classic&lt;/a>, and as I
-broke the 6120&amp;rsquo;s screen and reverted back to my trusty old &lt;a href="http://en.wikipedia.org/wiki/Nokia_6070" target="_blank" rel="noopener noreffer ">Nokia
-6070&lt;/a> (which I couldn&amp;rsquo;t even get to
-run the GMail app), I was quite a happy camper switching to a modern phone.&lt;/p></description></item></channel></rss>
+&lt;a href="http://en.wikipedia.org/wiki/Nokia_6120_classic" target="_blank" rel="noopener noreffer "&gt;Nokia 6120 Classic&lt;/a&gt;, and as I
+broke the 6120&amp;rsquo;s screen and reverted back to my trusty old &lt;a href="http://en.wikipedia.org/wiki/Nokia_6070" target="_blank" rel="noopener noreffer "&gt;Nokia
+6070&lt;/a&gt; (which I couldn&amp;rsquo;t even get to
+run the GMail app), I was quite a happy camper switching to a modern phone.&lt;/p&gt;</description></item></channel></rss>

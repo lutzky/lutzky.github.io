@@ -1,159 +1,161 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Software on Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Recent content in Software on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 11 Jul 2025 08:44:29 +0100</lastBuildDate><atom:link href="https://lutzky.net/tags/software/index.xml" rel="self" type="application/rss+xml"/><item><title>Newborn parenting software - part 4</title><link>https://lutzky.net/posts/software-parenting-4/</link><pubDate>Thu, 10 Jul 2025 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-4/</guid><description>Booby buttons! 😄</description></item><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description>&lt;p>Copy-on-write makes snapshots fast and accessible, but deleting them to
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Software on Shallow and Pedantic</title><link>https://lutzky.net/tags/software/</link><description>Recent content in Software on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Fri, 11 Jul 2025 08:44:29 +0100</lastBuildDate><atom:link href="https://lutzky.net/tags/software/index.xml" rel="self" type="application/rss+xml"/><item><title>Newborn parenting software - part 4</title><link>https://lutzky.net/posts/software-parenting-4/</link><pubDate>Thu, 10 Jul 2025 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-4/</guid><description>Booby buttons! 😄</description></item><item><title>zsnapfree</title><link>https://lutzky.net/posts/zsnapfree/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/zsnapfree/</guid><description>&lt;p&gt;Copy-on-write makes snapshots fast and accessible, but deleting them to
 reclaim disk space can be a bit confusing. Let&amp;rsquo;s have a quick primer on how
-those work, and look at a small utility to help reason about it.&lt;/p>
-&lt;p>&lt;a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer ">zsnapfree&lt;/a> is a TUI for showing how much
+those work, and look at a small utility to help reason about it.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/lutzky/zsnapfree" target="_blank" rel="noopener noreffer "&gt;zsnapfree&lt;/a&gt; is a TUI for showing how much
 space can be reclaimed by freeing zfs snapshots. It is a TUI wrapper over the
-standard zfs tool.&lt;/p>
-&lt;p>If you just want to see zsnapfree in action, skip to &lt;a href="#the-good-stuff" rel="">the screencast&lt;/a>.&lt;/p></description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/slow-boot/</guid><description>&lt;p>Rebooting a modern desktop computer really shouldn&amp;rsquo;t take very long, so when it
+standard zfs tool.&lt;/p&gt;
+&lt;p&gt;If you just want to see zsnapfree in action, skip to &lt;a href="#the-good-stuff" rel=""&gt;the screencast&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Adventures with slow boot</title><link>https://lutzky.net/posts/slow-boot/</link><pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/slow-boot/</guid><description>&lt;p&gt;Rebooting a modern desktop computer really shouldn&amp;rsquo;t take very long, so when it
 was somewhat-regularly taking well over 10 minutes just to shut down, I got
-curious, and ended up looking at netdata, jitter, anacron, and even ansible.&lt;/p></description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description>&lt;p>Figuring out what&amp;rsquo;s taking up space is a well-known issue, with a variety of
-great tools for it&amp;hellip; if we&amp;rsquo;re talking about files on a local hard drive.&lt;/p></description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description>&lt;p>In October 2023, two weeks before daylight savings time (&amp;ldquo;summer time&amp;rdquo;) was set
+curious, and ended up looking at netdata, jitter, anacron, and even ansible.&lt;/p&gt;</description></item><item><title>ncdu-import</title><link>https://lutzky.net/posts/ncdu-import/</link><pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ncdu-import/</guid><description>&lt;p&gt;Figuring out what&amp;rsquo;s taking up space is a well-known issue, with a variety of
+great tools for it&amp;hellip; if we&amp;rsquo;re talking about files on a local hard drive.&lt;/p&gt;</description></item><item><title>Timezone Changes</title><link>https://lutzky.net/posts/timezone-changes/</link><pubDate>Mon, 16 Oct 2023 19:54:39 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/timezone-changes/</guid><description>&lt;p&gt;In October 2023, two weeks before daylight savings time (&amp;ldquo;summer time&amp;rdquo;) was set
 to end, Israel briefly considered delaying this. That would&amp;rsquo;ve been a terrible
-idea, even if it weren&amp;rsquo;t at war at the time.&lt;/p></description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-distribution/</guid><description>&lt;p>For as long as I&amp;rsquo;ve been interested in software development, I&amp;rsquo;ve been
+idea, even if it weren&amp;rsquo;t at war at the time.&lt;/p&gt;</description></item><item><title>Getting your code to your friends</title><link>https://lutzky.net/posts/software-distribution/</link><pubDate>Sun, 23 Apr 2023 10:22:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-distribution/</guid><description>&lt;p&gt;For as long as I&amp;rsquo;ve been interested in software development, I&amp;rsquo;ve been
 interested in how software makes it onto a computer. &amp;ldquo;Works on my machine&amp;rdquo; was
-never quite enough&amp;hellip; how would it work on &lt;em>someone else&amp;rsquo;s&lt;/em> computer? Here&amp;rsquo;s a
-stroll down memory lane, starting from the 90s.&lt;/p></description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/rust/</guid><description>&amp;hellip;and now I hate all other programming languages. The lament of a regular Go user.</description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description>&lt;p>One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&amp;rsquo;t usually need it for night sleeps, but it&amp;rsquo;s helpful for a &amp;ldquo;cranky-because-tired&amp;rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.&lt;/p></description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/preload-key/</guid><description>How to enter passphrases BEFORE rebooting your server</description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description>Transitioning PooButtons to a microcontroller</description></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/posts/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 21:57:09 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-2/</guid><description>Logging diapers with satisfying clicks</description></item><item><title>Newborn parenting software - part 1</title><link>https://lutzky.net/posts/software-parenting-1/</link><pubDate>Sun, 03 Oct 2021 17:00:00 +0100</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-1/</guid><description>Choosing and hacking on baby tracking apps</description></item><item><title>Code comments</title><link>https://lutzky.net/posts/comments/</link><pubDate>Sun, 02 May 2021 11:02:57 +0100</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/comments/</guid><description>&lt;p>Good code comments only describe &lt;em>why&lt;/em> the code is (or isn&amp;rsquo;t!) doing something.&lt;/p></description></item><item><title>PiTemp</title><link>https://lutzky.net/posts/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/pitemp/</guid><description>An adventure with Raspberry Pi, Golang, and small displays.</description></item><item><title>TransportDroidIL outage</title><link>https://lutzky.net/posts/transportdroidil-outage/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/transportdroidil-outage/</guid><description>(Hebrew) The tale of my now-defunct android app for fetching public transport information.</description></item><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/posts/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description></item><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description></item><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description></item><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/posts/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/investigate/</guid><description>Distinguishing &lt;code>EPERM&lt;/code> vs &lt;code>EACCESS&lt;/code> and how that helps debug file manipulation scripts.</description></item><item><title>Startup times</title><link>https://lutzky.net/posts/startup-times/</link><pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/startup-times/</guid><description>Starting new java processes in your scripts considered harmful. Let&amp;rsquo;s compare &amp;ldquo;hello world&amp;rdquo; startup times for different languages.</description></item><item><title>Asserting string equality</title><link>https://lutzky.net/posts/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/posts/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description>&lt;p>Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.&lt;/p>
-&lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;p>Assume you&amp;rsquo;re working with an external vendor, who is providing you with code
-for a wonderful function &lt;code>getFoo&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.h version 1.2.3
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// foo.c version 1.2.3
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getFoo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// TODO improve performance
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">42&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>You use this function in many of your products - for example, in your
-best-selling &lt;code>barApp&lt;/code> application:&lt;/p></description></item><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/translationese/</guid><description>&lt;p>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project
+never quite enough&amp;hellip; how would it work on &lt;em&gt;someone else&amp;rsquo;s&lt;/em&gt; computer? Here&amp;rsquo;s a
+stroll down memory lane, starting from the 90s.&lt;/p&gt;</description></item><item><title>I tried Rust</title><link>https://lutzky.net/posts/rust/</link><pubDate>Mon, 16 Jan 2023 15:34:25 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/rust/</guid><description>&amp;hellip;and now I hate all other programming languages. The lament of a regular Go user.</description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description>&lt;p&gt;One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&amp;rsquo;t usually need it for night sleeps, but it&amp;rsquo;s helpful for a &amp;ldquo;cranky-because-tired&amp;rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.&lt;/p&gt;</description></item><item><title>Preloading disk encryption keys</title><link>https://lutzky.net/posts/preload-key/</link><pubDate>Wed, 26 Jan 2022 21:30:22 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/preload-key/</guid><description>How to enter passphrases BEFORE rebooting your server</description></item><item><title>Newborn parenting software - part 3</title><link>https://lutzky.net/posts/software-parenting-3/</link><pubDate>Sun, 10 Oct 2021 09:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-3/</guid><description>Transitioning PooButtons to a microcontroller</description></item><item><title>Newborn parenting software - part 2</title><link>https://lutzky.net/posts/software-parenting-2/</link><pubDate>Tue, 05 Oct 2021 21:57:09 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-2/</guid><description>Logging diapers with satisfying clicks</description></item><item><title>Newborn parenting software - part 1</title><link>https://lutzky.net/posts/software-parenting-1/</link><pubDate>Sun, 03 Oct 2021 17:00:00 +0100</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-parenting-1/</guid><description>Choosing and hacking on baby tracking apps</description></item><item><title>Code comments</title><link>https://lutzky.net/posts/comments/</link><pubDate>Sun, 02 May 2021 11:02:57 +0100</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/comments/</guid><description>&lt;p&gt;Good code comments only describe &lt;em&gt;why&lt;/em&gt; the code is (or isn&amp;rsquo;t!) doing something.&lt;/p&gt;</description></item><item><title>PiTemp</title><link>https://lutzky.net/posts/pitemp/</link><pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/pitemp/</guid><description>An adventure with Raspberry Pi, Golang, and small displays.</description></item><item><title>TransportDroidIL outage</title><link>https://lutzky.net/posts/transportdroidil-outage/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/transportdroidil-outage/</guid><description>(Hebrew) The tale of my now-defunct android app for fetching public transport information.</description></item><item><title>Seaplane - Github with a non-programmer</title><link>https://lutzky.net/posts/seaplane/</link><pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/seaplane/</guid><description>When I helped a non-programmer friend with some code for psychology research, and how we avoided using Matlab.</description></item><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description></item><item><title>Fun with file descriptor leaks</title><link>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</link><pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fun-with-file-descriptor-leaks/</guid><description>How file descriptor leaks are causing your processes to stick around longer than they should.</description></item><item><title>Weird permission issues with tvnamer</title><link>https://lutzky.net/posts/investigate/</link><pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/investigate/</guid><description>Distinguishing &lt;code&gt;EPERM&lt;/code&gt; vs &lt;code&gt;EACCESS&lt;/code&gt; and how that helps debug file manipulation scripts.</description></item><item><title>Startup times</title><link>https://lutzky.net/posts/startup-times/</link><pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/startup-times/</guid><description>Starting new java processes in your scripts considered harmful. Let&amp;rsquo;s compare &amp;ldquo;hello world&amp;rdquo; startup times for different languages.</description></item><item><title>Asserting string equality</title><link>https://lutzky.net/posts/asserting-string-equality/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/asserting-string-equality/</guid><description>When comparing long strings in unit tests, make sure your assertion failures give you useful output.</description></item><item><title>Test-driven procrastination</title><link>https://lutzky.net/posts/test-driven-procrastination/</link><pubDate>Sun, 01 Dec 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/test-driven-procrastination/</guid><description>How being lazy and procrastinating led me to adopt test-driven development before I realized it.</description></item><item><title>Multiple library versions</title><link>https://lutzky.net/posts/multiple-library-versions/</link><pubDate>Wed, 15 May 2013 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/multiple-library-versions/</guid><description>&lt;p&gt;Working with vendor code in C can get very tricky, especially when you except breaking changes to occur. Especially when you have multiple binaries depending on that vendor code, updating at different times, necessitating different live versions. Let&amp;rsquo;s explore.&lt;/p&gt;
+&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Assume you&amp;rsquo;re working with an external vendor, who is providing you with code
+for a wonderful function &lt;code&gt;getFoo&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// foo.h version 1.2.3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;getFoo&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// foo.c version 1.2.3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;getFoo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// TODO improve performance
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;You use this function in many of your products - for example, in your
+best-selling &lt;code&gt;barApp&lt;/code&gt; application:&lt;/p&gt;</description></item><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/translationese/</guid><description>&lt;p&gt;As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project
 in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a
-chance to use a few of my favorite technologies.&lt;/p>
-&lt;p>The project was coded in Python, which is &lt;em>not&lt;/em> my favorite programming
+chance to use a few of my favorite technologies.&lt;/p&gt;
+&lt;p&gt;The project was coded in Python, which is &lt;em&gt;not&lt;/em&gt; my favorite programming
 language - Ruby is. However, since Python is more popular at my workplace, and
 seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown
 to love it almost as much over the years. It&amp;rsquo;s quick, easy, and has fantastic
-libraries; specifically, for this project, we made heavy use of the &lt;a href="http://nltk.org" target="_blank" rel="noopener noreffer ">Natural
-Language Toolkit&lt;/a>. We used Git for source control and Github
+libraries; specifically, for this project, we made heavy use of the &lt;a href="http://nltk.org" target="_blank" rel="noopener noreffer "&gt;Natural
+Language Toolkit&lt;/a&gt;. We used Git for source control and Github
 for hosting, Travis for continuous integration, and ReadTheDocs for
 documentation. All of these culminate in the project being handed in as a
-single link: &lt;a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer ">http://github.com/lutzky/translationese&lt;/a>.&lt;/p></description></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 17:55:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</guid><description>&lt;p>&lt;strong>Edit: I was misled!&lt;/strong>&lt;/p>
-&lt;p>Illustrated here. Hints below.&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-irb" data-lang="irb">&amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;#34;x: %p, y: %p&amp;#34; % [x, y]; end
+single link: &lt;a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer "&gt;http://github.com/lutzky/translationese&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Three things I didn't know Ruby does</title><link>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</link><pubDate>Fri, 25 Jul 2008 17:55:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/three-things-i-didnt-know-ruby-does/</guid><description>&lt;p&gt;&lt;strong&gt;Edit: I was misled!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Illustrated here. Hints below.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-irb" data-lang="irb"&gt;&amp;gt;&amp;gt; def inspect_x_and_y(x,y); puts &amp;#34;x: %p, y: %p&amp;#34; % [x, y]; end
 =&amp;gt; nil
 &amp;gt;&amp;gt; inspect_x_and_y(y={&amp;#34;hello&amp;#34; =&amp;gt; &amp;#34;world&amp;#34;},x=[1,2,3])
 x: {&amp;#34;hello&amp;#34;=&amp;gt;&amp;#34;world&amp;#34;}, y: [1, 2, 3]
-&lt;/code>&lt;/pre>&lt;p>The bits I didn&amp;rsquo;t know about:&lt;/p>
-&lt;ol>
-&lt;li>&lt;code>&amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ]&lt;/code>&lt;/li>
-&lt;li>The &lt;code>%p&lt;/code> formatting character is the same as &lt;code>inspect&lt;/code>.&lt;/li>
-&lt;li>You can call methods with &lt;code>method_name(param2=val2, param1=val1)&lt;/code>, also like
-in python. &lt;strong>No you can&amp;rsquo;t! This code sets external variables called y and
-x.&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;p>How embarassing&amp;hellip; :(&lt;/p></description></item><item><title>Valgrind Fail</title><link>https://lutzky.net/posts/valgrind-fail/</link><pubDate>Wed, 11 Jun 2008 01:08:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/valgrind-fail/</guid><description>&lt;p>I neglected to post this here somehow, it&amp;rsquo;s about a month old by now&amp;hellip;&lt;/p>
-&lt;blockquote>
-&lt;p>Screenshot lost in the mist of time&amp;hellip; shows a program segfaulting, and then
-working properly when run within valgrind.&lt;/p>&lt;/blockquote>
-&lt;p>The problem turned out to be an imprecise (false-positve) comparison operator
-implemented for a class used as a hash key. God, I hate C++.&lt;/p></description></item><item><title>Faster Languages</title><link>https://lutzky.net/posts/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:49:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/faster-languages/</guid><description>&lt;p>Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The bits I didn&amp;rsquo;t know about:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;Format strings using a %% sign, %s, %s!&amp;quot; % [ &amp;quot;just like in python&amp;quot;, &amp;quot;but with arrays&amp;quot; ]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;%p&lt;/code&gt; formatting character is the same as &lt;code&gt;inspect&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;You can call methods with &lt;code&gt;method_name(param2=val2, param1=val1)&lt;/code&gt;, also like
+in python. &lt;strong&gt;No you can&amp;rsquo;t! This code sets external variables called y and
+x.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;How embarassing&amp;hellip; :(&lt;/p&gt;</description></item><item><title>Valgrind Fail</title><link>https://lutzky.net/posts/valgrind-fail/</link><pubDate>Wed, 11 Jun 2008 01:08:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/valgrind-fail/</guid><description>&lt;p&gt;I neglected to post this here somehow, it&amp;rsquo;s about a month old by now&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Screenshot lost in the mist of time&amp;hellip; shows a program segfaulting, and then
+working properly when run within valgrind.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The problem turned out to be an imprecise (false-positve) comparison operator
+implemented for a class used as a hash key. God, I hate C++.&lt;/p&gt;</description></item><item><title>Faster Languages</title><link>https://lutzky.net/posts/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:49:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/faster-languages/</guid><description>&lt;p&gt;Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis -
 C++. Part of the reason is that the exercise contains a time-limited
 tournament, and the code needs to run very quickly. Another reason is, I guess,
 the fact that C++ serves as a sort of lowest common denominator in the course
-(which used, by the way, to be taught in LISP, along with the language).&lt;/p></description></item><item><title>Egged Getter 0.1</title><link>https://lutzky.net/posts/egged-getter-0-1/</link><pubDate>Fri, 01 Feb 2008 23:21:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/egged-getter-0-1/</guid><description>&lt;blockquote>
-&lt;p>The Egged Getter has been lost in the mists of time. However, it&amp;rsquo;s code has
-largely been integrated into &lt;a href="https://github.com/lutzky/TransportDroidIL" target="_blank" rel="noopener noreffer ">TransportDroidIL&lt;/a>. An old version of the Python
-code has been pasted at the end of this post.&lt;/p>&lt;/blockquote>
-&lt;p>Here&amp;rsquo;s a little something I&amp;rsquo;ve been messing with: A simple fetcher script for
-the &lt;a href="http://www.egged.co.il" target="_blank" rel="noopener noreffer ">Egged&lt;/a> (Israeli bus company) site. I&amp;rsquo;ve made a
+(which used, by the way, to be taught in LISP, along with the language).&lt;/p&gt;</description></item><item><title>Egged Getter 0.1</title><link>https://lutzky.net/posts/egged-getter-0-1/</link><pubDate>Fri, 01 Feb 2008 23:21:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/egged-getter-0-1/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;The Egged Getter has been lost in the mists of time. However, it&amp;rsquo;s code has
+largely been integrated into &lt;a href="https://github.com/lutzky/TransportDroidIL" target="_blank" rel="noopener noreffer "&gt;TransportDroidIL&lt;/a&gt;. An old version of the Python
+code has been pasted at the end of this post.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here&amp;rsquo;s a little something I&amp;rsquo;ve been messing with: A simple fetcher script for
+the &lt;a href="http://www.egged.co.il" target="_blank" rel="noopener noreffer "&gt;Egged&lt;/a&gt; (Israeli bus company) site. I&amp;rsquo;ve made a
 deskbar applet which uses it, which was fun to do :) (I&amp;rsquo;m looking for other
-cool ideas to implement as deskbar applets)&lt;/p></description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/posts/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 22:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-threading-vs-processing/</guid><description>&lt;p>Writing multi-threaded applications in Python is often a headache because of
+cool ideas to implement as deskbar applets)&lt;/p&gt;</description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/posts/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 22:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-threading-vs-processing/</guid><description>&lt;p&gt;Writing multi-threaded applications in Python is often a headache because of
 the Global Interpreter Lock - only one Python thread can run at any given
 moment, which makes multi-threading useful only in the case where all modules
-but one actually run C code. However, thanks to the impressive new &lt;a href="http://pythonmagazine.com" target="_blank" rel="noopener noreffer ">Python
-Magazine&lt;/a>, I&amp;rsquo;ve stumbled across a package called
-&lt;code>processing&lt;/code>, paraphrasing python&amp;rsquo;s built-in &lt;code>threading&lt;/code> package. Essentially,
+but one actually run C code. However, thanks to the impressive new &lt;a href="http://pythonmagazine.com" target="_blank" rel="noopener noreffer "&gt;Python
+Magazine&lt;/a&gt;, I&amp;rsquo;ve stumbled across a package called
+&lt;code&gt;processing&lt;/code&gt;, paraphrasing python&amp;rsquo;s built-in &lt;code&gt;threading&lt;/code&gt; package. Essentially,
 the package provides an API identical to Python&amp;rsquo;s threading, but uses processes
 and pipes (or other mechanisms on non-posix operating systems) instead. What
 the magazine does not cover is the fact that this can also benefit GUI
 applications; updating a progressbar in the application doesn&amp;rsquo;t need to slow
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
-or processes at the user&amp;rsquo;s choice:&lt;/p></description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/posts/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 14:02:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/exception-handling-decorators-and-python/</guid><description>&lt;p>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After
+or processes at the user&amp;rsquo;s choice:&lt;/p&gt;</description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/posts/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 14:02:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/exception-handling-decorators-and-python/</guid><description>&lt;p&gt;Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After
 trying to figure out how to work DBus with C, and seeing how easy it is to do
 in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately,
-it&amp;rsquo;s very simple to use - especially thanks to &lt;a href="http://www.developer.com/lang/other/article.php/2217941" target="_blank" rel="noopener noreffer ">this guide&lt;/a>.&lt;/p>
-&lt;blockquote>
-&lt;p>It later turned out to be much easier to do in C, as described in &lt;em>&lt;a href="https://lutzky.net/2008/04/16/faster-languages" rel="">Faster Languages&lt;/a>&lt;/em>.&lt;/p></description></item><item><title>Two reasons Apple suck</title><link>https://lutzky.net/posts/two-reasons-apple-suck/</link><pubDate>Sun, 16 Sep 2007 12:47:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/two-reasons-apple-suck/</guid><description>&lt;p>First of all, &lt;a href="http://www.boingboing.net/2007/09/14/new-ipods-reengineer.html" target="_blank" rel="noopener noreffer ">new iPods won&amp;rsquo;t work on
-Linux&lt;/a>. Now,
+it&amp;rsquo;s very simple to use - especially thanks to &lt;a href="http://www.developer.com/lang/other/article.php/2217941" target="_blank" rel="noopener noreffer "&gt;this guide&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It later turned out to be much easier to do in C, as described in &lt;em&gt;&lt;a href="https://lutzky.net/2008/04/16/faster-languages" rel=""&gt;Faster Languages&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;</description></item><item><title>Two reasons Apple suck</title><link>https://lutzky.net/posts/two-reasons-apple-suck/</link><pubDate>Sun, 16 Sep 2007 12:47:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/two-reasons-apple-suck/</guid><description>&lt;p&gt;First of all, &lt;a href="http://www.boingboing.net/2007/09/14/new-ipods-reengineer.html" target="_blank" rel="noopener noreffer "&gt;new iPods won&amp;rsquo;t work on
+Linux&lt;/a&gt;. Now,
 while it&amp;rsquo;s very obvious that the idea is to block competition against other
 music vendors, that makes it even less legitimate. Good thing we&amp;rsquo;re starting to
 see some very nice cheap players out there - I&amp;rsquo;ve been rather impressed with
-the &lt;a href="http://en.meizu.com/product_m6.asp" target="_blank" rel="noopener noreffer ">Meizu M6 MiniPlayer&lt;/a>.&lt;/p>
-&lt;p>Secondly, they didn&amp;rsquo;t think of this: &lt;a href="http://www.gnome.org/start/2.20/notes/en/index.html#rnusers-file-management" target="_blank" rel="noopener noreffer ">Indexed search within the &amp;ldquo;Open&amp;rdquo;
-dialog&lt;/a>.
+the &lt;a href="http://en.meizu.com/product_m6.asp" target="_blank" rel="noopener noreffer "&gt;Meizu M6 MiniPlayer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Secondly, they didn&amp;rsquo;t think of this: &lt;a href="http://www.gnome.org/start/2.20/notes/en/index.html#rnusers-file-management" target="_blank" rel="noopener noreffer "&gt;Indexed search within the &amp;ldquo;Open&amp;rdquo;
+dialog&lt;/a&gt;.
 It&amp;rsquo;s in Ubuntu Gutsy, and really makes desktop search (implemented with Tracker
-in gutsy) worthwhile. Especially when attaching files in GMail :)&lt;/p></description></item><item><title>Myspace sucks</title><link>https://lutzky.net/posts/myspace-sucks/</link><pubDate>Thu, 17 May 2007 14:26:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/myspace-sucks/</guid><description>&lt;p>Life is good, for the most part. And as a technology enthusiast, there are many
+in gutsy) worthwhile. Especially when attaching files in GMail :)&lt;/p&gt;</description></item><item><title>Myspace sucks</title><link>https://lutzky.net/posts/myspace-sucks/</link><pubDate>Thu, 17 May 2007 14:26:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/myspace-sucks/</guid><description>&lt;p&gt;Life is good, for the most part. And as a technology enthusiast, there are many
 new and cool things to see online. For example, there&amp;rsquo;s the new
-&lt;a href="http://schools.whatsup.org.il" target="_blank" rel="noopener noreffer ">Schools&lt;/a> site, part of the Vaya project which
+&lt;a href="http://schools.whatsup.org.il" target="_blank" rel="noopener noreffer "&gt;Schools&lt;/a&gt; site, part of the Vaya project which
 helps Israeli schools use Linux; this site uses the up-and-coming
-&lt;a href="http://lahak.python-hosting.com" target="_blank" rel="noopener noreffer ">Lahak&lt;/a> CMS, built on the Django framework,
-and looks very promising to the eyes of the bidi-lingual webmaster.&lt;/p>
-&lt;p>However, some things just plain suck. One of them is myspace; today, in an
-attempt to make it more legible, I found that &lt;a href="http://myspace.com/switchblade777" target="_blank" rel="noopener noreffer ">My Band&amp;rsquo;s
-Page&lt;/a> implements all of its styling changes
+&lt;a href="http://lahak.python-hosting.com" target="_blank" rel="noopener noreffer "&gt;Lahak&lt;/a&gt; CMS, built on the Django framework,
+and looks very promising to the eyes of the bidi-lingual webmaster.&lt;/p&gt;
+&lt;p&gt;However, some things just plain suck. One of them is myspace; today, in an
+attempt to make it more legible, I found that &lt;a href="http://myspace.com/switchblade777" target="_blank" rel="noopener noreffer "&gt;My Band&amp;rsquo;s
+Page&lt;/a&gt; implements all of its styling changes
 by a &amp;ldquo;style&amp;rdquo; tag hidden within the &amp;ldquo;Members&amp;rdquo; text block. Myspace doesn&amp;rsquo;t filter
 this out - nor does it provide any other means of changing the styling. This,
 combined with myspace&amp;rsquo;s horrid administration interface, makes editing
 incredible unwieldy. I&amp;rsquo;m considering opening another Wordpress site for the
-band here on this server&amp;hellip;&lt;/p></description></item><item><title>IPython</title><link>https://lutzky.net/posts/ipython/</link><pubDate>Sun, 04 Mar 2007 00:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ipython/</guid><description>&lt;p>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project
+band here on this server&amp;hellip;&lt;/p&gt;</description></item><item><title>IPython</title><link>https://lutzky.net/posts/ipython/</link><pubDate>Sun, 04 Mar 2007 00:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ipython/</guid><description>&lt;p&gt;The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project
 for a course, which involves somewhat heavy-duty database and algorithm work.
-Python is my language of choice for it - let&amp;rsquo;s hope it works out well.&lt;/p>
-&lt;p>In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython
+Python is my language of choice for it - let&amp;rsquo;s hope it works out well.&lt;/p&gt;
+&lt;p&gt;In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython
 (available in apt) - it adds a bunch of stuff to the python shell which I
 sorely missed from irb - autocompletion, auto-indentation, and - it seems -
-adds a whole lot more.&lt;/p></description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/posts/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 14:52:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-the-whole-python-thing/</guid><description>&lt;p>I&amp;rsquo;ve converted my &lt;em>Antigibberish script&lt;/em>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>
+adds a whole lot more.&lt;/p&gt;</description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/posts/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 14:52:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-the-whole-python-thing/</guid><description>&lt;p&gt;I&amp;rsquo;ve converted my &lt;em&gt;Antigibberish script&lt;/em&gt;&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;
 (converts &amp;ldquo;broken hebrew&amp;rdquo; into proper hebrew, useful for sent-offline ICQ
 messages) to Python&amp;hellip; it&amp;rsquo;s quite a nice language, and the interpreter is FAST!
-I&amp;rsquo;m really torn between it and Ruby :(&lt;/p>
-&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>Used to have a copy of &lt;code>antigibberish.py&lt;/code>, but it&amp;rsquo;s been lost in
-the mists of time. It used to do the equivalent of this:&lt;/p>
-&lt;p>&lt;code>iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p></description></item><item><title>Beautiful ideas</title><link>https://lutzky.net/posts/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 17:24:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/beautiful-ideas/</guid><description>&lt;p>This man has &lt;a href="http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html" target="_blank" rel="noopener noreffer ">some beautiful design
-ideas&lt;/a>
-for the Linux desktop.&lt;/p></description></item><item><title>Why Vista worries me</title><link>https://lutzky.net/posts/why-vista-worries-me/</link><pubDate>Wed, 07 Feb 2007 18:22:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/why-vista-worries-me/</guid><description>&lt;p>I&amp;rsquo;ve heard &lt;a href="http://www.twit.tv/sn77" target="_blank" rel="noopener noreffer ">the latest Security Now&lt;/a>, regarding the
+I&amp;rsquo;m really torn between it and Ruby :(&lt;/p&gt;
+&lt;div class="footnotes" role="doc-endnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Used to have a copy of &lt;code&gt;antigibberish.py&lt;/code&gt;, but it&amp;rsquo;s been lost in
+the mists of time. It used to do the equivalent of this:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8&lt;/code&gt;&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Beautiful ideas</title><link>https://lutzky.net/posts/beautiful-ideas/</link><pubDate>Thu, 08 Feb 2007 17:24:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/beautiful-ideas/</guid><description>&lt;p&gt;This man has &lt;a href="http://njpatel.blogspot.com/2007/02/while-i-have-your-attention_07.html" target="_blank" rel="noopener noreffer "&gt;some beautiful design
+ideas&lt;/a&gt;
+for the Linux desktop.&lt;/p&gt;</description></item><item><title>Why Vista worries me</title><link>https://lutzky.net/posts/why-vista-worries-me/</link><pubDate>Wed, 07 Feb 2007 18:22:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/why-vista-worries-me/</guid><description>&lt;p&gt;I&amp;rsquo;ve heard &lt;a href="http://www.twit.tv/sn77" target="_blank" rel="noopener noreffer "&gt;the latest Security Now&lt;/a&gt;, regarding the
 debate between Dave Marsh and Peter Guttman on DRM in Windows Vista. While a
-few good points were made, the major one - in my opinion - was not.&lt;/p>
-&lt;p>DRM, in a practical sense, is deeply flawed: The idea is to give you your
+few good points were made, the major one - in my opinion - was not.&lt;/p&gt;
+&lt;p&gt;DRM, in a practical sense, is deeply flawed: The idea is to give you your
 media - say, a WMA piece of music - and a program to play it with - say, Windows
 Media Player - but encrypt the media. Now, naturally, Media Player will need
 the decryption key for the media, and the idea is that Media Player will verify
 that you are allowed to listen to the song, and only then decrypt it - as it is
-played.&lt;/p></description></item><item><title>On Vista</title><link>https://lutzky.net/posts/on-vista/</link><pubDate>Sun, 04 Feb 2007 13:27:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-vista/</guid><description>&lt;p>Everyone knew this was going to be an interesting one to watch. Die-hard
+played.&lt;/p&gt;</description></item><item><title>On Vista</title><link>https://lutzky.net/posts/on-vista/</link><pubDate>Sun, 04 Feb 2007 13:27:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-vista/</guid><description>&lt;p&gt;Everyone knew this was going to be an interesting one to watch. Die-hard
 Microsoft fans were sure Vista would be the final nail in the Open Source
 coffin, die-hard Linux fans were sure that the release would be Microsoft&amp;rsquo;s
-demise. Myself - I&amp;rsquo;m sitting and enjoying the show.&lt;/p>
-&lt;p>It&amp;rsquo;s always very interesting to show Beryl to non-Linux users. They are almost
+demise. Myself - I&amp;rsquo;m sitting and enjoying the show.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s always very interesting to show Beryl to non-Linux users. They are almost
 always highly impressed, and are often completely in shock that Linux is a
 graphical system - many people still believe Linux is command-line only. But
 the funniest thing is that they always seem to care more about useless,
@@ -161,7 +163,7 @@ spinning, transparent desktop cubes than, say, security. This holds for Vista&am
 flashy new graphics, as well - mainstream media seems to be focusing on Vista&amp;rsquo;s
 GUI a lot more than they are about its controversial new security features.
 Very interesting, keeping in mind that Windows has never been &amp;ldquo;not pretty
-enough&amp;rdquo; in consumer&amp;rsquo;s eyes, but rather too unstable or virus-prone.&lt;/p></description></item><item><title>3D effects for coders?</title><link>https://lutzky.net/posts/3d-effects-for-coders/</link><pubDate>Thu, 25 Jan 2007 15:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/3d-effects-for-coders/</guid><description>&lt;p>My new work desktop has a GeForce 4 MX, so I naturally installed Beryl on it.
+enough&amp;rdquo; in consumer&amp;rsquo;s eyes, but rather too unstable or virus-prone.&lt;/p&gt;</description></item><item><title>3D effects for coders?</title><link>https://lutzky.net/posts/3d-effects-for-coders/</link><pubDate>Thu, 25 Jan 2007 15:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/3d-effects-for-coders/</guid><description>&lt;p&gt;My new work desktop has a GeForce 4 MX, so I naturally installed Beryl on it.
 The graphics card has relatively little RAM, so it finds handling my 1280x1024
 resolution difficult when additional texture memory is needed - so using
 something like Firefox really slows it down when Beryl is activated, making me
@@ -169,29 +171,29 @@ keep it off most of the time. However, for coding, I&amp;rsquo;m finding that Be
 very useful - it actually helps me that the code windows are transparent, so
 that I can see what&amp;rsquo;s underneath them, and the &amp;ldquo;Expose&amp;rdquo; effect still leaves
 text legible, which is great for reading off a lot of terminals at once. So is
-Beryl&amp;hellip; a programmer&amp;rsquo;s tool?&lt;/p></description></item><item><title>Software Perfection - Lost in the details</title><link>https://lutzky.net/posts/software-perfection-lost-in-the-details/</link><pubDate>Thu, 25 Jan 2007 00:32:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-perfection-lost-in-the-details/</guid><description>&lt;p>Sometimes imperfections in Software drive me nuts. It&amp;rsquo;s what drove me away from
+Beryl&amp;hellip; a programmer&amp;rsquo;s tool?&lt;/p&gt;</description></item><item><title>Software Perfection - Lost in the details</title><link>https://lutzky.net/posts/software-perfection-lost-in-the-details/</link><pubDate>Thu, 25 Jan 2007 00:32:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/software-perfection-lost-in-the-details/</guid><description>&lt;p&gt;Sometimes imperfections in Software drive me nuts. It&amp;rsquo;s what drove me away from
 Windows. It&amp;rsquo;s what keeps me switching back and forth between desktop
 environments. It&amp;rsquo;s what has me wasting a lot of time getting the software to do
 what I want, instead of getting anything done. I even have two particularily
-good examples.&lt;/p>
-&lt;p>Firefox and Opera are my two favorite browsers. Opera is actually not as good,
+good examples.&lt;/p&gt;
+&lt;p&gt;Firefox and Opera are my two favorite browsers. Opera is actually not as good,
 in my taste, as Firefox. Firefox&amp;rsquo;s slew of extensions (especially my latest
-favorites - &lt;a href="http://del.icio.us/help/firefox/extension" target="_blank" rel="noopener noreffer ">Del.icio.us bookmarks&lt;/a>
-and &lt;a href="http://www.getfirebug.com/" target="_blank" rel="noopener noreffer ">Firebug&lt;/a>), better font handling (on Linux) and
+favorites - &lt;a href="http://del.icio.us/help/firefox/extension" target="_blank" rel="noopener noreffer "&gt;Del.icio.us bookmarks&lt;/a&gt;
+and &lt;a href="http://www.getfirebug.com/" target="_blank" rel="noopener noreffer "&gt;Firebug&lt;/a&gt;), better font handling (on Linux) and
 Open-Source nature keep it ahead, if all things were equal. However, Opera
-is much faster on my laptop. &lt;strong>Way&lt;/strong> faster. And with the kind of browsing I
-usually do - zillions of tabs open and all, that difference counts.&lt;/p></description></item><item><title>As for Python</title><link>https://lutzky.net/posts/as-for-python/</link><pubDate>Tue, 23 Jan 2007 21:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/as-for-python/</guid><description>&lt;p>Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to
-&lt;a href="http://tryruby.hobix.com" target="_blank" rel="noopener noreffer ">TryRuby&lt;/a>, code my sites using Rails, am surprised
+is much faster on my laptop. &lt;strong&gt;Way&lt;/strong&gt; faster. And with the kind of browsing I
+usually do - zillions of tabs open and all, that difference counts.&lt;/p&gt;</description></item><item><title>As for Python</title><link>https://lutzky.net/posts/as-for-python/</link><pubDate>Tue, 23 Jan 2007 21:33:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/as-for-python/</guid><description>&lt;p&gt;Myself, I&amp;rsquo;m a Ruby hacker. I send everyone within earshot to
+&lt;a href="http://tryruby.hobix.com" target="_blank" rel="noopener noreffer "&gt;TryRuby&lt;/a&gt;, code my sites using Rails, am surprised
 that I&amp;rsquo;m using a php-based blog&amp;hellip; you get the picture. Ruby is sometimes
 called the Japanese Python, and comparisons are inevitable. I know very little
-about Python, but I do know that&amp;hellip;&lt;/p>
-&lt;ul>
-&lt;li>It has a larger community&lt;/li>
-&lt;li>More GUI applications are written in it&lt;/li>
-&lt;li>More bindings are available for it&lt;/li>
-&lt;li>Its interpreter is much faster&lt;/li>
-&lt;li>Not a far inferior language&lt;/li>
-&lt;/ul>
-&lt;p>Ruby certainly does have its advantages over it - trivial class expansion,
+about Python, but I do know that&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It has a larger community&lt;/li&gt;
+&lt;li&gt;More GUI applications are written in it&lt;/li&gt;
+&lt;li&gt;More bindings are available for it&lt;/li&gt;
+&lt;li&gt;Its interpreter is much faster&lt;/li&gt;
+&lt;li&gt;Not a far inferior language&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ruby certainly does have its advantages over it - trivial class expansion,
 extremely concise syntax, seemingly better-suited for heavy usage of closures,
-and Matz. Ya gotta love Matz.&lt;/p></description></item></channel></rss>
+and Matz. Ya gotta love Matz.&lt;/p&gt;</description></item></channel></rss>

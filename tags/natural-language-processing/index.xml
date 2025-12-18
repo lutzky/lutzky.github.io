@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Natural Language Processing on Shallow and Pedantic</title><link>https://lutzky.net/tags/natural-language-processing/</link><description>Recent content in Natural Language Processing on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/natural-language-processing/index.xml" rel="self" type="application/rss+xml"/><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/translationese/</guid><description>&lt;p>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Natural Language Processing on Shallow and Pedantic</title><link>https://lutzky.net/tags/natural-language-processing/</link><description>Recent content in Natural Language Processing on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/natural-language-processing/index.xml" rel="self" type="application/rss+xml"/><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/translationese/</guid><description>&lt;p&gt;As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project
 in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a
-chance to use a few of my favorite technologies.&lt;/p>
-&lt;p>The project was coded in Python, which is &lt;em>not&lt;/em> my favorite programming
+chance to use a few of my favorite technologies.&lt;/p&gt;
+&lt;p&gt;The project was coded in Python, which is &lt;em&gt;not&lt;/em&gt; my favorite programming
 language - Ruby is. However, since Python is more popular at my workplace, and
 seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown
 to love it almost as much over the years. It&amp;rsquo;s quick, easy, and has fantastic
-libraries; specifically, for this project, we made heavy use of the &lt;a href="http://nltk.org" target="_blank" rel="noopener noreffer ">Natural
-Language Toolkit&lt;/a>. We used Git for source control and Github
+libraries; specifically, for this project, we made heavy use of the &lt;a href="http://nltk.org" target="_blank" rel="noopener noreffer "&gt;Natural
+Language Toolkit&lt;/a&gt;. We used Git for source control and Github
 for hosting, Travis for continuous integration, and ReadTheDocs for
 documentation. All of these culminate in the project being handed in as a
-single link: &lt;a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer ">http://github.com/lutzky/translationese&lt;/a>.&lt;/p></description></item></channel></rss>
+single link: &lt;a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer "&gt;http://github.com/lutzky/translationese&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>

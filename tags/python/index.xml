@@ -1,49 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>Recent content in Python on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description></item><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/translationese/</guid><description>&lt;p>As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Shallow and Pedantic</title><link>https://lutzky.net/tags/python/</link><description>Recent content in Python on Shallow and Pedantic</description><generator>Hugo</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 21:47:28 +0000</lastBuildDate><atom:link href="https://lutzky.net/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>FakeFile</title><link>https://lutzky.net/posts/fakefile/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/fakefile/</guid><description>A tiny python library for faking out filesystem operations for tests.</description></item><item><title>Translationese</title><link>https://lutzky.net/posts/translationese/</link><pubDate>Sun, 24 Mar 2013 00:51:15 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/translationese/</guid><description>&lt;p&gt;As part of my M.Sc. studies, I&amp;rsquo;ve recently completed a small laboratory project
 in natural language processing. I&amp;rsquo;ve learned quite a bit from it, and had a
-chance to use a few of my favorite technologies.&lt;/p>
-&lt;p>The project was coded in Python, which is &lt;em>not&lt;/em> my favorite programming
+chance to use a few of my favorite technologies.&lt;/p&gt;
+&lt;p&gt;The project was coded in Python, which is &lt;em&gt;not&lt;/em&gt; my favorite programming
 language - Ruby is. However, since Python is more popular at my workplace, and
 seems to have a richer ecosystem around it (sometimes, at any rate), I&amp;rsquo;ve grown
 to love it almost as much over the years. It&amp;rsquo;s quick, easy, and has fantastic
-libraries; specifically, for this project, we made heavy use of the &lt;a href="http://nltk.org" target="_blank" rel="noopener noreffer ">Natural
-Language Toolkit&lt;/a>. We used Git for source control and Github
+libraries; specifically, for this project, we made heavy use of the &lt;a href="http://nltk.org" target="_blank" rel="noopener noreffer "&gt;Natural
+Language Toolkit&lt;/a&gt;. We used Git for source control and Github
 for hosting, Travis for continuous integration, and ReadTheDocs for
 documentation. All of these culminate in the project being handed in as a
-single link: &lt;a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer ">http://github.com/lutzky/translationese&lt;/a>.&lt;/p></description></item><item><title>Faster Languages</title><link>https://lutzky.net/posts/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:49:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/faster-languages/</guid><description>&lt;p>Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis -
+single link: &lt;a href="http://github.com/lutzky/translationese" target="_blank" rel="noopener noreffer "&gt;http://github.com/lutzky/translationese&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Faster Languages</title><link>https://lutzky.net/posts/faster-languages/</link><pubDate>Wed, 16 Apr 2008 00:49:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/faster-languages/</guid><description>&lt;p&gt;Due to an exercise in an AI course, I&amp;rsquo;m forced to confront an old nemesis -
 C++. Part of the reason is that the exercise contains a time-limited
 tournament, and the code needs to run very quickly. Another reason is, I guess,
 the fact that C++ serves as a sort of lowest common denominator in the course
-(which used, by the way, to be taught in LISP, along with the language).&lt;/p></description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/posts/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 22:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-threading-vs-processing/</guid><description>&lt;p>Writing multi-threaded applications in Python is often a headache because of
+(which used, by the way, to be taught in LISP, along with the language).&lt;/p&gt;</description></item><item><title>On Threading vs. Processing</title><link>https://lutzky.net/posts/on-threading-vs-processing/</link><pubDate>Sat, 13 Oct 2007 22:04:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/on-threading-vs-processing/</guid><description>&lt;p&gt;Writing multi-threaded applications in Python is often a headache because of
 the Global Interpreter Lock - only one Python thread can run at any given
 moment, which makes multi-threading useful only in the case where all modules
-but one actually run C code. However, thanks to the impressive new &lt;a href="http://pythonmagazine.com" target="_blank" rel="noopener noreffer ">Python
-Magazine&lt;/a>, I&amp;rsquo;ve stumbled across a package called
-&lt;code>processing&lt;/code>, paraphrasing python&amp;rsquo;s built-in &lt;code>threading&lt;/code> package. Essentially,
+but one actually run C code. However, thanks to the impressive new &lt;a href="http://pythonmagazine.com" target="_blank" rel="noopener noreffer "&gt;Python
+Magazine&lt;/a&gt;, I&amp;rsquo;ve stumbled across a package called
+&lt;code&gt;processing&lt;/code&gt;, paraphrasing python&amp;rsquo;s built-in &lt;code&gt;threading&lt;/code&gt; package. Essentially,
 the package provides an API identical to Python&amp;rsquo;s threading, but uses processes
 and pipes (or other mechanisms on non-posix operating systems) instead. What
 the magazine does not cover is the fact that this can also benefit GUI
 applications; updating a progressbar in the application doesn&amp;rsquo;t need to slow
 down heavy computations being done in a separate thread. To show how easy the
 integration is, take the following example which shows usage of either threads
-or processes at the user&amp;rsquo;s choice:&lt;/p></description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/posts/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 14:02:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/exception-handling-decorators-and-python/</guid><description>&lt;p>Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After
+or processes at the user&amp;rsquo;s choice:&lt;/p&gt;</description></item><item><title>Exception handling, decorators, and python</title><link>https://lutzky.net/posts/exception-handling-decorators-and-python/</link><pubDate>Sun, 16 Sep 2007 14:02:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/exception-handling-decorators-and-python/</guid><description>&lt;p&gt;Lately I&amp;rsquo;ve been working on a project that has me using DBus a lot. After
 trying to figure out how to work DBus with C, and seeing how easy it is to do
 in Python, we figured we&amp;rsquo;d try to use embedded Python to do this. Fortunately,
-it&amp;rsquo;s very simple to use - especially thanks to &lt;a href="http://www.developer.com/lang/other/article.php/2217941" target="_blank" rel="noopener noreffer ">this guide&lt;/a>.&lt;/p>
-&lt;blockquote>
-&lt;p>It later turned out to be much easier to do in C, as described in &lt;em>&lt;a href="https://lutzky.net/2008/04/16/faster-languages" rel="">Faster Languages&lt;/a>&lt;/em>.&lt;/p></description></item><item><title>IPython</title><link>https://lutzky.net/posts/ipython/</link><pubDate>Sun, 04 Mar 2007 00:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ipython/</guid><description>&lt;p>The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project
+it&amp;rsquo;s very simple to use - especially thanks to &lt;a href="http://www.developer.com/lang/other/article.php/2217941" target="_blank" rel="noopener noreffer "&gt;this guide&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It later turned out to be much easier to do in C, as described in &lt;em&gt;&lt;a href="https://lutzky.net/2008/04/16/faster-languages" rel=""&gt;Faster Languages&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;</description></item><item><title>IPython</title><link>https://lutzky.net/posts/ipython/</link><pubDate>Sun, 04 Mar 2007 00:58:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/ipython/</guid><description>&lt;p&gt;The more I use Python, the nicer it becomes. I&amp;rsquo;m currently working on a project
 for a course, which involves somewhat heavy-duty database and algorithm work.
-Python is my language of choice for it - let&amp;rsquo;s hope it works out well.&lt;/p>
-&lt;p>In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython
+Python is my language of choice for it - let&amp;rsquo;s hope it works out well.&lt;/p&gt;
+&lt;p&gt;In the meantime, I&amp;rsquo;ve found a really nice python shell called iPython
 (available in apt) - it adds a bunch of stuff to the python shell which I
 sorely missed from irb - autocompletion, auto-indentation, and - it seems -
-adds a whole lot more.&lt;/p></description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/posts/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 14:52:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-the-whole-python-thing/</guid><description>&lt;p>I&amp;rsquo;ve converted my &lt;em>Antigibberish script&lt;/em>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>
+adds a whole lot more.&lt;/p&gt;</description></item><item><title>Really liking the whole Python thing</title><link>https://lutzky.net/posts/really-liking-the-whole-python-thing/</link><pubDate>Sun, 25 Feb 2007 14:52:00 +0000</pubDate><author>lutzky@gmail.com (Ohad Lutzky)</author><guid>https://lutzky.net/posts/really-liking-the-whole-python-thing/</guid><description>&lt;p&gt;I&amp;rsquo;ve converted my &lt;em&gt;Antigibberish script&lt;/em&gt;&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;
 (converts &amp;ldquo;broken hebrew&amp;rdquo; into proper hebrew, useful for sent-offline ICQ
 messages) to Python&amp;hellip; it&amp;rsquo;s quite a nice language, and the interpreter is FAST!
-I&amp;rsquo;m really torn between it and Ruby :(&lt;/p>
-&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>Used to have a copy of &lt;code>antigibberish.py&lt;/code>, but it&amp;rsquo;s been lost in
-the mists of time. It used to do the equivalent of this:&lt;/p>
-&lt;p>&lt;code>iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p></description></item></channel></rss>
+I&amp;rsquo;m really torn between it and Ruby :(&lt;/p&gt;
+&lt;div class="footnotes" role="doc-endnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Used to have a copy of &lt;code&gt;antigibberish.py&lt;/code&gt;, but it&amp;rsquo;s been lost in
+the mists of time. It used to do the equivalent of this:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iconv -f utf-8 -t iso8859-1 | iconv -f iso8859-8 -t utf-8&lt;/code&gt;&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>
