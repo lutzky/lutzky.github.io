@@ -37,27 +37,27 @@
 </span><span class=lnt>25
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gh>diff --git a/hello.c b/hello.c
 </span></span></span><span class=line><span class=cl><span class=gh>index 93ca08c..c7d354a 100644
-</span></span></span><span class=line><span class=cl><span class=gh></span><span class=gd>--- a/hello.c
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/hello.c
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -4,6 +4,7 @@
-</span></span></span><span class=line><span class=cl><span class=gu></span> void b();
+</span></span></span><span class=line><span class=cl><span class=gd>--- a/hello.c
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/hello.c
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -4,6 +4,7 @@
+</span></span></span><span class=line><span class=cl> void b();
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl> void a() {
 </span></span><span class=line><span class=cl><span class=gi>+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class=line><span class=cl><span class=gi></span>     return;
+</span></span></span><span class=line><span class=cl>     return;
 </span></span><span class=line><span class=cl> }
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gu>@@ -13,9 +14,10 @@ int main() {
-</span></span></span><span class=line><span class=cl><span class=gu></span> 
+</span></span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl>     printf(&#34;Hello, world!\n&#34;);
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl><span class=gd>-    return 1;
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+    return 0; // Found it!
-</span></span></span><span class=line><span class=cl><span class=gi></span> }
+</span></span></span><span class=line><span class=cl><span class=gi>+    return 0; // Found it!
+</span></span></span><span class=line><span class=cl> }
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl> void b() {
 </span></span><span class=line><span class=cl><span class=gi>+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class=line><span class=cl><span class=gi></span>     return;
+</span></span></span><span class=line><span class=cl>     return;
 </span></span><span class=line><span class=cl> }
 </span></span><span class=line><span class=cl> 
 </span></span></code></pre></td></tr></table></div></div><p>It&rsquo;s actually pretty easy to get rid of them. Run <code>git add -p</code> and you will be shown each patch &ldquo;hunk&rdquo; separately:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -100,42 +100,42 @@
 </span><span class=lnt>38
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gh>diff --git a/hello.c b/hello.c
 </span></span></span><span class=line><span class=cl><span class=gh>index 93ca08c..c7d354a 100644
-</span></span></span><span class=line><span class=cl><span class=gh></span><span class=gd>--- a/hello.c
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/hello.c
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -4,6 +4,7 @@
-</span></span></span><span class=line><span class=cl><span class=gu></span> void b();
+</span></span></span><span class=line><span class=cl><span class=gd>--- a/hello.c
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/hello.c
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -4,6 +4,7 @@
+</span></span></span><span class=line><span class=cl> void b();
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl> void a() {
 </span></span><span class=line><span class=cl><span class=gi>+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class=line><span class=cl><span class=gi></span>     return;
+</span></span></span><span class=line><span class=cl>     return;
 </span></span><span class=line><span class=cl> }
 </span></span><span class=line><span class=cl>### Stage this hunk [...]? n (No) ###
 </span></span><span class=line><span class=cl><span class=gu>@@ -13,9 +14,10 @@ int main() {
-</span></span></span><span class=line><span class=cl><span class=gu></span> 
+</span></span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl>     printf(&#34;Hello, world!\n&#34;);
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl><span class=gd>-    return 1;
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+    return 0; // Found it!
-</span></span></span><span class=line><span class=cl><span class=gi></span> }
+</span></span></span><span class=line><span class=cl><span class=gi>+    return 0; // Found it!
+</span></span></span><span class=line><span class=cl> }
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl> void b() {
 </span></span><span class=line><span class=cl><span class=gi>+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class=line><span class=cl><span class=gi></span>     return;
+</span></span></span><span class=line><span class=cl>     return;
 </span></span><span class=line><span class=cl> }
 </span></span><span class=line><span class=cl>### Stage this hunk? [...] s (Split)  ###
 </span></span><span class=line><span class=cl><span class=gu>@@ -13,7 +14,7 @@ int main() {
-</span></span></span><span class=line><span class=cl><span class=gu></span> 
+</span></span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl>     printf(&#34;Hello, world!\n&#34;);
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl><span class=gd>-    return 1;
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+    return 0; // Found it!
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl><span class=gi>+    return 0; // Found it!
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>### Stage this hunk [...]? y (Yes) ###
 </span></span><span class=line><span class=cl> void b() {
 </span></span><span class=line><span class=cl><span class=gi>+    printf(&#34;Bug is here?\n&#34;);
-</span></span></span><span class=line><span class=cl><span class=gi></span>     return;
+</span></span></span><span class=line><span class=cl>     return;
 </span></span><span class=line><span class=cl> }
 </span></span><span class=line><span class=cl>### Stage this hunk [...]? n (No) ###
 </span></span></code></pre></td></tr></table></div></div><p>Now, only the <code>return 0</code> line is stage for commit. To get rid of the rest of the changes, run <code>git checkout -- hello.c</code>. Now the <code>printf</code> statements have been removed!</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-04-24</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://lutzky.net/posts/git-add-patch/ data-hashtag=git-while-you-sit><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on WhatsApp" data-sharer=whatsapp data-url=https://lutzky.net/posts/git-add-patch/ data-title="Git While You Sit 1 - Add --patch" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://lutzky.net/posts/git-add-patch/ data-title="Git While You Sit 1 - Add --patch"><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://lutzky.net/posts/git-add-patch/ data-title="Git While You Sit 1 - Add --patch"><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/git-while-you-sit/>Git-While-You-Sit</a>,&nbsp;<a href=/tags/git/>Git</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/lessons-learned/ class=prev rel=prev title="Lessons learned"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Lessons learned</a>
-<a href=/posts/git-ignore/ class=next rel=next title="Git While You Sit 2 - .gitignore">Git While You Sit 2 - .gitignore<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=disqus_thread class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://disqus.com/?ref_noscript>Disqus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.152.2">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022 - 2025</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Ohad Lutzky</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+<a href=/posts/git-ignore/ class=next rel=next title="Git While You Sit 2 - .gitignore">Git While You Sit 2 - .gitignore<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=disqus_thread class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://disqus.com/?ref_noscript>Disqus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.154.3">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022 - 2026</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Ohad Lutzky</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
 </a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css><script type=text/javascript src=https://shallowandpedantic.disqus.com/embed.js defer></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},lightgallery:!0,search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-1VCTD5H9YR",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-1VCTD5H9YR" async></script></body></html>
