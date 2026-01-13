@@ -33,6 +33,8 @@ iterate quickly on your ESPHome UIs.
 
 ## Design and simulation tools
 
+<!-- cSpell: words Lopaka, esphome, nodemcuv2, profont, Wokwi -->
+
 For sketching initial layouts, there are some great web-based tools. [Lopaka]
 is fantastic (though with some limitations about fonts in the free version, and
 no esphome support yet in the self-hosted version). There are similar tools
