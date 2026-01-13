@@ -1,0 +1,310 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Pixel-Perfect simulated ESPHome displays - Shallow and Pedantic</title><meta name=Description content="A person/tech/code blog of a coder/techie/person. Like calculus in a kiddie pool, the author of this blog is known to be quite shallow and pedantic."><meta property="og:url" content="https://lutzky.net/posts/pixel-perfect-simulated-esphome/"><meta property="og:site_name" content="Shallow and Pedantic"><meta property="og:title" content="Pixel-Perfect simulated ESPHome displays"><meta property="og:description" content="How to quickly iterate on displays without leaving your desk"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-01-12T00:00:00+00:00"><meta property="article:modified_time" content="2026-01-13T00:08:31+00:00"><meta property="article:tag" content="Software"><meta property="article:tag" content="Hardware"><meta property="og:image" content="https://lutzky.net/posts/pixel-perfect-simulated-esphome/hero.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://lutzky.net/posts/pixel-perfect-simulated-esphome/hero.png"><meta name=twitter:title content="Pixel-Perfect simulated ESPHome displays"><meta name=twitter:description content="How to quickly iterate on displays without leaving your desk"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://lutzky.net/posts/pixel-perfect-simulated-esphome/><link rel=prev href=https://lutzky.net/posts/software-parenting-4/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Pixel-Perfect simulated ESPHome displays","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/lutzky.net\/posts\/pixel-perfect-simulated-esphome\/"},"image":[{"@type":"ImageObject","url":"https:\/\/lutzky.net\/posts\/pixel-perfect-simulated-esphome\/hero.png","width":1376,"height":768}],"genre":"posts","keywords":"software, hardware","wordcount":908,"url":"https:\/\/lutzky.net\/posts\/pixel-perfect-simulated-esphome\/","datePublished":"2026-01-12T00:00:00+00:00","dateModified":"2026-01-13T00:08:31+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Ohad Lutzky"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="Shallow and Pedantic">Shallow and Pedantic</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/stuff/>Stuff </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Shallow and Pedantic">Shallow and Pedantic</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>Cancel</a></div><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/stuff/ title>Stuff</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class="toc-content always-active" id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Pixel-Perfect simulated ESPHome displays</h1><h2 class=single-subtitle>How to quickly iterate on displays without leaving your desk</h2><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>Ohad Lutzky</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2026-01-12>2026-01-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;908 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;5 minutes&nbsp;</div></div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=/posts/pixel-perfect-simulated-esphome/hero.png data-srcset="/posts/pixel-perfect-simulated-esphome/hero.png, /posts/pixel-perfect-simulated-esphome/hero.png 1.5x, /posts/pixel-perfect-simulated-esphome/hero.png 2x" data-sizes=auto alt=/posts/pixel-perfect-simulated-esphome/hero.png title=/posts/pixel-perfect-simulated-esphome/hero.png></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#design-and-simulation-tools>Design and simulation tools</a></li><li><a href=#host-platform>Host platform</a></li></ul></nav></div></div><div class=content id=content><p>The <a href=https://lutzky.net/posts/front-door-display/ rel>front door display</a> has been serving me well. However, updating the UI was
+a tedious process. Because every pixel counts on a tiny screen, I found myself
+in a frustrating loop of tweaking the config, flashing the firmware, and
+waiting - only to find I was still one pixel off. These iterations are
+particularly annoying because:</p><ol><li>It&rsquo;s a bit far from my desk (I could move it to my desk, but then would feel
+pressure to finish very quickly, as the device isn&rsquo;t there)</li><li>The ESP8266 doesn&rsquo;t <em>love</em> being remote-flashed over and over again; I&rsquo;ve
+found myself needing to re-flash over USB, or even hard-bricking a couple.</li></ol><p>For this reason, I&rsquo;ve looked for tools to help me iterate on the design without
+physically flashing the device. There are quite a few!</p><div class="details admonition tip open"><div class="details-summary admonition-title"><i class="icon fas fa-lightbulb fa-fw" aria-hidden=true></i>TL;DR<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>Use <a href=https://esphome.io/components/display/sdl/ target=_blank rel="noopener noreffer">ESPHome SDL Display</a> to
+iterate quickly on your ESPHome UIs.</div></div></div><h2 id=design-and-simulation-tools>Design and simulation tools</h2><p>For sketching initial layouts, there are some great web-based tools. <a href=https://lopaka.app/ target=_blank rel="noopener noreffer">Lopaka</a>
+is fantastic (though with some limitations about fonts in the free version, and
+no esphome support yet in the self-hosted version). There are similar tools
+like <a href=https://github.com/rickkas7/DisplayGenerator target=_blank rel="noopener noreffer">DisplayGenerator</a> and the more powerful <a href=https://github.com/koosoli/ESPHomeDesigner target=_blank rel="noopener noreffer">ESPHomeDesigner</a>. These tools
+are great for playing around with what your UI might feel like, and also come
+with icons you can use.</p><p>These tools generally create a long <code>lambda</code>, like those seen in the <a href=https://esphome.io/components/display/ target=_blank rel="noopener noreffer">ESPHome
+display docs</a>. While it&rsquo;s great for prototyping, it&rsquo;s often quite helpful to
+move things over to a separate C++ file, which you can then manipulate with
+purpose-build C++ editors and tools. For instance, here&rsquo;s some of my current
+code for the front door display:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># ESPHome YAML</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>esphome</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>includes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>drawing.h</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>esp8266</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>board</span><span class=p>:</span><span class=w> </span><span class=l>nodemcuv2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>i2c</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sda</span><span class=p>:</span><span class=w> </span><span class=l>D1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>scl</span><span class=p>:</span><span class=w> </span><span class=l>D2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>frequency</span><span class=p>:</span><span class=w> </span><span class=l>800khz</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>display</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>main_display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>update_interval</span><span class=p>:</span><span class=w> </span><span class=m>0.</span><span class=l>05s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>ssd1306_i2c</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>model</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;SSD1306 128x64&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>lambda</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;draw_screen(it);&#34;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=c1>// drawing.h
+</span></span></span><span class=line><span class=cl><span class=cp>#pragma once
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;esphome.h&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>template</span> <span class=o>&lt;</span><span class=k>typename</span> <span class=n>T</span><span class=o>&gt;</span> <span class=kt>void</span> <span class=n>draw_screen</span><span class=p>(</span><span class=n>T</span> <span class=o>&amp;</span><span class=n>it</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>alarm_state_str</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>      <span class=n>id</span><span class=p>(</span><span class=n>alarm_state</span><span class=p>).</span><span class=n>has_state</span><span class=p>()</span> <span class=o>?</span> <span class=n>id</span><span class=p>(</span><span class=n>alarm_state</span><span class=p>).</span><span class=n>state</span><span class=p>.</span><span class=n>c_str</span><span class=p>()</span> <span class=o>:</span> <span class=s>&#34;?&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>it</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>11</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>id</span><span class=p>(</span><span class=n>profont15</span><span class=p>),</span> <span class=n>TextAlign</span><span class=o>::</span><span class=n>BOTTOM_LEFT</span><span class=p>,</span> <span class=s>&#34;Alarm:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>it</span><span class=p>.</span><span class=n>printf</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>36</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>id</span><span class=p>(</span><span class=n>profont29</span><span class=p>),</span> <span class=n>TextAlign</span><span class=o>::</span><span class=n>BOTTOM_LEFT</span><span class=p>,</span> <span class=s>&#34;%s&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=n>alarm_state_str</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=n>id</span><span class=p>(</span><span class=n>alarm_state</span><span class=p>).</span><span class=n>state</span> <span class=o>==</span> <span class=s>&#34;On&#34;</span> <span class=o>||</span> <span class=n>id</span><span class=p>(</span><span class=n>alarm_state</span><span class=p>).</span><span class=n>state</span> <span class=o>==</span> <span class=s>&#34;Arm&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>id</span><span class=p>(</span><span class=n>frame_counter</span><span class=p>)</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>id</span><span class=p>(</span><span class=n>frame_counter</span><span class=p>)</span> <span class=o>%</span> <span class=mi>32</span> <span class=o>&lt;</span> <span class=mi>16</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>it</span><span class=p>.</span><span class=n>image</span><span class=p>(</span><span class=mi>51</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>id</span><span class=p>(</span><span class=n>img_lock</span><span class=p>),</span> <span class=n>COLOR_OFF</span><span class=p>,</span> <span class=n>COLOR_ON</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Clearly, this has a lot of magic numbers that were repeatedly tweaked; that 36
+was previously 39, 32, 35&mldr; every attempt taking a two-minute firmware flash.
+The logic for &ldquo;what to show if the API hasn&rsquo;t connected yet&rdquo; is also something
+that went through a few iterations. All of these things need to &ldquo;really run
+ESPHome&rdquo;; let&rsquo;s see if we can do it right on our PC though.</p><p>For general-purpose &ldquo;simulate your entire ESPHome electronics setup&rdquo;,
+<a href=https://github.com/the-mentor/ESPHome-Device-Sim target=_blank rel="noopener noreffer">ESPHome-Device-Sim</a> is a small wrapper around Wokwi. It can simulate a wide
+variety of devices. However, if all you need is a display, like my case,
+there&rsquo;s a much simpler way to do this.</p><h2 id=host-platform>Host platform</h2><p>ESPHome&rsquo;s <a href=https://esphome.io/components/host/ target=_blank rel="noopener noreffer">Host Platform</a> basically allows you to run an esphome as a process
+on your Linux (or Mac, or WSL) computer. The UI uses SDL - there&rsquo;s an <a href=https://esphome.io/components/display/sdl target=_blank rel="noopener noreffer">SDL
+Display</a> (with <a href=https://esphome.io/components/touchscreen/sdl target=_blank rel="noopener noreffer">touchscreen</a> support), and you can use your
+keyboard as a <code>binary_sensor</code> with <a href=https://esphome.io/components/binary_sensor/sdl/ target=_blank rel="noopener noreffer">SDL Binary Sensor</a>. No firmware flashing,
+very quick iteration.</p><p>For our case, all we need is the display; we can keep our drawing code the
+same, and the YAML looks like this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>esphome</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>front-door-display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>friendly_name</span><span class=p>:</span><span class=w> </span><span class=l>Front door display sim</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>includes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>drawing.h</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c># remove i2c and esp8266 sections</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>host</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>mac_address</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;06:35:69:ab:f6:79&#34;</span><span class=w> </span><span class=c># Any address will do</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>display</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>extend main_display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>dimensions</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>height</span><span class=p>:</span><span class=w> </span><span class=m>128</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>width</span><span class=p>:</span><span class=w> </span><span class=m>64</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>sdl</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>update_interval</span><span class=p>:</span><span class=w> </span><span class=m>0.</span><span class=l>05s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>lambda</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;draw_screen(it);&#34;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>That looks like this:</p><p><a href=/posts/pixel-perfect-simulated-esphome/screenshot.webp rel><img class=lazyload src=/svg/loading.min.svg data-src=/posts/pixel-perfect-simulated-esphome/screenshot.webp data-srcset="/posts/pixel-perfect-simulated-esphome/screenshot.webp, /posts/pixel-perfect-simulated-esphome/screenshot.webp 1.5x, /posts/pixel-perfect-simulated-esphome/screenshot.webp 2x" data-sizes=auto alt=/posts/pixel-perfect-simulated-esphome/screenshot.webp title="Screenshot of front-door-display, as rendered by SDL on host-platform" width=64 height=129></a></p><p>To make things nice and maintainable, I want to have the &ldquo;real&rdquo; and &ldquo;simulated&rdquo;
+versions share code. I use <a href=https://esphome.io/components/packages/ target=_blank rel="noopener noreffer">packages</a> with
+<a href=https://esphome.io/components/packages/#extend target=_blank rel="noopener noreffer">extend</a> to make this reasonably clean and maintainable.</p><details><summary>Full source code</summary><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># front-door-display.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>esphome</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>front-door-display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>friendly_name</span><span class=p>:</span><span class=w> </span><span class=l>Front door display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>esp8266</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>board</span><span class=p>:</span><span class=w> </span><span class=l>nodemcuv2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>api</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>encryption</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>key</span><span class=p>:</span><span class=w> </span>!<span class=l>secret api_key_front_door_display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>ota</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>password</span><span class=p>:</span><span class=w> </span>!<span class=l>secret ota_password_front_door_display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>esphome</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>packages</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>wifi</span><span class=p>:</span><span class=w> </span>!<span class=l>include packages/wifi.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>core</span><span class=p>:</span><span class=w> </span>!<span class=l>include front-door-display/core.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>status_led</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>pin</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>number</span><span class=p>:</span><span class=w> </span><span class=l>GPIO2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>inverted</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>i2c</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sda</span><span class=p>:</span><span class=w> </span><span class=l>D1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>scl</span><span class=p>:</span><span class=w> </span><span class=l>D2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>frequency</span><span class=p>:</span><span class=w> </span><span class=l>800khz</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>display</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>id</span><span class=p>:</span><span class=w> </span>!<span class=l>extend main_display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>ssd1306_i2c</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>model</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;SSD1306 128x64&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>update_interval</span><span class=p>:</span><span class=w> </span><span class=m>0.</span><span class=l>05s</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># front-door-display-sim.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>esphome</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>front-door-display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>friendly_name</span><span class=p>:</span><span class=w> </span><span class=l>Front door display sim</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>api</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>encryption</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># I use the same key for all of my simulated devices, as I</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># simulate them all from the same host.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>key</span><span class=p>:</span><span class=w> </span>!<span class=l>secret api_key_host_tester</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>host</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>mac_address</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;06:35:69:ab:f6:79&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>packages</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>core</span><span class=p>:</span><span class=w> </span>!<span class=l>include front-door-display/core.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>display</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>id</span><span class=p>:</span><span class=w> </span>!<span class=l>extend main_display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>dimensions</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>height</span><span class=p>:</span><span class=w> </span><span class=m>128</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>width</span><span class=p>:</span><span class=w> </span><span class=m>64</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>sdl</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>update_interval</span><span class=p>:</span><span class=w> </span><span class=m>0.</span><span class=l>05s</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># front-door-display/core.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>esphome</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>includes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>front-door-display/drawing.h</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>display</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>main_display</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>update_interval</span><span class=p>:</span><span class=w> </span><span class=m>0.</span><span class=l>05s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>lambda</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;draw_screen(it);&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c># sensors, images, globals, fonts...</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></details><div class="details admonition note open"><div class="details-summary admonition-title"><i class="icon fas fa-pencil-alt fa-fw" aria-hidden=true></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>I learned this technique from the much-more-impressive <a href=https://github.com/yatush/cyd-tiled-display target=_blank rel="noopener noreffer">cyd-tiled-display
+project</a>, which is well worth
+checking out.</div></div></div><p>Happy hacking!</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2026-01-13</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://lutzky.net/posts/pixel-perfect-simulated-esphome/ data-hashtag=software><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on WhatsApp" data-sharer=whatsapp data-url=https://lutzky.net/posts/pixel-perfect-simulated-esphome/ data-title="Pixel-Perfect simulated ESPHome displays" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://lutzky.net/posts/pixel-perfect-simulated-esphome/ data-title="Pixel-Perfect simulated ESPHome displays"><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://lutzky.net/posts/pixel-perfect-simulated-esphome/ data-title="Pixel-Perfect simulated ESPHome displays"><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/software/>Software</a>,&nbsp;<a href=/tags/hardware/>Hardware</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/software-parenting-4/ class=prev rel=prev title="Newborn parenting software - part 4"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Newborn parenting software - part 4</a></div></div><div id=comments><div id=disqus_thread class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://disqus.com/?ref_noscript>Disqus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.154.5">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022 - 2026</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Ohad Lutzky</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css><script type=text/javascript src=https://shallowandpedantic.disqus.com/embed.js defer></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},lightgallery:!0,search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-1VCTD5H9YR",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-1VCTD5H9YR" async></script></body></html>
