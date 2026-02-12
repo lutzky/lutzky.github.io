@@ -1,4 +1,144 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - Shallow and Pedantic</title><link>https://lutzky.net/posts/</link><description>All Posts | Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Mon, 12 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/posts/" rel="self" type="application/rss+xml"/><item><title>Pixel-Perfect simulated ESPHome displays</title><link>https://lutzky.net/posts/pixel-perfect-simulated-esphome/</link><pubDate>Mon, 12 Jan 2026 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/pixel-perfect-simulated-esphome/</guid><description><![CDATA[<p>The <a href="https://lutzky.net/posts/front-door-display/" rel="">front door display</a> has been serving me well. However, updating the UI was
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - Shallow and Pedantic</title><link>https://lutzky.net/posts/</link><description>All Posts | Shallow and Pedantic</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lutzky@gmail.com (Ohad Lutzky)</managingEditor><webMaster>lutzky@gmail.com (Ohad Lutzky)</webMaster><lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://lutzky.net/posts/" rel="self" type="application/rss+xml"/><item><title>Clevis &amp; Tang on Proxmox</title><link>https://lutzky.net/posts/clevis-tang-proxmox/</link><pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/clevis-tang-proxmox/</guid><description><![CDATA[<p>I run a few small home servers, some of which contain sensitive personal
+backups. I want to protect against the &ldquo;physical server burglary&rdquo; threat
+vector, but also want to avoid entering passwords as much as I can. In <a href="https://lutzky.net/posts/preload-key/" rel="">a
+previous post</a>, I set up an &ldquo;enter password before rebooting&rdquo;
+mechanism, that works reasonably well if you <em>know in advance</em> you&rsquo;re going to
+reboot. I&rsquo;ve since refined my approach, and am happier with the solution.</p>
+<p>The main idea is using <a href="https://github.com/latchset/clevis" target="_blank" rel="noopener noreffer ">clevis and tang</a>.
+This is a system that allows a variety of encryption systems (including
+whole-disk LUKS encryption) to decrypt themselves using a network host running a
+&ldquo;tang&rdquo; server. This server doesn&rsquo;t actually hold the full keys - instead, <em>Superb
+<a href="https://en.wikipedia.org/wiki/Adi_Shamir" target="_blank" rel="noopener noreffer ">Shamir</a> Shenanigans</em> are used to share
+the secret between the client and server, so both need to be available for
+decryption.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Fun note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I was an undergrad in the Technion IIT, circa 2005, Prof. Shamir came by
+for a colloquium about using the CPU cache to obtain keys from other processes
+running on the machine; he was probably outlining his paper <a href="https://eprint.iacr.org/2005/271.pdf" target="_blank" rel="noopener noreffer ">Cache Attacks and
+Countermeasures: the Case of AES</a>.
+Because this was for an undergrad audience, he gave a quick introduction about
+how CPU caches work; the entire talk was easy-to-follow and super-engaging.
+Later that day, we had an ordinary &ldquo;computer architecture&rdquo; class, where the
+professor struggled to explain, in two hours, how a CPU cache works - to a
+lower level of detail than Shamir&rsquo;s talk, and much less clearly. This is not a
+dig at the second professor - Shamir is just that good.</div>
+        </div>
+    </div>
+<p>I run my various homelab servers as VMs on a <a href="https://www.proxmox.com" target="_blank" rel="noopener noreffer ">proxmox</a> host. Specifically, I
+run:</p>
+<ul>
+<li>Several non-encrypted machines, so any outage in the decryption system doesn&rsquo;t
+affect their reliability</li>
+<li>A tang host, whole-disk encrypted with LUKS, which requires a passkey on boot</li>
+<li>One or more &ldquo;ordinary&rdquo; encrypted machines (also whole-disk encrypted with
+LUKS), which, on boot, look for the tang host for decryption<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<p>This system is quite effective:</p>
+<ul>
+<li>If anyone steals my machine, even though it includes the tang server, it&rsquo;d
+still be useless to them - they wouldn&rsquo;t be able to boot it.</li>
+<li>If I reboot any VM, including the &ldquo;ordinary&rdquo; encrypted machines, no password
+is required.</li>
+<li>A password <em>is</em> required for rebooting the tang host - but since that&rsquo;s <em>all</em>
+it runs, it&rsquo;s very rare I need to reboot it. Thanks to <a href="https://ubuntu.com/security/livepatch" target="_blank" rel="noopener noreffer ">LivePatch</a>, it even
+gets kernel updates without rebooting.</li>
+<li>If I need to reboot the entire proxmox host, all non-encrypted machines will
+still work immediately. Because proxmox itself is accessible (with my
+password), I can remote in and input the passphrase for the tang host.</li>
+</ul>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Important<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Although you can use the proxmox mobile app to input the password on the tang
+host, it (at the time of writing) seems to handle the &ldquo;shift&rdquo; key incorrectly;
+I just use a (longer) passphrase which doesn&rsquo;t require that key (i.e. mostly
+lowercase letters, dashes, numbers).</div>
+        </div>
+    </div>
+<p>Clevis and tang can also be used outside of LUKS. I&rsquo;ve cobbled together some ZFS
+support, which I run on my NAS. First, I create my half-key local file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ <span class="nb">read</span> -s <span class="p">|</span> clevis encrypt tang <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="s1">&#39;{&#34;url&#34;:&#34;http://tang-server.localdomain&#34;}&#39;</span> -y &gt; zfs_key.jwe
+</span></span><span class="line"><span class="cl">$ sudo install -o root -m <span class="m">600</span> zfs_key.jwe /etc/zfs_key.jwe <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    rm zfs_key.jwe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then I create this systemd unit to load that key:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-systemd" data-lang="systemd"><span class="line"><span class="cl"><span class="k">[Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">Load ZFS encryption keys</span>
+</span></span><span class="line"><span class="cl"><span class="na">DefaultDependencies</span><span class="o">=</span><span class="s">no</span>
+</span></span><span class="line"><span class="cl"><span class="na">After</span><span class="o">=</span><span class="s">network-online.target zfs-import.target</span>
+</span></span><span class="line"><span class="cl"><span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target zfs-import.target</span>
+</span></span><span class="line"><span class="cl"><span class="na">Before</span><span class="o">=</span><span class="s">docker.service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span></span><span class="line"><span class="cl"><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">yes</span>
+</span></span><span class="line"><span class="cl"><span class="c"># God knows why it takes multiple attempts, but it does</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/sh -c &#34;for i in $(seq 1 30); do </span>\
+</span></span><span class="line"><span class="cl"><span class="s">    cat /etc/zfs_key.jwe | clevis decrypt | zfs load-key -a &amp;&amp; exit 0; </span>\
+</span></span><span class="line"><span class="cl"><span class="s">    sleep 1; done; exit 1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c"># We can&#39;t have Before=zfs-mount.service, as that creates a loop.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Instead, let&#39;s do more mounting here.</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">zfs mount -a -v -l</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
+</span></span><span class="line"><span class="cl"><span class="na">WantedBy</span><span class="o">=</span><span class="s">zfs-mount.service</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>With zfs as well, I can still manually input the key if necessary; I keep my
+keys in <a href="https://github.com/dani-garcia/vaultwarden" target="_blank" rel="noopener noreffer ">VaultWarden</a> as well, meaning they&rsquo;re backed up on multiple
+devices.</p>
+<p>Overall, this seems like a fairly solid tradeoff between security, reliability,
+and convenience. It is significantly more robust than <a href="https://lutzky.net/posts/preload-key/" rel="">my previous
+solution</a>, and I&rsquo;m quite happy with it.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Just in case, these can also be decrypted with a passkey&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></description></item><item><title>Pixel-Perfect simulated ESPHome displays</title><link>https://lutzky.net/posts/pixel-perfect-simulated-esphome/</link><pubDate>Mon, 12 Jan 2026 00:00:00 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/pixel-perfect-simulated-esphome/</guid><description><![CDATA[<p>The <a href="https://lutzky.net/posts/front-door-display/" rel="">front door display</a> has been serving me well. However, updating the UI was
 a tedious process. Because every pixel counts on a tiny screen, I found myself
 in a frustrating loop of tweaking the config, flashing the firmware, and
 waiting - only to find I was still one pixel off. These iterations are
@@ -1510,100 +1650,4 @@ soccer for a living and code for fun.&#160;<a href="#fnref:2" class="footnote-ba
 </li>
 </ol>
 </div>
-]]></description></item><item><title>Remote White Noise</title><link>https://lutzky.net/posts/remote-white-noise/</link><pubDate>Sat, 21 May 2022 12:07:35 +0000</pubDate><author>Ohad Lutzky</author><guid>https://lutzky.net/posts/remote-white-noise/</guid><description><![CDATA[<p>One young-child-parenting trick that has worked well for us is white noise. It might be because it emulates in-the-womb-noises, drowns out other noises, or gives baby something to fixate on - but it often does a great job of calming him to sleep. Nearly a year old now, he thankfully doesn&rsquo;t usually need it for night sleeps, but it&rsquo;s helpful for a &ldquo;cranky-because-tired&rdquo; nap or getting him to sleep for another half-hour when he decides to wake up very early.</p>
-<p>There are quite a few ways to play white noise, and many cheap mobile battery-powered devices will do the trick just fine. However, I wanted a bit more control, at least for when we&rsquo;re at home:</p>
-<ul>
-<li>It&rsquo;d be useful to turn on the noise remotely, as entering a cranky baby&rsquo;s room sometimes riles him up.</li>
-<li>It&rsquo;d be useful to (gradually!) turn <em>off</em> the noise remotely, especially as my wife doesn&rsquo;t like the sound and it can be made worse with a baby monitor.</li>
-<li>I&rsquo;d like to customize the sound itself (we&rsquo;re actually going for more of a <a href="https://www.youtube.com/watch?v=ZXtimhT-ff4" target="_blank" rel="noopener noreffer ">pink</a>/<a href="https://www.youtube.com/watch?v=RqzGzwTY-6w" target="_blank" rel="noopener noreffer ">brown</a> noise)</li>
-</ul>
-<p>After trying out several options, I went for using a Google Home Mini; we have several of those lying around (they used to come as free gifts with various purchases), the audio quality is reasonable, and it&rsquo;s compact and clean-looking. Although it does respond to a &ldquo;play white noise&rdquo; command, that plays <a href="http://www.gstatic.com/voice_delight/sounds/long/pink_noise.mp3" target="_blank" rel="noopener noreffer ">this 1-hour-long segment</a>, which is too short. Instead, I created a 10 hour version with customized parameters like so (mostly inspired <a href="https://askubuntu.com/questions/789465/generate-white-noise-to-calm-a-baby" target="_blank" rel="noopener noreffer ">here</a>):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sox -c1 -n result.ogg <span class="se">\
-</span></span></span><span class="line"><span class="cl">  synth <span class="m">36000</span> brownnoise synth pinknoise <span class="se">\
-</span></span></span><span class="line"><span class="cl">  mix synth sine amod 0.1 <span class="m">90</span>
-</span></span><span class="line"><span class="cl">ffmpeg -i result.ogg result.mp3
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Why is the conversion to MP3 important? See <a href="#quirks" rel="">quirks</a>.</p>
-<p>The rest is a matter of hooking it up to <a href="https://www.home-assistant.io/" target="_blank" rel="noopener noreffer ">homeassistant</a>. The <code>media_player.play_media</code> service gets it to play just fine. To make it easy to toggle, I created an <a href="https://www.home-assistant.io/integrations/input_boolean/" target="_blank" rel="noopener noreffer ">input boolean</a> and automation to start or stop media when it changes. Because the google home can also be stopped directly, I added a second automation which sets the input boolean off when that happens.</p>
-<h2 id="main-dashboard-toggle">Main dashboard toggle</h2>
-<p>Having the white-noise-toggle on the main dashboard (an old chromebook in kiosk mode) is quite useful, especially when babysitters are involved. (There&rsquo;s also a physical button, driven by ESPHome, in the nursery - but that&rsquo;s not quite remote).</p>
-<p>My wife had a great idea for styling this toggle - showing a picture of the baby awake when the white noise is off, and asleep when it&rsquo;s on:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">picture-entity</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">show_state</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">show_name</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">entity</span><span class="p">:</span><span class="w"> </span><span class="l">input_boolean.white_noise_toggle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">state_image</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;off&#34;: </span><span class="l">local/awake.jpg</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;on&#34;: </span><span class="l">local/sleeping.jpg</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">White Noise</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">tap_action</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l">toggle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">hold_action</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l">more-info</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>The <code>hold_action: more-info</code> thing is quite useful, as it can quickly indicate how long the white noise was on, approximating how long the nap has been so far (assuming the white noise does its job).</p>
-<h2 id="secondary-controls">Secondary controls</h2>
-<p>For additional control, in a separate <a href="https://www.home-assistant.io/dashboards/views/" target="_blank" rel="noopener noreffer ">tab</a> of the dashboard, I have the following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">vertical-stack</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">cards</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">entities</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">entities</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">entity</span><span class="p">:</span><span class="w"> </span><span class="l">media_player.googlehome1234</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">custom:slider-entity-row</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="l">mdi:volume-high</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">White noise volume</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">entity</span><span class="p">:</span><span class="w"> </span><span class="l">input_boolean.white_noise_toggle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">secondary_info</span><span class="p">:</span><span class="w"> </span><span class="l">last-changed</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">markdown</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Note: White noise volume is usually 40%. If it&#39;s off, it shows as 0%.&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>This allows easily controlling the volume (when it&rsquo;s on!), reminds us of what the &ldquo;usual&rdquo; volume setting is, and also quickly displays how long ago it was last toggled. <code>slider-entity-row</code> is an extension, which can be obtained <a href="https://github.com/thomasloven/lovelace-slider-entity-row" target="_blank" rel="noopener noreffer ">here</a>.</p>
-<h2 id="quirks">Quirks</h2>
-<p>While this setup works quite well, it has a couple of annoying quirks. Firstly, the Google Home plays a fairly loud chime before starting to play the white noise. Secondly, this involves the Google Home loading a ~300MB file. Originally I used ogg, and although it&rsquo;s usually cached, in some cases this could be a ~30-second process, with no user feedback visible. I&rsquo;ve considered having the script play a shorter clip multiple times over, but the playback has unpleasant gaps in that case (and risks repeating that loud chime).</p>
-<p>However, it seems that when pointing to an <em>mp3</em> file, audio starts playing immediately, without having to first finish downloading the whole file. The Google Home is pretty opaque about this, but experimentation seems to show this is consistent.</p>
-<h2 id="afterword">Afterword</h2>
-<p>Overall, this process of getting familiar with HomeAssistant and its various integrations has been delightful, with great community support and debuggability. My first thoughts were &ldquo;I don&rsquo;t need this - my projects are simple and I can code them myself&rdquo; - but the plethora of readily available integrations and the polished UI has made it well worth my time learning, and making changes is a breeze. And if my child sleeps better for it, that&rsquo;s a win in my book.</p>
 ]]></description></item></channel></rss>
