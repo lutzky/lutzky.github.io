@@ -1,3 +1,5 @@
+# cSpell:disable
+
 baseURL = "https://lutzky.net"
 disablePathToLower = true
 languageCode = "en-us"
@@ -10,14 +12,9 @@ googleAnalytics = "G-1VCTD5H9YR" # See also params.analytics.google
 enableGitInfo = true
 enableEmoji = true
 
-[frontmatter]
-  # Grab date AND SLUG from filename - undocumented, but
-  # see https://github.com/gohugoio/hugo/pull/4494/
-  date = [":filename", ":default"]
-
 [permalinks]
   posts = "/posts/:slug/"
-  pages = "/:filename/"
+  pages = "/:contentbasename/"
 
 [markup.highlight]
   noClasses = false
